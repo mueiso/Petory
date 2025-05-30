@@ -30,12 +30,23 @@ public class TradeBoardController {
 
 	private final TradeBoardServiceImpl tradeBoardService;
 
+	/**
+	 * 게시글 등록
+	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
+	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일 반환
+	 */
 	@PostMapping
 	private CommonResponse<TradeBoardCreateResponseDto> createTradeBoard(@RequestBody TradeBoardCreateRequestDto requestDto) {
 
 		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(requestDto));
 	}
 
+	/**
+	 * 게시글 전체 조회
+	 * @param category 카테고리 (nullable)
+	 * @param page 조회하려는 페이지 위치
+	 * @return List 형식의 게시글 반환
+	 */
 	@GetMapping
 	private CommonResponse<Page<TradeBoardGetResponseDto>> getAllTradeBoard(
 		@RequestParam(required = false) TradeCategory category,
@@ -44,6 +55,12 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.OK, tradeBoardService.findAllTradeBoard(category, page));
 	}
 
+	/**
+	 * 게시글 단건 조회
+	 * @param tradeBoardId 조회하려는 게시글 id
+	 * @param page 조회하려는 페이지 위치
+	 * @return 해당 게시글 반환
+	 */
 	@GetMapping("/{tradeBoardId}")
 	private CommonResponse<TradeBoardGetResponseDto> getByTradeBoardId(
 		@PathVariable Long tradeBoardId,
@@ -52,6 +69,12 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.OK, tradeBoardService.findByTradeBoardId(tradeBoardId));
 	}
 
+	/**
+	 * 게시글 수정
+	 * @param tradeBoardId 수정하려는 게시글 id
+	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액 (nullable)
+	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
+	 */
 	@PatchMapping("/{tradeBoardId}")
 	private CommonResponse<TradeBoardUpdateResponseDto> updateTradeBoard(
 		@PathVariable Long tradeBoardId,
@@ -60,6 +83,11 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.OK, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}
 
+	/**
+	 * 게시글 삭제
+	 * @param tradeBoardId 삭제하려는 게시글 id
+	 * @return 상태코드 및 삭제 완료 메시지
+	 */
 	@DeleteMapping("/{tradeBoardId}")
 	private CommonResponse<Void> deleteTradeBoard(@PathVariable Long tradeBoardId) {
 		tradeBoardService.deleteTradeBoard(tradeBoardId);

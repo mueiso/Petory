@@ -26,6 +26,7 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
 
+	//게시글 생성
 	@Override
 	@Transactional
 	public TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto) {
@@ -47,6 +48,7 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 		return new TradeBoardCreateResponseDto(tradeBoard);
 	}
 
+	//게시글 전체 조회
 	@Override
 	@Transactional(readOnly = true)
 	public Page<TradeBoardGetResponseDto> findAllTradeBoard(TradeCategory category, int page) {
@@ -64,6 +66,7 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 		return tradeBoard.map(TradeBoardGetResponseDto::new);
 	}
 
+	//게시글 단건 조회
 	@Override
 	@Transactional(readOnly = true)
 	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
@@ -73,6 +76,7 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 		return new TradeBoardGetResponseDto(tradeBoard);
 	}
 
+	//게시글 수정
 	@Override
 	@Transactional
 	public TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
@@ -102,7 +106,9 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 		return new TradeBoardUpdateResponseDto(tradeBoard);
 	}
 
+	//게시글 삭제(유저 status enum 생성된 후 softDelete 구현 예정)
 	@Override
+	@Transactional
 	public void deleteTradeBoard(Long tradeBoardId) {
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
 		tradeBoardRepository.delete(tradeBoard);

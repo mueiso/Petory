@@ -8,8 +8,11 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 
 // @Getter
-// @Entity
+@Entity
 // @Table(name = "place")
 public class Place extends BaseEntityWithBothAt {
+
+	@Id
+	private Long id;
 
 }

@@ -60,4 +60,12 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 
 		return tradeBoard.map(TradeBoardGetResponseDto::new);
 	}
+
+	@Override
+	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
+
+		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
+
+		return new TradeBoardGetResponseDto(tradeBoard);
+	}
 }

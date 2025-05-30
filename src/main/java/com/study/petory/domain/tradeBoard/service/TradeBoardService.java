@@ -12,4 +12,6 @@ public interface TradeBoardService {
 	TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto);
 
 	Page<TradeBoardGetResponseDto> findAllTradeBoard(TradeCategory category, int page);
+
+	TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId);
 }

@@ -19,6 +19,30 @@ public enum ErrorCode implements BaseCode {
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),
 
+	// Album
+	ALBUM_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// Calender
+	CALENDER_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// DailyQna
+	DAILY_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// Faq
+	FAQ_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// Feedback
+	FEEDBACK_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// OwnerBoard
+	OWNER_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// Place
+	PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다."),
+
+	// TradeBoard
+	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "엘범이 존재하지 않습니다.")
+
 	;
 
 	private final HttpStatus httpStatus;

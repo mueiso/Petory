@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - petory-network
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6381:6379"
+    networks:
+      - petory-network
+
+volumes:
+  mysql_data:
+
+networks:
+  petory-network:

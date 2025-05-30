@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.dto;
+package com.study.petory.domain.tradeBoard.dto.request;
 
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 

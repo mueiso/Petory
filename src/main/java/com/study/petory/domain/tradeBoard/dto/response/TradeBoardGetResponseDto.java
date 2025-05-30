@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.dto;
+package com.study.petory.domain.tradeBoard.dto.response;
 
 import java.time.LocalDateTime;
 
@@ -8,7 +8,8 @@ import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import lombok.Getter;
 
 @Getter
-public class TradeBoardCreateResponseDto {
+public class TradeBoardGetResponseDto {
+
 
 	private final Long id;
 
@@ -24,7 +25,7 @@ public class TradeBoardCreateResponseDto {
 
 	private final LocalDateTime createdAt;
 
-	public TradeBoardCreateResponseDto(TradeBoard tradeBoard) {
+	public TradeBoardGetResponseDto(TradeBoard tradeBoard) {
 		this.id = tradeBoard.getId();
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
@@ -33,4 +34,5 @@ public class TradeBoardCreateResponseDto {
 		this.price = tradeBoard.getPrice();
 		this.createdAt = tradeBoard.getCreatedAt();
 	}
+
 }

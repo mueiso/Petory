@@ -1,6 +1,7 @@
 package com.study.petory.domain.place.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
 import com.study.petory.domain.user.entity.User;
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +38,9 @@ public class Place extends BaseEntityWithBothAt {
 
 	@Column(nullable = false, length = 30)
 	private String placeName;
+
+	@OneToMany(mappedBy = "place")
+	private List<Place> placeList;
 
 	@Column(nullable = false)
 	private String placeInfo;

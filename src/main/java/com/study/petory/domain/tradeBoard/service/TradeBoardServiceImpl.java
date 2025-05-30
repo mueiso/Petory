@@ -101,4 +101,10 @@ public class TradeBoardServiceImpl implements TradeBoardService{
 
 		return new TradeBoardUpdateResponseDto(tradeBoard);
 	}
+
+	@Override
+	public void deleteTradeBoard(Long tradeBoardId) {
+		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
+		tradeBoardRepository.delete(tradeBoard);
+	}
 }

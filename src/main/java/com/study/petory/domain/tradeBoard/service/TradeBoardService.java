@@ -18,4 +18,6 @@ public interface TradeBoardService {
 	TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId);
 
 	TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto);
+
+	void deleteTradeBoard(Long tradeBoardId);
 }

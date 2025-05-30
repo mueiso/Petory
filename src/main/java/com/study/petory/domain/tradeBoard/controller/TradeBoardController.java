@@ -36,7 +36,9 @@ public class TradeBoardController {
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일 반환
 	 */
 	@PostMapping
-	private CommonResponse<TradeBoardCreateResponseDto> createTradeBoard(@RequestBody TradeBoardCreateRequestDto requestDto) {
+	private CommonResponse<TradeBoardCreateResponseDto> createTradeBoard(
+		@RequestBody TradeBoardCreateRequestDto requestDto
+	) {
 
 		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(requestDto));
 	}
@@ -89,7 +91,9 @@ public class TradeBoardController {
 	 * @return 상태코드 및 삭제 완료 메시지
 	 */
 	@DeleteMapping("/{tradeBoardId}")
-	private CommonResponse<Void> deleteTradeBoard(@PathVariable Long tradeBoardId) {
+	private CommonResponse<Void> deleteTradeBoard(
+		@PathVariable Long tradeBoardId
+	) {
 		tradeBoardService.deleteTradeBoard(tradeBoardId);
 		return CommonResponse.of(SuccessCode.NO_CONTENT);
 	}

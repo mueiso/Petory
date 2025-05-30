@@ -8,7 +8,7 @@ import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import lombok.Getter;
 
 @Getter
-public class TradeBoardGetResponseDto {
+public class TradeBoardUpdateResponseDto {
 
 	private final Long id;
 
@@ -26,7 +26,7 @@ public class TradeBoardGetResponseDto {
 
 	private final LocalDateTime updatedAt;
 
-	public TradeBoardGetResponseDto(TradeBoard tradeBoard) {
+	public TradeBoardUpdateResponseDto(TradeBoard tradeBoard) {
 		this.id = tradeBoard.getId();
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
@@ -36,5 +36,4 @@ public class TradeBoardGetResponseDto {
 		this.createdAt = tradeBoard.getCreatedAt();
 		this.updatedAt = tradeBoard.getUpdatedAt();
 	}
-
 }

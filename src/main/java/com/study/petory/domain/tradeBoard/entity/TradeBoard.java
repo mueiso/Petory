@@ -45,4 +45,24 @@ public class TradeBoard extends BaseEntityWithBothAt {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	public void updateCategory(TradeCategory tradeCategory) {
+		this.category = tradeCategory;
+	}
+
+	public void updateTitle(String title) {
+		this.title = title;
+	}
+
+	public void updateContent(String content) {
+		this.content = content;
+	}
+
+	public void updatePhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
+
+	public void updatePrice(Integer price) {
+		this.price = price;
+	}
 }

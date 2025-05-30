@@ -2,6 +2,7 @@ package com.study.petory.domain.tradeBoard.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
+import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
+import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.service.TradeBoardServiceImpl;
 import com.study.petory.exception.enums.SuccessCode;
@@ -46,5 +49,13 @@ public class TradeBoardController {
 		@RequestParam(defaultValue = "1") int page
 	) {
 		return CommonResponse.of(SuccessCode.OK, tradeBoardService.findByTradeBoardId(tradeBoardId));
+	}
+
+	@PatchMapping("/{tradeBoardId}")
+	private CommonResponse<TradeBoardUpdateResponseDto> updateTradeBoard(
+		@PathVariable Long tradeBoardId,
+		@RequestBody TradeBoardUpdateRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.OK, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}
 }

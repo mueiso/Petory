@@ -38,7 +38,7 @@ public class PlaceUpdateResponseDto {
 		this.updatedAt = place.getUpdatedAt();
 	}
 
-	public static PlaceUpdateResponseDto fromPlace(Place place) {
+	public static PlaceUpdateResponseDto from(Place place) {
 		return new PlaceUpdateResponseDto(place);
 	}
 }

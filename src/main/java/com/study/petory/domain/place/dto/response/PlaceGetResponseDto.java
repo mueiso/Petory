@@ -24,7 +24,7 @@ public class PlaceGetResponseDto {
 
 	private final BigDecimal longitude;
 
-	public PlaceGetResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio,
+	private PlaceGetResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio,
 		BigDecimal latitude, BigDecimal longitude) {
 		this.id = id;
 		this.placeName = placeName;
@@ -35,7 +35,7 @@ public class PlaceGetResponseDto {
 		this.longitude = longitude;
 	}
 
-	public static PlaceGetResponseDto fromPlace(Place place) {
+	public static PlaceGetResponseDto from(Place place) {
 		return new PlaceGetResponseDto(
 			place.getId(),
 			place.getPlaceName(),

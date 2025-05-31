@@ -79,7 +79,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
 
-		return PlaceGetResponseDto.fromPlace(findPlace);
+		return PlaceGetResponseDto.from(findPlace);
 	}
 
 	// 장소 수정
@@ -91,7 +91,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		findPlace.updatePlace(requestDto);
 
-		return PlaceUpdateResponseDto.fromPlace(findPlace);
+		return PlaceUpdateResponseDto.from(findPlace);
 	}
 
 	// 장소 삭제

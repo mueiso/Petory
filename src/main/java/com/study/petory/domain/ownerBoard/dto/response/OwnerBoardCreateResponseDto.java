@@ -1,16 +1,14 @@
 package com.study.petory.domain.ownerBoard.dto.response;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
 public class OwnerBoardCreateResponseDto {
 
 	private final Long id;
@@ -19,8 +17,16 @@ public class OwnerBoardCreateResponseDto {
 
 	private final String content;
 
-	// 사진 여러개 받기 가능
-	private final List<String> photoUrls;
-
 	private final LocalDateTime createdAt;
+
+	public static OwnerBoardCreateResponseDto from(OwnerBoard ownerBoard) {
+		return new OwnerBoardCreateResponseDto(
+			ownerBoard.getId(),
+			ownerBoard.getTitle(),
+			ownerBoard.getContent(),
+			ownerBoard.getCreatedAt()
+		);
+	}
+
 }
+

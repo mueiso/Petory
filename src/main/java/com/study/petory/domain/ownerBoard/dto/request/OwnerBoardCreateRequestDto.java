@@ -1,12 +1,9 @@
 package com.study.petory.domain.ownerBoard.dto.request;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.Singular;
 
 @Getter
 public class OwnerBoardCreateRequestDto {
@@ -19,6 +16,4 @@ public class OwnerBoardCreateRequestDto {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
-	// 사진 여러개 받기 가능
-	private List<String> photoUrls;
 }

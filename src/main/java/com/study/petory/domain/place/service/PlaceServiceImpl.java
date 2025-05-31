@@ -1,11 +1,15 @@
 package com.study.petory.domain.place.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -42,4 +46,27 @@ public class PlaceServiceImpl implements PlaceService {
 		return PlaceCreateResponseDto.fromPlace(place);
 	}
 
+	// 전체 장소 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PlaceGetResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
+
+		// placeName, placeType이 둘 다 있는 경우. 두 가지의 필터를 모두 포함한 조회
+		if (placeName != null && placeType != null) {
+			return placeRepository.findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable);
+		}
+
+		// placeName이 존재하는 경우 placeName 중 일부만 입력되는 경우에도 조회 가능
+		if (placeName != null) {
+			return placeRepository.findAllByPlaceNameContaining(placeName, pageable);
+		}
+
+		// placeType이 존재하는 경우 placeType 기준 조회
+		if (placeType != null) {
+			return placeRepository.findAllByPlaceType(placeType, pageable);
+		}
+
+		// 전체 조회
+		return placeRepository.findAllPlace(pageable);
+	}
 }

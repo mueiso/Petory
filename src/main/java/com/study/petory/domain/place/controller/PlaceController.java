@@ -1,13 +1,20 @@
 package com.study.petory.domain.place.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.PlaceService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -33,4 +40,21 @@ public class PlaceController {
 		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(requestDto));
 	}
 
+	/**
+	 * 전체 장소 조회
+	 * 페이징 관련 스크롤 방식이 옳을 지에 대한 고민
+	 * 필터 검색 로직 QueryDSL 사용으로 바꾸는게 옳을 지에 대한 고민
+	 * @param placeName 장소 이름 일부 입력 시에도 조회 가능
+	 * @param placeType 장소 타입 입력 시 타입 조건 기준 조회 가능
+	 * @param pageable 기본 페이징 설정. 한 페이지에 10개의 게시글(장소) 조회
+	 * @return CommonResponse 방식의 페이징된 장소 정보 목록
+	 */
+	@GetMapping
+	public CommonResponse<Page<PlaceGetResponseDto>> getAllPlace(
+		@RequestParam(required = false) String placeName,
+		@RequestParam(required = false) PlaceType placeType,
+		@PageableDefault(size = 10) Pageable pageable
+	) {
+		return CommonResponse.of(SuccessCode.OK, placeService.findAllPlace(placeName, placeType, pageable));
+	}
 }

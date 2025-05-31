@@ -1,6 +1,7 @@
 package com.study.petory.domain.place.dto.response;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
@@ -24,6 +25,8 @@ public class PlaceCreateResponseDto {
 
 	private final BigDecimal longitude;
 
+	private final LocalDateTime createdAt;
+
 	private PlaceCreateResponseDto(Place place) {
 		this.id = place.getId();
 		this.placeName = place.getPlaceName();
@@ -32,6 +35,7 @@ public class PlaceCreateResponseDto {
 		this.ratio = place.getRatio();
 		this.latitude = place.getLatitude();
 		this.longitude = place.getLongitude();
+		this.createdAt = place.getCreatedAt();
 	}
 
 	public static PlaceCreateResponseDto fromPlace(Place place) {

@@ -37,4 +37,11 @@ public class User extends BaseEntityWithBothAt {
 
 	@OneToMany(mappedBy = "user")
 	private List<UserRole> userRole;
+
+	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
+		this.nickname = nickname;
+		this.email = email;
+		this.userPrivateInfo = userPrivateInfo;
+		this.userRole = userRole;
+	}
 }

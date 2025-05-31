@@ -27,7 +27,7 @@ public class BaseEntityWithCreatedAt {
 	}
 
 	// soft delete 복구 시 사용
-	public void rollBackEntity() {
+	public void restoreEntity() {
 		this.deletedAt = null;
 	}
 }

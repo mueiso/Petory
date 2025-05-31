@@ -111,7 +111,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
 
-		findPlace.rollBackEntity();
+		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto);
 	}
 }

@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +57,18 @@ public class PlaceController {
 		@PageableDefault(size = 10) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.OK, placeService.findAllPlace(placeName, placeType, pageable));
+	}
+
+	/**
+	 * 특정 장소 조회
+	 * 사진, 평균 평점, 페이징 된 리뷰 목록 추가 예정
+	 * @param placeId 장소 식별자
+	 * @return CommonResponse 방식의 특정 장소 정보 + 해당 장소의 리뷰 목록
+	 */
+	@GetMapping("/{placeId}")
+	public CommonResponse<PlaceGetResponseDto> getByPlaceId(
+		@PathVariable Long placeId
+	) {
+		return CommonResponse.of(SuccessCode.OK, placeService.findByPlaceId(placeId));
 	}
 }

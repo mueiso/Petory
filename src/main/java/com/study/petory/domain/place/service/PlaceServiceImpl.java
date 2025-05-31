@@ -69,4 +69,13 @@ public class PlaceServiceImpl implements PlaceService {
 		// 전체 조회
 		return placeRepository.findAllPlace(pageable);
 	}
+
+	// 특정 장소 조회
+	@Override
+	public PlaceGetResponseDto findByPlaceId(Long placeId) {
+
+		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+
+		return PlaceGetResponseDto.fromPlace(findPlace);
+	}
 }

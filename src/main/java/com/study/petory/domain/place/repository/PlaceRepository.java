@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
@@ -24,4 +26,8 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	@Query("SELECT new com.study.petory.domain.place.dto.response.PlaceGetResponseDto(p.id, p.placeName, p.placeInfo, p.placeType, p.ratio, p.latitude, p.longitude) "
 		+ "FROM Place p")
 	Page<PlaceGetResponseDto> findAllPlace(Pageable pageable);
+
+	default Place findByIdOrElseThrow(long id) {
+		return findById(id).orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	}
 }

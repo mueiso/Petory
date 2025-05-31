@@ -12,4 +12,6 @@ public interface PlaceService {
 	PlaceCreateResponseDto savePlace(PlaceCreateRequestDto requestDto);
 
 	Page<PlaceGetResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable);
+
+	PlaceGetResponseDto findByPlaceId(Long placeId);
 }

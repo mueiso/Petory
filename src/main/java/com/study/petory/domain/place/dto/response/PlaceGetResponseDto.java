@@ -24,17 +24,26 @@ public class PlaceGetResponseDto {
 
 	private final BigDecimal longitude;
 
-	private PlaceGetResponseDto(Place place) {
-		this.id = place.getId();
-		this.placeName = place.getPlaceName();
-		this.placeInfo = place.getPlaceInfo();
-		this.placeType = place.getPlaceType();
-		this.ratio = place.getRatio();
-		this.latitude = place.getLatitude();
-		this.longitude = place.getLongitude();
+	public PlaceGetResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio,
+		BigDecimal latitude, BigDecimal longitude) {
+		this.id = id;
+		this.placeName = placeName;
+		this.placeInfo = placeInfo;
+		this.placeType = placeType;
+		this.ratio = ratio;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public static PlaceGetResponseDto fromPlace(Place place) {
-		return new PlaceGetResponseDto(place);
+		return new PlaceGetResponseDto(
+			place.getId(),
+			place.getPlaceName(),
+			place.getPlaceInfo(),
+			place.getPlaceType(),
+			place.getRatio(),
+			place.getLatitude(),
+			place.getLongitude()
+		);
 	}
 }

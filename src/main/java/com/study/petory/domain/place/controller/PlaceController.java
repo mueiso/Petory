@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
-import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -92,6 +92,23 @@ public class PlaceController {
 	}
 
 	/**
+	 * 삭제된 장소 복구
+	 * soft delete 된 장소를 다시 복구하는 기능
+	 * @param placeId 장소 식별자
+	 * @param requestDto 장소 복구에 필요한 정보
+	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
+	 */
+	@PatchMapping("/{placeId}")
+	public CommonResponse<Void> restorePlace(
+		@PathVariable Long placeId,
+		@RequestBody PlaceStatusChangeRequestDto requestDto
+	) {
+		placeService.restorePlace(placeId,requestDto);
+		return CommonResponse.of(SuccessCode.ROLLBACK);
+	}
+
+
+	/**
 	 * 장소 삭제
 	 * soft delete 구현
 	 * @param placeId 장소 식별자
@@ -101,7 +118,7 @@ public class PlaceController {
 	@DeleteMapping("/{placeId}")
 	public CommonResponse<Void> deletePlace(
 		@PathVariable Long placeId,
-		@RequestBody PlaceDeleteRequestDto requestDto
+		@RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.deletePlace(placeId, requestDto);
 		return CommonResponse.of(SuccessCode.NO_CONTENT);

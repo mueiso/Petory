@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
-import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -46,7 +46,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		placeRepository.save(place);
 
-		return PlaceCreateResponseDto.fromPlace(place);
+		return PlaceCreateResponseDto.from(place);
 	}
 
 	// 전체 장소 조회
@@ -97,10 +97,21 @@ public class PlaceServiceImpl implements PlaceService {
 	// 장소 삭제
 	@Override
 	@Transactional
-	public void deletePlace(Long placeId, PlaceDeleteRequestDto requestDto) {
+	public void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
 		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
 
 		findPlace.deactivateEntity();
+		findPlace.updateStatus(requestDto);
+	}
+
+	// 삭제된 장소 복구
+	@Override
+	@Transactional
+	public void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
+
+		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+
+		findPlace.rollBackEntity();
 		findPlace.updateStatus(requestDto);
 	}
 }

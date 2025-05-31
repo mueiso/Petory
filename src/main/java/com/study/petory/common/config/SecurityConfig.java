@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -57,4 +59,14 @@ public class SecurityConfig {
 		return http.build();
 	}
 
+	/*
+	* 비밀번호 암호화 하기 위해 Bean 등록
+	* 로그인 시 사용자 입력 비밀번호를 암호화된 비밀번호와 비교할 때 사용된다
+	* Security 는 내부적으로 이 메서드를 사용해 matches() 검사를 수행한다
+	 */
+	@Bean
+	public PasswordEncoder passEncoder() {
+
+		return new BCryptPasswordEncoder();
+	}
 }

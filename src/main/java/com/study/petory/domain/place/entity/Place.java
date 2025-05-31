@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -24,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "place")
+@Table(name = "places")
 @NoArgsConstructor
 public class Place extends BaseEntityWithBothAt {
 
@@ -40,7 +42,7 @@ public class Place extends BaseEntityWithBothAt {
 	private String placeName;
 
 	@OneToMany(mappedBy = "place")
-	private List<Place> placeList;
+	private List<PlaceReview> placeReviewList;
 
 	@Column(nullable = false)
 	private String placeInfo;
@@ -49,7 +51,7 @@ public class Place extends BaseEntityWithBothAt {
 	@Column(nullable = false, length = 30)
 	private PlaceType placeType; // type -> placeType으로 수정
 
-	@Column(nullable = false, precision = 2, scale = 1)		// precision : 전체 자리 수, scale : 그 중 소수점 자리 수
+	@Column(precision = 2, scale = 1)		// 추후에 NOTNULL로 수정 예정, precision : 전체 자리 수, scale : 그 중 소수점 자리 수
 	private BigDecimal ratio;
 
 	// 전체 주소
@@ -82,13 +84,31 @@ public class Place extends BaseEntityWithBothAt {
 		this.longitude = longitude;
 	}
 
-	// soft delete, 영업 중지로 status 변환
-	public void deactivatePlace() {
-		this.status = Status.INACTIVE;
+	// soft delete 구현을 위한 메서드
+	public void updateStatus(PlaceDeleteRequestDto requestDto) {
+		this.status = requestDto.getStatus();
 	}
 
-	// soft delete, 폐업으로 status 변환 -> 잘못 신고가 들어와서 폐업으로 오인할 수도 있어서 일단 소프트 딜리트 하고 일정 기간 이후에 하드 딜리트 되도록!
-	public void deletePlace() {
-		this.status = Status.DELETED;
+	// PlaceUpdateRequestDto null 가능 여부에 따른 update 메서드
+	public void updatePlace(PlaceUpdateRequestDto requestDto) {
+		if(requestDto.getPlaceName() != null) {
+			this.placeName = requestDto.getPlaceName();
+		}
+
+		if(requestDto.getPlaceInfo() != null) {
+			this.placeInfo = requestDto.getPlaceInfo();
+		}
+
+		if(requestDto.getPlaceType() != null) {
+			this.placeType = requestDto.getPlaceType();
+		}
+
+		if(requestDto.getLatitude() != null) {
+			this.latitude = requestDto.getLatitude();
+		}
+
+		if(requestDto.getLongitude() != null) {
+			this.longitude = requestDto.getLongitude();
+		}
 	}
 }

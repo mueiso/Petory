@@ -98,7 +98,7 @@ public class PlaceController {
 	 * @param requestDto 장소 복구에 필요한 정보
 	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
 	 */
-	@PatchMapping("/{placeId}")
+	@PatchMapping("/{placeId}/restore")
 	public CommonResponse<Void> restorePlace(
 		@PathVariable Long placeId,
 		@RequestBody PlaceStatusChangeRequestDto requestDto
@@ -106,7 +106,6 @@ public class PlaceController {
 		placeService.restorePlace(placeId,requestDto);
 		return CommonResponse.of(SuccessCode.ROLLBACK);
 	}
-
 
 	/**
 	 * 장소 삭제

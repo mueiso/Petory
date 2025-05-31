@@ -24,4 +24,9 @@ public abstract class BaseEntityWithBothAt {
 	private LocalDateTime updatedAt;
 
 	private LocalDateTime deletedAt;
+
+	// soft delete 시 사용
+	public void deactivateEntity() {
+		this.deletedAt = LocalDateTime.now();
+	}
 }

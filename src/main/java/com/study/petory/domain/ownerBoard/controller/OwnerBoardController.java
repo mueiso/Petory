@@ -29,6 +29,6 @@ public class OwnerBoardController {
 	@PostMapping
 	CommonResponse<OwnerBoardCreateResponseDto> createOwnerBoard(@Valid @RequestBody OwnerBoardCreateRequestDto dto) {
 
-		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto)); //추가하기
+		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto));
 	}
 }

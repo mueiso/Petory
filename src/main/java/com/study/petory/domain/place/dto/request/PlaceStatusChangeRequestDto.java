@@ -3,13 +3,11 @@ package com.study.petory.domain.place.dto.request;
 import com.study.petory.domain.place.entity.Status;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-public class PlaceDeleteRequestDto {
+@RequiredArgsConstructor
+public class PlaceStatusChangeRequestDto {
 
 	private final Status status;
-
-	public PlaceDeleteRequestDto(Status status) {
-		this.status = status;
-	}
 }

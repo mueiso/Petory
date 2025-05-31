@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
-import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
@@ -85,7 +85,7 @@ public class Place extends BaseEntityWithBothAt {
 	}
 
 	// soft delete 구현을 위한 메서드
-	public void updateStatus(PlaceDeleteRequestDto requestDto) {
+	public void updateStatus(PlaceStatusChangeRequestDto requestDto) {
 		this.status = requestDto.getStatus();
 	}
 

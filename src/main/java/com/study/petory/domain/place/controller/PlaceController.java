@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.PlaceService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -70,5 +73,19 @@ public class PlaceController {
 		@PathVariable Long placeId
 	) {
 		return CommonResponse.of(SuccessCode.OK, placeService.findByPlaceId(placeId));
+	}
+
+	/**
+	 * 장소 수정
+	 * @param placeId 장소 식별자
+	 * @param requestDto 장소 수정에 필요한 정보
+	 * @return CommonResponse 방식의 특정 장소의 수정된 정보
+	 */
+	@PatchMapping("/{placeId}")
+	public CommonResponse<PlaceUpdateResponseDto> updatePlace(
+		@PathVariable Long placeId,
+		@RequestBody PlaceUpdateRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.OK, placeService.updatePlace(placeId, requestDto));
 	}
 }

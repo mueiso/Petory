@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -91,5 +92,15 @@ public class PlaceServiceImpl implements PlaceService {
 		findPlace.updatePlace(requestDto);
 
 		return PlaceUpdateResponseDto.fromPlace(findPlace);
+	}
+
+	// 장소 삭제
+	@Override
+	@Transactional
+	public void deletePlace(Long placeId, PlaceDeleteRequestDto requestDto) {
+		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+
+		findPlace.deactivateEntity();
+		findPlace.updateStatus(requestDto);
 	}
 }

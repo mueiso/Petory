@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -18,4 +19,6 @@ public interface PlaceService {
 	PlaceGetResponseDto findByPlaceId(Long placeId);
 
 	PlaceUpdateResponseDto updatePlace(Long placeId, PlaceUpdateRequestDto requestDto);
+
+	void deletePlace(Long placeId, PlaceDeleteRequestDto requestDto);
 }

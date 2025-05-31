@@ -3,6 +3,7 @@ package com.study.petory.domain.place.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceDeleteRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -87,5 +89,21 @@ public class PlaceController {
 		@RequestBody PlaceUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.OK, placeService.updatePlace(placeId, requestDto));
+	}
+
+	/**
+	 * 장소 삭제
+	 * soft delete 구현
+	 * @param placeId 장소 식별자
+	 * @param requestDto 장소 삭제에 필요한 Enum 정보
+	 * @return CommonResponse 방식의 장소 삭제 메시지
+	 */
+	@DeleteMapping("/{placeId}")
+	public CommonResponse<Void> deletePlace(
+		@PathVariable Long placeId,
+		@RequestBody PlaceDeleteRequestDto requestDto
+	) {
+		placeService.deletePlace(placeId, requestDto);
+		return CommonResponse.of(SuccessCode.NO_CONTENT);
 	}
 }

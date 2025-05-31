@@ -38,7 +38,7 @@ public class PlaceCreateResponseDto {
 		this.createdAt = place.getCreatedAt();
 	}
 
-	public static PlaceCreateResponseDto fromPlace(Place place) {
+	public static PlaceCreateResponseDto from(Place place) {
 		return new PlaceCreateResponseDto(place);
 	}
 }

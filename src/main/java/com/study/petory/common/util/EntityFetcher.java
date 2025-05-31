@@ -1,4 +1,91 @@
 package com.study.petory.common.util;
 
+import org.springframework.stereotype.Component;
+
+import com.study.petory.domain.album.entity.Album;
+import com.study.petory.domain.album.repository.AlbumRepository;
+import com.study.petory.domain.calender.entity.Calender;
+import com.study.petory.domain.calender.repository.CalenderRepository;
+import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
+import com.study.petory.domain.dailyQna.entity.DailyQna;
+import com.study.petory.domain.faq.entity.Faq;
+import com.study.petory.domain.faq.repository.FaqRepository;
+import com.study.petory.domain.feedback.entity.Feedback;
+import com.study.petory.domain.feedback.repository.FeedbackRepository;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
+import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
+import com.study.petory.domain.pet.entity.Pet;
+import com.study.petory.domain.pet.repository.PetRepository;
+import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.repository.PlaceRepository;
+import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
+import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@Component
+@RequiredArgsConstructor
 public class EntityFetcher {
+
+	private final AlbumRepository albumRepository;
+	private final CalenderRepository calenderRepository;
+	private final DailyQnaRepository dailyQnaRepository;
+	private final FaqRepository faqRepository;
+	private final FeedbackRepository feedbackRepository;
+	private final OwnerBoardRepository ownerBoardRepository;
+	private final PetRepository petRepository;
+	private final PlaceRepository placeRepository;
+	private final TradeBoardRepository tradeBoardRepository;
+	private final UserRepository userRepository;
+
+	public Album findAlbumByAlbumId(Long albumId) {
+		return albumRepository.findById(albumId)
+			.orElseThrow(() -> new CustomException(ErrorCode.ALBUM_NOT_FOUND));
+	}
+
+	public Calender findCalenderByCalenderId(Long calenderId) {
+		return calenderRepository.findById(calenderId)
+			.orElseThrow(() -> new CustomException(ErrorCode.CALENDER_NOT_FOUND));
+	}
+
+	public DailyQna findDailyQnaByDailyQnaId(Long dailyQnaID) {
+		return dailyQnaRepository.findById(dailyQnaID)
+			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
+	}
+
+	public Faq findFaqByFaqId(Long faqID) {
+		return faqRepository.findById(faqID)
+			.orElseThrow(() -> new CustomException(ErrorCode.FAQ_QNA_NOT_FOUND));
+	}
+
+	public Feedback findFeedbackByFeedbackId(Long feedbackID) {
+		return feedbackRepository.findById(feedbackID)
+			.orElseThrow(() -> new CustomException(ErrorCode.FEEDBACK_NOT_FOUND));
+	}
+
+	public OwnerBoard findOwnerBoardByOwnerBoardId(Long ownerBoardID) {
+		return ownerBoardRepository.findById(ownerBoardID)
+			.orElseThrow(() -> new CustomException(ErrorCode.OWNER_BOARD_NOT_FOUND));
+	}
+
+	public Pet findPetByPetId(Long petID) {
+		return petRepository.findById(petID)
+			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+	}
+
+	public Place findPlaceByPlaceId(Long placeID) {
+		return placeRepository.findById(placeID)
+			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	}
+
+	public TradeBoard findTradeBoardByTradeBoardId(Long tradeBoardID) {
+		return tradeBoardRepository.findById(tradeBoardID)
+			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+	}
+
 }

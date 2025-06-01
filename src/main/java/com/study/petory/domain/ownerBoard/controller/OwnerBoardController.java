@@ -1,5 +1,7 @@
 package com.study.petory.domain.ownerBoard.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -27,8 +30,20 @@ public class OwnerBoardController {
 	 * @return id, 제목, 내용, 생성일
 	 */
 	@PostMapping
-	CommonResponse<OwnerBoardCreateResponseDto> createOwnerBoard(@Valid @RequestBody OwnerBoardCreateRequestDto dto) {
+	public CommonResponse<OwnerBoardCreateResponseDto> createOwnerBoard(@Valid @RequestBody OwnerBoardCreateRequestDto dto) {
 
 		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto));
 	}
+
+	/**
+	 * 게시글 단건 조회
+	 * @param boardId 주인커뮤니티 게시글 ID
+	 * @return 게시글 id,제목,내용,작성일,수정일
+	 */
+	@GetMapping("/{boardId}")
+	public CommonResponse<OwnerBoardGetResponseDto> getOwnerBoard(@PathVariable Long boardId) {
+
+		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findOwnerBoard(boardId));
+	}
+
 }

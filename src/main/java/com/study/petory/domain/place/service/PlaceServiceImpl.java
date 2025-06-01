@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
@@ -26,12 +27,14 @@ public class PlaceServiceImpl implements PlaceService {
 	private final PlaceRepository placeRepository;
 	private final UserRepository userRepository;
 
+	private final EntityFetcher entityFetcher;
+
 	// 장소 등록
 	@Override
 	@Transactional
 	public PlaceCreateResponseDto savePlace(PlaceCreateRequestDto requestDto) {
 
-		User user = userRepository.findById(1L).orElseThrow();
+		User user = entityFetcher.findUserByUserId(1L);
 
 		Place place = Place.builder()
 			.user(user)

@@ -20,11 +20,13 @@ public class PlaceGetResponseDto {
 
 	private final BigDecimal ratio;
 
+	// private final String photoList; // 이부분도 CreateResponseDto랑 비슷하게 하면 될듯
+
 	private final BigDecimal latitude;
 
 	private final BigDecimal longitude;
 
-	private PlaceGetResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio,
+	public PlaceGetResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio,
 		BigDecimal latitude, BigDecimal longitude) {
 		this.id = id;
 		this.placeName = placeName;

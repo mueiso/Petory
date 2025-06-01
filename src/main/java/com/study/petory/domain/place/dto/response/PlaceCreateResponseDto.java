@@ -21,6 +21,8 @@ public class PlaceCreateResponseDto {
 
 	private final BigDecimal ratio;
 
+	// private final String photoList;  // 게시글에 댓글 리스트 조회하듯이 가져와야할듯? dto로 만들어서 넣는것도 방법!
+
 	private final BigDecimal latitude;
 
 	private final BigDecimal longitude;

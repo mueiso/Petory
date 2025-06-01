@@ -17,6 +17,8 @@ public class PlaceCreateRequestDto {
 
 	private final PlaceType placeType;
 
+	// private final BigDecimal ratio;
+
 	private final String address;
 
 	private final BigDecimal latitude;

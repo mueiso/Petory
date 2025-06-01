@@ -39,4 +39,8 @@ public class DailyQna extends BaseEntityWithBothAt {
 		this.questionId = questionId;
 		this.answer = answer;
 	}
+
+	public void updateDailyQna(String answer) {
+		this.answer = answer;
+	}
 }

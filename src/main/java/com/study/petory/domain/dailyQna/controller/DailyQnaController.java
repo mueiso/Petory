@@ -3,6 +3,7 @@ package com.study.petory.domain.dailyQna.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.service.DailyQnaService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -40,7 +42,7 @@ public class DailyQnaController {
 		@Valid @RequestBody DailyQnaCreateRequestDto request
 	) {
 		Long userId = 1L;
-		dailyQnaService.saveDailyQNA(userId, questionId, request);
+		dailyQnaService.saveDailyQna(userId, questionId, request);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
@@ -58,5 +60,17 @@ public class DailyQnaController {
 	) {
 		Long userId = 1L;
 		return CommonResponse.of(SuccessCode.OK, dailyQnaService.findDailyQna(userId, questionId));
+	}
+
+	@PatchMapping("/daily-qnas/{dailyQnaId}")
+	public CommonResponse<Void> updateDailyQna(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long dailyQnaId,
+		@Valid @RequestBody DailyQnaUpdateRequestDto request
+	) {
+		Long userId = 1L;
+		dailyQnaService.updateDailyQna(userId, dailyQnaId, request);
+		return CommonResponse.of(SuccessCode.OK);
 	}
 }

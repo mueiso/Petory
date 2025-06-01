@@ -1,6 +1,7 @@
 package com.study.petory.domain.ownerBoard.controller;
 
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,5 +80,17 @@ public class OwnerBoardController {
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
 
 		return CommonResponse.of(SuccessCode.OK, ownerBoardService.updateOwnerBoard(boardId, dto));
+	}
+
+	/**
+	 * 게시글 삭제
+	 * @param boardId 삭제할 게시글 ID
+	 * @return no_content status 반환
+	 */
+	@DeleteMapping("/{boardId}")
+	public CommonResponse<Void> deleteOwnerBoard(@PathVariable Long boardId) {
+		ownerBoardService.deleteOwnerBoard(boardId);
+
+		return CommonResponse.of(SuccessCode.NO_CONTENT);
 	}
 }

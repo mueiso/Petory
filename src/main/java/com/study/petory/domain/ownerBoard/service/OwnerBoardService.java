@@ -22,4 +22,6 @@ public interface OwnerBoardService {
 	OwnerBoardGetResponseDto findOwnerBoard(Long boardId);
 
 	OwnerBoardUpdateResponseDto updateOwnerBoard(Long boardId, OwnerBoardUpdateRequestDto dto);
+
+	void deleteOwnerBoard(Long boardId);
 }

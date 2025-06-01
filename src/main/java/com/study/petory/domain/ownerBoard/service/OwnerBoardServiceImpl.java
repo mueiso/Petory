@@ -88,4 +88,14 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}
 
+	// 게시글 삭제
+	@Override
+	@Transactional
+	public void deleteOwnerBoard(Long boardId) {
+		// 본인 작성 글인지 검증 로직 추가
+
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+		ownerBoard.deactivateEntity();
+	}
+
 }

@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.PlaceReviewService;
@@ -140,6 +142,22 @@ public class PlaceController {
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.OK, placeReviewService.savePlaceReview(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(placeId, requestDto));
+	}
+
+	/**
+	 * 리뷰 수정
+	 * @param placeId 장소 식별자
+	 * @param reviewId 리뷰 식별자
+	 * @param requestDto 리뷰 등록에 필요한 정보
+	 * @return CommonResponse 방식의 수정된 리뷰에 대한 정보
+	 */
+	@PatchMapping("/{placeId}/reviews/{reviewId}")
+	public CommonResponse<PlaceReviewUpdateResponseDto> updatePlaceReview(
+		@PathVariable Long placeId,
+		@PathVariable Long reviewId,
+		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.OK, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
 	}
 }

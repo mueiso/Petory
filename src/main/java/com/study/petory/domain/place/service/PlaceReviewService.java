@@ -1,10 +1,14 @@
 package com.study.petory.domain.place.service;
 
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 
 import jakarta.validation.Valid;
 
 public interface PlaceReviewService {
 	PlaceReviewCreateResponseDto savePlaceReview(Long placeId, PlaceReviewCreateRequestDto requestDto);
+
+	PlaceReviewUpdateResponseDto updatePlaceReview(Long placeId, Long reviewId, PlaceReviewUpdateRequestDto requestDto);
 }

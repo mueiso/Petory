@@ -59,22 +59,22 @@ public class JwtUtil {
 	}
 
 	/*
-	* 주어진 사용자 정보(userId, email, nickname)를 JWT 의 Claim 으로 포함해서 Access Token 생성하는 메서드
-	* 리턴값 = 최종 생성된 JWT 문자열 (앞에 Bearer 포함)
-	* Date : 현재 시각 기준으로 Date 객체 생성 → issuedAt(토큰 발행 시점)과 expiration(만료 시점) 계산에 사용
+	 * 주어진 사용자 정보(userId, email, nickname)를 JWT 의 Claim 으로 포함해서 Access Token 생성하는 메서드
+	 * 리턴값 = 최종 생성된 JWT 문자열 (앞에 Bearer 포함)
+	 * Date : 현재 시각 기준으로 Date 객체 생성 → issuedAt(토큰 발행 시점)과 expiration(만료 시점) 계산에 사용
 	 */
-	public String createToken(Long userId, String email, String nickname) {
+	public String createAccessToken(Long userId, String email, String nickname) {
 
 		Date date = new Date();
 
 		/*
-		* return prefix + Jwts.builder() : JJWT 에서 제공하는 생성 빌더 시작점 (prefix = "Bearer ")
-		* .setSubject : sub(기본 Claim 중 하나)에 userId 저장 → 고유 ID 저장해서 토큰만 보고도 어떤 유저인지 알 수 있도록
-		* .claim : 커스텀 Claim 추가 → JWT 에 사용자 이메일, 닉네임 같이 담아서 나중에 토큰만 디코딩해도 이 정보를 쉽게 꺼낼 수 있도록 한다
-		* .setExpiration : 토큰 만료 시간 설정 → 현재 시간 + tokenLife = exp(만료 시간)
-		* .setIssuedAt : 토큰 발급 시각을 현재 시작으로 설정
-		* .signWith : JWT 를 서명하는 부분 → 서명을 통해 토큰이 위조되지 않았는지 검증 가능
-		* .compact() : 위의 빌더 체인들을 실제 JWT 문자열로 변환
+		 * return prefix + Jwts.builder() : JJWT 에서 제공하는 생성 빌더 시작점 (prefix = "Bearer ")
+		 * .setSubject : sub(기본 Claim 중 하나)에 userId 저장 → 고유 ID 저장해서 토큰만 보고도 어떤 유저인지 알 수 있도록
+		 * .claim : 커스텀 Claim 추가 → JWT 에 사용자 이메일, 닉네임 같이 담아서 나중에 토큰만 디코딩해도 이 정보를 쉽게 꺼낼 수 있도록 한다
+		 * .setExpiration : 토큰 만료 시간 설정 → 현재 시간 + tokenLife = exp(만료 시간)
+		 * .setIssuedAt : 토큰 발급 시각을 현재 시작으로 설정
+		 * .signWith : JWT 를 서명하는 부분 → 서명을 통해 토큰이 위조되지 않았는지 검증 가능
+		 * .compact() : 위의 빌더 체인들을 실제 JWT 문자열로 변환
 		 */
 		return prefix + Jwts.builder()
 			.setSubject(String.valueOf(userId))
@@ -85,5 +85,15 @@ public class JwtUtil {
 			.signWith(key, SignatureAlgorithm.HS256)
 			.compact();
 	}
+
+	public String createRefreshToken() {
+		Date now = new Date();
+		return prefix + Jwts.builder()
+			.setExpiration(new Date(now.getTime() + refreshTokenLife))
+			.setIssuedAt(now)
+			.signWith(key, SignatureAlgorithm.HS256)
+			.compact();
+	}
+
 
 }

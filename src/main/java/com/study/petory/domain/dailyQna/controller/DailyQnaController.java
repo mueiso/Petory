@@ -30,7 +30,7 @@ public class DailyQnaController {
 	private final DailyQnaService dailyQnaService;
 
 	/**
-	 * 오늘의 질문 답변 등록
+	 * 답변 등록
 	 * userId				답변을 작성한 유저
 	 * @param questionId	유저가 답변을 작성한 질문의 Id
 	 * @param request 		유저가 작성한 답변
@@ -49,7 +49,7 @@ public class DailyQnaController {
 	}
 
 	/**
-	 * 질문에 대한 사용자의 답변 조회
+	 * 답변 조회
 	 * userId				답변을 작성한 유저
 	 * @param questionId	질문 Id로 유저가 작성한 답변을 검색
 	 * @return CommonResponse 성공 메세지, data: 작성일 기준 내림차순 답변 조회
@@ -65,7 +65,7 @@ public class DailyQnaController {
 	}
 
 	/**
-	 * 답변을 사용자가 수정
+	 * 답변 수정
 	 * userId				답변을 작성한 유저
 	 * @param dailyQnaId	유저가 수정할 답변의 id
 	 * @param request		유저가 작성한 수정 할 내용
@@ -83,6 +83,12 @@ public class DailyQnaController {
 		return CommonResponse.of(SuccessCode.OK);
 	}
 
+	/**
+	 * 답변 삭제
+	 * userId				답변을 작성한 유저
+	 * @param dailyQnaId	유저가 삭제할 답변의 id
+	 * @return	CommonResponse 성공 메세지, data: null
+	 */
 	@DeleteMapping("/daily-qnas/{dailyQnaId}")
 	public ResponseEntity<CommonResponse<Void>> deleteDailyQna(
 		// 유저 정보: 수정 예정

@@ -69,7 +69,7 @@ public class Place extends BaseEntityWithBothAt {
 	// status 기본 상태 = 영업중
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10)
-	private Status status = Status.ACTIVE;
+	private PlaceStatus placeStatus = PlaceStatus.ACTIVE;
 
 	@Builder
 	public Place(User user, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio, String address,
@@ -86,7 +86,7 @@ public class Place extends BaseEntityWithBothAt {
 
 	// soft delete 구현을 위한 메서드
 	public void updateStatus(PlaceStatusChangeRequestDto requestDto) {
-		this.status = requestDto.getStatus();
+		this.placeStatus = requestDto.getPlaceStatus();
 	}
 
 	// PlaceUpdateRequestDto null 가능 여부에 따른 update 메서드

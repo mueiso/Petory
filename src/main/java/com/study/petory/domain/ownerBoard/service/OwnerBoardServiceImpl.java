@@ -1,9 +1,14 @@
 package com.study.petory.domain.ownerBoard.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
@@ -42,6 +47,24 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		return OwnerBoardCreateResponseDto.from(ownerBoard);
 	}
 
+	// 게시글 전체 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page) {
+
+		int adjustedPage = (page > 0) ? page - 1 : 0;
+		PageRequest pageRequest = PageRequest.of(adjustedPage, 5, Sort.by("createdAt").descending());
+
+		Page<OwnerBoard> boards;
+		if (title != null) {
+			boards = ownerBoardRepository.findByTitleContaining(title, pageRequest);
+		} else {
+			boards = ownerBoardRepository.findAll(pageRequest);
+		}
+
+		return boards.map(OwnerBoardGetAllResponseDto::from);
+	}
+
 	// 게시글 단건 조회
 	@Override
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
@@ -49,4 +72,5 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		return OwnerBoardGetResponseDto.from(ownerBoard);
 	}
+
 }

@@ -22,6 +22,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.Question;
@@ -131,5 +132,30 @@ public class DailyQnaServiceTest {
 		assertThat(response.get(2).getAnswer()).isEqualTo("답변 1");
 
 		asserSortedByCreatedAtDesc(response);
+	}
+
+	@Test
+	@DisplayName("답변을 수정하는 메서드")
+	public void updateDailyQna() {
+		// given
+		testUserRole.add(userRole);
+
+		DailyQna savedQna = new DailyQna(testUser, testQuestion, "수정 전 답변");
+
+		Long userId = 1L;
+		Long dailyQnaId = 1L;
+
+		given(dailyQnaRepository.findByIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
+		ReflectionTestUtils.setField(testUser, "id", 1L);
+
+		DailyQnaUpdateRequestDto updateData = new DailyQnaUpdateRequestDto("수정 후 답변");
+
+		// when
+		dailyQnaService.updateDailyQna(userId, dailyQnaId, updateData);
+
+		// then
+		DailyQna updateQna = dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
+
+		assertThat(updateQna.getAnswer()).isEqualTo("수정 후 답변");
 	}
 }

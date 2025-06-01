@@ -69,4 +69,40 @@ public class PlaceReviewServiceImpl implements PlaceReviewService{
 
 		return PlaceReviewUpdateResponseDto.from(findPlaceReview);
 	}
+
+	// 리뷰 복구
+	@Override
+	@Transactional
+	public void restorePlaceReview(Long placeId, Long reviewId) {
+
+		// 해당 장소가 존재하는지 검증하기 위한 로직
+		entityFetcher.findPlaceByPlaceId(placeId);
+
+		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
+
+		// deleteAt이 null 이라면 즉, 삭제되지 않았다면 복구가 안되므로 그것에 관한 검증 로직
+		if(findPlaceReview.getDeletedAt() == null) {
+			throw new CustomException(ErrorCode.REVIEW_NOT_DELETED);
+		}
+
+		findPlaceReview.restoreEntity();
+	}
+
+	// 리뷰 삭제
+	@Override
+	@Transactional
+	public void deletePlaceReview(Long placeId, Long reviewId) {
+
+		// 해당 장소가 존재하는지 검증하기 위한 로직
+		entityFetcher.findPlaceByPlaceId(placeId);
+
+		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
+
+		// deleteAt이 null 이 아니라면 즉, 삭제되었다면 삭제가 안되므로 그것에 관한 검증 로직
+		if(findPlaceReview.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.ALREADY_DELETED_REVIEW);
+		}
+
+		findPlaceReview.deactivateEntity();
+	}
 }

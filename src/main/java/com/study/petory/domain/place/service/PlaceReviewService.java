@@ -11,4 +11,8 @@ public interface PlaceReviewService {
 	PlaceReviewCreateResponseDto savePlaceReview(Long placeId, PlaceReviewCreateRequestDto requestDto);
 
 	PlaceReviewUpdateResponseDto updatePlaceReview(Long placeId, Long reviewId, PlaceReviewUpdateRequestDto requestDto);
+
+	void restorePlaceReview(Long placeId, Long reviewId);
+
+	void deletePlaceReview(Long placeId, Long reviewId);
 }

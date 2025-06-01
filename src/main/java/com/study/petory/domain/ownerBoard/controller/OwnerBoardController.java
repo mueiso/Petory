@@ -67,7 +67,12 @@ public class OwnerBoardController {
 		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findOwnerBoard(boardId));
 	}
 
-	// 게시글 수정
+	/**
+	 * 게시글 수정
+	 * @param boardId 수정할 주인커뮤니티 게시글 ID
+	 * @param dto 제목, 내용 // 사진 추가 예정
+	 * @return 수정된 OwnerBoard 반환
+	 */
 	@PatchMapping("/{boardId}")
 	public CommonResponse<OwnerBoardUpdateResponseDto> updateOwnerBoard(
 		@PathVariable Long boardId,

@@ -45,12 +45,12 @@ public class JwtUtil {
 	private Key key;
 
 	/*
-	* @PostConstruct : Bean 생성 후 자동으로 호출되는 초기화 작업 메서드
-	  → JWT 서명을 위한 암호화 키(Key)를 초기화하는 과정
-	  → @Value 로 주입된 secretKey 를 가공해 Key 객체를 만들기 위해 사용
-	* Decoders.BASE64.decode : =Base64 로 인코딩된 문자열인 secretKey 를 byte 배열로 디코딩
-	* this.key : 생성된 Key 를 클래스 필드에 저장해 나중에 사용
-	* Keys.hmacShaKeyFor() : 전달된 byte 값을 기반으로 HMAC-SHA 용 SecretKey 객체를 생성
+	 * @PostConstruct : Bean 생성 후 자동으로 호출되는 초기화 작업 메서드
+	   → JWT 서명을 위한 암호화 키(Key)를 초기화하는 과정
+	   → @Value 로 주입된 secretKey 를 가공해 Key 객체를 만들기 위해 사용
+	 * Decoders.BASE64.decode : =Base64 로 인코딩된 문자열인 secretKey 를 byte 배열로 디코딩
+	 * this.key : 생성된 Key 를 클래스 필드에 저장해 나중에 사용
+	 * Keys.hmacShaKeyFor() : 전달된 byte 값을 기반으로 HMAC-SHA 용 SecretKey 객체를 생성
 	 */
 	@PostConstruct
 	public void init() {
@@ -95,5 +95,9 @@ public class JwtUtil {
 			.compact();
 	}
 
+	/* TODO
+	 * substringToken
+	 * getClaims
+	 */
 
 }

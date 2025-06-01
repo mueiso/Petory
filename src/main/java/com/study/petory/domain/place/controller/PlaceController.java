@@ -111,7 +111,7 @@ public class PlaceController {
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.restorePlace(placeId, requestDto);
-		return CommonResponse.of(SuccessCode.ROLLBACK);
+		return CommonResponse.of(SuccessCode.RESTORE);
 	}
 
 	/**
@@ -159,5 +159,37 @@ public class PlaceController {
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.OK, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
+	}
+
+	/**
+	 * 삭제된 리뷰 복구
+	 * soft delete 된 리뷰를 다시 복구하는 기능
+	 * @param placeId 장소 식별자
+	 * @param reviewId 리뷰 식별자
+	 * @return CommonResponse 방식의 삭제된 리뷰 복구 메시지
+	 */
+	@PatchMapping("/{placeId}/reviews/{reviewId}")
+	public CommonResponse<Void> restorePlaceReview(
+		@PathVariable Long placeId,
+		@PathVariable Long reviewId
+	) {
+		placeReviewService.restorePlaceReview(placeId, reviewId);
+		return CommonResponse.of(SuccessCode.RESTORE);
+	}
+
+	/**
+	 * 리뷰 삭제
+	 * soft delete 구현
+	 * @param placeId 장소 식별자
+	 * @param reviewId 리뷰 식별자
+	 * @return CommonResponse 방식의 리뷰 삭제 메시지
+	 */
+	@DeleteMapping("/{placeId}/reviews/{reviewId}")
+	public CommonResponse<Void> deletePlaceReview(
+		@PathVariable Long placeId,
+		@PathVariable Long reviewId
+	) {
+		placeReviewService.deletePlaceReview(placeId, reviewId);
+		return CommonResponse.of(SuccessCode.NO_CONTENT);
 	}
 }

@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceType;
+import com.study.petory.domain.place.service.PlaceReviewService;
 import com.study.petory.domain.place.service.PlaceService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -33,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 public class PlaceController {
 
 	private final PlaceService placeService;
+	private final PlaceReviewService placeReviewService;
 
 	/**
 	 * 장소 등록
@@ -104,7 +108,7 @@ public class PlaceController {
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
-		placeService.restorePlace(placeId,requestDto);
+		placeService.restorePlace(placeId, requestDto);
 		return CommonResponse.of(SuccessCode.ROLLBACK);
 	}
 
@@ -122,5 +126,20 @@ public class PlaceController {
 	) {
 		placeService.deletePlace(placeId, requestDto);
 		return CommonResponse.of(SuccessCode.NO_CONTENT);
+	}
+
+	/**
+	 * 리뷰 등록
+	 * 유저 부분은 추후 수정 예정
+	 * @param placeId 장소 식별자
+	 * @param requestDto 리뷰 등록에 필요한 정보
+	 * @return CommonResponse 방식의 등록된 리뷰에 대한 정보
+	 */
+	@PostMapping("/{placeId}/reviews")
+	public CommonResponse<PlaceReviewCreateResponseDto> createPlaceReview(
+		@PathVariable Long placeId,
+		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.OK, placeReviewService.savePlaceReview(placeId, requestDto));
 	}
 }

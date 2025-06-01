@@ -47,11 +47,6 @@ public class EntityFetcher {
 	private final UserRepository userRepository;
 	private final QuestionRepository questionRepository;
 
-	public User findUserByUserId(Long userID) {
-		return userRepository.findById(userID)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-	}
-
 	public Album findAlbumByAlbumId(Long albumId) {
 		return albumRepository.findById(albumId)
 			.orElseThrow(() -> new CustomException(ErrorCode.ALBUM_NOT_FOUND));
@@ -66,37 +61,41 @@ public class EntityFetcher {
 		return dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
 	}
 
-	public Faq findFaqByFaqId(Long faqID) {
-		return faqRepository.findById(faqID)
+	public Faq findFaqByFaqId(Long faqId) {
+		return faqRepository.findById(faqId)
 			.orElseThrow(() -> new CustomException(ErrorCode.FAQ_QNA_NOT_FOUND));
 	}
 
-	public Feedback findFeedbackByFeedbackId(Long feedbackID) {
-		return feedbackRepository.findById(feedbackID)
+	public Feedback findFeedbackByFeedbackId(Long feedbackId) {
+		return feedbackRepository.findById(feedbackId)
 			.orElseThrow(() -> new CustomException(ErrorCode.FEEDBACK_NOT_FOUND));
 	}
 
-	public OwnerBoard findOwnerBoardByOwnerBoardId(Long ownerBoardID) {
-		return ownerBoardRepository.findById(ownerBoardID)
+	public OwnerBoard findOwnerBoardByOwnerBoardId(Long ownerBoardId) {
+		return ownerBoardRepository.findById(ownerBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.OWNER_BOARD_NOT_FOUND));
 	}
 
-	public Pet findPetByPetId(Long petID) {
-		return petRepository.findById(petID)
+	public Pet findPetByPetId(Long petId) {
+		return petRepository.findById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 	}
 
-	public Place findPlaceByPlaceId(Long placeID) {
-		return placeRepository.findById(placeID)
-			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	public Place findPlaceByPlaceId(Long placeId) {
+		return placeRepository.findByIdOrElseThrow(placeId);
 	}
 
-	public TradeBoard findTradeBoardByTradeBoardId(Long tradeBoardID) {
-		return tradeBoardRepository.findById(tradeBoardID)
+	public TradeBoard findTradeBoardByTradeBoardId(Long tradeBoardId) {
+		return tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
 	}
 
-	public Question findQuestionByQuestionId(Long questionID) {
-		return questionRepository.findByIdOrElseThrow(questionID);
+	public Question findQuestionByQuestionId(Long questionId) {
+		return questionRepository.findByIdOrElseThrow(questionId);
+	}
+
+	public User findUserByUserId(Long userId) {
+		return userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 }

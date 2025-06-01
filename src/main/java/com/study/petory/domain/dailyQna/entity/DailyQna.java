@@ -1,5 +1,6 @@
 package com.study.petory.domain.dailyQna.entity;
 
+import com.study.petory.common.entity.BaseEntityWithBothAt;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "daily_qna")
 @NoArgsConstructor
-public class DailyQna {
+public class DailyQna extends BaseEntityWithBothAt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

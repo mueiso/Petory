@@ -2,6 +2,7 @@ package com.study.petory.domain.ownerBoard.dto.response;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class OwnerBoardCreateResponseDto {
 
 	private final String content;
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private final LocalDateTime createdAt;
 
 	public static OwnerBoardCreateResponseDto from(OwnerBoard ownerBoard) {

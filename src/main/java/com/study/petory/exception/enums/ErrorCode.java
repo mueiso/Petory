@@ -43,6 +43,8 @@ public enum ErrorCode implements BaseCode {
 	// PlaceReview
 	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),
 	DUPLICATE_REVIEW(HttpStatus.BAD_REQUEST, "이미 리뷰를 작성한 장소입니다."),
+	REVIEW_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 리뷰입니다."),
+	ALREADY_DELETED_REVIEW(HttpStatus.BAD_REQUEST, "이미 삭제된 리뷰입니다."),
 
 	// TradeBoard
 	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "거래 글이 존재하지 않습니다.")

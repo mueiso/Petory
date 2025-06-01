@@ -1,5 +1,8 @@
 package com.study.petory.domain.dailyQna.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.domain.dailyQna.dto.request.DailyQNACreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.service.DailyQnaService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -15,7 +19,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/daily-qnas")
+@RequestMapping("/questions")
 @RequiredArgsConstructor
 public class DailyQnaController {
 
@@ -28,14 +32,31 @@ public class DailyQnaController {
 	 * @param request 		유저가 작성한 답변
 	 * @return CommonResponse 성공 메세지, data
 	 */
-	@PostMapping("/{questionId}")
+	@PostMapping("/{questionId}/daily-qnas")
 	public CommonResponse<Void> createDailyQna(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
 		@PathVariable Long questionId,
-		@Valid @RequestBody DailyQNACreateRequestDto request) {
+		@Valid @RequestBody DailyQnaCreateRequestDto request
+	) {
 		Long userId = 1L;
 		dailyQnaService.saveDailyQNA(userId, questionId, request);
 		return CommonResponse.of(SuccessCode.CREATED);
+	}
+
+	/**
+	 * 질문에 대한 사용자의 답변 조회
+	 * userId				답변을 작성한 유저
+	 * @param questionId	질문 Id로 유저가 작성한 답변을 검색
+	 * @return CommonResponse 성공 메세지, data: 작성일 기준 내림차순 답변 조회
+	 */
+	@GetMapping("/{questionId}/daily-qnas")
+	public CommonResponse<List<DailyQnaGetResponseDto>> getDailyQna(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long questionId
+	) {
+		Long userId = 1L;
+		return CommonResponse.of(SuccessCode.OK, dailyQnaService.findDailyQna(userId, questionId));
 	}
 }

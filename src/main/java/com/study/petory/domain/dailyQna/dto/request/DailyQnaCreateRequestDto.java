@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class DailyQNACreateRequestDto {
+public class DailyQnaCreateRequestDto {
 
 	private String answer;
 }

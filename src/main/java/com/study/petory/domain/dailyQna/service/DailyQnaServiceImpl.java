@@ -10,10 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +31,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	// 사용자의 답변을 저장
 	@Override
 	@Transactional
-	public void saveDailyQNA(Long userId, Long questionId, DailyQnaCreateRequestDto requestDto) {
+	public void saveDailyQna(Long userId, Long questionId, DailyQnaCreateRequestDto requestDto) {
 		User user = entityFetcher.findUserByUserId(userId);
 		Question todayQuestion = entityFetcher.findQuestionByQuestionId(questionId);
 		dailyQnaRepository.save(new DailyQna(
@@ -52,5 +55,16 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 			.collect(Collectors.toList());
 		responseList.sort(Comparator.comparing(DailyQnaGetResponseDto::getCreatedAt).reversed());
 		return responseList;
+	}
+
+	// 답변을 사용자가 수정
+	@Override
+	@Transactional
+	public void updateDailyQna(Long userId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto) {
+		DailyQna dailyQna = dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
+		if (dailyQna.getUserId().getId()!=userId) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
+		dailyQna.updateDailyQna(requestDto.getAnswer());
 	}
 }

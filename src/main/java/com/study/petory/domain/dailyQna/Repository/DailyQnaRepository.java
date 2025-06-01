@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;

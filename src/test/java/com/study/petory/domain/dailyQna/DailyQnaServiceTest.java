@@ -98,7 +98,7 @@ public class DailyQnaServiceTest {
 		given(entityFetcher.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
 
 		// when
-		dailyQnaService.saveDailyQNA(userId, questionId, requestDto);
+		dailyQnaService.saveDailyQna(userId, questionId, requestDto);
 		// then
 		verify(dailyQnaRepository, times(1)).save(any(DailyQna.class));
 	}

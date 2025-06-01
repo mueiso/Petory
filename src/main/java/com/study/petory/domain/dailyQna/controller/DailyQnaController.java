@@ -32,7 +32,7 @@ public class DailyQnaController {
 	 * userId				답변을 작성한 유저
 	 * @param questionId	유저가 답변을 작성한 질문의 Id
 	 * @param request 		유저가 작성한 답변
-	 * @return CommonResponse 성공 메세지, data
+	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping("/{questionId}/daily-qnas")
 	public CommonResponse<Void> createDailyQna(
@@ -62,6 +62,13 @@ public class DailyQnaController {
 		return CommonResponse.of(SuccessCode.OK, dailyQnaService.findDailyQna(userId, questionId));
 	}
 
+	/**
+	 * 답변을 사용자가 수정
+	 * userId				답변을 작성한 유저
+	 * @param dailyQnaId	유저가 수정할 답변의 id
+	 * @param request		유저가 작성한 수정 할 내용
+	 * @return	CommonResponse 성공 메세지, data: null
+	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}")
 	public CommonResponse<Void> updateDailyQna(
 		// 유저 정보: 수정 예정

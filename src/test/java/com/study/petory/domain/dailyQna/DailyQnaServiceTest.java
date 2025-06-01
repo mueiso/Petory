@@ -15,7 +15,7 @@ import static org.mockito.BDDMockito.*;
 
 import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
-import com.study.petory.domain.dailyQna.dto.request.DailyQNACreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.service.DailyQnaServiceImpl;
@@ -59,7 +59,7 @@ public class DailyQnaServiceTest {
 	public void saveDailyQna() {
 		// given
 		testUserRole.add(userRole);
-		DailyQNACreateRequestDto requestDto = new DailyQNACreateRequestDto("답변");
+		DailyQnaCreateRequestDto requestDto = new DailyQnaCreateRequestDto("답변");
 
 		Long userId = 1L;
 		Long questionId = 1L;

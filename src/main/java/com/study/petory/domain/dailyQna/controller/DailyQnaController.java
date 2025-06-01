@@ -2,6 +2,8 @@ package com.study.petory.domain.dailyQna.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +37,7 @@ public class DailyQnaController {
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping("/{questionId}/daily-qnas")
-	public CommonResponse<Void> createDailyQna(
+	public ResponseEntity<CommonResponse<Void>> createDailyQna(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
 		@PathVariable Long questionId,
@@ -53,7 +55,7 @@ public class DailyQnaController {
 	 * @return CommonResponse 성공 메세지, data: 작성일 기준 내림차순 답변 조회
 	 */
 	@GetMapping("/{questionId}/daily-qnas")
-	public CommonResponse<List<DailyQnaGetResponseDto>> getDailyQna(
+	public ResponseEntity<CommonResponse<List<DailyQnaGetResponseDto>>> getDailyQna(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
 		@PathVariable Long questionId
@@ -70,7 +72,7 @@ public class DailyQnaController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}")
-	public CommonResponse<Void> updateDailyQna(
+	public ResponseEntity<CommonResponse<Void>> updateDailyQna(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
 		@PathVariable Long dailyQnaId,
@@ -79,5 +81,16 @@ public class DailyQnaController {
 		Long userId = 1L;
 		dailyQnaService.updateDailyQna(userId, dailyQnaId, request);
 		return CommonResponse.of(SuccessCode.OK);
+	}
+
+	@DeleteMapping("/daily-qnas/{dailyQnaId}")
+	public ResponseEntity<CommonResponse<Void>> deleteDailyQna(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long dailyQnaId
+	) {
+		Long userId = 1L;
+		dailyQnaService.deleteDailyQna(userId, dailyQnaId);
+		return CommonResponse.of(SuccessCode.NO_CONTENT);
 	}
 }

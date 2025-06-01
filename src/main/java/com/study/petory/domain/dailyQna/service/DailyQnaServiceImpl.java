@@ -67,4 +67,15 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		}
 		dailyQna.updateDailyQna(requestDto.getAnswer());
 	}
+
+	// 답변을 사용자가 삭제
+	@Override
+	@Transactional
+	public void deleteDailyQna(Long userId, Long dailyQnaId) {
+		DailyQna dailyQna = dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
+		if (dailyQna.getUserId().getId()!=userId) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		}
+		dailyQna.deactivateEntity();
+	}
 }

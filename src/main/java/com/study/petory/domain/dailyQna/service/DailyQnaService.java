@@ -13,4 +13,6 @@ public interface DailyQnaService {
 	List<DailyQnaGetResponseDto> findDailyQna(Long userId, Long questionId);
 
 	void updateDailyQna(Long userId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto);
+
+	void deleteDailyQna(Long userId, Long dailyQnaId);
 }

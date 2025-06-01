@@ -24,6 +24,7 @@ import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.PlaceService;
 import com.study.petory.exception.enums.SuccessCode;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -41,7 +42,7 @@ public class PlaceController {
 	 */
 	@PostMapping
 	public CommonResponse<PlaceCreateResponseDto> createPlace(
-		@RequestBody PlaceCreateRequestDto requestDto
+		@Valid @RequestBody PlaceCreateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(requestDto));
 	}
@@ -86,7 +87,7 @@ public class PlaceController {
 	@PatchMapping("/{placeId}")
 	public CommonResponse<PlaceUpdateResponseDto> updatePlace(
 		@PathVariable Long placeId,
-		@RequestBody PlaceUpdateRequestDto requestDto
+		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.OK, placeService.updatePlace(placeId, requestDto));
 	}
@@ -101,7 +102,7 @@ public class PlaceController {
 	@PatchMapping("/{placeId}/restore")
 	public CommonResponse<Void> restorePlace(
 		@PathVariable Long placeId,
-		@RequestBody PlaceStatusChangeRequestDto requestDto
+		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.restorePlace(placeId,requestDto);
 		return CommonResponse.of(SuccessCode.ROLLBACK);
@@ -117,7 +118,7 @@ public class PlaceController {
 	@DeleteMapping("/{placeId}")
 	public CommonResponse<Void> deletePlace(
 		@PathVariable Long placeId,
-		@RequestBody PlaceStatusChangeRequestDto requestDto
+		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.deletePlace(placeId, requestDto);
 		return CommonResponse.of(SuccessCode.NO_CONTENT);

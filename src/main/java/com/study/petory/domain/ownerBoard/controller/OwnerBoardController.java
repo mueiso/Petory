@@ -2,6 +2,7 @@ package com.study.petory.domain.ownerBoard.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -48,8 +51,8 @@ public class OwnerBoardController {
 	@GetMapping
 	public CommonResponse<Page<OwnerBoardGetAllResponseDto>> getOwnerBoardsAll(
 		@RequestParam(required = false) String title,
-		@RequestParam(defaultValue = "1") int page
-	) {
+		@RequestParam(defaultValue = "1") int page) {
+
 		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findAllOwnerBoards(title, page));
 	}
 
@@ -62,5 +65,14 @@ public class OwnerBoardController {
 	public CommonResponse<OwnerBoardGetResponseDto> getOwnerBoard(@PathVariable Long boardId) {
 
 		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findOwnerBoard(boardId));
+	}
+
+	// 게시글 수정
+	@PatchMapping("/{boardId}")
+	public CommonResponse<OwnerBoardUpdateResponseDto> updateOwnerBoard(
+		@PathVariable Long boardId,
+		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
+
+		return CommonResponse.of(SuccessCode.OK, ownerBoardService.updateOwnerBoard(boardId, dto));
 	}
 }

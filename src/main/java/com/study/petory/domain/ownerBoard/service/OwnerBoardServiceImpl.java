@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.User;
@@ -67,10 +69,23 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 	// 게시글 단건 조회
 	@Override
+	@Transactional(readOnly = true)
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
 		return OwnerBoardGetResponseDto.from(ownerBoard);
+	}
+
+	// 게시글 수정
+	@Override
+	@Transactional
+	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long boardId, OwnerBoardUpdateRequestDto requestDto) {
+		// 본인 작성 글인지 검증 로직 추가
+
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+		requestDto.update(ownerBoard);
+
+		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}
 
 }

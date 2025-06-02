@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "places")
+@Table(name = "tb_place")
 @NoArgsConstructor
 public class Place extends BaseEntityWithBothAt {
 

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "feedback")
+@Table(name = "tb_feedback")
 @NoArgsConstructor
 public class Feedback extends BaseEntityWithBothAt {
 

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "daily_qna")
+@Table(name = "tb_daily_qna")
 @SQLRestriction("deleted_at is null")
 @NoArgsConstructor
 public class DailyQna extends BaseEntityWithBothAt {

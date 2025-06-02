@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +33,7 @@ import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
 import com.study.petory.domain.user.entity.UserRole;
+import com.study.petory.domain.user.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class DailyQnaServiceTest {
@@ -42,8 +44,9 @@ public class DailyQnaServiceTest {
 	@Mock
 	private DailyQnaRepository dailyQnaRepository;
 
+	// 리펙토링 예정
 	@Mock
-	private EntityFetcher entityFetcher;
+	private UserRepository userRepository;
 
 	@Mock
 	private QuestionServiceImpl questionService;
@@ -95,8 +98,8 @@ public class DailyQnaServiceTest {
 		Long userId = 1L;
 		Long questionId = 1L;
 
-		given(entityFetcher.findUserByUserId(userId)).willReturn(testUser);
-		given(entityFetcher.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
+		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
+		given(questionService.findQuestionByQuestionIdOrElseThrow(questionId)).willReturn(testQuestion);
 
 		// when
 		dailyQnaService.saveDailyQna(userId, questionId, requestDto);
@@ -145,7 +148,7 @@ public class DailyQnaServiceTest {
 		Long userId = 1L;
 		Long dailyQnaId = 1L;
 
-		given(dailyQnaRepository.findByIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
+		given(dailyQnaService.findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 
 		DailyQnaUpdateRequestDto updateData = new DailyQnaUpdateRequestDto("수정 후 답변");
@@ -154,7 +157,7 @@ public class DailyQnaServiceTest {
 		dailyQnaService.updateDailyQna(userId, dailyQnaId, updateData);
 
 		// then
-		DailyQna updateQna = dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
+		DailyQna updateQna = dailyQnaService.findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId);
 
 		assertThat(updateQna.getAnswer()).isEqualTo("수정 후 답변");
 	}
@@ -170,7 +173,7 @@ public class DailyQnaServiceTest {
 		Long userId = 1L;
 		Long dailyQnaId = 1L;
 
-		given(dailyQnaRepository.findByIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
+		given(dailyQnaService.findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 
 		// when

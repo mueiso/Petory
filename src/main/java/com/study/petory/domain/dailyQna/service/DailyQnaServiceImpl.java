@@ -15,6 +15,7 @@ import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;
 
@@ -25,15 +26,25 @@ import lombok.RequiredArgsConstructor;
 public class DailyQnaServiceImpl implements DailyQnaService{
 
 	private final DailyQnaRepository dailyQnaRepository;
-	private final EntityFetcher entityFetcher;
 	private final QuestionService questionService;
+
+	// 리펙토링 예정
+	private final UserRepository userRepository;
+
+	@Override
+	public DailyQna findDailyQnaByDailyQnaIdOrElseThrow(Long dailyQnaId) {
+		return dailyQnaRepository.findById(dailyQnaId)
+			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
+	}
 
 	// 사용자의 답변을 저장
 	@Override
 	@Transactional
 	public void saveDailyQna(Long userId, Long questionId, DailyQnaCreateRequestDto requestDto) {
-		User user = entityFetcher.findUserByUserId(userId);
-		Question todayQuestion = entityFetcher.findQuestionByQuestionId(questionId);
+		// 리펙토링 예정
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		Question todayQuestion = questionService.findQuestionByQuestionIdOrElseThrow(questionId);
 		dailyQnaRepository.save(new DailyQna(
 			user,
 			todayQuestion,
@@ -61,7 +72,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void updateDailyQna(Long userId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto) {
-		DailyQna dailyQna = dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
+		DailyQna dailyQna = findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId);
 		if (dailyQna.getUserId().getId()!=userId) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 		}
@@ -72,7 +83,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void deleteDailyQna(Long userId, Long dailyQnaId) {
-		DailyQna dailyQna = dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
+		DailyQna dailyQna = findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId);
 		if (dailyQna.getUserId().getId()!=userId) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}

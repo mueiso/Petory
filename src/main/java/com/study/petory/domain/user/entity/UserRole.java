@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "user_role")
+@Table(name = "tb_user_role")
 @NoArgsConstructor
 public class UserRole {
 

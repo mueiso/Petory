@@ -20,9 +20,9 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.service.TradeBoardService;
-import com.study.petory.domain.tradeBoard.service.TradeBoardServiceImpl;
 import com.study.petory.exception.enums.SuccessCode;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -39,7 +39,7 @@ public class TradeBoardController {
 	 */
 	@PostMapping
 	private ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
-		@RequestBody TradeBoardCreateRequestDto requestDto
+		@Valid @RequestBody TradeBoardCreateRequestDto requestDto
 	) {
 
 		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(requestDto));
@@ -82,7 +82,7 @@ public class TradeBoardController {
 	@PatchMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
 		@PathVariable Long tradeBoardId,
-		@RequestBody TradeBoardUpdateRequestDto requestDto
+		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.OK, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "calender")
+@Table(name = "tb_calender")
 @NoArgsConstructor
 public class Calender {
 

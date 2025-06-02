@@ -1,6 +1,7 @@
 package com.study.petory.domain.place.entity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
@@ -51,7 +52,7 @@ public class Place extends BaseEntityWithBothAt {
 	@Column(nullable = false, length = 30)
 	private PlaceType placeType; // type -> placeType으로 수정
 
-	@Column(precision = 2, scale = 1)		// 추후에 NOTNULL로 수정 예정, precision : 전체 자리 수, scale : 그 중 소수점 자리 수
+	@Column(precision = 2, scale = 1)        // 추후에 NOTNULL로 수정 예정, precision : 전체 자리 수, scale : 그 중 소수점 자리 수
 	private BigDecimal ratio;
 
 	// 전체 주소
@@ -91,24 +92,47 @@ public class Place extends BaseEntityWithBothAt {
 
 	// PlaceUpdateRequestDto null 가능 여부에 따른 update 메서드
 	public void updatePlace(PlaceUpdateRequestDto requestDto) {
-		if(requestDto.getPlaceName() != null) {
+		if (requestDto.getPlaceName() != null) {
 			this.placeName = requestDto.getPlaceName();
 		}
 
-		if(requestDto.getPlaceInfo() != null) {
+		if (requestDto.getPlaceInfo() != null) {
 			this.placeInfo = requestDto.getPlaceInfo();
 		}
 
-		if(requestDto.getPlaceType() != null) {
+		if (requestDto.getPlaceType() != null) {
 			this.placeType = requestDto.getPlaceType();
 		}
 
-		if(requestDto.getLatitude() != null) {
+		if (requestDto.getLatitude() != null) {
 			this.latitude = requestDto.getLatitude();
 		}
 
-		if(requestDto.getLongitude() != null) {
+		if (requestDto.getLongitude() != null) {
 			this.longitude = requestDto.getLongitude();
 		}
+	}
+
+	// 평균 평점 계산 로직
+	public void updateRatio(List<PlaceReview> placeReviewList) {
+		Integer sumRatio = 0;
+		int countPlaceReview = 0;
+
+		for (PlaceReview placeReview : placeReviewList) {
+			if (placeReview.getDeletedAt() == null) {
+				sumRatio += placeReview.getRatio();
+				countPlaceReview++;
+			}
+		}
+
+		// 만약 리뷰 갯수가 0개인 경우 0으로 반환
+		if(countPlaceReview == 0) {
+			this.ratio = BigDecimal.ZERO;
+			return;
+		}
+
+		// 정수형 타입을 BigDecimal 형태로 변환함과 동시에 나누는 로직. 소수점 첫째 자리까지 계산, 둘째 자리에서 반올림.
+		this.ratio = BigDecimal.valueOf(sumRatio)
+			.divide(BigDecimal.valueOf(countPlaceReview), 1, RoundingMode.HALF_UP);
 	}
 }

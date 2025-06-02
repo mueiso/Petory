@@ -96,8 +96,16 @@ public class JwtUtil {
 	}
 
 	/* TODO
-	 * substringToken
 	 * getClaims
 	 */
+
+	// 순수 JWT 문자열만 반환하는 유틸 메서드
+	public String subStringToken(String token) {
+		if(!StringUtils.hasText(token) || !token.startsWith(prefix)) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰 형식입니다.");
+		}
+
+		return token.substring(prefix.length());
+	}
 
 }

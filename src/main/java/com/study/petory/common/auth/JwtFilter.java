@@ -25,10 +25,11 @@ import lombok.RequiredArgsConstructor;
 public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtUtil jwtUtil;
+
 	// TODO - 직렬화/역직렬화 커스텀 설정 여부 확인 필요
 	private final RedisTemplate<String, Object> redisTemplate;
 
-	// TODO - URL 추가 필요
+	// TODO - URL 추가 및 수정 필요
 	// WHITELIST
 	private static final List<String> WHITELIST = List.of(
 		"/auth/login",

@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TradeBoardCreateRequestDto {
 
-	@NotBlank(message = "카테고리를 입력해주세요.")
+	@NotNull(message = "카테고리를 입력해주세요.")
 	private final TradeCategory category;
 
 	@NotBlank(message = "제목을 입력해주세요.")

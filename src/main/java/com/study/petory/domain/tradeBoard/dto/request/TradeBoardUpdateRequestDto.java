@@ -13,20 +13,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TradeBoardUpdateRequestDto {
 
-	@NotBlank(message = "카테고리를 입력해주세요.")
 	private final TradeCategory category;
 
-	@NotBlank(message = "제목을 입력해주세요.")
 	@Size(max = 30, message = "제목의 길이가 너무 깁니다.")
 	private final String title;
 
-	@NotBlank
 	@Size(max = 1000, message = "본문은 1000자를 넘어갈 수 없습니다.")
 	private final String content;
 
-	@Nullable //변수 타입은 S3 연동 후 변경
 	private final String photoUrl;
 
-	@NotNull(message = "금액을 입력해주세요.")
 	private final Integer price;
 }

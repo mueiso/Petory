@@ -98,15 +98,15 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			tradeBoard.updateCategory(requestDto.getCategory());
 		}
 
-		if (requestDto.getTitle() != null) {
+		if (requestDto.getTitle() != null && !requestDto.getTitle().isBlank()) {
 			tradeBoard.updateTitle(requestDto.getTitle());
 		}
 
-		if (requestDto.getContent() != null) {
+		if (requestDto.getContent() != null && !requestDto.getContent().isBlank()) {
 			tradeBoard.updateContent(requestDto.getContent());
 		}
 
-		if (requestDto.getPhotoUrl() != null) {
+		if (requestDto.getPhotoUrl() != null && !requestDto.getPhotoUrl().isBlank()) {
 			tradeBoard.updatePhotoUrl(requestDto.getPhotoUrl());
 		}
 

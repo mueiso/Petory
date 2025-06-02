@@ -27,14 +27,12 @@ public class PlaceServiceImpl implements PlaceService {
 	private final PlaceRepository placeRepository;
 	private final UserRepository userRepository;
 
-	private final EntityFetcher entityFetcher;
-
 	// 장소 등록
 	@Override
 	@Transactional
 	public PlaceCreateResponseDto savePlace(PlaceCreateRequestDto requestDto) {
 
-		User user = entityFetcher.findUserByUserId(1L);
+		User user = userRepository.findById(1L).orElseThrow();
 
 		Place place = Place.builder()
 			.user(user)
@@ -116,5 +114,10 @@ public class PlaceServiceImpl implements PlaceService {
 
 		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto);
+	}
+
+	// 다른 서비스에서 사용가능하게 설정한 메서드
+	public Place findPlaceByPlaceIdOrElseThrow(Long placeId) {
+		return placeRepository.findByIdOrElseThrow(placeId);
 	}
 }

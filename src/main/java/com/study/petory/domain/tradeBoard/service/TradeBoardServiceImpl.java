@@ -117,7 +117,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return new TradeBoardUpdateResponseDto(tradeBoard);
 	}
 
-	//게시글 삭제(유저 status enum 생성된 후 softDelete 구현 예정)
+	//User Status에 따라 상태값 변경하는 로직 구현 예정
+
 	@Override
 	@Transactional
 	public void deleteTradeBoard(Long tradeBoardId) {
@@ -132,6 +133,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);
 		}
 
-		tradeBoardRepository.delete(tradeBoard);
+		tradeBoard.deactivateEntity();
 	}
 }

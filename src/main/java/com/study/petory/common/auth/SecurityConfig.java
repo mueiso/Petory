@@ -65,7 +65,7 @@ public class SecurityConfig {
 	 * Security 는 내부적으로 이 메서드를 사용해 matches() 검사를 수행한다
 	 */
 	@Bean
-	public PasswordEncoder passEncoder() {
+	public PasswordEncoder passwordEncoder() {
 
 		return new BCryptPasswordEncoder();
 	}

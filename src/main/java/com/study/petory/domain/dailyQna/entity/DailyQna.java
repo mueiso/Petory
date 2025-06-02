@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "daily_qna")
+@Table(name = "tb_daily_qna")
 @NoArgsConstructor
 public class DailyQna {
 	@Id

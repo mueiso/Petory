@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "place_reviews")
+@Table(name = "tb_place_review")
 @NoArgsConstructor
 public class PlaceReview extends BaseEntityWithBothAt {
 

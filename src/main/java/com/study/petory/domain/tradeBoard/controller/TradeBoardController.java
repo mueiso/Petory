@@ -1,6 +1,7 @@
 package com.study.petory.domain.tradeBoard.controller;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,9 +19,10 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseD
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.service.TradeBoardServiceImpl;
+import com.study.petory.domain.tradeBoard.service.TradeBoardService;
 import com.study.petory.exception.enums.SuccessCode;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TradeBoardController {
 
-	private final TradeBoardServiceImpl tradeBoardService;
+	private final TradeBoardService tradeBoardService;
 
 	/**
 	 * 게시글 등록
@@ -36,8 +38,8 @@ public class TradeBoardController {
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일 반환
 	 */
 	@PostMapping
-	private CommonResponse<TradeBoardCreateResponseDto> createTradeBoard(
-		@RequestBody TradeBoardCreateRequestDto requestDto
+	private ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
+		@Valid @RequestBody TradeBoardCreateRequestDto requestDto
 	) {
 
 		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(requestDto));
@@ -50,7 +52,7 @@ public class TradeBoardController {
 	 * @return List 형식의 게시글 반환
 	 */
 	@GetMapping
-	private CommonResponse<Page<TradeBoardGetResponseDto>> getAllTradeBoard(
+	private ResponseEntity<CommonResponse<Page<TradeBoardGetResponseDto>>> getAllTradeBoard(
 		@RequestParam(required = false) TradeCategory category,
 		@RequestParam(defaultValue = "1") int page
 	) {
@@ -64,7 +66,7 @@ public class TradeBoardController {
 	 * @return 해당 게시글 반환
 	 */
 	@GetMapping("/{tradeBoardId}")
-	private CommonResponse<TradeBoardGetResponseDto> getByTradeBoardId(
+	private ResponseEntity<CommonResponse<TradeBoardGetResponseDto>> getByTradeBoardId(
 		@PathVariable Long tradeBoardId,
 		@RequestParam(defaultValue = "1") int page
 	) {
@@ -78,9 +80,9 @@ public class TradeBoardController {
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
 	 */
 	@PatchMapping("/{tradeBoardId}")
-	private CommonResponse<TradeBoardUpdateResponseDto> updateTradeBoard(
+	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
 		@PathVariable Long tradeBoardId,
-		@RequestBody TradeBoardUpdateRequestDto requestDto
+		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.OK, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}
@@ -91,7 +93,7 @@ public class TradeBoardController {
 	 * @return 상태코드 및 삭제 완료 메시지
 	 */
 	@DeleteMapping("/{tradeBoardId}")
-	private CommonResponse<Void> deleteTradeBoard(
+	private ResponseEntity<CommonResponse<Void>> deleteTradeBoard(
 		@PathVariable Long tradeBoardId
 	) {
 		tradeBoardService.deleteTradeBoard(tradeBoardId);

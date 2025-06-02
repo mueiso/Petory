@@ -1,5 +1,7 @@
 package com.study.petory.domain.tradeBoard.entity;
 
+import org.hibernate.annotations.Where;
+
 import com.study.petory.common.entity.BaseEntityWithBothAt;
 import com.study.petory.domain.user.entity.User;
 
@@ -11,17 +13,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "trade_board")
+@Table(name = "tb_trade_board")
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Where(clause = "deleted_at IS NULL")
 public class TradeBoard extends BaseEntityWithBothAt {
 
 	@Id
@@ -45,6 +45,16 @@ public class TradeBoard extends BaseEntityWithBothAt {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@Builder
+	public TradeBoard(TradeCategory category, String title, String content, String photoUrl, Integer price, User user) {
+		this.category = category;
+		this.title = title;
+		this.content = content;
+		this.photoUrl = photoUrl;
+		this.price = price;
+		this.user = user;
+	}
 
 	public void updateCategory(TradeCategory tradeCategory) {
 		this.category = tradeCategory;

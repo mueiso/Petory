@@ -2,6 +2,8 @@ package com.study.petory.common.response;
 
 import java.time.LocalDateTime;
 
+import org.springframework.http.ResponseEntity;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -27,11 +29,13 @@ public class CommonResponse <T> {
 		this.data = data;
 	}
 
-	public static <T> CommonResponse <T> of (BaseCode code, T data) {
-		return new CommonResponse<>(code, data);
+	public static <T> ResponseEntity<CommonResponse<T>> of(BaseCode code, T data) {
+		return ResponseEntity
+			.status(code.getStatus())
+			.body(new CommonResponse<>(code, data));
 	}
 
-	public static <T> CommonResponse <T> of (BaseCode code) {
-		return new CommonResponse<>(code, null);
+	public static <T> ResponseEntity<CommonResponse<T>> of(BaseCode code) {
+		return of(code, null);
 	}
 }

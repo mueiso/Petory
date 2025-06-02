@@ -3,6 +3,7 @@ package com.study.petory.domain.place.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -47,7 +48,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
 	@PostMapping
-	public CommonResponse<PlaceCreateResponseDto> createPlace(
+	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
 		@Valid @RequestBody PlaceCreateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(requestDto));
@@ -63,7 +64,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 페이징된 장소 정보 목록
 	 */
 	@GetMapping
-	public CommonResponse<Page<PlaceGetResponseDto>> getAllPlace(
+	public ResponseEntity<CommonResponse<Page<PlaceGetResponseDto>>> getAllPlace(
 		@RequestParam(required = false) String placeName,
 		@RequestParam(required = false) PlaceType placeType,
 		@PageableDefault(size = 10) Pageable pageable
@@ -78,7 +79,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 특정 장소 정보 + 해당 장소의 리뷰 목록
 	 */
 	@GetMapping("/{placeId}")
-	public CommonResponse<PlaceGetResponseDto> getByPlaceId(
+	public ResponseEntity<CommonResponse<PlaceGetResponseDto>> getByPlaceId(
 		@PathVariable Long placeId
 	) {
 		return CommonResponse.of(SuccessCode.OK, placeService.findByPlaceId(placeId));
@@ -91,7 +92,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 특정 장소의 수정된 정보
 	 */
 	@PatchMapping("/{placeId}")
-	public CommonResponse<PlaceUpdateResponseDto> updatePlace(
+	public ResponseEntity<CommonResponse<PlaceUpdateResponseDto>> updatePlace(
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
@@ -107,7 +108,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
 	 */
 	@PatchMapping("/{placeId}/restore")
-	public CommonResponse<Void> restorePlace(
+	public ResponseEntity<CommonResponse<Void>> restorePlace(
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
@@ -124,7 +125,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 장소 삭제 메시지
 	 */
 	@DeleteMapping("/{placeId}")
-	public CommonResponse<Void> deletePlace(
+	public ResponseEntity<CommonResponse<Void>> deletePlace(
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {

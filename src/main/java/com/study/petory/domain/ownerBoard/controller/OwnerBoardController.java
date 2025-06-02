@@ -85,12 +85,24 @@ public class OwnerBoardController {
 	/**
 	 * 게시글 삭제
 	 * @param boardId 삭제할 게시글 ID
-	 * @return no_content status 반환
+	 * @return NO_CONTENT 성공코드 반환
 	 */
 	@DeleteMapping("/{boardId}")
 	public CommonResponse<Void> deleteOwnerBoard(@PathVariable Long boardId) {
 		ownerBoardService.deleteOwnerBoard(boardId);
 
 		return CommonResponse.of(SuccessCode.NO_CONTENT);
+	}
+
+	/**
+	 * 게시글 복구
+	 * @param boardId 복구할 게시글 ID
+	 * @return ROLLBACK 성공코드 반환
+	 */
+	@PatchMapping("/{boardId}/restore")
+	public CommonResponse<Void> restoreBoard(@PathVariable Long boardId) {
+		ownerBoardService.restoreBoard(boardId);
+
+		return CommonResponse.of(SuccessCode.ROLLBACK);
 	}
 }

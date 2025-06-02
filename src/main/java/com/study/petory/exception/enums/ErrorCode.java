@@ -36,6 +36,7 @@ public enum ErrorCode implements BaseCode {
 
 	// OwnerBoard
 	OWNER_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "글이 존재하지 않습니다."),
+	OWNER_BOARD_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 게시물은 복구할 수 없습니다."),
 
 	// Place
 	PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "장소가 존재하지 않습니다."),

@@ -1,10 +1,13 @@
 package com.study.petory.domain.place.dto.response;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -26,8 +29,11 @@ public class PlaceGetResponseDto {
 
 	private final BigDecimal longitude;
 
+	private final List<PlaceReviewGetResponseDto> placeReviewList;
+
+	@Builder
 	public PlaceGetResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio,
-		BigDecimal latitude, BigDecimal longitude) {
+		BigDecimal latitude, BigDecimal longitude, List<PlaceReviewGetResponseDto> placeReviewList) {
 		this.id = id;
 		this.placeName = placeName;
 		this.placeInfo = placeInfo;
@@ -35,17 +41,22 @@ public class PlaceGetResponseDto {
 		this.ratio = ratio;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.placeReviewList = placeReviewList;
 	}
 
 	public static PlaceGetResponseDto from(Place place) {
-		return new PlaceGetResponseDto(
-			place.getId(),
-			place.getPlaceName(),
-			place.getPlaceInfo(),
-			place.getPlaceType(),
-			place.getRatio(),
-			place.getLatitude(),
-			place.getLongitude()
-		);
+		return PlaceGetResponseDto.builder()
+			.id(place.getId())
+			.placeName(place.getPlaceName())
+			.placeInfo(place.getPlaceInfo())
+			.placeType(place.getPlaceType())
+			.ratio(place.getRatio())
+			.latitude(place.getLatitude())
+			.longitude(place.getLongitude())
+			.placeReviewList(place.getPlaceReviewList().stream()
+				.filter(placeReview -> placeReview.getDeletedAt() == null)
+				.map(PlaceReviewGetResponseDto::from)
+				.collect(Collectors.toList()))
+			.build();
 	}
 }

@@ -7,7 +7,9 @@ import com.study.petory.domain.album.repository.AlbumRepository;
 import com.study.petory.domain.calender.entity.Calender;
 import com.study.petory.domain.calender.repository.CalenderRepository;
 import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
+import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
+import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.faq.entity.Faq;
 import com.study.petory.domain.faq.repository.FaqRepository;
 import com.study.petory.domain.feedback.entity.Feedback;
@@ -17,9 +19,7 @@ import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.pet.repository.PetRepository;
 import com.study.petory.domain.place.entity.Place;
-import com.study.petory.domain.place.entity.PlaceReview;
 import com.study.petory.domain.place.repository.PlaceRepository;
-import com.study.petory.domain.place.repository.PlaceReviewRepository;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
@@ -45,7 +45,7 @@ public class EntityFetcher {
 	private final PlaceRepository placeRepository;
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
-	private final PlaceReviewRepository placeReviewRepository;
+	private final QuestionRepository questionRepository;
 
 	public Album findAlbumByAlbumId(Long albumId) {
 		return albumRepository.findById(albumId)
@@ -55,11 +55,6 @@ public class EntityFetcher {
 	public Calender findCalenderByCalenderId(Long calenderId) {
 		return calenderRepository.findById(calenderId)
 			.orElseThrow(() -> new CustomException(ErrorCode.CALENDER_NOT_FOUND));
-	}
-
-	public DailyQna findDailyQnaByDailyQnaId(Long dailyQnaId) {
-		return dailyQnaRepository.findById(dailyQnaId)
-			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
 	}
 
 	public Faq findFaqByFaqId(Long faqId) {
@@ -94,9 +89,5 @@ public class EntityFetcher {
 	public User findUserByUserId(Long userId) {
 		return userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-	}
-
-	public PlaceReview findPlaceReviewByReviewId(Long reviewId) {
-		return placeReviewRepository.findByIdOrElseThrow(reviewId);
 	}
 }

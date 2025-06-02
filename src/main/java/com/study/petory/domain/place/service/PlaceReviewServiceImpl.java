@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;

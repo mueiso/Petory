@@ -36,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String url = request.getRequestURI();
 
 		// 요청된 URL 이 인증 우회 대상인지 판단 후 JWT 인증 필터 건너뛰기/ 후 다음 필터로 넘김
-		if(WHITELIST.contains(url)) {
+		if (WHITELIST.contains(url)) {
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -44,7 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		// 클라이언트가 HTTP 요청에 Authorization 헤더 포함시켰는지 확인
 		String bearerJwt = request.getHeader("Authorization");
 
-		if(bearerJwt == null) {
+		if (bearerJwt == null) {
 			writeErrorResponse(response, 401, "Authorization 헤더가 존재하지 않습니다.");
 			return;
 		}
@@ -52,7 +52,8 @@ public class JwtFilter extends OncePerRequestFilter {
 	}
 
 	// JWT 없거나 잘못된 경우 사용할 공통 메서드
-	private void writeErrorResponse(HttpServletResponse response, HttpStatus status, String message) throws IOException {
+	private void writeErrorResponse(HttpServletResponse response, HttpStatus status, String message) throws
+		IOException {
 
 		response.setStatus(status.value());
 		response.setContentType("application/json;charset=UTF-8");

@@ -1,15 +1,19 @@
 package com.study.petory.domain.tradeBoard.repository;
 
-import java.awt.print.Pageable;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 public interface TradeBoardRepository extends JpaRepository<TradeBoard, Long> {
 
 	Page<TradeBoard> findAllByCategory(TradeCategory category, PageRequest pageable);
+
+	default TradeBoard findTradeBoardById(Long id) {
+		return findById(id).orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+	}
 }

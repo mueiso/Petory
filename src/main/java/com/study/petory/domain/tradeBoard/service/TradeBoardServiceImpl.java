@@ -16,6 +16,8 @@ import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,8 +33,9 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional
 	public TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto) {
 
-		//User user = new User();//나중에 토큰으로 값을 받아올 예정
-		User user = userRepository.findById(1L).orElseThrow();
+		//나중에 토큰으로 값을 받아올 예정
+		User user = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = TradeBoard.builder()
 			.category(requestDto.getCategory())
@@ -57,7 +60,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		PageRequest pageable = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").descending());
 
 		Page<TradeBoard> tradeBoard;
-		if (category != null) {
+		if (category != null) { //카테고리가 있다면 카테고리로 조회
 			tradeBoard = tradeBoardRepository.findAllByCategory(category, pageable);
 		} else {
 			tradeBoard = tradeBoardRepository.findAll(pageable);
@@ -71,7 +74,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional(readOnly = true)
 	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
 
-		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
+		TradeBoard tradeBoard = tradeBoardRepository.findTradeBoardById(tradeBoardId);
 
 		return new TradeBoardGetResponseDto(tradeBoard);
 	}
@@ -81,21 +84,29 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional
 	public TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
 
-		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
+		//나중에 토큰으로 값 받아오기
+		User user = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		TradeBoard tradeBoard = tradeBoardRepository.findTradeBoardById(tradeBoardId);
+
+		if (tradeBoard.getUser() != user) {
+			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);
+		}
 
 		if (requestDto.getCategory() != null) {
 			tradeBoard.updateCategory(requestDto.getCategory());
 		}
 
-		if (requestDto.getTitle() != null) {
+		if (requestDto.getTitle() != null && !requestDto.getTitle().isBlank()) {
 			tradeBoard.updateTitle(requestDto.getTitle());
 		}
 
-		if (requestDto.getContent() != null) {
+		if (requestDto.getContent() != null && !requestDto.getContent().isBlank()) {
 			tradeBoard.updateContent(requestDto.getContent());
 		}
 
-		if (requestDto.getPhotoUrl() != null) {
+		if (requestDto.getPhotoUrl() != null && !requestDto.getPhotoUrl().isBlank()) {
 			tradeBoard.updatePhotoUrl(requestDto.getPhotoUrl());
 		}
 
@@ -106,11 +117,22 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return new TradeBoardUpdateResponseDto(tradeBoard);
 	}
 
-	//게시글 삭제(유저 status enum 생성된 후 softDelete 구현 예정)
+	//User Status에 따라 상태값 변경하는 로직 구현 예정
+
 	@Override
 	@Transactional
 	public void deleteTradeBoard(Long tradeBoardId) {
-		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
-		tradeBoardRepository.delete(tradeBoard);
+
+		//나중에 토큰으로 값 받아오기
+		User user = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		TradeBoard tradeBoard = tradeBoardRepository.findTradeBoardById(tradeBoardId);
+
+		if (tradeBoard.getUser() != user) {
+			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);
+		}
+
+		tradeBoard.deactivateEntity();
 	}
 }

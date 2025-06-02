@@ -83,7 +83,13 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		// 본인 작성 글인지 검증 로직 추가
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
-		requestDto.update(ownerBoard);
+
+		if (requestDto.getTitle() != null) {
+			ownerBoard.updateTitle(requestDto.getTitle());
+		}
+		if (requestDto.getContent() != null) {
+			ownerBoard.updateContent(requestDto.getContent());
+		}
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}
@@ -101,7 +107,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 복구
 	@Override
 	@Transactional
-	public void restoreBoard(Long boardId) {
+	public void restoreOwnerBoard(Long boardId) {
 		// 관리자 권한 검증 로직 추가
 
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)

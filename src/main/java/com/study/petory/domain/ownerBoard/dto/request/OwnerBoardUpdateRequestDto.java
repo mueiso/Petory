@@ -1,9 +1,6 @@
 package com.study.petory.domain.ownerBoard.dto.request;
 
-import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
@@ -16,9 +13,6 @@ public class OwnerBoardUpdateRequestDto {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
-	public void update(OwnerBoard ownerBoard) {
-		if(title != null) {ownerBoard.updateTitle(title);}
-		if(content != null) {ownerBoard.updateContent(content);}
-	}
+	// photoUrlList 추가 예정
 
 }

@@ -60,9 +60,9 @@ public class SecurityConfig {
 	}
 
 	/*
-	* 비밀번호 암호화 하기 위해 Bean 등록
-	* 로그인 시 사용자 입력 비밀번호를 암호화된 비밀번호와 비교할 때 사용된다
-	* Security 는 내부적으로 이 메서드를 사용해 matches() 검사를 수행한다
+	 * 비밀번호 암호화 하기 위해 Bean 등록
+	 * 로그인 시 사용자 입력 비밀번호를 암호화된 비밀번호와 비교할 때 사용된다
+	 * Security 는 내부적으로 이 메서드를 사용해 matches() 검사를 수행한다
 	 */
 	@Bean
 	public PasswordEncoder passEncoder() {

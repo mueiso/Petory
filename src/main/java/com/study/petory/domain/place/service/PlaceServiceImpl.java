@@ -78,7 +78,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public PlaceGetResponseDto findByPlaceId(Long placeId) {
 
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = placeRepository.findWithReviewByIdOrElseThrow(placeId);
 
 		return PlaceGetResponseDto.from(findPlace);
 	}

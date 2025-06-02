@@ -1,7 +1,10 @@
 package com.study.petory.domain.place.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -29,5 +32,13 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 
 	default Place findByIdOrElseThrow(long id) {
 		return findById(id).orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	}
+
+	// 특정 조회 - 리뷰 리스트까지 함께 조회하기 위한 메서드
+	@EntityGraph(attributePaths = "placeReviewList")
+	Optional<Place> findWithReviewsById(Long id);
+
+	default Place findWithReviewByIdOrElseThrow(long id) {
+		return findWithReviewsById(id).orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 }

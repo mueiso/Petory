@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "trade_board")
+@Table(name = "tb_trade_board")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

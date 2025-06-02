@@ -104,15 +104,13 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	public void restoreBoard(Long boardId) {
 		// 관리자 권한 검증 로직 추가
 
-		// OwnerBoard ownerBoard = findOwnerBoardById(boardId);
-
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
 
 		if (ownerBoard.getDeletedAt() == null) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_NOT_DELETED);
 		}
-// 복구에서 막힘
+
 		ownerBoard.restoreEntity();
 	}
 

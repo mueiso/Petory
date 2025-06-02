@@ -1,6 +1,5 @@
 package com.study.petory.domain.place.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -80,7 +79,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService{
 
 		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
 
-		// deleteAt이 null 이라면 즉, 삭제되지 않았다면 복구가 안되므로 그것에 관한 검증 로직
+		// deletedAt이 null 이라면 즉, 삭제되지 않았다면 복구가 안되므로 그것에 관한 검증 로직
 		if(findPlaceReview.getDeletedAt() == null) {
 			throw new CustomException(ErrorCode.REVIEW_NOT_DELETED);
 		}
@@ -98,7 +97,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService{
 
 		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
 
-		// deleteAt이 null 이 아니라면 즉, 삭제되었다면 삭제가 안되므로 그것에 관한 검증 로직
+		// deletedAt이 null 이 아니라면 즉, 삭제되었다면 삭제가 안되므로 그것에 관한 검증 로직
 		if(findPlaceReview.getDeletedAt() != null) {
 			throw new CustomException(ErrorCode.ALREADY_DELETED_REVIEW);
 		}

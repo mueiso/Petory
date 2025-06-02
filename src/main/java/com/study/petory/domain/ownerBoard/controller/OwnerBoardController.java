@@ -64,7 +64,8 @@ public class OwnerBoardController {
 	 * @return 게시글 id,제목,내용,작성일,수정일 //사진 및 댓글리스트 추가 예정
 	 */
 	@GetMapping("/{boardId}")
-	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(@PathVariable Long boardId) {
+	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(
+		@PathVariable Long boardId) {
 
 		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findOwnerBoard(boardId));
 	}
@@ -89,7 +90,8 @@ public class OwnerBoardController {
 	 * @return NO_CONTENT 성공코드 반환
 	 */
 	@DeleteMapping("/{boardId}")
-	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoard(@PathVariable Long boardId) {
+	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoard(
+		@PathVariable Long boardId) {
 		ownerBoardService.deleteOwnerBoard(boardId);
 
 		return CommonResponse.of(SuccessCode.NO_CONTENT);
@@ -101,8 +103,9 @@ public class OwnerBoardController {
 	 * @return ROLLBACK 성공코드 반환
 	 */
 	@PatchMapping("/{boardId}/restore")
-	public ResponseEntity<CommonResponse<Void>> restoreBoard(@PathVariable Long boardId) {
-		ownerBoardService.restoreBoard(boardId);
+	public ResponseEntity<CommonResponse<Void>> restoreOwnerBoard(
+		@PathVariable Long boardId) {
+		ownerBoardService.restoreOwnerBoard(boardId);
 
 		return CommonResponse.of(SuccessCode.ROLLBACK);
 	}

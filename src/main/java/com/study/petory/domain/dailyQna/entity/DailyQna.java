@@ -1,7 +1,6 @@
 package com.study.petory.domain.dailyQna.entity;
 
 import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
 import com.study.petory.domain.user.entity.User;

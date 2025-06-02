@@ -1,6 +1,7 @@
 package com.study.petory.domain.ownerBoard.controller;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -37,7 +38,7 @@ public class OwnerBoardController {
 	 * @return id, 제목, 내용, 생성일
 	 */
 	@PostMapping
-	public CommonResponse<OwnerBoardCreateResponseDto> createOwnerBoard(
+	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
 		@Valid @RequestBody OwnerBoardCreateRequestDto dto) {
 
 		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto));
@@ -50,7 +51,7 @@ public class OwnerBoardController {
 	 * @return List형식의 게시글 반환
 	 */
 	@GetMapping
-	public CommonResponse<Page<OwnerBoardGetAllResponseDto>> getOwnerBoardsAll(
+	public ResponseEntity<CommonResponse<Page<OwnerBoardGetAllResponseDto>>> getOwnerBoardsAll(
 		@RequestParam(required = false) String title,
 		@RequestParam(defaultValue = "1") int page) {
 
@@ -63,7 +64,7 @@ public class OwnerBoardController {
 	 * @return 게시글 id,제목,내용,작성일,수정일 //사진 및 댓글리스트 추가 예정
 	 */
 	@GetMapping("/{boardId}")
-	public CommonResponse<OwnerBoardGetResponseDto> getOwnerBoard(@PathVariable Long boardId) {
+	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(@PathVariable Long boardId) {
 
 		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findOwnerBoard(boardId));
 	}
@@ -75,7 +76,7 @@ public class OwnerBoardController {
 	 * @return 수정된 OwnerBoard 반환
 	 */
 	@PatchMapping("/{boardId}")
-	public CommonResponse<OwnerBoardUpdateResponseDto> updateOwnerBoard(
+	public ResponseEntity<CommonResponse<OwnerBoardUpdateResponseDto>> updateOwnerBoard(
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
 
@@ -88,7 +89,7 @@ public class OwnerBoardController {
 	 * @return NO_CONTENT 성공코드 반환
 	 */
 	@DeleteMapping("/{boardId}")
-	public CommonResponse<Void> deleteOwnerBoard(@PathVariable Long boardId) {
+	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoard(@PathVariable Long boardId) {
 		ownerBoardService.deleteOwnerBoard(boardId);
 
 		return CommonResponse.of(SuccessCode.NO_CONTENT);
@@ -100,7 +101,7 @@ public class OwnerBoardController {
 	 * @return ROLLBACK 성공코드 반환
 	 */
 	@PatchMapping("/{boardId}/restore")
-	public CommonResponse<Void> restoreBoard(@PathVariable Long boardId) {
+	public ResponseEntity<CommonResponse<Void>> restoreBoard(@PathVariable Long boardId) {
 		ownerBoardService.restoreBoard(boardId);
 
 		return CommonResponse.of(SuccessCode.ROLLBACK);

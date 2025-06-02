@@ -168,7 +168,7 @@ public class PlaceController {
 	 * @param reviewId 리뷰 식별자
 	 * @return CommonResponse 방식의 삭제된 리뷰 복구 메시지
 	 */
-	@PatchMapping("/{placeId}/reviews/{reviewId}")
+	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
 	public CommonResponse<Void> restorePlaceReview(
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId

@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
@@ -115,15 +115,18 @@ public class DailyQnaServiceTest {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-		DailyQna d1 = createDummyDailyQna("답변 1", LocalDateTime.parse("2022-01-01 00:00:00", formatter));
-		DailyQna d2 = createDummyDailyQna("답변 2", LocalDateTime.parse("2025-01-01 00:00:00", formatter));
-		DailyQna d3 = createDummyDailyQna("답변 3", LocalDateTime.parse("2024-01-01 00:00:00", formatter));
+		DailyQnaGetResponseDto d1 = new DailyQnaGetResponseDto("답변 1", LocalDateTime.parse("2022-01-01 00:00:00", formatter));
+		DailyQnaGetResponseDto d2 = new DailyQnaGetResponseDto("답변 2", LocalDateTime.parse("2024-01-01 00:00:00", formatter));
+		DailyQnaGetResponseDto d3 = new DailyQnaGetResponseDto("답변 3", LocalDateTime.parse("2023-01-01 00:00:00", formatter));
+
+		List<DailyQnaGetResponseDto> responseList = new ArrayList<>(Arrays.asList(d1, d2, d3));
 
 		Long userId = 1L;
 		Long questionId = 1L;
 
-		given(questionService.isExistQuestion(questionId)).willReturn(true);
-		given(dailyQnaRepository.findByUserId_IdAndQuestionId_Id(userId, questionId)).willReturn(List.of(d1, d2, d3));
+		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
+		given(questionService.findQuestionByQuestionIdOrElseThrow(questionId)).willReturn(testQuestion);
+		given(dailyQnaRepository.findDailyQna(testUser, testQuestion)).willReturn(responseList);
 
 		// when
 		List<DailyQnaGetResponseDto> response = dailyQnaService.findDailyQna(userId, questionId);
@@ -144,12 +147,13 @@ public class DailyQnaServiceTest {
 		testUserRole.add(userRole);
 
 		DailyQna savedQna = new DailyQna(testUser, testQuestion, "수정 전 답변");
+		ReflectionTestUtils.setField(savedQna, "id", 1L);
+		ReflectionTestUtils.setField(testUser, "id", 1L);
 
 		Long userId = 1L;
 		Long dailyQnaId = 1L;
 
-		given(dailyQnaService.findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
-		ReflectionTestUtils.setField(testUser, "id", 1L);
+		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(savedQna));
 
 		DailyQnaUpdateRequestDto updateData = new DailyQnaUpdateRequestDto("수정 후 답변");
 
@@ -169,12 +173,13 @@ public class DailyQnaServiceTest {
 		testUserRole.add(userRole);
 
 		DailyQna savedQna = new DailyQna(testUser, testQuestion, "삭제 전 답변");
+		ReflectionTestUtils.setField(savedQna, "id", 1L);
+		ReflectionTestUtils.setField(testUser, "id", 1L);
 
 		Long userId = 1L;
 		Long dailyQnaId = 1L;
 
-		given(dailyQnaService.findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
-		ReflectionTestUtils.setField(testUser, "id", 1L);
+		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(savedQna));
 
 		// when
 		dailyQnaService.deleteDailyQna(userId, dailyQnaId);

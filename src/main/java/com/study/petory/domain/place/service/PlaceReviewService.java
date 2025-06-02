@@ -6,8 +6,6 @@ import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceReview;
 
-import jakarta.validation.Valid;
-
 public interface PlaceReviewService {
 	PlaceReviewCreateResponseDto savePlaceReview(Long placeId, PlaceReviewCreateRequestDto requestDto);
 

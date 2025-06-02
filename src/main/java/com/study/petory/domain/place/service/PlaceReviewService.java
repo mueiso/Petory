@@ -4,6 +4,7 @@ import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
+import com.study.petory.domain.place.entity.PlaceReview;
 
 import jakarta.validation.Valid;
 
@@ -15,4 +16,6 @@ public interface PlaceReviewService {
 	void restorePlaceReview(Long placeId, Long reviewId);
 
 	void deletePlaceReview(Long placeId, Long reviewId);
+
+	PlaceReview findPlaceReviewByReviewIdOrElseThrow(Long PlaceReviewId);
 }

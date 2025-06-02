@@ -108,6 +108,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService{
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드
+	@Override
 	public PlaceReview findPlaceReviewByReviewIdOrElseThrow(Long placeReviewId) {
 		return placeReviewRepository.findByIdOrElseThrow(placeReviewId);
 	}

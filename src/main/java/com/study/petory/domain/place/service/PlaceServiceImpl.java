@@ -117,6 +117,7 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드
+	@Override
 	public Place findPlaceByPlaceIdOrElseThrow(Long placeId) {
 		return placeRepository.findByIdOrElseThrow(placeId);
 	}

@@ -48,7 +48,6 @@ public class JwtFilter extends OncePerRequestFilter {
 			writeErrorResponse(response, 401, "Authorization 헤더가 존재하지 않습니다.");
 			return;
 		}
-
 	}
 
 	// JWT 없거나 잘못된 경우 사용할 공통 메서드

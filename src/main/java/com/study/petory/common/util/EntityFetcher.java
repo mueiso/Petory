@@ -57,10 +57,6 @@ public class EntityFetcher {
 			.orElseThrow(() -> new CustomException(ErrorCode.CALENDER_NOT_FOUND));
 	}
 
-	public DailyQna findDailyQnaByDailyQnaId(Long dailyQnaId) {
-		return dailyQnaRepository.findByIdOrElseThrow(dailyQnaId);
-	}
-
 	public Faq findFaqByFaqId(Long faqId) {
 		return faqRepository.findById(faqId)
 			.orElseThrow(() -> new CustomException(ErrorCode.FAQ_QNA_NOT_FOUND));
@@ -88,10 +84,6 @@ public class EntityFetcher {
 	public TradeBoard findTradeBoardByTradeBoardId(Long tradeBoardId) {
 		return tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
-	}
-
-	public Question findQuestionByQuestionId(Long questionId) {
-		return questionRepository.findByIdOrElseThrow(questionId);
 	}
 
 	public User findUserByUserId(Long userId) {

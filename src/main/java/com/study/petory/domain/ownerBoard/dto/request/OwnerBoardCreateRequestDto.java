@@ -13,7 +13,6 @@ public class OwnerBoardCreateRequestDto {
 	private String title;
 
 	@NotBlank(message = "내용은 필수 입력값 입니다.")
-	@Column(columnDefinition = "TEXT")
 	private String content;
 
 	// photoUrlList 추가 예정

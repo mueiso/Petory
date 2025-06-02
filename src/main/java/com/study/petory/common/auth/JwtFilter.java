@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -52,7 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String bearerJwt = request.getHeader("Authorization");
 
 		if (bearerJwt == null) {
-			writeErrorResponse(response, 401, "Authorization 헤더가 존재하지 않습니다.");
+			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "Authorization 헤더가 존재하지 않습니다.");
 			return;
 		}
 
@@ -66,7 +67,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		try {
 			jwt = jwtUtil.subStringToken(bearerJwt);
 		} catch (ResponseStatusException e) {
-			writeErrorResponse(response, e.getStatusCode().value(), e.getReason());
+			writeErrorResponse(response, e.getStatusCode(), e.getReason());
 			return;
 		}
 
@@ -118,7 +119,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	}
 
 	// JWT 없거나 잘못된 경우 사용할 공통 메서드
-	private void writeErrorResponse(HttpServletResponse response, HttpStatus status, String message) throws
+	private void writeErrorResponse(HttpServletResponse response, HttpStatusCode status, String message) throws
 		IOException {
 
 		response.setStatus(status.value());

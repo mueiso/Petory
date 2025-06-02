@@ -10,10 +10,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 
 @Component
@@ -95,17 +98,48 @@ public class JwtUtil {
 			.compact();
 	}
 
-	/* TODO
-	 * getClaims
-	 */
-
 	// 순수 JWT 문자열만 반환하는 유틸 메서드
 	public String subStringToken(String token) {
-		if(!StringUtils.hasText(token) || !token.startsWith(prefix)) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰 형식입니다.");
+		if (!StringUtils.hasText(token) || !token.startsWith(prefix)) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다.");
 		}
 
 		return token.substring(prefix.length());
+	}
+
+	/*
+	 * Jwts.parserBuilder() : JJWT 라이브러리에서 제공하는 JWT 파서 빌더 객체 생성
+	   → parserBuilder() 는 .build() 전에 키 또는 파싱 설정을 지정할 수 있도록 해준다
+	 * setSigningKey(key) : JWT 의 서명을 검증할 키를 설정
+	   → 이 키는 @PostConstruct 에서 HMAC-SHA256 방식으로 생성된 Key 객체이다
+	   → 서명된 토큰인지 확인하는 데 사용된다 (위조 방지)
+	 * .build() : 최종 JwtParser 객체 생성
+	   → 토큰 파싱할 준비 완료
+	 * .parseClaimsJws(token) : 전달받은 JWT 문자열을 JWS(서명된 JWT)로 파싱
+	   → 이 과정에서 이루어지는 것 : 토큰의 유효성 검증, 서명 검증, 만료 기간 검사 등
+	 *
+	 */
+	public Claims getClaims(String token) {
+
+		String pureToken = subStringToken(token);
+
+		try {
+			// 정상적인 토큰 처리
+			return Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(pureToken)
+				.getBody();
+			// 토큰 만료
+		} catch (ExpiredJwtException e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다.");
+			// 서명 불일치
+		} catch (SignatureException e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "잘못된 서명입니다.");
+			// 기타 JWT 오류 (Malformed, Unsupported 등)
+		} catch (JwtException e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다.");
+		}
 	}
 
 }

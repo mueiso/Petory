@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtUtil jwtUtil;
-	// TODO - 직렬화/역직렬화 설정 필요
+	// TODO - 직렬화/역직렬화 커스텀 설정 여부 확인 필요
 	private final RedisTemplate<String, Object> redisTemplate;
 
 	// TODO - URL 추가 필요
@@ -55,18 +58,63 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		/*
 		 * 토큰 파싱 및 유효성 검사
+		 * subStringToken() : 유효성 검사 + Bearer 제거
 		 * subStringToken() 안에서 발생한 예외 잡아서 HTTP 응답에 401 에러와 함께 메시지 JSON 으로 응답
 		 */
 		String jwt;
 
-		try{
+		try {
 			jwt = jwtUtil.subStringToken(bearerJwt);
-		} catch(ResponseStatusException e) {
+		} catch (ResponseStatusException e) {
 			writeErrorResponse(response, e.getStatusCode().value(), e.getReason());
 			return;
 		}
 
+		/*
+		 * tokenKey : Redis 에 저장된 블랙리스트 토큰의 Key 를 구성하는 부분
+		 * jwt 는 현재 요청에서 추출한 Access Token 문자열이기 때문에
+		   → Redis 에 저장할 때 "BLACKLIST_" 접두어 붙여서 구분
+		 */
+		String tokenKey = "BLACKLIST_" + jwt;
 
+		/*
+		 * Redis 에서 tokenKey 존재하는지 확인
+		 * hasKey() : 해당 키가 Redis 에 존재하는지 여부에 따라 true/false 반환
+		 */
+		Boolean isBlackListed = redisTemplate.hasKey(tokenKey);
+
+		/*
+		 * isBlackListed 가 true 인지 확인 → null-safe 체크
+		 * Redis 에서 해당 토큰이 블랙리스트에 등록되어 있으면 writeErrorResponse 로직으로 진입
+		 */
+		if (Boolean.TRUE.equals(isBlackListed)) {
+			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다. 다시 로그인 해주세요.");
+			return;
+		}
+
+		try {
+			// 내부에서 Bearer 제거 + 토큰의 유효성 검증 → Claims 객체로 반환
+			Claims claims = jwtUtil.getClaims(bearerJwt);
+			// Claims 는 JWT 내부 payload 정보들을 갖고 있어 getSubject() 로 값 추출 가능
+			String userId = claims.getSubject();
+
+			// TODO - 권한 부여 로직 추가 후 권한 목록 수정 → List.of()
+			// Spring Security 에서 사용하는 인증 객체 생성
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userId, null,
+				List.of());
+
+			/*
+			 * 보안 컨텍스트에 방금 만든 authentication 객체를 저장
+			   → 이후 컨트롤러 단에서 @AuthenticationPrincipal 같은 방식으로 사용자 정보를 꺼낼 수 있다
+			   → 인증을 수동으로 완료 처리함
+			 */
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			filterChain.doFilter(request, response);
+			// jwtUtil.getClaims() 에서 토큰 만료됐거나 위조된 경우 예외 발생
+		} catch (ResponseStatusException e) {
+			writeErrorResponse(response, e.getStatusCode(), e.getReason());
+		}
 	}
 
 	// JWT 없거나 잘못된 경우 사용할 공통 메서드

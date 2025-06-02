@@ -23,7 +23,7 @@ public class Question {
 	@Column(nullable = false)
 	private String question;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 10)
 	private String date;
 
 	@Builder

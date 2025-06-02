@@ -74,7 +74,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional(readOnly = true)
 	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
 
-		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId).orElseThrow();
+		TradeBoard tradeBoard = tradeBoardRepository.findTradeBoardById(tradeBoardId);
 
 		return new TradeBoardGetResponseDto(tradeBoard);
 	}
@@ -88,8 +88,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		User user = userRepository.findById(1L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
-			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+		TradeBoard tradeBoard = tradeBoardRepository.findTradeBoardById(tradeBoardId);
 
 		if (tradeBoard.getUser() != user) {
 			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);
@@ -127,8 +126,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		User user = userRepository.findById(1L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
-			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+		TradeBoard tradeBoard = tradeBoardRepository.findTradeBoardById(tradeBoardId);
 
 		if (tradeBoard.getUser() != user) {
 			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);

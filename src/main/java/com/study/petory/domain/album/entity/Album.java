@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "album")
+@Table(name = "tb_album")
 @NoArgsConstructor
 public class Album {
 

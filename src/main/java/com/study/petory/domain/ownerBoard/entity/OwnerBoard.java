@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "owner_board")
+@Table(name = "tb_owner_board")
 @NoArgsConstructor
 @Where(clause = "deleted_at IS NULL")
 public class OwnerBoard extends BaseEntityWithBothAt {

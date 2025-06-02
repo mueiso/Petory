@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "user")
+@Table(name = "tb_user")
 @NoArgsConstructor
 public class User extends BaseEntityWithBothAt {
 

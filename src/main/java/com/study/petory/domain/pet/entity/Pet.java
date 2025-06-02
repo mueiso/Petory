@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "pet")
+@Table(name = "tb_pet")
 @NoArgsConstructor
 public class Pet extends BaseEntityWithBothAt {
 

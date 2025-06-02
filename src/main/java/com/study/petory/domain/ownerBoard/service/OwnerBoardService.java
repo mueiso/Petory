@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 public interface OwnerBoardService {
 	OwnerBoard findOwnerBoardById(Long boardId);
 
-	OwnerBoardCreateResponseDto saveOwnerBoard(@Valid OwnerBoardCreateRequestDto dto);
+	OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto);
 
 	Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page);
 
@@ -25,5 +25,5 @@ public interface OwnerBoardService {
 
 	void deleteOwnerBoard(Long boardId);
 
-	void restoreBoard(Long boardId);
+	void restoreOwnerBoard(Long boardId);
 }

@@ -24,7 +24,7 @@ public class TradeBoardUpdateRequestDto {
 	@Size(max = 1000, message = "본문은 1000자를 넘어갈 수 없습니다.")
 	private final String content;
 
-	@Nullable
+	@Nullable //변수 타입은 S3 연동 후 변경
 	private final String photoUrl;
 
 	@NotNull(message = "금액을 입력해주세요.")

@@ -5,11 +5,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.common.util.EntityFetcher;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.Place;
@@ -53,7 +53,7 @@ public class PlaceServiceImpl implements PlaceService {
 	// 전체 장소 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<PlaceGetResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
+	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
 
 		// placeName, placeType이 둘 다 있는 경우. 두 가지의 필터를 모두 포함한 조회
 		if (placeName != null && placeType != null) {

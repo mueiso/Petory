@@ -21,6 +21,7 @@ import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
@@ -64,7 +65,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 페이징된 장소 정보 목록
 	 */
 	@GetMapping
-	public ResponseEntity<CommonResponse<Page<PlaceGetResponseDto>>> getAllPlace(
+	public ResponseEntity<CommonResponse<Page<PlaceGetAllResponseDto>>> getAllPlace(
 		@RequestParam(required = false) String placeName,
 		@RequestParam(required = false) PlaceType placeType,
 		@PageableDefault(size = 10) Pageable pageable

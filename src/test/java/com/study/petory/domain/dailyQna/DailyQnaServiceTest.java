@@ -135,7 +135,7 @@ public class DailyQnaServiceTest {
 	}
 
 	@Test
-	@DisplayName("답변을 수정하는 메서드")
+	@DisplayName("사용자가 답변을 수정한다.")
 	public void updateDailyQna() {
 		// given
 		testUserRole.add(userRole);
@@ -158,4 +158,26 @@ public class DailyQnaServiceTest {
 
 		assertThat(updateQna.getAnswer()).isEqualTo("수정 후 답변");
 	}
+
+	@Test
+	@DisplayName("사용자가 답변을 삭제한다.")
+	public void deleteDailyQna() {
+		// given
+		testUserRole.add(userRole);
+
+		DailyQna savedQna = new DailyQna(testUser, testQuestion, "삭제 전 답변");
+
+		Long userId = 1L;
+		Long dailyQnaId = 1L;
+
+		given(dailyQnaRepository.findByIdOrElseThrow(dailyQnaId)).willReturn(savedQna);
+		ReflectionTestUtils.setField(testUser, "id", 1L);
+
+		// when
+		dailyQnaService.deleteDailyQna(userId, dailyQnaId);
+
+		// then
+		assertThat(savedQna.getDeletedAt()).isNotNull();
+	}
+
 }

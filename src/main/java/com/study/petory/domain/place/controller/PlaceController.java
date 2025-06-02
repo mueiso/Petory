@@ -101,6 +101,7 @@ public class PlaceController {
 	/**
 	 * 삭제된 장소 복구
 	 * soft delete 된 장소를 다시 복구하는 기능
+	 * 삭제된 장소인지 검증 로직 필요
 	 * @param placeId 장소 식별자
 	 * @param requestDto 장소 복구에 필요한 정보
 	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
@@ -117,6 +118,7 @@ public class PlaceController {
 	/**
 	 * 장소 삭제
 	 * soft delete 구현
+	 * 삭제 가능한 장소인지 검증 로직 필요
 	 * @param placeId 장소 식별자
 	 * @param requestDto 장소 삭제에 필요한 Enum 정보
 	 * @return CommonResponse 방식의 장소 삭제 메시지

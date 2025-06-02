@@ -16,4 +16,6 @@ public class OwnerBoardCreateRequestDto {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
+	// photoUrlList 추가 예정
+
 }

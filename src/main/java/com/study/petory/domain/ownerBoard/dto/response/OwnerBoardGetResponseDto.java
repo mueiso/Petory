@@ -18,6 +18,8 @@ public class OwnerBoardGetResponseDto {
 
 	private final String content;
 
+	// photoUrlList 추가 예정
+
 	// commentList 추가 예정
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

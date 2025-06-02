@@ -19,6 +19,7 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseD
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.domain.tradeBoard.service.TradeBoardService;
 import com.study.petory.domain.tradeBoard.service.TradeBoardServiceImpl;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -29,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TradeBoardController {
 
-	private final TradeBoardServiceImpl tradeBoardService;
+	private final TradeBoardService tradeBoardService;
 
 	/**
 	 * 게시글 등록

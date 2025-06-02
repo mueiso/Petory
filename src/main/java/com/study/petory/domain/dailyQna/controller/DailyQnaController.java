@@ -97,6 +97,6 @@ public class DailyQnaController {
 	) {
 		Long userId = 1L;
 		dailyQnaService.deleteDailyQna(userId, dailyQnaId);
-		return CommonResponse.of(SuccessCode.NO_CONTENT);
+		return CommonResponse.of(SuccessCode.OK);
 	}
 }

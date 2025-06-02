@@ -34,7 +34,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto) {
 
 		//나중에 토큰으로 값을 받아올 예정
-		User user = userRepository.findById(1L).orElseThrow();
+		User user = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = TradeBoard.builder()
 			.category(requestDto.getCategory())
@@ -84,7 +85,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
 
 		//나중에 토큰으로 값 받아오기
-		User user = userRepository.findById(1L).orElseThrow();
+		User user = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
@@ -122,7 +124,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public void deleteTradeBoard(Long tradeBoardId) {
 
 		//나중에 토큰으로 값 받아오기
-		User user = userRepository.findById(1L).orElseThrow();
+		User user = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));

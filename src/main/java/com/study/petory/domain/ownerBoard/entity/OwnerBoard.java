@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +21,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "owner_board")
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Where(clause = "deleted_at IS NULL")
 public class OwnerBoard extends BaseEntityWithBothAt {
 
@@ -38,6 +35,13 @@ public class OwnerBoard extends BaseEntityWithBothAt {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@Builder
+	public OwnerBoard(String title, String content, User user) {
+		this.title = title;
+		this.content = content;
+		this.user = user;
+	}
 
 	public void updateTitle(String title) {this.title = title;}
 

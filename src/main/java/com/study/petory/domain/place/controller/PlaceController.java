@@ -141,7 +141,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 등록된 리뷰에 대한 정보
 	 */
 	@PostMapping("/{placeId}/reviews")
-	public CommonResponse<PlaceReviewCreateResponseDto> createPlaceReview(
+	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
 	) {
@@ -156,7 +156,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 수정된 리뷰에 대한 정보
 	 */
 	@PatchMapping("/{placeId}/reviews/{reviewId}")
-	public CommonResponse<PlaceReviewUpdateResponseDto> updatePlaceReview(
+	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
@@ -172,7 +172,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 삭제된 리뷰 복구 메시지
 	 */
 	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
-	public CommonResponse<Void> restorePlaceReview(
+	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
@@ -188,7 +188,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 리뷰 삭제 메시지
 	 */
 	@DeleteMapping("/{placeId}/reviews/{reviewId}")
-	public CommonResponse<Void> deletePlaceReview(
+	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {

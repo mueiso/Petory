@@ -1,9 +1,15 @@
 package com.study.petory.domain.dailyQna.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
+import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
+import com.study.petory.domain.user.service.UserService;
 import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;
 
@@ -14,10 +20,47 @@ import lombok.RequiredArgsConstructor;
 public class QuestionServiceImpl implements QuestionService {
 
 	private final QuestionRepository questionRepository;
+	private final UserService userService;
 
+	// id로 질문을 조회
 	@Override
 	public Question findQuestionByQuestionIdOrElseThrow(Long questionId) {
 		return questionRepository.findById(questionId)
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+	}
+
+	// 해당 일자에 해당하는 질문이 있는지 확인
+	@Override
+	public boolean existsByDate(String date) {
+		if (questionRepository.existsByDate(date)) {
+			throw new CustomException(ErrorCode.DATE_IS_EXIST);
+		}
+		return true;
+	}
+
+	// 질문을 저장
+	@Override
+	@Transactional
+	public void saveQuestion(Long userId, QuestionCreateRequestDto request) {
+		existsByDate(request.getDate());
+		// 수정 예정
+		// if (!userService.권한검증메서드(userId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		questionRepository.save(Question.builder()
+			.question(request.getQuestion())
+			.date(request.getDate())
+			.build()
+		);
+	}
+
+	@Override
+	public Page<QuestionGetResponseDto> getAllQuestion(Long userId, Pageable pageable) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(userId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		// todo 코드 마저 작성
+		return null;
 	}
 }

@@ -7,4 +7,6 @@ import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
+
+	boolean existsByDate(String date);
 }

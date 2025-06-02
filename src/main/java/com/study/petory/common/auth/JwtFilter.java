@@ -3,9 +3,11 @@ package com.study.petory.common.auth;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtUtil jwtUtil;
+	// TODO - 직렬화/역직렬화 설정 필요
+	private final RedisTemplate<String, Object> redisTemplate;
 
 	// TODO - URL 추가 필요
 	// WHITELIST
@@ -48,6 +52,21 @@ public class JwtFilter extends OncePerRequestFilter {
 			writeErrorResponse(response, 401, "Authorization 헤더가 존재하지 않습니다.");
 			return;
 		}
+
+		/*
+		 * 토큰 파싱 및 유효성 검사
+		 * subStringToken() 안에서 발생한 예외 잡아서 HTTP 응답에 401 에러와 함께 메시지 JSON 으로 응답
+		 */
+		String jwt;
+
+		try{
+			jwt = jwtUtil.subStringToken(bearerJwt);
+		} catch(ResponseStatusException e) {
+			writeErrorResponse(response, e.getStatusCode().value(), e.getReason());
+			return;
+		}
+
+
 	}
 
 	// JWT 없거나 잘못된 경우 사용할 공통 메서드

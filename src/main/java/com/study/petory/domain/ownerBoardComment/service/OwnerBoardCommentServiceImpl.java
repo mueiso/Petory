@@ -8,13 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
-import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentRequestDto;
+import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentCreateRequestDto;
+import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentCreateResponseDto;
 import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentGetResponseDto;
+import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentUpdateResponseDto;
 import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoardComment.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,9 +30,17 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	private final OwnerBoardService ownerBoardService;
 	private final UserRepository userRepository;
 
+	// CommentId로 OwnerBoardComment 조회
+	@Override
+	public OwnerBoardComment findOwnerBoardCommentById(Long commentId) {
+		return ownerBoardCommentRepository.findById(commentId)
+			.orElseThrow(() -> new CustomException(ErrorCode.OWNER_BOARD_COMMENT_NOT_FOUND));
+	}
+
 	// 주인커뮤니티 댓글 생성
 	@Override
-	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId, OwnerBoardCommentRequestDto dto) {
+	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId,
+		OwnerBoardCommentCreateRequestDto dto) {
 
 		User user = userRepository.findById(1L).orElseThrow(); // 임시로 유저 생성, 추후 로그인유저 변경 예정
 		OwnerBoard ownerBoard = ownerBoardService.findOwnerBoardById(boardId);
@@ -55,6 +67,26 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findAll(pageRequest);
 
 		return comments.map(OwnerBoardCommentGetResponseDto::from);
+	}
+
+	// 주인커뮤니티 댓글 수정
+	@Override
+	@Transactional
+	public OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
+		OwnerBoardCommentUpdateRequestDto dto) {
+		// 본인 댓글인지 검증 로직 추가 예정
+
+		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
+
+		if (boardId != comment.getOwnerBoard().getId()) {
+			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
+		}
+
+		if (dto.getContent() != null) {
+			comment.updateContent(dto.getContent());
+		}
+
+		return OwnerBoardCommentUpdateResponseDto.from(comment);
 	}
 
 }

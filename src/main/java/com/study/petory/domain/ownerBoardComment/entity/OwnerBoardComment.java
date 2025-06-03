@@ -44,4 +44,6 @@ public class OwnerBoardComment extends BaseEntityWithBothAt {
 		this.user = user;
 		this.ownerBoard = ownerBoard;
 	}
+
+	public void updateContent(String content) {this.content = content;}
 }

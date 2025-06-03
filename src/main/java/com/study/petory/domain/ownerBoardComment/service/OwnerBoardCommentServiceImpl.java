@@ -32,6 +32,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	// CommentId로 OwnerBoardComment 조회
 	@Override
+	@Transactional(readOnly = true)
 	public OwnerBoardComment findOwnerBoardCommentById(Long commentId) {
 		return ownerBoardCommentRepository.findById(commentId)
 			.orElseThrow(() -> new CustomException(ErrorCode.OWNER_BOARD_COMMENT_NOT_FOUND));
@@ -87,6 +88,21 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 		}
 
 		return OwnerBoardCommentUpdateResponseDto.from(comment);
+	}
+
+	// 주인커뮤니티 댓글 삭제
+	@Override
+	@Transactional
+	public void deleteOwnerBoardComment(Long boardId, Long commentId) {
+		// 본인 댓글인지 검증 로직 추가
+
+		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
+
+		if (boardId != comment.getOwnerBoard().getId()) {
+			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
+		}
+
+		comment.deactivateEntity();
 	}
 
 }

@@ -18,4 +18,6 @@ public interface OwnerBoardCommentService {
 
 	OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto);
+
+	void deleteOwnerBoardComment(Long boardId, Long commentId);
 }

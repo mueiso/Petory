@@ -1,5 +1,7 @@
 package com.study.petory.domain.ownerBoardComment.entity;
 
+import org.hibernate.annotations.Where;
+
 import com.study.petory.common.entity.BaseEntityWithBothAt;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.user.entity.User;
@@ -21,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "tb_owner_board_comment")
+@Where(clause = "deleted_at IS NULL")
 public class OwnerBoardComment extends BaseEntityWithBothAt {
 
 	@Id

@@ -2,6 +2,7 @@ package com.study.petory.domain.ownerBoardComment.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,6 +75,20 @@ public class OwnerBoardCommentController {
 			ownerBoardCommentService.updateOwnerBoardComment(boardId, commentId, dto));
 	}
 
-	//댓글 삭제
+	/**
+	 * 주인커뮤니티 댓글 삭제
+	 * @param boardId 댓글이 속한 게시글 ID
+	 * @param commentId 댓글 ID
+	 * @return NO_CONTENT 성공코드 반환
+	 */
+	@DeleteMapping("/{boardId}/comments/{commentId}")
+	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoardComment(
+		@PathVariable Long boardId,
+		@PathVariable Long commentId
+	) {
+		ownerBoardCommentService.deleteOwnerBoardComment(boardId, commentId);
+
+		return CommonResponse.of(SuccessCode.NO_CONTENT);
+	}
 
 }

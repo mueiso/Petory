@@ -1,10 +1,15 @@
 package com.study.petory.domain.ownerBoard.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
 import com.study.petory.domain.user.entity.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +18,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,6 +44,9 @@ public class OwnerBoard extends BaseEntityWithBothAt {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@OneToMany(mappedBy = "ownerBoard", cascade = CascadeType.ALL)
+	private List<OwnerBoardComment> comments = new ArrayList<>();
 
 	@Builder
 	public OwnerBoard(String title, String content, User user) {

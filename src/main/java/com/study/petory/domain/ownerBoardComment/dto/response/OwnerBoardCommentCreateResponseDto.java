@@ -2,6 +2,7 @@ package com.study.petory.domain.ownerBoardComment.dto.response;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ public class OwnerBoardCommentCreateResponseDto {
 
 	private final Long id;
 	private final String content;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private final LocalDateTime createdAt;
 	private final Long writerId;
 

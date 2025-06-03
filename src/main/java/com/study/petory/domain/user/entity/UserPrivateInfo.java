@@ -29,4 +29,10 @@ public class UserPrivateInfo extends BaseEntityWithBothAt {
 
 	@Column(nullable = false)
 	private String mobileNum;
+
+	public UserPrivateInfo(Long authId, String name, String mobileNum) {
+		this.authId = authId;
+		this.name = name;
+		this.mobileNum = mobileNum;
+	}
 }

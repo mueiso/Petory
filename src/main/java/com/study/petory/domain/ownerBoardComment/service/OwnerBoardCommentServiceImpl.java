@@ -1,12 +1,16 @@
 package com.study.petory.domain.ownerBoardComment.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
 import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentRequestDto;
 import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentCreateResponseDto;
+import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentGetResponseDto;
 import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoardComment.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
@@ -39,4 +43,18 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		return OwnerBoardCommentCreateResponseDto.from(comment);
 	}
+
+	// 주인커뮤니티 댓글 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(int page) {
+
+		int adjustedPage = (page > 0) ? page - 1 : 0;
+		PageRequest pageRequest = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").ascending());
+
+		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findAll(pageRequest);
+
+		return comments.map(OwnerBoardCommentGetResponseDto::from);
+	}
+
 }

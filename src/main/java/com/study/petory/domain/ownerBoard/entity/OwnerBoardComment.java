@@ -1,9 +1,8 @@
-package com.study.petory.domain.ownerBoardComment.entity;
+package com.study.petory.domain.ownerBoard.entity;
 
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
-import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;

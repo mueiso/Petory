@@ -1,4 +1,4 @@
-package com.study.petory.domain.ownerBoardComment.service;
+package com.study.petory.domain.ownerBoard.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
-import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentCreateRequestDto;
-import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentUpdateRequestDto;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentCreateResponseDto;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentGetResponseDto;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentUpdateResponseDto;
-import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
-import com.study.petory.domain.ownerBoardComment.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentUpdateResponseDto;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;

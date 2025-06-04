@@ -1,4 +1,4 @@
-package com.study.petory.domain.ownerBoardComment.controller;
+package com.study.petory.domain.ownerBoard.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentCreateRequestDto;
-import com.study.petory.domain.ownerBoardComment.dto.request.OwnerBoardCommentUpdateRequestDto;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentCreateResponseDto;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentGetResponseDto;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentUpdateResponseDto;
-import com.study.petory.domain.ownerBoardComment.service.OwnerBoardCommentService;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentUpdateResponseDto;
+import com.study.petory.domain.ownerBoard.service.OwnerBoardCommentService;
 import com.study.petory.exception.enums.SuccessCode;
 
 import jakarta.validation.Valid;

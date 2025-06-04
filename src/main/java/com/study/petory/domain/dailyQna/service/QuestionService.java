@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
 
 public interface QuestionService {
@@ -21,5 +22,6 @@ public interface QuestionService {
 
 	QuestionGetOneResponseDto getOneQuestion(Long userId, Long questionId);
 
+	QuestionGetTodayResponseDto getTodayQuestion();
 
 }

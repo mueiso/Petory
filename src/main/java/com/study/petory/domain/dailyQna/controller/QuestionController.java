@@ -21,6 +21,7 @@ import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.service.DailyQnaService;
 import com.study.petory.domain.dailyQna.service.QuestionService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -89,6 +90,16 @@ public class QuestionController {
 	) {
 		Long userId = 1L;
 		return CommonResponse.of(SuccessCode.OK, questionService.getOneQuestion(userId, questionId));
+	}
+
+	/**
+	 * 오늘의 질문 조회		모든 권한 사용 가능
+	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜
+	 */
+	@GetMapping("/today")
+	public ResponseEntity<CommonResponse<QuestionGetTodayResponseDto>> getTodayQuestion(
+	) {
+		return CommonResponse.of(SuccessCode.OK, questionService.getTodayQuestion());
 	}
 
 	/**

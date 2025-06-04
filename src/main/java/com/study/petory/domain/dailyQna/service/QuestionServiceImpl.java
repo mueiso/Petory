@@ -13,6 +13,7 @@ import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.user.service.UserService;
 import com.study.petory.exception.CustomException;
@@ -102,5 +103,13 @@ public class QuestionServiceImpl implements QuestionService {
 		Question question = questionRepository.findById(questionId)
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
 		return QuestionGetOneResponseDto.from(question);
+	}
+
+	@Override
+	public QuestionGetTodayResponseDto getTodayQuestion() {
+		LocalDate date = LocalDate.now();
+		String today = date.format(DateTimeFormatter.ofPattern("MM-dd"));
+		return questionRepository.findTodayQuestion(today)
+			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
 	}
 }

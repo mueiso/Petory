@@ -32,7 +32,7 @@ public class PlaceCreateResponseDto {
 	private PlaceCreateResponseDto(Place place) {
 		this.id = place.getId();
 		this.placeName = place.getPlaceName();
-		this.placeInfo = place.getPlaceName();
+		this.placeInfo = place.getPlaceInfo();
 		this.placeType = place.getPlaceType();
 		this.ratio = place.getRatio();
 		this.latitude = place.getLatitude();

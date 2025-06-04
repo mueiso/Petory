@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceType;
+import com.study.petory.domain.place.service.PlaceReviewService;
 import com.study.petory.domain.place.service.PlaceService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -34,6 +40,7 @@ import lombok.RequiredArgsConstructor;
 public class PlaceController {
 
 	private final PlaceService placeService;
+	private final PlaceReviewService placeReviewService;
 
 	/**
 	 * 장소 등록
@@ -58,7 +65,7 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 페이징된 장소 정보 목록
 	 */
 	@GetMapping
-	public ResponseEntity<CommonResponse<Page<PlaceGetResponseDto>>> getAllPlace(
+	public ResponseEntity<CommonResponse<Page<PlaceGetAllResponseDto>>> getAllPlace(
 		@RequestParam(required = false) String placeName,
 		@RequestParam(required = false) PlaceType placeType,
 		@PageableDefault(size = 10) Pageable pageable
@@ -96,6 +103,7 @@ public class PlaceController {
 	/**
 	 * 삭제된 장소 복구
 	 * soft delete 된 장소를 다시 복구하는 기능
+	 * 삭제된 장소인지 검증 로직 필요
 	 * @param placeId 장소 식별자
 	 * @param requestDto 장소 복구에 필요한 정보
 	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
@@ -105,13 +113,14 @@ public class PlaceController {
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
-		placeService.restorePlace(placeId,requestDto);
-		return CommonResponse.of(SuccessCode.ROLLBACK);
+		placeService.restorePlace(placeId, requestDto);
+		return CommonResponse.of(SuccessCode.RESTORE);
 	}
 
 	/**
 	 * 장소 삭제
 	 * soft delete 구현
+	 * 삭제 가능한 장소인지 검증 로직 필요
 	 * @param placeId 장소 식별자
 	 * @param requestDto 장소 삭제에 필요한 Enum 정보
 	 * @return CommonResponse 방식의 장소 삭제 메시지
@@ -122,6 +131,69 @@ public class PlaceController {
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.deletePlace(placeId, requestDto);
+		return CommonResponse.of(SuccessCode.NO_CONTENT);
+	}
+
+	/**
+	 * 리뷰 등록
+	 * 유저 부분은 추후 수정 예정
+	 * @param placeId 장소 식별자
+	 * @param requestDto 리뷰 등록에 필요한 정보
+	 * @return CommonResponse 방식의 등록된 리뷰에 대한 정보
+	 */
+	@PostMapping("/{placeId}/reviews")
+	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
+		@PathVariable Long placeId,
+		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(placeId, requestDto));
+	}
+
+	/**
+	 * 리뷰 수정
+	 * @param placeId 장소 식별자
+	 * @param reviewId 리뷰 식별자
+	 * @param requestDto 리뷰 등록에 필요한 정보
+	 * @return CommonResponse 방식의 수정된 리뷰에 대한 정보
+	 */
+	@PatchMapping("/{placeId}/reviews/{reviewId}")
+	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
+		@PathVariable Long placeId,
+		@PathVariable Long reviewId,
+		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.OK, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
+	}
+
+	/**
+	 * 삭제된 리뷰 복구
+	 * soft delete 된 리뷰를 다시 복구하는 기능
+	 * @param placeId 장소 식별자
+	 * @param reviewId 리뷰 식별자
+	 * @return CommonResponse 방식의 삭제된 리뷰 복구 메시지
+	 */
+	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
+	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
+		@PathVariable Long placeId,
+		@PathVariable Long reviewId
+	) {
+		placeReviewService.restorePlaceReview(placeId, reviewId);
+		return CommonResponse.of(SuccessCode.RESTORE);
+	}
+
+	/**
+	 * 리뷰 삭제
+	 * soft delete 구현
+	 * @param placeId 장소 식별자
+	 * @param reviewId 리뷰 식별자
+	 * @return CommonResponse 방식의 리뷰 삭제 메시지
+	 */
+	@DeleteMapping("/{placeId}/reviews/{reviewId}")
+	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
+		@PathVariable Long placeId,
+		@PathVariable Long reviewId
+	) {
+		placeReviewService.deletePlaceReview(placeId, reviewId);
 		return CommonResponse.of(SuccessCode.NO_CONTENT);
 	}
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -38,4 +39,23 @@ public class PlaceReview extends BaseEntityWithBothAt {
 
 	@Column(nullable = false)
 	private Integer ratio;
+
+	@Builder
+	public PlaceReview(Place place, User user, String content, Integer ratio) {
+		this.place = place;
+		this.user = user;
+		this.content = content;
+		this.ratio = ratio;
+	}
+
+	// PlaceReviewUpdateRequestDto null 가능 여부에 따른 update 메서드
+	public void updatePlaceReview(String content, Integer ratio) {
+		if (content != null) {
+			this.content = content;
+		}
+
+		if (ratio != null) {
+			this.ratio = ratio;
+		}
+	}
 }

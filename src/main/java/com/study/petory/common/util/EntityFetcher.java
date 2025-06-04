@@ -8,8 +8,6 @@ import com.study.petory.domain.calender.entity.Calender;
 import com.study.petory.domain.calender.repository.CalenderRepository;
 import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
-import com.study.petory.domain.dailyQna.entity.DailyQna;
-import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.faq.entity.Faq;
 import com.study.petory.domain.faq.repository.FaqRepository;
 import com.study.petory.domain.feedback.entity.Feedback;
@@ -18,7 +16,6 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.pet.repository.PetRepository;
-import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
@@ -75,10 +72,6 @@ public class EntityFetcher {
 	public Pet findPetByPetId(Long petId) {
 		return petRepository.findById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
-	}
-
-	public Place findPlaceByPlaceId(Long placeId) {
-		return placeRepository.findByIdOrElseThrow(placeId);
 	}
 
 	public TradeBoard findTradeBoardByTradeBoardId(Long tradeBoardId) {

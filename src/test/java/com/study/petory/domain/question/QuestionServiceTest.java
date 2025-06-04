@@ -21,7 +21,7 @@ import org.springframework.data.domain.Sort;
 
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.service.QuestionServiceImpl;
 
@@ -34,8 +34,8 @@ public class QuestionServiceTest {
 	@Mock
 	private QuestionRepository questionRepository;
 
-	private Page<QuestionGetResponseDto> setQuestion(int page) {
-		List<QuestionGetResponseDto> questionList = new ArrayList<>();
+	private Page<QuestionGetAllResponseDto> setQuestion(int page) {
+		List<QuestionGetAllResponseDto> questionList = new ArrayList<>();
 		LocalDate date = LocalDate.of(2024, 01, 01);
 		for (int i = 1; i <= 366; i++) {
 			String monthDay = date.format(DateTimeFormatter.ofPattern("MM-dd"));
@@ -44,7 +44,7 @@ public class QuestionServiceTest {
 				monthDay
 			);
 			date = date.plusDays(1);
-			questionList.add(QuestionGetResponseDto.from(question));
+			questionList.add(QuestionGetAllResponseDto.from(question));
 		}
 
 		int p = 0;
@@ -55,8 +55,8 @@ public class QuestionServiceTest {
 
 		int start = (int)pageable.getOffset();
 		int end = Math.min(start + 50, questionList.size());
-		List<QuestionGetResponseDto> pageC = questionList.subList(start, end);
-		Page<QuestionGetResponseDto> testPage = new PageImpl<>(pageC, pageable, questionList.size());
+		List<QuestionGetAllResponseDto> pageC = questionList.subList(start, end);
+		Page<QuestionGetAllResponseDto> testPage = new PageImpl<>(pageC, pageable, questionList.size());
 		return testPage;
 	}
 
@@ -89,7 +89,7 @@ public class QuestionServiceTest {
 		given(questionRepository.findQuestionByPage(setQuestion(page).getPageable())).willReturn(setQuestion(page));
 
 		// when
-		Page<QuestionGetResponseDto> responsePage = questionService.getAllQuestion(userId, page);
+		Page<QuestionGetAllResponseDto> responsePage = questionService.getAllQuestion(userId, page);
 
 		// then
 		assertThat(responsePage.getContent()).hasSize(16);

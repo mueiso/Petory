@@ -19,7 +19,8 @@ import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.service.DailyQnaService;
 import com.study.petory.domain.dailyQna.service.QuestionService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -42,8 +43,8 @@ public class QuestionController {
 	}
 
 	/**
-	 * 질문 생성
-	 * userId				답변을 작성한 유저
+	 * 질문 생성				관리자만 가능
+	 * userId				관리자인지 검증
 	 * @param request       관리자가 추가하는 질문
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
@@ -65,13 +66,29 @@ public class QuestionController {
 	 * @return CommonResponse 성공 메세지, data: 질문을 날짜 기준 내림차순으로 조회, 한 페이지에 50개씩 출력
 	 */
 	@GetMapping("/all")
-	public ResponseEntity<CommonResponse<Page<QuestionGetResponseDto>>> getAllQuestion(
+	public ResponseEntity<CommonResponse<Page<QuestionGetAllResponseDto>>> getAllQuestion(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
 		@RequestParam(defaultValue = "1") int page
 	) {
 		Long userId = 1L;
 		return CommonResponse.of(SuccessCode.OK, questionService.getAllQuestion(userId, page));
+	}
+
+	/**
+	 * 질문 단건 조회			관리자만 가능
+	 * userId				관리자인지 검증
+	 * @param questionId	조회할 질문의 id
+	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜
+	 */
+	@GetMapping("/{questionId}")
+	public ResponseEntity<CommonResponse<QuestionGetOneResponseDto>> getOneQuestion(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long questionId
+	) {
+		Long userId = 1L;
+		return CommonResponse.of(SuccessCode.OK, questionService.getOneQuestion(userId, questionId));
 	}
 
 	/**

@@ -5,19 +5,19 @@ import com.study.petory.domain.dailyQna.entity.Question;
 import lombok.Getter;
 
 @Getter
-public class QuestionGetResponseDto {
+public class QuestionGetOneResponseDto {
 
 	private final String question;
 
 	private final String date;
 
-	private QuestionGetResponseDto(String question, String date) {
+	private QuestionGetOneResponseDto(String question, String date) {
 		this.question = question;
 		this.date = date;
 	}
 
-	public static QuestionGetResponseDto from(Question question) {
-		return new QuestionGetResponseDto(
+	public static QuestionGetOneResponseDto from(Question question) {
+		return new QuestionGetOneResponseDto(
 			question.getQuestion(),
 			question.getDate());
 	}

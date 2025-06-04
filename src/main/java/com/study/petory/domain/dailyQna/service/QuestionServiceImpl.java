@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.user.service.UserService;
 import com.study.petory.exception.CustomException;
@@ -77,7 +78,7 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public Page<QuestionGetResponseDto> getAllQuestion(Long userId, int page) {
+	public Page<QuestionGetAllResponseDto> getAllQuestion(Long userId, int page) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
@@ -91,4 +92,15 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionRepository.findQuestionByPage(pageable);
 	}
 
+	@Override
+	@Transactional
+	public QuestionGetOneResponseDto getOneQuestion(Long userId, Long questionId) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(userId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Question question = questionRepository.findById(questionId)
+			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+		return QuestionGetOneResponseDto.from(question);
+	}
 }

@@ -11,7 +11,7 @@ public class PlaceReviewCreateResponseDto {
 
 	private final Long placeId;
 
-	private final Long userId;
+	private final String nickName;
 
 	private final Long id;
 
@@ -23,7 +23,7 @@ public class PlaceReviewCreateResponseDto {
 
 	private PlaceReviewCreateResponseDto(PlaceReview placeReview) {
 		this.placeId = placeReview.getPlace().getId();
-		this.userId = placeReview.getUser().getId();
+		this.nickName = placeReview.getUser().getNickname();
 		this.id = placeReview.getId();
 		this.content = placeReview.getContent();
 		this.ratio = placeReview.getRatio();

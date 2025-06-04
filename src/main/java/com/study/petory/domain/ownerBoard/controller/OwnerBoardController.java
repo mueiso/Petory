@@ -107,6 +107,6 @@ public class OwnerBoardController {
 		@PathVariable Long boardId) {
 		ownerBoardService.restoreOwnerBoard(boardId);
 
-		return CommonResponse.of(SuccessCode.ROLLBACK);
+		return CommonResponse.of(SuccessCode.RESTORE);
 	}
 }

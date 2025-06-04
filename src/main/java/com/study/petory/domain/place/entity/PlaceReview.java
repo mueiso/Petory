@@ -1,7 +1,6 @@
 package com.study.petory.domain.place.entity;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
-import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -50,13 +49,13 @@ public class PlaceReview extends BaseEntityWithBothAt {
 	}
 
 	// PlaceReviewUpdateRequestDto null 가능 여부에 따른 update 메서드
-	public void updatePlaceReview(PlaceReviewUpdateRequestDto requestDto) {
-		if (requestDto.getContent() != null) {
-			this.content = requestDto.getContent();
+	public void updatePlaceReview(String content, Integer ratio) {
+		if (content != null) {
+			this.content = content;
 		}
 
-		if (requestDto.getRatio() != null) {
-			this.ratio = requestDto.getRatio();
+		if (ratio != null) {
+			this.ratio = ratio;
 		}
 	}
 }

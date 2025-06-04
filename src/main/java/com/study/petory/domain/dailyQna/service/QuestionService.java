@@ -15,5 +15,5 @@ public interface QuestionService {
 
 	void saveQuestion(Long userId, QuestionCreateRequestDto request);
 
-	Page<QuestionGetResponseDto> getAllQuestion(Long userId, Pageable pageable);
+	Page<QuestionGetResponseDto> getAllQuestion(Long userId, int page);
 }

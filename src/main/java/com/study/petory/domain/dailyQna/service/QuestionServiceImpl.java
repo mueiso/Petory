@@ -1,7 +1,9 @@
 package com.study.petory.domain.dailyQna.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,12 +57,17 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public Page<QuestionGetResponseDto> getAllQuestion(Long userId, Pageable pageable) {
+	public Page<QuestionGetResponseDto> getAllQuestion(Long userId, int page) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		// todo 코드 마저 작성
-		return null;
+		int p = 0;
+		if (page < 0) {
+			p = page - 1;
+		}
+		PageRequest pageable = PageRequest.of(p, 50, Sort.by("date").ascending());
+
+		return questionRepository.findQuestionByPage(pageable);
 	}
 }

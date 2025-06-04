@@ -89,9 +89,10 @@ public class JwtUtil {
 			.compact();
 	}
 
-	public String createRefreshToken() {
+	public String createRefreshToken(Long userId) {
 		Date now = new Date();
 		return prefix + Jwts.builder()
+			.setSubject(String.valueOf(userId))
 			.setExpiration(new Date(now.getTime() + refreshTokenLife))
 			.setIssuedAt(now)
 			.signWith(key, SignatureAlgorithm.HS256)
@@ -141,5 +142,11 @@ public class JwtUtil {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다.");
 		}
 	}
+
+	// Token 에서 userId 만 가져올 편의 메서드
+	public Long getUserIdFromToken(String token) {
+		return Long.valueOf(getClaims(token).getSubject());
+	}
+
 
 }

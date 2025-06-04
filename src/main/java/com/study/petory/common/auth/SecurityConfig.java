@@ -44,7 +44,15 @@ public class SecurityConfig {
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
 				// TODO 수정 필요
-				.requestMatchers("/auth/**", "/users/signup", "/users/login", "/error", "/oauth2/").permitAll()
+				.requestMatchers(
+					"/auth/**",
+					"/users/signup",
+					"/users/login",
+					"/oauth2/**",       // 소셜 로그인 진입점 (예: /oauth2/authorization/google)
+					"/login/oauth2/**", // 소셜 로그인 콜백 URI (예: /login/oauth2/code/google)
+					"/error"
+				).permitAll()
+
 				.anyRequest().authenticated()
 			)
 			.exceptionHandling(ex -> ex
@@ -70,3 +78,7 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 }
+
+/* TODO
+ * OAuth2SuccessHandler / OAuth2UserService 연동
+ */

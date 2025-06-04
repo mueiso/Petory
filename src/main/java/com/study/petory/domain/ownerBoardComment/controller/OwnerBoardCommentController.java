@@ -52,9 +52,10 @@ public class OwnerBoardCommentController {
 	 */
 	@GetMapping("/{boardId}/comments")
 	public ResponseEntity<CommonResponse<Page<OwnerBoardCommentGetResponseDto>>> getOwnerBoardCommentsAll(
+		@PathVariable long boardId,
 		@RequestParam(defaultValue = "1") int page) {
 
-		return CommonResponse.of(SuccessCode.OK, ownerBoardCommentService.findAllOwnerBoardComments(page));
+		return CommonResponse.of(SuccessCode.OK, ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
 	}
 
 	/**

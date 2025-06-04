@@ -14,7 +14,7 @@ public interface OwnerBoardCommentService {
 
 	OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId, OwnerBoardCommentCreateRequestDto dto);
 
-	Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(int page);
+	Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, int page);
 
 	OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto);

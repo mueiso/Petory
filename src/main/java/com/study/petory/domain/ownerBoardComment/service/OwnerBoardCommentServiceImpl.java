@@ -60,12 +60,12 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(int page) {
+	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, int page) {
 
 		int adjustedPage = (page > 0) ? page - 1 : 0;
 		PageRequest pageRequest = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").ascending());
 
-		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findAll(pageRequest);
+		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageRequest);
 
 		return comments.map(OwnerBoardCommentGetResponseDto::from);
 	}

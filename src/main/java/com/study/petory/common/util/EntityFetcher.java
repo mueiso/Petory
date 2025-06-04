@@ -77,10 +77,6 @@ public class EntityFetcher {
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 	}
 
-	public Place findPlaceByPlaceId(Long placeId) {
-		return placeRepository.findByIdOrElseThrow(placeId);
-	}
-
 	public TradeBoard findTradeBoardByTradeBoardId(Long tradeBoardId) {
 		return tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));

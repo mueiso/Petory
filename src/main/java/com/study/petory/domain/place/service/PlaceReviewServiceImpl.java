@@ -12,7 +12,6 @@ import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceReview;
-import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.place.repository.PlaceReviewRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -26,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 	private final PlaceReviewRepository placeReviewRepository;
-	private final PlaceRepository placeRepository;
+	private final PlaceService placeService;
 	private final UserRepository userRepository;
 
 	// 리뷰 등록
@@ -34,7 +33,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	@Transactional
 	public PlaceReviewCreateResponseDto savePlaceReview(Long placeId, PlaceReviewCreateRequestDto requestDto) {
 
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = placeService.findPlaceByPlaceId(placeId);
 		User findUser = userRepository.findById(1L).orElseThrow();
 
 		// 한 유저가 같은 장소에 한 개의 리뷰만 등록할 수 있도록 검증하는 로직
@@ -66,9 +65,9 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		PlaceReviewUpdateRequestDto requestDto) {
 
 		// 해당 장소가 존재하는지 검증하기 위한 로직
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = placeService.findPlaceByPlaceId(placeId);
 
-		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
+		PlaceReview findPlaceReview = findPlaceReviewByReviewId(reviewId);
 
 		findPlaceReview.updatePlaceReview(requestDto.getContent(), requestDto.getRatio());
 
@@ -86,9 +85,9 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public void restorePlaceReview(Long placeId, Long reviewId) {
 
 		// 해당 장소가 존재하는지 검증하기 위한 로직
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = placeService.findPlaceByPlaceId(placeId);
 
-		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
+		PlaceReview findPlaceReview = findPlaceReviewByReviewId(reviewId);
 
 		// deletedAt이 null 이라면 즉, 삭제되지 않았다면 복구가 안되므로 그것에 관한 검증 로직
 		if (findPlaceReview.getDeletedAt() == null) {
@@ -107,9 +106,9 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public void deletePlaceReview(Long placeId, Long reviewId) {
 
 		// 해당 장소가 존재하는지 검증하기 위한 로직
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = placeService.findPlaceByPlaceId(placeId);
 
-		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
+		PlaceReview findPlaceReview = findPlaceReviewByReviewId(reviewId);
 
 		// deletedAt이 null 이 아니라면 즉, 삭제되었다면 삭제가 안되므로 그것에 관한 검증 로직
 		if (findPlaceReview.getDeletedAt() != null) {
@@ -123,9 +122,11 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드
+	// throws CustomException
 	@Override
-	public PlaceReview findPlaceReviewByReviewIdOrElseThrow(Long placeReviewId) {
-		return placeReviewRepository.findByIdOrElseThrow(placeReviewId);
+	public PlaceReview findPlaceReviewByReviewId(Long placeReviewId) {
+		return placeReviewRepository.findById(placeReviewId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_REVIEW_NOT_FOUND));
 	}
 
 	// 평점 업데이트 로직의 중복 사용으로 인한 분리 로직

@@ -26,5 +26,5 @@ public interface PlaceService {
 
 	void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto);
 
-	Place findPlaceByPlaceIdOrElseThrow(Long placeId);
+	Place findPlaceByPlaceId(Long placeId);
 }

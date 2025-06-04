@@ -11,8 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
@@ -32,15 +30,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 			+ "FROM Place p")
 	Page<PlaceGetAllResponseDto> findAllPlace(Pageable pageable);
 
-	default Place findByIdOrElseThrow(long id) {
-		return findById(id).orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
-	}
-
 	// 특정 조회 - 리뷰 리스트까지 함께 조회하기 위한 메서드
 	@EntityGraph(attributePaths = {"placeReviewList", "user"})
 	Optional<Place> findWithReviewsById(Long id);
-
-	default Place findWithReviewByIdOrElseThrow(long id) {
-		return findWithReviewsById(id).orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
-	}
 }

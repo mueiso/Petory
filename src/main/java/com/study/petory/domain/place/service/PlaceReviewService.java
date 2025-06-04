@@ -15,5 +15,5 @@ public interface PlaceReviewService {
 
 	void deletePlaceReview(Long placeId, Long reviewId);
 
-	PlaceReview findPlaceReviewByReviewIdOrElseThrow(Long PlaceReviewId);
+	PlaceReview findPlaceReviewByReviewId(Long PlaceReviewId);
 }

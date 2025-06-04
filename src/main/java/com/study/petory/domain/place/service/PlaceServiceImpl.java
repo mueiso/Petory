@@ -21,6 +21,8 @@ import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -82,7 +84,8 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public PlaceGetResponseDto findByPlaceId(Long placeId) {
 
-		Place findPlace = placeRepository.findWithReviewByIdOrElseThrow(placeId);
+		Place findPlace = placeRepository.findWithReviewsById(placeId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 
 		List<PlaceReviewGetResponseDto> placeReviewList = findPlace.getPlaceReviewList().stream()
 			.filter(placeReview -> placeReview.getDeletedAt() == null)
@@ -97,7 +100,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public PlaceUpdateResponseDto updatePlace(Long placeId, PlaceUpdateRequestDto requestDto) {
 
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = findPlaceByPlaceId(placeId);
 
 		findPlace.updatePlace(
 			requestDto.getPlaceName(),
@@ -113,7 +116,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	@Transactional
 	public void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = findPlaceByPlaceId(placeId);
 
 		findPlace.deactivateEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());
@@ -124,15 +127,17 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
 
-		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
+		Place findPlace = findPlaceByPlaceId(placeId);
 
 		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드
+	// throws CustomException
 	@Override
-	public Place findPlaceByPlaceIdOrElseThrow(Long placeId) {
-		return placeRepository.findByIdOrElseThrow(placeId);
+	public Place findPlaceByPlaceId(Long placeId) {
+		return placeRepository.findById(placeId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 }

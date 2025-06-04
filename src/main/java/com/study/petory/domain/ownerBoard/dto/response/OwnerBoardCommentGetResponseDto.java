@@ -1,9 +1,9 @@
-package com.study.petory.domain.ownerBoardComment.dto.response;
+package com.study.petory.domain.ownerBoard.dto.response;
 
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

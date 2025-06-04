@@ -71,7 +71,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	// 답변을 사용자가 수정
 	@Override
 	@Transactional
-	public void updateDailyQna(Long userId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto) {
+	public void updateDailyQna(Long userId, Long questionId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto) {
 		DailyQna dailyQna = findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId);
 		if (dailyQna.getUser().getId() != userId) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
@@ -82,7 +82,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	// 답변을 사용자가 삭제
 	@Override
 	@Transactional
-	public void deleteDailyQna(Long userId, Long dailyQnaId) {
+	public void deleteDailyQna(Long userId, Long questionId, Long dailyQnaId) {
 		DailyQna dailyQna = findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId);
 		if (dailyQna.getUser().getId() != userId) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);

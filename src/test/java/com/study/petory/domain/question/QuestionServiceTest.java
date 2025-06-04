@@ -48,7 +48,7 @@ public class QuestionServiceTest {
 		}
 
 		int p = 0;
-		if (page < 0) {
+		if (page > 1) {
 			p = page - 1;
 		}
 		PageRequest pageable = PageRequest.of(p, 50, Sort.by("date").ascending());
@@ -84,7 +84,7 @@ public class QuestionServiceTest {
 	public void getAllQuestion() {
 		// given
 		Long userId = 1L;
-		int page = 1;
+		int page = 8;
 
 		given(questionRepository.findQuestionByPage(setQuestion(page).getPageable())).willReturn(setQuestion(page));
 
@@ -92,9 +92,9 @@ public class QuestionServiceTest {
 		Page<QuestionGetResponseDto> responsePage = questionService.getAllQuestion(userId, page);
 
 		// then
-		assertThat(responsePage.getContent()).hasSize(50);
+		assertThat(responsePage.getContent()).hasSize(16);
 		assertThat(responsePage.getTotalElements()).isEqualTo(366);
 		assertThat(responsePage.getTotalPages()).isEqualTo(8);
-		assertThat(responsePage.isFirst()).isTrue();
+		assertThat(responsePage.isLast()).isTrue();
 	}
 }

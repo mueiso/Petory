@@ -1,7 +1,6 @@
 package com.study.petory.domain.dailyQna.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetResponseDto;
@@ -16,4 +15,6 @@ public interface QuestionService {
 	void saveQuestion(Long userId, QuestionCreateRequestDto request);
 
 	Page<QuestionGetResponseDto> getAllQuestion(Long userId, int page);
+
+	void setQuestion();
 }

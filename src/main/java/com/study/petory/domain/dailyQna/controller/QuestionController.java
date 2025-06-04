@@ -18,6 +18,7 @@ import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
@@ -100,6 +101,25 @@ public class QuestionController {
 	public ResponseEntity<CommonResponse<QuestionGetTodayResponseDto>> getTodayQuestion(
 	) {
 		return CommonResponse.of(SuccessCode.OK, questionService.getTodayQuestion());
+	}
+
+	/**
+	 * 질문 수정				관리자만 가능
+	 * userId 				관리자인지 검증
+	 * @param questionId	수정할 질문의 id
+	 * @param request		수정할 내용
+	 * @return	CommonResponse 성공 메세지, data: null
+	 */
+	@PatchMapping("/{questionId}")
+	public ResponseEntity<CommonResponse<Void>> updateQuestion(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long questionId,
+		@Valid @RequestBody QuestionUpdateRequestDto request
+		) {
+		Long userId = 1L;
+		questionService.updateQuestion(userId , questionId, request);
+		return CommonResponse.of(SuccessCode.OK);
 	}
 
 	/**

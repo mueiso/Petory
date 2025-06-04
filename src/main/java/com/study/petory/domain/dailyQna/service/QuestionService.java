@@ -3,6 +3,7 @@ package com.study.petory.domain.dailyQna.service;
 import org.springframework.data.domain.Page;
 
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
@@ -23,5 +24,7 @@ public interface QuestionService {
 	QuestionGetOneResponseDto getOneQuestion(Long userId, Long questionId);
 
 	QuestionGetTodayResponseDto getTodayQuestion();
+
+	void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request);
 
 }

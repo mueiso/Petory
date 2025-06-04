@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
+import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
@@ -62,7 +63,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return true;
 	}
 
-	// 질문을 저장
+	// 질문을 저장 admin
 	@Override
 	@Transactional
 	public void saveQuestion(Long userId, QuestionCreateRequestDto request) {
@@ -78,6 +79,7 @@ public class QuestionServiceImpl implements QuestionService {
 		);
 	}
 
+	// 질문 전체 조회 admin
 	@Override
 	public Page<QuestionGetAllResponseDto> getAllQuestion(Long userId, int page) {
 		// 수정 예정
@@ -93,6 +95,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionRepository.findQuestionByPage(pageable);
 	}
 
+	// 질문 단건 조회 admin
 	@Override
 	@Transactional
 	public QuestionGetOneResponseDto getOneQuestion(Long userId, Long questionId) {
@@ -105,11 +108,24 @@ public class QuestionServiceImpl implements QuestionService {
 		return QuestionGetOneResponseDto.from(question);
 	}
 
+	// 오늘의 질문 조회
 	@Override
 	public QuestionGetTodayResponseDto getTodayQuestion() {
 		LocalDate date = LocalDate.now();
 		String today = date.format(DateTimeFormatter.ofPattern("MM-dd"));
 		return questionRepository.findTodayQuestion(today)
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+	}
+
+	// 질문 수정
+	@Override
+	@Transactional
+	public void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(userId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Question question = findQuestionByQuestionIdOrElseThrow(questionId);
+		question.update(request.getQuestion(), request.getDate());
 	}
 }

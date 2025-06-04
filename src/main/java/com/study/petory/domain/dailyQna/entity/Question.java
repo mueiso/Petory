@@ -1,5 +1,7 @@
 package com.study.petory.domain.dailyQna.entity;
 
+import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,5 +32,14 @@ public class Question {
 	public Question(String question, String date) {
 		this.question = question;
 		this.date = date;
+	}
+
+	public void update(String question, String date) {
+		if (question != null) {
+			this.question = question;
+		}
+		if (date != null) {
+			this.date = date;
+		}
 	}
 }

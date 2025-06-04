@@ -14,6 +14,6 @@ public interface OwnerBoardRepository extends JpaRepository<OwnerBoard, Long> {
 
 	Page<OwnerBoard> findByTitleContaining(String title, PageRequest pageRequest);
 
-	@Query(value = "SELECT * FROM owner_board o WHERE o.id = :id", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_owner_board o WHERE o.id = :id", nativeQuery = true)
 	Optional<OwnerBoard> findByIdIncludingDeleted(@Param("id") Long id);
 }

@@ -22,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
 	private final JwtFilter jwtFilter;
+	private final CustomOAuth2UserService customOAuth2UserService;
+	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
 	/*
 	1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
@@ -38,7 +40,8 @@ public class SecurityConfig {
 	 */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf(AbstractHttpConfigurer::disable)
+		http
+			.csrf(AbstractHttpConfigurer::disable)
 			.formLogin(AbstractHttpConfigurer::disable)
 			.logout(AbstractHttpConfigurer::disable)
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -52,9 +55,9 @@ public class SecurityConfig {
 					"/login/oauth2/**", // 소셜 로그인 콜백 URI (예: /login/oauth2/code/google)
 					"/error"
 				).permitAll()
-
 				.anyRequest().authenticated()
 			)
+
 			.exceptionHandling(ex -> ex
 				.authenticationEntryPoint((request, response, authException) -> {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -62,6 +65,14 @@ public class SecurityConfig {
 					response.getWriter().write("{\"status\":401,\"message\":\"인증이 필요합니다.\"}");
 				})
 			)
+
+			.oauth2Login(oauth2 -> oauth2
+				.userInfoEndpoint(userInfo -> userInfo
+					.userService(customOAuth2UserService)  // OAuth2 사용자 정보 처리
+				)
+				.successHandler(oAuth2SuccessHandler)  // 로그인 성공 후 JWT 발급
+			)
+
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
@@ -80,5 +91,5 @@ public class SecurityConfig {
 }
 
 /* TODO
- * OAuth2SuccessHandler / OAuth2UserService 연동
+ * OAuth2SuccessHandler / OAuth2UserService 연동 완료 → 구현 필요
  */

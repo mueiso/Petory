@@ -70,10 +70,12 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 		PlaceReview findPlaceReview = placeReviewRepository.findByIdOrElseThrow(reviewId);
 
-		findPlaceReview.updatePlaceReview(requestDto);
+		findPlaceReview.updatePlaceReview(requestDto.getContent(), requestDto.getRatio());
 
 		// 평균 평점 로직. private 메서드 활용
-		updatePlaceRatio(findPlace);
+		if (requestDto.getRatio() != null) {
+			updatePlaceRatio(findPlace);
+		}
 
 		return PlaceReviewUpdateResponseDto.from(findPlaceReview);
 	}

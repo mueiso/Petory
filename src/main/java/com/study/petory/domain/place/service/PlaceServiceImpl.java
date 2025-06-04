@@ -1,5 +1,8 @@
 package com.study.petory.domain.place.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewGetResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
@@ -80,7 +84,12 @@ public class PlaceServiceImpl implements PlaceService {
 
 		Place findPlace = placeRepository.findWithReviewByIdOrElseThrow(placeId);
 
-		return PlaceGetResponseDto.from(findPlace);
+		List<PlaceReviewGetResponseDto> placeReviewList = findPlace.getPlaceReviewList().stream()
+			.filter(placeReview -> placeReview.getDeletedAt() == null)
+			.map(PlaceReviewGetResponseDto::from)
+			.collect(Collectors.toList());
+
+		return PlaceGetResponseDto.from(findPlace, placeReviewList);
 	}
 
 	// 장소 수정
@@ -90,7 +99,12 @@ public class PlaceServiceImpl implements PlaceService {
 
 		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
 
-		findPlace.updatePlace(requestDto);
+		findPlace.updatePlace(
+			requestDto.getPlaceName(),
+			requestDto.getPlaceInfo(),
+			requestDto.getPlaceType(),
+			requestDto.getLatitude(),
+			requestDto.getLongitude());
 
 		return PlaceUpdateResponseDto.from(findPlace);
 	}
@@ -102,7 +116,7 @@ public class PlaceServiceImpl implements PlaceService {
 		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
 
 		findPlace.deactivateEntity();
-		findPlace.updateStatus(requestDto);
+		findPlace.updateStatus(requestDto.getPlaceStatus());
 	}
 
 	// 삭제된 장소 복구
@@ -113,7 +127,7 @@ public class PlaceServiceImpl implements PlaceService {
 		Place findPlace = placeRepository.findByIdOrElseThrow(placeId);
 
 		findPlace.restoreEntity();
-		findPlace.updateStatus(requestDto);
+		findPlace.updateStatus(requestDto.getPlaceStatus());
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드

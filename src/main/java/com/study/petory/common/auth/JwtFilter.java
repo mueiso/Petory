@@ -148,6 +148,6 @@ public class JwtFilter extends OncePerRequestFilter {
 }
 
 /* TODO
- * 로그아웃 시 AccessToken 을 Redis 에 저장 (블랙리스트)
+ * 로그아웃 시 AccessToken 을 Redis 에 저장 (블랙리스트) 로직 추가
  * UserDetailsService 도 커스터마이징
  */

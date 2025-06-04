@@ -147,6 +147,4 @@ public class JwtUtil {
 	public Long getUserIdFromToken(String token) {
 		return Long.valueOf(getClaims(token).getSubject());
 	}
-
-
 }

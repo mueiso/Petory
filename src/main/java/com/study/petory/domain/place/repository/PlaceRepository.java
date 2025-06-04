@@ -17,7 +17,8 @@ import com.study.petory.exception.enums.ErrorCode;
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
 	// placeName, placeType이 둘 다 있는 경우. 두 가지의 필터를 모두 포함한 조회
-	Page<PlaceGetAllResponseDto> findAllByPlaceNameContainingAndPlaceType(String placeName, PlaceType placeType, Pageable pageable);
+	Page<PlaceGetAllResponseDto> findAllByPlaceNameContainingAndPlaceType(String placeName, PlaceType placeType,
+		Pageable pageable);
 
 	// placeName이 존재하는 경우 placeName 중 일부만 입력되는 경우에도 조회 가능
 	Page<PlaceGetAllResponseDto> findAllByPlaceNameContaining(String placeName, Pageable pageable);
@@ -26,8 +27,9 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 	Page<PlaceGetAllResponseDto> findAllByPlaceType(PlaceType placeType, Pageable pageable);
 
 	// 전체 조회
-	@Query("SELECT new com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto(p.id, p.placeName, p.placeInfo, p.placeType, p.ratio, p.latitude, p.longitude) "
-		+ "FROM Place p")
+	@Query(
+		"SELECT new com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto(p.id, p.placeName, p.placeInfo, p.placeType, p.ratio, p.latitude, p.longitude) "
+			+ "FROM Place p")
 	Page<PlaceGetAllResponseDto> findAllPlace(Pageable pageable);
 
 	default Place findByIdOrElseThrow(long id) {

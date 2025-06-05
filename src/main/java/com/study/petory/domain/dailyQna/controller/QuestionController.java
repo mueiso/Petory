@@ -41,7 +41,7 @@ public class QuestionController {
 	@PostMapping("/test")
 	public ResponseEntity<CommonResponse<Void>> test() {
 		questionService.setQuestion();
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.REQUESTED);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class QuestionController {
 		@RequestParam(defaultValue = "1") int page
 	) {
 		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.OK, questionService.findAllQuestion(userId, page));
+		return CommonResponse.of(SuccessCode.REQUESTED, questionService.findAllQuestion(userId, page));
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class QuestionController {
 		@PathVariable Long questionId
 	) {
 		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.OK, questionService.findOneQuestion(userId, questionId));
+		return CommonResponse.of(SuccessCode.REQUESTED, questionService.findOneQuestion(userId, questionId));
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class QuestionController {
 	@GetMapping("/today")
 	public ResponseEntity<CommonResponse<QuestionGetTodayResponseDto>> getTodayQuestion(
 	) {
-		return CommonResponse.of(SuccessCode.OK, questionService.findTodayQuestion());
+		return CommonResponse.of(SuccessCode.REQUESTED, questionService.findTodayQuestion());
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class QuestionController {
 		) {
 		Long userId = 1L;
 		questionService.updateQuestion(userId , questionId, request);
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.REQUESTED);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class QuestionController {
 	) {
 		Long userId = 1L;
 		questionService.deactivateQuestion(userId, questionId);
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.REQUESTED);
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class QuestionController {
 	) {
 		Long userId = 1L;
 		questionService.restoreQuestion(userId, questionId);
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.REQUESTED);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class QuestionController {
 		@PathVariable Long questionId
 	) {
 		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.OK, dailyQnaService.findDailyQna(userId, questionId));
+		return CommonResponse.of(SuccessCode.REQUESTED, dailyQnaService.findDailyQna(userId, questionId));
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class QuestionController {
 	) {
 		Long userId = 1L;
 		dailyQnaService.updateDailyQna(userId, questionId, dailyQnaId, request);
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.REQUESTED);
 	}
 
 	/**
@@ -227,6 +227,6 @@ public class QuestionController {
 	) {
 		Long userId = 1L;
 		dailyQnaService.deleteDailyQna(userId, questionId, dailyQnaId);
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.REQUESTED);
 	}
 }

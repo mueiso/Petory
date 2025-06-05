@@ -49,6 +49,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		ChatRoom chatRoom = ChatRoom.builder()
 			.sellerId(seller.getId())
 			.customerId(customer.getId())
+			.tradeBoardId(tradeBoardId)
 			.tradeBoardTitle(tradeBoard.getTitle())
 			.tradeBoardUrl("/trade-boards/" + tradeBoard.getId())
 			.build();

@@ -54,7 +54,7 @@ public class ChatRoomController {
 	 * @param chatRoomId 삭제하려는 채팅방 아이디
 	 * @return 삭제 확인 메시지
 	 */
-	@DeleteMapping("{/chatRoomId}")
+	@DeleteMapping("/{chatRoomId}")
 	public ResponseEntity<CommonResponse<Void>> deleteChatRoom(
 		@PathVariable String chatRoomId
 	) {

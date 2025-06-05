@@ -41,6 +41,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		User seller = userRepository.findById(tradeBoard.getUser().getId())
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		//해당 물품에 관한 채팅방이 존재할 경우 예외처리
 		if (chatRoomRepository.findByTradeBoardIdAndSellerId(tradeBoardId, seller.getId()) != null) {
 			throw new CustomException(ErrorCode.CHAT_ROOM_ALREADY_EXIST);
 		}

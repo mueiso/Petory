@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.study.petory.common.auth.dto.TokenResponse;
+import com.study.petory.common.auth.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 
@@ -22,7 +22,7 @@ public class AuthService {
 	private final StringRedisTemplate redisTemplate;
 
 	// Google OAuth2 로그인 성공 시 토큰 발급
-	public TokenResponse issueToken(User user) {
+	public TokenResponseDto issueToken(User user) {
 
 		String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
 		String refreshToken = jwtProvider.createRefreshToken(user.getId());
@@ -30,7 +30,7 @@ public class AuthService {
 		// Redis 에 Refresh Token 저장
 		jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
 
-		return new TokenResponse(accessToken, refreshToken);
+		return new TokenResponseDto(accessToken, refreshToken);
 	}
 
 	// 로그아웃 - Access Token 블랙리스트 처리 + Refresh Token 삭제
@@ -49,7 +49,7 @@ public class AuthService {
 	}
 
 	// Refresh Token 을 이용한 Access Token 재발급
-	public TokenResponse reissue(String email, String refreshToken) {
+	public TokenResponseDto reissue(String email, String refreshToken) {
 
 		if (!jwtProvider.isValidRefreshToken(email, refreshToken)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Refresh Token이 유효하지 않습니다.");
@@ -64,6 +64,6 @@ public class AuthService {
 		jwtProvider.deleteRefreshToken(email);
 		jwtProvider.storeRefreshToken(email, newRefreshToken);
 
-		return new TokenResponse(newAccessToken, newRefreshToken);
+		return new TokenResponseDto(newAccessToken, newRefreshToken);
 	}
 }

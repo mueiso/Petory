@@ -1,6 +1,7 @@
 package com.study.petory.common.auth.service;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -25,6 +26,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) {
+
 		OAuth2User oAuth2User = super.loadUser(userRequest);
 
 		String email = oAuth2User.getAttribute("email");
@@ -44,11 +46,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				.role(Role.USER)
 				.build();
 
+			// 유저와 역할 매핑
+			List<UserRole> userRoles = Collections.singletonList(role);
+
+			// User 엔티티 생성 및 저장
 			return userRepository.save(User.builder()
 				.nickname(name)
 				.email(email)
 				.userPrivateInfo(privateInfo)
-				.userRole(Collections.singletonList(role))
+				.userRole(userRoles)
 				.build());
 		});
 

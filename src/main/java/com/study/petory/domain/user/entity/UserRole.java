@@ -26,13 +26,8 @@ public class UserRole {
 	@Column(nullable = false)
 	private Role role;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "user_id")
-	private User user;
-
 	@Builder
 	public UserRole(Role role, User user) {
 		this.role = role;
-		this.user = user;
 	}
 }

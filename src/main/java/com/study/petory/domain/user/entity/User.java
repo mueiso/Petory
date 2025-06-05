@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +37,8 @@ public class User extends BaseEntityWithBothAt {
 	@JoinColumn(name = "user_private_info_id")
 	private UserPrivateInfo userPrivateInfo;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "user_id")  // 단방향 설정 시 꼭 사용
 	private List<UserRole> userRole;
 
 	@Builder

@@ -65,7 +65,8 @@ public enum ErrorCode implements BaseCode {
 	OWNER_BOARD_COMMENT_MISMATCH(HttpStatus.BAD_REQUEST, "해당 게시글에 존재하지 않는 댓글입니다."),
 
 	//Chat
-	CHAT_ROOM_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "이미 존재하는 채팅방입니다.")
+	CHAT_ROOM_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "이미 존재하는 채팅방입니다."),
+	CHAT_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 채팅방입니다.")
 	;
 
 	private final HttpStatus httpStatus;

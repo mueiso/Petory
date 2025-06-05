@@ -1,8 +1,13 @@
 package com.study.petory.domain.chat.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.entity.ChatRoom;
 import com.study.petory.domain.chat.repository.ChatRoomRepository;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
@@ -22,6 +27,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
 
+	//채팅방 생성
 	@Override
 	public ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId) {
 
@@ -42,12 +48,28 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		ChatRoom chatRoom = ChatRoom.builder()
 			.sellerId(seller.getId())
 			.customerId(customer.getId())
-			.tradeBoardId(tradeBoardId)
+			.tradeBoardTitle(tradeBoard.getTitle())
 			.tradeBoardUrl("/trade-boards/" + tradeBoard.getId())
 			.build();
 
 		ChatRoom savedCharRoom = chatRoomRepository.save(chatRoom);
 
 		return new ChatRoomCreateResponseDto(savedCharRoom, tradeBoard);
+	}
+
+	//로그인 한 사용자 채팅방 전체 조회
+	@Override
+	public Page<ChatRoomGetResponseDto> findAllChatRoom(int page) {
+
+		//수정 예정
+		User customer = userRepository.findById(1L)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		int adjustPage = page > 0 ? page - 1 : 0;
+		PageRequest pageable = PageRequest.of(adjustPage, 10);
+
+		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerId(customer.getId(), pageable);
+
+		return chatRooms.map(ChatRoomGetResponseDto::new);
 	}
 }

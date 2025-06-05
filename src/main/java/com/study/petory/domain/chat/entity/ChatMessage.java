@@ -2,6 +2,7 @@ package com.study.petory.domain.chat.entity;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
@@ -26,5 +27,6 @@ public class ChatMessage {
 
 	private String message;
 
+	@CreatedDate
 	private LocalDateTime createdAt;
 }

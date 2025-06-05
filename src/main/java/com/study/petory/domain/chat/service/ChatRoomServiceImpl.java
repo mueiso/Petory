@@ -1,7 +1,5 @@
 package com.study.petory.domain.chat.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
@@ -37,15 +35,19 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		User seller = userRepository.findById(tradeBoard.getUser().getId())
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		if (chatRoomRepository.findByTradeBoardIdAndSellerId(tradeBoardId, seller.getId()) != null) {
+			throw new CustomException(ErrorCode.CHAT_ROOM_ALREADY_EXIST);
+		}
+
 		ChatRoom chatRoom = ChatRoom.builder()
 			.sellerId(seller.getId())
 			.customerId(customer.getId())
-			.tradeBoardTitle(tradeBoard.getTitle())
+			.tradeBoardId(tradeBoardId)
 			.tradeBoardUrl("/trade-boards/" + tradeBoard.getId())
 			.build();
 
 		ChatRoom savedCharRoom = chatRoomRepository.save(chatRoom);
 
-		return new ChatRoomCreateResponseDto(savedCharRoom);
+		return new ChatRoomCreateResponseDto(savedCharRoom, tradeBoard);
 	}
 }

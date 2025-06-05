@@ -43,6 +43,12 @@ public enum ErrorCode implements BaseCode {
 	// Place
 	PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "장소가 존재하지 않습니다."),
 
+	// PlaceReview
+	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),
+	DUPLICATE_REVIEW(HttpStatus.BAD_REQUEST, "이미 리뷰를 작성한 장소입니다."),
+	REVIEW_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 리뷰입니다."),
+	ALREADY_DELETED_REVIEW(HttpStatus.BAD_REQUEST, "이미 삭제된 리뷰입니다."),
+
 	// TradeBoard
 	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "거래 글이 존재하지 않습니다."),
 	TRADE_BOARD_FORBIDDEN(HttpStatus.FORBIDDEN, "작성자만 거래글을 수정하거나 삭제할 수 있습니다."),
@@ -52,7 +58,12 @@ public enum ErrorCode implements BaseCode {
 	DATE_IS_EXIST(HttpStatus.CONFLICT, "해당 날짜에는 질문이 이미 존재합니다."),
 	QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "이미 비활성화된 질문입니다."),
 	QUESTION_IS_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 질문이 아닙니다."),
-	TODAY_QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "일시적인 오류가 발생했습니다.")
+	TODAY_QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "일시적인 오류가 발생했습니다."),
+
+	// OwnerBoardComment
+	OWNER_BOARD_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다."),
+	OWNER_BOARD_COMMENT_MISMATCH(HttpStatus.BAD_REQUEST, "해당 게시글에 존재하지 않는 댓글입니다.")
+
 	;
 
 	private final HttpStatus httpStatus;

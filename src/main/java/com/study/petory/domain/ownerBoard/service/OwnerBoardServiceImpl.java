@@ -1,5 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,6 +16,9 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;
@@ -26,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardRepository ownerBoardRepository;
 	private final UserRepository userRepository;
+	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
@@ -73,7 +79,14 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		return OwnerBoardGetResponseDto.from(ownerBoard);
+		List<OwnerBoardComment> initialComments = ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(
+			boardId);
+
+		List<OwnerBoardCommentGetResponseDto> commentsList = initialComments.stream()
+			.map(OwnerBoardCommentGetResponseDto::from)
+			.toList();
+
+		return OwnerBoardGetResponseDto.of(ownerBoard, commentsList);
 	}
 
 	// 게시글 수정

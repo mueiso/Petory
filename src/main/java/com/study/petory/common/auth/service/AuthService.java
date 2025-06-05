@@ -24,8 +24,16 @@ public class AuthService {
 	// Google OAuth2 로그인 성공 시 토큰 발급
 	public TokenResponseDto issueToken(User user) {
 
-		String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
-		String refreshToken = jwtProvider.createRefreshToken(user.getId());
+		// 기존 유저 조회 또는 저장
+		User savedUser = userRepository.findByEmail(user.getEmail())
+			.orElseGet(() -> userRepository.save(user)); // 없으면 저장 후 반환
+
+		if (savedUser.getId() == null) {
+			throw new IllegalStateException("사용자 정보를 저장했지만 ID가 생성되지 않았습니다. DB 설정을 확인하세요.");
+		}
+
+		String accessToken = jwtProvider.createAccessToken(savedUser.getId(), savedUser.getEmail(), savedUser.getNickname());
+		String refreshToken = jwtProvider.createRefreshToken(savedUser.getId());
 
 		// Redis 에 Refresh Token 저장
 		jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);

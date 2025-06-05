@@ -1,5 +1,7 @@
 package com.study.petory.common.auth.dto;
 
+import java.util.Collections;
+
 import com.study.petory.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +20,7 @@ public class OAuth2LoginRequestDto {
 		return User.builder()
 			.email(this.email)
 			.nickname(this.nickname)
+			.userRole(Collections.emptyList())  // null 방지
 			.build();
 	}
 }

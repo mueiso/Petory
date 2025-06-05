@@ -36,6 +36,9 @@ dependencies {
 
     // .env 등록을 위한 의존성
     implementation 'io.github.cdimascio:dotenv-java:3.2.0'
+
+    //웹소켓
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
 
 tasks.named('test') {

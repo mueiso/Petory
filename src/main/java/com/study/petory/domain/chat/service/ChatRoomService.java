@@ -10,4 +10,6 @@ public interface ChatRoomService {
 	ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId);
 
 	Page<ChatRoomGetResponseDto> findAllChatRoom(int page);
+
+	void deleteChatRoom(String chatRoomId);
 }

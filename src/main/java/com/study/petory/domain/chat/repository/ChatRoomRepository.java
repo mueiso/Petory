@@ -10,5 +10,5 @@ public interface ChatRoomRepository extends MongoRepository<ChatRoom, String> {
 
 	ChatRoom findByTradeBoardIdAndSellerId(Long tradeBoardId, Long sellerId);
 
-	Page<ChatRoom> findAllByCustomerId(Long customerId, PageRequest pageable);
+	Page<ChatRoom> findAllByCustomerIdAndDeletedFalse(Long customerId, PageRequest pageable);
 }

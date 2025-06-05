@@ -28,6 +28,8 @@ public class ChatRoom {
 
 	private String lastMessageId;
 
+	private boolean isDeleted = false;
+
 	@CreatedDate
 	private LocalDateTime createdAt;
 
@@ -38,5 +40,9 @@ public class ChatRoom {
 		this.tradeBoardTitle = tradeBoardTitle;
 		this.tradeBoardUrl = tradeBoardUrl;
 		this.lastMessageId = lastMessageId;
+	}
+
+	public void deactivateChatRoom() {
+		this.isDeleted = true;
 	}
 }

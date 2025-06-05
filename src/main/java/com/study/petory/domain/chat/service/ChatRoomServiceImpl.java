@@ -69,8 +69,17 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		int adjustPage = page > 0 ? page - 1 : 0;
 		PageRequest pageable = PageRequest.of(adjustPage, 10);
 
-		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerId(customer.getId(), pageable);
+		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndDeletedFalse(customer.getId(), pageable);
 
 		return chatRooms.map(ChatRoomGetResponseDto::new);
+	}
+
+	@Override
+	public void deleteChatRoom(String chatRoomId) {
+
+		ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
+			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+
+		chatRoom.deactivateChatRoom();
 	}
 }

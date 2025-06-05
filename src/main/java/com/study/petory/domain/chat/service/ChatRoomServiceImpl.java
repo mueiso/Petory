@@ -74,6 +74,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		return chatRooms.map(ChatRoomGetResponseDto::new);
 	}
 
+	//채팅방 삭제(소프트 딜리트)
 	@Override
 	public void deleteChatRoom(String chatRoomId) {
 

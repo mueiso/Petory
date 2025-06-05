@@ -75,7 +75,7 @@ public class QuestionController {
 		@RequestParam(defaultValue = "1") int page
 	) {
 		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.OK, questionService.getAllQuestion(userId, page));
+		return CommonResponse.of(SuccessCode.OK, questionService.findAllQuestion(userId, page));
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class QuestionController {
 		@PathVariable Long questionId
 	) {
 		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.OK, questionService.getOneQuestion(userId, questionId));
+		return CommonResponse.of(SuccessCode.OK, questionService.findOneQuestion(userId, questionId));
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class QuestionController {
 	@GetMapping("/today")
 	public ResponseEntity<CommonResponse<QuestionGetTodayResponseDto>> getTodayQuestion(
 	) {
-		return CommonResponse.of(SuccessCode.OK, questionService.getTodayQuestion());
+		return CommonResponse.of(SuccessCode.OK, questionService.findTodayQuestion());
 	}
 
 	/**

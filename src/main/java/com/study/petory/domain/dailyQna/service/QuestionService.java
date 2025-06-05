@@ -19,11 +19,11 @@ public interface QuestionService {
 
 	void saveQuestion(Long userId, QuestionCreateRequestDto request);
 
-	Page<QuestionGetAllResponseDto> getAllQuestion(Long userId, int page);
+	Page<QuestionGetAllResponseDto> findAllQuestion(Long userId, int page);
 
-	QuestionGetOneResponseDto getOneQuestion(Long userId, Long questionId);
+	QuestionGetOneResponseDto findOneQuestion(Long userId, Long questionId);
 
-	QuestionGetTodayResponseDto getTodayQuestion();
+	QuestionGetTodayResponseDto findTodayQuestion();
 
 	void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request);
 

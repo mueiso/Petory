@@ -81,7 +81,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// 질문 전체 조회 admin
 	@Override
-	public Page<QuestionGetAllResponseDto> getAllQuestion(Long userId, int page) {
+	public Page<QuestionGetAllResponseDto> findAllQuestion(Long userId, int page) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
@@ -98,19 +98,17 @@ public class QuestionServiceImpl implements QuestionService {
 	// 질문 단건 조회 admin
 	@Override
 	@Transactional
-	public QuestionGetOneResponseDto getOneQuestion(Long userId, Long questionId) {
+	public QuestionGetOneResponseDto findOneQuestion(Long userId, Long questionId) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		Question question = questionRepository.findById(questionId)
-			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
-		return QuestionGetOneResponseDto.from(question);
+		return QuestionGetOneResponseDto.from(findQuestionByQuestionId(questionId));
 	}
 
 	// 오늘의 질문 조회
 	@Override
-	public QuestionGetTodayResponseDto getTodayQuestion() {
+	public QuestionGetTodayResponseDto findTodayQuestion() {
 		LocalDate date = LocalDate.now();
 		String today = date.format(DateTimeFormatter.ofPattern("MM-dd"));
 		return questionRepository.findTodayQuestion(today)
@@ -144,6 +142,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.deactivateEntity();
 	}
 
+	// 질문 복구
 	@Override
 	@Transactional
 	public void restoreQuestion(Long userId, Long questionId) {

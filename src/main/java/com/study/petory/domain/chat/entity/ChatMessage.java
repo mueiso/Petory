@@ -11,22 +11,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Document(collection = "chatroom")
+@Document(collection = "chatMessage")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatRoom {
+public class ChatMessage {
 
 	@Id
 	private String id;
 
-	private Long sellerId; // 판매자 닉네임
+	private String chatRoomId;
 
-	private Long customerId; // 구매자 닉네임
+	private Long senderId;
 
-	private Long tradeBoardId; //판매글 아이디
-
-	private String lastMessageId;
+	private String message;
 
 	private LocalDateTime createdAt;
 }

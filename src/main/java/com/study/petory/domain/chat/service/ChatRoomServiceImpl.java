@@ -1,7 +1,5 @@
 package com.study.petory.domain.chat.service;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -32,7 +30,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	public ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId) {
 
 		//토큰 값으로 수정 예정
-		User customer = userRepository.findById(1L)
+		User customer = userRepository.findById(2L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
@@ -64,13 +62,13 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	public Page<ChatRoomGetResponseDto> findAllChatRoom(int page) {
 
 		//수정 예정
-		User customer = userRepository.findById(1L)
+		User customer = userRepository.findById(2L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		int adjustPage = page > 0 ? page - 1 : 0;
 		PageRequest pageable = PageRequest.of(adjustPage, 10);
 
-		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndDeletedFalse(customer.getId(), pageable);
+		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndIsDeletedFalse(customer.getId(), pageable);
 
 		return chatRooms.map(ChatRoomGetResponseDto::new);
 	}
@@ -79,9 +77,12 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	@Override
 	public void deleteChatRoom(String chatRoomId) {
 
+		//채팅방 유저 검증 로직
+
 		ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
 			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
 
 		chatRoom.deactivateChatRoom();
+		chatRoomRepository.save(chatRoom);
 	}
 }

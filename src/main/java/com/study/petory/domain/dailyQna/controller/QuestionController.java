@@ -65,7 +65,8 @@ public class QuestionController {
 	 * 질문 전체 조회			관리자만 가능
 	 * userId				관리자인지 검증
 	 * @param page          한 번에 50개씩 반환하여 원하는 페이지를 선택
-	 * @return CommonResponse 성공 메세지, data: 질문을 날짜 기준 내림차순으로 조회, 한 페이지에 50개씩 출력
+	 * @return CommonResponse 성공 메세지, data: 질문, 날짜, 비활성화 시 비활성화 날짜 표시
+	 * 											질문을 날짜 기준 내림차순으로 조회, 한 페이지에 50개씩 출력
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<CommonResponse<Page<QuestionGetAllResponseDto>>> getAllQuestion(
@@ -81,7 +82,7 @@ public class QuestionController {
 	 * 질문 단건 조회			관리자만 가능
 	 * userId				관리자인지 검증
 	 * @param questionId	조회할 질문의 id
-	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜
+	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 비활성화 시 비활성화 날짜 표시
 	 */
 	@GetMapping("/{questionId}")
 	public ResponseEntity<CommonResponse<QuestionGetOneResponseDto>> getOneQuestion(
@@ -119,6 +120,23 @@ public class QuestionController {
 		) {
 		Long userId = 1L;
 		questionService.updateQuestion(userId , questionId, request);
+		return CommonResponse.of(SuccessCode.OK);
+	}
+
+	/**
+	 * 질문 비활성화			관리자만 비활성화
+	 * userId 				관리자인지 검증
+	 * @param questionId	비활성화 할 질문의 id
+	 * @return	CommonResponse 성공 메세지, data: null
+	 */
+	@DeleteMapping("/{questionId}")
+	public ResponseEntity<CommonResponse<Void>> deleteQuestion(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long questionId
+	) {
+		Long userId = 1L;
+		questionService.deleteQuestion(userId, questionId);
 		return CommonResponse.of(SuccessCode.OK);
 	}
 

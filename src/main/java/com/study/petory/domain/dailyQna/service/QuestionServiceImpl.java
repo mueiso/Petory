@@ -128,4 +128,19 @@ public class QuestionServiceImpl implements QuestionService {
 		Question question = findQuestionByQuestionIdOrElseThrow(questionId);
 		question.update(request.getQuestion(), request.getDate());
 	}
+
+	// 질문 비활성화
+	@Override
+	@Transactional
+	public void deleteQuestion(Long userId, Long questionId) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(userId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Question question = findQuestionByQuestionIdOrElseThrow(questionId);
+		if (question.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.QUESTION_IS_DEACTIVATED);
+		}
+		question.deactivateEntity();
+	}
 }

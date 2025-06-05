@@ -1,5 +1,6 @@
 package com.study.petory.domain.dailyQna.entity;
 
+import com.study.petory.common.entity.BaseEntityWithCreatedAt;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 
 import jakarta.persistence.Column;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_question")
 @NoArgsConstructor
-public class Question {
+public class Question extends BaseEntityWithCreatedAt {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

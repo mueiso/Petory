@@ -27,4 +27,5 @@ public interface QuestionService {
 
 	void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request);
 
+	void deleteQuestion(Long userId, Long questionId);
 }

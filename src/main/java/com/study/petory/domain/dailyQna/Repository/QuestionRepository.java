@@ -16,9 +16,9 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
 	boolean existsByDate(String date);
 
-	@Query("SELECT new com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto(q.question, q.date) FROM Question q")
+	@Query("SELECT new com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto(q.question, q.date, q.deletedAt) FROM Question q")
 	Page<QuestionGetAllResponseDto> findQuestionByPage(Pageable pageable);
 
-	@Query("SELECT new com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto(q.question, q.date) FROM Question q WHERE q.date LIKE :date")
+	@Query("SELECT new com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto(q.question, q.date) FROM Question q WHERE q.date LIKE :date AND q.deletedAt IS NOT NULL")
 	Optional<QuestionGetTodayResponseDto> findTodayQuestion(@Param("date") String date);
 }

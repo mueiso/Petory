@@ -91,7 +91,3 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 }
-
-/* TODO
- * OAuth2SuccessHandler / OAuth2UserService 연동 완료 → 구현 필요
- */

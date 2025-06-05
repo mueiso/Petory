@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.study.petory.common.auth.service.JwtProvider;
+
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -26,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 // OncePerRequestFilter 를 상속받아 HTTP 요청당 한 번만 실행
 public class JwtFilter extends OncePerRequestFilter {
 
-	private final JwtUtil jwtUtil;
+	private final JwtProvider jwtProvider;
 
 	private final RedisTemplate<String, String> redisTemplate;
 
@@ -71,7 +73,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String jwt;
 
 		try {
-			jwt = jwtUtil.subStringToken(bearerJwt);
+			jwt = jwtProvider.subStringToken(bearerJwt);
 			debugLog("추출된 JWT: " + jwt);
 		} catch (ResponseStatusException e) {
 			debugLog("JWT 파싱 실패: " + e.getReason());
@@ -105,7 +107,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		try {
 			// 내부에서 Bearer 제거 + 토큰의 유효성 검증 → Claims 객체로 반환
-			Claims claims = jwtUtil.getClaims(bearerJwt);
+			Claims claims = jwtProvider.getClaims(bearerJwt);
 			// Claims 는 JWT 내부 payload 정보들을 갖고 있어 getSubject() 로 값 추출 가능
 			String userId = claims.getSubject();
 			debugLog("JWT Claims 파싱 성공 - 사용자 ID: " + userId);
@@ -125,7 +127,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 			debugLog("JWT 인증 완료. 다음 필터로 전달");
 			filterChain.doFilter(request, response);
-			// jwtUtil.getClaims() 에서 토큰 만료됐거나 위조된 경우 예외 발생
+			// jwtProvider.getClaims() 에서 토큰 만료됐거나 위조된 경우 예외 발생
 		} catch (ResponseStatusException e) {
 			debugLog("JWT 검증 실패 - 이유: " + e.getReason());
 			writeErrorResponse(response, e.getStatusCode(), e.getReason());

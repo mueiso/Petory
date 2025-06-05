@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.security;
+package com.study.petory.common.auth.service;
 
 import java.security.Key;
 import java.util.Date;
@@ -20,7 +20,7 @@ import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class JwtUtil {
+public class JwtProvider {
 
 	/*
 	 * 이 토큰을 가진 자 (=Bearer)가 인증된 사용자라는 의미의 표준 헤더 형식

@@ -2,8 +2,10 @@ package com.study.petory.common.auth.service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -21,6 +23,12 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 public class JwtProvider {
+
+	private final StringRedisTemplate redisTemplate;
+
+	public JwtProvider(StringRedisTemplate redisTemplate) {
+		this.redisTemplate = redisTemplate;
+	}
 
 	/*
 	 * 이 토큰을 가진 자 (=Bearer)가 인증된 사용자라는 의미의 표준 헤더 형식
@@ -143,8 +151,19 @@ public class JwtProvider {
 		}
 	}
 
-	// Token 에서 userId 만 가져올 편의 메서드
-	public Long getUserIdFromToken(String token) {
-		return Long.valueOf(getClaims(token).getSubject());
+	public void storeRefreshToken(String email, String refreshToken) {
+		long expireMillis = refreshTokenLife;
+
+		// Redis에 저장, 키는 이메일(또는 사용자 ID), 값은 토큰
+		redisTemplate.opsForValue().set(email, refreshToken, expireMillis, TimeUnit.MILLISECONDS);
+	}
+
+	public void deleteRefreshToken(String email) {
+		redisTemplate.delete(email);
+	}
+
+	public boolean isValidRefreshToken(String email, String refreshToken) {
+		String saved = redisTemplate.opsForValue().get(email);
+		return saved != null && saved.equals(refreshToken);
 	}
 }

@@ -27,19 +27,20 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException, ServletException {
 
-		// OAuth2 로그인 후 DefaultOAuth2User에서 이메일 추출
-		String email = authentication.getName(); // 기본 키 설정이 email이었음
+		// OAuth2 로그인 후 DefaultOAuth2User 에서 이메일 추출
+		String email = authentication.getName(); // 기본 키 설정이 email
 
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new IllegalArgumentException("로그인된 유저 정보를 찾을 수 없습니다."));
 
 		// JWT 토큰 발급
-		String accessToken = jwtProvider.createAccessToken(user);
-		String refreshToken = jwtProvider.createRefreshToken(user);
+		String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
+		String refreshToken = jwtProvider.createRefreshToken(user.getId());
 
-		// refreshToken 저장 (예: Redis 또는 DB - JwtProvider 내부 또는 Service에서 처리)
+		// refreshToken 저장
 		jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
 
+		// TODO - 쿼리 파라미터에 토큰 노출되어 보안상 수정 필요
 		// 클라이언트로 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
 		String targetUrl = UriBuilder.of("http://localhost:3000/oauth/success")
 			.addParam("accessToken", accessToken)

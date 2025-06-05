@@ -112,7 +112,7 @@ public class QuestionServiceImpl implements QuestionService {
 		LocalDate date = LocalDate.now();
 		String today = date.format(DateTimeFormatter.ofPattern("MM-dd"));
 		return questionRepository.findTodayQuestion(today)
-			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+			.orElseThrow(() -> new CustomException(ErrorCode.TODAY_QUESTION_IS_DEACTIVATED));
 	}
 
 	// 질문 수정

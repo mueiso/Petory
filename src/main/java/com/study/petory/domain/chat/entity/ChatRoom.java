@@ -24,7 +24,7 @@ public class ChatRoom extends BaseEntityWithCreatedAt {
 
 	private Long customerId; // 구매자 닉네임
 
-	private Long boardId; //판매글 Id
+	private Long tradeBoardId; //판매글 Id
 
 	private String lastMessageId;
 }

@@ -99,7 +99,7 @@ public class DailyQnaServiceTest {
 		Long questionId = 1L;
 
 		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
-		given(questionService.findQuestionByQuestionIdOrElseThrow(questionId)).willReturn(testQuestion);
+		given(questionService.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
 
 		// when
 		dailyQnaService.saveDailyQna(userId, questionId, requestDto);
@@ -125,7 +125,7 @@ public class DailyQnaServiceTest {
 		Long questionId = 1L;
 
 		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
-		given(questionService.findQuestionByQuestionIdOrElseThrow(questionId)).willReturn(testQuestion);
+		given(questionService.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
 		given(dailyQnaRepository.findDailyQna(testUser, testQuestion)).willReturn(responseList);
 
 		// when

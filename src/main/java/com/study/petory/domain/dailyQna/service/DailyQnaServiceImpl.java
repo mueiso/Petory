@@ -43,7 +43,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		Question todayQuestion = questionService.findQuestionByQuestionIdOrElseThrow(questionId);
+		Question todayQuestion = questionService.findQuestionByQuestionId(questionId);
 		dailyQnaRepository.save(DailyQna.builder()
 			.user(user)
 			.question(todayQuestion)
@@ -59,7 +59,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		Question question = questionService.findQuestionByQuestionIdOrElseThrow(questionId);
+		Question question = questionService.findQuestionByQuestionId(questionId);
 
 		List<DailyQnaGetResponseDto> answerList = dailyQnaRepository.findDailyQna(user, question);
 

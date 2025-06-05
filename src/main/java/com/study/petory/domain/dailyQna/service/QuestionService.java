@@ -13,7 +13,7 @@ public interface QuestionService {
 
 	void setQuestion();
 
-	Question findQuestionByQuestionIdOrElseThrow(Long questionId);
+	Question findQuestionByQuestionId(Long questionId);
 
 	boolean existsByDate(String date);
 
@@ -27,5 +27,7 @@ public interface QuestionService {
 
 	void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request);
 
-	void deleteQuestion(Long userId, Long questionId);
+	void deactivateQuestion(Long userId, Long questionId);
+
+	void restoreQuestion(Long userId, Long questionId);
 }

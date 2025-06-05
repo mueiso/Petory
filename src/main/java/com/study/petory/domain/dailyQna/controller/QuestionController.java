@@ -124,19 +124,36 @@ public class QuestionController {
 	}
 
 	/**
-	 * 질문 비활성화			관리자만 비활성화
+	 * 질문 비활성화			관리자만 비활성화 가능
 	 * userId 				관리자인지 검증
 	 * @param questionId	비활성화 할 질문의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping("/{questionId}")
-	public ResponseEntity<CommonResponse<Void>> deleteQuestion(
+	public ResponseEntity<CommonResponse<Void>> deactivateQuestion(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
 		@PathVariable Long questionId
 	) {
 		Long userId = 1L;
-		questionService.deleteQuestion(userId, questionId);
+		questionService.deactivateQuestion(userId, questionId);
+		return CommonResponse.of(SuccessCode.OK);
+	}
+
+	/**
+	 * 질문 활성화			관리자만 활성화 가능
+	 * userId 				관리자인지 검증
+	 * @param questionId	활성화 할 질문의 id
+	 * @return	CommonResponse 성공 메세지, data: null
+	 */
+	@PatchMapping("/{questionId}/restore")
+	public ResponseEntity<CommonResponse<Void>> restoreQuestion(
+		// 유저 정보: 수정 예정
+		// 어노테이션 Long userId
+		@PathVariable Long questionId
+	) {
+		Long userId = 1L;
+		questionService.restoreQuestion(userId, questionId);
 		return CommonResponse.of(SuccessCode.OK);
 	}
 

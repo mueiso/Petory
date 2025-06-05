@@ -49,7 +49,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// id로 질문을 조회
 	@Override
-	public Question findQuestionByQuestionIdOrElseThrow(Long questionId) {
+	public Question findQuestionByQuestionId(Long questionId) {
 		return questionRepository.findById(questionId)
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
 	}
@@ -125,22 +125,36 @@ public class QuestionServiceImpl implements QuestionService {
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		Question question = findQuestionByQuestionIdOrElseThrow(questionId);
+		Question question = findQuestionByQuestionId(questionId);
 		question.update(request.getQuestion(), request.getDate());
 	}
 
 	// 질문 비활성화
 	@Override
 	@Transactional
-	public void deleteQuestion(Long userId, Long questionId) {
+	public void deactivateQuestion(Long userId, Long questionId) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		Question question = findQuestionByQuestionIdOrElseThrow(questionId);
+		Question question = findQuestionByQuestionId(questionId);
 		if (question.getDeletedAt() != null) {
 			throw new CustomException(ErrorCode.QUESTION_IS_DEACTIVATED);
 		}
 		question.deactivateEntity();
+	}
+
+	@Override
+	@Transactional
+	public void restoreQuestion(Long userId, Long questionId) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(userId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Question question = findQuestionByQuestionId(questionId);
+		if (question.getDeletedAt() == null) {
+			throw new CustomException(ErrorCode.QUESTION_IS_NOT_DEACTIVATED);
+		}
+		question.restoreEntity();
 	}
 }

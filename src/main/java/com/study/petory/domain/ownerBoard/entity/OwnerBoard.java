@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.BaseEntityWithBothAt;
-import com.study.petory.domain.ownerBoardComment.entity.OwnerBoardComment;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.CascadeType;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-import com.study.petory.domain.ownerBoardComment.dto.response.OwnerBoardCommentGetResponseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomAllGetResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.service.ChatRoomService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -43,10 +44,22 @@ public class ChatRoomController {
 	 * @return 로그인한 사용자의 채팅방
 	 */
 	@GetMapping
-	public ResponseEntity<CommonResponse<Page<ChatRoomGetResponseDto>>> getAllCharRoom(
+	public ResponseEntity<CommonResponse<Page<ChatRoomAllGetResponseDto>>> getAllCharRoom(
 		@RequestParam(defaultValue = "1") int page
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, chatRoomService.findAllChatRoom(page));
+	}
+
+	/**
+	 * 채팅방 단건 조회
+	 * @param chatRoomId 조회하려는 채팅방 아이디
+	 * @return 채팅 내역 및 거래 물품
+	 */
+	@GetMapping("/{chatRoomId}")
+	public ResponseEntity<CommonResponse<ChatRoomGetResponseDto>> getByChatRoomId(
+		@PathVariable String chatRoomId
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, chatRoomService.findByChatRoomId(chatRoomId));
 	}
 
 	/**

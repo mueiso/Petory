@@ -1,5 +1,8 @@
 package com.study.petory.domain.chat.dto.response;
 
+import java.util.List;
+
+import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
 
 import lombok.Getter;
@@ -7,12 +10,18 @@ import lombok.Getter;
 @Getter
 public class ChatRoomGetResponseDto {
 
+	private final String chatRoomId;
+
 	private final String tradeBoardTitle;
 
-	private final String lastMessageId;
+	private final String tradeBoardUrl;
 
-	public ChatRoomGetResponseDto(ChatRoom chatRoom) {
+	private final List<ChatMessage> messages;
+
+	public ChatRoomGetResponseDto(ChatRoom chatRoom, List<ChatMessage> messages) {
+		this.chatRoomId = chatRoom.getId();
 		this.tradeBoardTitle = chatRoom.getTradeBoardTitle();
-		this.lastMessageId = chatRoom.getLastMessage();
+		this.tradeBoardUrl = chatRoom.getTradeBoardUrl();
+		this.messages = messages;
 	}
 }

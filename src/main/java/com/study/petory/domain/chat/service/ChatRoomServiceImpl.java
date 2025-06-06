@@ -1,12 +1,17 @@
 package com.study.petory.domain.chat.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomAllGetResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
+import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
+import com.study.petory.domain.chat.repository.ChatMessageRepository;
 import com.study.petory.domain.chat.repository.ChatRoomRepository;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
@@ -24,6 +29,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	private final ChatRoomRepository chatRoomRepository;
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
+	private final ChatMessageRepository chatMessageRepository;
 
 	//채팅방 생성
 	@Override
@@ -59,7 +65,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
 	//로그인 한 사용자 채팅방 전체 조회
 	@Override
-	public Page<ChatRoomGetResponseDto> findAllChatRoom(int page) {
+	public Page<ChatRoomAllGetResponseDto> findAllChatRoom(int page) {
 
 		//수정 예정
 		User customer = userRepository.findById(2L)
@@ -70,7 +76,19 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
 		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndIsDeletedFalse(customer.getId(), pageable);
 
-		return chatRooms.map(ChatRoomGetResponseDto::new);
+		return chatRooms.map(ChatRoomAllGetResponseDto::new);
+	}
+
+	//채팅방 단건 조회
+	@Override
+	public ChatRoomGetResponseDto findByChatRoomId(String chatRoomId) {
+
+		ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
+			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+
+		List<ChatMessage> messages = chatMessageRepository.findAllByChatRoomId(chatRoomId);
+
+		return new ChatRoomGetResponseDto(chatRoom, messages);
 	}
 
 	//채팅방 삭제(소프트 딜리트)

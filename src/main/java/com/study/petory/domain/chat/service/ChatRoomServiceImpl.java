@@ -2,8 +2,8 @@ package com.study.petory.domain.chat.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
@@ -65,16 +65,15 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
 	//로그인 한 사용자 채팅방 전체 조회
 	@Override
-	public Page<ChatRoomAllGetResponseDto> findAllChatRoom(int page) {
+	public Slice<ChatRoomAllGetResponseDto> findAllChatRoom() {
 
 		//수정 예정
 		User customer = userRepository.findById(2L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		int adjustPage = page > 0 ? page - 1 : 0;
-		PageRequest pageable = PageRequest.of(adjustPage, 10);
+		PageRequest pageable = PageRequest.of(0, 10);
 
-		Page<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndIsDeletedFalse(customer.getId(), pageable);
+		Slice<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndIsDeletedFalse(customer.getId(), pageable);
 
 		return chatRooms.map(ChatRoomAllGetResponseDto::new);
 	}

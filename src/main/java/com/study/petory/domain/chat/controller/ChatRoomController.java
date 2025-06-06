@@ -1,6 +1,6 @@
 package com.study.petory.domain.chat.controller;
 
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,14 +40,12 @@ public class ChatRoomController {
 
 	/**
 	 * 채팅방 조회
-	 * @param page 조회할 페이지
 	 * @return 로그인한 사용자의 채팅방
 	 */
 	@GetMapping
-	public ResponseEntity<CommonResponse<Page<ChatRoomAllGetResponseDto>>> getAllCharRoom(
-		@RequestParam(defaultValue = "1") int page
+	public ResponseEntity<CommonResponse<Slice<ChatRoomAllGetResponseDto>>> getAllCharRoom(
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, chatRoomService.findAllChatRoom(page));
+		return CommonResponse.of(SuccessCode.FOUND, chatRoomService.findAllChatRoom());
 	}
 
 	/**

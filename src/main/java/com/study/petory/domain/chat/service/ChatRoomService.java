@@ -1,6 +1,6 @@
 package com.study.petory.domain.chat.service;
 
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomAllGetResponseDto;
@@ -10,7 +10,7 @@ public interface ChatRoomService {
 
 	ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId);
 
-	Page<ChatRoomAllGetResponseDto> findAllChatRoom(int page);
+	Slice<ChatRoomAllGetResponseDto> findAllChatRoom();
 
 	ChatRoomGetResponseDto findByChatRoomId(String chatRoomId);
 

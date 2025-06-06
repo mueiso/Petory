@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - mysql_data:/var/lib/mysql
+#    volumes:
+#      - mysql_data:/var/lib/mysql
     networks:
       - petory-network
 
@@ -24,8 +24,21 @@ services:
     networks:
       - petory-network
 
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_boot
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongodb_data:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
 volumes:
   mysql_data:
+  mongodb_data:
 
 networks:
   petory-network:

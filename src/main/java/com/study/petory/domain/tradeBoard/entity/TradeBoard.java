@@ -43,7 +43,7 @@ public class TradeBoard extends BaseEntityWithBothAt {
 	private Integer price;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "tb_user_id")
 	private User user;
 
 	@Builder

@@ -13,6 +13,6 @@ public class ChatRoomGetResponseDto {
 
 	public ChatRoomGetResponseDto(ChatRoom chatRoom) {
 		this.tradeBoardTitle = chatRoom.getTradeBoardTitle();
-		this.lastMessageId = chatRoom.getLastMessageId();
+		this.lastMessageId = chatRoom.getLastMessage();
 	}
 }

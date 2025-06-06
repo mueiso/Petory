@@ -28,7 +28,7 @@ public class ChatRoom {
 
 	private String tradeBoardUrl; // 구매하려는 상품 url
 
-	private String lastMessageId;
+	private String lastMessage;
 
 	private boolean isDeleted = false;
 
@@ -36,16 +36,19 @@ public class ChatRoom {
 	private LocalDateTime createdAt;
 
 	@Builder
-	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId, String tradeBoardTitle, String tradeBoardUrl, String lastMessageId) {
+	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId, String tradeBoardTitle, String tradeBoardUrl) {
 		this.sellerId = sellerId;
 		this.customerId = customerId;
 		this.tradeBoardId = tradeBoardId;
 		this.tradeBoardTitle = tradeBoardTitle;
 		this.tradeBoardUrl = tradeBoardUrl;
-		this.lastMessageId = lastMessageId;
 	}
 
 	public void deactivateChatRoom() {
 		this.isDeleted = true;
+	}
+
+	public void updateLastMessage(String message) {
+		this.lastMessage = message;
 	}
 }

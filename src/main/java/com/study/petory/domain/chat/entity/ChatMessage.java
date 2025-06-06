@@ -5,17 +5,16 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.study.petory.domain.chat.dto.request.ChatMessageSendRequestDto;
+
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Document(collection = "chatMessage")
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class ChatMessage {
 
 	@Id
@@ -29,4 +28,11 @@ public class ChatMessage {
 
 	@CreatedDate
 	private LocalDateTime createdAt;
+
+	@Builder
+	public ChatMessage(String chatRoomId, Long senderId, String message) {
+		this.chatRoomId = chatRoomId;
+		this.senderId = senderId;
+		this.message = message;
+	}
 }

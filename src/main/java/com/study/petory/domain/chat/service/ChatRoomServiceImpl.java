@@ -95,7 +95,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 	@Override
 	public void deleteChatRoom(String chatRoomId) {
 
-		//채팅방 유저 검증 로직
+		//채팅방 유저 검증 로직 추가 예정
 
 		ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
 			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));

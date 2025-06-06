@@ -19,6 +19,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 	private final ChatMessageRepository chatMessageRepository;
 	private final ChatRoomRepository chatRoomRepository;
 
+	//메시지 생성
 	@Override
 	public ChatMessage createChatMessage(ChatMessageSendRequestDto requestDto) {
 

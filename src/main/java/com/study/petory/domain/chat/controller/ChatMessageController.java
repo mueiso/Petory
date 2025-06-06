@@ -18,7 +18,10 @@ public class ChatMessageController {
 	private final ChatMessageService chatMessageService;
 	private final SimpMessagingTemplate messagingTemplate;
 
-	//메시지 보내기
+	/**
+	 * 메시지 보내기
+	 * @param requestDto roomId, senderId, 보내려는 메시지
+	 */
 	@MessageMapping("/message")
 	public void sendMessage(
 		@RequestBody ChatMessageSendRequestDto requestDto

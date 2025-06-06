@@ -18,15 +18,15 @@ public class ChatRoom {
 	@Id
 	private String id;
 
-	private Long sellerId; // 판매자 닉네임
+	private Long sellerId;
 
-	private Long customerId; // 구매자 닉네임
+	private Long customerId;
 
 	private Long tradeBoardId;
 
 	private String tradeBoardTitle;
 
-	private String tradeBoardUrl; // 구매하려는 상품 url
+	private String tradeBoardUrl;
 
 	private String lastMessage;
 

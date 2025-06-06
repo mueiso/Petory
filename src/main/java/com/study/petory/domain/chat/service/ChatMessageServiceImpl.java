@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.study.petory.domain.chat.dto.request.ChatMessageSendRequestDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
+import com.study.petory.domain.chat.repository.ChatMessageRepository;
 import com.study.petory.domain.chat.repository.ChatRoomRepository;
 import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatMessageServiceImpl implements ChatMessageService {
 
+	private final ChatMessageRepository chatMessageRepository;
 	private final ChatRoomRepository chatRoomRepository;
 
 	@Override
@@ -28,6 +30,8 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 			.senderId(requestDto.getSenderId())
 			.message(requestDto.getMessage())
 			.build();
+
+		chatMessageRepository.save(chatMessage);
 
 		chatRoom.updateLastMessage(requestDto.getMessage());
 		chatRoomRepository.save(chatRoom);

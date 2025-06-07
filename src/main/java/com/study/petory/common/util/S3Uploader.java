@@ -31,7 +31,7 @@ public class S3Uploader {
 	}
 
 	// S3에 파일 업로드
-	public String uploadFile(MultipartFile file, String folder) {
+	public String uploadFile(MultipartFile file, String folder) { //folder로 버킷에서 도메인 구분
 		try {
 			String ext = getExtension(file.getOriginalFilename());
 			String fileName = folder + "/" + UUID.randomUUID() + "." + ext;
@@ -48,7 +48,7 @@ public class S3Uploader {
 				+ ".amazonaws.com/"
 				+ fileName;
 
-		} catch (IOException e) {
+		} catch (IOException e) { // file.getInputStream()에서 발생할 수 있는 예외를 처리함
 			throw new CustomException(ErrorCode.FILE_UPLOAD_FAILED);
 		}
 	}

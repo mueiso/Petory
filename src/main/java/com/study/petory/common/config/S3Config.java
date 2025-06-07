@@ -22,12 +22,12 @@ public class S3Config {
 	private String region;
 
 	@Bean
-	public S3Client s3Client() {
+	public S3Client s3Client() { //S3와 직접 연결해주는 객체
 		AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
 
 		return S3Client.builder()
 			.region(Region.of(region))
-			.credentialsProvider(StaticCredentialsProvider.create(credentials))
+			.credentialsProvider(StaticCredentialsProvider.create(credentials)) // 인증 정보 적용
 			.build();
 	}
 

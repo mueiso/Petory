@@ -31,10 +31,11 @@ public abstract class AbstractImageService<T> {
 		return urls;
 	}
 
+	// 도메인별로 구현 필요
 	protected abstract String getFolderName(); // 도메인별 폴더명
 
 	protected abstract T createImageEntity(String url, Object context); // 도메인별 엔티티 생성
 
-	protected abstract void save(T entity); // 도메인별 저장로직
+	protected abstract void save(T entity); // 도메인별 DB 저장로직
 
 }

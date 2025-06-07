@@ -34,7 +34,6 @@ public class S3Uploader {
 			.bucket(bucket)
 			.key(fileName)
 			.contentType(file.getContentType())
-			// .acl(ObjectCannedACL.PUBLIC_READ)
 			.build();
 
 		s3Client.putObject(putRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));

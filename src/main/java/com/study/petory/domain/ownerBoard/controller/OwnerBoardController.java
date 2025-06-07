@@ -58,13 +58,6 @@ public class OwnerBoardController {
 		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
 	}
 
-	// //이미지 업로드
-	// @PostMapping("upload")
-	// public ResponseEntity<String> uploadImage(@RequestParam MultipartFile file) throws IOException {
-	// 	String url = ownerBoardImageService.uploadAndSave(file);
-	// 	return ResponseEntity.ok(url);
-	// }
-
 	/**
 	 * 게시글 전체 조회
 	 * @param title 제목 검색 가능(nullable)

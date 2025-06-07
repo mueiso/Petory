@@ -1,6 +1,10 @@
 package com.study.petory.domain.ownerBoard.service;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
@@ -15,7 +19,8 @@ import jakarta.validation.Valid;
 public interface OwnerBoardService {
 	OwnerBoard findOwnerBoardById(Long boardId);
 
-	OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto);
+	OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) throws
+		IOException;
 
 	Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page);
 

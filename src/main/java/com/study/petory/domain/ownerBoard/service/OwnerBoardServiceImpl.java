@@ -1,5 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -7,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
@@ -32,6 +35,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardRepository ownerBoardRepository;
 	private final UserRepository userRepository;
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
+	private final OwnerBoardImageService ownerBoardImageService;
 
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
@@ -41,7 +45,9 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 	// 게시글 생성
 	@Override
-	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto) {
+	@Transactional
+	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) throws
+		IOException {
 		User user = userRepository.findById(1L).orElseThrow(); // 추후 토큰값으로 수정
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
@@ -52,7 +58,12 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		ownerBoardRepository.save(ownerBoard);
 
-		return OwnerBoardCreateResponseDto.from(ownerBoard);
+		List<String> urls = new ArrayList<>();
+		if (images != null && !images.isEmpty()) {
+			urls = ownerBoardImageService.uploadAndSaveAll(images, ownerBoard);
+		}
+
+		return OwnerBoardCreateResponseDto.of(ownerBoard, urls);
 	}
 
 	// 게시글 전체 조회

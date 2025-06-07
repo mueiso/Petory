@@ -1,5 +1,8 @@
 package com.study.petory.domain.ownerBoard.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
@@ -25,6 +30,7 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseD
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardCommentService;
+import com.study.petory.domain.ownerBoard.service.OwnerBoardImageService;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -38,6 +44,7 @@ public class OwnerBoardController {
 
 	private final OwnerBoardService ownerBoardService;
 	private final OwnerBoardCommentService ownerBoardCommentService;
+	private final OwnerBoardImageService ownerBoardImageService;
 
 	/**
 	 * 게시글 생성
@@ -46,10 +53,22 @@ public class OwnerBoardController {
 	 */
 	@PostMapping
 	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
-		@Valid @RequestBody OwnerBoardCreateRequestDto dto) {
+		@RequestPart @Valid OwnerBoardCreateRequestDto dto,
+		@RequestPart(required = false) List<MultipartFile> images) {
 
-		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto));
+		try {
+			return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
+
+	// //이미지 업로드
+	// @PostMapping("upload")
+	// public ResponseEntity<String> uploadImage(@RequestParam MultipartFile file) throws IOException {
+	// 	String url = ownerBoardImageService.uploadAndSave(file);
+	// 	return ResponseEntity.ok(url);
+	// }
 
 	/**
 	 * 게시글 전체 조회

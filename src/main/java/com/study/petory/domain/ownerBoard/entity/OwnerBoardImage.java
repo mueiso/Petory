@@ -1,5 +1,7 @@
 package com.study.petory.domain.ownerBoard.entity;
 
+import com.study.petory.common.entity.BaseEntityWithCreatedAt;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "tb_owner_board_image")
-public class OwnerBoardImage {
+public class OwnerBoardImage extends BaseEntityWithCreatedAt {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

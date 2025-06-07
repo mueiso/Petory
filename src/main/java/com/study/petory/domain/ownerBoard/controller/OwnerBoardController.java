@@ -65,7 +65,7 @@ public class OwnerBoardController {
 		@PathVariable Long imageId) {
 		ownerBoardService.deleteImage(boardId, imageId);
 
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 	/**

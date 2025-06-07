@@ -10,6 +10,6 @@ import lombok.Getter;
 public class DailyQnaUpdateRequestDto {
 
 	@NotBlank
-	@Size(max = 255, message = "70글자까지 입력이 가능합니다")
+	@Size(max = 255, message = "85글자 이하로 입력해주세요.")
 	private String answer;
 }

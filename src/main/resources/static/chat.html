@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>채팅 테스트</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+    <style>
+        #messages { list-style: none; padding: 0; }
+        .me { color: blue; }
+        .server { color: green; }
+    </style>
+</head>
+<body>
+<h1>채팅 테스트</h1>
+
+<!-- senderId 입력 -->
+<input type="text" id="senderIdInput" placeholder="Id를 입력하세요" />
+
+<br/><br/>
+
+<input type="text" id="messageInput" placeholder="메시지를 입력하세요" />
+<button onclick="sendMessage()">보내기</button>
+
+<ul id="messages"></ul>
+
+<script>
+    // 채팅방 ID (테스트용)
+    const chatRoomId = "6842997daa98010644bbc3d5";
+
+    // WebSocket 연결
+    const socket = new SockJS("http://localhost:8080/ws-chat");
+    const stompClient = Stomp.over(socket);
+
+    // 연결 및 구독
+    stompClient.connect({}, (frame) => {
+        console.log("STOMP 연결됨:", frame);
+
+        stompClient.subscribe(`/sub/room/${chatRoomId}`, (message) => {
+            const data = JSON.parse(message.body);
+
+            // 현재 입력된 senderId를 가져옴
+            const mySenderId = parseInt(document.getElementById("senderIdInput").value, 10);
+
+            // 내가 보낸 메시지라면 무시
+            if (data.senderId === mySenderId) {
+                return;
+            }
+
+            addMessage("상대방", data.message, "server");
+        });
+    });
+
+    // 메시지 전송
+    function sendMessage() {
+        const input = document.getElementById("messageInput");
+        const senderInput = document.getElementById("senderIdInput");
+
+        const message = input.value.trim();
+        const senderId = parseInt(senderInput.value, 10);
+
+        if (!message || !senderId) {
+            alert("메시지와 senderId를 모두 입력하세요!");
+            return;
+        }
+
+        const payload = {
+            chatRoomId: chatRoomId,
+            senderId: senderId,
+            message: message
+        };
+
+        stompClient.send("/pub/message", {}, JSON.stringify(payload));
+        addMessage("나", message, "me");
+        input.value = "";
+    }
+
+    function addMessage(sender, text, className) {
+        const list = document.getElementById("messages");
+        const item = document.createElement("li");
+        item.className = className;
+        item.textContent = `${sender}: ${text}`;
+        list.appendChild(item);
+    }
+</script>
+</body>
+</html>

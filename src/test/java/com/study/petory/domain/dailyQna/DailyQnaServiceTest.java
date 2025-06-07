@@ -99,7 +99,7 @@ public class DailyQnaServiceTest {
 		Long questionId = 1L;
 
 		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
-		given(questionService.findQuestionByQuestionIdOrElseThrow(questionId)).willReturn(testQuestion);
+		given(questionService.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
 
 		// when
 		dailyQnaService.saveDailyQna(userId, questionId, requestDto);
@@ -125,7 +125,7 @@ public class DailyQnaServiceTest {
 		Long questionId = 1L;
 
 		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
-		given(questionService.findQuestionByQuestionIdOrElseThrow(questionId)).willReturn(testQuestion);
+		given(questionService.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
 		given(dailyQnaRepository.findDailyQna(testUser, testQuestion)).willReturn(responseList);
 
 		// when
@@ -152,13 +152,14 @@ public class DailyQnaServiceTest {
 
 		Long userId = 1L;
 		Long dailyQnaId = 1L;
+		Long questionId = 1L;
 
 		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(savedQna));
 
 		DailyQnaUpdateRequestDto updateData = new DailyQnaUpdateRequestDto("수정 후 답변");
 
 		// when
-		dailyQnaService.updateDailyQna(userId, dailyQnaId, updateData);
+		dailyQnaService.updateDailyQna(userId, questionId, dailyQnaId, updateData);
 
 		// then
 		DailyQna updateQna = dailyQnaService.findDailyQnaByDailyQnaIdOrElseThrow(dailyQnaId);
@@ -178,11 +179,12 @@ public class DailyQnaServiceTest {
 
 		Long userId = 1L;
 		Long dailyQnaId = 1L;
+		Long questionId = 1L;
 
 		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(savedQna));
 
 		// when
-		dailyQnaService.deleteDailyQna(userId, dailyQnaId);
+		dailyQnaService.deleteDailyQna(userId, questionId, dailyQnaId);
 
 		// then
 		assertThat(savedQna.getDeletedAt()).isNotNull();

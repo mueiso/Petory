@@ -79,7 +79,7 @@ public class OwnerBoardController {
 		@RequestParam(required = false) String title,
 		@RequestParam(defaultValue = "1") int page) {
 
-		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findAllOwnerBoards(title, page));
+		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.findAllOwnerBoards(title, page));
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class OwnerBoardController {
 	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(
 		@PathVariable Long boardId) {
 
-		return CommonResponse.of(SuccessCode.OK, ownerBoardService.findOwnerBoard(boardId));
+		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.findOwnerBoard(boardId));
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class OwnerBoardController {
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
 
-		return CommonResponse.of(SuccessCode.OK, ownerBoardService.updateOwnerBoard(boardId, dto));
+		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.updateOwnerBoard(boardId, dto));
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class OwnerBoardController {
 		@PathVariable Long boardId) {
 		ownerBoardService.deleteOwnerBoard(boardId);
 
-		return CommonResponse.of(SuccessCode.NO_CONTENT);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class OwnerBoardController {
 		@PathVariable Long boardId) {
 		ownerBoardService.restoreOwnerBoard(boardId);
 
-		return CommonResponse.of(SuccessCode.RESTORE);
+		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class OwnerBoardController {
 		@PathVariable long boardId,
 		@RequestParam(defaultValue = "1") int page) {
 
-		return CommonResponse.of(SuccessCode.OK, ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
+		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class OwnerBoardController {
 		@Valid @RequestBody OwnerBoardCommentUpdateRequestDto dto
 	) {
 
-		return CommonResponse.of(SuccessCode.OK,
+		return CommonResponse.of(SuccessCode.REQUESTED,
 			ownerBoardCommentService.updateOwnerBoardComment(boardId, commentId, dto));
 	}
 
@@ -192,7 +192,7 @@ public class OwnerBoardController {
 	) {
 		ownerBoardCommentService.deleteOwnerBoardComment(boardId, commentId);
 
-		return CommonResponse.of(SuccessCode.NO_CONTENT);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 }

@@ -30,4 +30,6 @@ public interface OwnerBoardService {
 	void deleteOwnerBoard(Long boardId);
 
 	void restoreOwnerBoard(Long boardId);
+
+	void deleteImage(Long boardId, Long imageId);
 }

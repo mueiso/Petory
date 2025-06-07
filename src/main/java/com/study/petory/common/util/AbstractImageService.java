@@ -1,6 +1,5 @@
 package com.study.petory.common.util;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ public abstract class AbstractImageService<T> {
 		this.s3Uploader = s3Uploader;
 	}
 
+	// 파일 업로드 및 저장
 	public List<String> uploadAndSaveAll(List<MultipartFile> files, Object context) {
 		List<String> urls = new ArrayList<>();
 
@@ -32,7 +32,9 @@ public abstract class AbstractImageService<T> {
 	}
 
 	protected abstract String getFolderName(); // 도메인별 폴더명
+
 	protected abstract T createImageEntity(String url, Object context); // 도메인별 엔티티 생성
+
 	protected abstract void save(T entity); // 도메인별 저장로직
 
 }

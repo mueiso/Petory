@@ -58,6 +58,16 @@ public class OwnerBoardController {
 		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
 	}
 
+	// 사진 삭제
+	@DeleteMapping("/{boardId}/images/{imageId}")
+	public ResponseEntity<CommonResponse<Void>> deleteImage(
+		@PathVariable Long boardId,
+		@PathVariable Long imageId) {
+		ownerBoardService.deleteImage(boardId, imageId);
+
+		return CommonResponse.of(SuccessCode.OK);
+	}
+
 	/**
 	 * 게시글 전체 조회
 	 * @param title 제목 검색 가능(nullable)

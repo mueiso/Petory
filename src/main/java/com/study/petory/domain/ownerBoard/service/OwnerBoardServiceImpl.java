@@ -19,7 +19,9 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.ownerBoard.repository.OwnerBoardImageRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -35,6 +37,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final UserRepository userRepository;
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardImageService ownerBoardImageService;
+	private final OwnerBoardImageRepository ownerBoardImageRepository;
 
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
@@ -140,6 +143,13 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		}
 
 		ownerBoard.restoreEntity();
+	}
+
+	// 게시글 사진 삭제
+	@Override
+	public void deleteImage(Long boardId, Long imageId) {
+		findOwnerBoardById(boardId);
+		ownerBoardImageService.deleteImage(imageId);
 	}
 
 }

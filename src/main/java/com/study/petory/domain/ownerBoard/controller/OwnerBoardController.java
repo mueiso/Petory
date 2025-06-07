@@ -1,6 +1,5 @@
 package com.study.petory.domain.ownerBoard.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -56,11 +55,7 @@ public class OwnerBoardController {
 		@RequestPart @Valid OwnerBoardCreateRequestDto dto,
 		@RequestPart(required = false) List<MultipartFile> images) {
 
-		try {
-			return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
 	}
 
 	// //이미지 업로드

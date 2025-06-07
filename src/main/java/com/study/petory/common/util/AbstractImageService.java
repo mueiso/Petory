@@ -14,7 +14,7 @@ public abstract class AbstractImageService<T> {
 		this.s3Uploader = s3Uploader;
 	}
 
-	public List<String> uploadAndSaveAll(List<MultipartFile> files, Object context) throws IOException {
+	public List<String> uploadAndSaveAll(List<MultipartFile> files, Object context) {
 		List<String> urls = new ArrayList<>();
 
 		if (files == null || files.isEmpty()) {

@@ -58,7 +58,10 @@ public enum ErrorCode implements BaseCode {
 
 	// OwnerBoardComment
 	OWNER_BOARD_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다."),
-	OWNER_BOARD_COMMENT_MISMATCH(HttpStatus.BAD_REQUEST, "해당 게시글에 존재하지 않는 댓글입니다.")
+	OWNER_BOARD_COMMENT_MISMATCH(HttpStatus.BAD_REQUEST, "해당 게시글에 존재하지 않는 댓글입니다."),
+
+	// S3
+	FILE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다.")
 
 	;
 

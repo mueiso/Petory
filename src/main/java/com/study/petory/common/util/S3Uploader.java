@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
+
 import lombok.RequiredArgsConstructor;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
@@ -26,20 +28,26 @@ public class S3Uploader {
 		return fileName.substring(fileName.lastIndexOf(".") + 1);
 	}
 
-	public String uploadFile(MultipartFile file, String folder) throws IOException {
-		String ext = getExtension(file.getOriginalFilename());
-		String fileName = folder + "/" + UUID.randomUUID() + "." + ext;
+	public String uploadFile(MultipartFile file, String folder) {
+		try {
+			String ext = getExtension(file.getOriginalFilename());
+			String fileName = folder + "/" + UUID.randomUUID() + "." + ext;
 
-		PutObjectRequest putRequest = PutObjectRequest.builder()
-			.bucket(bucket)
-			.key(fileName)
-			.contentType(file.getContentType())
-			.build();
+			PutObjectRequest putRequest = PutObjectRequest.builder()
+				.bucket(bucket)
+				.key(fileName)
+				.contentType(file.getContentType())
+				.build();
 
-		s3Client.putObject(putRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+			s3Client.putObject(putRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
 
-		return "https://" + bucket + ".s3." + s3Client.serviceClientConfiguration().region().id() + ".amazonaws.com/"
-			+ fileName;
+			return "https://" + bucket + ".s3." + s3Client.serviceClientConfiguration().region().id()
+				+ ".amazonaws.com/"
+				+ fileName;
+
+		} catch (IOException e) {
+			throw new CustomException(ErrorCode.FILE_UPLOAD_FAILED);
+		}
 	}
 
 }

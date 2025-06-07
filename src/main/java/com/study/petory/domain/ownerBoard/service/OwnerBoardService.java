@@ -19,8 +19,7 @@ import jakarta.validation.Valid;
 public interface OwnerBoardService {
 	OwnerBoard findOwnerBoardById(Long boardId);
 
-	OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) throws
-		IOException;
+	OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images);
 
 	Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page);
 

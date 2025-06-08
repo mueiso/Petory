@@ -7,6 +7,7 @@ import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
+import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 
 public interface TradeBoardService {
@@ -20,4 +21,6 @@ public interface TradeBoardService {
 	TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto);
 
 	void deleteTradeBoard(Long tradeBoardId);
+
+	TradeBoard findTradeBoardById(Long tradeBoardId);
 }

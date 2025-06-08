@@ -72,7 +72,7 @@ public class PlaceController {
 		@RequestParam(required = false) PlaceType placeType,
 		@PageableDefault(size = 10) Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.OK, placeService.findAllPlace(placeName, placeType, pageable));
+		return CommonResponse.of(SuccessCode.REQUESTED, placeService.findAllPlace(placeName, placeType, pageable));
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class PlaceController {
 	public ResponseEntity<CommonResponse<PlaceGetResponseDto>> getByPlaceId(
 		@PathVariable Long placeId
 	) {
-		return CommonResponse.of(SuccessCode.OK, placeService.findByPlaceId(placeId));
+		return CommonResponse.of(SuccessCode.REQUESTED, placeService.findByPlaceId(placeId));
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class PlaceController {
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.OK, placeService.updatePlace(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.REQUESTED, placeService.updatePlace(placeId, requestDto));
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class PlaceController {
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.restorePlace(placeId, requestDto);
-		return CommonResponse.of(SuccessCode.RESTORE);
+		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class PlaceController {
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
 		placeService.deletePlace(placeId, requestDto);
-		return CommonResponse.of(SuccessCode.NO_CONTENT);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class PlaceController {
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.OK, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
+		return CommonResponse.of(SuccessCode.REQUESTED, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class PlaceController {
 		@PathVariable Long reviewId
 	) {
 		placeReviewService.restorePlaceReview(placeId, reviewId);
-		return CommonResponse.of(SuccessCode.RESTORE);
+		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class PlaceController {
 		@PathVariable Long reviewId
 	) {
 		placeReviewService.deletePlaceReview(placeId, reviewId);
-		return CommonResponse.of(SuccessCode.NO_CONTENT);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 	/**

@@ -1,5 +1,8 @@
 package com.study.petory.domain.dailyQna.entity;
 
+import com.study.petory.common.entity.BaseEntityWithCreatedAt;
+import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_question")
 @NoArgsConstructor
-public class Question {
+public class Question extends BaseEntityWithCreatedAt {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +26,21 @@ public class Question {
 	@Column(nullable = false)
 	private String question;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 10)
 	private String date;
 
 	@Builder
 	public Question(String question, String date) {
 		this.question = question;
 		this.date = date;
+	}
+
+	public void update(String question, String date) {
+		if (question != null) {
+			this.question = question;
+		}
+		if (date != null) {
+			this.date = date;
+		}
 	}
 }

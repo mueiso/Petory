@@ -56,7 +56,7 @@ public class TradeBoardController {
 		@RequestParam(required = false) TradeCategory category,
 		@RequestParam(defaultValue = "1") int page
 	) {
-		return CommonResponse.of(SuccessCode.OK, tradeBoardService.findAllTradeBoard(category, page));
+		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findAllTradeBoard(category, page));
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class TradeBoardController {
 		@PathVariable Long tradeBoardId,
 		@RequestParam(defaultValue = "1") int page
 	) {
-		return CommonResponse.of(SuccessCode.OK, tradeBoardService.findByTradeBoardId(tradeBoardId));
+		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByTradeBoardId(tradeBoardId));
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class TradeBoardController {
 		@PathVariable Long tradeBoardId,
 		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.OK, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}
 
 	/**
@@ -97,6 +97,6 @@ public class TradeBoardController {
 		@PathVariable Long tradeBoardId
 	) {
 		tradeBoardService.deleteTradeBoard(tradeBoardId);
-		return CommonResponse.of(SuccessCode.NO_CONTENT);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 }

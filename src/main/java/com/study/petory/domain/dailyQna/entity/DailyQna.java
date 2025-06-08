@@ -11,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -20,7 +21,12 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "tb_daily_qna")
+@Table(
+	name = "tb_daily_qna",
+	indexes = {
+		@Index(name = "index_user_question",columnList = "user_id, question_id"),
+	}
+	)
 @Where(clause = "deleted_at is null")
 @NoArgsConstructor
 public class DailyQna extends BaseEntityWithBothAt {
@@ -28,11 +34,11 @@ public class DailyQna extends BaseEntityWithBothAt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "question_id", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Question question;
 

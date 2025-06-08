@@ -1,0 +1,900 @@
+{
+folder: {
+folderId: 82085042,
+name: "갈수있어 강아지도, 인천 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "5",
+iconId: "1",
+markerColor: "5",
+lastUseTime: 1684742299000,
+creationTime: 1680844463000,
+shouldOverlay: true,
+bookmarkCount: 822,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa69a1438fc3a9cfafe95",
+reviewPageUrl: "https://m.place.naver.com/my/642fa69a1438fc3a9cfafe95/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_247/168084443322917k2u_PNG/image.png?type=f102_102",
+nick: "N강아지도 밀크"
+},
+shareId: "c582b0a7ca2c4386a4872994353a01be",
+encryptedUserIdNo: "VBgiDOVpg9cQ2MF9:rOLpLJRg7BWx4Ea_snCWcZiOMxCDdQ",
+followCount: 883,
+viewCount: 2968,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007242883,
+name: "까페돔바니",
+displayName: "",
+px: 126.6204193,
+py: 37.4767859,
+type: "place",
+useTime: 1683520472000,
+lastUpdateTime: 1683520472000,
+creationTime: 1683520471000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1582793244",
+address: "인천광역시 중구 북성동3가 3-10",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11110140",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "B/NXkjZSeuUIpJcJ0j5kGw==",
+pan: "54.33",
+tilt: "-10.63",
+lng: "126.6203904",
+lat: "37.4766539",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190427_223/1556351620191mu9ju_JPEG/ZmbY20SW1FTklKNPKYzsGVZj.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20190427_203/1556351615233rHfVT_JPEG/sNiO3aSOXmqDhlLpZvFefkc2.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20190427_201/1556351615809dO3ri_JPEG/6o8HIoxCsCEHS5GQyEYis1lX.JPG.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007242691,
+name: "싼태카페",
+displayName: "",
+px: 126.7338631,
+py: 37.5039767,
+type: "place",
+useTime: 1683520461000,
+lastUpdateTime: 1683520461000,
+creationTime: 1683520461000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1505741816",
+address: "인천광역시 부평구 부개동 12-192",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11237107",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007242507,
+name: "도깨비냉장고 도화점",
+displayName: "",
+px: 126.661754,
+py: 37.4724576,
+type: "place",
+useTime: 1683520451000,
+lastUpdateTime: 1683520451000,
+creationTime: 1683520450000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1545763244",
+address: "인천광역시 미추홀구 도화동 1005-4",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11177104",
+cidPath: [
+"220036",
+"220052",
+"220578",
+"221361"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007242353,
+name: "꿀스커피 박촌역점",
+displayName: "",
+px: 126.7449261,
+py: 37.5552156,
+type: "place",
+useTime: 1683520440000,
+lastUpdateTime: 1683520440000,
+creationTime: 1683520440000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1731094530",
+address: "인천광역시 계양구 박촌동 60-5 1층 꿀스커피",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11245109",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"1002289"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "GNHDFPYIR2TXiuLg9Sdrow==",
+pan: "14.68",
+tilt: "11.18",
+lng: "126.7448750",
+lat: "37.5551430",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20191122_212/1574389127649WpS8F_JPEG/LJRmpOfgB7NeRfTd7u7lJGQK.jpg",
+"https://ldb-phinf.pstatic.net/20191122_170/1574388394188uQ7nd_JPEG/i1WksUKB-niIXrwDasY9HtkY.jpg",
+"https://ldb-phinf.pstatic.net/20191122_30/1574388405680YVbLN_JPEG/oBIjxC5le8h7qW8ASLTdf-AP.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982488478,
+name: "화덕베이글 라이트쏠티",
+displayName: "",
+px: 126.5044619,
+py: 37.4783077,
+type: "place",
+useTime: 1681897726000,
+lastUpdateTime: 1681897726000,
+creationTime: 1681897726000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1472587041",
+address: "인천광역시 중구 운남동 1602-6 럭키프라자 104호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11110146",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "y/Ogt32zuI//ijT0HOm2Hw==",
+pan: "-121.74",
+tilt: "10.63",
+lng: "126.5047891",
+lat: "37.4785732",
+fov: "53"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230121_24/1674279656839f1lTK_JPEG/KakaoTalk_20230121_140222211.jpg",
+"https://ldb-phinf.pstatic.net/20230121_103/1674279635684fGtpg_JPEG/KakaoTalk_20230121_140141485.jpg",
+"https://ldb-phinf.pstatic.net/20230121_172/1674279635570HKiVv_JPEG/KakaoTalk_20230121_140218501.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982488186,
+name: "카페테이블홍예",
+displayName: "",
+px: 126.6246031,
+py: 37.4728068,
+type: "place",
+useTime: 1681897710000,
+lastUpdateTime: 1681897710000,
+creationTime: 1681897710000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "38502725",
+address: "인천광역시 중구 송학동3가 7-11 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11110121",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "wQowbOglPe1SmIbtwX1K1w==",
+pan: "143.52",
+tilt: "10.00",
+lng: "126.6245541",
+lat: "37.4728729",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250605_30/1749101101020Jk6Dx_JPEG/KakaoTalk_20250605_142425158_01.jpg",
+"https://ldb-phinf.pstatic.net/20250515_113/1747297527817sbg0C_JPEG/%BB%FD%B8%C1%B0%ED%C6%C4%B8%A3%C6%E4.jpg",
+"https://ldb-phinf.pstatic.net/20250503_256/1746246335136VUalS_JPEG/KakaoTalk_20250503_125350986_01.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982487819,
+name: "키키유업",
+displayName: "",
+px: 126.4970729,
+py: 37.493066,
+type: "place",
+useTime: 1681897692000,
+lastUpdateTime: 1681897692000,
+creationTime: 1681897691000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1178443961",
+address: "인천광역시 중구 운서동 3087-2 121호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11110147",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982487396,
+name: "카스텔 베이커리 카페",
+displayName: "",
+px: 126.6340778,
+py: 37.3886193,
+type: "place",
+useTime: 1681897667000,
+lastUpdateTime: 1681897667000,
+creationTime: 1681897667000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1158151919",
+address: "인천광역시 연수구 송도동 98-1 닥터플러스몰 2F A209호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11185106",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "B5zBP6fbbCQwHZYlnMZw6A==",
+pan: "45.62",
+tilt: "10.00",
+lng: "126.6339120",
+lat: "37.3884570",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230213_274/1676292968297YkVA9_JPEG/IG-3.jpg",
+"https://ldb-phinf.pstatic.net/20240131_46/1706693160582hCDuH_JPEG/naver002.jpg",
+"https://ldb-phinf.pstatic.net/20230217_286/1676615998511Uq4Lx_JPEG/77985955-8FB1-4DFF-8EC6-8F56B74D066C.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982487097,
+name: "카페 라비타",
+displayName: "",
+px: 126.6512107,
+py: 37.3974208,
+type: "place",
+useTime: 1681897651000,
+lastUpdateTime: 1681897651000,
+creationTime: 1681897651000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "33211091",
+address: "인천광역시 연수구 송도동 20-23 월드마크 2단지 1층상가146호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11185106",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "e1OuZ7mTwTUFdsBEXYYcxQ==",
+pan: "-55.45",
+tilt: "10.00",
+lng: "126.6514428",
+lat: "37.3972608",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200617_114/1592357398182lGKiA_JPEG/deGXRV4d4tLZyv-6K8bUgRQR.jpg",
+"https://ldb-phinf.pstatic.net/20200617_148/1592357414950uD0HH_JPEG/IwFlb7rplOxNK391qmNH31Fq.jpg",
+"https://ldb-phinf.pstatic.net/20200617_229/1592357415115QuQqp_JPEG/YDf2N1b3y5YaA4sHOwYNsmoO.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982486704,
+name: "인생음악",
+displayName: "",
+px: 126.652945,
+py: 37.4198291,
+type: "place",
+useTime: 1681897631000,
+lastUpdateTime: 1681897631000,
+creationTime: 1681897630000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1966413963",
+address: "인천광역시 연수구 옥련동 531-3 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11185101",
+cidPath: [
+"220036",
+"220052",
+"220590"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "JySjSgzLSHbdza1VkEUo0g==",
+pan: "-119.90",
+tilt: "10.00",
+lng: "126.6530625",
+lat: "37.4198965",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190120_45/1547952079882Kh8Rr_JPEG/RXLyFcdHdJ7LwciXSJtcDtfA.jpg"
+],
+category: "라이브카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982485658,
+name: "블랙디더치",
+displayName: "",
+px: 126.6921813,
+py: 37.5923273,
+type: "place",
+useTime: 1681897575000,
+lastUpdateTime: 1681897575000,
+creationTime: 1681897574000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "37812401",
+address: "인천광역시 서구 당하동 1027-15 신한실크밸리아파트 제상가2동",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11260114",
+cidPath: [
+"220036",
+"220052",
+"220577",
+"221358"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982485402,
+name: "모모",
+displayName: "",
+px: 126.6769738,
+py: 37.5674756,
+type: "place",
+useTime: 1681897560000,
+lastUpdateTime: 1681897560000,
+creationTime: 1681897560000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1245172149",
+address: "인천광역시 서구 검암동 492-2 1층 102호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11260103",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982484879,
+name: "오늘은달콤",
+displayName: "",
+px: 126.6807007,
+py: 37.4952763,
+type: "place",
+useTime: 1681897533000,
+lastUpdateTime: 1681897533000,
+creationTime: 1681897532000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1409744436",
+address: "인천광역시 서구 가좌동 129-3 102호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11260112",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "T91pxuH5QTT+JR7kVa72Ug==",
+pan: "-148.43",
+tilt: "10.31",
+lng: "126.6703332",
+lat: "37.5176315",
+fov: "65"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231208_165/1702033103350LIBa1_JPEG/1000014433.jpg",
+"https://ldb-phinf.pstatic.net/20240119_242/1705647162503Ekes3_JPEG/1000027690.jpg",
+"https://ldb-phinf.pstatic.net/20231204_264/1701637659972clLbc_JPEG/1000014292.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982484028,
+name: "0131커피컴퍼니",
+displayName: "",
+px: 126.7300127,
+py: 37.5079574,
+type: "place",
+useTime: 1681897491000,
+lastUpdateTime: 1681897491000,
+creationTime: 1681897490000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1243486643",
+address: "인천광역시 부평구 갈산동 400-7 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11237106",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "trXYy8iK9h11gpLB6Dqzlw==",
+pan: "-40.29",
+tilt: "10.00",
+lng: "126.7301120",
+lat: "37.5079180",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240404_190/1712210714290XNWQx_JPEG/%B0%FA%C0%CF%B5%B5%BD%C3%B6%F4%B6%BC%BC%A6.jpg",
+"https://ldb-phinf.pstatic.net/20240215_281/1707966054113NRcY3_JPEG/%B8%DE%C0%CE.jpg",
+"https://ldb-phinf.pstatic.net/20240308_164/1709873447194xEcvO_JPEG/KakaoTalk_20240308_134940719.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982483747,
+name: "티피킷",
+displayName: "",
+px: 126.730265,
+py: 37.5079564,
+type: "place",
+useTime: 1681897476000,
+lastUpdateTime: 1681897476000,
+creationTime: 1681897476000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1506968321",
+address: "인천광역시 부평구 갈산동 401-5 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11237106",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982483427,
+name: "워크업커피 부평점",
+displayName: "",
+px: 126.7319774,
+py: 37.4940927,
+type: "place",
+useTime: 1681897460000,
+lastUpdateTime: 1681897460000,
+creationTime: 1681897460000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1677587838",
+address: "인천광역시 부평구 부평동 364-19 102호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11237101",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982483076,
+name: "케이크0307",
+displayName: "",
+px: 126.7208191,
+py: 37.5051085,
+type: "place",
+useTime: 1681897442000,
+lastUpdateTime: 1681897442000,
+creationTime: 1681897441000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1839908963",
+address: "인천광역시 부평구 부평동 954 2층 cake 0307",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11237101",
+cidPath: [
+"220036",
+"220052",
+"220565",
+"221177"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982482725,
+name: "카페오우",
+displayName: "",
+px: 126.7163893,
+py: 37.5029327,
+type: "place",
+useTime: 1681897425000,
+lastUpdateTime: 1681897425000,
+creationTime: 1681897424000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1773992224",
+address: "인천광역시 부평구 부평동 64-20 부평대림아파트 상가 2층 209호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11237101",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "mPxFRzVMPXmxXo2mpKS5sA==",
+pan: "79.54",
+tilt: "10.00",
+lng: "126.7161750",
+lat: "37.5028930",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250216_269/17397052205141ENAU_JPEG/20230115_221707.jpg",
+"https://ldb-phinf.pstatic.net/20250216_251/1739705185440PTC3U_JPEG/1000036471.jpg",
+"https://ldb-phinf.pstatic.net/20221018_26/1666075807391Fy7ar_PNG/LOGO_OW_BL_2.PNG.png"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982480858,
+name: "호카스콘샵",
+displayName: "",
+px: 126.6933479,
+py: 37.4493362,
+type: "place",
+useTime: 1681897330000,
+lastUpdateTime: 1681897330000,
+creationTime: 1681897329000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1012293691",
+address: "인천광역시 남동구 구월동 1341-7 1층 호카스콘샵",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11200101",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ZHu5ZIyKluH7GlPKHxUzAQ==",
+pan: "37.06",
+tilt: "-3.75",
+lng: "126.6944603",
+lat: "37.4484107",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250602_299/1748859894266LTu6b_JPEG/IMG_6614.jpeg",
+"https://ldb-phinf.pstatic.net/20250520_3/1747720927023kEAAL_JPEG/IMG_6510.jpeg",
+"https://ldb-phinf.pstatic.net/20250420_110/1745124795500UyFsI_JPEG/220DE626-3DD9-47CD-8B1C-18FDB0D338C1.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979126305,
+name: "카페 투영즈",
+displayName: "",
+px: 126.505731,
+py: 37.4775399,
+type: "place",
+useTime: 1681662009000,
+lastUpdateTime: 1681662009000,
+creationTime: 1681662009000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1937035725",
+address: "인천광역시 중구 운남동 1602-12 1층 104호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "11110146",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "usF6SwPQMtPB5DRcTx6EMw==",
+pan: "-92.12",
+tilt: "6.50",
+lng: "126.5060651",
+lat: "37.4775485",
+fov: "70"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210828_98/163008263435773MoG_JPEG/LGl5lQum7BZ9vhMoDWt2mU-Y.jpg",
+"https://ldb-phinf.pstatic.net/20210828_154/16300826467198VdaP_JPEG/F4vaTXGWyFRhbf874tSGPxaM.jpg",
+"https://ldb-phinf.pstatic.net/20210828_283/1630082670239u3vdd_JPEG/QS_DPJirwHbKluOLeu-vseNj.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+}
+],
+unavailableCount: 332,
+mismatchedCount: 28,
+removed: false
+}

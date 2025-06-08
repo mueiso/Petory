@@ -1,0 +1,706 @@
+[ {
+  "bookmarkId" : 1007251593,
+  "name" : "르당",
+  "displayName" : "",
+  "px" : 128.4184393,
+  "py" : 35.7730396,
+  "type" : "place",
+  "useTime" : 1683521005000,
+  "lastUpdateTime" : 1683521005000,
+  "creationTime" : 1683521004000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1677279405",
+  "address" : "대구광역시 달성군 논공읍 금포리 2113",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0671025322",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "WStCm7gBoseaBHZO5nYMAA==",
+      "pan" : "-34.15",
+      "tilt" : "10.00",
+      "lng" : "128.4185178",
+      "lat" : "35.7729238",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240506_215/1714998253523Dd4Bv_JPEG/IMG_5318.jpeg", "https://ldb-phinf.pstatic.net/20240506_254/1714998253395628py_JPEG/IMG_5155.jpeg", "https://ldb-phinf.pstatic.net/20240506_275/17149982533415kDLa_JPEG/IMG_5180.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988498006,
+  "name" : "엠티지",
+  "displayName" : "",
+  "px" : 128.5447006,
+  "py" : 35.8495032,
+  "type" : "place",
+  "useTime" : 1682314269000,
+  "lastUpdateTime" : 1682314269000,
+  "creationTime" : 1682314268000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1710507817",
+  "address" : "대구광역시 달서구 감삼동 195-23 1층 MTG",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06290113",
+  "cidPath" : [ "220036", "220052", "220576", "221212" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "1GBj1Nxtu8hulXKsZipDKw==",
+      "pan" : "-76.51",
+      "tilt" : "10.00",
+      "lng" : "128.5447996",
+      "lat" : "35.8494794",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20201226_127/16089747752061AA2M_JPEG/rHbHtGJ7OVoxW_0GK5ZV28pA.jpeg.jpg", "https://ldb-phinf.pstatic.net/20250218_50/1739875721752Cb8of_JPEG/1000019679.jpg", "https://ldb-phinf.pstatic.net/20250218_240/1739875724456Ngo83_JPEG/1000018899.jpg" ],
+    "category" : "카페"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988497213,
+  "name" : "일하",
+  "displayName" : "",
+  "px" : 128.5507819,
+  "py" : 35.8544037,
+  "type" : "place",
+  "useTime" : 1682314221000,
+  "lastUpdateTime" : 1682314221000,
+  "creationTime" : 1682314220000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1350916503",
+  "address" : "대구광역시 달서구 두류동 497-12",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06290102",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "QoeDm7HqjFI2wMjYGEwSSg==",
+      "pan" : "154.19",
+      "tilt" : "10.00",
+      "lng" : "128.5507454",
+      "lat" : "35.8544789",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211126_96/1637889314123UmkJG_JPEG/B5A54068-C408-4405-BC81-F4A0BD4809F1.jpeg", "https://ldb-phinf.pstatic.net/20211126_133/1637889576552HyELs_JPEG/8EE50131-0334-4A5C-A06B-D851D99B2E9E.jpeg", "https://ldb-phinf.pstatic.net/20250305_201/1741147925903Vnflp_JPEG/IMG_7506.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988496325,
+  "name" : "신당동 마약커피",
+  "displayName" : "",
+  "px" : 128.4948628,
+  "py" : 35.8531833,
+  "type" : "place",
+  "useTime" : 1682314166000,
+  "lastUpdateTime" : 1682314166000,
+  "creationTime" : 1682314166000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1488595131",
+  "address" : "대구광역시 달서구 신당동 1838-14 1층 카페",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06290107",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988430755,
+  "name" : "청솔로9 침산점",
+  "displayName" : "",
+  "px" : 128.5853319,
+  "py" : 35.884627,
+  "type" : "place",
+  "useTime" : 1682310183000,
+  "lastUpdateTime" : 1682310183000,
+  "creationTime" : 1682310182000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1487856464",
+  "address" : "대구광역시 북구 칠성동2가 89-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06230102",
+  "cidPath" : [ "220036", "220052", "1003737" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "VCRENkayl0DA04Fcrq/PyA==",
+      "pan" : "28.40",
+      "tilt" : "10.00",
+      "lng" : "128.5852401",
+      "lat" : "35.8844571",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211122_122/1637570706798boKbu_JPEG/Resized_1632386850934.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988427630,
+  "name" : "하프힐",
+  "displayName" : "",
+  "px" : 128.5706892,
+  "py" : 35.8629723,
+  "type" : "place",
+  "useTime" : 1682310002000,
+  "lastUpdateTime" : 1682310002000,
+  "creationTime" : 1682310002000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1486285390",
+  "address" : "대구광역시 서구 내당동 886-8",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06170101",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "fhtDZhNVXXFCxmTDvMUahw==",
+      "pan" : "-15.50",
+      "tilt" : "10.00",
+      "lng" : "128.5707104",
+      "lat" : "35.8628958",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250426_216/1745635533046mGfOv_JPEG/IMG_3116.jpeg", "https://ldb-phinf.pstatic.net/20250514_103/1747191286157GOYwm_JPEG/IMG_3665.jpeg", "https://ldb-phinf.pstatic.net/20250426_36/1745635532671JwRNX_JPEG/IMG_3122.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988426178,
+  "name" : "가가라커피",
+  "displayName" : "",
+  "px" : 128.6438911,
+  "py" : 35.8667838,
+  "type" : "place",
+  "useTime" : 1682309918000,
+  "lastUpdateTime" : 1682309918000,
+  "creationTime" : 1682309917000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1740237558",
+  "address" : "대구광역시 수성구 만촌동 667-16 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06260102",
+  "cidPath" : [ "220036", "220052", "220576", "221212" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988415741,
+  "name" : "까사넬로",
+  "displayName" : "",
+  "px" : 128.5970617,
+  "py" : 35.872306,
+  "type" : "place",
+  "useTime" : 1682309348000,
+  "lastUpdateTime" : 1682309348000,
+  "creationTime" : 1682309348000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1505691820",
+  "address" : "대구광역시 중구 동문동 19-3",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110120",
+  "cidPath" : [ "220036", "220052", "220564", "221161" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "7deq4m+QrCPeUp052qyxPg==",
+      "pan" : "90.57",
+      "tilt" : "10.00",
+      "lng" : "128.5969640",
+      "lat" : "35.8723069",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230714_182/1689314997886tX0d7_JPEG/KakaoTalk_20230714_150918319_02.jpg", "https://ldb-phinf.pstatic.net/20230714_266/1689314998088Vrh9U_JPEG/KakaoTalk_20230714_150918319.jpg", "https://ldb-phinf.pstatic.net/20230714_137/1689314997808B1bN9_JPEG/KakaoTalk_20230714_150918319_01.jpg" ],
+    "category" : "베이커리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988407242,
+  "name" : "엘티알커피",
+  "displayName" : "",
+  "px" : 128.5925635,
+  "py" : 35.8679693,
+  "type" : "place",
+  "useTime" : 1682308870000,
+  "lastUpdateTime" : 1682308870000,
+  "creationTime" : 1682308870000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1770497336",
+  "address" : "대구광역시 중구 종로2가 84-2 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110114",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984092030,
+  "name" : "파스쿠찌 태평메가타워점",
+  "displayName" : "",
+  "px" : 128.590328,
+  "py" : 35.875758,
+  "type" : "place",
+  "useTime" : 1682005414000,
+  "lastUpdateTime" : 1682005414000,
+  "creationTime" : 1682005414000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1047190119",
+  "address" : "대구광역시 중구 태평로3가 219-1 메가타워 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110131",
+  "cidPath" : [ "220036", "220052", "220576", "221342" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "kqZGVUjP9yIQMnJjPL5ZOw==",
+      "pan" : "110.67",
+      "tilt" : "12.06",
+      "lng" : "128.5902372",
+      "lat" : "35.8759073",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20191226_224/1577336988148EUkAu_JPEG/5R7QGrIA1HggY0BluacIo6M1.jpg", "https://ldb-phinf.pstatic.net/20191226_90/1577336988180IbJXX_JPEG/a1hpLyj6AkkpztYH0KozcLtC.jpg", "https://ldb-phinf.pstatic.net/20191226_12/1577336856690s7Bfp_JPEG/MIvGjqppQdnXdVqREcYzuz9b.jpg" ],
+    "category" : "카페"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984091431,
+  "name" : "스테드",
+  "displayName" : "",
+  "px" : 128.5928279,
+  "py" : 35.868426,
+  "type" : "place",
+  "useTime" : 1682005388000,
+  "lastUpdateTime" : 1682005388000,
+  "creationTime" : 1682005387000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1155458571",
+  "address" : "대구광역시 중구 종로2가 59-3 sted",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110114",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "htlkEqtKY6CZLyLWu4hU/A==",
+      "pan" : "12.73",
+      "tilt" : "8.69",
+      "lng" : "128.5928221",
+      "lat" : "35.8682970",
+      "fov" : "50"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230620_122/1687270771859oCicm_JPEG/KakaoTalk_20220726_021048002_01.jpg", "https://ldb-phinf.pstatic.net/20230620_161/1687270772900TP2kG_JPEG/KakaoTalk_20230116_144916974_12.jpg", "https://ldb-phinf.pstatic.net/20250408_14/1744118783607rFbaD_JPEG/25%B3%E2%B8%CD%B0%ED%BE%B2.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984090981,
+  "name" : "소명커피바",
+  "displayName" : "",
+  "px" : 128.5949928,
+  "py" : 35.8627937,
+  "type" : "place",
+  "useTime" : 1682005368000,
+  "lastUpdateTime" : 1682005368000,
+  "creationTime" : 1682005368000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1571457326",
+  "address" : "대구광역시 중구 남산동 916-5 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110156",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "RMYq09zII8qA/Rtz8flGdg==",
+      "pan" : "-149.44",
+      "tilt" : "10.00",
+      "lng" : "128.5950374",
+      "lat" : "35.8628690",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210527_173/1622045276493DfUJk_JPEG/_Q0H_2Ly2_k9vDUB5igKck1J.jpg", "https://ldb-phinf.pstatic.net/20210527_264/16220452766559WAgw_JPEG/NQCdEyfyPvEZVaviWbVPe1E8.jpg", "https://ldb-phinf.pstatic.net/20211004_284/1633277845641svIsR_JPEG/bcVAElIcqdD4HGm8TLHasKj5.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984090523,
+  "name" : "플러피",
+  "displayName" : "",
+  "px" : 128.5953055,
+  "py" : 35.861719,
+  "type" : "place",
+  "useTime" : 1682005349000,
+  "lastUpdateTime" : 1682005349000,
+  "creationTime" : 1682005349000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1097643431",
+  "address" : "대구광역시 중구 남산동 677-41 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110156",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984090034,
+  "name" : "헤이버터",
+  "displayName" : "",
+  "px" : 128.5917142,
+  "py" : 35.8600931,
+  "type" : "place",
+  "useTime" : 1682005329000,
+  "lastUpdateTime" : 1682005329000,
+  "creationTime" : 1682005328000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1591784989",
+  "address" : "대구광역시 중구 남산동 700-15 헤이버터",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110156",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "GbpW9SXaqkScrrd6yHYN8w==",
+      "pan" : "96.64",
+      "tilt" : "6.38",
+      "lng" : "128.5916454",
+      "lat" : "35.8600515",
+      "fov" : "72"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20191222_262/1576989410846rBNSM_JPEG/XhXs6SsKVMCmLyBmixzjvgVV.jpeg.jpg" ],
+    "category" : "케이크전문"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984089597,
+  "name" : "블루샥 대구 동성로점",
+  "displayName" : "",
+  "px" : 128.5935502,
+  "py" : 35.8699831,
+  "type" : "place",
+  "useTime" : 1682005310000,
+  "lastUpdateTime" : 1682005310000,
+  "creationTime" : 1682005309000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1409095700",
+  "address" : "대구광역시 중구 남일동 59-3 1층 블루샥",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110117",
+  "cidPath" : [ "220036", "220052", "1004586" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "XwRz5gH0/vLy9uDN/poypA==",
+      "pan" : "-76.46",
+      "tilt" : "9.81",
+      "lng" : "128.5937607",
+      "lat" : "35.8699750",
+      "fov" : "72"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210528_39/1622168307965q6YG6_JPEG/44VBbnIwkPlEUDX7tFPAT9QU.jpg", "https://ldb-phinf.pstatic.net/20210605_261/1622903084422Kt41u_JPEG/Vo6fRP7GerUZlsxhM8Ry3X3V.jpg", "https://ldb-phinf.pstatic.net/20210605_248/1622903088377VDS2t_JPEG/l6o1_SL83ZTM6p4voIAYltuY.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984089144,
+  "name" : "아나바커피",
+  "displayName" : "",
+  "px" : 128.5938418,
+  "py" : 35.8645393,
+  "type" : "place",
+  "useTime" : 1682005290000,
+  "lastUpdateTime" : 1682005290000,
+  "creationTime" : 1682005290000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1872389573",
+  "address" : "대구광역시 중구 남산동 921-6 1호(남산동)",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110156",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984088711,
+  "name" : "오피스커피",
+  "displayName" : "",
+  "px" : 128.5920916,
+  "py" : 35.8666121,
+  "type" : "place",
+  "useTime" : 1682005272000,
+  "lastUpdateTime" : 1682005272000,
+  "creationTime" : 1682005272000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1486422865",
+  "address" : "대구광역시 중구 계산동2가 264-3",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110139",
+  "cidPath" : [ "220036", "220052", "220577", "221358" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "+8cinE9eoKcID6S0wiod+Q==",
+      "pan" : "-84.73",
+      "tilt" : "4.13",
+      "lng" : "128.5923192",
+      "lat" : "35.8665412",
+      "fov" : "57"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210314_49/1615687292685iE6nq_JPEG/jb8NkCAgzEyOY3UAed-enHN5.jpeg.jpg", "https://ldb-phinf.pstatic.net/20220519_113/1652951814760yYKUb_JPEG/KakaoTalk_20220512_143519426.jpg", "https://ldb-phinf.pstatic.net/20220519_23/1652951843821ovjSo_JPEG/KakaoTalk_20220512_143519426_01.jpg" ],
+    "category" : "테이크아웃커피"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984088223,
+  "name" : "이씨씨커피",
+  "displayName" : "",
+  "px" : 128.5910394,
+  "py" : 35.8721597,
+  "type" : "place",
+  "useTime" : 1682005252000,
+  "lastUpdateTime" : 1682005252000,
+  "creationTime" : 1682005251000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1387663727",
+  "address" : "대구광역시 중구 대안동 77-4",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110147",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "3cs4BJCwEji6QxNQoe9aag==",
+      "pan" : "83.39",
+      "tilt" : "-2.13",
+      "lng" : "128.5909180",
+      "lat" : "35.8722839",
+      "fov" : "100"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210629_213/1624923691518EPzwR_JPEG/Ejc9bumUF_H_jj1ZUUgzr41a.jpeg.jpg", "https://ldb-phinf.pstatic.net/20210629_172/1624923700735av9O6_JPEG/480aAzdSz24cC-DfoRPmxg5D.jpeg.jpg", "https://ldb-phinf.pstatic.net/20210629_295/1624923705130E4Eg0_JPEG/Ux-06C7LGFyxA_V9Vpv51y1t.jpeg.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984087811,
+  "name" : "드리퍼베이커",
+  "displayName" : "",
+  "px" : 128.590931,
+  "py" : 35.8709549,
+  "type" : "place",
+  "useTime" : 1682005234000,
+  "lastUpdateTime" : 1682005234000,
+  "creationTime" : 1682005234000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1390393425",
+  "address" : "대구광역시 중구 종로1가 28-1 1층 드리퍼베이커",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110113",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "f4bFpk1kMJxdFuhDtB5Iww==",
+      "pan" : "-95.30",
+      "tilt" : "10.00",
+      "lng" : "128.5910268",
+      "lat" : "35.8709637",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241129_32/1732846273552mWExs_JPEG/KakaoTalk_20241105_192009877.jpg", "https://ldb-phinf.pstatic.net/20241025_267/1729854048734CQpCx_JPEG/IMG_7093.jpeg", "https://ldb-phinf.pstatic.net/20250501_63/1746069964821gmbBx_JPEG/%BF%C0%C6%AE%B9%D04.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984087377,
+  "name" : "핸썸커피 남산점",
+  "displayName" : "",
+  "px" : 128.5843287,
+  "py" : 35.8639211,
+  "type" : "place",
+  "useTime" : 1682005217000,
+  "lastUpdateTime" : 1682005217000,
+  "creationTime" : 1682005216000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1949050223",
+  "address" : "대구광역시 중구 남산동 130-2 상가동 1동 106호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "06110156",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "pVA8HMtssHwqQsuW5tMDYw==",
+      "pan" : "173.39",
+      "tilt" : "3.88",
+      "lng" : "128.5843469",
+      "lat" : "35.8641152",
+      "fov" : "67"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211227_155/1640540619533UoYpM_JPEG/BF9FF92E-C10A-469C-9ADE-E873C5B2119F.jpeg", "https://ldb-phinf.pstatic.net/20220118_43/1642504534787nCLad_JPEG/5F2C6803-1ABD-4598-BE07-2ADA56C2D6A4.jpeg", "https://ldb-phinf.pstatic.net/20220118_61/1642504534606ElpDh_JPEG/81E63FCC-5090-4902-9F1C-FE31EE3E5703.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+} ]

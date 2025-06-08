@@ -1,0 +1,717 @@
+[ {
+  "bookmarkId" : 988531343,
+  "name" : "하말",
+  "displayName" : "",
+  "px" : 128.7891551,
+  "py" : 35.9667361,
+  "type" : "place",
+  "useTime" : 1682316230000,
+  "lastUpdateTime" : 1682316230000,
+  "creationTime" : 1682316229000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1490631644",
+  "address" : "경상북도 경산시 와촌면 대한리 99-1 카페 하말",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0429031031",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "smobgy7PmAcK3gm7MQIxjA==",
+      "pan" : "-68.53",
+      "tilt" : "2.31",
+      "lng" : "128.7893475",
+      "lat" : "35.9666063",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231122_151/1700630874097xKxBz_JPEG/B5D82068-B70F-4B90-9CE3-A2AB34BFFFF8.jpeg", "https://ldb-phinf.pstatic.net/20250329_269/1743224974832xgXBi_JPEG/KakaoTalk_20250329_140903294.jpg", "https://ldb-phinf.pstatic.net/20250329_236/17432364616097q64q_JPEG/HHHHHHHHHHHHHH.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988528593,
+  "name" : "카페 메이플",
+  "displayName" : "",
+  "px" : 129.3296018,
+  "py" : 35.7847036,
+  "type" : "place",
+  "useTime" : 1682316062000,
+  "lastUpdateTime" : 1682316062000,
+  "creationTime" : 1682316061000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1808775640",
+  "address" : "경상북도 경주시 진현동 611-110 카페 메이플",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04130134",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "jpqgzdIJMe511d70U0o/Wg==",
+      "pan" : "-72.66",
+      "tilt" : "-3.19",
+      "lng" : "129.3297122",
+      "lat" : "35.7847207",
+      "fov" : "73"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230330_130/1680180773810ExGRp_JPEG/9BFFC1B8-9F3A-47B4-924E-DD99C7D84204.jpeg", "https://ldb-phinf.pstatic.net/20230330_162/1680180498335SHueY_JPEG/A70DB99D-6931-4D03-B4F9-7B2ADA25BC4B.jpeg", "https://ldb-phinf.pstatic.net/20250530_113/17485776217763rCK3_JPEG/14E9D1EF-2989-4A21-AF2C-65F1B9FFE386.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988525633,
+  "name" : "이소",
+  "displayName" : "",
+  "px" : 128.2645085,
+  "py" : 35.7264835,
+  "type" : "place",
+  "useTime" : 1682315877000,
+  "lastUpdateTime" : 1682315877000,
+  "creationTime" : 1682315877000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1000543127",
+  "address" : "경상북도 고령군 대가야읍 지산리 201-5",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0483025326",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "r3xVDC5Gv3k4nwZhIxP2Hw==",
+      "pan" : "98.42",
+      "tilt" : "4.94",
+      "lng" : "128.2643820",
+      "lat" : "35.7265540",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220207_260/1644192202868NwnVa_JPEG/0E0A1D92-D61C-4F06-8E74-1FF291CADE71.jpeg", "https://ldb-phinf.pstatic.net/20220207_247/16441921920366GPKb_JPEG/3D1E7A7A-1489-45B7-B6B9-6A7C0C8691F3.jpeg", "https://ldb-phinf.pstatic.net/20220207_196/1644192192126Md0QH_JPEG/C214A073-83E5-489A-B1FA-1E21ABF799B7.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988525436,
+  "name" : "비타스티마",
+  "displayName" : "",
+  "px" : 128.3104437,
+  "py" : 35.7880796,
+  "type" : "place",
+  "useTime" : 1682315865000,
+  "lastUpdateTime" : 1682315865000,
+  "creationTime" : 1682315865000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1050962986",
+  "address" : "경상북도 고령군 운수면 신간리 951",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0483032032",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "fcvTwui1/ET0N/P8l/7fgQ==",
+      "pan" : "-61.99",
+      "tilt" : "10.00",
+      "lng" : "128.3106005",
+      "lat" : "35.7879961",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210715_251/1626285334179fyHaz_JPEG/xEeN6PhFrSvir9NE3dznkswj.jpg", "https://ldb-phinf.pstatic.net/20210715_146/1626285334208AG0Iw_JPEG/8SYUAlsN1c1TfIPhTg72inC2.jpg", "https://ldb-phinf.pstatic.net/20200721_39/1595327743025Pv7Nr_JPEG/5A98e2qVcMLn4s7vjAucJFsc.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988524707,
+  "name" : "언더바",
+  "displayName" : "",
+  "px" : 128.3285082,
+  "py" : 36.1245711,
+  "type" : "place",
+  "useTime" : 1682315825000,
+  "lastUpdateTime" : 1682315825000,
+  "creationTime" : 1682315825000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1169037349",
+  "address" : "경상북도 구미시 원평동 408-51 1층 언더바",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04190101",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988524181,
+  "name" : "올라이드",
+  "displayName" : "",
+  "px" : 128.3300449,
+  "py" : 36.3007998,
+  "type" : "place",
+  "useTime" : 1682315795000,
+  "lastUpdateTime" : 1682315795000,
+  "creationTime" : 1682315794000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1780585598",
+  "address" : "경상북도 구미시 도개면 궁기리 751-2 (2층)",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0419033025",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988522132,
+  "name" : "차원커피",
+  "displayName" : "",
+  "px" : 128.3358107,
+  "py" : 36.1072289,
+  "type" : "place",
+  "useTime" : 1682315680000,
+  "lastUpdateTime" : 1682315680000,
+  "creationTime" : 1682315679000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1240827948",
+  "address" : "경상북도 구미시 형곡동 278-4 1층 차원커피",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04190109",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "c12VTiaX5fOmC8zXE4bEEA==",
+      "pan" : "-93.79",
+      "tilt" : "10.00",
+      "lng" : "128.3360444",
+      "lat" : "36.1072442",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230831_37/1693469508084In79z_JPEG/73BC05FB-585F-4F04-B504-F9A206B5591E.jpeg", "https://ldb-phinf.pstatic.net/20250527_41/1748341914129cvBG2_JPEG/IMG_5602.jpeg", "https://ldb-phinf.pstatic.net/20250527_279/1748341913293qnYfK_JPEG/IMG_5514.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988521803,
+  "name" : "동네커피1988",
+  "displayName" : "",
+  "px" : 128.4110192,
+  "py" : 36.1475926,
+  "type" : "place",
+  "useTime" : 1682315661000,
+  "lastUpdateTime" : 1682315661000,
+  "creationTime" : 1682315660000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1968595308",
+  "address" : "경상북도 구미시 옥계동 540 대백상가 109호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04190128",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "MPiokLFrL0X7Lq4ZWaZLjQ==",
+      "pan" : "-105.17",
+      "tilt" : "2.50",
+      "lng" : "128.4112892",
+      "lat" : "36.1476835",
+      "fov" : "40"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210524_1/1621820949090XTDQC_JPEG/Dunl6vIMBSY9gnxBSHkic632.jpeg.jpg", "https://ldb-phinf.pstatic.net/20200904_66/1599225141358QkEoi_JPEG/eHs2vxGwSG2LZRX1GUb-hN7a.jpeg.jpg", "https://ldb-phinf.pstatic.net/20201020_8/1603187944095fcDUm_JPEG/ap_8jo79ah10hQUtVNNeMzMs.jpeg.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988520546,
+  "name" : "제이힐링카페",
+  "displayName" : "",
+  "px" : 128.6389159,
+  "py" : 36.0351955,
+  "type" : "place",
+  "useTime" : 1682315587000,
+  "lastUpdateTime" : 1682315587000,
+  "creationTime" : 1682315586000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1159361366",
+  "address" : "경상북도 군위군 부계면 남산리 739",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0472033034",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "2bO7gxGGtSXA25bq9BEseA==",
+      "pan" : "-120.01",
+      "tilt" : "10.00",
+      "lng" : "128.6394249",
+      "lat" : "36.0353275",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210709_5/1625796575013UXxoc_JPEG/Wb_9uRnHChPLvMtDcFl1c9SO.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988519801,
+  "name" : "읍천리382 김천신음점",
+  "displayName" : "",
+  "px" : 128.1154778,
+  "py" : 36.1329349,
+  "type" : "place",
+  "useTime" : 1682315543000,
+  "lastUpdateTime" : 1682315543000,
+  "creationTime" : 1682315543000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1809965114",
+  "address" : "경상북도 김천시 신음동 1037-18",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04150108",
+  "cidPath" : [ "220036", "220052", "220576", "1005376" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "7H4BOEmgmHCWEW0i2D38Dg==",
+      "pan" : "-94.19",
+      "tilt" : "10.00",
+      "lng" : "128.1155897",
+      "lat" : "36.1329430",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241007_76/1728299410234QXRxI_JPEG/1.jpg", "https://ldb-phinf.pstatic.net/20241007_299/17282994102551vFrc_JPEG/2.jpg", "https://ldb-phinf.pstatic.net/20241007_113/1728299410245YgKcq_JPEG/3.jpg" ],
+    "category" : "카페"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988519128,
+  "name" : "오름",
+  "displayName" : "",
+  "px" : 128.1948767,
+  "py" : 36.1209519,
+  "type" : "place",
+  "useTime" : 1682315507000,
+  "lastUpdateTime" : 1682315507000,
+  "creationTime" : 1682315507000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1978453068",
+  "address" : "경상북도 김천시 율곡동 756 101호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04150120",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "PwaK5/v5S5waMbD/f7a8dw==",
+      "pan" : "69.70",
+      "tilt" : "10.00",
+      "lng" : "128.1947464",
+      "lat" : "36.1209036",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241118_122/1731912614148DbSnw_JPEG/IMG_0007.jpeg", "https://ldb-phinf.pstatic.net/20241118_193/1731912614610ErXoq_JPEG/IMG_9448.jpeg", "https://ldb-phinf.pstatic.net/20241118_31/1731912615154csTA2_PNG/IMG_9441.png" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988518635,
+  "name" : "자연속으로카페",
+  "displayName" : "",
+  "px" : 128.0484182,
+  "py" : 35.9909506,
+  "type" : "place",
+  "useTime" : 1682315478000,
+  "lastUpdateTime" : 1682315478000,
+  "creationTime" : 1682315478000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1136813637",
+  "address" : "경상북도 김천시 지례면 교리 46 2층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0415042021",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "qiIMOLLmlcCqQbdQRXlgnw==",
+      "pan" : "-5.33",
+      "tilt" : "10.00",
+      "lng" : "128.0484175",
+      "lat" : "35.9902575",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250308_39/1741360759049szvOG_JPEG/1000008117.jpg", "https://ldb-phinf.pstatic.net/20250517_191/1747432313063w0Hmn_JPEG/1747432294413.jpg", "https://ldb-phinf.pstatic.net/20250517_293/17474322906817RsR6_JPEG/1747432257911.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988516914,
+  "name" : "Cafe B2iN",
+  "displayName" : "",
+  "px" : 128.0803604,
+  "py" : 35.9184652,
+  "type" : "place",
+  "useTime" : 1682315373000,
+  "lastUpdateTime" : 1682315373000,
+  "creationTime" : 1682315372000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1017848060",
+  "address" : "경상북도 성주군 금수면 영천리 374",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0484035034",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "DL6Q5k1m6CnUZCNhlzB3PA==",
+      "pan" : "175.93",
+      "tilt" : "10.00",
+      "lng" : "128.0803350",
+      "lat" : "35.9188143",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200420_44/1587369648533wtSYz_JPEG/JWa2asFYq7sujh2SKOkbb2T1.jpeg.jpg", "https://ldb-phinf.pstatic.net/20200418_7/1587189518509UXkLr_JPEG/oimKvmpWMe9evha2HSp5Y8Om.JPG.jpg", "https://ldb-phinf.pstatic.net/20200418_19/1587189229634w1kSE_JPEG/Fbrashqo_Hzn6k0azYWfg8_Y.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988516268,
+  "name" : "테이크아웃커피",
+  "displayName" : "",
+  "px" : 128.7546344,
+  "py" : 36.5568571,
+  "type" : "place",
+  "useTime" : 1682315335000,
+  "lastUpdateTime" : 1682315335000,
+  "creationTime" : 1682315335000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1024083181",
+  "address" : "경상북도 안동시 용상동 1179-70 테이크아웃커피",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04170110",
+  "cidPath" : [ "220036", "220052", "220577", "221358" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "BwpL5HFTnOo79ieEcG7KUQ==",
+      "pan" : "-130.47",
+      "tilt" : "10.56",
+      "lng" : "128.7547655",
+      "lat" : "36.5569992",
+      "fov" : "52"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210928_42/1632791741785QnRKN_JPEG/Dn5IR42-wVSR0JvI75uoPsUM.jpg", "https://ldb-phinf.pstatic.net/20211001_162/1633099924420MOPaI_JPEG/6JYTL5MB-3gCZruD0_-Plf7W.jpg" ],
+    "category" : "테이크아웃커피"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988506946,
+  "name" : "플러피",
+  "displayName" : "",
+  "px" : 129.3856568,
+  "py" : 36.0833409,
+  "type" : "place",
+  "useTime" : 1682314798000,
+  "lastUpdateTime" : 1682314798000,
+  "creationTime" : 1682314798000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1470400089",
+  "address" : "경상북도 포항시 북구 장성동 1377-7 1층 fluffy",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04113121",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988506581,
+  "name" : "웜포레스트",
+  "displayName" : "",
+  "px" : 129.3851919,
+  "py" : 36.0850114,
+  "type" : "place",
+  "useTime" : 1682314777000,
+  "lastUpdateTime" : 1682314777000,
+  "creationTime" : 1682314776000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1067462336",
+  "address" : "경상북도 포항시 북구 장성동 1509-16 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04113121",
+  "cidPath" : [ "220036", "220052", "220564", "221161" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Qbv/6MfQhn3FOgRLTx2GIA==",
+      "pan" : "20.31",
+      "tilt" : "10.00",
+      "lng" : "129.3851569",
+      "lat" : "36.0849168",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240811_132/1723386560090S7yOS_JPEG/1000007519.jpg", "https://ldb-phinf.pstatic.net/20240326_22/1711448053579laIWK_JPEG/1000006988.jpg", "https://ldb-phinf.pstatic.net/20240326_80/1711448068198wEXMx_JPEG/1000006987.jpg" ],
+    "category" : "베이커리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988503809,
+  "name" : "버터미업",
+  "displayName" : "",
+  "px" : 129.3897033,
+  "py" : 36.0892659,
+  "type" : "place",
+  "useTime" : 1682314611000,
+  "lastUpdateTime" : 1682314611000,
+  "creationTime" : 1682314611000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1469933019",
+  "address" : "경상북도 포항시 북구 양덕동 677-5 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "04113122",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "4aFa+R1rCWB6m+w01Ka/Bg==",
+      "pan" : "-172.49",
+      "tilt" : "10.00",
+      "lng" : "129.3897199",
+      "lat" : "36.0893897",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241101_137/1730442012227baCDM_JPEG/IMG_0205.jpeg", "https://ldb-phinf.pstatic.net/20240705_167/1720113431726ogOvL_JPEG/766AB400-0C34-445C-A038-666D7814E8B6.jpeg", "https://ldb-phinf.pstatic.net/20241101_300/1730442012387RXD4e_JPEG/IMG_0532.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 988502742,
+  "name" : "서른날",
+  "displayName" : "",
+  "px" : 129.3307195,
+  "py" : 36.0795144,
+  "type" : "place",
+  "useTime" : 1682314545000,
+  "lastUpdateTime" : 1682314545000,
+  "creationTime" : 1682314545000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1567050949",
+  "address" : "경상북도 포항시 북구 흥해읍 학천리 427 1층 101호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0411325047",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "bWh8RF6UrCyJCNQjBJav/Q==",
+      "pan" : "75.60",
+      "tilt" : "20.19",
+      "lng" : "129.3306983",
+      "lat" : "36.0794800",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231206_35/1701861978716V8C6l_JPEG/scaled_IMG_20231129_120539_378.jpg", "https://ldb-phinf.pstatic.net/20231206_94/1701861996039vY09w_JPEG/scaled_IMG_20231204_210048_269.jpg", "https://ldb-phinf.pstatic.net/20231206_55/1701862024187vf6FD_JPEG/scaled_IMG_20231124_105019_541.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984725888,
+  "name" : "카페 호두까기",
+  "displayName" : "",
+  "px" : 129.3981316,
+  "py" : 36.1634468,
+  "type" : "place",
+  "useTime" : 1682057547000,
+  "lastUpdateTime" : 1682057547000,
+  "creationTime" : 1682057547000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "37883100",
+  "address" : "경상북도 포항시 북구 흥해읍 오도리 86",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0411325045",
+  "cidPath" : [ "220036", "220052", "220577", "221358" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "wOhnK4PzjBth3IT1PgnH2Q==",
+      "pan" : "103.70",
+      "tilt" : "10.00",
+      "lng" : "129.3978545",
+      "lat" : "36.1635141",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ ],
+    "category" : "테이크아웃커피"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984725531,
+  "name" : "오디오카페",
+  "displayName" : "",
+  "px" : 129.3982065,
+  "py" : 36.1634392,
+  "type" : "place",
+  "useTime" : 1682057528000,
+  "lastUpdateTime" : 1682057528000,
+  "creationTime" : 1682057527000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1802398483",
+  "address" : "경상북도 포항시 북구 흥해읍 오도리 86 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "0411325045",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+} ]

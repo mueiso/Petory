@@ -1,0 +1,932 @@
+{
+folder: {
+folderId: 82085084,
+name: "갈수있어 강아지도, 충남/대전 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "2",
+iconId: "1",
+markerColor: "2",
+lastUseTime: 1684742062000,
+creationTime: 1680844512000,
+shouldOverlay: true,
+bookmarkCount: 957,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa69a1438fc3a9cfafe95",
+reviewPageUrl: "https://m.place.naver.com/my/642fa69a1438fc3a9cfafe95/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_247/168084443322917k2u_PNG/image.png?type=f102_102",
+nick: "N강아지도 밀크"
+},
+shareId: "9d5fc32369094e07abba90c8e34279fe",
+encryptedUserIdNo: "0YUDvOSiGtOtWnS5:AVH5G6aYMGxEG4V_B1wSc4PFTb_uPQ",
+followCount: 745,
+viewCount: 2617,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1008679996,
+name: "뚝이마켓 아이스크림할인점 2단지",
+displayName: "",
+px: 127.3291502,
+py: 36.3343278,
+type: "place",
+useTime: 1683615375000,
+lastUpdateTime: 1683615375000,
+creationTime: 1683615374000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1673782843",
+address: "대전광역시 유성구 상대동 570-92 2-7",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200115",
+cidPath: [
+"220036",
+"220052",
+"220578",
+"221361"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "nAdJd1qfLNKpsrOF+djnSA==",
+pan: "170.36",
+tilt: "6.50",
+lng: "127.3300580",
+lat: "36.3360905",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250416_256/1744766391145PBttI_JPEG/IMG_2023.jpeg",
+"https://ldb-phinf.pstatic.net/20220806_199/1659789944630xBsWW_JPEG/7A038312-ADC9-4C2C-8080-6234AC1E2964.jpeg",
+"https://ldb-phinf.pstatic.net/20220806_228/1659789944996LyNAn_JPEG/36790621-782F-4DCA-9155-3185B5282AE6.jpeg"
+],
+category: "가공식품"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008679535,
+name: "그레이스538",
+displayName: "",
+px: 127.3392457,
+py: 36.3378183,
+type: "place",
+useTime: 1683615353000,
+lastUpdateTime: 1683615353000,
+creationTime: 1683615353000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "38331984",
+address: "대전광역시 유성구 원신흥동 538-2",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200114",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ptmF2YM4KbWYOifdzaPGJg==",
+pan: "-154.17",
+tilt: "10.00",
+lng: "127.3392898",
+lat: "36.3379091",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220406_108/1649211471719iHTPB_JPEG/83E9956D-377B-46A7-BBE4-DD2FD538B475.jpeg",
+"https://ldb-phinf.pstatic.net/20220406_84/1649211471748UTk3j_JPEG/30969E95-8035-4311-A1C9-BEBAB6DA7A45.jpeg",
+"https://ldb-phinf.pstatic.net/20220406_84/1649211471759NFsLT_JPEG/B7A372FD-18FB-4133-A7E7-EBE68AC9AFDA.jpeg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008679193,
+name: "쎄시마몽드",
+displayName: "",
+px: 127.3359477,
+py: 36.3562773,
+type: "place",
+useTime: 1683615337000,
+lastUpdateTime: 1683615337000,
+creationTime: 1683615337000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1275832104",
+address: "대전광역시 유성구 봉명동 561-2",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200111",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1008678954,
+name: "소겸들",
+displayName: "",
+px: 127.335123,
+py: 36.3572192,
+type: "place",
+useTime: 1683615327000,
+lastUpdateTime: 1683615327000,
+creationTime: 1683615327000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1585940352",
+address: "대전광역시 유성구 장대동 11-55 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200117",
+cidPath: [
+"220036",
+"220052",
+"220577",
+"221358"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "2b9nCi/Soy3JWZ6ZdDPg3Q==",
+pan: "119.80",
+tilt: "5.31",
+lng: "127.3351693",
+lat: "36.3573084",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250111_27/1736552325835lPGlx_JPEG/IMG_5601.jpeg",
+"https://ldb-phinf.pstatic.net/20241125_289/1732524301623nrlsv_JPEG/KakaoTalk_20241125_151902096_05.jpg",
+"https://ldb-phinf.pstatic.net/20220307_269/1646635871202wk6lx_JPEG/KakaoTalk_20220305_183211997_01.jpg"
+],
+category: "테이크아웃커피"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008678708,
+name: "LACO COFFEE",
+displayName: "",
+px: 127.3341196,
+py: 36.3599423,
+type: "place",
+useTime: 1683615316000,
+lastUpdateTime: 1683615316000,
+creationTime: 1683615315000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1094760525",
+address: "대전광역시 유성구 장대동 269-3",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200117",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "zYgR4xaqQ8ViWaa3NPi7jw==",
+pan: "-100.40",
+tilt: "-5.44",
+lng: "127.3343614",
+lat: "36.3599622",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20201030_12/1604042921861Rzh2F_JPEG/pyG3U962lus2zJYGXH2B4ZWJ.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20201030_45/16040429337400GfWB_JPEG/rV5qk5L4EuBmNVb2c4V3zV9u.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20201030_243/1604042933442MBgwo_JPEG/Pu19xHddr1RPuozP9AztYliU.jpeg.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008678456,
+name: "노이도밍고",
+displayName: "",
+px: 127.3163687,
+py: 36.3736566,
+type: "place",
+useTime: 1683615304000,
+lastUpdateTime: 1683615304000,
+creationTime: 1683615304000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1435578607",
+address: "대전광역시 유성구 지족동 892-14 1층 노이도밍고",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "+0bt6YlSIbR4GwPwrxHUxw==",
+pan: "-87.83",
+tilt: "10.19",
+lng: "127.3165218",
+lat: "36.3736300",
+fov: "62"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250117_104/1737113211272sKtJ9_JPEG/IMG_7033.jpeg",
+"https://ldb-phinf.pstatic.net/20250117_45/17371132113728SlgY_JPEG/IMG_7036.jpeg",
+"https://ldb-phinf.pstatic.net/20250117_1/17371132121293FYgi_JPEG/IMG_7029.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008678183,
+name: "파프 더 샌드위치",
+displayName: "",
+px: 127.3163952,
+py: 36.37445,
+type: "place",
+useTime: 1683615292000,
+lastUpdateTime: 1683615292000,
+creationTime: 1683615291000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1668433015",
+address: "대전광역시 유성구 지족동 885-8 FAFF",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1008677913,
+name: "르호봇",
+displayName: "",
+px: 127.3397671,
+py: 36.4135782,
+type: "place",
+useTime: 1683615278000,
+lastUpdateTime: 1683615278000,
+creationTime: 1683615278000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1012941277",
+address: "대전광역시 유성구 신봉동 239 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200135",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Rv6zZnf4EN1ONBCHNc5ROg==",
+pan: "93.57",
+tilt: "10.00",
+lng: "127.3391823",
+lat: "36.4136142",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230729_128/1690580595802zG5V8_JPEG/1E3A0BA9-9A71-486A-A0CD-AAE12AF5DC94.jpeg",
+"https://ldb-phinf.pstatic.net/20230729_231/16905805959667YVEy_JPEG/38B51329-E648-4EDC-AB6B-6BD42AAFBC99.jpeg",
+"https://ldb-phinf.pstatic.net/20230729_222/1690580595646bcong_JPEG/066B4E5A-AE7B-49E9-9F93-89CF3AAAD6B9.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008677693,
+name: "커피가가장맛있는57.8도",
+displayName: "",
+px: 127.3378469,
+py: 36.4081972,
+type: "place",
+useTime: 1683615267000,
+lastUpdateTime: 1683615267000,
+creationTime: 1683615267000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1123818960",
+address: "대전광역시 유성구 신봉동 154-1",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200135",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "LHD0Mcfg8/Ig7fdtX8S3ZA==",
+pan: "88.25",
+tilt: "10.00",
+lng: "127.3372285",
+lat: "36.4081778",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210402_113/16173507097585OuyD_JPEG/RMxXGh61jQGpN-4y5AgHhJ52.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210402_253/1617350689469A99TX_JPEG/IlRuWz1KIOtEvGcBLdnto_NE.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210402_273/1617350629712crSrm_JPEG/pXlM8sYB21ss7J2D8ds0hJ1T.jpeg.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008677447,
+name: "오브디저트",
+displayName: "",
+px: 127.4018869,
+py: 36.3967198,
+type: "place",
+useTime: 1683615255000,
+lastUpdateTime: 1683615255000,
+creationTime: 1683615255000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1099725461",
+address: "대전광역시 유성구 전민동 458-5 1층 2호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200141",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1008677064,
+name: "이소당 본점",
+displayName: "",
+px: 127.3380479,
+py: 36.3718785,
+type: "place",
+useTime: 1683615238000,
+lastUpdateTime: 1683615238000,
+creationTime: 1683615238000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1312871377",
+address: "대전광역시 유성구 죽동 714-2 1층 이소당",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200121",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "85O7Xrbkrx6ftdjntUjrHA==",
+pan: "-163.04",
+tilt: "-0.07",
+lng: "127.3381067",
+lat: "36.3719779",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240507_18/1715049244383uUQMi_JPEG/IMG_0424.jpeg",
+"https://ldb-phinf.pstatic.net/20240507_155/1715049244284cblVF_JPEG/IMG_0429.jpeg",
+"https://ldb-phinf.pstatic.net/20250309_7/1741493742527hpElh_JPEG/IMG_4366.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008676533,
+name: "아이앤알 커피 로스터스",
+displayName: "",
+px: 127.3163715,
+py: 36.387355,
+type: "place",
+useTime: 1683615214000,
+lastUpdateTime: 1683615214000,
+creationTime: 1683615214000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1450369833",
+address: "대전광역시 유성구 지족동 980-8 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "NGbfTdrwJG05nQXQCvV1+w==",
+pan: "-91.08",
+tilt: "10.00",
+lng: "127.3165162",
+lat: "36.3873576",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220626_37/16562304191460IUbI_JPEG/inr_logo_%C1%A6%B0%C5-01.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008676276,
+name: "카페길우 반석점",
+displayName: "",
+px: 127.3170054,
+py: 36.3877804,
+type: "place",
+useTime: 1683615201000,
+lastUpdateTime: 1683615201000,
+creationTime: 1683615201000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1921721133",
+address: "대전광역시 유성구 지족동 981-10 . 1층(지족동)",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "s2aMRpAeqoOFs8yjKbTNYA==",
+pan: "-9.29",
+tilt: "10.00",
+lng: "127.3392059",
+lat: "36.2955097",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240509_280/1715262922564HTAxD_JPEG/IMG_7332.jpeg",
+"https://ldb-phinf.pstatic.net/20240509_156/1715262923821AxUS5_JPEG/IMG_7333.jpeg",
+"https://ldb-phinf.pstatic.net/20240509_259/1715263377389gQ1xu_JPEG/IMG_7421.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008676039,
+name: "주헤히스",
+displayName: "",
+px: 127.3172952,
+py: 36.387515,
+type: "place",
+useTime: 1683615190000,
+lastUpdateTime: 1683615190000,
+creationTime: 1683615189000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1541618045",
+address: "대전광역시 유성구 지족동 983-8 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "IDaVuxRnUG+tLcGpZT5qxQ==",
+pan: "-64.01",
+tilt: "17.19",
+lng: "127.3173846",
+lat: "36.3874529",
+fov: "68"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240224_28/17087600244724yMia_JPEG/0BAA335E-7B3B-4B69-AB5C-9505F3F63F04.jpeg",
+"https://ldb-phinf.pstatic.net/20240224_173/1708760252695E6dxb_JPEG/DDB4972C-DF5B-4D31-8E47-169E18390740.jpeg",
+"https://ldb-phinf.pstatic.net/20240224_148/1708760189796JGUU1_JPEG/IMG_6367.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008675767,
+name: "요거투",
+displayName: "",
+px: 127.3184994,
+py: 36.3851446,
+type: "place",
+useTime: 1683615178000,
+lastUpdateTime: 1683615178000,
+creationTime: 1683615178000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1169066793",
+address: "대전광역시 유성구 지족동 835 102호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1008675485,
+name: "달봄커피",
+displayName: "",
+px: 127.3070673,
+py: 36.3877784,
+type: "place",
+useTime: 1683615166000,
+lastUpdateTime: 1683615166000,
+creationTime: 1683615166000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1754925319",
+address: "대전광역시 유성구 지족동 1096-10",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1008675215,
+name: "라피스커피",
+displayName: "",
+px: 127.3052472,
+py: 36.3868011,
+type: "place",
+useTime: 1683615154000,
+lastUpdateTime: 1683615154000,
+creationTime: 1683615154000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1067156432",
+address: "대전광역시 유성구 지족동 1020-4 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1008674937,
+name: "봄베이크",
+displayName: "",
+px: 127.3187228,
+py: 36.2983214,
+type: "place",
+useTime: 1683615141000,
+lastUpdateTime: 1683615141000,
+creationTime: 1683615141000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1349479489",
+address: "대전광역시 유성구 원내동 341-3 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200101",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "b88Av2bf3tai129A8C9zsA==",
+pan: "-178.35",
+tilt: "0.56",
+lng: "127.3187464",
+lat: "36.2984429",
+fov: "57"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240322_223/1711102062310iV7Bc_JPEG/KakaoTalk_20240322_190619593.jpg",
+"https://ldb-phinf.pstatic.net/20240322_193/1711100831265sjT8k_JPEG/KakaoTalk_20240322_184318319_02.jpg",
+"https://ldb-phinf.pstatic.net/20240322_61/1711100839141jrl9F_JPEG/KakaoTalk_20240312_162312522.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008674659,
+name: "텀브커피 대전관평점",
+displayName: "",
+px: 127.3894429,
+py: 36.4299315,
+type: "place",
+useTime: 1683615129000,
+lastUpdateTime: 1683615129000,
+creationTime: 1683615128000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "38325260",
+address: "대전광역시 유성구 관평동 1352 디티비안 W 101호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200146",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"230895"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "fSb//yI/cPyLcTHP9SbAfg==",
+pan: "-77.42",
+tilt: "10.00",
+lng: "127.3898892",
+lat: "36.4298316",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230607_204/16861190414801ukxl_JPEG/%B8%DE%B4%BA%B8%F0%C0%BD%C4%C6.jpg",
+"https://ldb-phinf.pstatic.net/20210526_238/162199663438745QUC_JPEG/Fuu_39F0fuLTtc3RsxWv83Hp.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210526_44/16219578742855JV3H_JPEG/y4ds4zacnTlt4pJi8m1D2KOQ.jpeg.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1008674361,
+name: "카페유앤",
+displayName: "",
+px: 127.3095179,
+py: 36.3344365,
+type: "place",
+useTime: 1683615115000,
+lastUpdateTime: 1683615115000,
+creationTime: 1683615115000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1232525660",
+address: "대전광역시 유성구 학하동 787 1층 109호(학하동, 학하리슈 빌포레) cu편의점라인",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "07200105",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "tdXfeKczs25Ej1ce+EAqaA==",
+pan: "-149.89",
+tilt: "10.00",
+lng: "127.3096490",
+lat: "36.3346619",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221107_8/1667790890120bMdHk_JPEG/CF98F5E7-DE84-409C-B603-20903EC621A4.jpeg",
+"https://ldb-phinf.pstatic.net/20221107_280/1667790833864m00js_JPEG/0E74FDC8-7453-49CA-B228-DB140E43DFD5.jpeg",
+"https://ldb-phinf.pstatic.net/20221107_1/1667790809745Eay2c_JPEG/C451D395-8FA6-4935-B072-A1D26EB7A734.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+}
+],
+unavailableCount: 319,
+mismatchedCount: 29,
+removed: false
+}

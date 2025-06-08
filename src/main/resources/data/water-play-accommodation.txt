@@ -1,0 +1,982 @@
+{
+folder: {
+folderId: 81077642,
+name: "갈수있어 강아지도, 전국 물놀이 숙소",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "11",
+lastUseTime: 1723170521000,
+creationTime: 1679187990000,
+shouldOverlay: true,
+bookmarkCount: 405,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "63fc7c6df0b992ad63529e03",
+reviewPageUrl: "https://m.place.naver.com/my/63fc7c6df0b992ad63529e03/review?v=2",
+imageUrl: "https://myplace-phinf.pstatic.net/20230310_143/16784360866515BQes_PNG/221226_%B3%D7%C0%CC%B9%F6%C1%F6%B5%B5_%C4%B7%C6%E4%C0%CE%BF%EB_%C7%C1%B7%CE%C7%CA%C0%CC%B9%CC%C1%F6-01.png?type=f220_220_70_sharpen",
+nick: "N지도슨트 먼지"
+},
+shareId: "7db0e0ef3297428f84610d786d60fc29",
+encryptedUserIdNo: "PJiJzXQTy18CqIKr:4M80FnQrxeK-q_APv3JsnENYmbakdA",
+followCount: 2204,
+viewCount: 24651,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007072708,
+name: "변산프로방스애견펜션",
+displayName: "",
+px: 126.4856139,
+py: 35.6005785,
+type: "place",
+useTime: 1683511232000,
+lastUpdateTime: 1683511232000,
+creationTime: 1683511232000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1701080687",
+address: "전라북도 부안군 변산면 도청리 536-1 변산프로방스",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "1380036021",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "J/rFSvR3odeVLLFDh8HVFA==",
+pan: "-101.73",
+tilt: "10.00",
+lng: "126.4857184",
+lat: "35.6006001",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250523_31/1747937649512hEAxL_JPEG/sdfsd.jpg",
+"https://ldb-phinf.pstatic.net/20250523_6/1747937844543KclQR_JPEG/A49A0142.jpg",
+"https://ldb-phinf.pstatic.net/20250523_16/17479377525026f9CU_JPEG/KakaoTalk_20230513_204002178_03.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1002021052,
+name: "쉬오트애견풀빌라",
+displayName: "",
+px: 129.3062386,
+py: 35.7901543,
+type: "place",
+useTime: 1683185093000,
+lastUpdateTime: 1683185093000,
+creationTime: 1683185092000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1933035860",
+address: "경상북도 경주시 구정동 18-5 쉬오트애견풀빌라",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "04130131",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "VawyQYUk1VZRb1PGINyMZg==",
+pan: "-113.98",
+tilt: "10.00",
+lng: "129.3066087",
+lat: "35.7903185",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230515_157/16841425096222Gkge_JPEG/01.jpg",
+"https://ldb-phinf.pstatic.net/20230515_176/16841425099581GYwI_JPEG/02.jpg",
+"https://ldb-phinf.pstatic.net/20230515_166/16841425093242QpkR_JPEG/03.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1001688726,
+name: "포천 캘리포처니아 펜션",
+displayName: "",
+px: 127.2795327,
+py: 37.9803994,
+type: "place",
+useTime: 1683167903000,
+lastUpdateTime: 1683167903000,
+creationTime: 1683167855000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1638050586",
+address: "경기도 포천시 영중면 금주리 66",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0265036022",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "TnLN1F0OxRlxLbVd5mlepQ==",
+pan: "44.53",
+tilt: "10.00",
+lng: "127.2794984",
+lat: "37.9803645",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220902_205/166209651084750xxk_JPEG/2.jpg",
+"https://ldb-phinf.pstatic.net/20241015_41/1729000108273JpPBW_JPEG/KakaoTalk_20230323_204622499.jpg",
+"https://ldb-phinf.pstatic.net/20220902_78/1662096510257sKyDQ_JPEG/5.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1001679183,
+name: "가평다온캠핑장",
+displayName: "",
+px: 127.3536065,
+py: 37.8463503,
+type: "place",
+useTime: 1683167384000,
+lastUpdateTime: 1683167384000,
+creationTime: 1683167384000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1979503648",
+address: "경기도 가평군 조종면 신상리 123-1",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0282034522",
+cidPath: [
+"221941",
+"221950"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "+cg9yrfnUlzwo0q2kck1Wg==",
+pan: "-18.69",
+tilt: "21.63",
+lng: "127.3539414",
+lat: "37.8461233",
+fov: "90"
+},
+thumbnailUrls: [
+"https://naverbooking-phinf.pstatic.net/20241202_130/1733110736181zRvhi_JPEG/DJI_0045.jpg",
+"https://ldb-phinf.pstatic.net/20250527_32/17483088502209XnvM_JPEG/%B3%D7%C0%CC%B9%F6%B4%DF%BA%BA%C0%BD%C5%C1.jpg",
+"https://naverbooking-phinf.pstatic.net/20250414_20/1744636989517rsKUA_JPEG/%BE%DF%BF%DC%BC%F6%BF%B5%C0%E5%BF%C0%C7%C2.jpg"
+],
+category: "캠핑,야영장"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1001671105,
+name: "가평 아이섬 풀 글램핑",
+displayName: "",
+px: 127.5127458,
+py: 37.8998714,
+type: "place",
+useTime: 1683167005000,
+lastUpdateTime: 1683167005000,
+creationTime: 1683167005000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1678220844",
+address: "경기도 가평군 북면 제령리 613-1",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0282035027",
+cidPath: [
+"221941",
+"221950"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "bndpA0FLrwuI0xGXS8zA5Q==",
+pan: "111.03",
+tilt: "10.00",
+lng: "127.5117152",
+lat: "37.9001959",
+fov: "120"
+},
+thumbnailUrls: [
+"https://naverbooking-phinf.pstatic.net/20231220_40/1703043944836cQ2ES_JPEG/2.jpg",
+"https://ldb-phinf.pstatic.net/20240107_208/1704613607449zgkJt_JPEG/DJI_0022.jpg",
+"https://ldb-phinf.pstatic.net/20240306_203/1709721339407P1xDn_JPEG/KakaoTalk_20240306_193518148.jpg"
+],
+category: "캠핑,야영장"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1001661663,
+name: "가평 516글램라반",
+displayName: "",
+px: 127.5361162,
+py: 37.7722779,
+type: "place",
+useTime: 1683166569000,
+lastUpdateTime: 1683166569000,
+creationTime: 1683166568000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1134194479",
+address: "경기도 가평군 가평읍 금대리 303-2",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0282025034",
+cidPath: [
+"221941",
+"221950"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "SYUB+hpgMIVYsPt6NuIRuw==",
+pan: "83.60",
+tilt: "10.00",
+lng: "127.5358524",
+lat: "37.7722481",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250226_69/1740548514021fa1YW_JPEG/2.jpg",
+"https://ldb-phinf.pstatic.net/20240723_146/1721716533710Eo9MG_JPEG/5.jpg",
+"https://ldb-phinf.pstatic.net/20240723_155/1721716533715crUH1_JPEG/1.jpg"
+],
+category: "캠핑,야영장"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1001660234,
+name: "드림키즈풀빌라sky",
+displayName: "",
+px: 126.6027145,
+py: 37.2228616,
+type: "place",
+useTime: 1683166505000,
+lastUpdateTime: 1683166505000,
+creationTime: 1683166504000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1166219051",
+address: "경기도 안산시 단원구 대부남동 3-479",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "02273112",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "x0jT6XYNWEtBP7Itmkt2mA==",
+pan: "-72.23",
+tilt: "3.56",
+lng: "126.6031830",
+lat: "37.2228020",
+fov: "70"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230411_209/1681217728675M87xV_JPEG/NST09681.jpg",
+"https://ldb-phinf.pstatic.net/20230411_124/1681217761491E3jbT_JPEG/NST09716.jpg",
+"https://ldb-phinf.pstatic.net/20230411_230/1681217776051XePMJ_JPEG/NSW04474.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999046462,
+name: "바다이야기 펜션",
+displayName: "",
+px: 126.3248058,
+py: 36.5934258,
+type: "place",
+useTime: 1682997709000,
+lastUpdateTime: 1682997709000,
+creationTime: 1682997708000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1429135263",
+address: "충청남도 태안군 안면읍 창기리 292-13 바다이야기 펜션",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "1582525323",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "xJCRjoaULr3+5Gv1vteWIw==",
+pan: "-179.56",
+tilt: "10.00",
+lng: "126.3248075",
+lat: "36.5936085",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231006_208/16965591702788Jn8R_JPEG/1696127318060.jpg",
+"https://ldb-phinf.pstatic.net/20231026_41/1698282859363YVR7f_JPEG/1696127318133.jpg",
+"https://ldb-phinf.pstatic.net/20231006_299/1696560701750ct8rb_JPEG/20230816_210005.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999045799,
+name: "꽃지사랑펜션",
+displayName: "",
+px: 126.3372129,
+py: 36.4911039,
+type: "place",
+useTime: 1682997678000,
+lastUpdateTime: 1682997678000,
+creationTime: 1682997678000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "13291945",
+address: "충청남도 태안군 안면읍 승언리 163",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "1582525321",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "hkCSp1U+AwwDuff7/Vk1SA==",
+pan: "-16.96",
+tilt: "10.00",
+lng: "126.3372523",
+lat: "36.4909751",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230311_134/1678508210770jQw4c_JPEG/IMG_4316.jpg",
+"https://naverbooking-phinf.pstatic.net/20230320_240/16793173566580j7zQ_JPEG/image.jpg",
+"https://naverbooking-phinf.pstatic.net/20230320_17/1679317431061NBtaG_JPEG/image.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999045406,
+name: "콩밭매는 댕댕이 펜션",
+displayName: "",
+px: 126.8335885,
+py: 36.4100958,
+type: "place",
+useTime: 1682997659000,
+lastUpdateTime: 1682997659000,
+creationTime: 1682997659000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "38281755",
+address: "충청남도 청양군 대치면 광금리 427-6 콩밭매는 댕댕이 펜션",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "1579032023",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "GtV42mNhC9Z+WPwNyvsBoQ==",
+pan: "106.02",
+tilt: "10.00",
+lng: "126.8332423",
+lat: "36.4101950",
+fov: "120"
+},
+thumbnailUrls: [
+"https://naverbooking-phinf.pstatic.net/20230513_41/1683982791313AhO90_JPEG/mv_11.jpg",
+"https://naverbooking-phinf.pstatic.net/20230513_42/1683982701194aTWaW_JPEG/KakaoTalk_20230406_114638215.jpg",
+"https://naverbooking-phinf.pstatic.net/20230513_174/1683982790754KQico_JPEG/mv_05.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999038077,
+name: "mong9mong9haus",
+displayName: "",
+px: 127.793396,
+py: 37.6924458,
+type: "place",
+useTime: 1682997313000,
+lastUpdateTime: 1682997313000,
+creationTime: 1682997313000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "11891008",
+address: "강원도 홍천군 북방면 장항리 98-4",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0172038033",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "KqHyU2yrJAkduzCampfFWA==",
+pan: "161.97",
+tilt: "10.00",
+lng: "127.7933616",
+lat: "37.6925510",
+fov: "120"
+},
+thumbnailUrls: [
+"https://naverbooking-phinf.pstatic.net/20241002_76/1727862312391UrKlJ_JPEG/s27.jpg",
+"https://ldb-phinf.pstatic.net/20241002_44/1727863923157CCrGB_JPEG/t7.jpg",
+"https://ldb-phinf.pstatic.net/20241002_126/17278639640471Xk0D_JPEG/t12.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999034427,
+name: "양양 게스트하우스",
+displayName: "",
+px: 128.6821098,
+py: 38.0565051,
+type: "place",
+useTime: 1682997147000,
+lastUpdateTime: 1682997147000,
+creationTime: 1682997146000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1332584226",
+address: "강원도 양양군 손양면 동호리 130",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0183032021",
+cidPath: [
+"221941",
+"221954"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "NodcvV3IpSuefqXMUp+bzw==",
+pan: "74.26",
+tilt: "10.00",
+lng: "128.6818327",
+lat: "38.0564268",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210726_220/1627272161359pny53_JPEG/guesthouse1.jpg",
+"https://ldb-phinf.pstatic.net/20210726_139/1627272161353jKNnH_JPEG/guesthouse2.jpg",
+"https://ldb-phinf.pstatic.net/20210710_68/1625907320120s1gFS_PNG/nbYcS1XNZlpXsz5jeNPWQgxs.png"
+],
+category: "게스트하우스"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999029910,
+name: "낙산톡게스트하우스",
+displayName: "",
+px: 128.6325291,
+py: 38.1178644,
+type: "place",
+useTime: 1682996942000,
+lastUpdateTime: 1682996942000,
+creationTime: 1682996942000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "36547743",
+address: "강원도 양양군 강현면 주청리 2-58",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0183035040",
+cidPath: [
+"221941",
+"221954"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 999028790,
+name: "게스트하우스웨이브",
+displayName: "",
+px: 128.5900118,
+py: 38.2122898,
+type: "place",
+useTime: 1682996893000,
+lastUpdateTime: 1682996893000,
+creationTime: 1682996893000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1107452857",
+address: "강원도 속초시 동명동 253-10",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "01210102",
+cidPath: [
+"221941",
+"221954"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "fRoYge0cn95RUuiVzgQcXg==",
+pan: "90.42",
+tilt: "10.00",
+lng: "128.5894694",
+lat: "38.2122933",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20180330_3/15223967596450OpSM_JPEG/BxVnhlBukqwMJsHu1_uCX68B.jpg",
+"https://ldb-phinf.pstatic.net/20180330_221/1522396787571ksX6q_JPEG/CCT5sLNGpgEFFea4FWXlwejz.jpg",
+"https://ldb-phinf.pstatic.net/20180330_153/1522396810295VKngD_JPEG/GNUYRvmdIzCUUhurstSmwoKb.jpg"
+],
+category: "게스트하우스"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999027264,
+name: "스타비치펜션",
+displayName: "",
+px: 129.0888434,
+py: 37.5906129,
+type: "place",
+useTime: 1682996825000,
+lastUpdateTime: 1682996825000,
+creationTime: 1682996825000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1768559727",
+address: "강원도 동해시 망상동 363-1",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "01170129",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "dE3zwpbyILjfOpVPfQVzjQ==",
+pan: "61.42",
+tilt: "10.00",
+lng: "129.0886337",
+lat: "37.5904985",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250321_171/1742528107502KlSl5_JPEG/5.jpg",
+"https://ldb-phinf.pstatic.net/20250321_101/1742539943810NTfKS_JPEG/1.jpg",
+"https://ldb-phinf.pstatic.net/20250321_289/1742528107334XqKrE_JPEG/6.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 999025994,
+name: "씨에스타게스트하우스",
+displayName: "",
+px: 128.9124049,
+py: 37.7968346,
+type: "place",
+useTime: 1682996771000,
+lastUpdateTime: 1682996771000,
+creationTime: 1682996770000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1073700555",
+address: "강원도 강릉시 초당동 455-8",
+memo: "",
+url: "",
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "01150112",
+cidPath: [
+"221941",
+"221954"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "xr1Pop2VbCsTQMDjqpKbNA==",
+pan: "86.57",
+tilt: "10.00",
+lng: "128.9120906",
+lat: "37.7968155",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231108_241/1699411783279bAcCz_JPEG/20230901_064442.jpeg",
+"https://ldb-phinf.pstatic.net/20250602_229/1748830708556AL96O_JPEG/%BE%BE%BF%A1%BD%BA%C5%B8_%B4%DE%B7%C2_%2847%29.jpg",
+"https://ldb-phinf.pstatic.net/20230403_112/16805095806223bvH0_JPEG/KakaoTalk_Photo_2023-04-03-17-10-41_002.jpeg"
+],
+category: "게스트하우스"
+},
+isIndoor: false
+},
+{
+bookmarkId: 933174125,
+name: "그린스톤오토캠핑장 & 펜션",
+displayName: "",
+px: 127.977347,
+py: 36.6830619,
+type: "place",
+useTime: 1679452164000,
+lastUpdateTime: 1679452164000,
+creationTime: 1678506824000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "31036967",
+address: "경상북도 문경시 가은읍 완장길 103-63 그린스톤오토캠핑장",
+memo: "",
+url: null,
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0428025331",
+cidPath: [
+"221941",
+"221950"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "qSHJUpZwEG3NytzRj6ZHxA==",
+pan: "-17.07",
+tilt: "6.42",
+lng: "127.9774024",
+lat: "36.6828815",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210629_87/1624970858482sntaB_JPEG/wM4R4YokInSRyA6QBq0hj7ex.jpg",
+"https://ldb-phinf.pstatic.net/20210629_219/1624970650325yIuUc_JPEG/AmhGXkZRN4a0fkx1tchGtSLI.jpg",
+"https://ldb-phinf.pstatic.net/20210629_280/1624970704977UutnR_JPEG/0ggDTWWFAW98HYZspGooYeKS.jpg"
+],
+category: "캠핑,야영장"
+},
+isIndoor: false
+},
+{
+bookmarkId: 933164534,
+name: "파머스힐캠핑장",
+displayName: "",
+px: 127.3585998,
+py: 37.7932308,
+type: "place",
+useTime: 1679451566000,
+lastUpdateTime: 1679451566000,
+creationTime: 1678506329000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "35366061",
+address: "경기도 가평군 상면 한사간길 85-52 파머스힐캠핑장",
+memo: "",
+url: null,
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0282033022",
+cidPath: [
+"221941",
+"221950"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "visjG+a8rgDZPs5w+2Urvg==",
+pan: "155.63",
+tilt: "10.00",
+lng: "127.3584851",
+lat: "37.7934831",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211019_135/1634625624190B8XmL_JPEG/GBwaoparYwm6283jd-3Q18lK.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20211019_178/1634625632704I7XGC_JPEG/L8p3IEJl44Mld3e_OiF1lzwd.jpg",
+"https://ldb-phinf.pstatic.net/20211019_168/1634625645913kha4h_JPEG/T7p9EJ8GTWcGh5olL6GOPNxp.JPG.jpg"
+],
+category: "캠핑,야영장"
+},
+isIndoor: false
+},
+{
+bookmarkId: 933682185,
+name: "럭셔리풀빌라 글램핑 풀램핑",
+displayName: "",
+px: 127.3726809,
+py: 37.6894493,
+type: "place",
+useTime: 1679451515000,
+lastUpdateTime: 1679451515000,
+creationTime: 1678536694000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1170533768",
+address: "경기도 가평군 청평면 남이터길 52-35 풀램핑",
+memo: "",
+url: null,
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "0282032524",
+cidPath: [
+"221941",
+"221947"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "hj+dOSfb8pwzPU3Zpbp5Sw==",
+pan: "-6.54",
+tilt: "10.00",
+lng: "127.3726932",
+lat: "37.6893419",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240510_85/1715328429968lxkRy_JPEG/%B4%D9%BF%EE%B7%CE%B5%E5.jpg",
+"https://ldb-phinf.pstatic.net/20230117_130/1673928995831mInCq_JPEG/8.jpg",
+"https://ldb-phinf.pstatic.net/20240726_86/1721924561617Jtkq9_JPEG/luavely___20240726_010526_6.jpg"
+],
+category: "펜션"
+},
+isIndoor: false
+},
+{
+bookmarkId: 931392584,
+name: "다온숲",
+displayName: "",
+px: 127.2550561,
+py: 36.6425552,
+type: "place",
+useTime: 1679451458000,
+lastUpdateTime: 1679451458000,
+creationTime: 1678368951000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1210638481",
+address: "세종특별자치시 전동면 깊은내길 213",
+memo: "",
+url: null,
+mcid: "ACCOMMODATION",
+mcidName: "숙박",
+rcode: "1711038025",
+cidPath: [
+"221941",
+"221950"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "XEWp0haFPzse3ZQhDQ2icA==",
+pan: "93.69",
+tilt: "10.00",
+lng: "127.2548815",
+lat: "36.6425663",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250521_42/1747808316892MzwQO_JPEG/9.jpg",
+"https://ldb-phinf.pstatic.net/20250415_43/1744721854050qYCAx_JPEG/1.jpg",
+"https://ldb-phinf.pstatic.net/20230222_142/1677036152057boowa_JPEG/%C6%F7%BC%A56.jpg"
+],
+category: "캠핑,야영장"
+},
+isIndoor: false
+}
+],
+unavailableCount: 22,
+mismatchedCount: 14,
+removed: false
+}

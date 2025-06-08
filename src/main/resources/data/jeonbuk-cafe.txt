@@ -1,0 +1,933 @@
+{
+folder: {
+folderId: 82085106,
+name: "갈수있어 강아지도, 전북 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "8",
+lastUseTime: 1684742268000,
+creationTime: 1680844536000,
+shouldOverlay: true,
+bookmarkCount: 430,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa69a1438fc3a9cfafe95",
+reviewPageUrl: "https://m.place.naver.com/my/642fa69a1438fc3a9cfafe95/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_247/168084443322917k2u_PNG/image.png?type=f102_102",
+nick: "N강아지도 밀크"
+},
+shareId: "29f6cf6552cf4e0b86c567562c77db55",
+encryptedUserIdNo: "ZUvD5IA1EygBLgJk:Nqpyjv90vTTy6HlS3OZIvTkRuGlIBg",
+followCount: 621,
+viewCount: 1691,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007248797,
+name: "커피로드뷰 삼봉지점",
+displayName: "",
+px: 127.1218651,
+py: 35.9250215,
+type: "place",
+useTime: 1683520828000,
+lastUpdateTime: 1683520828000,
+creationTime: 1683520827000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1556720889",
+address: "전라북도 완주군 삼례읍 수계리 1235-4",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1371025029",
+cidPath: [
+"220036",
+"220052",
+"1005928"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "RPQzT81NNVrbLJdYpB1aIA==",
+pan: "-38.32",
+tilt: "10.00",
+lng: "127.1219224",
+lat: "35.9248992",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230110_131/1673334337622ilV6G_JPEG/2.JPG",
+"https://ldb-phinf.pstatic.net/20230110_143/1673334337662kzXb4_JPEG/3.JPG",
+"https://ldb-phinf.pstatic.net/20230110_72/1673334338337icaxS_JPEG/6.JPG"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007248636,
+name: "지요카페",
+displayName: "",
+px: 126.4180803,
+py: 35.806262,
+type: "place",
+useTime: 1683520817000,
+lastUpdateTime: 1683520817000,
+creationTime: 1683520816000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1857272474",
+address: "전라북도 군산시 옥도면 무녀도리 산11",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1313039025",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "duz22CfFz1n22785h5CVeA==",
+pan: "63.43",
+tilt: "10.00",
+lng: "126.4180134",
+lat: "35.8062285",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20181016_27/1539697217630FrMAM_JPEG/-fCAYAQ-rlLmJrzNuJXi0I36.jpg",
+"https://ldb-phinf.pstatic.net/20181016_60/1539697225597chj6u_JPEG/DYaVD_Jsf9ki5RieQp0JENpt.jpg",
+"https://ldb-phinf.pstatic.net/20181016_262/15396972321014Fixr_JPEG/wXHviJE5FwQoakiW0el10_WZ.jpg"
+],
+category: "베이커리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989050439,
+name: "워니양과자점",
+displayName: "",
+px: 127.101345,
+py: 35.8229915,
+type: "place",
+useTime: 1682344457000,
+lastUpdateTime: 1682344457000,
+creationTime: 1682344457000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1824194758",
+address: "전라북도 전주시 완산구 효자동3가 1649-2 1층 (효자동3가, 드림빌)",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13111142",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989050112,
+name: "카페인히얼",
+displayName: "",
+px: 127.1205125,
+py: 35.8143447,
+type: "place",
+useTime: 1682344441000,
+lastUpdateTime: 1682344441000,
+creationTime: 1682344441000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1491239365",
+address: "전라북도 전주시 완산구 중화산동2가 634 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13111128",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989049784,
+name: "카페피에스",
+displayName: "",
+px: 127.1448931,
+py: 35.8156813,
+type: "place",
+useTime: 1682344425000,
+lastUpdateTime: 1682344425000,
+creationTime: 1682344424000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1413837464",
+address: "전라북도 전주시 완산구 중앙동4가 16-3",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13111104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989049378,
+name: "모노클",
+displayName: "",
+px: 127.1037855,
+py: 35.8341993,
+type: "place",
+useTime: 1682344404000,
+lastUpdateTime: 1682344404000,
+creationTime: 1682344404000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1186151835",
+address: "전라북도 전주시 완산구 효자동3가 1446-2",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13111142",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989047869,
+name: "스위머",
+displayName: "",
+px: 127.1377899,
+py: 35.8437592,
+type: "place",
+useTime: 1682344331000,
+lastUpdateTime: 1682344331000,
+creationTime: 1682344331000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1892182134",
+address: "전라북도 전주시 덕진구 금암동 631-320 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13113107",
+cidPath: [
+"220036",
+"220052",
+"220587",
+"221432"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989047534,
+name: "도란도란",
+displayName: "",
+px: 127.1328141,
+py: 35.8411665,
+type: "place",
+useTime: 1682344315000,
+lastUpdateTime: 1682344315000,
+creationTime: 1682344315000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1389678141",
+address: "전라북도 전주시 덕진구 금암동 667-30 도란도란 카페",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13113107",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "w82y/Qqy50sfMUY945K22w==",
+pan: "-59.25",
+tilt: "10.00",
+lng: "127.1244122",
+lat: "35.8399403",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200407_4/1586190048259egs6p_JPEG/aIqOd6rLVYMCCbogYiJEM-oC.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20220820_50/1660994886212BGoXr_JPEG/19C357A5-D7EA-4C30-B72F-4BE25CBAEC73.jpeg",
+"https://ldb-phinf.pstatic.net/20190826_160/1566819633362D1VG8_JPEG/pSZIWG9CblIRtDjyyvV0qVLU.JPG.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989045481,
+name: "서천프린스",
+displayName: "",
+px: 126.7211505,
+py: 35.9704116,
+type: "place",
+useTime: 1682344218000,
+lastUpdateTime: 1682344218000,
+creationTime: 1682344218000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1717575540",
+address: "전라북도 군산시 수송동 65-66 1층 101호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13130141",
+cidPath: [
+"220036",
+"220052",
+"220589",
+"230488"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "nzJ6XjxfSdtAXE4v5LX7qA==",
+pan: "117.00",
+tilt: "10.00",
+lng: "126.7210781",
+lat: "35.9704484",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210414_1/1618405723375nk59P_JPEG/v3Kyeoapi7O1nTBQR5SfJei3.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989045090,
+name: "카페신민회",
+displayName: "",
+px: 126.710044,
+py: 35.9862796,
+type: "place",
+useTime: 1682344200000,
+lastUpdateTime: 1682344200000,
+creationTime: 1682344200000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1201738320",
+address: "전라북도 군산시 신창동 40 카페신민회",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13130105",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "7ii/p49RWO9iPqA5gnhi4g==",
+pan: "-82.12",
+tilt: "10.00",
+lng: "126.7101575",
+lat: "35.9862638",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210719_65/1626660224610npdNG_JPEG/KhfEN_Nvno_yhQf4lCicB_ja.jpg",
+"https://ldb-phinf.pstatic.net/20241011_298/1728576447180VR6JT_JPEG/%C8%A3%B6%B1%C5%A9%B7%CE%C7%C3_.jpeg",
+"https://ldb-phinf.pstatic.net/20220702_109/1656736535813FV4gu_JPEG/1656736353081.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983238694,
+name: "커피브루",
+displayName: "",
+px: 127.4311937,
+py: 35.7927401,
+type: "place",
+useTime: 1681957965000,
+lastUpdateTime: 1681957965000,
+creationTime: 1681957965000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1419505338",
+address: "전라북도 진안군 진안읍 군상리 450-27 커피브루",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1372025021",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "4juOjeDpJj5gvq32gmX8zw==",
+pan: "116.21",
+tilt: "7.19",
+lng: "127.4311571",
+lat: "35.7928159",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220210_52/1644478662080bh3s1_JPEG/580CC1E9-6783-46AA-8E7C-67FA76C69657.jpeg",
+"https://ldb-phinf.pstatic.net/20220210_214/16444786613165buzi_JPEG/6CAF8346-0125-43C3-B459-5C1B306CFBED.jpeg",
+"https://ldb-phinf.pstatic.net/20220210_124/1644478660896e0wpi_JPEG/7BBA9A12-21D5-496B-B93D-207B3C50C8BC.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983238327,
+name: "카페 공간153",
+displayName: "",
+px: 127.4260194,
+py: 35.7930179,
+type: "place",
+useTime: 1681957944000,
+lastUpdateTime: 1681957944000,
+creationTime: 1681957944000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37161910",
+address: "전라북도 진안군 진안읍 군상리 877 카페공간153(카페 내에 독립서점 운영)",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1372025021",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "3nwqulj18fkfVtrZ0//Iwg==",
+pan: "120.33",
+tilt: "-12.56",
+lng: "127.4259051",
+lat: "35.7931141",
+fov: "55"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230708_211/1688824021057FwXt7_JPEG/IMG_7997.jpeg",
+"https://ldb-phinf.pstatic.net/20240606_112/1717643789597PY2oM_JPEG/IMG_4227.jpeg",
+"https://ldb-phinf.pstatic.net/20240606_199/1717643789201n9Mth_JPEG/IMG_4260.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983237964,
+name: "카페진안",
+displayName: "",
+px: 127.3281233,
+py: 35.802482,
+type: "place",
+useTime: 1681957923000,
+lastUpdateTime: 1681957923000,
+creationTime: 1681957922000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1594386413",
+address: "전라북도 진안군 부귀면 세동리 225",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1372038023",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "qGbDxU/1jcAnlIcGG5aDZA==",
+pan: "70.69",
+tilt: "10.00",
+lng: "127.3277775",
+lat: "35.8023606",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240520_259/1716194323139GtcqG_JPEG/1000018738.jpg",
+"https://ldb-phinf.pstatic.net/20230403_283/1680510026596JY3mp_JPEG/20220507_185850.jpg",
+"https://ldb-phinf.pstatic.net/20230403_47/1680509959830XMSy7_JPEG/20221127_134341.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983237625,
+name: "카페 레드",
+displayName: "",
+px: 127.3949772,
+py: 35.7581973,
+type: "place",
+useTime: 1681957903000,
+lastUpdateTime: 1681957903000,
+creationTime: 1681957903000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1924667305",
+address: "전라북도 진안군 마령면 동촌리 64-1 카페 레드",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1372037022",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "RNd8uOCTGi36u+UByzZbGw==",
+pan: "-65.94",
+tilt: "7.06",
+lng: "127.3951493",
+lat: "35.7581442",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220604_204/1654319266773dmHkm_JPEG/AE6A2819-BB71-47FC-99C1-1FFD5E17ADA6.jpeg",
+"https://ldb-phinf.pstatic.net/20220604_188/1654318728071e2diQ_JPEG/55A383A7-4C0C-4F68-B864-198F53BDECE9.jpeg",
+"https://ldb-phinf.pstatic.net/20211224_109/1640311130962Xxby4_JPEG/20211204_155609.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983237255,
+name: "카페고현",
+displayName: "",
+px: 126.9924143,
+py: 35.603067,
+type: "place",
+useTime: 1681957883000,
+lastUpdateTime: 1681957883000,
+creationTime: 1681957883000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1573541229",
+address: "전라북도 정읍시 칠보면 시산리 597-6 카페고현",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1318042025",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Vi2REpeTae6xjYJuC/ki7Q==",
+pan: "-99.71",
+tilt: "10.00",
+lng: "126.9925353",
+lat: "35.6030876",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231118_289/1700304831944wd56p_JPEG/IMG_5139.jpeg",
+"https://ldb-phinf.pstatic.net/20220503_137/1651548706077aARvO_JPEG/9CA78F6F-3FAA-41B7-84B4-D8F18964D14E.jpeg",
+"https://ldb-phinf.pstatic.net/20220503_147/1651548705527Un2sH_JPEG/B9ABC810-E284-49B6-8AC4-783C8CEE58F5.jpeg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983236859,
+name: "공차 정읍상동점",
+displayName: "",
+px: 126.8691248,
+py: 35.5593281,
+type: "place",
+useTime: 1681957862000,
+lastUpdateTime: 1681957862000,
+creationTime: 1681957861000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1410655740",
+address: "전라북도 정읍시 상동 219-22",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13180103",
+cidPath: [
+"220036",
+"220052",
+"220580",
+"221396"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "CQrXdhIY/l4On67ipccbVQ==",
+pan: "-126.92",
+tilt: "10.00",
+lng: "126.8693087",
+lat: "35.5594660",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20180630_171/1530289553505HyhrF_JPEG/2cpJYiKbqKHceEmQXZhrXHb_.jpg",
+"https://ldb-phinf.pstatic.net/20180704_96/1530704025262csHLY_JPEG/NcxbwXCKnYBNOeU6LJslhRNZ.jpg",
+"https://ldb-phinf.pstatic.net/20180704_101/1530704025252Pbem6_JPEG/IbzIm2V7aRPh2h36ZJl9yy6U.jpg"
+],
+category: "차"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983236495,
+name: "오늘도설렘",
+displayName: "",
+px: 126.8415401,
+py: 35.5072345,
+type: "place",
+useTime: 1681957842000,
+lastUpdateTime: 1681957842000,
+creationTime: 1681957842000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1918013815",
+address: "전라북도 정읍시 신정동 1494-1 상가동 1호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13180127",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983236182,
+name: "카페소울",
+displayName: "",
+px: 126.8666981,
+py: 35.5533748,
+type: "place",
+useTime: 1681957822000,
+lastUpdateTime: 1681957822000,
+creationTime: 1681957822000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1243379448",
+address: "전라북도 정읍시 시기동 44-2",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13180104",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "duu8H2StpoNcig2sqcZaRw==",
+pan: "-152.36",
+tilt: "10.00",
+lng: "126.8667508",
+lat: "35.5534751",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220827_17/1661598726828BNNYo_JPEG/20220827_200206.jpg",
+"https://ldb-phinf.pstatic.net/20210228_38/16144944867968shJv_JPEG/O5SYeWXfxwz8y_hLIBYnl2KR.jpeg.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983235829,
+name: "파인드룸",
+displayName: "",
+px: 126.847372,
+py: 35.5723467,
+type: "place",
+useTime: 1681957802000,
+lastUpdateTime: 1681957802000,
+creationTime: 1681957801000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1305516782",
+address: "전라북도 정읍시 연지동 636 1층 113호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13180105",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "dumdUcAoTxgDj9DCGe0wXQ==",
+pan: "-47.13",
+tilt: "21.06",
+lng: "126.8474111",
+lat: "35.5721774",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210625_260/162461378824589Qys_JPEG/HTHbGGIjh3kT9fkyJ6Moy6Af.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210626_234/1624695393391iCqz7_JPEG/n_uv53b9RHvzjBXjTIoRj6HO.jpeg.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983235414,
+name: "차오름",
+displayName: "",
+px: 126.8577759,
+py: 35.5668729,
+type: "place",
+useTime: 1681957781000,
+lastUpdateTime: 1681957781000,
+creationTime: 1681957781000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1452455277",
+address: "전라북도 정읍시 장명동 106-7",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "13180102",
+cidPath: [
+"220036",
+"220052",
+"220580",
+"221395"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "AK2h8fLRLRz6bF1ZonydXQ==",
+pan: "42.68",
+tilt: "10.00",
+lng: "126.8575811",
+lat: "35.5666615",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241102_84/1730528090197OTlfP_JPEG/IMG_0323.jpeg",
+"https://ldb-phinf.pstatic.net/20230207_19/1675754791637xkPQz_JPEG/BeautyPlus_20230128130213915_save.jpg",
+"https://ldb-phinf.pstatic.net/20231209_3/17020969410697pLmq_JPEG/IMG_0443.jpeg"
+],
+category: "차"
+},
+isIndoor: false
+}
+],
+unavailableCount: 108,
+mismatchedCount: 16,
+removed: false
+}

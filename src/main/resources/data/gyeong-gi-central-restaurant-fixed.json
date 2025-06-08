@@ -1,0 +1,739 @@
+[ {
+  "bookmarkId" : 1007385739,
+  "name" : "하늘에바다에",
+  "displayName" : "",
+  "px" : 126.5726497,
+  "py" : 37.2861236,
+  "type" : "place",
+  "useTime" : 1683528996000,
+  "lastUpdateTime" : 1683528996000,
+  "creationTime" : 1683528995000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "32137483",
+  "address" : "경기도 안산시 단원구 대부북동 1848-114",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02273111",
+  "cidPath" : [ "220036", "220037", "220076", "220801", "221674" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "2LIpjsenFcFgm2KQjbssxg==",
+      "pan" : "-43.72",
+      "tilt" : "10.00",
+      "lng" : "126.5727677",
+      "lat" : "37.2860001",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220822_38/16611419513181APyH_JPEG/2251E4E6-0481-47C3-9226-85081F4274ED.jpeg", "https://ldb-phinf.pstatic.net/20220822_191/16611419513493tXRg_JPEG/51EBBDCB-D7B2-4F7F-BBB8-B75FCD6C6DDC.jpeg", "https://ldb-phinf.pstatic.net/20220822_124/1661141951284JqMMs_JPEG/3A387277-F0F7-4F54-B4B9-15BC14455D0A.jpeg" ],
+    "category" : "조개요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007385376,
+  "name" : "민들레농원",
+  "displayName" : "",
+  "px" : 126.8034987,
+  "py" : 37.4595726,
+  "type" : "place",
+  "useTime" : 1683528975000,
+  "lastUpdateTime" : 1683528975000,
+  "creationTime" : 1683528974000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "11482262",
+  "address" : "경기도 시흥시 계수동 산110-5",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02390113",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "M+OrrigXblm03bP4PHvnsw==",
+      "pan" : "140.08",
+      "tilt" : "10.00",
+      "lng" : "126.8034024",
+      "lat" : "37.4596875",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210807_237/1628312366796MUJ4h_JPEG/1O7A-dDFIDCdukY6UStB68d7.jpg", "https://ldb-phinf.pstatic.net/20210807_245/1628312429369XdwVr_JPEG/Zy61aIhkKAqcQoXFsdW0M8HT.jpg", "https://ldb-phinf.pstatic.net/20210807_249/1628312489651XfQck_JPEG/uSZkTTaFeYp6HmfL2_22w2rh.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007384729,
+  "name" : "쉼터",
+  "displayName" : "",
+  "px" : 127.0044432,
+  "py" : 37.4369276,
+  "type" : "place",
+  "useTime" : 1683528936000,
+  "lastUpdateTime" : 1683528936000,
+  "creationTime" : 1683528935000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1852309243",
+  "address" : "경기도 과천시 과천동 703 쉼터",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "02290105",
+  "cidPath" : [ "220036", "220051", "220559", "221149" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "34FNmF653qlC2/w56rTqEw==",
+      "pan" : "40.94",
+      "tilt" : "10.00",
+      "lng" : "127.0043013",
+      "lat" : "37.4367639",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230608_187/1686202760756wQPcL_JPEG/KakaoTalk_20230608_142134128_01.jpg", "https://ldb-phinf.pstatic.net/20230608_140/16862027527041A7SN_JPEG/KakaoTalk_20230608_142134128.jpg", "https://ldb-phinf.pstatic.net/20230608_22/16862027474514oskG_JPEG/KakaoTalk_20230608_141325752_09.jpg" ],
+    "category" : "포장마차"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985479056,
+  "name" : "후야돈",
+  "displayName" : "",
+  "px" : 126.9804195,
+  "py" : 37.3917558,
+  "type" : "place",
+  "useTime" : 1682102399000,
+  "lastUpdateTime" : 1682102399000,
+  "creationTime" : 1682102399000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "37086154",
+  "address" : "경기도 의왕시 포일동 539-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430109",
+  "cidPath" : [ "220036", "220038", "220082", "220812" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "4bdx/08riQscMUhLVA9iKg==",
+      "pan" : "34.34",
+      "tilt" : "13.00",
+      "lng" : "126.9804736",
+      "lat" : "37.3916457",
+      "fov" : "67"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20221206_17/1670330064675R1KIv_JPEG/%B0%A1%B0%D4%BB%E7%C1%F82.jpg", "https://ldb-phinf.pstatic.net/20221206_16/1670330056778pTGvo_JPEG/%B0%A1%B0%D4%BB%E7%C1%F81.jpg", "https://ldb-phinf.pstatic.net/20201119_8/1605794160926XyoEE_JPEG/Wk6CFXbYVyOnn8nxKS7pgovR.jpg" ],
+    "category" : "돈가스"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985479030,
+  "name" : "둥이치킨",
+  "displayName" : "",
+  "px" : 126.9654909,
+  "py" : 37.3661257,
+  "type" : "place",
+  "useTime" : 1682102393000,
+  "lastUpdateTime" : 1682102393000,
+  "creationTime" : 1682102392000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "33856460",
+  "address" : "경기도 의왕시 오전동 24-2 2층 둥이치킨",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430105",
+  "cidPath" : [ "220036", "220049", "220245" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "rA7wSfyfHAdGQzxxuKHoog==",
+      "pan" : "-47.95",
+      "tilt" : "8.25",
+      "lng" : "126.9649537",
+      "lat" : "37.3663659",
+      "fov" : "48"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20221026_246/1666770569396w0k6L_JPEG/KakaoTalk_20221026_164423774.jpg", "https://ldb-phinf.pstatic.net/20230519_187/1684473574486Vmx3L_JPEG/%B5%D5%C0%CC%C4%A1%C5%B2_%C0%CE%BD%BA%C5%B81.jpg", "https://ldb-phinf.pstatic.net/20221026_211/1666770569540QwDSR_JPEG/KakaoTalk_20221026_164423774_02.jpg" ],
+    "category" : "치킨,닭강정"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985479007,
+  "name" : "에스타시온",
+  "displayName" : "",
+  "px" : 126.9424536,
+  "py" : 37.3060265,
+  "type" : "place",
+  "useTime" : 1682102386000,
+  "lastUpdateTime" : 1682102386000,
+  "creationTime" : 1682102385000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "37910210",
+  "address" : "경기도 의왕시 초평동 318-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430111",
+  "cidPath" : [ "220036", "220044", "220126" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Gu+unSRv9ThNukfjGw5Wvg==",
+      "pan" : "80.87",
+      "tilt" : "-4.56",
+      "lng" : "126.9423734",
+      "lat" : "37.3062285",
+      "fov" : "48"
+    },
+    "thumbnailUrls" : [ "https://naverbooking-phinf.pstatic.net/20230722_56/1689953413818YjfAu_JPEG/358807347_3577793629156247_1970342486498340322_n.jpg", "https://naverbooking-phinf.pstatic.net/20230719_63/1689748640628jb6zh_JPEG/359011551_748721973742576_4193031895983278374_n.jpg", "https://naverbooking-phinf.pstatic.net/20230719_148/1689748640727Rln3j_JPEG/332004301_891340298857407_3395017978501759728_n.jpg" ],
+    "category" : "양식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478968,
+  "name" : "미트빌리지",
+  "displayName" : "",
+  "px" : 127.0086595,
+  "py" : 37.4025393,
+  "type" : "place",
+  "useTime" : 1682102377000,
+  "lastUpdateTime" : 1682102377000,
+  "creationTime" : 1682102376000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1441316856",
+  "address" : "경기도 의왕시 청계동 459 미트빌리지",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430108",
+  "cidPath" : [ "220036", "220037", "220075", "1002056", "1002055" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "2q6hH7P5Tgah/Iq5lD+yog==",
+      "pan" : "106.44",
+      "tilt" : "10.00",
+      "lng" : "127.0082775",
+      "lat" : "37.4026516",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220519_117/16529432047977SzxY_JPEG/%B9%CC%C6%AE%BA%F4%B8%AE%C1%F6_%C4%B7%C7%CE%C0%E5_5.JPG", "https://ldb-phinf.pstatic.net/20220610_195/1654829818514lR4wz_JPEG/KakaoTalk_20220516_155612609_16.jpg", "https://ldb-phinf.pstatic.net/20220610_246/16548298184105H16a_JPEG/KakaoTalk_20220516_155612609_26_%283%29.jpg" ],
+    "category" : "정육식당"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478939,
+  "name" : "쭈꾸미의왕",
+  "displayName" : "",
+  "px" : 126.9433895,
+  "py" : 37.3147082,
+  "type" : "place",
+  "useTime" : 1682102369000,
+  "lastUpdateTime" : 1682102369000,
+  "creationTime" : 1682102368000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1936945809",
+  "address" : "경기도 의왕시 초평동 265-2 2, 3층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430111",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "nn89KZ3ZrxOpQS8TfLl11A==",
+      "pan" : "-24.65",
+      "tilt" : "10.00",
+      "lng" : "126.9434444",
+      "lat" : "37.3145885",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230511_222/1683796506815ovEsT_JPEG/IMG_2109.jpg", "https://ldb-phinf.pstatic.net/20230511_89/1683796739546VOh9V_JPEG/IMG_2170_jpg.jpg", "https://ldb-phinf.pstatic.net/20230511_234/1683796506985JPJTz_JPEG/IMG_2107.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478909,
+  "name" : "이대가장수촌",
+  "displayName" : "",
+  "px" : 126.9431705,
+  "py" : 37.3014096,
+  "type" : "place",
+  "useTime" : 1682102363000,
+  "lastUpdateTime" : 1682102363000,
+  "creationTime" : 1682102363000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "613586450",
+  "address" : "경기도 의왕시 초평동 산61-20",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430111",
+  "cidPath" : [ "220036", "220037", "220075", "220774", "221606" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "u3kSWbrcgIrvGxL//5vq6Q==",
+      "pan" : "-111.01",
+      "tilt" : "10.00",
+      "lng" : "126.9434421",
+      "lat" : "37.3015136",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240330_61/1711765567004y1IV3_JPEG/1000008914.jpg", "https://ldb-phinf.pstatic.net/20240330_79/1711765567016zW4a7_JPEG/1000008913.jpg", "https://ldb-phinf.pstatic.net/20240330_136/1711765566990syCvv_JPEG/1000008915.jpg" ],
+    "category" : "백숙,삼계탕"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478858,
+  "name" : "산앤들",
+  "displayName" : "",
+  "px" : 127.0046588,
+  "py" : 37.3947848,
+  "type" : "place",
+  "useTime" : 1682102350000,
+  "lastUpdateTime" : 1682102350000,
+  "creationTime" : 1682102349000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "37993504",
+  "address" : "경기도 의왕시 청계동 554-5 산앤들",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430108",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "RUc1tUHaktw6l0Xjgt8g4g==",
+      "pan" : "107.82",
+      "tilt" : "-7.50",
+      "lng" : "127.0044849",
+      "lat" : "37.3949653",
+      "fov" : "77"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20160608_184/1465359749534uCQXn_JPEG/176558535248806_0.jpeg", "https://ldb-phinf.pstatic.net/20240715_88/1721034881944M8P4j_JPEG/KakaoTalk_20240715_181347255_04.jpg", "https://ldb-phinf.pstatic.net/20240715_93/1721034881794CVyGh_JPEG/KakaoTalk_20240715_181347255_01.jpg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478744,
+  "name" : "오봉산장",
+  "displayName" : "",
+  "px" : 126.9628676,
+  "py" : 37.3493968,
+  "type" : "place",
+  "useTime" : 1682102313000,
+  "lastUpdateTime" : 1682102313000,
+  "creationTime" : 1682102313000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "13057183",
+  "address" : "경기도 의왕시 고천동 425-2 오봉산장",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430101",
+  "cidPath" : [ "220036", "220037", "220075", "220769", "221553" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "jIk9wGbAtKx5Ik/fLORXqQ==",
+      "pan" : "64.02",
+      "tilt" : "10.00",
+      "lng" : "126.9625271",
+      "lat" : "37.3492306",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250111_229/1736574457756UcWgi_JPEG/KakaoTalk_20250111_144236832.jpg", "https://ldb-phinf.pstatic.net/20250111_53/1736574448754pWI8x_JPEG/KakaoTalk_20250111_144236832_01.jpg", "https://ldb-phinf.pstatic.net/20250111_180/1736574440048Ng68l_JPEG/KakaoTalk_20250111_144236832_14.jpg" ],
+    "category" : "오리요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478701,
+  "name" : "마당기픈집",
+  "displayName" : "",
+  "px" : 126.9516665,
+  "py" : 37.3283033,
+  "type" : "place",
+  "useTime" : 1682102302000,
+  "lastUpdateTime" : 1682102302000,
+  "creationTime" : 1682102301000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "38255393",
+  "address" : "경기도 의왕시 삼동 418 마당기픈집",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430103",
+  "cidPath" : [ "220036", "220037", "220056", "220594" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "sQoHaWa5YAFdFRjdZJlQCA==",
+      "pan" : "-65.15",
+      "tilt" : "10.00",
+      "lng" : "126.9519216",
+      "lat" : "37.3281850",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220519_134/1652960069689zSpam_JPEG/20220518_144501.jpg", "https://ldb-phinf.pstatic.net/20231221_211/17030877324199Jh3g_JPEG/1000042276.jpg", "https://ldb-phinf.pstatic.net/20231215_234/1702592170653oNvX7_JPEG/temp_file.jpg" ],
+    "category" : "한정식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478653,
+  "name" : "농군의집",
+  "displayName" : "",
+  "px" : 126.9981228,
+  "py" : 37.3562709,
+  "type" : "place",
+  "useTime" : 1682102291000,
+  "lastUpdateTime" : 1682102291000,
+  "creationTime" : 1682102290000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "37746828",
+  "address" : "경기도 의왕시 오전동 745",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430105",
+  "cidPath" : [ "220036", "220044", "220127", "220914", "230079" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "sMRe7enawTJOhpQr3D4OMA==",
+      "pan" : "178.81",
+      "tilt" : "-6.04",
+      "lng" : "126.9980811",
+      "lat" : "37.3564949",
+      "fov" : "100"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240526_211/17167080431126cqH9_PNG/1.png", "https://ldb-phinf.pstatic.net/20240526_28/1716708042591BTKod_PNG/2.png", "https://ldb-phinf.pstatic.net/20240526_221/1716708043225o5bNM_PNG/3.png" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478602,
+  "name" : "카페몬순",
+  "displayName" : "",
+  "px" : 126.9683312,
+  "py" : 37.3751084,
+  "type" : "place",
+  "useTime" : 1682102280000,
+  "lastUpdateTime" : 1682102280000,
+  "creationTime" : 1682102280000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "33657526",
+  "address" : "경기도 의왕시 내손동 810-8",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430107",
+  "cidPath" : [ "220036", "220044", "220133", "220932" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "E3IQv8QpufVdfmlgi4OU5Q==",
+      "pan" : "76.23",
+      "tilt" : "10.00",
+      "lng" : "126.9682015",
+      "lat" : "37.3750152",
+      "fov" : "100"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20190702_210/1562002784698IrFhh_JPEG/duZwaw7jCZjtKb2SpZZllZzb.jpg", "https://ldb-phinf.pstatic.net/20190702_176/15620027931946DSeQ_JPEG/GKs-ut4xSdPTPa4RPwSR-MdF.jpg", "https://ldb-phinf.pstatic.net/20190702_246/1562078592273RB9JR_JPEG/AF7t8eNfTreZkD9mg1egWOxh.jpg" ],
+    "category" : "브런치"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478440,
+  "name" : "위자네 의왕점",
+  "displayName" : "",
+  "px" : 126.9494959,
+  "py" : 37.320581,
+  "type" : "place",
+  "useTime" : 1682102246000,
+  "lastUpdateTime" : 1682102246000,
+  "creationTime" : 1682102245000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1449369304",
+  "address" : "경기도 의왕시 삼동 193-6 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "02430103",
+  "cidPath" : [ "220036", "220051", "220556", "221121" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "76ijndNNNmJsU0RjUnGrRw==",
+      "pan" : "-84.22",
+      "tilt" : "10.00",
+      "lng" : "126.9495920",
+      "lat" : "37.3205712",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250205_190/1738717571083nUpAr_JPEG/IMG_0623.jpeg", "https://ldb-phinf.pstatic.net/20230202_129/16752750882372KGDC_JPEG/8448DE9F-68A0-4CA6-8A90-D2D38FC1B318.jpeg", "https://ldb-phinf.pstatic.net/20230202_4/1675275088377PlY7O_JPEG/435588D4-3107-4011-9DED-AE2AF2924391.jpeg" ],
+    "category" : "이자카야"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478421,
+  "name" : "1977라운지펍",
+  "displayName" : "",
+  "px" : 126.9499133,
+  "py" : 37.3207113,
+  "type" : "place",
+  "useTime" : 1682102240000,
+  "lastUpdateTime" : 1682102240000,
+  "creationTime" : 1682102239000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1497120874",
+  "address" : "경기도 의왕시 삼동 471-24",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "02430103",
+  "cidPath" : [ "220036", "220051", "220553", "221078" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "ynaggK2E4VSxVAk6KqI1sQ==",
+      "pan" : "-94.09",
+      "tilt" : "10.00",
+      "lng" : "126.9500493",
+      "lat" : "37.3207209",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ ],
+    "category" : "맥주,호프"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478388,
+  "name" : "복죽 전문점",
+  "displayName" : "",
+  "px" : 126.9528116,
+  "py" : 37.3183933,
+  "type" : "place",
+  "useTime" : 1682102232000,
+  "lastUpdateTime" : 1682102232000,
+  "creationTime" : 1682102232000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "19036518",
+  "address" : "경기도 의왕시 삼동 192-467 복죽",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430103",
+  "cidPath" : [ "220036", "220037", "220060", "220616" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "tJiP8Qf9h920AHMIq+4I5Q==",
+      "pan" : "-94.43",
+      "tilt" : "19.62",
+      "lng" : "126.9529232",
+      "lat" : "37.3184374",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20221226_52/1672046072900U8Mrh_JPEG/1672046052756.jpg" ],
+    "category" : "죽"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478362,
+  "name" : "포일포차",
+  "displayName" : "",
+  "px" : 126.9847762,
+  "py" : 37.3969132,
+  "type" : "place",
+  "useTime" : 1682102225000,
+  "lastUpdateTime" : 1682102225000,
+  "creationTime" : 1682102225000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1983488853",
+  "address" : "경기도 의왕시 포일동 663-1 106호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "02430109",
+  "cidPath" : [ "220036", "220051", "220559", "221149" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478334,
+  "name" : "버터밀크팬트리",
+  "displayName" : "",
+  "px" : 126.9837011,
+  "py" : 37.3980429,
+  "type" : "place",
+  "useTime" : 1682102219000,
+  "lastUpdateTime" : 1682102219000,
+  "creationTime" : 1682102219000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1427508850",
+  "address" : "경기도 의왕시 포일동 670-9 102호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02430109",
+  "cidPath" : [ "220036", "220044", "220133", "220932" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "iLRwN55SSGWu0/5LuhxZ6Q==",
+      "pan" : "43.51",
+      "tilt" : "10.00",
+      "lng" : "126.9836099",
+      "lat" : "37.3979468",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241115_206/1731658504805irpaa_JPEG/IMG_0076.jpeg", "https://ldb-phinf.pstatic.net/20230326_132/16798139926560yzO1_JPEG/CFC202DA-BE3A-45F0-BE0E-3DDC5F62758E.jpeg", "https://ldb-phinf.pstatic.net/20250410_109/17442788234257ee3v_JPEG/IMG_1570.jpeg" ],
+    "category" : "브런치"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 985478306,
+  "name" : "대단한포차",
+  "displayName" : "",
+  "px" : 126.9689143,
+  "py" : 37.3590397,
+  "type" : "place",
+  "useTime" : 1682102213000,
+  "lastUpdateTime" : 1682102213000,
+  "creationTime" : 1682102213000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "37764908",
+  "address" : "경기도 의왕시 오전동 104-37",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "02430105",
+  "cidPath" : [ "220036", "220051", "220559", "221149" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+} ]

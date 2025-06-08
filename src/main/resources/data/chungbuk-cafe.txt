@@ -1,0 +1,976 @@
+{
+folder: {
+folderId: 82085071,
+name: "갈수있어 강아지도, 충북 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "6",
+lastUseTime: 1684742027000,
+creationTime: 1680844498000,
+shouldOverlay: true,
+bookmarkCount: 400,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa69a1438fc3a9cfafe95",
+reviewPageUrl: "https://m.place.naver.com/my/642fa69a1438fc3a9cfafe95/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_247/168084443322917k2u_PNG/image.png?type=f102_102",
+nick: "N강아지도 밀크"
+},
+shareId: "c8ea55becfa74620b4e85565757612e9",
+encryptedUserIdNo: "7xdpZpZshmrJ5u9v:CekxvFx-r6_8_73ztfn4kKAF51eQOQ",
+followCount: 594,
+viewCount: 1584,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007247599,
+name: "드롭탑 오송역언더패스점",
+displayName: "",
+px: 127.3302365,
+py: 36.6175668,
+type: "place",
+useTime: 1683520750000,
+lastUpdateTime: 1683520750000,
+creationTime: 1683520750000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1973570984",
+address: "충청북도 청주시 흥덕구 오송읍 오송리 15-4",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1611325028",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221250"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Z2M9Fkqhz9ow+nId9RQCKA==",
+pan: "115.82",
+tilt: "10.00",
+lng: "127.3292848",
+lat: "36.6180260",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230305_59/1677986185250R0jQx_JPEG/1677904802419.jpg",
+"https://ldb-phinf.pstatic.net/20230305_31/1677986203856kDswA_JPEG/1677904854130.jpg",
+"https://ldb-phinf.pstatic.net/20230305_285/1677986190784dOAcg_JPEG/1677904894164.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007247059,
+name: "점선 에스프레소바",
+displayName: "",
+px: 127.4294915,
+py: 36.6256788,
+type: "place",
+useTime: 1683520720000,
+lastUpdateTime: 1683520720000,
+creationTime: 1683520720000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1406905023",
+address: "충청북도 청주시 흥덕구 강서동 546 교차로 상가 1층 점선 에스프레소바",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16113117",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "EiXO1voGE380m6zhwdVoTw==",
+pan: "-82.42",
+tilt: "7.88",
+lng: "127.4295560",
+lat: "36.6256324",
+fov: "57"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230212_170/167617013444799FG7_PNG/FD15813B-3600-4287-9285-925E6582F708.png",
+"https://ldb-phinf.pstatic.net/20221029_86/16670476434330QHX3_JPEG/580B0982-4839-49D3-B6A5-F4B280CD1F67.jpeg",
+"https://ldb-phinf.pstatic.net/20221014_277/1665736180873WzatJ_JPEG/D839266B-E272-4CA8-A50C-980B3A760B51.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007246853,
+name: "둘레딸기카페",
+displayName: "",
+px: 127.5124143,
+py: 36.541266,
+type: "place",
+useTime: 1683520709000,
+lastUpdateTime: 1683520709000,
+creationTime: 1683520709000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1499027769",
+address: "충청북도 청주시 상당구 가덕면 삼항리 477 둘레딸기카페 ",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1611133023",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ginjaOwYPM2kCjtgV84vFQ==",
+pan: "152.68",
+tilt: "10.00",
+lng: "127.5122780",
+lat: "36.5415290",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200325_66/1585096718691U6kaK_JPEG/RdOf1ntDIhViiUrazuhIs9vp.jpg",
+"https://ldb-phinf.pstatic.net/20200325_82/1585096738872BPON4_JPEG/CUOIAPmLNooZw-czbZhBgVNd.jpg",
+"https://ldb-phinf.pstatic.net/20201231_177/1609415332856kL9ug_JPEG/DgrobCSg0h7VEooeWiunGEYh.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007246705,
+name: "하이그림",
+displayName: "",
+px: 128.200106,
+py: 37.1896481,
+type: "place",
+useTime: 1683520701000,
+lastUpdateTime: 1683520701000,
+creationTime: 1683520700000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1414194990",
+address: "충청북도 제천시 송학면 도화리 987",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1615038025",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007246404,
+name: "카페 소소",
+displayName: "",
+px: 127.7863208,
+py: 36.1739868,
+type: "place",
+useTime: 1683520688000,
+lastUpdateTime: 1683520688000,
+creationTime: 1683520682000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1265373264",
+address: "충청북도 영동군 영동읍 동정리 94-2",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1674025022",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "2zLGILxlldQMOfVF8/cVkA==",
+pan: "16.28",
+tilt: "10.00",
+lng: "127.7863787",
+lat: "36.1738492",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20201228_203/1609091054581LSpiv_JPEG/h5hNX0sLuAzAMQRnMF33br8f.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20201228_152/1609091611766XNfDJ_JPEG/mwAnkm6UHS9CAHVTrBumVfpT.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20201228_129/1609091117006GEfMm_JPEG/iKbObHaUyNnJzH3eM7CGcE3d.jpeg.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986892952,
+name: "굿나잇커피앤북",
+displayName: "",
+px: 127.9169532,
+py: 37.0120278,
+type: "place",
+useTime: 1682210493000,
+lastUpdateTime: 1682210493000,
+creationTime: 1682210492000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1057582602",
+address: "충청북도 충주시 목행.용탄동 604-7 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16130119",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "lkh3Rl1OTCxYpSq2EiakdQ==",
+pan: "-125.87",
+tilt: "10.00",
+lng: "127.9170494",
+lat: "37.0120972",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220531_12/1653992825792OOmAD_JPEG/KakaoTalk_20220531_192606746_01.jpg",
+"https://ldb-phinf.pstatic.net/20230116_199/1673832079400n1Ay0_JPEG/IMG_20220603_194751_404.jpg",
+"https://ldb-phinf.pstatic.net/20230116_139/1673832015163NlYx0_JPEG/IMG_20220601_120935_786.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986892767,
+name: "충주댐198510",
+displayName: "",
+px: 127.9786843,
+py: 37.0112138,
+type: "place",
+useTime: 1682210479000,
+lastUpdateTime: 1682210479000,
+creationTime: 1682210478000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1888857824",
+address: "충청북도 충주시 종민동 1068-4",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16130121",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "KCdHKAw0Z82h+4lU/U6B9w==",
+pan: "18.90",
+tilt: "10.00",
+lng: "127.9784380",
+lat: "37.0106833",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240807_106/1722995267688f8rQW_JPEG/1000022179.jpg",
+"https://ldb-phinf.pstatic.net/20240807_72/17229952676432uTQD_JPEG/1000022208.jpg",
+"https://ldb-phinf.pstatic.net/20240807_149/1722995267630y0PXN_JPEG/1000022665.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986892469,
+name: "다운힐커피하우스",
+displayName: "",
+px: 127.9284891,
+py: 36.9797209,
+type: "place",
+useTime: 1682210457000,
+lastUpdateTime: 1682210457000,
+creationTime: 1682210456000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1609127024",
+address: "충청북도 충주시 교현동 622-3",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16130105",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 986892214,
+name: "옥다방",
+displayName: "",
+px: 127.3682276,
+py: 36.6606011,
+type: "place",
+useTime: 1682210437000,
+lastUpdateTime: 1682210437000,
+creationTime: 1682210437000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1078675757",
+address: "충청북도 청주시 흥덕구 옥산면 오산리 367-1 1층 옥다방",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1611332021",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "tKL7W3sQ6EVGrYuZ1ZXSWw==",
+pan: "-54.46",
+tilt: "1.38",
+lng: "127.3685920",
+lat: "36.6605318",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220307_92/1646656924365vUobL_JPEG/2533F551-E32B-461F-B6FA-7F809EE92A75.jpeg",
+"https://ldb-phinf.pstatic.net/20220312_269/1647067136058aUsMn_JPEG/2A4F4D98-E10A-4624-8B4F-B7CC346AE33F.jpeg",
+"https://ldb-phinf.pstatic.net/20220312_161/1647067135145fKSYG_JPEG/BE151B74-20E0-4A67-8FFD-9EC132CD1829.jpeg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986891971,
+name: "퍼즈",
+displayName: "",
+px: 127.3251904,
+py: 36.6235729,
+type: "place",
+useTime: 1682210420000,
+lastUpdateTime: 1682210420000,
+creationTime: 1682210419000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1772671308",
+address: "충청북도 청주시 흥덕구 오송읍 만수리 850 101호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1611325025",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "XqVPGSm/oiROzvsNGTB1iA==",
+pan: "-168.39",
+tilt: "2.31",
+lng: "127.3251780",
+lat: "36.6238465",
+fov: "45"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240401_246/1711947251311vHtSA_JPEG/1711945956640.jpg",
+"https://ldb-phinf.pstatic.net/20240401_56/1711947241657qrgd4_JPEG/1711945956552.jpg",
+"https://ldb-phinf.pstatic.net/20240401_231/1711947222350b5QGC_JPEG/1711945957094.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986891316,
+name: "케잌후",
+displayName: "",
+px: 127.4872877,
+py: 36.6524057,
+type: "place",
+useTime: 1682210373000,
+lastUpdateTime: 1682210373000,
+creationTime: 1682210372000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1824785455",
+address: "충청북도 청주시 청원구 우암동 321-1 1층 101호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16114101",
+cidPath: [
+"220036",
+"220052",
+"220565",
+"221177"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "7xp/aLBxXFPDYGIK9eaB/Q==",
+pan: "-158.96",
+tilt: "18.00",
+lng: "127.4873380",
+lat: "36.6524935",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240216_287/1708062632537fOET6_PNG/IMG_8838.png",
+"https://ldb-phinf.pstatic.net/20230909_138/1694246006583taf87_JPEG/DM_20230909164557_001.jpg",
+"https://ldb-phinf.pstatic.net/20230909_59/1694246008510sVttR_JPEG/DM_20230909164558_001.jpg"
+],
+category: "케이크전문"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986890366,
+name: "계절애",
+displayName: "",
+px: 127.4943997,
+py: 36.6530776,
+type: "place",
+useTime: 1682210302000,
+lastUpdateTime: 1682210302000,
+creationTime: 1682210302000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1417307762",
+address: "충청북도 청주시 청원구 내덕동 46-3",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16114102",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 986889701,
+name: "스케치",
+displayName: "",
+px: 127.4597303,
+py: 36.6324979,
+type: "place",
+useTime: 1682210254000,
+lastUpdateTime: 1682210254000,
+creationTime: 1682210253000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1729986840",
+address: "충청북도 청주시 서원구 사창동 503-1",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16112102",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "QrxzLqzFfLDHzHvEau486w==",
+pan: "98.02",
+tilt: "13.75",
+lng: "127.4596130",
+lat: "36.6325350",
+fov: "62"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240802_16/1722568428349ndMzr_JPEG/1000018607.jpg",
+"https://ldb-phinf.pstatic.net/20240802_294/1722568428197Ec1Sn_JPEG/1000018599.jpg",
+"https://ldb-phinf.pstatic.net/20240820_59/1724147508621Aelvm_JPEG/1000018857.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986888831,
+name: "케이키",
+displayName: "",
+px: 127.4903319,
+py: 36.6342772,
+type: "place",
+useTime: 1682210190000,
+lastUpdateTime: 1682210190000,
+creationTime: 1682210190000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1573710310",
+address: "충청북도 청주시 상당구 북문로1가 38-5",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16111102",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "db8LKHyVTIWLCNRSmKPgmA==",
+pan: "169.85",
+tilt: "10.00",
+lng: "127.4902947",
+lat: "36.6344832",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190310_300/1552208984377QlpQz_JPEG/edQSBXZrMAaYdmoEeDmHu9uM.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20190310_274/1552208996620DEDsQ_JPEG/AjxqMkHLuh2tHFPeW02Sm_DK.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20190310_249/1552209010245y1Vy4_JPEG/oF6Guw_-SIQRzO1OJVYH9CSr.jpeg.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986887965,
+name: "고트",
+displayName: "",
+px: 127.4926944,
+py: 36.6370464,
+type: "place",
+useTime: 1682210130000,
+lastUpdateTime: 1682210130000,
+creationTime: 1682210130000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1052836558",
+address: "충청북도 청주시 상당구 수동 288-33",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "16111112",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "NC0DOYpbp6s86XagfIu/bw==",
+pan: "-152.57",
+tilt: "10.00",
+lng: "127.4928306",
+lat: "36.6373080",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240527_41/1716806649905FAW5W_JPEG/26CBB49D-447D-4087-A62D-A5585DB46E0B.jpeg",
+"https://ldb-phinf.pstatic.net/20250402_55/1743591673962sxjMV_JPEG/%BD%C3%C1%AE.jpg",
+"https://ldb-phinf.pstatic.net/20240527_274/1716806649883glUfQ_JPEG/34A6E03E-8DE1-4ACC-A00F-C617EB670827.jpeg"
+],
+category: "브런치카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986887549,
+name: "노이",
+displayName: "",
+px: 127.5354612,
+py: 36.9032984,
+type: "place",
+useTime: 1682210099000,
+lastUpdateTime: 1682210099000,
+creationTime: 1682210098000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1371767543",
+address: "충청북도 진천군 덕산읍 두촌리 3147",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1675025325",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "VGqmNN2eehViRyjluE1YpQ==",
+pan: "119.86",
+tilt: "8.06",
+lng: "127.5353205",
+lat: "36.9043971",
+fov: "60"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231206_243/17018307741778UAe1_JPEG/KakaoTalk_20231005_105219201_08.jpg",
+"https://ldb-phinf.pstatic.net/20231206_185/1701830769598wSjDk_JPEG/%C5%CD%BA%F1%B3%AA%B5%B5.jpg",
+"https://ldb-phinf.pstatic.net/20231206_7/1701830761973tdGvY_JPEG/%BF%A1%B1%D7%C5%B8%B8%A3%C6%AE%28%C1%A4%29.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986887200,
+name: "카페볕뉘 충북혁신도시점",
+displayName: "",
+px: 127.5394576,
+py: 36.9002965,
+type: "place",
+useTime: 1682210071000,
+lastUpdateTime: 1682210071000,
+creationTime: 1682210071000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1825992838",
+address: "충청북도 진천군 덕산읍 두촌리 2669 1층 카페볕뉘",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1675025325",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "qUNzmLvz6GFAcmsF4djhOA==",
+pan: "147.95",
+tilt: "10.00",
+lng: "127.5393818",
+lat: "36.9004172",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220430_57/1651313605469c6TfQ_JPEG/B1C958E2-29C3-4B3F-A9D4-9ECE7719AE7D.jpeg",
+"https://ldb-phinf.pstatic.net/20241118_220/1731914498287vMwE7_JPEG/IMG_6554.jpeg",
+"https://ldb-phinf.pstatic.net/20250511_125/17469696734488abgV_JPEG/IMG_8865.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986886876,
+name: "고자매맛카롱",
+displayName: "",
+px: 127.7711693,
+py: 36.170947,
+type: "place",
+useTime: 1682210047000,
+lastUpdateTime: 1682210047000,
+creationTime: 1682210046000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1582901032",
+address: "충청북도 영동군 영동읍 부용리 47-2 1층 고자매맛카롱",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1674025028",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "tlBD/MxwvcxKzmdVu8+TXA==",
+pan: "-73.40",
+tilt: "10.00",
+lng: "127.7712680",
+lat: "36.1709175",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240814_159/17235717079388we9U_JPEG/IMG_20220701_100245_810.jpg",
+"https://ldb-phinf.pstatic.net/20240814_54/1723571705990WIGYH_JPEG/IMG_20240516_124405_160.jpg",
+"https://ldb-phinf.pstatic.net/20240814_212/1723571962013qQLLb_JPEG/1000012045.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986886486,
+name: "뀨카롱",
+displayName: "",
+px: 127.7702714,
+py: 36.1699485,
+type: "place",
+useTime: 1682210018000,
+lastUpdateTime: 1682210018000,
+creationTime: 1682210018000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1039577942",
+address: "충청북도 영동군 영동읍 부용리 54-4 101호 뀨카롱",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1674025028",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "bWTJLtPY2S1z5HYB42joTw==",
+pan: "157.70",
+tilt: "10.00",
+lng: "127.7782028",
+lat: "36.1744705",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240720_101/1721409549669RBEJC_JPEG/IMG_1411.jpeg",
+"https://ldb-phinf.pstatic.net/20240720_204/1721409547094uv7Dn_JPEG/DC12137B-B917-4356-ABB3-A8EB8E4696B2.jpeg",
+"https://ldb-phinf.pstatic.net/20240720_12/1721409734662Ilwdl_JPEG/IMG_7702.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 986886109,
+name: "닡커피바",
+displayName: "",
+px: 127.7781468,
+py: 36.1745559,
+type: "place",
+useTime: 1682209992000,
+lastUpdateTime: 1682209992000,
+creationTime: 1682209991000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1249490915",
+address: "충청북도 영동군 영동읍 계산리 686-19 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "1674025021",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "bWTJLtPY2S1z5HYB42joTw==",
+pan: "-33.27",
+tilt: "10.00",
+lng: "127.7782028",
+lat: "36.1744705",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220607_159/1654591369909fXYag_JPEG/C0954F98-F040-4356-88EA-66353DD5EC64.jpeg",
+"https://ldb-phinf.pstatic.net/20220607_172/1654591369922vnByA_JPEG/58941AF4-812B-48F8-A322-50F0BB4A69D9.jpeg",
+"https://ldb-phinf.pstatic.net/20220607_17/1654591369935TeFRn_JPEG/028D4526-4397-4095-A7B1-E63C02E6B286.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+}
+],
+unavailableCount: 125,
+mismatchedCount: 23,
+removed: false
+}

@@ -47,7 +47,8 @@ public class OwnerBoardController {
 
 	/**
 	 * 게시글 생성
-	 * @param dto 제목, 내용 //사진 추가 예정
+	 * @param dto 제목,내용
+	 * @param images 사진 file
 	 * @return id, 제목, 내용, 생성일
 	 */
 	@PostMapping
@@ -58,7 +59,12 @@ public class OwnerBoardController {
 		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
 	}
 
-	// 사진 삭제
+	/**
+	 * 사진 삭제
+	 * @param boardId 사진이 포함된 게시글 ID
+	 * @param imageId 사진 ID
+	 * @return
+	 */
 	@DeleteMapping("/{boardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
 		@PathVariable Long boardId,

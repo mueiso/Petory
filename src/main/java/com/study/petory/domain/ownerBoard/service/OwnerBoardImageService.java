@@ -53,20 +53,4 @@ public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage
 		repository.delete(image);
 
 	}
-	//
-	// @Transactional
-	// public void deleteImage(Long imageId) {
-	// 	OwnerBoardImage image = repository.findById(imageId)
-	// 		.orElseThrow(() -> new CustomException(ErrorCode.FILE_NOT_FOUND));
-	//
-	// 	String key = extractKeyFromUrl(image.getUrl());
-	//
-	// 	s3Uploader.deleteFile(key);
-	// 	repository.delete(image);
-	// }
-	//
-	// private String extractKeyFromUrl(String url) {
-	// 	String S3_BASE_URL = "https://petory-static-files.s3.ap-northeast-2.amazonaws.com/";
-	// 	return url.replace(S3_BASE_URL, "");
-	// }
 }

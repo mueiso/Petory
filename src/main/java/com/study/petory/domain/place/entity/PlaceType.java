@@ -9,7 +9,9 @@ public enum PlaceType {
 	HOSPITAL("병원"),
 	STORE("애견 용품점"),
 	BEAUTY("애견 미용실"),
-	SCHOOL("애견 유치원");
+	SCHOOL("애견 유치원"),
+	ACCOMMODATION("숙박"),
+	ETC("이외");
 
 	private final String displayName;
 

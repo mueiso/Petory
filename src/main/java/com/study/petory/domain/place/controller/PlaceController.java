@@ -72,7 +72,7 @@ public class PlaceController {
 		@RequestParam(required = false) PlaceType placeType,
 		@PageableDefault(size = 10) Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.REQUESTED, placeService.findAllPlace(placeName, placeType, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, placeType, pageable));
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class PlaceController {
 	public ResponseEntity<CommonResponse<PlaceGetResponseDto>> getByPlaceId(
 		@PathVariable Long placeId
 	) {
-		return CommonResponse.of(SuccessCode.REQUESTED, placeService.findByPlaceId(placeId));
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findByPlaceId(placeId));
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class PlaceController {
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.REQUESTED, placeService.updatePlace(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(placeId, requestDto));
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class PlaceController {
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.REQUESTED, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
 	}
 
 	/**
@@ -208,6 +208,6 @@ public class PlaceController {
 		// 현재 프로젝트의 루트 경로를 가져와서 src 이하의 경로를 붙이는 과정
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/data";
 		bookmarkPlaceService.writeJsonData(filePath);
-		return CommonResponse.of(SuccessCode.OK);
+		return CommonResponse.of(SuccessCode.CREATED);
 	}
 }

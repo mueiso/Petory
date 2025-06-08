@@ -14,12 +14,13 @@ public enum ErrorCode implements BaseCode {
 	LONG_JSON_TYPE(HttpStatus.BAD_REQUEST, "요청 형식이 잘못되었습니다. JSON 구조를 확인하세요."),
 
 	// user
-	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저가 존재하지 않습니다."),
+	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
+	EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
+	WRONG_SIGNATURE(HttpStatus.UNAUTHORIZED, "잘못된 서명입니다."),
+	INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
 
 	// pet
-	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),
-
-	;
+	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다.");
 
 	private final HttpStatus httpStatus;
 	private final String message;

@@ -29,17 +29,17 @@ public class SecurityConfig {
 	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
 	/*
-	1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
-	2. .sessionManagement : 세션 관리 방식 설정
-	3. .authorizeHttpRequests : URL 접근 권한 설정
+	 * 1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
+	 * 2. .sessionManagement : 세션 관리 방식 설정
+	 * 3. .authorizeHttpRequests : URL 접근 권한 설정
 			.requestMatchers : 해당 경로들은 로그인 없이 접근 허용 → permitAll(누구나 접근 허용)
 			.anyRequest().authenticated() : 그 외의 모든 요청은 인증된 사용자만 접근 가능
-	4. exceptionHandling : 인증 예외 처리 커스터마이징 → 인증 안 된 사용자가 보호된 리소스 접근 시 예외를 JSON 으로 반환
+	 * 4. exceptionHandling : 인증 예외 처리 커스터마이징 → 인증 안 된 사용자가 보호된 리소스 접근 시 예외를 JSON 으로 반환
 			.authenticationEntryPoint : 인증 안 된 사용자 접근 시 동작 지정
 			response.setStatue : HTTP 상태 코드 401 UNAUTHORIZED 로 응답
 			response.setContentType : 응답 형식을 JSON 으로 설정
 			response.getWriter().write() : 사용자에게 JSON 메시지를 반환
-	5. addFilterBefore : JWT 필터를 Security 필터 체인에 등록 → JWT 토큰 유효한지 먼저 검증 후 인증 처리 진행
+	 * 5. addFilterBefore : JWT 필터를 Security 필터 체인에 등록 → JWT 토큰 유효한지 먼저 검증 후 인증 처리 진행
 	 */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

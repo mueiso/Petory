@@ -2,19 +2,19 @@ package com.study.petory.common.auth.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.study.petory.common.auth.dto.OAuth2LoginRequestDto;
-import com.study.petory.common.auth.dto.TokenReissueRequestDto;
 import com.study.petory.common.auth.dto.TokenResponseDto;
 import com.study.petory.common.auth.service.AuthService;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.exception.enums.SuccessCode;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,26 +24,63 @@ public class AuthController {
 
 	private final AuthService authService;
 
-	// OAuth2 로그인 후 토큰 발급
-	@PostMapping("/login/oauth2")
-	public CommonResponse<TokenResponseDto> oauth2Login(@RequestBody OAuth2LoginRequestDto loginRequestDto) {
-		TokenResponseDto tokenResponseDto = authService.issueToken(loginRequestDto.toUser());
-		return CommonResponse.of(SuccessCode.USER_LOGIN, tokenResponseDto);
-	}
-
-	// 로그아웃 처리
+	/**
+	 * 로그아웃 처리
+	 * AccessToken 을 블랙리스트에 등록
+	 * Redis 에서 RefreshToken 제거
+	 * 클라이언트의 RefreshToken 쿠키 제거
+	 *
+	 * @param bearerToken : "Bearer {token}" 형식의 인증 토큰
+	 * @param email : 사용자의 이메일
+	 * @param response : HttpServletResponse 객체 (쿠키 제거 위해 사용)
+	 * @return 로그아웃 성공 메시지
+	 */
 	@DeleteMapping("/logout")
-	public CommonResponse<Object> logout(@RequestHeader("Authorization") String bearerToken,
-		@RequestParam String email) {
+	public CommonResponse<Object> logout(
+		@RequestHeader("Authorization") String bearerToken,
+		@RequestParam String email,
+		HttpServletResponse response) {
+
 		authService.logout(bearerToken, email);
+
+		// 클라이언트의 refreshToken 쿠키 제거 (MaxAge = 0)
+		Cookie deleteCookie = new Cookie("refreshToken", null);
+		deleteCookie.setPath("/");
+		deleteCookie.setMaxAge(0);
+		deleteCookie.setHttpOnly(true);
+		deleteCookie.setSecure(true);  // HTTPS 환경에서만 전송
+		response.addCookie(deleteCookie);
+
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);
 	}
 
-	// Refresh Token 으로 Access Token 재발급
+	/**
+	 * RefreshToken 쿠키 기반으로 AccessToken 재발급
+	 * Redis 에 저장된 RefreshToken 과 쿠키 비교
+	 * AccessToken + 새 RefreshToken 발급
+	 * 새 RefreshToken 을 쿠키로 재설정
+	 *
+	 * @param request : HttpServletRequest (쿠키 접근)
+	 * @param response : HttpServletResponse (새 쿠키 설정)
+	 * @param email : 사용자 이메일
+	 * @return 새로 발급된 AccessToken + RefreshToken 포함 응답
+	 */
 	@PostMapping("/reissue")
-	public CommonResponse<TokenResponseDto> reissue(@RequestBody TokenReissueRequestDto tokenReissueRequestDto) {
-		TokenResponseDto tokenResponseDto = authService.reissue(tokenReissueRequestDto.getEmail(),
-			tokenReissueRequestDto.getRefreshToken());
+	public CommonResponse<TokenResponseDto> reissue(
+		HttpServletRequest request,
+		HttpServletResponse response,
+		@RequestParam String email) {
+
+		TokenResponseDto tokenResponseDto = authService.reissue(request, email);
+
+		// 새 refreshToken 을 HttpOnly 쿠키로 설정
+		Cookie refreshCookie = new Cookie("refreshToken", tokenResponseDto.getRefreshToken());
+		refreshCookie.setPath("/");
+		refreshCookie.setHttpOnly(true);
+		refreshCookie.setSecure(true);  // HTTPS 환경
+		refreshCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일
+		response.addCookie(refreshCookie);
+
 		return CommonResponse.of(SuccessCode.TOKEN_REISSUE, tokenResponseDto);
 	}
 }

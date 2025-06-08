@@ -6,10 +6,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.server.ResponseStatusException;
+
+import com.study.petory.exception.CustomException;
+import com.study.petory.exception.enums.ErrorCode;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -27,6 +28,7 @@ public class JwtProvider {
 	private final StringRedisTemplate redisTemplate;
 
 	public JwtProvider(StringRedisTemplate redisTemplate) {
+
 		this.redisTemplate = redisTemplate;
 	}
 
@@ -48,7 +50,7 @@ public class JwtProvider {
 
 	/*
 	 * @Value : 외부 설정값 주입받기 위해 사용
-	 * ${jwt.secret.key} : application.properties 에 정의된 값을 가져온다
+	 * application.properties 에서 JWT 서명에 사용할 시크릿 키를 주입받고, Key 객체로 변환해서 JWT 에 서명 시 사용
 	 * Key : JWT 를 서명(Sign) 하거나 파싱(Verify) 할 때 사용되는 암호화 키 → @PostConstruct 메서드에서 초기화된다
 	 */
 	@Value("${jwt.secret.key}")
@@ -59,12 +61,12 @@ public class JwtProvider {
 	 * @PostConstruct : Bean 생성 후 자동으로 호출되는 초기화 작업 메서드
 	   → JWT 서명을 위한 암호화 키(Key)를 초기화하는 과정
 	   → @Value 로 주입된 secretKey 를 가공해 Key 객체를 만들기 위해 사용
-	 * Decoders.BASE64.decode : =Base64 로 인코딩된 문자열인 secretKey 를 byte 배열로 디코딩
-	 * this.key : 생성된 Key 를 클래스 필드에 저장해 나중에 사용
-	 * Keys.hmacShaKeyFor() : 전달된 byte 값을 기반으로 HMAC-SHA 용 SecretKey 객체를 생성
+	 * 시크릿 키를 Base64 디코딩해 HMAC SHA 서명을 위한 Key 객체로 초기화
+	 * 토큰 생성 및 검증 시 동일한 키로 서명/검증
 	 */
 	@PostConstruct
 	public void init() {
+
 		byte[] keyBytes = Decoders.BASE64.decode(secretKey);
 		this.key = Keys.hmacShaKeyFor(keyBytes);
 	}
@@ -97,8 +99,11 @@ public class JwtProvider {
 			.compact();
 	}
 
+	// 사용자 ID만 사용해 RefreshToken 생성 (보안성 위해 Claim 최소화)
 	public String createRefreshToken(Long userId) {
+
 		Date now = new Date();
+
 		return prefix + Jwts.builder()
 			.setSubject(String.valueOf(userId))
 			.setExpiration(new Date(now.getTime() + refreshTokenLife))
@@ -107,10 +112,11 @@ public class JwtProvider {
 			.compact();
 	}
 
-	// 순수 JWT 문자열만 반환하는 유틸 메서드
+	// 순수 JWT 문자열만 반환하는 유틸 메서드 (Bearer 제거)
 	public String subStringToken(String token) {
+
 		if (!StringUtils.hasText(token) || !token.startsWith(prefix)) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다.");
+			throw new CustomException(ErrorCode.INVALID_TOKEN);
 		}
 
 		return token.substring(prefix.length());
@@ -141,29 +147,42 @@ public class JwtProvider {
 				.getBody();
 			// 토큰 만료
 		} catch (ExpiredJwtException e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다.");
+			throw new CustomException(ErrorCode.EXPIRED_TOKEN);
 			// 서명 불일치
 		} catch (SignatureException e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "잘못된 서명입니다.");
+			throw new CustomException(ErrorCode.WRONG_SIGNATURE);
 			// 기타 JWT 오류 (Malformed, Unsupported 등)
 		} catch (JwtException e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다.");
+			throw new CustomException(ErrorCode.INVALID_TOKEN);
 		}
 	}
 
+	/*
+	 * Redis 에 이메일을 키로 하여 Refresh Token 을 저장
+	   → 키는 이메일(또는 사용자 ID), 값은 토큰
+	 * Redis TTL(Time-To-Live)은 7일 → 자동 만료
+	 */
 	public void storeRefreshToken(String email, String refreshToken) {
+
 		long expireMillis = refreshTokenLife;
 
-		// Redis에 저장, 키는 이메일(또는 사용자 ID), 값은 토큰
 		redisTemplate.opsForValue().set(email, refreshToken, expireMillis, TimeUnit.MILLISECONDS);
 	}
 
+	// 로그아웃 시 Redis 에서 해당 사용자의 Refresh Token 삭제
 	public void deleteRefreshToken(String email) {
+
 		redisTemplate.delete(email);
 	}
 
+	/*
+	 * Redis 에 저장된 토큰과 전달된 토큰이 일치하는지 검사
+	 * 유효하지 않거나 존재하지 않으면 false 반환
+	 */
 	public boolean isValidRefreshToken(String email, String refreshToken) {
+
 		String saved = redisTemplate.opsForValue().get(email);
+
 		return saved != null && saved.equals(refreshToken);
 	}
 }

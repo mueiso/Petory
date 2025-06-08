@@ -52,6 +52,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		if (WHITELIST.contains(url)) {
 			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
+
 			return;
 		}
 
@@ -62,6 +63,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		if (bearerJwt == null) {
 			debugLog("Authorization 헤더 없음. 필터 중단");
 			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "Authorization 헤더가 존재하지 않습니다.");
+
 			return;
 		}
 
@@ -78,6 +80,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		} catch (ResponseStatusException e) {
 			debugLog("JWT 파싱 실패: " + e.getReason());
 			writeErrorResponse(response, e.getStatusCode(), e.getReason());
+
 			return;
 		}
 
@@ -102,6 +105,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		if (Boolean.TRUE.equals(isBlackListed)) {
 			debugLog("블랙리스트 토큰 발견. 필터 중단");
 			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다. 다시 로그인 해주세요.");
+
 			return;
 		}
 
@@ -148,8 +152,3 @@ public class JwtFilter extends OncePerRequestFilter {
 		log.debug("[JwtFilter] {}", message);
 	}
 }
-
-/* TODO
- * 로그아웃 시 AccessToken 을 Redis 에 저장 (블랙리스트) 로직 추가
- * UserDetailsService 도 커스터마이징
- */

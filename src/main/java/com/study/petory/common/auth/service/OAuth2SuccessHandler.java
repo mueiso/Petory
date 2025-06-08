@@ -12,6 +12,7 @@ import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 	private final UserRepository userRepository;
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+	public void onAuthenticationSuccess(
+		HttpServletRequest request,
+		HttpServletResponse response,
 		Authentication authentication) throws IOException, ServletException {
 
 		// OAuth2 로그인 후 DefaultOAuth2User 에서 이메일 추출
@@ -33,24 +36,34 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new IllegalArgumentException("로그인된 유저 정보를 찾을 수 없습니다."));
 
-		// JWT 토큰 발급
+		// JWT 토큰 생성
 		String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
 		String refreshToken = jwtProvider.createRefreshToken(user.getId());
 
-		// refreshToken 저장
+		// RefreshToken Redis 저장
 		jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
 
-		// TODO - 쿼리 파라미터에 토큰 노출되어 보안상 수정 필요
-		// 클라이언트로 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
+		// Refresh Token 은 보안상 쿠키에 저장 (HttpOnly, Secure, Path=/, Max-Age=7일)
+		Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+		refreshTokenCookie.setHttpOnly(true);
+		refreshTokenCookie.setSecure(true);  // HTTPS 환경에서만 전송 (운영 배포 시 필수)
+		refreshTokenCookie.setPath("/");
+		refreshTokenCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일 (초 단위)
+
+		response.addCookie(refreshTokenCookie);
+
+		/*
+		 * accessToken 만 URL 파라미터로 전달
+		 * 클라이언트로 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
+		 */
 		String targetUrl = UriBuilder.of("http://localhost:3000/oauth/success")
 			.addParam("accessToken", accessToken)
-			.addParam("refreshToken", refreshToken)
 			.build();
 
 		response.sendRedirect(targetUrl);
 	}
 
-	// 간단한 URI 빌더 유틸 (내부 클래스로 사용하거나 별도 유틸로 분리 가능)
+	// 간단한 URI 빌더 유틸 (추후에 확장성 고려 시 별도 유틸로 분리 가능)
 	private static class UriBuilder {
 		private final StringBuilder uri;
 		private boolean hasParam = false;

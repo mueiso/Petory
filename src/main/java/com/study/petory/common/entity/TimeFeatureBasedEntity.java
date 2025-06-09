@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntityWithBothAt {
+public abstract class TimeFeatureBasedEntity {
 
 	@CreatedDate
 	@Column(updatable = false)

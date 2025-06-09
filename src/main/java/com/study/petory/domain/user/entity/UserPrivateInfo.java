@@ -1,6 +1,6 @@
 package com.study.petory.domain.user.entity;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_user_private_info")
 @NoArgsConstructor
-public class UserPrivateInfo extends BaseEntityWithBothAt {
+public class UserPrivateInfo extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

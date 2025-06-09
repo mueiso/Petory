@@ -1,6 +1,6 @@
 package com.study.petory.domain.pet.entity;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_pet")
 @NoArgsConstructor
-public class Pet extends BaseEntityWithBothAt {
+public class Pet extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

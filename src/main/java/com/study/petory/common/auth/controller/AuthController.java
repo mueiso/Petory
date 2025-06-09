@@ -38,6 +38,7 @@ public class AuthController {
 	@DeleteMapping("/logout")
 	public CommonResponse<Object> logout(
 		@RequestHeader("Authorization") String bearerToken,
+		// TODO - AccessToken 으로부터 email 추출해 서버에서 결정하는 방식으로 수정 (보안상 이메일 위조 가능성 때문)
 		@RequestParam String email,
 		HttpServletResponse response) {
 

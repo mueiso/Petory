@@ -2,6 +2,7 @@ package com.study.petory.common.auth.service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -34,7 +35,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		String email = oAuth2User.getAttribute("email");
 		String name = oAuth2User.getAttribute("name");
 
-		// 이미 가입된 사용자인지 확인
+		// 이메일 값이 없으면 예외 발생
+		if (email == null || email.isBlank()) {
+			throw new IllegalArgumentException("이메일 정보가 제공되지 않았습니다.");
+		}
+
+		// 사용자 조회 또는 신규 생성
 		User user = userRepository.findByEmail(email).orElseGet(() -> {
 
 			// 1. 개인 정보 객체 생성
@@ -61,9 +67,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				.build());
 		});
 
-		// Spring Security 내 인증 객체로 반환할 OAuth2User 구성
+		// DB에 저장된 역할로부터 권한 동기화
+		List<SimpleGrantedAuthority> authorities = user.getUserRole().stream()
+			.map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole().name()))
+			.toList();
+
+		// OAuth2User 반환 (SecurityContext 에 등록될 사용자 객체)
 		return new DefaultOAuth2User(
-			Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
+			authorities,
 			oAuth2User.getAttributes(),  // 사용자 속성 전체
 			"email"  // principal key: SecurityContext 에서 사용자 식별
 		);

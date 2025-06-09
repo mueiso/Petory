@@ -49,7 +49,6 @@ public class SecurityConfig {
 			.logout(AbstractHttpConfigurer::disable)
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
-				// TODO 수정 필요
 				.requestMatchers(
 					"/auth/**",
 					"/users/signup",

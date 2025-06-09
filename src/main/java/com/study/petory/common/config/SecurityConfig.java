@@ -1,5 +1,7 @@
 package com.study.petory.common.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -11,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.study.petory.common.security.JwtAuthenticationEntryPoint;
 import com.study.petory.common.security.JwtFilter;
@@ -48,6 +53,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
+			.cors(cors -> cors.configurationSource(corsConfigurationSource()))  // CORS 설정 적용
 			.csrf(AbstractHttpConfigurer::disable)
 			.formLogin(AbstractHttpConfigurer::disable)
 			.logout(AbstractHttpConfigurer::disable)
@@ -82,7 +88,7 @@ public class SecurityConfig {
 	}
 
 	/*
-	 * 비밀번호 암호화 하기 위해 Bean 등록
+	 * 비밀번호 암호화용 Bean
 	 * 로그인 시 사용자 입력 비밀번호를 암호화된 비밀번호와 비교할 때 사용된다
 	 * Security 는 내부적으로 이 메서드를 사용해 matches() 검사를 수행한다
 	 */
@@ -90,5 +96,36 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 
 		return new BCryptPasswordEncoder();
+	}
+
+	/*
+	 * CORS 설정 위한 Bean
+	 * React 등 다른 도메인에서 요청 시 Access-Control-Allow-Credentials, Access-Control-Allow-Origin 등을 정상 처리
+	 */
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+
+		// CORS 설정 객체 생성
+		CorsConfiguration config = new CorsConfiguration();
+
+		// 요청을 허용할 Origin (클라이언트 도메인 지정)
+		config.setAllowedOrigins(List.of("http://localhost:3000"));  // React 등 프론트엔드 개발 서버
+
+		// 허용할 HTTP 메서드 지정
+		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+		// 허용할 요청 헤더 지정 (예: Authorization, Content-Type 등)
+		config.setAllowedHeaders(List.of("*"));
+
+		// 자격 증명 포함 허용 (예: 쿠키, Authorization 헤더 등)
+		config.setAllowCredentials(true);  // 쿠키/인증정보 포함 허용 (프론트에서 withCredentials: true 필요)
+
+		// CORS 설정을 특정 경로 패턴에 매핑
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+		// 모든 경로(/**)에 대해 CORS 설정 적용
+		source.registerCorsConfiguration("/**", config);
+
+		return source;
 	}
 }

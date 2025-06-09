@@ -2,7 +2,7 @@ package com.study.petory.domain.tradeBoard.entity;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_trade_board")
 @NoArgsConstructor
 @Where(clause = "deleted_at IS NULL")
-public class TradeBoard extends BaseEntityWithBothAt {
+public class TradeBoard extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class TradeBoard extends BaseEntityWithBothAt {
 	private Integer price;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "tb_user_id")
 	private User user;
 
 	@Builder
@@ -74,5 +74,15 @@ public class TradeBoard extends BaseEntityWithBothAt {
 
 	public void updatePrice(Integer price) {
 		this.price = price;
+	}
+
+	// tradeBoardId 검증 메서드
+	public boolean isEqualId(Long tradeBoardId) {
+		return this.id.equals(tradeBoardId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
 	}
 }

@@ -2,7 +2,7 @@ package com.study.petory.domain.dailyQna.entity;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 	)
 @Where(clause = "deleted_at is null")
 @NoArgsConstructor
-public class DailyQna extends BaseEntityWithBothAt {
+public class DailyQna extends TimeFeatureBasedEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -54,5 +54,20 @@ public class DailyQna extends BaseEntityWithBothAt {
 
 	public void updateDailyQna(String answer) {
 		this.answer = answer;
+	}
+
+	// dailyQnaId 검증 메서드
+	public boolean isEqualId(Long dailyQnaId) {
+		return this.id.equals(dailyQnaId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
+
+	// question 검증 메서드
+	public boolean isEqualQuestion(Long questionId) {
+		return this.question.isEqualId(questionId);
 	}
 }

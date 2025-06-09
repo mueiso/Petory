@@ -2,7 +2,7 @@ package com.study.petory.domain.user.entity;
 
 import java.util.List;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_user")
 @NoArgsConstructor
-public class User extends BaseEntityWithBothAt {
+public class User extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,5 +43,10 @@ public class User extends BaseEntityWithBothAt {
 		this.email = email;
 		this.userPrivateInfo = userPrivateInfo;
 		this.userRole = userRole;
+	}
+
+	// userId 검증 메서드
+	public boolean isEqualId(Long userId) {
+		return this.id.equals(userId);
 	}
 }

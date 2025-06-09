@@ -14,10 +14,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
@@ -81,7 +85,36 @@ class TradeBoardServiceTest {
 	}
 
 	@Test
-	void 거래_게시글_전체_조회에_성공한다() {
+	void 카테고리_없이_전체_조회에_성공한다() {
+		//given
+		int page = 1;
+		PageRequest pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
+
+		TradeBoard tradeBoard1 = TradeBoard.builder()
+			.category(TradeCategory.TOYS)
+			.title("title1")
+			.content("content1")
+			.photoUrl("url1")
+			.price(1000)
+			.user(user)
+			.build();
+
+		TradeBoard tradeBoard2 = TradeBoard.builder()
+			.category(TradeCategory.HEALTH)
+			.title("title2")
+			.content("content2")
+			.photoUrl("url2")
+			.price(2000)
+			.user(user)
+			.build();
+
+		tradeBoardRepository.save(tradeBoard1);
+		tradeBoardRepository.save(tradeBoard2);
+
+		//when
+		Page<TradeBoardGetAllResponseDto> tradeBoards = tradeBoardService.findAllTradeBoard(null, page);
+
+		//then
 
 	}
 }

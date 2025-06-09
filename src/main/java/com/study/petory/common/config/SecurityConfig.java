@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.study.petory.common.security.JwtAuthenticationEntryPoint;
 import com.study.petory.common.security.JwtFilter;
 import com.study.petory.domain.user.service.CustomOAuth2UserService;
 import com.study.petory.domain.user.service.OAuth2FailureHandler;
@@ -30,6 +31,7 @@ public class SecurityConfig {
 	private final CustomOAuth2UserService customOAuth2UserService;
 	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 	private final OAuth2FailureHandler oAuth2FailureHandler;
+	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	/*
 	 * 1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
@@ -64,11 +66,7 @@ public class SecurityConfig {
 			)
 
 			.exceptionHandling(ex -> ex
-				.authenticationEntryPoint((request, response, authException) -> {
-					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					response.setContentType("application/json;charset=UTF-8");
-					response.getWriter().write("{\"status\":401,\"message\":\"인증이 필요합니다.\"}");
-				})
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 분리된 클래스 사용
 			)
 
 			.oauth2Login(oauth2 -> oauth2

@@ -42,7 +42,8 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
 	public OwnerBoard findOwnerBoardById(Long boardId) {
-		return ownerBoardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
+		return ownerBoardRepository.findByIdWithImages(boardId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
 	}
 
 	// 게시글 생성
@@ -90,6 +91,11 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional(readOnly = true)
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		// List<String> imageUrls = ownerBoard.getImages()
+		// 	.stream()
+		// 	.map(OwnerBoardImage::getUrl)
+		// 	.toList();
 
 		List<OwnerBoardComment> initialComments = ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(
 			boardId);

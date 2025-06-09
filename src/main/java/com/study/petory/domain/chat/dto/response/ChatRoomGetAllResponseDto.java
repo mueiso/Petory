@@ -11,11 +11,11 @@ public class ChatRoomGetAllResponseDto {
 
 	private final Long tradeBoardId;
 
-	private final Long opponentUserId;
+	private final String opponentUserNickname;
 
-	public ChatRoomGetAllResponseDto(ChatRoom chatRoom, Long opponentUserId) {
+	public ChatRoomGetAllResponseDto(ChatRoom chatRoom, String opponentUserNickname) {
 		this.chatRoomId = chatRoom.getId();
 		this.tradeBoardId = chatRoom.getTradeBoardId();
-		this.opponentUserId = opponentUserId;
+		this.opponentUserNickname = opponentUserNickname;
 	}
 }

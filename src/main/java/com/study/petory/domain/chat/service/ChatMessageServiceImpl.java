@@ -34,9 +34,6 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
 		chatMessageRepository.save(chatMessage);
 
-		chatRoom.updateLastMessage(requestDto.getMessage());
-		chatRoomRepository.save(chatRoom);
-
 		return chatMessage;
 	}
 }

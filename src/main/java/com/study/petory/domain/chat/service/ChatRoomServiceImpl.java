@@ -79,7 +79,11 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 		return chatRooms.map(chatRoom -> {
 			Long opponentUserId =
 				chatRoom.isEqualSeller(user.getId()) ? chatRoom.getCustomerId() : chatRoom.getSellerId();
-			return new ChatRoomGetAllResponseDto(chatRoom, opponentUserId);
+
+			User opponentUSer = userRepository.findById(opponentUserId)
+				.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+			return new ChatRoomGetAllResponseDto(chatRoom, opponentUSer.getNickname());
 		});
 	}
 

@@ -42,4 +42,9 @@ public class Question extends DeletionBasedEntity {
 			this.date = date;
 		}
 	}
+
+	// questionId 검증 메서드
+	public boolean isEqualId(Long questionId) {
+		return this.id.equals(questionId);
+	}
 }

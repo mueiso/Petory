@@ -134,4 +134,14 @@ public class Place extends TimeFeatureBasedEntity {
 		this.ratio = BigDecimal.valueOf(sumRatio)
 			.divide(BigDecimal.valueOf(countPlaceReview), 1, RoundingMode.HALF_UP);
 	}
+
+	// placeId 검증 메서드
+	public boolean isEqualId(Long placeId) {
+		return this.id.equals(placeId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
 }

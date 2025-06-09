@@ -58,4 +58,14 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 			this.ratio = ratio;
 		}
 	}
+
+	// place 검증 메서드
+	public boolean isEqualPlace(Long placeId) {
+		return this.place.isEqualId(placeId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
 }

@@ -34,7 +34,7 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false,length = 100)
+	@Column(nullable = false, length = 100)
 	private String title;
 
 	@Column(nullable = false, columnDefinition = "TEXT")
@@ -54,7 +54,21 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 		this.user = user;
 	}
 
-	public void updateTitle(String title) {this.title = title;}
+	public void updateTitle(String title) {
+		this.title = title;
+	}
 
-	public void updateContent(String content) {this.content = content;}
+	public void updateContent(String content) {
+		this.content = content;
+	}
+
+	// ownerBoardId 검증 메서드
+	public boolean isEqualId(Long ownerBoardId) {
+		return this.id.equals(ownerBoardId);
+	}
+
+	// user 검증 메서드
+	private boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
 }

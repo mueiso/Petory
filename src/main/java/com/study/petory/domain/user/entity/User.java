@@ -44,4 +44,9 @@ public class User extends TimeFeatureBasedEntity {
 		this.userPrivateInfo = userPrivateInfo;
 		this.userRole = userRole;
 	}
+
+	// userId 검증 메서드
+	public boolean isEqualId(Long userId) {
+		return this.id.equals(userId);
+	}
 }

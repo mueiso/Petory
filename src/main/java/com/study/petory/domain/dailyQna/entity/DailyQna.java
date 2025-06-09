@@ -49,4 +49,14 @@ public class DailyQna extends TimeFeatureBasedEntity {
 	public void updateDailyQna(String answer) {
 		this.answer = answer;
 	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
+
+	// question 검증 메서드
+	public boolean isEqualQuestion(Long questionId) {
+		return this.question.isEqualId(questionId);
+	}
 }

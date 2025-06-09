@@ -75,4 +75,14 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	public void updatePrice(Integer price) {
 		this.price = price;
 	}
+
+	// tradeBoardId 검증 메서드
+	public boolean isEqualId(Long tradeBoardId) {
+		return this.id.equals(tradeBoardId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
 }

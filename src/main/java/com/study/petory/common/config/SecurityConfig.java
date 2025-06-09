@@ -18,7 +18,6 @@ import com.study.petory.domain.user.service.CustomOAuth2UserService;
 import com.study.petory.domain.user.service.OAuth2FailureHandler;
 import com.study.petory.domain.user.service.OAuth2SuccessHandler;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Configuration

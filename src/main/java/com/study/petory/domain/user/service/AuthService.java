@@ -23,6 +23,8 @@ public class AuthService {
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
 	private final StringRedisTemplate redisTemplate;
+	private static final String REFRESH_TOKEN_COOKIE_NAME = "refreshToken";
+
 
 	/*
 	 * Google OAuth2 로그인 성공 시 토큰 발급
@@ -106,7 +108,7 @@ public class AuthService {
 		}
 
 		for (Cookie cookie : request.getCookies()) {
-			if ("refreshToken".equals(cookie.getName())) {
+			if (REFRESH_TOKEN_COOKIE_NAME.equals(cookie.getName())) {
 				return cookie.getValue();
 			}
 		}

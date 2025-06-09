@@ -26,7 +26,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 
 	// 전체 조회
 	@Query(
-		"SELECT new com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto(p.id, p.placeName, p.placeInfo, p.placeType, p.ratio, p.latitude, p.longitude) "
+		"SELECT new com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto(p.id, p.placeName, p.placeInfo, p.placeType, p.address, p.ratio, p.latitude, p.longitude) "
 			+ "FROM Place p")
 	Page<PlaceGetAllResponseDto> findAllPlace(Pageable pageable);
 

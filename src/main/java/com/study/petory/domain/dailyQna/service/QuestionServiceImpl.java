@@ -3,13 +3,15 @@ package com.study.petory.domain.dailyQna.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
+import com.study.petory.domain.dailyQna.repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
@@ -81,17 +83,11 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// 질문 전체 조회 admin
 	@Override
-	public Page<QuestionGetAllResponseDto> findAllQuestion(Long userId, int page) {
+	public Page<QuestionGetAllResponseDto> findAllQuestion(Long userId, Pageable pageable) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(userId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		int p = 0;
-		if (page > 1) {
-			p = page - 1;
-		}
-		PageRequest pageable = PageRequest.of(p, 50, Sort.by("date").ascending());
-
 		return questionRepository.findQuestionByPage(pageable);
 	}
 
@@ -108,6 +104,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	// 오늘의 질문 조회
 	@Override
+	@Cacheable(value = "todayQuestion")
 	public QuestionGetTodayResponseDto findTodayQuestion() {
 		LocalDate date = LocalDate.now();
 		String today = date.format(DateTimeFormatter.ofPattern("MM-dd"));

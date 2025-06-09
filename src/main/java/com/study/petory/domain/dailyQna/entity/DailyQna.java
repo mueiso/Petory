@@ -2,7 +2,7 @@ package com.study.petory.domain.dailyQna.entity;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_daily_qna")
 @Where(clause = "deleted_at is null")
 @NoArgsConstructor
-public class DailyQna extends BaseEntityWithBothAt {
+public class DailyQna extends TimeFeatureBasedEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

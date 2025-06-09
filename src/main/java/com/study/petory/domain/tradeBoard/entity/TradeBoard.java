@@ -2,7 +2,7 @@ package com.study.petory.domain.tradeBoard.entity;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_trade_board")
 @NoArgsConstructor
 @Where(clause = "deleted_at IS NULL")
-public class TradeBoard extends BaseEntityWithBothAt {
+public class TradeBoard extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

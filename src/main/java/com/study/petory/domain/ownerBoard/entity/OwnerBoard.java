@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.CascadeType;
@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_owner_board")
 @NoArgsConstructor
 @Where(clause = "deleted_at IS NULL")
-public class OwnerBoard extends BaseEntityWithBothAt {
+public class OwnerBoard extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

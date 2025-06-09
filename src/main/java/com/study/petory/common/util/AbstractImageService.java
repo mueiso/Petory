@@ -41,10 +41,9 @@ public abstract class AbstractImageService<T> {
 
 	// 파일 삭제
 	@Transactional
-	public void deleteImage(Long imageId) {
-		T image = findImageById(imageId);
-		String key = extractKeyFromUrl(getImageUrl(image));
-		s3Uploader.deleteFile(key);
+	public void deleteImageInternal(T image) {
+		// String key = extractKeyFromUrl(getImageUrl(image));
+		// s3Uploader.deleteFile(key);
 		deleteImageEntity(image);
 	}
 
@@ -62,9 +61,14 @@ public abstract class AbstractImageService<T> {
 	protected abstract void save(T entity); // 도메인별 DB 저장로직
 
 	// 도메인별 구현 필요(삭제 용도)
-	protected abstract T findImageById(Long imageId);
+	public abstract void deleteImage(T image); // deleteImageInternal 메서드 구현클래스에서 호출
 
-	protected abstract String getImageUrl(T image);
+	protected abstract T findImageById(Long imageId); // Image 조회로직
 
-	protected abstract void deleteImageEntity(T image);
+	protected abstract String getImageUrl(T image); // Image에서 Url 가져오기
+
+	protected abstract void deleteImageEntity(T image); // db에서 Image 삭제(hard Delete)
+
+	// protected abstract void deleteImageById(Long imageId); // db에서 Image 삭제(hard Delete)
+
 }

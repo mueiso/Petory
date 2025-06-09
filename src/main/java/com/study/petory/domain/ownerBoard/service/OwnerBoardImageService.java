@@ -1,6 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.util.AbstractImageService;
 import com.study.petory.common.util.S3Uploader;
@@ -14,11 +15,18 @@ import com.study.petory.exception.enums.ErrorCode;
 public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage> {
 
 	// 도메인 별 repository 및 생성자 구현
-	private final OwnerBoardImageRepository repository;
+	private final OwnerBoardImageRepository ownerBoardImageRepository;
 
-	public OwnerBoardImageService(S3Uploader s3Uploader, OwnerBoardImageRepository repository) {
+	public OwnerBoardImageService(S3Uploader s3Uploader, OwnerBoardImageRepository ownerBoardImageRepository) {
 		super(s3Uploader);
-		this.repository = repository;
+		this.ownerBoardImageRepository = ownerBoardImageRepository;
+	}
+
+	@Override
+	@Transactional // 구현클래스에서 반드시 붙이기
+	public void deleteImage(OwnerBoardImage image) {
+
+		deleteImageInternal(image);
 	}
 
 	@Override
@@ -34,12 +42,12 @@ public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage
 
 	@Override
 	protected void save(OwnerBoardImage entity) {
-		repository.save(entity);
+		ownerBoardImageRepository.save(entity);
 	}
 
 	@Override
 	protected OwnerBoardImage findImageById(Long imageId) {
-		return repository.findById(imageId)
+		return ownerBoardImageRepository.findById(imageId)
 			.orElseThrow(() -> new CustomException(ErrorCode.FILE_NOT_FOUND));
 	}
 
@@ -48,9 +56,14 @@ public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage
 		return image.getUrl();
 	}
 
+	// @Override
+	// protected void deleteImageById(Long imageId) {
+	// 	ownerBoardImageRepository.deleteById(imageId);
+	// }
+
 	@Override
 	protected void deleteImageEntity(OwnerBoardImage image) {
-		repository.delete(image);
-
+		ownerBoardImageRepository.delete(image);
+		ownerBoardImageRepository.flush();
 	}
 }

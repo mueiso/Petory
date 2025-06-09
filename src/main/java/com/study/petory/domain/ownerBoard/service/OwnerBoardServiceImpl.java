@@ -132,6 +132,14 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		// 본인 작성 글인지 검증 로직 추가
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		// 이미지 모두 hard delete(S3, DB)
+		List<OwnerBoardImage> images = ownerBoard.getImages();
+		for (OwnerBoardImage image : images) {
+			ownerBoardImageService.deleteImage(image);
+		}
+
+		// 게시글 soft delete
 		ownerBoard.deactivateEntity();
 	}
 
@@ -155,7 +163,8 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Override
 	public void deleteImage(Long boardId, Long imageId) {
 		findOwnerBoardById(boardId);
-		ownerBoardImageService.deleteImage(imageId);
+		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
+		ownerBoardImageService.deleteImageInternal(image);
 	}
 
 }

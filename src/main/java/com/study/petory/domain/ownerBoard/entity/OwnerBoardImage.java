@@ -1,5 +1,6 @@
 package com.study.petory.domain.ownerBoard.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.BaseEntityWithCreatedAt;
 
 import jakarta.persistence.Entity;
@@ -27,6 +28,7 @@ public class OwnerBoardImage extends BaseEntityWithCreatedAt {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "owner_board_id")
+	@JsonIgnore
 	private OwnerBoard ownerBoard;
 
 	public OwnerBoardImage(String url, OwnerBoard ownerBoard) {

@@ -1,6 +1,7 @@
 package com.study.petory.common.util;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +26,18 @@ public class S3Uploader {
 	@Value("${cloud.aws.bucket}")
 	private String bucket;
 
+	// 이미지 필터링
+	private static final List<String> ALLOWED_EXTENSIONS = List.of("jpg", "jpeg", "png", "gif", "webp");
+
 	// 파일 확장자 추출 메서드
 	private String getExtension(String fileName) {
-		return fileName.substring(fileName.lastIndexOf(".") + 1);
+		String ext = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+
+		if (ALLOWED_EXTENSIONS.contains(ext)) {
+			throw new CustomException(ErrorCode.FILE_INVALID_EXTENSION);
+		}
+
+		return ext;
 	}
 
 	// S3에 파일 업로드

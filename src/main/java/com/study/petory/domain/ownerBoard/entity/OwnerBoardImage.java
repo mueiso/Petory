@@ -35,4 +35,8 @@ public class OwnerBoardImage extends BaseEntityWithCreatedAt {
 		this.url = url;
 		this.ownerBoard = ownerBoard;
 	}
+
+	public void ClearOwnerBoard() {
+		this.ownerBoard = null;
+	}
 }

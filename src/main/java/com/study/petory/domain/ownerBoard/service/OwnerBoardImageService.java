@@ -25,7 +25,6 @@ public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage
 	@Override
 	@Transactional // 구현클래스에서 반드시 붙이기
 	public void deleteImage(OwnerBoardImage image) {
-
 		deleteImageInternal(image);
 	}
 
@@ -56,14 +55,4 @@ public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage
 		return image.getUrl();
 	}
 
-	// @Override
-	// protected void deleteImageById(Long imageId) {
-	// 	ownerBoardImageRepository.deleteById(imageId);
-	// }
-
-	@Override
-	protected void deleteImageEntity(OwnerBoardImage image) {
-		ownerBoardImageRepository.delete(image);
-		ownerBoardImageRepository.flush();
-	}
 }

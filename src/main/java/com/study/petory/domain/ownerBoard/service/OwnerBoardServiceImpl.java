@@ -135,8 +135,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		// 이미지 모두 hard delete(S3, DB)
 		List<OwnerBoardImage> images = ownerBoard.getImages();
-		for (OwnerBoardImage image : images) {
+
+		for (OwnerBoardImage image : new ArrayList<>(images)) {
 			ownerBoardImageService.deleteImage(image);
+			ownerBoard.getImages().remove(image); // 연관관계를 끊어 고아객체로 만들면 delete 쿼리 발생
 		}
 
 		// 게시글 soft delete

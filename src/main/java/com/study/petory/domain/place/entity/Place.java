@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_place")
 @NoArgsConstructor
-public class Place extends BaseEntityWithBothAt {
+public class Place extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -133,5 +133,15 @@ public class Place extends BaseEntityWithBothAt {
 		// 정수형 타입을 BigDecimal 형태로 변환함과 동시에 나누는 로직. 소수점 첫째 자리까지 계산, 둘째 자리에서 반올림.
 		this.ratio = BigDecimal.valueOf(sumRatio)
 			.divide(BigDecimal.valueOf(countPlaceReview), 1, RoundingMode.HALF_UP);
+	}
+
+	// placeId 검증 메서드
+	public boolean isEqualId(Long placeId) {
+		return this.id.equals(placeId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
 	}
 }

@@ -108,7 +108,7 @@ public class SecurityConfig {
 		// CORS 설정 객체 생성
 		CorsConfiguration config = new CorsConfiguration();
 
-		// 요청을 허용할 Origin (클라이언트 도메인 지정)
+		// 허용할 프론트 주소 (클라이언트 도메인 지정)
 		config.setAllowedOrigins(List.of("http://localhost:3000"));  // React 등 프론트엔드 개발 서버
 
 		// 허용할 HTTP 메서드 지정
@@ -123,7 +123,7 @@ public class SecurityConfig {
 		// CORS 설정을 특정 경로 패턴에 매핑
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-		// 모든 경로(/**)에 대해 CORS 설정 적용
+		// 모든 요청 경로(/**)에 대해 CORS 설정 적용
 		source.registerCorsConfiguration("/**", config);
 
 		return source;

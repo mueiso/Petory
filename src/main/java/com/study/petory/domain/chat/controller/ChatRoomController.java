@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
-import com.study.petory.domain.chat.dto.response.ChatRoomAllGetResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.service.ChatRoomService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -43,7 +42,7 @@ public class ChatRoomController {
 	 * @return 로그인한 사용자의 채팅방
 	 */
 	@GetMapping
-	public ResponseEntity<CommonResponse<Slice<ChatRoomAllGetResponseDto>>> getAllCharRoom(
+	public ResponseEntity<CommonResponse<Slice<ChatRoomGetAllResponseDto>>> getAllCharRoom(
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, chatRoomService.findAllChatRoom());
 	}

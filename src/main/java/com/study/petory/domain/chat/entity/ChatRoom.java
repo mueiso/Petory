@@ -24,31 +24,23 @@ public class ChatRoom {
 
 	private Long tradeBoardId;
 
-	private String tradeBoardTitle;
-
-	private String tradeBoardUrl;
-
-	private String lastMessage;
-
 	private boolean isDeleted = false;
 
 	@CreatedDate
 	private LocalDateTime createdAt;
 
 	@Builder
-	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId, String tradeBoardTitle, String tradeBoardUrl) {
+	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId) {
 		this.sellerId = sellerId;
 		this.customerId = customerId;
 		this.tradeBoardId = tradeBoardId;
-		this.tradeBoardTitle = tradeBoardTitle;
-		this.tradeBoardUrl = tradeBoardUrl;
 	}
 
 	public void deactivateChatRoom() {
 		this.isDeleted = true;
 	}
 
-	public void updateLastMessage(String message) {
-		this.lastMessage = message;
+	public boolean isEqualSeller(Long userId) {
+		return this.sellerId.equals(userId);
 	}
 }

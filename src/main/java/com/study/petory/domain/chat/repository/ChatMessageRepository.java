@@ -10,4 +10,5 @@ public interface ChatMessageRepository extends MongoRepository<ChatMessage, Stri
 
 	List<ChatMessage> findAllByChatRoomId(String chatRoomId);
 
+	ChatMessage findFirstByChatRoomIdOrderByCreatedAtDesc(String chatRoomId);
 }

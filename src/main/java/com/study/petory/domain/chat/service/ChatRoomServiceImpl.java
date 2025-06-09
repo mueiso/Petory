@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
-import com.study.petory.domain.chat.dto.response.ChatRoomAllGetResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
@@ -47,6 +48,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 
 		//해당 물품에 관한 채팅방이 존재하거나 삭제되지 않은 경우 예외처리
 		ChatRoom existRoom = chatRoomRepository.findByTradeBoardIdAndSellerId(tradeBoardId, seller.getId());
+
 		if (existRoom != null && !existRoom.isDeleted()) {
 			throw new CustomException(ErrorCode.CHAT_ROOM_ALREADY_EXIST);
 		}
@@ -55,28 +57,30 @@ public class ChatRoomServiceImpl implements ChatRoomService{
 			.sellerId(seller.getId())
 			.customerId(customer.getId())
 			.tradeBoardId(tradeBoardId)
-			.tradeBoardTitle(tradeBoard.getTitle())
-			.tradeBoardUrl("/trade-boards/" + tradeBoard.getId())
 			.build();
 
 		ChatRoom savedCharRoom = chatRoomRepository.save(chatRoom);
 
-		return new ChatRoomCreateResponseDto(savedCharRoom, tradeBoard);
+		return new ChatRoomCreateResponseDto(savedCharRoom);
 	}
 
 	//로그인 한 사용자 채팅방 전체 조회
 	@Override
-	public Slice<ChatRoomAllGetResponseDto> findAllChatRoom() {
+	public Slice<ChatRoomGetAllResponseDto> findAllChatRoom() {
 
 		//수정 예정
-		User customer = userRepository.findById(2L)
+		User user = userRepository.findById(2L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		PageRequest pageable = PageRequest.of(0, 10);
+		PageRequest pageable = PageRequest.of(0, 15);
 
-		Slice<ChatRoom> chatRooms = chatRoomRepository.findAllByCustomerIdAndIsDeletedFalse(customer.getId(), pageable);
+		Slice<ChatRoom> chatRooms = chatRoomRepository.findAllByUserIdAndIsDeletedFalse(user.getId(), pageable);
 
-		return chatRooms.map(ChatRoomAllGetResponseDto::new);
+		return chatRooms.map(chatRoom -> {
+			Long opponentUserId =
+				chatRoom.isEqualSeller(user.getId()) ? chatRoom.getCustomerId() : chatRoom.getSellerId();
+			return new ChatRoomGetAllResponseDto(chatRoom, opponentUserId);
+		});
 	}
 
 	//채팅방 단건 조회

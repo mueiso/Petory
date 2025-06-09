@@ -12,16 +12,19 @@ public class ChatRoomGetResponseDto {
 
 	private final String chatRoomId;
 
-	private final String tradeBoardTitle;
+	private final Long tradeBoardId;
 
-	private final String tradeBoardUrl;
+	private final Long sellerId;
+
+	private final Long customerId;
 
 	private final List<ChatMessage> messages;
 
 	public ChatRoomGetResponseDto(ChatRoom chatRoom, List<ChatMessage> messages) {
 		this.chatRoomId = chatRoom.getId();
-		this.tradeBoardTitle = chatRoom.getTradeBoardTitle();
-		this.tradeBoardUrl = chatRoom.getTradeBoardUrl();
+		this.tradeBoardId = chatRoom.getTradeBoardId();
+		this.sellerId = chatRoom.getSellerId();
+		this.customerId = chatRoom.getCustomerId();
 		this.messages = messages;
 	}
 }

@@ -12,22 +12,19 @@ public class ChatRoomCreateResponseDto {
 
 	private final String chatRoomId;
 
+	private final Long tradeBoardId;
+
 	private final Long sellerId;
 
 	private final Long customerId;
 
-	private final String tradeBoardTitle;
-
-	private final String tradeBoardUrl;
-
 	private final LocalDateTime createdAt;
 
-	public ChatRoomCreateResponseDto(ChatRoom chatRoom, TradeBoard tradeBoard) {
+	public ChatRoomCreateResponseDto(ChatRoom chatRoom) {
 		this.chatRoomId = chatRoom.getId();
+		this.tradeBoardId = chatRoom.getTradeBoardId();
 		this.sellerId = chatRoom.getSellerId();
 		this.customerId = chatRoom.getCustomerId();
-		this.tradeBoardTitle = tradeBoard.getTitle();
-		this.tradeBoardUrl = chatRoom.getTradeBoardUrl();
 		this.createdAt = chatRoom.getCreatedAt();
 	}
 }

@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.service;
+package com.study.petory.domain.user.service;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 
@@ -46,12 +47,14 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 		// Refresh Token 은 보안상 쿠키에 저장 (HttpOnly, Secure, Path=/, Max-Age=7일)
 		Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
 		refreshTokenCookie.setHttpOnly(true);
-		refreshTokenCookie.setSecure(true);  // HTTPS 환경에서만 전송 (운영 배포 시 필수)
+		// TODO - 로컬 개발 중이면 HTTPS 가 아니라서 쿠키가 아예 전송되지 않을 수 있어서 false → 배포 전에 true 로 변경
+		refreshTokenCookie.setSecure(false);  // HTTPS 환경에서만 전송 (운영 배포 시 필수)
 		refreshTokenCookie.setPath("/");
 		refreshTokenCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일 (초 단위)
 
 		response.addCookie(refreshTokenCookie);
 
+		// TODO - 배포된 프론트엔트 주소로 변경 필요 (예: "https://www.petory.com/oauth/success")
 		/*
 		 * accessToken 만 URL 파라미터로 전달
 		 * 클라이언트로 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)

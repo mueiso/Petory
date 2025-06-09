@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.security;
+package com.study.petory.common.security;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,8 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.study.petory.common.auth.service.JwtProvider;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

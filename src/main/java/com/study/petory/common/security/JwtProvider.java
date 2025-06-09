@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.service;
+package com.study.petory.common.security;
 
 import java.security.Key;
 import java.util.Date;

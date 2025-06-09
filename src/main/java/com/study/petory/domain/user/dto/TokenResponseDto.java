@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.dto;
+package com.study.petory.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

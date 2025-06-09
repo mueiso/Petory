@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.controller;
+package com.study.petory.domain.user.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.study.petory.common.auth.dto.TokenResponseDto;
-import com.study.petory.common.auth.service.AuthService;
+import com.study.petory.domain.user.dto.TokenResponseDto;
+import com.study.petory.domain.user.service.AuthService;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -38,7 +38,7 @@ public class AuthController {
 	@DeleteMapping("/logout")
 	public CommonResponse<Object> logout(
 		@RequestHeader("Authorization") String bearerToken,
-		// TODO - AccessToken 으로부터 email 추출해 서버에서 결정하는 방식으로 수정 (보안상 이메일 위조 가능성 때문)
+		// TODO - AccessToken 으로부터 email 추출해 서버에서 결정하는 방식으로 수정 (보안상 이메일 위조 가능성 때문) → 아예 없어도 될듯
 		@RequestParam String email,
 		HttpServletResponse response) {
 

@@ -1,11 +1,12 @@
-package com.study.petory.common.auth.service;
+package com.study.petory.domain.user.service;
 
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.study.petory.common.auth.dto.TokenResponseDto;
+import com.study.petory.common.security.JwtProvider;
+import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;
@@ -70,7 +71,7 @@ public class AuthService {
 	}
 
 	/*
-	 * RefreshToken을 쿠키에서 읽고 AccessToken 재발급
+	 * RefreshToken 을 쿠키에서 읽고 AccessToken 재발급
 	 */
 	public TokenResponseDto reissue(HttpServletRequest request, String email) {
 

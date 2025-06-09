@@ -1,8 +1,7 @@
-package com.study.petory.common.auth.service;
+package com.study.petory.domain.user.service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -33,7 +32,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 		// 구글에서 받은 사용자 정보 추출
 		String email = oAuth2User.getAttribute("email");
-		String name = oAuth2User.getAttribute("name");
+		String name = oAuth2User.getAttribute("nickname");
 
 		// 이메일 값이 없으면 예외 발생
 		if (email == null || email.isBlank()) {
@@ -56,7 +55,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				.build();
 
 			// 유저와 역할 매핑
-			List<UserRole> userRoles = Collections.singletonList(userRole);
+			List<UserRole> userRoles = List.of(userRole);
 
 			// User 엔티티 생성 및 저장
 			return userRepository.save(User.builder()

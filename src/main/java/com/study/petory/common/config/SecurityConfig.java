@@ -1,4 +1,4 @@
-package com.study.petory.common.auth.security;
+package com.study.petory.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.study.petory.common.auth.service.CustomOAuth2UserService;
-import com.study.petory.common.auth.service.OAuth2SuccessHandler;
+import com.study.petory.common.security.JwtFilter;
+import com.study.petory.domain.user.service.CustomOAuth2UserService;
+import com.study.petory.domain.user.service.OAuth2FailureHandler;
+import com.study.petory.domain.user.service.OAuth2SuccessHandler;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class SecurityConfig {
 	private final JwtFilter jwtFilter;
 	private final CustomOAuth2UserService customOAuth2UserService;
 	private final OAuth2SuccessHandler oAuth2SuccessHandler;
+	private final OAuth2FailureHandler oAuth2FailureHandler;
 
 	/*
 	 * 1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
@@ -73,6 +76,7 @@ public class SecurityConfig {
 					.userService(customOAuth2UserService)  // OAuth2 사용자 정보 처리
 				)
 				.successHandler(oAuth2SuccessHandler)  // 로그인 성공 후 JWT 발급
+				.failureHandler(oAuth2FailureHandler)  // 로그인 실패 시 처리
 			)
 
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

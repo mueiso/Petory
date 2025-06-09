@@ -33,7 +33,8 @@ public class S3Uploader {
 	private String getExtension(String fileName) {
 		String ext = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 
-		if (ALLOWED_EXTENSIONS.contains(ext)) {
+		if (!ALLOWED_EXTENSIONS.contains(ext)) {
+
 			throw new CustomException(ErrorCode.FILE_INVALID_EXTENSION);
 		}
 

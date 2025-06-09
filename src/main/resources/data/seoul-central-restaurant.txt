@@ -1,0 +1,947 @@
+{
+folder: {
+folderId: 82083973,
+name: "갈수있어 강아지도, 서울중부 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "6",
+lastUseTime: 1693219599000,
+creationTime: 1680843287000,
+shouldOverlay: true,
+bookmarkCount: 483,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642f9e468c456e870014869e",
+reviewPageUrl: "https://m.place.naver.com/my/642f9e468c456e870014869e/review?v=2",
+imageUrl: "https://myplace-phinf.pstatic.net/20230407_300/1680843154382oK9fr_PNG/221226_%B3%D7%C0%CC%B9%F6%C1%F6%B5%B5_%C4%B7%C6%E4%C0%CE%BF%EB_%C7%C1%B7%CE%C7%CA%C0%CC%B9%CC%C1%F6-01.png?type=f220_220_70_sharpen",
+nick: "N강아지도 초코"
+},
+shareId: "90bd9ed317374606b04b5a4878c94dc7",
+encryptedUserIdNo: "YYz_awCfmjLGfBj_:rU1IWjbOqAAPd8sp7MknxRcBVIfmhw",
+followCount: 1776,
+viewCount: 7068,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007382406,
+name: "헌터스위크",
+displayName: "",
+px: 126.9819441,
+py: 37.568548,
+type: "place",
+useTime: 1683528807000,
+lastUpdateTime: 1683528807000,
+creationTime: 1683528806000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1440910228",
+address: "서울특별시 중구 다동 13",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09140102",
+cidPath: [
+"220036",
+"230746"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "43lZcY0WRpTruLl7ycM4Yw==",
+pan: "-87.93",
+tilt: "10.00",
+lng: "126.9821092",
+lat: "37.5685419",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20180913_281/1536772355299Vza4J_JPEG/tY04dqw9JmHechrVhU_28Uv4.jpg",
+"https://ldb-phinf.pstatic.net/20180913_140/153677236291147fYx_JPEG/k8jgzJPqk5cwgyF2C3dUigf2.jpg",
+"https://ldb-phinf.pstatic.net/20180913_195/1536772366048EADM6_JPEG/-F7sNumf5nvp5kHz_NNq4ENV.jpg"
+],
+category: "푸드트럭"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007382246,
+name: "블러섬랜드",
+displayName: "",
+px: 126.9737677,
+py: 37.5555056,
+type: "place",
+useTime: 1683528797000,
+lastUpdateTime: 1683528797000,
+creationTime: 1683528797000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "35162822",
+address: "서울특별시 중구 남대문로5가 417 서울스퀘어 지하 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09140118",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "oUG272VJRmZbT7kGa/aXWA==",
+pan: "89.22",
+tilt: "10.00",
+lng: "126.9731358",
+lat: "37.5554965",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150902_111/14411278287732WOKL_JPEG/156568546924842_0.jpeg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007382030,
+name: "메종 앙티브",
+displayName: "",
+px: 127.0029101,
+py: 37.5373868,
+type: "place",
+useTime: 1683528785000,
+lastUpdateTime: 1683528785000,
+creationTime: 1683528784000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "32875601",
+address: "서울특별시 용산구 한남동 729-32",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170131",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Vj6xJDuiRb1IzwOnmzMPWA==",
+pan: "-169.97",
+tilt: "10.00",
+lng: "127.0029265",
+lat: "37.5374787",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20180903_156/1535960806891qfoQ2_JPEG/_.jpg",
+"https://ldb-phinf.pstatic.net/20180903_8/1535960806870VYWuS_JPEG/__2.jpg",
+"https://ldb-phinf.pstatic.net/20231226_234/1703548070019w2SfG_JPEG/IMG_9465.jpeg"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007381816,
+name: "삼각지 3번출구호프",
+displayName: "",
+px: 126.9723039,
+py: 37.5333728,
+type: "place",
+useTime: 1683528771000,
+lastUpdateTime: 1683528771000,
+creationTime: 1683528770000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1968834681",
+address: "서울특별시 용산구 한강로1가 243-18 1층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "09170124",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"221078"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ajKgXXPuUCvgYLN7STP2Ig==",
+pan: "120.83",
+tilt: "10.00",
+lng: "126.9721225",
+lat: "37.5334808",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240603_234/1717346113775lI7pu_JPEG/IMG_2456.jpeg",
+"https://ldb-phinf.pstatic.net/20240603_68/1717345857976ydHjr_JPEG/IMG_2433.jpeg",
+"https://ldb-phinf.pstatic.net/20240603_226/1717346124427lViv2_JPEG/IMG_2442.jpeg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979434875,
+name: "유키사키",
+displayName: "",
+px: 126.9741708,
+py: 37.5512415,
+type: "place",
+useTime: 1681697468000,
+lastUpdateTime: 1681697468000,
+creationTime: 1681697468000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1303775449",
+address: "서울특별시 용산구 동자동 35-141 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170107",
+cidPath: [
+"220036",
+"220038",
+"220081",
+"220804"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "EhODjsoLuuSaR3+B6Oe2qg==",
+pan: "-13.51",
+tilt: "8.13",
+lng: "126.9741332",
+lat: "37.5511696",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220407_13/1649337601302fagP1_JPEG/1649245199614.jpg",
+"https://ldb-phinf.pstatic.net/20220228_117/1646052771026HUf3X_JPEG/1646046388131-3.jpg",
+"https://ldb-phinf.pstatic.net/20241114_84/1731583466868krg0A_JPEG/IMG_7728.jpeg"
+],
+category: "일식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979434561,
+name: "파파밸리피자 후암점",
+displayName: "",
+px: 126.9765907,
+py: 37.55239,
+type: "place",
+useTime: 1681697453000,
+lastUpdateTime: 1681697453000,
+creationTime: 1681697452000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1731518833",
+address: "서울특별시 용산구 후암동 100-1 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170101",
+cidPath: [
+"220036",
+"220044",
+"220136",
+"230963"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 979434143,
+name: "양푼이동태탕",
+displayName: "",
+px: 126.9781916,
+py: 37.5475469,
+type: "place",
+useTime: 1681697433000,
+lastUpdateTime: 1681697433000,
+creationTime: 1681697432000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1245603197",
+address: "서울특별시 용산구 후암동 244-72",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170101",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220803",
+"221682"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "bzLv7JENYGVQ1n+z85WM4Q==",
+pan: "97.87",
+tilt: "6.81",
+lng: "126.9780541",
+lat: "37.5474939",
+fov: "82"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200316_148/1584326801997FYIqM_JPEG/zhk5tBiBuNcZuuLEenbJpUi-.jpg",
+"https://ldb-phinf.pstatic.net/20230315_76/1678817291352fx6z7_JPEG/20230311_090614.jpg"
+],
+category: "매운탕,해물탕"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979433841,
+name: "구위 브런치바",
+displayName: "",
+px: 126.9621981,
+py: 37.5401379,
+type: "place",
+useTime: 1681697418000,
+lastUpdateTime: 1681697418000,
+creationTime: 1681697418000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1997206129",
+address: "서울특별시 용산구 효창동 5-104 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170119",
+cidPath: [
+"220036",
+"220044",
+"220127",
+"220913"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ItnDVcpPb8ycdQC5KCmy4g==",
+pan: "104.03",
+tilt: "10.88",
+lng: "126.9621830",
+lat: "37.5402070",
+fov: "52"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240629_246/1719649377052lqXEj_JPEG/24.06.27_GOOEY4820.jpg",
+"https://ldb-phinf.pstatic.net/20240629_7/1719649376939WK2Ws_JPEG/24.06.27_GOOEY4779.jpg",
+"https://ldb-phinf.pstatic.net/20240702_23/17198490426788sy9w_JPEG/KakaoTalk_20240702_004947555.jpg"
+],
+category: "이탈리아음식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979433593,
+name: "왕땅떡갈비 용문시장점",
+displayName: "",
+px: 126.959976,
+py: 37.5365043,
+type: "place",
+useTime: 1681697406000,
+lastUpdateTime: 1681697406000,
+creationTime: 1681697406000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1928954388",
+address: "서울특별시 용산구 용문동 41-19",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170121",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "HskGUfCvBpaUoJ8tXLUnyQ==",
+pan: "-131.23",
+tilt: "10.00",
+lng: "126.9600652",
+lat: "37.5365823",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211124_42/1637709810186SJNo9_JPEG/KakaoTalk_20211118_121915775_02_%281%29.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979429897,
+name: "탁월",
+displayName: "",
+px: 126.9887952,
+py: 37.5385435,
+type: "place",
+useTime: 1681697224000,
+lastUpdateTime: 1681697224000,
+creationTime: 1681697224000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1994070101",
+address: "서울특별시 용산구 이태원동 303-20 지하 102호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "K6PWNgL+IS5MbwnISJQqQQ==",
+pan: "77.35",
+tilt: "10.00",
+lng: "126.9886571",
+lat: "37.5385124",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220322_13/1647957358101W9gDc_PNG/1643272678334.png"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979429761,
+name: "마이하우스",
+displayName: "",
+px: 126.9926265,
+py: 37.5375879,
+type: "place",
+useTime: 1681697217000,
+lastUpdateTime: 1681697217000,
+creationTime: 1681697216000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1089533483",
+address: "서울특별시 용산구 이태원동 205-13 2층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220051",
+"220554",
+"230098"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "tL/aeO8nddUm4ZcoSLk7Yg==",
+pan: "-81.50",
+tilt: "30.00",
+lng: "126.9927457",
+lat: "37.5375694",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220622_128/1655876058262ATCLQ_JPEG/KakaoTalk_20220622_134558607.jpg",
+"https://ldb-phinf.pstatic.net/20220622_290/165587605061585E8E_JPEG/KakaoTalk_20220622_134800108.jpg",
+"https://ldb-phinf.pstatic.net/20220622_280/1655876047770H06mi_JPEG/KakaoTalk_20220622_134800108_01.jpg"
+],
+category: "바(BAR)"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979429479,
+name: "옹플뢰르",
+displayName: "",
+px: 126.9952027,
+py: 37.5390718,
+type: "place",
+useTime: 1681697203000,
+lastUpdateTime: 1681697203000,
+creationTime: 1681697202000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1122933127",
+address: "서울특별시 용산구 이태원동 234-4 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "UCRnEf1Ms1hVssFZNKwFuw==",
+pan: "113.97",
+tilt: "10.00",
+lng: "126.9951213",
+lat: "37.5391079",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230728_129/1690497958568RGdM3_JPEG/IMG_20230301_075151_758.jpg",
+"https://ldb-phinf.pstatic.net/20230728_28/1690497958381Iu0nU_JPEG/IMG_20230227_085645_834.jpg",
+"https://ldb-phinf.pstatic.net/20230728_279/1690497958886zvqCf_JPEG/IMG_20230228_113304_583.jpg"
+],
+category: "브런치"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979429220,
+name: "uphill namsan",
+displayName: "",
+px: 126.9943775,
+py: 37.540116,
+type: "place",
+useTime: 1681697191000,
+lastUpdateTime: 1681697191000,
+creationTime: 1681697190000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1125647880",
+address: "서울특별시 용산구 이태원동 5-27 2층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "DywkFljkjS+94DyxkkApzw==",
+pan: "-36.16",
+tilt: "10.00",
+lng: "126.9944379",
+lat: "37.5400333",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230524_294/1684933809826vofOg_JPEG/IMG_5067.jpeg",
+"https://ldb-phinf.pstatic.net/20220813_194/1660381425138kYPju_JPEG/uphill_private_room.jpg",
+"https://ldb-phinf.pstatic.net/20220823_11/1661238817168daJ2I_JPEG/uphill_03.jpg"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979428845,
+name: "TULIP",
+displayName: "",
+px: 126.9943721,
+py: 37.5400514,
+type: "place",
+useTime: 1681697173000,
+lastUpdateTime: 1681697173000,
+creationTime: 1681697172000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1927664986",
+address: "서울특별시 용산구 이태원동 5-27 1층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220051",
+"220555",
+"221119"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 979427784,
+name: "레이지파머스",
+displayName: "",
+px: 126.9931802,
+py: 37.5403535,
+type: "place",
+useTime: 1681697116000,
+lastUpdateTime: 1681697116000,
+creationTime: 1681697116000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1236581902",
+address: "서울특별시 용산구 이태원동 228-4 A동 레이지파머스",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "n0k6KFdA4trxfEPGS/Z3oA==",
+pan: "3.68",
+tilt: "10.00",
+lng: "126.9931696",
+lat: "37.5401885",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240111_111/1704966112534WK7Y5_JPEG/KJH02352%284x5%29.jpg",
+"https://ldb-phinf.pstatic.net/20240111_206/1704966067234MO47k_JPEG/LAZY_FARMERS-10_%BA%B9%BB%E7%BA%BB.jpg",
+"https://ldb-phinf.pstatic.net/20240111_269/1704966113042XdLPQ_JPEG/KJH02338%284x5%29.jpg"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979427576,
+name: "84Lounge",
+displayName: "",
+px: 126.99238,
+py: 37.5397952,
+type: "place",
+useTime: 1681697105000,
+lastUpdateTime: 1681697105000,
+creationTime: 1681697105000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "36453653",
+address: "서울특별시 용산구 이태원동 211-2 4F,5F",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"221078"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "NPaOjYy30+YEnsV4SkEGDw==",
+pan: "160.36",
+tilt: "10.00",
+lng: "126.9923600",
+lat: "37.5398509",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150901_5/1441075089455RUOlI_JPEG/SUBMIT_1434689476023_36453653.jpg",
+"https://ldb-phinf.pstatic.net/20150901_159/14410750897036K9L3_JPEG/SUBMIT_1434689600193_36453653.jpg",
+"https://ldb-phinf.pstatic.net/20150901_205/1441075089928XYdkP_JPEG/SUBMIT_1434689621627_36453653.jpg"
+],
+category: "맥주,호프"
+},
+isIndoor: false
+},
+{
+bookmarkId: 979427421,
+name: "예요",
+displayName: "",
+px: 126.9918905,
+py: 37.5394295,
+type: "place",
+useTime: 1681697097000,
+lastUpdateTime: 1681697097000,
+creationTime: 1681697096000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1385705681",
+address: "서울특별시 용산구 이태원동 211-19",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220051",
+"220554",
+"221116"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 979427100,
+name: "하비비",
+displayName: "",
+px: 126.9918938,
+py: 37.5395431,
+type: "place",
+useTime: 1681697080000,
+lastUpdateTime: 1681697080000,
+creationTime: 1681697080000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1478175182",
+address: "서울특별시 용산구 이태원동 211-18 2층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 979426724,
+name: "Kosher Eli Food",
+displayName: "",
+px: 126.9899454,
+py: 37.5385695,
+type: "place",
+useTime: 1681697061000,
+lastUpdateTime: 1681697061000,
+creationTime: 1681697060000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1790468240",
+address: "서울특별시 용산구 이태원동 224-56 1층 매장 (코셔엘리푸드)",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 979426516,
+name: "선데이아보",
+displayName: "",
+px: 126.9910045,
+py: 37.5415946,
+type: "place",
+useTime: 1681697050000,
+lastUpdateTime: 1681697050000,
+creationTime: 1681697050000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1527943075",
+address: "서울특별시 용산구 이태원동 260-124 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "09170130",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "oDIEu11pkDupyXR5uAJKSw==",
+pan: "71.90",
+tilt: "9.50",
+lng: "126.9909382",
+lat: "37.5414952",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230710_61/16889682900243CKXP_JPEG/IMG_7831.jpeg",
+"https://ldb-phinf.pstatic.net/20230710_155/1688968022711xQYc1_JPEG/IMG_7796.jpeg",
+"https://ldb-phinf.pstatic.net/20230710_17/1688968021036wUkEG_JPEG/IMG_7762.jpeg"
+],
+category: "브런치"
+},
+isIndoor: false
+}
+],
+unavailableCount: 127,
+mismatchedCount: 19,
+removed: false
+}

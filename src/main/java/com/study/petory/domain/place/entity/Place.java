@@ -43,7 +43,7 @@ public class Place extends TimeFeatureBasedEntity {
 	@OneToMany(mappedBy = "place")
 	private List<PlaceReview> placeReviewList;
 
-	@Column(nullable = false)
+	// @Column(nullable = false)
 	private String placeInfo;
 
 	@Enumerated(EnumType.STRING)

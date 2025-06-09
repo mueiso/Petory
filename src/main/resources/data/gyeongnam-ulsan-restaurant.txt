@@ -1,0 +1,922 @@
+{
+folder: {
+folderId: 82084539,
+name: "갈수있어 강아지도, 경남/울산 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "2",
+iconId: "1",
+markerColor: "2",
+lastUseTime: 1694771971000,
+creationTime: 1680843895000,
+shouldOverlay: true,
+bookmarkCount: 666,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa4251438fc3a9cc06a7d",
+reviewPageUrl: "https://m.place.naver.com/my/642fa4251438fc3a9cc06a7d/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_152/1680843802917uJyox_PNG/image.png?type=f102_102",
+nick: "N강아지도 맥스"
+},
+shareId: "13a360a1124940c7a03feb9d4d117879",
+encryptedUserIdNo: "BnOy_tv4dac69eFv:l6iqvFI1t0FN0WS9AfnqPhwIiVzfTw",
+followCount: 1302,
+viewCount: 6654,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007270213,
+name: "윗하우스",
+displayName: "",
+px: 128.6871173,
+py: 35.2420504,
+type: "place",
+useTime: 1683522205000,
+lastUpdateTime: 1683522205000,
+creationTime: 1683522204000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1400424573",
+address: "경상남도 창원시 의창구 사림동 52-4",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03121125",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "hhzEJVBsMJe+EorjqnrjnA==",
+pan: "-155.68",
+tilt: "2.31",
+lng: "128.6871700",
+lat: "35.2421900",
+fov: "75"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230914_264/1694645435987MiW8H_JPEG/IMG_8853.jpeg",
+"https://naverbooking-phinf.pstatic.net/20250116_86/17370087304202XpCe_JPEG/%B2%DC%B9%D9%C1%FA%B9%D9%B0%D4%C6%AE%BB%F7%B5%E5%C0%A7%C4%A1.jpg"
+],
+category: "브런치"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007270042,
+name: "화제낚시터",
+displayName: "",
+px: 128.9703951,
+py: 35.3412725,
+type: "place",
+useTime: 1683522194000,
+lastUpdateTime: 1683522194000,
+creationTime: 1683522193000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1205937745",
+address: "경상남도 양산시 원동면 화제리 2688-2",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0333032028",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Qbi/ai3mHdwOoUpD1M9npQ==",
+pan: "21.87",
+tilt: "10.00",
+lng: "128.9703443",
+lat: "35.3411459",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220330_61/1648622851330aqQC7_JPEG/Resized_20220121_133426.jpeg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007269846,
+name: "물철철평상",
+displayName: "",
+px: 128.8565776,
+py: 35.5431716,
+type: "place",
+useTime: 1683522182000,
+lastUpdateTime: 1683522182000,
+creationTime: 1683522181000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1049851056",
+address: "경상남도 밀양시 산외면 희곡리 73",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0327033023",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220774",
+"221606"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007269687,
+name: "필립스가든",
+displayName: "",
+px: 128.8876948,
+py: 35.2758028,
+type: "place",
+useTime: 1683522171000,
+lastUpdateTime: 1683522171000,
+creationTime: 1683522170000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1059990648",
+address: "경상남도 김해시 생림면 나전리 30-22 필립스가든",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0325035021",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007269500,
+name: "하이육지사람",
+displayName: "",
+px: 128.7261339,
+py: 34.8670328,
+type: "place",
+useTime: 1683522159000,
+lastUpdateTime: 1683522159000,
+creationTime: 1683522158000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1790772141",
+address: "경상남도 거제시 장승포동 704-1",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "03310102",
+cidPath: [
+"220036",
+"220051",
+"220559",
+"221149"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007269117,
+name: "A212 글램핑 바베큐",
+displayName: "",
+px: 128.7215863,
+py: 34.8469283,
+type: "place",
+useTime: 1683522134000,
+lastUpdateTime: 1683522134000,
+creationTime: 1683522133000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1869260353",
+address: "경상남도 거제시 일운면 옥림리 320-4",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0331031026",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "SZl2AWeXiqjIlJzJPgbnSA==",
+pan: "113.89",
+tilt: "-0.50",
+lng: "128.7214395",
+lat: "34.8470363",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221122_220/1669090520572f6CP6_JPEG/KakaoTalk_20221122_131237797_03.jpg",
+"https://ldb-phinf.pstatic.net/20250125_95/1737768494373Ega8E_JPEG/IMG_8431.jpeg",
+"https://ldb-phinf.pstatic.net/20221122_88/1669090520868oegWi_JPEG/KakaoTalk_20221122_131237797_07.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007268946,
+name: "랑 카페",
+displayName: "",
+px: 128.5323121,
+py: 34.9164072,
+type: "place",
+useTime: 1683522123000,
+lastUpdateTime: 1683522123000,
+creationTime: 1683522122000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1801247332",
+address: "경상남도 거제시 사등면 성포리 74-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0331036023",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989085594,
+name: "샐러드식당 통영점",
+displayName: "",
+px: 128.419634,
+py: 34.8843109,
+type: "place",
+useTime: 1682346253000,
+lastUpdateTime: 1682346253000,
+creationTime: 1682346252000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1894591371",
+address: "경상남도 통영시 광도면 죽림리 1573-2 524동 309호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0322034024",
+cidPath: [
+"220036",
+"220047",
+"220170",
+"230734"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "4xuZuPsr+eM53U8iDzsnDA==",
+pan: "134.91",
+tilt: "10.00",
+lng: "128.4195259",
+lat: "34.8844184",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220426_250/16509507764003qRF2_JPEG/KakaoTalk_Photo_2022-04-25-19-22-36-5.jpeg",
+"https://ldb-phinf.pstatic.net/20220425_33/1650874935983VMtSN_JPEG/2C309914-C8BC-4CA9-8510-E4D73918A8A1.jpeg",
+"https://ldb-phinf.pstatic.net/20220426_210/1650950782706YCw7H_JPEG/IMG_1570.JPG"
+],
+category: "다이어트,샐러드"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989084123,
+name: "찌개집",
+displayName: "",
+px: 128.6763773,
+py: 35.2206403,
+type: "place",
+useTime: 1682346177000,
+lastUpdateTime: 1682346177000,
+creationTime: 1682346176000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1641975944",
+address: "경상남도 창원시 성산구 중앙동 100-2 현대 오피스텔 1층 109, 110호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03123125",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "WX/sE9QFd4pUJWEXjm5A8w==",
+pan: "-64.85",
+tilt: "10.00",
+lng: "128.6769434",
+lat: "35.2203741",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220824_212/1661314742493az4pN_JPEG/1660205505165.jpg",
+"https://ldb-phinf.pstatic.net/20220824_227/1661314796195v4uH1_JPEG/1661314759308.jpg",
+"https://ldb-phinf.pstatic.net/20220824_160/1661314843332OvAcG_JPEG/1661314797676.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989083541,
+name: "세자책돈",
+displayName: "",
+px: 128.5774172,
+py: 35.2070455,
+type: "place",
+useTime: 1682346148000,
+lastUpdateTime: 1682346148000,
+creationTime: 1682346147000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1829069169",
+address: "경상남도 창원시 마산합포구 오동동 165-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03125137",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220765",
+"221458"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "DQlGdUKQs18vLqyF6FtYJA==",
+pan: "-31.22",
+tilt: "10.00",
+lng: "128.5774639",
+lat: "35.2069684",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200418_30/1587139177231mPo5w_JPEG/9sh5yFUF842a2aH6-4x7r6qI.jpg",
+"https://ldb-phinf.pstatic.net/20250405_115/1743853147597LNdou_JPEG/1000003691.jpg",
+"https://ldb-phinf.pstatic.net/20250405_132/1743853147555z3B8M_JPEG/1000003700.jpg"
+],
+category: "돼지고기구이"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989083281,
+name: "돈우하우스",
+displayName: "",
+px: 128.0858684,
+py: 35.1865811,
+type: "place",
+useTime: 1682346136000,
+lastUpdateTime: 1682346136000,
+creationTime: 1682346135000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1390661026",
+address: "경상남도 진주시 강남동 108-13",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03170103",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "tsOcvpnts/saxl6esgPJwQ==",
+pan: "-84.04",
+tilt: "10.00",
+lng: "128.0859750",
+lat: "35.1865699",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221210_257/1670634493176SPJDX_JPEG/20220517_183446.jpg",
+"https://ldb-phinf.pstatic.net/20221210_39/1670634284153U95jy_JPEG/20221209_035256.jpg",
+"https://ldb-phinf.pstatic.net/20200715_67/1594776120172anfEV_JPEG/m0RgNF2YGRTiytohr6bgOOx7.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989083000,
+name: "쌀국수냠냠",
+displayName: "",
+px: 128.9880713,
+py: 35.3176922,
+type: "place",
+useTime: 1682346121000,
+lastUpdateTime: 1682346121000,
+creationTime: 1682346121000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1013964706",
+address: "경상남도 양산시 물금읍 가촌리 1324 한신더휴아파트 B102호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0333025323",
+cidPath: [
+"220036",
+"220041",
+"220103"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "GojEqkrbUrlNkQwJFbbtBg==",
+pan: "31.83",
+tilt: "10.00",
+lng: "128.9978455",
+lat: "35.3183926",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240609_279/1717861739344KLP7b_JPEG/1000001786.jpg",
+"https://ldb-phinf.pstatic.net/20240609_4/1717861739799qKvSf_JPEG/1000001768.jpg",
+"https://ldb-phinf.pstatic.net/20240609_160/1717861741213EVfAT_JPEG/1000001756.jpg"
+],
+category: "베트남음식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989082433,
+name: "더팜홈쿡",
+displayName: "",
+px: 128.854823,
+py: 35.2325278,
+type: "place",
+useTime: 1682346093000,
+lastUpdateTime: 1682346093000,
+creationTime: 1682346092000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1626605831",
+address: "경상남도 김해시 외동 1225-5 김해시금관대로 1190번길17-4 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03250109",
+cidPath: [
+"220036",
+"1004976",
+"1004972"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989081457,
+name: "담따프레시 거제아주점",
+displayName: "",
+px: 128.6860745,
+py: 34.8665754,
+type: "place",
+useTime: 1682346044000,
+lastUpdateTime: 1682346044000,
+creationTime: 1682346043000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1907037626",
+address: "경상남도 거제시 아주동 1686-11",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03310105",
+cidPath: [
+"220036",
+"1004976",
+"1004972"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989080886,
+name: "모래성분식",
+displayName: "",
+px: 128.7105381,
+py: 34.9115195,
+type: "place",
+useTime: 1682346015000,
+lastUpdateTime: 1682346015000,
+creationTime: 1682346015000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1834429692",
+address: "경상남도 거제시 덕포동 363 오션뷰 103호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "03310107",
+cidPath: [
+"220036",
+"220048",
+"220185"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "YJR7eEgECYEtwAD/18w4mw==",
+pan: "-65.31",
+tilt: "16.56",
+lng: "128.7106854",
+lat: "34.9114537",
+fov: "60"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200414_146/1586873359505vVDKS_JPEG/GCOORBA2K_x12Vs1CSnyyF1C.jpg",
+"https://ldb-phinf.pstatic.net/20200414_74/1586873371150Q0AuN_JPEG/fbgM2tVfRmvq-5RPcdwOziDb.jpg",
+"https://ldb-phinf.pstatic.net/20200414_1/1586873387708JUIJA_JPEG/s5gfI2VO8ampqcR7_V5XJdrP.jpg"
+],
+category: "종합분식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989080585,
+name: "1981 수제버거",
+displayName: "",
+px: 129.3124469,
+py: 35.5733139,
+type: "place",
+useTime: 1682346000000,
+lastUpdateTime: 1682346000000,
+creationTime: 1682345999000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1071825182",
+address: "울산광역시 중구 성안동 830-11 1층 1981수제버거",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "10110109",
+cidPath: [
+"220036",
+"220044",
+"220138",
+"221004"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "wjxwtNX6amzmc7cgRXNMFQ==",
+pan: "114.72",
+tilt: "10.00",
+lng: "129.3122391",
+lat: "35.5734093",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250411_75/1744303341675emFz6_JPEG/KakaoTalk_20250406_001405339_01.jpg",
+"https://ldb-phinf.pstatic.net/20250411_145/17443033511724k9w6_JPEG/KakaoTalk_20250406_001405339_02.jpg",
+"https://ldb-phinf.pstatic.net/20241127_64/1732699899868VYF88_JPEG/1000001232.jpg"
+],
+category: "햄버거"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989080287,
+name: "해어화",
+displayName: "",
+px: 129.3296384,
+py: 35.3487944,
+type: "place",
+useTime: 1682345985000,
+lastUpdateTime: 1682345985000,
+creationTime: 1682345984000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1711017523",
+address: "울산광역시 울주군 서생면 신암리 253 1층 해어화",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1071031021",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 989080006,
+name: "다섯꼬마 김밥",
+displayName: "",
+px: 129.241013,
+py: 35.5735555,
+type: "place",
+useTime: 1682345971000,
+lastUpdateTime: 1682345971000,
+creationTime: 1682345970000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1617839240",
+address: "울산광역시 울주군 범서읍 구영리 853-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1071025927",
+cidPath: [
+"220036",
+"220048",
+"220186"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "SpLIy1qVSLXL4aWRL2H9ng==",
+pan: "170.16",
+tilt: "14.06",
+lng: "129.2406796",
+lat: "35.5736305",
+fov: "57"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190214_114/1550121199795pAz73_JPEG/j_R9G9gJHm3-bycKcF647ToJ.jpg"
+],
+category: "김밥"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989079420,
+name: "대게궁 울산",
+displayName: "",
+px: 129.4495735,
+py: 35.6149483,
+type: "place",
+useTime: 1682345939000,
+lastUpdateTime: 1682345939000,
+creationTime: 1682345939000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "16329025",
+address: "울산광역시 북구 정자동 701",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "10200113",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220794",
+"230512"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "lZswm6Gyu71SQlO59Tr9rQ==",
+pan: "-93.13",
+tilt: "2.50",
+lng: "129.4497026",
+lat: "35.6150444",
+fov: "105"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230904_18/1693803184756GBTMb_JPEG/%B4%EB%B0%D41.jpg",
+"https://ldb-phinf.pstatic.net/20230904_187/16938098280399PCKn_PNG/002.png",
+"https://ldb-phinf.pstatic.net/20230904_230/1693803184731BRScA_JPEG/%B4%EB%B0%D43.jpg"
+],
+category: "대게요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989079154,
+name: "비어첸 울산 머큐어호텔점",
+displayName: "",
+px: 129.441699,
+py: 35.6262305,
+type: "place",
+useTime: 1682345926000,
+lastUpdateTime: 1682345926000,
+creationTime: 1682345925000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1953549733",
+address: "울산광역시 북구 산하동 1037-1 201동 101호",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "10200118",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"1000213"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "XIPbi9M/YY9ymqe4tD/icw==",
+pan: "-137.71",
+tilt: "10.75",
+lng: "129.4422640",
+lat: "35.6258817",
+fov: "47"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211125_176/1637838041904q5ul6_JPEG/1637838024732.jpg",
+"https://ldb-phinf.pstatic.net/20211125_201/1637837925834WJfB5_JPEG/1637837762668.jpg",
+"https://ldb-phinf.pstatic.net/20211125_205/1637837915314bcQP7_JPEG/1637837741777.jpg"
+],
+category: "맥주,호프"
+},
+isIndoor: false
+}
+],
+unavailableCount: 183,
+mismatchedCount: 19,
+removed: false
+}

@@ -51,6 +51,11 @@ public class OwnerBoardComment extends TimeFeatureBasedEntity {
 		this.content = content;
 	}
 
+	// ownerBoardCommentId 검증 메서드
+	public boolean isEqualId(Long ownerBoardCommentId) {
+		return this.id.equals(ownerBoardCommentId);
+	}
+
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);

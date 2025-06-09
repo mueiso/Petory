@@ -59,6 +59,11 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 		}
 	}
 
+	// placeReviewId 검증 메서드
+	public boolean isEqualId(Long placeReviewId) {
+		return this.id.equals(placeReviewId);
+	}
+
 	// place 검증 메서드
 	public boolean isEqualPlace(Long placeId) {
 		return this.place.isEqualId(placeId);

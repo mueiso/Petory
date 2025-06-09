@@ -19,6 +19,8 @@ public class PlaceGetResponseDto {
 
 	private final PlaceType placeType;
 
+	private final String address;
+
 	private final BigDecimal ratio;
 
 	// private final String photoList; // 이부분도 CreateResponseDto랑 비슷하게 하면 될듯
@@ -34,6 +36,7 @@ public class PlaceGetResponseDto {
 		this.placeName = place.getPlaceName();
 		this.placeInfo = place.getPlaceInfo();
 		this.placeType = place.getPlaceType();
+		this.address = place.getAddress();
 		this.ratio = place.getRatio();
 		this.latitude = place.getLatitude();
 		this.longitude = place.getLongitude();

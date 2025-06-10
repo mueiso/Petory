@@ -29,7 +29,6 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseD
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardCommentService;
-import com.study.petory.domain.ownerBoard.service.OwnerBoardImageService;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -43,7 +42,6 @@ public class OwnerBoardController {
 
 	private final OwnerBoardService ownerBoardService;
 	private final OwnerBoardCommentService ownerBoardCommentService;
-	private final OwnerBoardImageService ownerBoardImageService;
 
 	/**
 	 * 게시글 생성
@@ -85,7 +83,7 @@ public class OwnerBoardController {
 		@RequestParam(required = false) String title,
 		@RequestParam(defaultValue = "1") int page) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.findAllOwnerBoards(title, page));
+		return CommonResponse.of(SuccessCode.FOUND, ownerBoardService.findAllOwnerBoards(title, page));
 	}
 
 	/**
@@ -97,7 +95,7 @@ public class OwnerBoardController {
 	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(
 		@PathVariable Long boardId) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.findOwnerBoard(boardId));
+		return CommonResponse.of(SuccessCode.FOUND, ownerBoardService.findOwnerBoard(boardId));
 	}
 
 	/**
@@ -111,7 +109,7 @@ public class OwnerBoardController {
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.updateOwnerBoard(boardId, dto));
+		return CommonResponse.of(SuccessCode.UPDATED, ownerBoardService.updateOwnerBoard(boardId, dto));
 	}
 
 	/**
@@ -164,7 +162,8 @@ public class OwnerBoardController {
 		@PathVariable long boardId,
 		@RequestParam(defaultValue = "1") int page) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
+		return CommonResponse.of(SuccessCode.FOUND,
+			ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
 	}
 
 	/**
@@ -181,7 +180,7 @@ public class OwnerBoardController {
 		@Valid @RequestBody OwnerBoardCommentUpdateRequestDto dto
 	) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED,
+		return CommonResponse.of(SuccessCode.UPDATED,
 			ownerBoardCommentService.updateOwnerBoardComment(boardId, commentId, dto));
 	}
 

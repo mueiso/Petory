@@ -1,5 +1,6 @@
 package com.study.petory.domain.chat.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,15 @@ public class ChatRoom {
 	@Id
 	private ObjectId id;
 
+	private Long tradeBoardId;
+
 	private Long sellerId;
 
 	private Long customerId;
 
-	private Long tradeBoardId;
-
 	private List<ChatMessage> messages = new ArrayList<>();
+
+	private LocalDateTime lastMessageDate;
 
 	@Builder
 	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId) {
@@ -36,5 +39,6 @@ public class ChatRoom {
 
 	public void addMessage(ChatMessage message) {
 		this.messages.add(message);
+		this.lastMessageDate = message.getCreatedAt();
 	}
 }

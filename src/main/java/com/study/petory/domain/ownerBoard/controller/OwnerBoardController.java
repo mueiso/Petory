@@ -174,7 +174,7 @@ public class OwnerBoardController {
 	 * @param dto 수정 내용
 	 * @return 댓글 ID, 수정된 내용, 수정일, 작성자 ID
 	 */
-	@PatchMapping("/{boardId}/comments/{commentId}")
+	@PutMapping("/{boardId}/comments/{commentId}")
 	public ResponseEntity<CommonResponse<OwnerBoardCommentUpdateResponseDto>> updateOwnerBoardComment(
 		@PathVariable Long boardId,
 		@PathVariable Long commentId,

@@ -110,12 +110,8 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		if (!requestDto.getTitle().equals(ownerBoard.getTitle())) {
-			ownerBoard.updateTitle(requestDto.getTitle());
-		}
-		if (!requestDto.getContent().equals(ownerBoard.getContent())) {
-			ownerBoard.updateContent(requestDto.getContent());
-		}
+		ownerBoard.updateTitle(requestDto.getTitle());
+		ownerBoard.updateContent(requestDto.getContent());
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}

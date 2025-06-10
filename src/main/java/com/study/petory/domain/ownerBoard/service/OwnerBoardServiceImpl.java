@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,16 +70,13 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 전체 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page) {
-
-		int adjustedPage = (page > 0) ? page - 1 : 0;
-		PageRequest pageRequest = PageRequest.of(adjustedPage, 5, Sort.by("createdAt").descending());
+	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
 
 		Page<OwnerBoard> boards;
 		if (title != null) {
-			boards = ownerBoardRepository.findByTitleContaining(title, pageRequest);
+			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
 		} else {
-			boards = ownerBoardRepository.findAll(pageRequest);
+			boards = ownerBoardRepository.findAll(pageable);
 		}
 
 		return boards.map(OwnerBoardGetAllResponseDto::from);
@@ -91,11 +87,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional(readOnly = true)
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
-
-		// List<String> imageUrls = ownerBoard.getImages()
-		// 	.stream()
-		// 	.map(OwnerBoardImage::getUrl)
-		// 	.toList();
 
 		List<OwnerBoardComment> initialComments = ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(
 			boardId);
@@ -115,12 +106,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		if (requestDto.getTitle() != null) {
-			ownerBoard.updateTitle(requestDto.getTitle());
-		}
-		if (requestDto.getContent() != null) {
-			ownerBoard.updateContent(requestDto.getContent());
-		}
+		ownerBoard.updateOwnerBoard(requestDto.getTitle(), requestDto.getContent());
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}

@@ -3,6 +3,7 @@ package com.study.petory.domain.ownerBoard.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
@@ -28,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_owner_board")
 @NoArgsConstructor
 @Where(clause = "deleted_at IS NULL")
+@DynamicUpdate
 public class OwnerBoard extends TimeFeatureBasedEntity {
 
 	@Id
@@ -57,11 +59,8 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 		this.user = user;
 	}
 
-	public void updateTitle(String title) {
+	public void updateOwnerBoard(String title, String content) {
 		this.title = title;
-	}
-
-	public void updateContent(String content) {
 		this.content = content;
 	}
 

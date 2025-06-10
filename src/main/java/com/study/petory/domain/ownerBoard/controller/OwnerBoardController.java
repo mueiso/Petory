@@ -3,12 +3,16 @@ package com.study.petory.domain.ownerBoard.controller;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +33,6 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseD
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardCommentService;
-import com.study.petory.domain.ownerBoard.service.OwnerBoardImageService;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
 import com.study.petory.exception.enums.SuccessCode;
 
@@ -43,7 +46,6 @@ public class OwnerBoardController {
 
 	private final OwnerBoardService ownerBoardService;
 	private final OwnerBoardCommentService ownerBoardCommentService;
-	private final OwnerBoardImageService ownerBoardImageService;
 
 	/**
 	 * 게시글 생성
@@ -63,7 +65,7 @@ public class OwnerBoardController {
 	 * 사진 삭제
 	 * @param boardId 사진이 포함된 게시글 ID
 	 * @param imageId 사진 ID
-	 * @return
+	 * @return 요청 성공 코드만 반환
 	 */
 	@DeleteMapping("/{boardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
@@ -77,41 +79,41 @@ public class OwnerBoardController {
 	/**
 	 * 게시글 전체 조회
 	 * @param title 제목 검색 가능(nullable)
-	 * @param page 조회하려는 페이지 위치
-	 * @return List형식의 게시글 반환
+	 * @param pageable 조회하려는 페이지 위치
+	 * @return 전체 게시글 페이징 처리되어 반환
 	 */
 	@GetMapping
 	public ResponseEntity<CommonResponse<Page<OwnerBoardGetAllResponseDto>>> getOwnerBoardsAll(
 		@RequestParam(required = false) String title,
-		@RequestParam(defaultValue = "1") int page) {
+		@PageableDefault(page = 0, size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.findAllOwnerBoards(title, page));
+		return CommonResponse.of(SuccessCode.FOUND, ownerBoardService.findAllOwnerBoards(title, pageable));
 	}
 
 	/**
 	 * 게시글 단건 조회
 	 * @param boardId 주인커뮤니티 게시글 ID
-	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개) //사진리스트 추가 예정
+	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개), 사진리스트
 	 */
 	@GetMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(
 		@PathVariable Long boardId) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.findOwnerBoard(boardId));
+		return CommonResponse.of(SuccessCode.FOUND, ownerBoardService.findOwnerBoard(boardId));
 	}
 
 	/**
 	 * 게시글 수정
 	 * @param boardId 수정할 주인커뮤니티 게시글 ID
-	 * @param dto 제목, 내용 // 사진 추가 예정
+	 * @param dto 제목, 내용
 	 * @return 수정된 OwnerBoard 반환
 	 */
-	@PatchMapping("/{boardId}")
+	@PutMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardUpdateResponseDto>> updateOwnerBoard(
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardService.updateOwnerBoard(boardId, dto));
+		return CommonResponse.of(SuccessCode.UPDATED, ownerBoardService.updateOwnerBoard(boardId, dto));
 	}
 
 	/**
@@ -156,15 +158,17 @@ public class OwnerBoardController {
 
 	/**
 	 * 게시글의 댓글 전체 조회(페이징)
-	 * @param page 댓글 페이지
+	 * @param boardId 게시글 ID
+	 * @param pageable 페이징 설정
 	 * @return Page size 10, 생성일 기준 오름차순 정렬
 	 */
 	@GetMapping("/{boardId}/comments")
 	public ResponseEntity<CommonResponse<Page<OwnerBoardCommentGetResponseDto>>> getOwnerBoardCommentsAll(
 		@PathVariable long boardId,
-		@RequestParam(defaultValue = "1") int page) {
+		@PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED, ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
+		return CommonResponse.of(SuccessCode.FOUND,
+			ownerBoardCommentService.findAllOwnerBoardComments(boardId, pageable));
 	}
 
 	/**
@@ -174,14 +178,14 @@ public class OwnerBoardController {
 	 * @param dto 수정 내용
 	 * @return 댓글 ID, 수정된 내용, 수정일, 작성자 ID
 	 */
-	@PatchMapping("/{boardId}/comments/{commentId}")
+	@PutMapping("/{boardId}/comments/{commentId}")
 	public ResponseEntity<CommonResponse<OwnerBoardCommentUpdateResponseDto>> updateOwnerBoardComment(
 		@PathVariable Long boardId,
 		@PathVariable Long commentId,
 		@Valid @RequestBody OwnerBoardCommentUpdateRequestDto dto
 	) {
 
-		return CommonResponse.of(SuccessCode.REQUESTED,
+		return CommonResponse.of(SuccessCode.UPDATED,
 			ownerBoardCommentService.updateOwnerBoardComment(boardId, commentId, dto));
 	}
 

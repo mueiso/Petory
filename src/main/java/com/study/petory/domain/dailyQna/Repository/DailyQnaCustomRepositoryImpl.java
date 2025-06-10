@@ -13,6 +13,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 import com.study.petory.domain.dailyQna.entity.QDailyQna;
+import com.study.petory.domain.dailyQna.entity.QQuestion;
+import com.study.petory.domain.user.entity.QUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,8 +28,13 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	@Override
 	public List<DailyQna> findDailyQna(Long userId, Long questionId) {
+		QUser qUser = QUser.user;
+		QQuestion qQuestion = QQuestion.question1;
+
 		return jpaQueryFactory
 			.selectFrom(qDailyQna)
+			.join(qDailyQna.user, qUser).fetchJoin()
+			.join(qDailyQna.question, qQuestion).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.question.id.eq(questionId),
@@ -49,18 +56,13 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	@Override
 	public Page<DailyQna> findDailyQnaByHidden(Long userId, Pageable pageable) {
-		long offset = pageable.getOffset();
-		if (offset <= 0) {
-			offset = 0;
-		}
-
 		List<DailyQna> DailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.HIDDEN)
 			)
-			.offset(offset - 1)
+			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
 			.fetch();
 
@@ -80,19 +82,13 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	@Override
 	public Page<DailyQna> findDailyQnaByDeleted(Long userId, Pageable pageable) {
-		long offset = pageable.getOffset();
-		if (offset <= 0) {
-			offset = 0;
-		}
-
-
 		List<DailyQna> DailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.DELETED)
 			)
-			.offset(offset - 1)
+			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
 			.fetch();
 

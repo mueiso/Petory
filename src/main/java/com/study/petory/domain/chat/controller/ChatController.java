@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.service.ChatService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -53,4 +55,12 @@ public class ChatController {
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(page));
 	}
+
+	@GetMapping("/{chatRoomId}")
+	public ResponseEntity<CommonResponse<ChatRoomGetResponseDto>> getByChatRoomId(
+		@PathVariable String chatRoomId
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, chatService.findChatRoomById(chatRoomId));
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
 import com.study.petory.domain.chat.repository.ChatAggregateRepository;
@@ -72,12 +73,19 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public List<ChatRoomGetAllResponseDto> findAllChatRoom(int page) {
 
-		int adjustPage = (page > 0) ? page - 1 : 0;
-
 		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, page);
 
 		return chatRooms.stream()
 			.map(chatRoom -> new ChatRoomGetAllResponseDto(chatRoom, 2L))
 			.toList();
+	}
+
+	@Override
+	public ChatRoomGetResponseDto findChatRoomById(String chatRoomId) {
+
+		ChatRoom chatRoom = chatRepository.findById(new ObjectId(chatRoomId))
+			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+
+		return new ChatRoomGetResponseDto(chatRoom);
 	}
 }

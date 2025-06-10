@@ -1,0 +1,963 @@
+{
+folder: {
+folderId: 82084364,
+name: "갈수있어 강아지도, 충남/대전 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "2",
+iconId: "1",
+markerColor: "2",
+lastUseTime: 1694771740000,
+creationTime: 1680843719000,
+shouldOverlay: true,
+bookmarkCount: 622,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa3281438fc3a9ca8b8cc",
+reviewPageUrl: "https://m.place.naver.com/my/642fa3281438fc3a9ca8b8cc/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_246/1680843549843HKMWa_PNG/image.png?type=f102_102",
+nick: "N강아지도 뭉치"
+},
+shareId: "1582372888a54731beca5197bc520b65",
+encryptedUserIdNo: "m91SPYQEataGMYly:_sYB41DipE9vgcRZaBy3eJjK1x7zQg",
+followCount: 1340,
+viewCount: 6907,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007267659,
+name: "성주",
+displayName: "",
+px: 127.3947619,
+py: 36.3458897,
+type: "place",
+useTime: 1683522038000,
+lastUpdateTime: 1683522038000,
+creationTime: 1683522038000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1573923141",
+address: "대전광역시 서구 탄방동 968 1층 101호",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "07170106",
+cidPath: [
+"220036",
+"220051",
+"220555",
+"221119"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "3fyOQaHL9ZDqlNIcjXF4cw==",
+pan: "47.48",
+tilt: "10.00",
+lng: "127.3947064",
+lat: "36.3457918",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220914_194/1663146670242P130T_JPEG/5F04C3C7-48FE-4DA9-B766-CF0E98A828FE.jpeg",
+"https://ldb-phinf.pstatic.net/20220914_251/16631467603008QkPa_JPEG/3DB21051-B91C-45C5-BB9D-DE5B2A5A943A.jpeg",
+"https://ldb-phinf.pstatic.net/20220914_218/1663146760263TkjOV_JPEG/30E32447-D524-43EF-BED8-6D55A1865C05.jpeg"
+],
+category: "와인"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007267449,
+name: "버거 베이트",
+displayName: "",
+px: 127.354503,
+py: 36.3085761,
+type: "place",
+useTime: 1683522024000,
+lastUpdateTime: 1683522024000,
+creationTime: 1683522024000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1118853147",
+address: "대전광역시 서구 도안동 1948 1층 버거베이트",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07170115",
+cidPath: [
+"220036",
+"220044",
+"220138",
+"221004"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "2swNebYXar5oCfiUym3vFw==",
+pan: "93.34",
+tilt: "10.00",
+lng: "127.3543638",
+lat: "36.3085841",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241025_7/1729824256482LbozR_JPEG/34C2BE0F-89DE-4EE7-9C03-DAC5FBC0DE6F.jpeg",
+"https://ldb-phinf.pstatic.net/20241025_252/1729824416548vRTFe_JPEG/212ADE11-F9C5-410D-8B12-3A8FD4D8021D.jpeg",
+"https://ldb-phinf.pstatic.net/20241025_241/1729824331837zGrS4_JPEG/662CEDC4-89D5-466A-8B1D-EFF348333178.jpeg"
+],
+category: "햄버거"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007265313,
+name: "시골맛집",
+displayName: "",
+px: 126.3467062,
+py: 36.5570025,
+type: "place",
+useTime: 1683521888000,
+lastUpdateTime: 1683521888000,
+creationTime: 1683521887000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "32529091",
+address: "충청남도 태안군 안면읍 정당리 1112-4",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1582525322",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "DJvXvwhTLANgBebpBwfNsQ==",
+pan: "-108.31",
+tilt: "10.00",
+lng: "126.3468308",
+lat: "36.5570436",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210506_163/1620261917636i0i7N_JPEG/-syeZ0IqBS5zB8qrdO69uRYE.jpg",
+"https://ldb-phinf.pstatic.net/20210506_181/1620261939517YSaK9_JPEG/7PhqAZ4g092VjZvqAjRlKwY3.jpg",
+"https://ldb-phinf.pstatic.net/20210506_185/1620261958725LCtRQ_JPEG/JzSat7iFUe9zAoquhiHI4dCb.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007265139,
+name: "본구스또",
+displayName: "",
+px: 127.132952,
+py: 36.8442796,
+type: "place",
+useTime: 1683521876000,
+lastUpdateTime: 1683521876000,
+creationTime: 1683521876000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1284481923",
+address: "충청남도 천안시 서북구 성성동 95-22 B동 지하1층 105호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "15133105",
+cidPath: [
+"220036",
+"220044",
+"220138",
+"221004"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007264914,
+name: "내안애치킨",
+displayName: "",
+px: 126.9549908,
+py: 36.7815973,
+type: "place",
+useTime: 1683521863000,
+lastUpdateTime: 1683521863000,
+creationTime: 1683521863000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1010479834",
+address: "충청남도 아산시 신창면 행목리 202 정문상가 지하 104호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1520041025",
+cidPath: [
+"220036",
+"220049",
+"220245"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "YCxYQibE6EfqZJwGF2qyKA==",
+pan: "-114.84",
+tilt: "10.00",
+lng: "126.9550952",
+lat: "36.7816455",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20180218_31/1518958200274rH41Y_JPEG/nARdAUb0qszDULlTkbZnSrF7.jpg"
+],
+category: "치킨,닭강정"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007264766,
+name: "황금마차",
+displayName: "",
+px: 126.3336371,
+py: 36.9880053,
+type: "place",
+useTime: 1683521853000,
+lastUpdateTime: 1683521853000,
+creationTime: 1683521852000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1338907375",
+address: "충청남도 서산시 대산읍 독곶리 산230-2 등산로 입구 바로 앞, 황금마차",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1521025031",
+cidPath: [
+"220036",
+"220037",
+"220066",
+"220672"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230119_212/16740974198100GVfl_JPEG/123444.jpg",
+"https://ldb-phinf.pstatic.net/20230125_178/1674627531460Ri553_JPEG/%C1%A6%B8%F1%C0%BB_%C0%D4%B7%C2%C7%D8%C1%D6%BC%BC%BF%E4_-001.jpg",
+"https://ldb-phinf.pstatic.net/20230119_210/16740974105508fjQT_JPEG/DSC0022.JPG"
+],
+category: "추어탕"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007264438,
+name: "요니의 한식집",
+displayName: "",
+px: 125.95598,
+py: 36.2423744,
+type: "place",
+useTime: 1683521833000,
+lastUpdateTime: 1683521833000,
+creationTime: 1683521832000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1543621607",
+address: "충청남도 보령시 오천면 외연도리 482",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1518032030",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982297674,
+name: "고드래미족발 노은직영점",
+displayName: "",
+px: 127.3173983,
+py: 36.3662231,
+type: "place",
+useTime: 1681887872000,
+lastUpdateTime: 1681887872000,
+creationTime: 1681887872000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1191596764",
+address: "대전광역시 유성구 노은동 553-8",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07200119",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220766",
+"1002975"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "oQ2Vz6HM+iWb98xh08KbKQ==",
+pan: "-70.96",
+tilt: "11.56",
+lng: "127.3177820",
+lat: "36.3660655",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190228_292/1551324482932vKbaA_JPEG/Y3mZdNDm22qgPRLJBNlP-n16.jpg",
+"https://ldb-phinf.pstatic.net/20250318_32/1742284922841Azpe3_JPEG/1742284888985.jpg"
+],
+category: "족발,보쌈"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982297358,
+name: "LITTLE TAP",
+displayName: "",
+px: 127.3185161,
+py: 36.3727922,
+type: "place",
+useTime: 1681887854000,
+lastUpdateTime: 1681887854000,
+creationTime: 1681887854000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37388581",
+address: "대전광역시 유성구 지족동 905-3 드래곤랜드",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "07200120",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"221078"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "USL2B3pfvOfasenh5Y2fLA==",
+pan: "-116.75",
+tilt: "10.00",
+lng: "127.3186997",
+lat: "36.3728845",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210510_38/1620640804359azpcs_JPEG/Oxpzh6y7rTCS1wgjzeNAW61N.jpg",
+"https://ldb-phinf.pstatic.net/20210510_176/1620640737964TCvL8_JPEG/yRn0twEZ7fdmiQu2V1IDgKrH.jpg",
+"https://ldb-phinf.pstatic.net/20210510_299/1620640737585gJSYb_JPEG/tebYdsCpe5gU3-2UyAiWti6z.jpg"
+],
+category: "맥주,호프"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982297051,
+name: "민칼국수",
+displayName: "",
+px: 127.3222274,
+py: 36.3678139,
+type: "place",
+useTime: 1681887837000,
+lastUpdateTime: 1681887837000,
+creationTime: 1681887837000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1570275637",
+address: "대전광역시 유성구 노은동 535-30",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07200119",
+cidPath: [
+"220036",
+"220037",
+"220073",
+"220712"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "YaCPBLmL1LKA6WYhEpTwOw==",
+pan: "64.39",
+tilt: "9.69",
+lng: "127.3221903",
+lat: "36.3677205",
+fov: "73"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200629_191/1593432990903keGzG_JPEG/MDGzIBbQ5Pg7armoa8eEBlYT.jpg"
+],
+category: "칼국수,만두"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982296745,
+name: "한마음정육식당 송강점",
+displayName: "",
+px: 127.3830911,
+py: 36.4445448,
+type: "place",
+useTime: 1681887819000,
+lastUpdateTime: 1681887819000,
+creationTime: 1681887818000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1373943498",
+address: "대전광역시 유성구 봉산동 719-2",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07200145",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"1002056",
+"1002727"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "yDdlK6gTwJsHBZcp5Rb6Mg==",
+pan: "-36.02",
+tilt: "30.00",
+lng: "127.3831124",
+lat: "36.4443853",
+fov: "75"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210929_245/16329033068222va7U_JPEG/3hNUf42AgDw1MhFROXT_ddYF.jpg",
+"https://ldb-phinf.pstatic.net/20210929_151/1632903306834iBy1e_JPEG/HIEfAL0FFkKl3Boxgtkhg9AK.jpg",
+"https://ldb-phinf.pstatic.net/20211001_44/1633078799708AMSKL_JPEG/Bd4s45L39c_tAaYfNa5EOgbk.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982295561,
+name: "돈갓 수제돈까스 대전관평점",
+displayName: "",
+px: 127.390432,
+py: 36.4234859,
+type: "place",
+useTime: 1681887751000,
+lastUpdateTime: 1681887751000,
+creationTime: 1681887751000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1449127007",
+address: "대전광역시 유성구 관평동 1026 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07200146",
+cidPath: [
+"220036",
+"220038",
+"220082",
+"1004426"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "eHDkhFE7Jg2dUXT3AqwM4A==",
+pan: "120.74",
+tilt: "12.13",
+lng: "127.3903150",
+lat: "36.4234250",
+fov: "75"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200609_264/1591665351259fD1rO_JPEG/bXToYNfJZKnl8b544jstS2mP.jpg",
+"https://ldb-phinf.pstatic.net/20200814_80/15973671338476TsGt_JPEG/dJMBQR8te5uWgsvKNlFeBrie.jpg",
+"https://ldb-phinf.pstatic.net/20220603_290/1654249263894OlEEV_JPEG/%B0%ED%C3%DF%B8%B6%BF%E4%B5%B7%B0%AB.jpg"
+],
+category: "돈가스"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982295259,
+name: "라븐",
+displayName: "",
+px: 127.3890853,
+py: 36.4257002,
+type: "place",
+useTime: 1681887733000,
+lastUpdateTime: 1681887733000,
+creationTime: 1681887733000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "36947295",
+address: "대전광역시 유성구 관평동 865 1층 라븐",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07200146",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "UeJAi5IokC07N+JXnM4Xdg==",
+pan: "28.05",
+tilt: "10.00",
+lng: "127.3890419",
+lat: "36.4256187",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241025_276/17298289028228jdSM_JPEG/%BD%C5%B8%DE%B4%BA_%B4%DC%C3%BC.jpg",
+"https://ldb-phinf.pstatic.net/20220803_207/1659535014988iOawr_JPEG/image.jpg",
+"https://ldb-phinf.pstatic.net/20220803_4/1659535015698Pfmdr_JPEG/image.jpg"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982294803,
+name: "오늘한잔오뗑",
+displayName: "",
+px: 127.3351606,
+py: 36.3548373,
+type: "place",
+useTime: 1681887710000,
+lastUpdateTime: 1681887710000,
+creationTime: 1681887709000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1797727419",
+address: "대전광역시 유성구 봉명동 566-17 1층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "07200111",
+cidPath: [
+"220036",
+"220051",
+"220552",
+"221043"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "qrqMCfC2yDSzKW1HaVSR6w==",
+pan: "93.54",
+tilt: "9.50",
+lng: "127.3350350",
+lat: "36.3548225",
+fov: "77"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230630_177/1688120233525HhR6r_JPEG/1686579007077.jpg",
+"https://ldb-phinf.pstatic.net/20230611_55/16864122839655lxu8_JPEG/20230517_202201.jpg",
+"https://ldb-phinf.pstatic.net/20230611_33/168641228402486YRQ_JPEG/20230515_212814.jpg"
+],
+category: "오뎅,꼬치"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982294289,
+name: "더 그릴",
+displayName: "",
+px: 127.2875541,
+py: 36.3621403,
+type: "place",
+useTime: 1681887680000,
+lastUpdateTime: 1681887680000,
+creationTime: 1681887679000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1778402328",
+address: "대전광역시 유성구 갑동 327-19 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07200118",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"1002056",
+"1002055"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "E2m9TxQdkHUQs8SGw9dxDw==",
+pan: "-109.56",
+tilt: "10.00",
+lng: "127.2877170",
+lat: "36.3621980",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221118_242/1668756740481p6xaJ_JPEG/CA62513F-382B-4488-9375-81397B6A61F4.jpeg",
+"https://ldb-phinf.pstatic.net/20230728_146/1690515774946Lqd3n_JPEG/IMG_1654.jpeg",
+"https://ldb-phinf.pstatic.net/20221118_137/1668756740880tbVGo_JPEG/34D50A59-3BA0-478B-A00C-F4DB58D3BF42.jpeg"
+],
+category: "정육식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982293607,
+name: "이코이노바",
+displayName: "",
+px: 127.361826,
+py: 36.3570202,
+type: "place",
+useTime: 1681887639000,
+lastUpdateTime: 1681887639000,
+creationTime: 1681887639000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1287420356",
+address: "대전광역시 서구 월평동 496 1층 101호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07170113",
+cidPath: [
+"220036",
+"220038",
+"220081",
+"220804"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982293076,
+name: "크크1159",
+displayName: "",
+px: 127.3605493,
+py: 36.3577042,
+type: "place",
+useTime: 1681887611000,
+lastUpdateTime: 1681887611000,
+creationTime: 1681887610000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1523265865",
+address: "대전광역시 서구 월평동 437 상가 1층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "07170113",
+cidPath: [
+"220036",
+"220051",
+"220552",
+"221043"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982292608,
+name: "썬하우스",
+displayName: "",
+px: 127.390687,
+py: 36.3442938,
+type: "place",
+useTime: 1681887584000,
+lastUpdateTime: 1681887584000,
+creationTime: 1681887583000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1646676839",
+address: "대전광역시 서구 탄방동 806 1층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "07170106",
+cidPath: [
+"220036",
+"220051",
+"220555",
+"221119"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "sFq7LCInHQnmB9Fgd7MkpA==",
+pan: "51.09",
+tilt: "10.00",
+lng: "127.3905896",
+lat: "36.3442151",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220916_261/1663310784554F7lRE_JPEG/F8BF0B0A-.jpg",
+"https://ldb-phinf.pstatic.net/20220423_82/1650689846395cw8Ee_JPEG/KakaoTalk_Photo_2022-04-23-13-57-15.jpeg",
+"https://ldb-phinf.pstatic.net/20220916_172/1663310538098AO3Yy_JPEG/IMG_1079.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982292110,
+name: "베니즈",
+displayName: "",
+px: 127.3776662,
+py: 36.3613219,
+type: "place",
+useTime: 1681887557000,
+lastUpdateTime: 1681887557000,
+creationTime: 1681887556000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1648982510",
+address: "대전광역시 서구 월평동 252 신안빌딩 201호 베니즈",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07170113",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Q335rM4PRa5HNKnqsN3QjA==",
+pan: "84.46",
+tilt: "30.00",
+lng: "127.3774734",
+lat: "36.3613722",
+fov: "75"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250109_282/17363493801773WDKc_JPEG/slect_%BC%F6%C1%A4.jpg",
+"https://ldb-phinf.pstatic.net/20250109_284/1736349392436N5Nj6_JPEG/slect%BC%F6%C1%A4.jpg",
+"https://ldb-phinf.pstatic.net/20240210_235/1707541832261koJkE_JPEG/slect_%BC%F6%C1%A4.jpg"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982291304,
+name: "코너델리",
+displayName: "",
+px: 127.3428488,
+py: 36.3214055,
+type: "place",
+useTime: 1681887512000,
+lastUpdateTime: 1681887512000,
+creationTime: 1681887511000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1245828729",
+address: "대전광역시 서구 도안동 1211 1층 코너델리",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "07170115",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ysTo9Phj5/ktFmTKKWHPbw==",
+pan: "111.78",
+tilt: "10.00",
+lng: "127.3427512",
+lat: "36.3214445",
+fov: "120"
+},
+thumbnailUrls: [
+"https://naverbooking-phinf.pstatic.net/20230822_289/16926718571816T2bm_JPEG/image.jpg",
+"https://naverbooking-phinf.pstatic.net/20230822_242/1692671834491NsOCW_JPEG/image.jpg",
+"https://naverbooking-phinf.pstatic.net/20230822_100/1692671786592DRDm9_JPEG/image.jpg"
+],
+category: "브런치"
+},
+isIndoor: false
+}
+],
+unavailableCount: 186,
+mismatchedCount: 15,
+removed: false
+}

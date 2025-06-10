@@ -1,24 +1,27 @@
 package com.study.petory.domain.ownerBoard.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
-import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.ownerBoard.repository.OwnerBoardImageRepository;
+import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;
@@ -32,16 +35,20 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardRepository ownerBoardRepository;
 	private final UserRepository userRepository;
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
+	private final OwnerBoardImageService ownerBoardImageService;
+	private final OwnerBoardImageRepository ownerBoardImageRepository;
 
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
 	public OwnerBoard findOwnerBoardById(Long boardId) {
-		return ownerBoardRepository.findById(boardId).orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
+		return ownerBoardRepository.findByIdWithImages(boardId)
+			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
 	}
 
 	// 게시글 생성
 	@Override
-	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto) {
+	@Transactional
+	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) {
 		User user = userRepository.findById(1L).orElseThrow(); // 추후 토큰값으로 수정
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
@@ -52,22 +59,24 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		ownerBoardRepository.save(ownerBoard);
 
-		return OwnerBoardCreateResponseDto.from(ownerBoard);
+		List<String> urls = new ArrayList<>();
+		if (images != null && !images.isEmpty()) {
+			urls = ownerBoardImageService.uploadAndSaveAll(images, ownerBoard);
+		}
+
+		return OwnerBoardCreateResponseDto.of(ownerBoard, urls);
 	}
 
 	// 게시글 전체 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page) {
-
-		int adjustedPage = (page > 0) ? page - 1 : 0;
-		PageRequest pageRequest = PageRequest.of(adjustedPage, 5, Sort.by("createdAt").descending());
+	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
 
 		Page<OwnerBoard> boards;
 		if (title != null) {
-			boards = ownerBoardRepository.findByTitleContaining(title, pageRequest);
+			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
 		} else {
-			boards = ownerBoardRepository.findAll(pageRequest);
+			boards = ownerBoardRepository.findAll(pageable);
 		}
 
 		return boards.map(OwnerBoardGetAllResponseDto::from);
@@ -97,12 +106,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		if (requestDto.getTitle() != null) {
-			ownerBoard.updateTitle(requestDto.getTitle());
-		}
-		if (requestDto.getContent() != null) {
-			ownerBoard.updateContent(requestDto.getContent());
-		}
+		ownerBoard.updateOwnerBoard(requestDto.getTitle(), requestDto.getContent());
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}
@@ -114,6 +118,16 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		// 본인 작성 글인지 검증 로직 추가
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		// 이미지 모두 hard delete(S3, DB)
+		List<OwnerBoardImage> images = ownerBoard.getImages();
+
+		for (OwnerBoardImage image : new ArrayList<>(images)) {
+			ownerBoardImageService.deleteImage(image); // S3 이미지 정보 삭제
+			ownerBoard.getImages().remove(image); // DB 이미지 정보 삭제, 연관관계를 끊어 고아객체로 만들면 delete 쿼리 발생
+		}
+
+		// 게시글 soft delete
 		ownerBoard.deactivateEntity();
 	}
 
@@ -131,6 +145,14 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		}
 
 		ownerBoard.restoreEntity();
+	}
+
+	// 게시글 사진 삭제
+	@Override
+	public void deleteImage(Long boardId, Long imageId) {
+		findOwnerBoardById(boardId);
+		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
+		ownerBoardImageService.deleteImageInternal(image);
 	}
 
 }

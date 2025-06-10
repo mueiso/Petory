@@ -1,0 +1,739 @@
+[ {
+  "bookmarkId" : 1008784986,
+  "name" : "홀윗",
+  "displayName" : "",
+  "px" : 126.5393123,
+  "py" : 33.5011672,
+  "type" : "place",
+  "useTime" : 1683620460000,
+  "lastUpdateTime" : 1683620460000,
+  "creationTime" : 1683620459000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1639312717",
+  "address" : "제주특별자치도 제주시 이도이동 370-1 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "14110104",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008784552,
+  "name" : "언더라운지 제주함덕점",
+  "displayName" : "",
+  "px" : 126.6711398,
+  "py" : 33.5423925,
+  "type" : "place",
+  "useTime" : 1683620438000,
+  "lastUpdateTime" : 1683620438000,
+  "creationTime" : 1683620437000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1570836131",
+  "address" : "제주특별자치도 제주시 조천읍 함덕리 산14-13 5층 6층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025924",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "3C19NuWuy9Z+Aqn0SZAipw==",
+      "pan" : "171.10",
+      "tilt" : "10.00",
+      "lng" : "126.6712034",
+      "lat" : "33.5426248",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230923_159/1695439455584zo8qL_JPEG/1695438947680-1.jpg", "https://ldb-phinf.pstatic.net/20240419_219/1713524829773qqAic_JPEG/1000039520.jpg", "https://ldb-phinf.pstatic.net/20230923_172/1695439464855K7Xg3_JPEG/1695438947680-0.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008783841,
+  "name" : "민스마켓",
+  "displayName" : "",
+  "px" : 126.943906,
+  "py" : 33.5023856,
+  "type" : "place",
+  "useTime" : 1683620404000,
+  "lastUpdateTime" : 1683620404000,
+  "creationTime" : 1683620403000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1780624861",
+  "address" : "제주특별자치도 제주시 우도면 연평리 2516 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411033021",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "OuZi1brPreciOeibU4kbHA==",
+      "pan" : "53.95",
+      "tilt" : "7.31",
+      "lng" : "126.9437691",
+      "lat" : "33.5022747",
+      "fov" : "40"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230713_289/1689214435361bC0lM_JPEG/image.jpg", "https://ldb-phinf.pstatic.net/20230518_136/1684371131981w2bIi_JPEG/IMG_2260.jpeg", "https://ldb-phinf.pstatic.net/20230518_18/16843711547427H9cr_JPEG/IMG_2282.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008783345,
+  "name" : "리부아르",
+  "displayName" : "",
+  "px" : 126.3752298,
+  "py" : 33.4819589,
+  "type" : "place",
+  "useTime" : 1683620381000,
+  "lastUpdateTime" : 1683620381000,
+  "creationTime" : 1683620380000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1258089808",
+  "address" : "제주특별자치도 제주시 애월읍 구엄리 1258-8 3층 LIBOIRE CAFE",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025324",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "gQrs7zBCZc4jgQzWWJStKw==",
+      "pan" : "175.34",
+      "tilt" : "6.00",
+      "lng" : "126.3752010",
+      "lat" : "33.4821147",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230907_227/1694086990777pfkn8_JPEG/IMG_4173.jpeg", "https://ldb-phinf.pstatic.net/20250121_265/1737441255455Mt7aL_JPEG/IMG_3864.jpeg", "https://ldb-phinf.pstatic.net/20230223_201/167714159030098hk1_JPEG/7FE98A6E-DD34-426B-9833-E8B7EDAB4BA7.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008783077,
+  "name" : "더휘게 농원 X 디닷커피바",
+  "displayName" : "",
+  "px" : 126.3551378,
+  "py" : 33.4293853,
+  "type" : "place",
+  "useTime" : 1683620367000,
+  "lastUpdateTime" : 1683620367000,
+  "creationTime" : 1683620367000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1163245968",
+  "address" : "제주특별자치도 제주시 애월읍 상가리 748-1 디닷커피바",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025331",
+  "cidPath" : [ "220036", "220052", "220576", "221212" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008782102,
+  "name" : "젬마 초콜릿 과자점",
+  "displayName" : "",
+  "px" : 126.4962431,
+  "py" : 33.4925182,
+  "type" : "place",
+  "useTime" : 1683620320000,
+  "lastUpdateTime" : 1683620320000,
+  "creationTime" : 1683620319000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1512769168",
+  "address" : "제주특별자치도 제주시 연동 300-3 남해오네뜨 씨유편의점과 미주호텔 사이 골목",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "14110137",
+  "cidPath" : [ "220036", "220052", "220583", "221404" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "f0Eq9wQisqXg7Hz88e9gdA==",
+      "pan" : "-12.40",
+      "tilt" : "16.44",
+      "lng" : "126.4962933",
+      "lat" : "33.4923880",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230426_212/1682493522771g9B4V_JPEG/20230401_112801.jpg", "https://ldb-phinf.pstatic.net/20230426_169/16824935221555QMdm_JPEG/20230426_123859.jpg", "https://ldb-phinf.pstatic.net/20230426_207/1682493519805RAaqV_JPEG/20230407_135436.jpg" ],
+    "category" : "초콜릿전문점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008781799,
+  "name" : "젤라떼리아섬",
+  "displayName" : "",
+  "px" : 126.4767376,
+  "py" : 33.481635,
+  "type" : "place",
+  "useTime" : 1683620304000,
+  "lastUpdateTime" : 1683620304000,
+  "creationTime" : 1683620304000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1359925138",
+  "address" : "제주특별자치도 제주시 노형동 3796-11 1층 젤라떼리아섬",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "14110122",
+  "cidPath" : [ "220036", "220052", "220578", "221363" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "dVItt/YylFr09xJSt4po7A==",
+      "pan" : "87.66",
+      "tilt" : "6.56",
+      "lng" : "126.4765803",
+      "lat" : "33.4816262",
+      "fov" : "50"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220607_238/1654597145978Wczdw_JPEG/%B4%EB%C7%A5%B8%DE%B4%BA%C4%DC.jpg", "https://ldb-phinf.pstatic.net/20241129_176/1732860352866vB662_PNG/%BA%F9%BC%F6.png", "https://ldb-phinf.pstatic.net/20230426_220/1682498089322RXxMl_JPEG/94F1EE83-B3AC-45C9-BC0F-5EB2A364400D.jpeg" ],
+    "category" : "아이스크림"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1008717241,
+  "name" : "쏘스위트",
+  "displayName" : "",
+  "px" : 126.8866013,
+  "py" : 33.4402179,
+  "type" : "place",
+  "useTime" : 1683617278000,
+  "lastUpdateTime" : 1683617278000,
+  "creationTime" : 1683617277000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1046352531",
+  "address" : "제주특별자치도 서귀포시 성산읍 수산리 772-5",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1413025925",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "tIWkob/p0PciMjo6AbWRNw==",
+      "pan" : "-66.64",
+      "tilt" : "10.00",
+      "lng" : "126.8869686",
+      "lat" : "33.4400590",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20190405_75/1554456022537E27GC_JPEG/QUigxC4RAVxxQUb756IlrxQh.JPG.jpg", "https://ldb-phinf.pstatic.net/20190405_200/1554456044446GoGlN_JPEG/d4jzkSmSQbzV_PNg-JScMQ_O.JPG.jpg", "https://ldb-phinf.pstatic.net/20190405_288/1554456059361ynsC1_JPEG/4W9SuV7N4EB9ewfqYBlN9wzD.JPG.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007935154,
+  "name" : "안도르",
+  "displayName" : "",
+  "px" : 126.7719459,
+  "py" : 33.4566059,
+  "type" : "place",
+  "useTime" : 1683558228000,
+  "lastUpdateTime" : 1683558228000,
+  "creationTime" : 1683558228000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1574419480",
+  "address" : "제주특별자치도 제주시 구좌읍 송당리 2142 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025625",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "36k/JvbIf4P5bX8+70qVaA==",
+      "pan" : "-69.41",
+      "tilt" : "10.00",
+      "lng" : "126.7721608",
+      "lat" : "33.4565249",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230212_56/1676194101257RfUPc_JPEG/KakaoTalk_20230212_182503229_13.jpg", "https://ldb-phinf.pstatic.net/20210713_137/1626145203059HYn56_JPEG/jWuRH-NZadh9HsHDADqHWMx1.jpg", "https://ldb-phinf.pstatic.net/20210713_78/1626145202609UDRwB_JPEG/FerRmT9wuzCQHnaJ6407Imbl.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007933938,
+  "name" : "카페 글렌코",
+  "displayName" : "",
+  "px" : 126.7332423,
+  "py" : 33.4336731,
+  "type" : "place",
+  "useTime" : 1683558187000,
+  "lastUpdateTime" : 1683558187000,
+  "creationTime" : 1683558187000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1281784128",
+  "address" : "제주특별자치도 제주시 구좌읍 송당리 2635-8",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025625",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "fCoZvBZcBD3y2KovfXpHPQ==",
+      "pan" : "179.49",
+      "tilt" : "10.00",
+      "lng" : "126.7332313",
+      "lat" : "33.4347159",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20181015_55/1539579234029pyrWT_JPEG/tGhYy8GuxOR8v_O9k92fynpZ.jpg", "https://ldb-phinf.pstatic.net/20181015_255/1539579334092IDtpS_JPEG/nWUdBkNYNzPWFohiup5zMhtN.jpg", "https://ldb-phinf.pstatic.net/20181015_246/15395793395796EmH6_JPEG/3g_DEO9tLUx-36uyWl8evWO9.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007933285,
+  "name" : "조남매구움과자",
+  "displayName" : "",
+  "px" : 126.8136734,
+  "py" : 33.4919458,
+  "type" : "place",
+  "useTime" : 1683558166000,
+  "lastUpdateTime" : 1683558166000,
+  "creationTime" : 1683558166000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1801187028",
+  "address" : "제주특별자치도 제주시 구좌읍 평대리 2940 비자림스테이 201동 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025633",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "LalvW4yfpxdamzz18f41ZQ==",
+      "pan" : "9.73",
+      "tilt" : "7.88",
+      "lng" : "126.8137014",
+      "lat" : "33.4918369",
+      "fov" : "47"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20221222_49/1671697208650JaSsI_JPEG/20220509_180710.jpg", "https://ldb-phinf.pstatic.net/20230320_227/1679287653456oLr32_JPEG/20230307_140539.jpg", "https://ldb-phinf.pstatic.net/20230623_257/1687487027874kDA90_JPEG/20230621_152552_polarr.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007932700,
+  "name" : "해녀삼춘커피",
+  "displayName" : "",
+  "px" : 126.7404354,
+  "py" : 33.5582075,
+  "type" : "place",
+  "useTime" : 1683558145000,
+  "lastUpdateTime" : 1683558145000,
+  "creationTime" : 1683558145000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1561674325",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 4074-2 2층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "u29dfOUEJGuYt8VERU2YCA==",
+      "pan" : "157.06",
+      "tilt" : "10.00",
+      "lng" : "126.7403749",
+      "lat" : "33.5583499",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231116_39/1700134038959Goqag_JPEG/1700133412358.jpg", "https://ldb-phinf.pstatic.net/20231116_30/17001340871565md20_JPEG/20231023_152321.jpg", "https://ldb-phinf.pstatic.net/20220929_37/1664425632127li2OE_JPEG/5397F090-231A-43A5-A9F3-AD3EB8AEC684.jpeg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007932158,
+  "name" : "김녕에사는김영훈",
+  "displayName" : "",
+  "px" : 126.7462951,
+  "py" : 33.5542905,
+  "type" : "place",
+  "useTime" : 1683558125000,
+  "lastUpdateTime" : 1683558125000,
+  "creationTime" : 1683558125000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1257655031",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 3546 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "VszzO5ydqGemBOXpOoxhSQ==",
+      "pan" : "-148.35",
+      "tilt" : "10.00",
+      "lng" : "126.7463668",
+      "lat" : "33.5544065",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220409_138/1649514538188UlM95_JPEG/1649514508545-0.jpg", "https://ldb-phinf.pstatic.net/20220409_185/1649514543369bGYDu_JPEG/1649514508545-1.jpg", "https://ldb-phinf.pstatic.net/20220409_244/16495145478086rXx8_JPEG/1649514508545-2.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007931612,
+  "name" : "이층다방",
+  "displayName" : "",
+  "px" : 126.7441388,
+  "py" : 33.5526288,
+  "type" : "place",
+  "useTime" : 1683558103000,
+  "lastUpdateTime" : 1683558103000,
+  "creationTime" : 1683558103000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1783147736",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 2540",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Crp5cJW/Hr/nL98FLza8hw==",
+      "pan" : "-47.33",
+      "tilt" : "10.00",
+      "lng" : "126.7442368",
+      "lat" : "33.5525384",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240524_215/1716521584746gq9U4_JPEG/1000025219.jpg", "https://ldb-phinf.pstatic.net/20240524_161/1716521584367Ftzke_JPEG/1000025220.jpg", "https://ldb-phinf.pstatic.net/20240524_172/1716521584931gkxaU_JPEG/1000025224.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007931119,
+  "name" : "브릭스 제주",
+  "displayName" : "",
+  "px" : 126.7429831,
+  "py" : 33.5546569,
+  "type" : "place",
+  "useTime" : 1683558084000,
+  "lastUpdateTime" : 1683558084000,
+  "creationTime" : 1683558083000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "36830542",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 3416 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "zzy5qXqqoVfbyNoCvkNtYQ==",
+      "pan" : "-134.23",
+      "tilt" : "19.13",
+      "lng" : "126.7430357",
+      "lat" : "33.5547633",
+      "fov" : "77"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211223_17/1640230762321XNozg_JPEG/IMG_20211216_121755_620.jpg", "https://ldb-phinf.pstatic.net/20200520_122/1589950793822LDguT_JPEG/vrabESQR2D6YWxAHdhTkOtDS.jpg", "https://ldb-phinf.pstatic.net/20200520_4/1589950790507SnOym_JPEG/aC4dJMK9Pqnj7Zv5KB8-FyXl.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007930613,
+  "name" : "쪼끌락",
+  "displayName" : "",
+  "px" : 126.7551763,
+  "py" : 33.5578891,
+  "type" : "place",
+  "useTime" : 1683558062000,
+  "lastUpdateTime" : 1683558062000,
+  "creationTime" : 1683558062000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "36399029",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 1223-20 김녕로 21길 21",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "mnstaVzyeoHccbG++MhVEQ==",
+      "pan" : "-88.57",
+      "tilt" : "17.69",
+      "lng" : "126.7553685",
+      "lat" : "33.5578388",
+      "fov" : "40"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230521_27/1684611642038BWqcM_JPEG/IMG_20230501_095139_167.jpg", "https://ldb-phinf.pstatic.net/20230521_266/168461165664301Sld_JPEG/20230430_143401.jpg", "https://ldb-phinf.pstatic.net/20230521_242/16846116350792a05l_JPEG/1683307926280.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007929646,
+  "name" : "롯지먼트",
+  "displayName" : "",
+  "px" : 126.7474213,
+  "py" : 33.5557622,
+  "type" : "place",
+  "useTime" : 1683558022000,
+  "lastUpdateTime" : 1683558022000,
+  "creationTime" : 1683558021000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1090098579",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 3676 롯지먼트",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Wp39lUmuUTUG+zO1I2kVeg==",
+      "pan" : "1.15",
+      "tilt" : "10.00",
+      "lng" : "126.7474201",
+      "lat" : "33.5557023",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220809_180/16600222155419OQeR_PNG/KakaoTalk_20220616_151601852_01-removebg-preview_%281%29.png" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007929196,
+  "name" : "니모스토리",
+  "displayName" : "",
+  "px" : 126.7541183,
+  "py" : 33.5583344,
+  "type" : "place",
+  "useTime" : 1683557998000,
+  "lastUpdateTime" : 1683557998000,
+  "creationTime" : 1683557998000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "38705735",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 1267-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220587", "221431" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "PmFSW9SSXkAQ4FMEuz310w==",
+      "pan" : "102.93",
+      "tilt" : "10.00",
+      "lng" : "126.7536566",
+      "lat" : "33.5583341",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230725_29/1690264851077jXHK2_JPEG/1690264818434.jpg", "https://ldb-phinf.pstatic.net/20230725_7/16902639090640kUPt_JPEG/1687520501128.jpg", "https://ldb-phinf.pstatic.net/20230725_228/1690267304176RfcqH_JPEG/1648961936602-3.jpg" ],
+    "category" : "테마카페"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007928769,
+  "name" : "모멘터리커피",
+  "displayName" : "",
+  "px" : 126.7537246,
+  "py" : 33.5564506,
+  "type" : "place",
+  "useTime" : 1683557974000,
+  "lastUpdateTime" : 1683557974000,
+  "creationTime" : 1683557974000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1460920082",
+  "address" : "제주특별자치도 제주시 구좌읍 김녕리 1241-1 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025634",
+  "cidPath" : [ "220036", "220052", "220576", "221212" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "VKyZ5GZ0r5t2zknrzNVLKw==",
+      "pan" : "12.76",
+      "tilt" : "10.00",
+      "lng" : "126.7537033",
+      "lat" : "33.5563565",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240502_251/1714630098008LOat7_JPEG/IMG_9832.jpeg", "https://ldb-phinf.pstatic.net/20240502_266/1714630097867vCd85_JPEG/IMG_9834.jpeg", "https://ldb-phinf.pstatic.net/20240502_71/1714630098008iY7gt_JPEG/IMG_9833.jpeg" ],
+    "category" : "카페"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007928296,
+  "name" : "카페 스누피",
+  "displayName" : "",
+  "px" : 126.7796945,
+  "py" : 33.4434523,
+  "type" : "place",
+  "useTime" : 1683557947000,
+  "lastUpdateTime" : 1683557947000,
+  "creationTime" : 1683557947000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1837212560",
+  "address" : "제주특별자치도 제주시 구좌읍 송당리 2303-1 스누피 가든",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "1411025625",
+  "cidPath" : [ "220036", "220052", "220563" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "ueSmvPmYxQiIbKedJcLCHg==",
+      "pan" : "6.54",
+      "tilt" : "10.00",
+      "lng" : "126.7796513",
+      "lat" : "33.4430752",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210323_201/1616466356499pSCxl_JPEG/w9cGWwwAh-NUL8FTpqlvhgYZ.jpg", "https://ldb-phinf.pstatic.net/20210323_203/1616466367124olNMg_JPEG/nA6TEQWy27wLHT8bQnk4Ud27.jpg", "https://ldb-phinf.pstatic.net/20210323_53/16164663755452WYgA_JPEG/d_9nyUTb0TS3dCyBLfVDb94l.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+} ]

@@ -2,7 +2,10 @@ package com.study.petory.domain.place.entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
@@ -27,6 +30,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_place")
 @NoArgsConstructor
+@DynamicUpdate
 public class Place extends TimeFeatureBasedEntity {
 
 	@Id
@@ -41,9 +45,9 @@ public class Place extends TimeFeatureBasedEntity {
 	private String placeName;
 
 	@OneToMany(mappedBy = "place")
-	private List<PlaceReview> placeReviewList;
+	private List<PlaceReview> placeReviewList = new ArrayList<>();
 
-	@Column(nullable = false)
+	// @Column(nullable = false)
 	private String placeInfo;
 
 	@Enumerated(EnumType.STRING)
@@ -91,35 +95,22 @@ public class Place extends TimeFeatureBasedEntity {
 	// PlaceUpdateRequestDto null 가능 여부에 따른 update 메서드
 	public void updatePlace(String placeName, String placeInfo, PlaceType placeType, BigDecimal latitude,
 		BigDecimal longitude) {
-		if (placeName != null) {
-			this.placeName = placeName;
-		}
-
-		if (placeInfo != null) {
-			this.placeInfo = placeInfo;
-		}
-
-		if (placeType != null) {
-			this.placeType = placeType;
-		}
-
-		if (latitude != null) {
-			this.latitude = latitude;
-		}
-
-		if (longitude != null) {
-			this.longitude = longitude;
-		}
+		this.placeName = placeName;
+		this.placeInfo = placeInfo;
+		this.placeType = placeType;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	// 평균 평점 계산 로직
-	public void updateRatio(List<PlaceReview> placeReviewList) {
-		Integer sumRatio = 0;
+	public void updateRatio() {
+		BigDecimal sumRatio = BigDecimal.ZERO;
 		int countPlaceReview = 0;
 
-		for (PlaceReview placeReview : placeReviewList) {
+		for (PlaceReview placeReview : this.placeReviewList) {
 			if (placeReview.getDeletedAt() == null) {
-				sumRatio += placeReview.getRatio();
+				// BigDecimal의 경우 객체이기 때문에 add메서드로 더해야하고 불변객체이므로 반환 값을 다시 변수에 할당해야 함
+				sumRatio = sumRatio.add(placeReview.getRatio());
 				countPlaceReview++;
 			}
 		}
@@ -131,7 +122,7 @@ public class Place extends TimeFeatureBasedEntity {
 		}
 
 		// 정수형 타입을 BigDecimal 형태로 변환함과 동시에 나누는 로직. 소수점 첫째 자리까지 계산, 둘째 자리에서 반올림.
-		this.ratio = BigDecimal.valueOf(sumRatio)
+		this.ratio = sumRatio
 			.divide(BigDecimal.valueOf(countPlaceReview), 1, RoundingMode.HALF_UP);
 	}
 

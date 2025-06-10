@@ -1,0 +1,966 @@
+{
+folder: {
+folderId: 82084193,
+name: "갈수있어 강아지도, 경기동남 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "12",
+lastUseTime: 1694770402000,
+creationTime: 1680843515000,
+shouldOverlay: true,
+bookmarkCount: 666,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa2a03010c46697dc0f0b",
+reviewPageUrl: "https://m.place.naver.com/my/642fa2a03010c46697dc0f0b/review?v=2",
+imageUrl: "https://myplace-phinf.pstatic.net/20230522_74/1684749293063dDMV7_PNG/221226_%B3%D7%C0%CC%B9%F6%C1%F6%B5%B5_%C4%B7%C6%E4%C0%CE%BF%EB_%C7%C1%B7%CE%C7%CA%C0%CC%B9%CC%C1%F6-01.png?type=f220_220_70_sharpen",
+nick: "N강아지도 코코"
+},
+shareId: "3c5ab8e0e9e34df8bc93aa879cf50dcc",
+encryptedUserIdNo: "EWlflF2Xk351MgW0:QWcDnt6pHFCzdTeCEUDqw-5l2vtHrA",
+followCount: 2091,
+viewCount: 10840,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007387088,
+name: "용문산 촌두부",
+displayName: "",
+px: 127.5845247,
+py: 37.5450047,
+type: "place",
+useTime: 1683529068000,
+lastUpdateTime: 1683529068000,
+creationTime: 1683529067000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "11566461",
+address: "경기도 양평군 용문면 신점리 369-63 용문산로628번길3",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0283040033",
+cidPath: [
+"220036",
+"220037",
+"220079"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "MHZtVSfQcauURFcD3+eAtw==",
+pan: "-51.60",
+tilt: "10.00",
+lng: "127.5845978",
+lat: "37.5449467",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221212_205/1670834655516gojLa_JPEG/1670834632324.jpg",
+"https://ldb-phinf.pstatic.net/20221212_36/1670834630497p02IU_JPEG/1670834601495.jpg",
+"https://ldb-phinf.pstatic.net/20220501_24/1651395209592U6Wqk_JPEG/1651395197316.jpg"
+],
+category: "향토음식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007386868,
+name: "쁘띠로사",
+displayName: "",
+px: 127.3488695,
+py: 37.6056685,
+type: "place",
+useTime: 1683529056000,
+lastUpdateTime: 1683529056000,
+creationTime: 1683529056000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1659290931",
+address: "경기도 양평군 서종면 문호리 768-21 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0283035021",
+cidPath: [
+"220036",
+"220042",
+"220118"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "2dw/5ZPq9BXcM/hev+6m8Q==",
+pan: "19.90",
+tilt: "10.00",
+lng: "127.3488140",
+lat: "37.6055151",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250503_238/174624966424816FLD_JPEG/IMG_4806.jpeg",
+"https://ldb-phinf.pstatic.net/20250503_20/1746249658588B5gja_JPEG/IMG_4804.jpeg",
+"https://ldb-phinf.pstatic.net/20250503_142/1746249652896Ufh5H_JPEG/IMG_4805.jpeg"
+],
+category: "주꾸미요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007386555,
+name: "용수상회",
+displayName: "",
+px: 127.6062212,
+py: 37.6249809,
+type: "place",
+useTime: 1683529039000,
+lastUpdateTime: 1683529039000,
+creationTime: 1683529039000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "19162501",
+address: "경기도 양평군 단월면 석산리 640-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0283036028",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "YzXRMuOfvibU9RWXZkekng==",
+pan: "-23.59",
+tilt: "10.00",
+lng: "127.6063078",
+lat: "37.6247825",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150831_259/1440997375022WGsP1_JPEG/146475483568176_0.jpeg",
+"https://ldb-phinf.pstatic.net/20150831_17/1440997375192jHj8F_JPEG/146475483568176_1.jpeg",
+"https://ldb-phinf.pstatic.net/20150831_189/14409973753748Wep7_JPEG/146475483568176_2.jpeg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987983736,
+name: "도깨비셀프바베큐",
+displayName: "",
+px: 127.4387803,
+py: 37.3003231,
+type: "place",
+useTime: 1682267325000,
+lastUpdateTime: 1682267325000,
+creationTime: 1682267324000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1231921980",
+address: "경기도 이천시 송정동 182-9",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02500110",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "kmAtvaHIQMNaPiVznyUeLQ==",
+pan: "103.35",
+tilt: "8.81",
+lng: "127.4384660",
+lat: "37.3002850",
+fov: "47"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211003_194/1633259222470dt804_JPEG/eUK0DWaMoNa-2AvCOjs0ojeB.jpg",
+"https://ldb-phinf.pstatic.net/20211003_27/1633259222180Aok7r_JPEG/zJ6Xg-kVLDIYc9ReEKgXWtEh.jpg",
+"https://ldb-phinf.pstatic.net/20211003_16/1633259222253X6PXK_JPEG/g2BpYY1QvskJDKLNcKRiwCRp.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987983628,
+name: "꿀 달 한식당",
+displayName: "",
+px: 127.445559,
+py: 37.2783096,
+type: "place",
+useTime: 1682267316000,
+lastUpdateTime: 1682267316000,
+creationTime: 1682267316000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1837435604",
+address: "경기도 이천시 중리동 213 라온팰리스 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02500103",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 987983528,
+name: "기절떡볶이",
+displayName: "",
+px: 127.4481699,
+py: 37.2770604,
+type: "place",
+useTime: 1682267308000,
+lastUpdateTime: 1682267308000,
+creationTime: 1682267308000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1898213720",
+address: "경기도 이천시 중리동 463-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02500103",
+cidPath: [
+"220036",
+"220048",
+"220185"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "8Mkaq+sDujw34zrCpQNoxw==",
+pan: "-127.33",
+tilt: "14.13",
+lng: "127.4481530",
+lat: "37.2771420",
+fov: "45"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220613_196/1655120698577wwpyF_JPEG/%B7%D1%B8%B5%B9%E8%B3%CA1.jpg",
+"https://ldb-phinf.pstatic.net/20220613_84/16551207070792nEhI_JPEG/%B7%D1%B8%B5%B9%E8%B3%CA4.jpg",
+"https://ldb-phinf.pstatic.net/20220613_279/1655120701252gi3Yu_JPEG/%B7%D1%B8%B5%B9%E8%B3%CA2_%BC%D5.jpg"
+],
+category: "종합분식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987983417,
+name: "리얼펍 장호원점",
+displayName: "",
+px: 127.6297271,
+py: 37.1187982,
+type: "place",
+useTime: 1682267299000,
+lastUpdateTime: 1682267299000,
+creationTime: 1682267299000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1852570596",
+address: "경기도 이천시 장호원읍 장호원리 141-5 리얼펍 장호원점",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "0250025021",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"230821"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "sMgRrQAqSHNgQfBLiNLlfQ==",
+pan: "-85.69",
+tilt: "10.00",
+lng: "127.6298282",
+lat: "37.1187905",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20201106_278/1604626237899YlgkW_JPEG/w31767awi5Wz7JgIk9MPH5vJ.jpg",
+"https://ldb-phinf.pstatic.net/20201106_118/1604626236003k5qpJ_JPEG/t1BoDkxGb2-wx_QHeslRccYL.jpg",
+"https://ldb-phinf.pstatic.net/20201106_37/1604626236520f9OAv_JPEG/S5UnBuAMHkRNFCJX2E-rimUf.jpg"
+],
+category: "맥주,호프"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987983053,
+name: "도깨",
+displayName: "",
+px: 127.4442788,
+py: 37.2820932,
+type: "place",
+useTime: 1682267269000,
+lastUpdateTime: 1682267269000,
+creationTime: 1682267269000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1519715896",
+address: "경기도 이천시 창전동 129-16 2층 203호",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02500101",
+cidPath: [
+"220036",
+"220051",
+"220554",
+"221116"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "D2TyRlQgj7S0WRsLIJMEdA==",
+pan: "-96.96",
+tilt: "3.83",
+lng: "127.4443943",
+lat: "37.2821088",
+fov: "100"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211224_189/1640271812676Vnl69_JPEG/1638428094931.jpg",
+"https://ldb-phinf.pstatic.net/20230419_179/1681901185726YdJBl_JPEG/IMG_20230405_181545_416.jpg",
+"https://ldb-phinf.pstatic.net/20230406_295/1680777967183Bl7my_JPEG/20230403_202631.jpg"
+],
+category: "바(BAR)"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987982750,
+name: "취한밤",
+displayName: "",
+px: 127.4444023,
+py: 37.2816618,
+type: "place",
+useTime: 1682267246000,
+lastUpdateTime: 1682267246000,
+creationTime: 1682267245000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1020809810",
+address: "경기도 이천시 창전동 149 1층 취한밤",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02500101",
+cidPath: [
+"220036",
+"220051",
+"220552",
+"221043"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "5pynlKMjTU3U3jP3YxDfMQ==",
+pan: "97.69",
+tilt: "23.75",
+lng: "127.4443179",
+lat: "37.2817739",
+fov: "105"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20170829_72/1503959024927qqryM_JPEG/duKTx2fL_qDPge7L_EHuUd0g.jpg",
+"https://ldb-phinf.pstatic.net/20170829_300/1503959032260L3R3O_JPEG/kCYg0zp8DG-wyyPNeeTGj8UO.jpg"
+],
+category: "요리주점"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987982625,
+name: "더팩토리",
+displayName: "",
+px: 127.4446363,
+py: 37.2807909,
+type: "place",
+useTime: 1682267234000,
+lastUpdateTime: 1682267234000,
+creationTime: 1682267234000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "36373101",
+address: "경기도 이천시 창전동 162-8 2층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02500101",
+cidPath: [
+"220036",
+"220051",
+"220552",
+"221043"
+],
+available: true,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 987982496,
+name: "리틀피크닉",
+displayName: "",
+px: 127.4445333,
+py: 37.2778353,
+type: "place",
+useTime: 1682267225000,
+lastUpdateTime: 1682267225000,
+creationTime: 1682267224000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1015336319",
+address: "경기도 이천시 중리동 209-8",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02500103",
+cidPath: [
+"220036",
+"220051",
+"220552",
+"221043"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "z77COn5Rb4wxKSjobA2PPw==",
+pan: "105.47",
+tilt: "7.94",
+lng: "127.4444470",
+lat: "37.2779031",
+fov: "77"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220826_299/1661504594781zHfeg_JPEG/78EF34E8-C153-4921-A978-61ACCA23CF6B.jpeg",
+"https://ldb-phinf.pstatic.net/20220826_171/1661504594666hwnRF_JPEG/B4B8BC68-5688-487D-B7B6-E20A2B909C7E.jpeg"
+],
+category: "요리주점"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987982407,
+name: "그링고",
+displayName: "",
+px: 127.4458637,
+py: 37.2803658,
+type: "place",
+useTime: 1682267217000,
+lastUpdateTime: 1682267217000,
+creationTime: 1682267217000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1589616796",
+address: "경기도 이천시 창전동 164-3 101호(창전동, 석산빌딩)",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02500101",
+cidPath: [
+"220036",
+"220051",
+"220554",
+"221116"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "lv5gBdCMQRx6tS4WL+IB9Q==",
+pan: "93.48",
+tilt: "6.56",
+lng: "127.4457904",
+lat: "37.2803852",
+fov: "59"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220913_103/1663003610224j1jtT_JPEG/KakaoTalk_20220913_022632739.jpg",
+"https://ldb-phinf.pstatic.net/20220915_124/1663205474297YFhpu_JPEG/DSC09614.jpg",
+"https://ldb-phinf.pstatic.net/20220914_286/1663119385022pL6sD_JPEG/KakaoTalk_20220914_103601125_04.jpg"
+],
+category: "바(BAR)"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987980958,
+name: "원셰프의행복식탁 이천증포점",
+displayName: "",
+px: 127.4469917,
+py: 37.2889297,
+type: "place",
+useTime: 1682267104000,
+lastUpdateTime: 1682267104000,
+creationTime: 1682267104000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1351180467",
+address: "경기도 이천시 증포동 351-9 B층 03호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02500109",
+cidPath: [
+"220036",
+"1004976",
+"1004972"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "TGlIysjzYBe1xeYrRUVoCg==",
+pan: "118.64",
+tilt: "10.00",
+lng: "127.4466663",
+lat: "37.2891070",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211013_258/1634087680193nuxyh_JPEG/Z62ePkB_90CQeC3--penfFo0.jpg",
+"https://ldb-phinf.pstatic.net/20211013_141/1634087680663QEMD2_JPEG/_wgTR-SAa37IJPlV9h2j7Cyy.jpg",
+"https://ldb-phinf.pstatic.net/20211103_171/1635868866241MIIrc_JPEG/1QFcpiDewvLRqSd597PJTVMR.jpg"
+],
+category: "밀키트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987980824,
+name: "캠퍼락",
+displayName: "",
+px: 127.4028626,
+py: 37.3026918,
+type: "place",
+useTime: 1682267093000,
+lastUpdateTime: 1682267093000,
+creationTime: 1682267093000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "33142206",
+address: "경기도 이천시 신둔면 소정리 49-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250031033",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "uQK3kRPRK4+gq3f1em7niw==",
+pan: "-48.43",
+tilt: "10.00",
+lng: "127.4031331",
+lat: "37.3024517",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150901_13/14410498978325j2wF_JPEG/SUBMIT_1407817285920_33142206.jpg",
+"https://ldb-phinf.pstatic.net/20150901_119/1441049898034FBnpt_JPEG/SUBMIT_1407817285442_33142206.jpg",
+"https://ldb-phinf.pstatic.net/20150901_124/14410498982413buUB_JPEG/SUBMIT_1407817285339_33142206.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987980695,
+name: "뒷통구이",
+displayName: "",
+px: 127.402259,
+py: 37.3089152,
+type: "place",
+useTime: 1682267083000,
+lastUpdateTime: 1682267083000,
+creationTime: 1682267082000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1706179809",
+address: "경기도 이천시 신둔면 수광리 274-6 뒷통구이",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250031021",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "PaelmGZ123wOvscqvPVBHQ==",
+pan: "65.12",
+tilt: "10.00",
+lng: "127.4021087",
+lat: "37.3088454",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221224_224/16718808920294YWr3_JPEG/20221224_171441.jpg",
+"https://ldb-phinf.pstatic.net/20221224_81/1671880919915WPbHu_JPEG/20221221_175734.jpg",
+"https://ldb-phinf.pstatic.net/20221224_43/1671880932751DEhyE_JPEG/20221224_175347.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987980572,
+name: "돈치킨 신둔점",
+displayName: "",
+px: 127.4022493,
+py: 37.3090434,
+type: "place",
+useTime: 1682267073000,
+lastUpdateTime: 1682267073000,
+creationTime: 1682267072000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37498227",
+address: "경기도 이천시 신둔면 수광리 274-6 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250031021",
+cidPath: [
+"220036",
+"220049",
+"220318"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "WAKz3rxkH8PQwLVU1dn6XA==",
+pan: "81.96",
+tilt: "10.00",
+lng: "127.4020464",
+lat: "37.3090146",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250206_199/1738820896031QpH4e_PNG/241216.png",
+"https://ldb-phinf.pstatic.net/20250206_222/1738819765812f5sP5_JPEG/%B9%D9%BA%ED%B8%B53%C1%BE.jpg",
+"https://ldb-phinf.pstatic.net/20250206_36/1738819765919UIetM_JPEG/%C7%D6%B7%CE%BD%BA%C6%AE.jpg"
+],
+category: "치킨,닭강정"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987980442,
+name: "테그42 이천점",
+displayName: "",
+px: 127.4957828,
+py: 37.2873339,
+type: "place",
+useTime: 1682267062000,
+lastUpdateTime: 1682267062000,
+creationTime: 1682267062000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1072002678",
+address: "경기도 이천시 부발읍 무촌리 52",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250025321",
+cidPath: [
+"220036",
+"220048",
+"220190",
+"1005073"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 987980348,
+name: "닭사부일체 이천본점",
+displayName: "",
+px: 127.4719851,
+py: 37.2533315,
+type: "place",
+useTime: 1682267054000,
+lastUpdateTime: 1682267054000,
+creationTime: 1682267054000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1333670756",
+address: "경기도 이천시 부발읍 가좌리 100-43 103호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250025329",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220773",
+"221605"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "t28qUrigy1h44vCK5pAkCw==",
+pan: "-81.70",
+tilt: "1.81",
+lng: "127.4722607",
+lat: "37.2532058",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240924_178/1727189530121N3CWG_PNG/1000069387.png",
+"https://ldb-phinf.pstatic.net/20250418_177/1744980492444m8OyV_JPEG/1000060315.jpg",
+"https://ldb-phinf.pstatic.net/20241207_43/1733583264503HgUxX_JPEG/1000076949.jpg"
+],
+category: "닭볶음탕"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987980195,
+name: "하륜일만족발 하이닉스점",
+displayName: "",
+px: 127.4918601,
+py: 37.2546055,
+type: "place",
+useTime: 1682267041000,
+lastUpdateTime: 1682267041000,
+creationTime: 1682267040000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1067134804",
+address: "경기도 이천시 부발읍 아미리 1245 상가동",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250025330",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220766",
+"1002720"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "jNsDxflpJpNNji02O9xuCA==",
+pan: "109.76",
+tilt: "10.00",
+lng: "127.4915769",
+lat: "37.2554700",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220527_14/1653639433149XgG8z_JPEG/IMG_7269.jpg"
+],
+category: "족발,보쌈"
+},
+isIndoor: false
+},
+{
+bookmarkId: 987979965,
+name: "교정앞분식",
+displayName: "",
+px: 127.4643035,
+py: 37.3065257,
+type: "place",
+useTime: 1682267023000,
+lastUpdateTime: 1682267023000,
+creationTime: 1682267023000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1509307513",
+address: "경기도 이천시 백사면 모전리 968-9 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0250032026",
+cidPath: [
+"220036",
+"220048",
+"220185"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+}
+],
+unavailableCount: 177,
+mismatchedCount: 27,
+removed: false
+}

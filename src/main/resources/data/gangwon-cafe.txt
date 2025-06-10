@@ -1,0 +1,951 @@
+{
+folder: {
+folderId: 82085052,
+name: "갈수있어 강아지도, 강원 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "1",
+lastUseTime: 1684742178000,
+creationTime: 1680844474000,
+shouldOverlay: true,
+bookmarkCount: 660,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa69a1438fc3a9cfafe95",
+reviewPageUrl: "https://m.place.naver.com/my/642fa69a1438fc3a9cfafe95/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_247/168084443322917k2u_PNG/image.png?type=f102_102",
+nick: "N강아지도 밀크"
+},
+shareId: "6b5f06cd1f484979abc0229a58a17863",
+encryptedUserIdNo: "rYw-2_FDLFFWSwsf:RM0oV1b6n_pv2ZDsSY_Qrgani8_UPg",
+followCount: 1104,
+viewCount: 3857,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007239693,
+name: "고래카페",
+displayName: "",
+px: 128.7883984,
+py: 37.9444875,
+type: "place",
+useTime: 1683520280000,
+lastUpdateTime: 1683520280000,
+creationTime: 1683520279000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1995003098",
+address: "강원도 양양군 현남면 남애리 2-81 고래카페",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0183034038",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "MzuoEXA2o9uZheIOsuGufg==",
+pan: "74.25",
+tilt: "16.31",
+lng: "128.7881792",
+lat: "37.9444413",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200109_157/1578543679842diSYL_JPEG/fVegGIsnnzA12HHc6x14YnGO.jpg",
+"https://ldb-phinf.pstatic.net/20200109_58/1578543768700X52fY_JPEG/HAfmDYV9mF31xPwkQgqds1SU.jpg",
+"https://ldb-phinf.pstatic.net/20200109_153/157854405109087mh1_JPEG/oEyNii5i-Ca6d4LS4jtAEmnv.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007239474,
+name: "섬마을커피",
+displayName: "",
+px: 128.5938161,
+py: 38.20176,
+type: "place",
+useTime: 1683520264000,
+lastUpdateTime: 1683520264000,
+creationTime: 1683520263000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1246657023",
+address: "강원도 속초시 청호동 941-1",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01210109",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007239289,
+name: "1940나한정역커피가게",
+displayName: "",
+px: 129.0362237,
+py: 37.2014442,
+type: "place",
+useTime: 1683520252000,
+lastUpdateTime: 1683520252000,
+creationTime: 1683520251000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "36505105",
+address: "강원도 삼척시 도계읍 심포리 258",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0123025035",
+cidPath: [
+"220036",
+"220052",
+"220577",
+"221358"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "nogD1huCgOvHaTyHBWPhOg==",
+pan: "-17.00",
+tilt: "10.00",
+lng: "129.0362855",
+lat: "37.2012419",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150901_227/1441079182046cv4Nx_PNG/SUBMIT_1429238261259_36505105.png",
+"https://ldb-phinf.pstatic.net/20150901_18/1441079182368DPGGt_JPEG/SUBMIT_1431480996489_36505105.jpg",
+"https://ldb-phinf.pstatic.net/20150901_121/1441079182569VBIV5_JPEG/SUBMIT_1431480996754_36505105.jpg"
+],
+category: "테이크아웃커피"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982468652,
+name: "웨어커피 춘천명동점",
+displayName: "",
+px: 127.7305847,
+py: 37.8794449,
+type: "place",
+useTime: 1681896731000,
+lastUpdateTime: 1681896731000,
+creationTime: 1681896731000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1538308035",
+address: "강원도 춘천시 조양동 6-50 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01110108",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "z9SVO4vYpgUv0ZQy0ew/0g==",
+pan: "-61.85",
+tilt: "10.00",
+lng: "127.7306814",
+lat: "37.8793931",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240724_178/172178984711617LD3_JPEG/%C5%A9%B7%CE%C7%C3%B6%F3%C5%D7.jpeg",
+"https://ldb-phinf.pstatic.net/20240724_142/17217898471333WbQ4_PNG/%C5%A9%B7%E7%C5%B0_%C0%CE%BD%BA%C5%B8.png",
+"https://naverbooking-phinf.pstatic.net/20250109_138/17364005752687G95E_JPEG/%B9%E8%B9%CE%B7%CE%B0%ED%BB%E7%C0%CC%C1%EE.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982468298,
+name: "플라베",
+displayName: "",
+px: 127.7274771,
+py: 37.8812041,
+type: "place",
+useTime: 1681896714000,
+lastUpdateTime: 1681896714000,
+creationTime: 1681896714000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1486290219",
+address: "강원도 춘천시 요선동 18-2 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01110102",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982467638,
+name: "THE 1939",
+displayName: "",
+px: 127.6340671,
+py: 37.8133087,
+type: "place",
+useTime: 1681896680000,
+lastUpdateTime: 1681896680000,
+creationTime: 1681896680000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1821414613",
+address: "강원도 춘천시 남산면 강촌리 243-4",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0111040027",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "OnZPDv9Y9EESluBtEceLlg==",
+pan: "72.24",
+tilt: "2.56",
+lng: "127.6338790",
+lat: "37.8132846",
+fov: "75"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220513_156/1652422783828lExCU_JPEG/3748E674-F644-46EB-84A7-12BE3B6F5C2F.jpeg",
+"https://ldb-phinf.pstatic.net/20230418_164/1681801595340xyr4U_JPEG/635B7EE3-598E-491F-BD3F-B47ACEF8780F.jpeg",
+"https://ldb-phinf.pstatic.net/20230418_230/16818015954462m3eF_JPEG/60C8BC1A-D3A6-43F0-945B-BFC074C39763.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982466669,
+name: "허밍옐로우",
+displayName: "",
+px: 127.9230384,
+py: 37.3324869,
+type: "place",
+useTime: 1681896634000,
+lastUpdateTime: 1681896634000,
+creationTime: 1681896633000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1308849200",
+address: "강원도 원주시 무실동 1669-5 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01130115",
+cidPath: [
+"220036",
+"220052",
+"220577",
+"221358"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982466301,
+name: "기리커피",
+displayName: "",
+px: 127.9315879,
+py: 37.3493438,
+type: "place",
+useTime: 1681896615000,
+lastUpdateTime: 1681896615000,
+creationTime: 1681896615000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1857545226",
+address: "강원도 원주시 단계동 822-1 1층상가",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01130110",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "yA6jspCGKZRP7Hv8iaebbA==",
+pan: "-172.63",
+tilt: "10.00",
+lng: "127.9316061",
+lat: "37.3494829",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231204_36/1701666675439tn0FM_JPEG/6D55E916-AA67-4723-838F-CE094D2D969B.jpeg",
+"https://ldb-phinf.pstatic.net/20240115_179/1705292709980VO6me_JPEG/IMG_2285.jpeg",
+"https://ldb-phinf.pstatic.net/20231204_9/170166667592389Kev_JPEG/IMG_1491.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982465948,
+name: "거북이 밀크바",
+displayName: "",
+px: 128.7606695,
+py: 37.9721576,
+type: "place",
+useTime: 1681896597000,
+lastUpdateTime: 1681896597000,
+creationTime: 1681896597000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1604378113",
+address: "강원도 양양군 현남면 시변리 33-3 거북이밀크바",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0183034024",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "dSdGIS+pYcxKS2zwmiKYtg==",
+pan: "-149.55",
+tilt: "10.00",
+lng: "128.7606561",
+lat: "37.9722770",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230911_263/1694434244273BxSKo_JPEG/DSCF7663.JPG",
+"https://ldb-phinf.pstatic.net/20250125_106/1737792780349sxBiK_JPEG/%B4%D9%BF%EE%B7%CE%B5%E5_%281%29.jpg",
+"https://ldb-phinf.pstatic.net/20240910_186/1725955558264vVKUS_JPEG/F37246DE-519D-4616-A86E-4B928270BF8D.jpeg"
+],
+category: "햄버거"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982465537,
+name: "마음이동해",
+displayName: "",
+px: 128.6214023,
+py: 38.0747794,
+type: "place",
+useTime: 1681896576000,
+lastUpdateTime: 1681896576000,
+creationTime: 1681896576000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1387708198",
+address: "강원도 양양군 양양읍 남문리 79-8 핑크색건물 삼화페인트 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0183025021",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "A8S7MOYhSnNyjj0E4dQOHw==",
+pan: "141.67",
+tilt: "10.00",
+lng: "128.6213018",
+lat: "38.0749062",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230731_100/169077439183141gJR_JPEG/%BF%C0%C7%C1%B3%CA%B8%B6%B1%D7%B3%DD.jpg",
+"https://ldb-phinf.pstatic.net/20240731_129/1722407538326zop6i_JPEG/%BF%DC%BA%CE2.jpg",
+"https://ldb-phinf.pstatic.net/20240731_89/1722407513283KV42g_JPEG/18.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982464490,
+name: "해피쿠키데이",
+displayName: "",
+px: 128.588539,
+py: 38.2040445,
+type: "place",
+useTime: 1681896525000,
+lastUpdateTime: 1681896525000,
+creationTime: 1681896524000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1423584181",
+address: "강원도 속초시 금호동 491-6 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01210104",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "tzeYNcISabPTXX543JKqyA==",
+pan: "-117.60",
+tilt: "10.00",
+lng: "128.5957893",
+lat: "38.2142418",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230504_79/1683180225921Xwj37_JPEG/IMG_4492.jpeg",
+"https://ldb-phinf.pstatic.net/20230504_221/1683180225255ghdsV_JPEG/IMG_4488.jpeg",
+"https://ldb-phinf.pstatic.net/20230504_62/1683180225723F4QMQ_JPEG/IMG_4483.jpeg"
+],
+category: "베이커리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982462635,
+name: "초당110",
+displayName: "",
+px: 128.9170737,
+py: 37.7922737,
+type: "place",
+useTime: 1681896430000,
+lastUpdateTime: 1681896430000,
+creationTime: 1681896429000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1338491802",
+address: "강원도 강릉시 강문동 127-1 초당110",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150113",
+cidPath: [
+"220036",
+"220052",
+"220578",
+"221361"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "2IXz6Y4oadqFy4n5XcMaUw==",
+pan: "132.11",
+tilt: "5.94",
+lng: "128.9169455",
+lat: "37.7923056",
+fov: "85"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241105_92/1730813075951TEMY7_JPEG/dsc_7118.jpeg",
+"https://ldb-phinf.pstatic.net/20230614_28/1686748127483OGx0G_JPEG/00003.jpg",
+"https://ldb-phinf.pstatic.net/20241105_65/1730813223635I4GDU_JPEG/IMG_6506.jpeg"
+],
+category: "아이스크림"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982462237,
+name: "이진리",
+displayName: "",
+px: 128.8925757,
+py: 37.762023,
+type: "place",
+useTime: 1681896412000,
+lastUpdateTime: 1681896412000,
+creationTime: 1681896411000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1385470899",
+address: "강원도 강릉시 교동 191-30 카페 이진리",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150110",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Df/VgnPAh5eYBlRQVmeFnA==",
+pan: "117.29",
+tilt: "-4.06",
+lng: "128.8923217",
+lat: "37.7621193",
+fov: "55"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230924_297/1695511689922lNhft_JPEG/temp_file.jpg",
+"https://ldb-phinf.pstatic.net/20230924_297/1695512012007Wz3Tl_JPEG/temp_file.jpg",
+"https://ldb-phinf.pstatic.net/20230924_96/16955120198629EkfM_JPEG/temp_file.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982461681,
+name: "샙그린",
+displayName: "",
+px: 128.8998482,
+py: 37.7550817,
+type: "place",
+useTime: 1681896382000,
+lastUpdateTime: 1681896382000,
+creationTime: 1681896381000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1295131793",
+address: "강원도 강릉시 성남동 310-2 /1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150108",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "hroVWUJLj0C9IT3XpSWUaA==",
+pan: "-165.06",
+tilt: "10.00",
+lng: "126.9723872",
+lat: "37.5741422",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240208_176/1707362641256xNrD2_JPEG/538098E1-E122-44EE-B08C-80C50113AAA1.jpeg",
+"https://ldb-phinf.pstatic.net/20240208_126/17073626413517PcsM_JPEG/0A696306-04C4-4C8E-BF86-73A3D88FEC4F.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982461334,
+name: "카페 만월경 강릉교동점",
+displayName: "",
+px: 128.8798648,
+py: 37.7630976,
+type: "place",
+useTime: 1681896364000,
+lastUpdateTime: 1681896364000,
+creationTime: 1681896363000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1232131968",
+address: "강원도 강릉시 교동 1767 교동 2차 현대아파트 ",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150110",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"1005690"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982460965,
+name: "사임당커피",
+displayName: "",
+px: 128.8656814,
+py: 37.7640111,
+type: "place",
+useTime: 1681896346000,
+lastUpdateTime: 1681896346000,
+creationTime: 1681896345000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1199381568",
+address: "강원도 강릉시 유천동 209 바동 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150131",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "QvQLstYgUwXvdAIAY4rbFQ==",
+pan: "-18.83",
+tilt: "10.00",
+lng: "128.8663393",
+lat: "37.7638931",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231204_109/1701651935640XVlvu_JPEG/IMG_2501.jpeg",
+"https://ldb-phinf.pstatic.net/20231204_205/1701651935046b9cxc_JPEG/IMG_2502.jpeg",
+"https://ldb-phinf.pstatic.net/20231204_132/1701651935813fG1az_JPEG/IMG_2504.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982460556,
+name: "디캣웨이브",
+displayName: "",
+px: 128.8781544,
+py: 37.7405255,
+type: "place",
+useTime: 1681896326000,
+lastUpdateTime: 1681896326000,
+creationTime: 1681896325000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1731668739",
+address: "강원도 강릉시 내곡동 621-2 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150116",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982460243,
+name: "스트라다",
+displayName: "",
+px: 128.8777226,
+py: 37.7415989,
+type: "place",
+useTime: 1681896308000,
+lastUpdateTime: 1681896308000,
+creationTime: 1681896308000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1513672225",
+address: "강원도 강릉시 회산동 27-15 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150117",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Jf0WbEBZuMRXoCdOLqrGBQ==",
+pan: "174.53",
+tilt: "16.44",
+lng: "128.8776110",
+lat: "37.7417800",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210728_70/1627471474879WkLJ8_JPEG/0oabE-X73nTqp2W4VO8iZdOo.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20220926_61/1664158641211OuipT_JPEG/6B6BA0B1-E850-4BDB-A810-5DA0A5A3B0B2.jpeg",
+"https://ldb-phinf.pstatic.net/20230611_74/1686459755473Qwcf4_JPEG/Resized_20230611_135525.jpeg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982459807,
+name: "오버웨잇",
+displayName: "",
+px: 128.8961746,
+py: 37.7962028,
+type: "place",
+useTime: 1681896286000,
+lastUpdateTime: 1681896286000,
+creationTime: 1681896286000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1669842519",
+address: "강원도 강릉시 저동 673-13",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150137",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "mNvqdiozVtixazXIrt4k1w==",
+pan: "-9.22",
+tilt: "10.00",
+lng: "128.8989290",
+lat: "37.7530479",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230315_86/167886223837168reE_JPEG/0ECD8D28-B232-4BFE-B39F-3F3659394A6B.jpeg",
+"https://naverbooking-phinf.pstatic.net/20250512_68/1747055474657zil58_PNG/IMG_1895.PNG",
+"https://naverbooking-phinf.pstatic.net/20250512_147/1747055474809ynMtz_PNG/IMG_1878.PNG"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982459358,
+name: "커피마마퀸 남문점",
+displayName: "",
+px: 128.8862637,
+py: 37.7480363,
+type: "place",
+useTime: 1681896265000,
+lastUpdateTime: 1681896265000,
+creationTime: 1681896265000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1227908510",
+address: "강원도 강릉시 남문동 184-10 1층, 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "01150102",
+cidPath: [
+"220036",
+"220052",
+"1005112"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "uE0ji9NJSPq7WL6hskpRyQ==",
+pan: "177.04",
+tilt: "10.00",
+lng: "128.8862533",
+lat: "37.7482312",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220607_32/1654587749452xt42D_JPEG/S__37232643.jpg",
+"https://ldb-phinf.pstatic.net/20220607_8/1654587750026V04EX_JPEG/S__37232645.jpg",
+"https://ldb-phinf.pstatic.net/20220519_68/1652933920682JoKHq_JPEG/S__28893194.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+}
+],
+unavailableCount: 147,
+mismatchedCount: 23,
+removed: false
+}

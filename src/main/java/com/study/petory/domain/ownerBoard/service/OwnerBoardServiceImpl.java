@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,16 +72,16 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 전체 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, int page) {
+	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
 
-		int adjustedPage = (page > 0) ? page - 1 : 0;
-		PageRequest pageRequest = PageRequest.of(adjustedPage, 5, Sort.by("createdAt").descending());
+		// int adjustedPage = (papage > 0) ? page - 1 : 0;
+		// PageRequest pageRequest = PageRequest.of(adjustedPage, 5, Sort.by("createdAt").descending());
 
 		Page<OwnerBoard> boards;
 		if (title != null) {
-			boards = ownerBoardRepository.findByTitleContaining(title, pageRequest);
+			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
 		} else {
-			boards = ownerBoardRepository.findAll(pageRequest);
+			boards = ownerBoardRepository.findAll(pageable);
 		}
 
 		return boards.map(OwnerBoardGetAllResponseDto::from);

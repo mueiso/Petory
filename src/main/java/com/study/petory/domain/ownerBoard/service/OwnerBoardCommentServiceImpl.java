@@ -1,17 +1,16 @@
 package com.study.petory.domain.ownerBoard.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentUpdateResponseDto;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
@@ -59,12 +58,9 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, int page) {
+	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, Pageable pageable) {
 
-		int adjustedPage = (page > 0) ? page - 1 : 0;
-		PageRequest pageRequest = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").ascending());
-
-		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageRequest);
+		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageable);
 
 		return comments.map(OwnerBoardCommentGetResponseDto::from);
 	}
@@ -78,7 +74,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
 
-		if (boardId != comment.getOwnerBoard().getId()) {
+		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
 		}
 
@@ -97,7 +93,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
 
-		if (boardId != comment.getOwnerBoard().getId()) {
+		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
 		}
 

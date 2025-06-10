@@ -1,6 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
@@ -14,7 +15,7 @@ public interface OwnerBoardCommentService {
 
 	OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId, OwnerBoardCommentCreateRequestDto dto);
 
-	Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, int page);
+	Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, Pageable pageable);
 
 	OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto);

@@ -7,7 +7,7 @@ import com.study.petory.domain.dailyQna.entity.Question;
 import lombok.Getter;
 
 @Getter
-public class QuestionGetOneResponseDto {
+public class QuestionGetDeletedResponse {
 
 	private final String question;
 
@@ -15,18 +15,14 @@ public class QuestionGetOneResponseDto {
 
 	private final LocalDateTime deletedAt;
 
-	private QuestionGetOneResponseDto(String question, String date, LocalDateTime deletedAt) {
+	private QuestionGetDeletedResponse(String question, String date, LocalDateTime deletedAt) {
 		this.question = question;
 		this.date = date;
-		if (deletedAt != null) {
-			this.deletedAt = deletedAt;
-		} else {
-			this.deletedAt = null;
-		}
+		this.deletedAt = deletedAt;
 	}
 
-	public static QuestionGetOneResponseDto from(Question question) {
-		return new QuestionGetOneResponseDto(
+	public static QuestionGetDeletedResponse from(Question question) {
+		return new QuestionGetDeletedResponse(
 			question.getQuestion(),
 			question.getDate(),
 			question.getDeletedAt()

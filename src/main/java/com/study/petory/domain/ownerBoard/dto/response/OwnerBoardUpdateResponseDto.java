@@ -18,8 +18,6 @@ public class OwnerBoardUpdateResponseDto {
 
 	private final String content;
 
-	// photoUrlList 추가 예정
-
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private final LocalDateTime updatedAt;
 

@@ -54,8 +54,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 		response.addCookie(refreshTokenCookie);
 
-		// TODO - 배포된 프론트엔트 주소로 변경 필요 (예: "https://www.petory.com/oauth/success")
-		/*
+		/* TODO - 배포된 프론트엔트 주소로 변경 필요 (예: "https://www.petory.com/oauth/success")
 		 * accessToken 만 URL 파라미터로 전달
 		 * 클라이언트로 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
 		 */

@@ -32,7 +32,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		// 2. 사용자 정보에서 이메일 추출 (Google 은 기본 제공)
 		String email = oAuth2User.getAttribute("email");
 
-		// 3. 사용자 이름 또는 닉네임 추출
+		// 3. 사용자 이름 추출
 		String name = oAuth2User.getAttribute("name");
 
 		// 4. 이메일이 없으면 예외 발생 → 회원 식별이 불가하므로

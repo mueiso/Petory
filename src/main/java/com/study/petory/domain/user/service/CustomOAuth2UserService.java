@@ -1,6 +1,5 @@
 package com.study.petory.domain.user.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,55 +26,54 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) {
 
-		// 기본 OAuth2UserService 를 사용해 사용자 정보 불러오기
+		// 1. 기본 OAuth2UserService 를 통해 OAuth2User 로딩
 		OAuth2User oAuth2User = super.loadUser(userRequest);
 
-		// 구글에서 받은 사용자 정보 추출
+		// 2. 사용자 정보에서 이메일 추출 (Google 은 기본 제공)
 		String email = oAuth2User.getAttribute("email");
-		String name = oAuth2User.getAttribute("nickname");
 
-		// 이메일 값이 없으면 예외 발생
+		// 3. 사용자 이름 또는 닉네임 추출
+		String name = oAuth2User.getAttribute("name");
+
+		// 4. 이메일이 없으면 예외 발생 → 회원 식별이 불가하므로
 		if (email == null || email.isBlank()) {
 			throw new IllegalArgumentException("이메일 정보가 제공되지 않았습니다.");
 		}
 
-		// 사용자 조회 또는 신규 생성
+		// 5. 사용자 정보가 DB에 존재하지 않으면 새로 생성
 		User user = userRepository.findByEmail(email).orElseGet(() -> {
 
-			// 1. 개인 정보 객체 생성
+			// 5-1. 개인 정보 객체 생성
 			UserPrivateInfo privateInfo = UserPrivateInfo.builder()
-				.authId(userRequest.getClientRegistration().getRegistrationId())
+				.authId(userRequest.getClientRegistration().getRegistrationId())  // 예: "google"
 				.name(name)
-				.mobileNum("")  // 초기값 설정
+				.mobileNum("")  // 초기값 설정 (필요시 나중에 업데이트)
 				.build();
 
-			// 2. 사용자 역할 설정 (기본 USER)
-			UserRole userRole  = UserRole.builder()
+			// 5-2. 기본 사용자 역할 설정 (예: ROLE_USER)
+			UserRole userRole = UserRole.builder()
 				.role(Role.USER)
 				.build();
 
-			// 유저와 역할 매핑
-			List<UserRole> userRoles = List.of(userRole);
-
-			// User 엔티티 생성 및 저장
+			// 5-3. 사용자 객체 생성 및 저장
 			return userRepository.save(User.builder()
-				.nickname(name)  // 초기 닉네임은 이름으로 설정
+				.nickname(name)  // 초기 닉네임 설정
 				.email(email)
 				.userPrivateInfo(privateInfo)
-				.userRole(userRoles)
+				.userRole(List.of(userRole))  // 역할 연결
 				.build());
 		});
 
-		// DB에 저장된 역할로부터 권한 동기화
+		// 6. 사용자 권한을 Spring Security 권한 객체로 매핑
 		List<SimpleGrantedAuthority> authorities = user.getUserRole().stream()
 			.map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole().name()))
 			.toList();
 
-		// OAuth2User 반환 (SecurityContext 에 등록될 사용자 객체)
+		// 7. DefaultOAuth2User 객체 생성하여 반환 (SecurityContext 에 저장될 사용자 정보)
 		return new DefaultOAuth2User(
-			authorities,
-			oAuth2User.getAttributes(),  // 사용자 속성 전체
-			"email"  // principal key: SecurityContext 에서 사용자 식별
+			authorities,                      // 사용자 권한
+			oAuth2User.getAttributes(),       // OAuth2 프로바이더에서 받은 전체 사용자 정보
+			"email"                           // 사용자 식별 키 (principal)
 		);
 	}
 }

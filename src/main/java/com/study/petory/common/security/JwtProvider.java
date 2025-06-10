@@ -166,6 +166,7 @@ public class JwtProvider {
 
 		long expireMillis = refreshTokenLife;
 
+		// TODO - RefreshToken 저장 Key 를 이메일 말고 userId로
 		redisTemplate.opsForValue().set(email, refreshToken, expireMillis, TimeUnit.MILLISECONDS);
 	}
 

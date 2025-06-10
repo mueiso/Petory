@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,7 +90,7 @@ public class OwnerBoardController {
 	/**
 	 * 게시글 단건 조회
 	 * @param boardId 주인커뮤니티 게시글 ID
-	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개) //사진리스트 추가 예정
+	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개), 사진리스트 추가
 	 */
 	@GetMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(
@@ -101,10 +102,10 @@ public class OwnerBoardController {
 	/**
 	 * 게시글 수정
 	 * @param boardId 수정할 주인커뮤니티 게시글 ID
-	 * @param dto 제목, 내용 // 사진 추가 예정
+	 * @param dto 제목, 내용
 	 * @return 수정된 OwnerBoard 반환
 	 */
-	@PatchMapping("/{boardId}")
+	@PutMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardUpdateResponseDto>> updateOwnerBoard(
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {

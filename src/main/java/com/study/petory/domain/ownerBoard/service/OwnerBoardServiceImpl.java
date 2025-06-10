@@ -92,11 +92,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		// List<String> imageUrls = ownerBoard.getImages()
-		// 	.stream()
-		// 	.map(OwnerBoardImage::getUrl)
-		// 	.toList();
-
 		List<OwnerBoardComment> initialComments = ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(
 			boardId);
 
@@ -115,10 +110,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		if (requestDto.getTitle() != null) {
+		if (!requestDto.getTitle().equals(ownerBoard.getTitle())) {
 			ownerBoard.updateTitle(requestDto.getTitle());
 		}
-		if (requestDto.getContent() != null) {
+		if (!requestDto.getContent().equals(ownerBoard.getContent())) {
 			ownerBoard.updateContent(requestDto.getContent());
 		}
 

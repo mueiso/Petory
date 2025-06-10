@@ -32,5 +32,5 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
 
 	// 특정 조회 - 리뷰 리스트까지 함께 조회하기 위한 메서드
 	@EntityGraph(attributePaths = {"placeReviewList", "placeReviewList.user"})
-	Optional<Place> findWithReviewsById(Long id);
+	Optional<Place> findWithReviewListById(Long id);
 }

@@ -2,6 +2,7 @@ package com.study.petory.domain.place.entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
@@ -41,7 +42,7 @@ public class Place extends TimeFeatureBasedEntity {
 	private String placeName;
 
 	@OneToMany(mappedBy = "place")
-	private List<PlaceReview> placeReviewList;
+	private List<PlaceReview> placeReviewList = new ArrayList<>();
 
 	// @Column(nullable = false)
 	private String placeInfo;

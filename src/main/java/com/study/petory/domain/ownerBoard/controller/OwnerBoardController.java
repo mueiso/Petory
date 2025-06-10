@@ -90,7 +90,7 @@ public class OwnerBoardController {
 	/**
 	 * 게시글 단건 조회
 	 * @param boardId 주인커뮤니티 게시글 ID
-	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개), 사진리스트 추가
+	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개), 사진리스트
 	 */
 	@GetMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardGetResponseDto>> getOwnerBoard(

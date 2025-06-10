@@ -12,8 +12,8 @@ import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -24,7 +24,6 @@ public class AuthService {
 	private final JwtProvider jwtProvider;
 	private final StringRedisTemplate redisTemplate;
 	private static final String REFRESH_TOKEN_COOKIE_NAME = "refreshToken";
-
 
 	/*
 	 * Google OAuth2 로그인 성공 시 토큰 발급
@@ -55,10 +54,13 @@ public class AuthService {
 	/*
 	 * 로그아웃: Access Token 블랙리스트 처리 + Refresh Token 삭제
 	 */
-	public void logout(String accessToken, String email) {
+	public void logout(String accessToken) {
 
 		// 접두어 "Bearer " 제거 후 토큰 문자열만 추출
 		String pureToken = jwtProvider.subStringToken(accessToken);
+
+		// 토큰에서 추출한 이메일
+		String email = jwtProvider.getEmailFromToken(pureToken);
 
 		// 토큰 만료 시간 계산
 		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
@@ -75,10 +77,13 @@ public class AuthService {
 	/*
 	 * RefreshToken 을 쿠키에서 읽고 AccessToken 재발급
 	 */
-	public TokenResponseDto reissue(HttpServletRequest request, String email) {
+	public TokenResponseDto reissue(HttpServletRequest request) {
 
 		// 쿠키에서 RefreshToken 추출
 		String refreshToken = extractRefreshTokenFromCookie(request);
+
+		// 토큰에서 추출한 이메일
+		String email = jwtProvider.getEmailFromToken(refreshToken);
 
 		// Redis 에 저장된 Refresh Token 과 일치하는지, 만료되지 않았는지 검증
 		if (!jwtProvider.isValidRefreshToken(email, refreshToken)) {

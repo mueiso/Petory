@@ -1,15 +1,15 @@
 package com.study.petory.domain.user.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.service.AuthService;
-import com.study.petory.common.response.CommonResponse;
 import com.study.petory.exception.enums.SuccessCode;
 
 import jakarta.servlet.http.Cookie;
@@ -31,18 +31,15 @@ public class AuthController {
 	 * 클라이언트의 RefreshToken 쿠키 제거
 	 *
 	 * @param bearerToken : "Bearer {token}" 형식의 인증 토큰
-	 * @param email : 사용자의 이메일
 	 * @param response : HttpServletResponse 객체 (쿠키 제거 위해 사용)
 	 * @return 로그아웃 성공 메시지
 	 */
 	@DeleteMapping("/logout")
-	public CommonResponse<Object> logout(
+	public ResponseEntity<CommonResponse<Object>> logout(
 		@RequestHeader("Authorization") String bearerToken,
-		// TODO - AccessToken 으로부터 email 추출해 서버에서 결정하는 방식으로 수정 (보안상 이메일 위조 가능성 때문) → 아예 없어도 될듯
-		@RequestParam String email,
 		HttpServletResponse response) {
 
-		authService.logout(bearerToken, email);
+		authService.logout(bearerToken);
 
 		// 클라이언트의 refreshToken 쿠키 제거 (MaxAge = 0)
 		Cookie deleteCookie = new Cookie("refreshToken", null);
@@ -63,16 +60,14 @@ public class AuthController {
 	 *
 	 * @param request : HttpServletRequest (쿠키 접근)
 	 * @param response : HttpServletResponse (새 쿠키 설정)
-	 * @param email : 사용자 이메일
 	 * @return 새로 발급된 AccessToken + RefreshToken 포함 응답
 	 */
 	@PostMapping("/reissue")
-	public CommonResponse<TokenResponseDto> reissue(
+	public ResponseEntity<CommonResponse<TokenResponseDto>> reissue(
 		HttpServletRequest request,
-		HttpServletResponse response,
-		@RequestParam String email) {
+		HttpServletResponse response) {
 
-		TokenResponseDto tokenResponseDto = authService.reissue(request, email);
+		TokenResponseDto tokenResponseDto = authService.reissue(request);
 
 		// 새 refreshToken 을 HttpOnly 쿠키로 설정
 		Cookie refreshCookie = new Cookie("refreshToken", tokenResponseDto.getRefreshToken());

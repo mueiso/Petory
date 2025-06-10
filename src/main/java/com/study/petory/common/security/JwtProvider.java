@@ -186,4 +186,10 @@ public class JwtProvider {
 
 		return saved != null && saved.equals(refreshToken);
 	}
+
+	// 이메일 추출 메서드
+	public String getEmailFromToken(String token) {
+		Claims claims = getClaims(token);
+		return claims.get("email", String.class);
+	}
 }

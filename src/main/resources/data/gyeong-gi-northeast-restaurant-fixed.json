@@ -1,0 +1,720 @@
+[ {
+  "bookmarkId" : 1007389258,
+  "name" : "하늘다리커피",
+  "displayName" : "",
+  "px" : 127.2192419,
+  "py" : 38.0844583,
+  "type" : "place",
+  "useTime" : 1683529181000,
+  "lastUpdateTime" : 1683529181000,
+  "creationTime" : 1683529181000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1937277381",
+  "address" : "경기도 포천시 영북면 대회산리 376 하늘다리푸드트럭존",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0265039026",
+  "cidPath" : [ "220036", "230746" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "thumbnailUrls" : [ ],
+    "category" : "푸드트럭"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007388971,
+  "name" : "엄지척푸드",
+  "displayName" : "",
+  "px" : 127.2192419,
+  "py" : 38.0844583,
+  "type" : "place",
+  "useTime" : 1683529167000,
+  "lastUpdateTime" : 1683529167000,
+  "creationTime" : 1683529167000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1668330995",
+  "address" : "경기도 포천시 영북면 대회산리 376 푸드트럭존",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0265039026",
+  "cidPath" : [ "220036", "220048", "220185" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "wGvE/V5li0f36MwNsEfVeg==",
+      "pan" : "-6.14",
+      "tilt" : "10.00",
+      "lng" : "127.2193398",
+      "lat" : "38.0835477",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200815_201/1597472615430TtJw6_JPEG/Dr6uXz1i58uowkWQri5wEFWl.jpg" ],
+    "category" : "종합분식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007388791,
+  "name" : "반월가든",
+  "displayName" : "",
+  "px" : 127.2154447,
+  "py" : 37.9008259,
+  "type" : "place",
+  "useTime" : 1683529157000,
+  "lastUpdateTime" : 1683529157000,
+  "creationTime" : 1683529157000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1843903164",
+  "address" : "경기도 포천시 군내면 하성북리 546-6",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0265031028",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007387493,
+  "name" : "선녀마당",
+  "displayName" : "",
+  "px" : 127.0136292,
+  "py" : 37.7367183,
+  "type" : "place",
+  "useTime" : 1683529088000,
+  "lastUpdateTime" : 1683529088000,
+  "creationTime" : 1683529087000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "35326579",
+  "address" : "경기도 의정부시 가능동 595-28",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02150110",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "4RkzastfIrd1nGYTdBOq/g==",
+      "pan" : "155.45",
+      "tilt" : "22.50",
+      "lng" : "127.0136154",
+      "lat" : "37.7368250",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20170522_218/1495463220639mTWYO_JPEG/186472635677141_8.jpeg", "https://ldb-phinf.pstatic.net/20190816_3/1565954768289o9RAb_JPEG/wKiPMjaaasogH1m5cww0iDjd.jpg", "https://ldb-phinf.pstatic.net/20180607_97/1528336453627eddKx_JPEG/gK72tvZroYvUYQ6SW2kY-WEU.jpg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007386081,
+  "name" : "대궐산장",
+  "displayName" : "",
+  "px" : 126.9393058,
+  "py" : 37.7687478,
+  "type" : "place",
+  "useTime" : 1683529014000,
+  "lastUpdateTime" : 1683529014000,
+  "creationTime" : 1683529014000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "18095047",
+  "address" : "경기도 양주시 백석읍 기산리 364-2",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0263025027",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "jL9PmTMJvgTBYij6HgpNuQ==",
+      "pan" : "157.50",
+      "tilt" : "2.38",
+      "lng" : "126.9389466",
+      "lat" : "37.7689759",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220617_251/1655448752736NwpaR_JPEG/SNOW_20220524_120503_469.jpg", "https://ldb-phinf.pstatic.net/20220617_234/1655448751903cygAR_JPEG/SNOW_20220524_120242_952.jpg", "https://ldb-phinf.pstatic.net/20240703_232/17200019895168fLkV_JPEG/1000002793.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 1007383681,
+  "name" : "아지랭이",
+  "displayName" : "",
+  "px" : 127.3481564,
+  "py" : 37.7888176,
+  "type" : "place",
+  "useTime" : 1683528878000,
+  "lastUpdateTime" : 1683528878000,
+  "creationTime" : 1683528878000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "324624757",
+  "address" : "경기도 가평군 상면 연하리 309-12",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0282033021",
+  "cidPath" : [ "220036", "220037", "220075", "220769", "221553" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "A2Df52epT8Rvp1forTC9Aw==",
+      "pan" : "133.49",
+      "tilt" : "22.38",
+      "lng" : "127.3480907",
+      "lat" : "37.7892244",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20170712_283/1499840165299q6VK9_JPEG/186657514050247_0.jpeg", "https://ldb-phinf.pstatic.net/20170712_76/1499840165360I5E3j_JPEG/186657514050247_1.jpeg", "https://ldb-phinf.pstatic.net/20170712_113/14998401654140DkYs_JPEG/186657514050247_2.jpeg" ],
+    "category" : "오리요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208571,
+  "name" : "개라지 오브 도미닉",
+  "displayName" : "",
+  "px" : 127.6361839,
+  "py" : 37.3081632,
+  "type" : "place",
+  "useTime" : 1682019886000,
+  "lastUpdateTime" : 1682019886000,
+  "creationTime" : 1682019885000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1113897065",
+  "address" : "경기도 여주시 현암동 240-1 2동",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "02670122",
+  "cidPath" : [ "220036", "220051", "220554", "221116" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208546,
+  "name" : "양마담이 만드는 버거",
+  "displayName" : "",
+  "px" : 127.6387961,
+  "py" : 37.2975085,
+  "type" : "place",
+  "useTime" : 1682019876000,
+  "lastUpdateTime" : 1682019876000,
+  "creationTime" : 1682019876000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1362289643",
+  "address" : "경기도 여주시 상동 216 2층 202호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670101",
+  "cidPath" : [ "220036", "220044", "220138", "221004" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Lycx4KzCxYqB9irf2WzmWA==",
+      "pan" : "109.83",
+      "tilt" : "10.00",
+      "lng" : "127.6386744",
+      "lat" : "37.2975523",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220415_193/1649993504813ftCh7_JPEG/1.jpg", "https://ldb-phinf.pstatic.net/20190228_96/1551333398813WeK0O_JPEG/Jb6Po_s1c2EPnnd3raDHyGKe.jpg", "https://ldb-phinf.pstatic.net/20190228_152/1551333409562mxz2x_JPEG/3QuIBlp5YFY5eom8KR3MaPnd.jpg" ],
+    "category" : "햄버거"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208518,
+  "name" : "동원횟집",
+  "displayName" : "",
+  "px" : 127.676979,
+  "py" : 37.2535022,
+  "type" : "place",
+  "useTime" : 1682019870000,
+  "lastUpdateTime" : 1682019870000,
+  "creationTime" : 1682019869000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "19190215",
+  "address" : "경기도 여주시 우만동 192 동원횟집",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670104",
+  "cidPath" : [ "220036", "220037", "220076", "220792", "221629" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "GqclgWz7ytKyIVOPMWqcZQ==",
+      "pan" : "-157.39",
+      "tilt" : "0.56",
+      "lng" : "127.6771266",
+      "lat" : "37.2536302",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200206_256/1580973034421fRvJT_JPEG/oglE5aDatfYxy9S7PulMGZiX.jpeg.jpg", "https://ldb-phinf.pstatic.net/20230316_261/1678966035160EX3s5_JPEG/IMG_9591.JPG", "https://ldb-phinf.pstatic.net/20230316_197/1678965980950RK8EF_JPEG/IMG_9619.jpg" ],
+    "category" : "생선회"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208472,
+  "name" : "토리샘.토리그릴바베큐",
+  "displayName" : "",
+  "px" : 127.6585498,
+  "py" : 37.152057,
+  "type" : "place",
+  "useTime" : 1682019859000,
+  "lastUpdateTime" : 1682019859000,
+  "creationTime" : 1682019859000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "12221031",
+  "address" : "경기도 여주시 점동면 관한리 419",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0267031025",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "HrU+454InHvG6Vy2ypzvWw==",
+      "pan" : "-74.37",
+      "tilt" : "21.44",
+      "lng" : "127.6472481",
+      "lat" : "37.3022224",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231114_36/1699933635474HXyHz_JPEG/1000000899.jpg", "https://ldb-phinf.pstatic.net/20231130_53/1701312827563gkcjP_JPEG/1000001042.jpg", "https://ldb-phinf.pstatic.net/20231130_134/1701312826933r1wkC_JPEG/1000001030.jpg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208451,
+  "name" : "해승리시골밥상",
+  "displayName" : "",
+  "px" : 127.608499,
+  "py" : 37.2534372,
+  "type" : "place",
+  "useTime" : 1682019853000,
+  "lastUpdateTime" : 1682019853000,
+  "creationTime" : 1682019853000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1073766013",
+  "address" : "경기도 여주시 연라동 634",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670111",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "pIHJidSFQvO4K9U+byg1Pg==",
+      "pan" : "-86.23",
+      "tilt" : "21.71",
+      "lng" : "127.6088010",
+      "lat" : "37.2536169",
+      "fov" : "100"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210510_68/1620635771917UFDFs_JPEG/WPqAOhKK3yjd2OjVUkwMP3uN.jpg", "https://ldb-phinf.pstatic.net/20210511_142/1620743957150OLWlG_JPEG/y5LqKWlStQU5anom8VtaIxtw.jpg", "https://ldb-phinf.pstatic.net/20210604_246/1622802257294m75Oj_JPEG/oodYc2awNFIFZsvNX87ijY7i.jpeg.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208430,
+  "name" : "장복골",
+  "displayName" : "",
+  "px" : 127.6099338,
+  "py" : 37.2744753,
+  "type" : "place",
+  "useTime" : 1682019848000,
+  "lastUpdateTime" : 1682019848000,
+  "creationTime" : 1682019847000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "34213692",
+  "address" : "경기도 여주시 연라동 174-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670111",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "yqbuUonrQOJaxMyFfgECpw==",
+      "pan" : "-68.66",
+      "tilt" : "10.00",
+      "lng" : "127.6112692",
+      "lat" : "37.2739527",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240902_158/1725264368289pKwGV_JPEG/0902.jpg", "https://ldb-phinf.pstatic.net/20241120_13/1732077940825mbKlb_JPEG/%BF%A9%C1%D6_2.jpg", "https://ldb-phinf.pstatic.net/20241120_285/1732078327875hrCgL_JPEG/%BF%A9%C1%D6_3.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208403,
+  "name" : "인생횟집",
+  "displayName" : "",
+  "px" : 127.6378369,
+  "py" : 37.2901899,
+  "type" : "place",
+  "useTime" : 1682019839000,
+  "lastUpdateTime" : 1682019839000,
+  "creationTime" : 1682019839000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1119115041",
+  "address" : "경기도 여주시 홍문동 284-7",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670102",
+  "cidPath" : [ "220036", "220037", "220076", "220792", "221629" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "uOg9IgF8XyCtnmFZNZDKZQ==",
+      "pan" : "-30.41",
+      "tilt" : "10.00",
+      "lng" : "127.6379842",
+      "lat" : "37.2899388",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211030_124/1635585635627q92l3_JPEG/TxnE2Z24vpRkzBBlCqsnYXun.jpg", "https://ldb-phinf.pstatic.net/20211110_154/1636538445684FNzVi_JPEG/kaeHZW5xMgT3ffkyR6TjiwCZ.jpg", "https://ldb-phinf.pstatic.net/20211030_204/1635585698103LWoTs_JPEG/eayocrFuLlPlDcjDWBdn5D65.jpg" ],
+    "category" : "생선회"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208375,
+  "name" : "여주장작솥뚜껑닭볶음탕",
+  "displayName" : "",
+  "px" : 127.6584887,
+  "py" : 37.3104501,
+  "type" : "place",
+  "useTime" : 1682019830000,
+  "lastUpdateTime" : 1682019830000,
+  "creationTime" : 1682019829000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1784194067",
+  "address" : "경기도 여주시 천송동 407-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670120",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "NkjjfrCGwZ0NDf4BhCPTag==",
+      "pan" : "139.51",
+      "tilt" : "10.00",
+      "lng" : "127.6583560",
+      "lat" : "37.3104476",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20191225_175/1577248771546PGMAg_JPEG/v-BwYAhGe_tKgiQ8Ri6CgBQp.jpg", "https://ldb-phinf.pstatic.net/20230626_27/1687751481173ImTTy_JPEG/IMG_4898.jpeg", "https://ldb-phinf.pstatic.net/20230626_255/1687751530236BexDb_PNG/IMG_4841.png" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208312,
+  "name" : "여주설렁탕",
+  "displayName" : "",
+  "px" : 127.6542058,
+  "py" : 37.2983379,
+  "type" : "place",
+  "useTime" : 1682019811000,
+  "lastUpdateTime" : 1682019811000,
+  "creationTime" : 1682019811000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "405606378",
+  "address" : "경기도 여주시 천송동 289-7 여주설렁탕",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670120",
+  "cidPath" : [ "220036", "220037", "220069", "220696" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "QP6zSXI4tkvzyMc9QAeK7Q==",
+      "pan" : "-145.62",
+      "tilt" : "10.00",
+      "lng" : "127.6544079",
+      "lat" : "37.2986325",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220617_19/1655427901110QKWyF_PNG/1588931996597.png", "https://ldb-phinf.pstatic.net/20201205_61/1607136966477vonNh_JPEG/oiV0nWLyfElmS9rM9ebZK9ml.jpg", "https://ldb-phinf.pstatic.net/20201205_177/1607136976726KvGSL_JPEG/0hWfy-UNRe6MbZzl-T4HNWkK.jpg" ],
+    "category" : "곰탕,설렁탕"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208286,
+  "name" : "BBQ치킨 여주터미널점",
+  "displayName" : "",
+  "px" : 127.6356487,
+  "py" : 37.289863,
+  "type" : "place",
+  "useTime" : 1682019802000,
+  "lastUpdateTime" : 1682019802000,
+  "creationTime" : 1682019802000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "31299103",
+  "address" : "경기도 여주시 홍문동 273-5",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670102",
+  "cidPath" : [ "220036", "220049", "220250" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "feYPNDRp5StTRN6qcNxUEg==",
+      "pan" : "113.23",
+      "tilt" : "14.19",
+      "lng" : "127.6355806",
+      "lat" : "37.2899633",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250411_62/17443373144563mhHJ_JPEG/%BA%B8%B5%B5%C0%DA%B7%E1.jpg", "https://ldb-phinf.pstatic.net/20250314_5/17419187112391Q5mg_PNG/%C0%AF%C6%A9%BA%EA_%C4%BF%B9%C2%B4%CF%C6%BC.png", "https://ldb-phinf.pstatic.net/20241111_127/17312942506581T0BP_JPEG/%BA%AF%BF%E4%C7%D1_%BF%C2%B6%F3%C0%CE%B8%C5%C0%E5_%B8%DE%B4%BA_1.jpg" ],
+    "category" : "치킨,닭강정"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208261,
+  "name" : "만복족발",
+  "displayName" : "",
+  "px" : 127.6360685,
+  "py" : 37.2910016,
+  "type" : "place",
+  "useTime" : 1682019797000,
+  "lastUpdateTime" : 1682019797000,
+  "creationTime" : 1682019796000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1822119863",
+  "address" : "경기도 여주시 홍문동 270-7 1층 만복족발",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670102",
+  "cidPath" : [ "220036", "220037", "220075", "220766", "221504" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208236,
+  "name" : "삼구농원",
+  "displayName" : "",
+  "px" : 127.6531026,
+  "py" : 37.256839,
+  "type" : "place",
+  "useTime" : 1682019789000,
+  "lastUpdateTime" : 1682019789000,
+  "creationTime" : 1682019789000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1969188119",
+  "address" : "경기도 여주시 점봉동 81-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "02670115",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "uookiZ4kULS+rQWeKWldfw==",
+      "pan" : "94.60",
+      "tilt" : "25.44",
+      "lng" : "127.6525489",
+      "lat" : "37.2567888",
+      "fov" : "60"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240723_30/1721730115951dadNi_JPEG/20240630_122259.jpg.jpg", "https://ldb-phinf.pstatic.net/20240722_167/1721623848349GBBLj_JPEG/1000008876.jpg", "https://ldb-phinf.pstatic.net/20240805_87/1722868717823AU7sK_JPEG/20240725_204308.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208201,
+  "name" : "느티나무가든",
+  "displayName" : "",
+  "px" : 127.43254,
+  "py" : 37.4115987,
+  "type" : "place",
+  "useTime" : 1682019782000,
+  "lastUpdateTime" : 1682019782000,
+  "creationTime" : 1682019782000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1818212940",
+  "address" : "경기도 여주시 산북면 주어리 335",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0267038025",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "UDo+L4OifKMTnG5+2KbXlA==",
+      "pan" : "25.02",
+      "tilt" : "10.00",
+      "lng" : "127.4322402",
+      "lat" : "37.4109561",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220720_144/16582878267245xz2r_JPEG/KakaoTalk_20220720_122905860_01.jpg", "https://ldb-phinf.pstatic.net/20220720_98/16582878277710bOjF_JPEG/KakaoTalk_20220720_122905860_15.jpg", "https://ldb-phinf.pstatic.net/20220720_265/1658287826721np3an_JPEG/KakaoTalk_20220720_122905860.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 984208179,
+  "name" : "금당로맛집",
+  "displayName" : "",
+  "px" : 127.6816361,
+  "py" : 37.3271298,
+  "type" : "place",
+  "useTime" : 1682019776000,
+  "lastUpdateTime" : 1682019776000,
+  "creationTime" : 1682019775000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "35240496",
+  "address" : "경기도 여주시 북내면 당우리 197-4",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "0267036021",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "M9IstvjguOIg9bceVyl9Ug==",
+      "pan" : "-68.73",
+      "tilt" : "8.25",
+      "lng" : "127.6819197",
+      "lat" : "37.3270964",
+      "fov" : "55"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210805_131/16281294494659oGsb_JPEG/omrCBbur9oOQ6WQb6YlX1i4C.jpg", "https://ldb-phinf.pstatic.net/20210805_23/1628129449540RwpjN_JPEG/xyPqfeQCyIEbt7hKjONZYBUU.jpg", "https://ldb-phinf.pstatic.net/20210805_77/1628129438341kGwLm_JPEG/EfIxb_C4aQgPL0G4g4pvOO9h.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+} ]

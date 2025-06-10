@@ -1,6 +1,6 @@
 package com.study.petory.domain.place.entity;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_place_review")
 @NoArgsConstructor
-public class PlaceReview extends BaseEntityWithBothAt {
+public class PlaceReview extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +57,20 @@ public class PlaceReview extends BaseEntityWithBothAt {
 		if (ratio != null) {
 			this.ratio = ratio;
 		}
+	}
+
+	// placeReviewId 검증 메서드
+	public boolean isEqualId(Long placeReviewId) {
+		return this.id.equals(placeReviewId);
+	}
+
+	// place 검증 메서드
+	public boolean isEqualPlace(Long placeId) {
+		return this.place.isEqualId(placeId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
 	}
 }

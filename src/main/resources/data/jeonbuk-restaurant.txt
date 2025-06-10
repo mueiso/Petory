@@ -1,0 +1,967 @@
+{
+folder: {
+folderId: 82084403,
+name: "갈수있어 강아지도, 전북 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "8",
+lastUseTime: 1693732628000,
+creationTime: 1680843754000,
+shouldOverlay: true,
+bookmarkCount: 271,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa3281438fc3a9ca8b8cc",
+reviewPageUrl: "https://m.place.naver.com/my/642fa3281438fc3a9ca8b8cc/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_246/1680843549843HKMWa_PNG/image.png?type=f102_102",
+nick: "N강아지도 뭉치"
+},
+shareId: "bc834a45edff4a3c8936adf1b4b24108",
+encryptedUserIdNo: "Bv_kfZYO-G_o2345:r-kZAyEOrTe8uvZFBRnYJn2lrQIuoQ",
+followCount: 1082,
+viewCount: 4916,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007266199,
+name: "사선대완냉면",
+displayName: "",
+px: 127.2680727,
+py: 35.678564,
+type: "place",
+useTime: 1683521945000,
+lastUpdateTime: 1683521945000,
+creationTime: 1683521944000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "36768238",
+address: "전라북도 임실군 관촌면 관촌리 580-2",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1375038026",
+cidPath: [
+"220036",
+"220037",
+"220063",
+"220645"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "o5PZ6dqu50kM9JMVjwjF9g==",
+pan: "52.02",
+tilt: "10.00",
+lng: "127.2679355",
+lat: "35.6784568",
+fov: "120"
+},
+thumbnailUrls: [ ],
+category: "냉면"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007266025,
+name: "돌쇠바베큐",
+displayName: "",
+px: 126.5660777,
+py: 35.9649457,
+type: "place",
+useTime: 1683521933000,
+lastUpdateTime: 1683521933000,
+creationTime: 1683521933000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "20119255",
+address: "전라북도 군산시 오식도동 620-8",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13130147",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "CQvsHlBHuQBn78y+h0OJcg==",
+pan: "-75.67",
+tilt: "10.00",
+lng: "126.5662335",
+lat: "35.9649058",
+fov: "120"
+},
+thumbnailUrls: [ ],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982279561,
+name: "돈백미가 국밥50년",
+displayName: "",
+px: 127.1026469,
+py: 35.8173268,
+type: "place",
+useTime: 1681886857000,
+lastUpdateTime: 1681886857000,
+creationTime: 1681886857000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1957451194",
+address: "전라북도 전주시 완산구 효자동2가 1234-2",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13111141",
+cidPath: [
+"220036",
+"220037",
+"220061",
+"220623"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "0MhmygovadxrfDSAHS3EPw==",
+pan: "147.11",
+tilt: "9.56",
+lng: "127.1025993",
+lat: "35.8174536",
+fov: "97"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220203_292/16438153681672INOv_JPEG/%B0%A1%B6%F71.jpg",
+"https://ldb-phinf.pstatic.net/20220203_206/1643815051414XvBA7_JPEG/%B5%B7%B9%E9%B1%B9%B9%E41.jpg",
+"https://ldb-phinf.pstatic.net/20220203_8/1643815061662NP44C_JPEG/%B5%B7%B9%E9%B1%B9%B9%E43_.jpg"
+],
+category: "국밥"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982279234,
+name: "랑랑이네",
+displayName: "",
+px: 127.1734923,
+py: 35.7959915,
+type: "place",
+useTime: 1681886838000,
+lastUpdateTime: 1681886838000,
+creationTime: 1681886838000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1815462027",
+address: "전라북도 전주시 완산구 대성동 200",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13111143",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "2lw2LcgZN1ti6pw83WBi8w==",
+pan: "139.90",
+tilt: "10.00",
+lng: "127.1733151",
+lat: "35.7962014",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20201104_199/160441824960884FpA_JPEG/ecIsfTHAy4S-fnLPo2F_Jw7T.jpg",
+"https://ldb-phinf.pstatic.net/20200612_203/1591949500258HOG1F_JPEG/csz9rAV_4BC7lkgZS-bQGJlS.jpg",
+"https://ldb-phinf.pstatic.net/20201104_246/1604418358705Cj0mv_JPEG/yiLDmTkEjkxbDKjP0UsA5-gw.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982278827,
+name: "대박삼겹김치찜&초대박등갈비김치찜 아중점",
+displayName: "",
+px: 127.1655162,
+py: 35.824188,
+type: "place",
+useTime: 1681886814000,
+lastUpdateTime: 1681886814000,
+creationTime: 1681886814000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1311637981",
+address: "전라북도 전주시 덕진구 인후동1가 935-9 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13113103",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 982278482,
+name: "화라소소",
+displayName: "",
+px: 127.1277979,
+py: 35.8427859,
+type: "place",
+useTime: 1681886794000,
+lastUpdateTime: 1681886794000,
+creationTime: 1681886794000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1700368836",
+address: "전라북도 전주시 덕진구 덕진동1가 1263-18 2층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13113105",
+cidPath: [
+"220036",
+"220039",
+"220091",
+"220861"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "WgBQdEiZ28r6T3AQn9cI2g==",
+pan: "-131.55",
+tilt: "10.00",
+lng: "127.1278670",
+lat: "35.8428470",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210905_57/16308213764231vo5U_JPEG/HCakpGLeQYI8zW0UHlFp2iY8.jpg",
+"https://ldb-phinf.pstatic.net/20230621_22/1687323777960hrtmE_JPEG/i_2sjequ.jpg",
+"https://ldb-phinf.pstatic.net/20230621_18/1687323777940apDvM_JPEG/i_7pgw4u.jpg"
+],
+category: "중식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982278072,
+name: "강천풍경식당",
+displayName: "",
+px: 127.0695183,
+py: 35.4087198,
+type: "place",
+useTime: 1681886773000,
+lastUpdateTime: 1681886773000,
+creationTime: 1681886773000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "21061302",
+address: "전라북도 순창군 팔덕면 청계리 958-5",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1377035025",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ZnzYj7LyrLh+/Lg9uFmcdg==",
+pan: "13.83",
+tilt: "10.00",
+lng: "127.0694998",
+lat: "35.4086447",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220805_248/1659679553330aW8Df_JPEG/Screenshot_20220805-150404_Gallery.jpg",
+"https://ldb-phinf.pstatic.net/20230710_236/16889661993505wn7E_PNG/%BB%FD%BB%FD%C1%A4%BA%B8%282017.6.28%29%B9%E6%BF%B5.png",
+"https://ldb-phinf.pstatic.net/20220804_26/1659595612274IC2qR_JPEG/Screenshot_20220804-113236_KakaoTalk.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 982276674,
+name: "청춘연어",
+displayName: "",
+px: 126.6857667,
+py: 35.9473912,
+type: "place",
+useTime: 1681886700000,
+lastUpdateTime: 1681886700000,
+creationTime: 1681886699000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1663234273",
+address: "전라북도 군산시 미룡동 866-2",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "13130145",
+cidPath: [
+"220036",
+"220051",
+"220556",
+"221121"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "wMXUo5qgJuk74/4RjArBbw==",
+pan: "175.32",
+tilt: "10.00",
+lng: "126.6867022",
+lat: "35.9471382",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240822_278/1724338533039GTsLb_JPEG/IMG_8625.jpeg",
+"https://ldb-phinf.pstatic.net/20240822_93/1724338532842cqkyU_JPEG/IMG_8604.jpeg",
+"https://ldb-phinf.pstatic.net/20240822_197/1724338532835A2vXj_JPEG/IMG_8624.jpeg"
+],
+category: "이자카야"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981055881,
+name: "운일암송어횟집",
+displayName: "",
+px: 127.4224697,
+py: 35.967449,
+type: "place",
+useTime: 1681802853000,
+lastUpdateTime: 1681802853000,
+creationTime: 1681802852000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "17630608",
+address: "전라북도 진안군 주천면 주양리 295-1 목조 건물",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1372040021",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220792",
+"221629"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "JIStcw/piD2HkRJOBmpJgg==",
+pan: "22.55",
+tilt: "10.00",
+lng: "127.4224206",
+lat: "35.9673307",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211230_97/1640863882785IIBQX_JPEG/KakaoTalk_20210803_183616567.jpg",
+"https://ldb-phinf.pstatic.net/20211209_196/1639026636810jdy6N_JPEG/shsi.jpg",
+"https://ldb-phinf.pstatic.net/20211209_90/1639032095389RgGJ3_JPEG/KakaoTalk_20211209_153520253.jpg"
+],
+category: "생선회"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981055564,
+name: "유케야 정읍점",
+displayName: "",
+px: 126.8723453,
+py: 35.5586407,
+type: "place",
+useTime: 1681802836000,
+lastUpdateTime: 1681802836000,
+creationTime: 1681802835000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1293990913",
+address: "전라북도 정읍시 상동 244-3 유케야",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13180103",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"1001998"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "uYix9TrPJw4wOMV/JOUU7Q==",
+pan: "-49.71",
+tilt: "10.00",
+lng: "126.8724700",
+lat: "35.5585100",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210727_235/1627390469225lssUz_JPEG/JeB-d5C1PL1kUwd5Uk4m0eGE.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210727_205/1627390481838apJTv_JPEG/d5t4zIWZjvQapnaTFYt3slpG.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20211109_143/163642435249801UXE_JPEG/mldnKx0xNGLYJl8etyCKY8y6.jpeg.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981055235,
+name: "별빛정원",
+displayName: "",
+px: 126.8533284,
+py: 35.5937104,
+type: "place",
+useTime: 1681802819000,
+lastUpdateTime: 1681802819000,
+creationTime: 1681802819000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1131735881",
+address: "전라북도 정읍시 하북동 661-1 별빛정원",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13180121",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "r2Uj2DsyM9xc+myML38vKw==",
+pan: "-92.10",
+tilt: "10.00",
+lng: "126.8547907",
+lat: "35.5937986",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241010_126/1728549063022kXflY_PNG/056A5700%BC%F6%C1%A4.png",
+"https://naverbooking-phinf.pstatic.net/20241006_122/17281781694064XNqs_PNG/056A5702.png",
+"https://ldb-phinf.pstatic.net/20241015_102/17289817517946c4Pt_PNG/%C4%AB%B6%F3%B9%DD%C0%FC%B0%E610.png"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981053648,
+name: "전나무가든",
+displayName: "",
+px: 126.8523999,
+py: 35.711841,
+type: "place",
+useTime: 1681802738000,
+lastUpdateTime: 1681802738000,
+creationTime: 1681802737000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1147316988",
+address: "전라북도 정읍시 신태인읍 신덕리 14-78 전나무가든",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "1318025023",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "dXOYWOttbbcveiWRhW7zkA==",
+pan: "-12.19",
+tilt: "7.63",
+lng: "126.8526264",
+lat: "35.7118083",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200601_168/1590997507615J8P2f_JPEG/cVcJB3MdXyYhihmkPnJUeKQn.jpg",
+"https://ldb-phinf.pstatic.net/20200818_2/1597708559344QdUir_JPEG/ohT2Be-3aWej0KOF8tHsiw1V.jpg",
+"https://ldb-phinf.pstatic.net/20200601_120/1590998060291NrwY3_JPEG/kql1VoiHWt-gFHi-BqaqVrEW.jpg"
+],
+category: "닭요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981053336,
+name: "바 카셰트",
+displayName: "",
+px: 126.8694644,
+py: 35.5620034,
+type: "place",
+useTime: 1681802722000,
+lastUpdateTime: 1681802722000,
+creationTime: 1681802721000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1651048710",
+address: "전라북도 정읍시 상동 148-15 바 카셰트 ( Bar Cachette)",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "13180103",
+cidPath: [
+"220036",
+"220051",
+"220555",
+"221119"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "SfmEkYUvOIQXY3q4YRw/YQ==",
+pan: "11.96",
+tilt: "10.00",
+lng: "126.8694398",
+lat: "35.5618872",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250605_64/1749083774209Cewpw_PNG/6.png",
+"https://ldb-phinf.pstatic.net/20250605_180/1749083447529Jv3OR_JPEG/KakaoTalk_20250605_000200894_03.jpg",
+"https://ldb-phinf.pstatic.net/20250605_199/17490837742648SknQ_PNG/5.png"
+],
+category: "와인"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981052985,
+name: "오롯",
+displayName: "",
+px: 126.8668581,
+py: 35.559152,
+type: "place",
+useTime: 1681802704000,
+lastUpdateTime: 1681802704000,
+creationTime: 1681802703000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1647933841",
+address: "전라북도 정읍시 상동 307-1 오롯카페",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13180103",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "luj9L4CrDA4Ofdb+jdn12A==",
+pan: "-165.81",
+tilt: "10.00",
+lng: "126.8668770",
+lat: "35.5592263",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210313_48/1615592221787Qs7mr_JPEG/sBfXpNnyT9wfhKTjxwasiFcV.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20250205_199/1738733601269r2fz0_PNG/%BF%C0%B7%D4_%B8%DE%B4%BA%C6%C7_%282%29-4.png",
+"https://ldb-phinf.pstatic.net/20250205_277/17387336011949Csfm_PNG/%BF%C0%B7%D4_%B8%DE%B4%BA%C6%C7_%282%29-2.png"
+],
+category: "브런치카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981052645,
+name: "블라썸",
+displayName: "",
+px: 126.861887,
+py: 35.5586082,
+type: "place",
+useTime: 1681802687000,
+lastUpdateTime: 1681802687000,
+creationTime: 1681802686000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1223318260",
+address: "전라북도 정읍시 상동 771",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13180103",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 981052354,
+name: "비룡중화요리",
+displayName: "",
+px: 126.8609155,
+py: 35.5646196,
+type: "place",
+useTime: 1681802670000,
+lastUpdateTime: 1681802670000,
+creationTime: 1681802669000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "20816774",
+address: "전라북도 정읍시 장명동 169-3 비룡중화요리",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13180102",
+cidPath: [
+"220036",
+"220039",
+"220091",
+"220861"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "N7LnG6R/hjiyNKjBGb4LEQ==",
+pan: "-170.91",
+tilt: "10.00",
+lng: "126.8609279",
+lat: "35.5646964",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231118_122/1700295963623jivH7_JPEG/scaled_1653296829149.jpg",
+"https://ldb-phinf.pstatic.net/20231118_55/1700295943473xLY9x_JPEG/scaled_20220817_133256.jpg",
+"https://ldb-phinf.pstatic.net/20231118_168/1700295915723IMrLa_JPEG/scaled_20221110_173438.jpg"
+],
+category: "중식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981051993,
+name: "쑤불쭈꾸미",
+displayName: "",
+px: 127.0952515,
+py: 35.8098413,
+type: "place",
+useTime: 1681802652000,
+lastUpdateTime: 1681802652000,
+creationTime: 1681802652000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1000377965",
+address: "전라북도 전주시 완산구 효자동2가 1308-6 쑤불쭈꾸미",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13111141",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220802",
+"221677"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 981051325,
+name: "윤참치 전주본점",
+displayName: "",
+px: 127.109294,
+py: 35.8169491,
+type: "place",
+useTime: 1681802619000,
+lastUpdateTime: 1681802619000,
+creationTime: 1681802618000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "31075925",
+address: "전라북도 전주시 완산구 효자동3가 1536-3 2층 윤참치",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "13111142",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220792",
+"221630"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "vdDEubiyyjvw+XnIFxOzZw==",
+pan: "97.60",
+tilt: "10.00",
+lng: "127.1090120",
+lat: "35.8169865",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20191004_283/1570191378411SvhmN_JPEG/MsET0arGbFNM_yZV64xHguO9.jpg",
+"https://ldb-phinf.pstatic.net/20191004_281/1570191493767PJeCb_JPEG/0rfsF_FTX5mEAAdxhjhEk35p.jpg",
+"https://ldb-phinf.pstatic.net/20191004_31/1570193082904pwfMg_JPEG/yGz3utMUntNJkhzW7wSt3of1.jpg"
+],
+category: "생선회"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981050987,
+name: "청춘하이볼 신시가지점",
+displayName: "",
+px: 127.10878,
+py: 35.816728,
+type: "place",
+useTime: 1681802602000,
+lastUpdateTime: 1681802602000,
+creationTime: 1681802601000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1773793679",
+address: "전라북도 전주시 완산구 효자동3가 1535-4 1동 2층 201호",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "13111142",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"221078"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 981050308,
+name: "묵찌빠",
+displayName: "",
+px: 127.1083947,
+py: 35.8181528,
+type: "place",
+useTime: 1681802567000,
+lastUpdateTime: 1681802567000,
+creationTime: 1681802566000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "36938681",
+address: "전라북도 전주시 완산구 효자동3가 1527-12 3층",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "13111142",
+cidPath: [
+"220036",
+"220051",
+"220554",
+"221116"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "BZlE7Ug0mbAHM4aoLCAA0g==",
+pan: "25.96",
+tilt: "10.00",
+lng: "127.1083262",
+lat: "35.8180120",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200820_154/1597935185717PG0HC_JPEG/hyyo31BWsg67KTlRz03ZS2qV.jpg"
+],
+category: "바(BAR)"
+},
+isIndoor: false
+}
+],
+unavailableCount: 78,
+mismatchedCount: 11,
+removed: false
+}

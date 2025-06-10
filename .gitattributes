@@ -15,3 +15,5 @@
 
 # 그 외 모든 텍스트는 LF로 고정
 * text=auto eol=lf
+*.json text eol=lf
+

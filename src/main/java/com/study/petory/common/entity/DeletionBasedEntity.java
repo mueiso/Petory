@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntityWithCreatedAt {
+public abstract class DeletionBasedEntity {
 
 	@CreatedDate
 	@Column(updatable = false)

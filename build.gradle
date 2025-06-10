@@ -33,6 +33,19 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'software.amazon.awssdk:s3:2.20.122'
+
+    // .env 등록을 위한 의존성
+    implementation 'io.github.cdimascio:dotenv-java:3.2.0'
+
+    //MongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    //웹소켓
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    // json 데이터 파싱을 위한 의존성(YAMLFactory 사용가능)
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
 
     // Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -76,5 +89,5 @@ checkstyle {
     configFile = file("config/checkstyle/naver-checkstyle-rules.xml")
     configProperties = ["suppressionFile": "config/checkstyle/naver-checkstyle-suppressions.xml"]
     // checkstyle 버전 8.24 이상 선언
-    toolVersion = "8.24"
+    toolVersion ="8.24"
 }

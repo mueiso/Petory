@@ -2,7 +2,7 @@ package com.study.petory.domain.user.entity;
 
 import java.util.List;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,9 +20,9 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "user")
+@Table(name = "tb_user")
 @NoArgsConstructor
-public class User extends BaseEntityWithBothAt {
+public class User extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class User extends BaseEntityWithBothAt {
 	@JoinColumn(name = "user_private_info_id")
 	private UserPrivateInfo userPrivateInfo;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "user_id")  // 단방향 설정 시 꼭 사용
 	private List<UserRole> userRole;
 
@@ -47,5 +47,10 @@ public class User extends BaseEntityWithBothAt {
 		this.email = email;
 		this.userPrivateInfo = userPrivateInfo;
 		this.userRole = userRole;
+	}
+
+	// userId 검증 메서드
+	public boolean isEqualId(Long userId) {
+		return this.id.equals(userId);
 	}
 }

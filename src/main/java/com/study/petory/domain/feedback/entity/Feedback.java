@@ -1,6 +1,6 @@
 package com.study.petory.domain.feedback.entity;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "feedback")
+@Table(name = "tb_feedback")
 @NoArgsConstructor
-public class Feedback extends BaseEntityWithBothAt {
+public class Feedback extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,6 @@ package com.study.petory.domain.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "user_role")
+@Table(name = "tb_user_role")
 @NoArgsConstructor
 public class UserRole {
 
@@ -26,8 +25,17 @@ public class UserRole {
 	@Column(nullable = false)
 	private Role role;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
 	@Builder
-	public UserRole(Role role, User user) {
+	public UserRole(Role role) {
 		this.role = role;
 	}
+
+	// @Builder
+	// public UserRole(Role role, User user) {
+	// 	this.role = role;
+	// }
 }

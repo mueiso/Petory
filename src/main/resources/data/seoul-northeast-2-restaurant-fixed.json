@@ -1,0 +1,728 @@
+[ {
+  "bookmarkId" : 1007380660,
+  "name" : "광신영양족발",
+  "displayName" : "",
+  "px" : 127.0902695,
+  "py" : 37.6798193,
+  "type" : "place",
+  "useTime" : 1683528701000,
+  "lastUpdateTime" : 1683528701000,
+  "creationTime" : 1683528701000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "11626839",
+  "address" : "서울특별시 노원구 상계동 11 단지 종합상가 롯데슈퍼 앞",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09350105",
+  "cidPath" : [ "220036", "220037", "220075", "220766", "221504" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "16D02y5qakQo5Z9XVaqPsg==",
+      "pan" : "-103.31",
+      "tilt" : "10.00",
+      "lng" : "127.0574573",
+      "lat" : "37.6657701",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20150831_34/1441008133386OuhEM_JPEG/11626839_0.jpg", "https://ldb-phinf.pstatic.net/20150831_126/1441008133627b5WDA_JPEG/11626839_1.jpg", "https://ldb-phinf.pstatic.net/20150831_238/1441008133839z2Mvh_JPEG/11626839_2.jpg" ],
+    "category" : "족발,보쌈"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979609840,
+  "name" : "빌라드코스테스",
+  "displayName" : "",
+  "px" : 127.0391112,
+  "py" : 37.6027147,
+  "type" : "place",
+  "useTime" : 1681706743000,
+  "lastUpdateTime" : 1681706743000,
+  "creationTime" : 1681706742000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1427970785",
+  "address" : "서울특별시 성북구 하월곡동 46-85 빌라드코스테스",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290136",
+  "cidPath" : [ "220036", "220044", "220126" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "d69znGIx72rGDMCUlY94kw==",
+      "pan" : "44.61",
+      "tilt" : "10.00",
+      "lng" : "127.0389720",
+      "lat" : "37.6025735",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230723_107/1690124000591Kh6LL_JPEG/90F87E53-22BA-45DB-BE4E-D814259185B2.jpeg", "https://ldb-phinf.pstatic.net/20240828_194/1724822954589imrg9_JPEG/IMG_1266.jpeg", "https://ldb-phinf.pstatic.net/20230402_44/1680438853390gwnRf_JPEG/B9862A04-0A24-4042-A2D8-BE0936C14E6E.jpeg" ],
+    "category" : "양식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979609555,
+  "name" : "지구별여행자 LP Music House",
+  "displayName" : "",
+  "px" : 127.0584849,
+  "py" : 37.6070618,
+  "type" : "place",
+  "useTime" : 1681706726000,
+  "lastUpdateTime" : 1681706726000,
+  "creationTime" : 1681706725000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1068727350",
+  "address" : "서울특별시 성북구 석관동 262-19 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09290139",
+  "cidPath" : [ "220036", "220051", "220554", "221116" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "06amJ+6yh+rkCJngP3fXLg==",
+      "pan" : "78.29",
+      "tilt" : "11.06",
+      "lng" : "127.0584402",
+      "lat" : "37.6069901",
+      "fov" : "67"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210316_250/1615889647463vJCVd_JPEG/UMU-jjw_1zrmckiyCvb4t6TH.jpg", "https://ldb-phinf.pstatic.net/20210316_11/1615889715330yFu32_JPEG/5gxja_I5Xc6oBxlOV9Pvy_fq.jpg", "https://ldb-phinf.pstatic.net/20240109_191/1704794065616EUDe1_JPEG/20230413_024858.jpg" ],
+    "category" : "와인"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979609238,
+  "name" : "쌀",
+  "displayName" : "",
+  "px" : 127.049679,
+  "py" : 37.6057562,
+  "type" : "place",
+  "useTime" : 1681706707000,
+  "lastUpdateTime" : 1681706707000,
+  "creationTime" : 1681706707000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1257851853",
+  "address" : "서울특별시 성북구 상월곡동 24-40",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290137",
+  "cidPath" : [ "220036", "220044", "220126" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "isrvi/TNke8oY6C8FfJwYw==",
+      "pan" : "-135.48",
+      "tilt" : "10.00",
+      "lng" : "127.0497349",
+      "lat" : "37.6058130",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210409_43/1617974175377FBuNk_JPEG/o7lNZ8S3ExyaL2k-WYBVvRoz.jpg", "https://ldb-phinf.pstatic.net/20210411_24/1618148575782GtudK_JPEG/voS2kFw4LTBk2SFa2LZtmEqN.jpg" ],
+    "category" : "양식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979608966,
+  "name" : "B1",
+  "displayName" : "",
+  "px" : 127.042519,
+  "py" : 37.6043268,
+  "type" : "place",
+  "useTime" : 1681706689000,
+  "lastUpdateTime" : 1681706689000,
+  "creationTime" : 1681706689000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "1374988205",
+  "address" : "서울특별시 성북구 하월곡동 21-103 지하1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09290136",
+  "cidPath" : [ "220036", "220051", "220554", "230098" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "zETcUlSI/0ZmHS59XikNyg==",
+      "pan" : "-14.64",
+      "tilt" : "11.06",
+      "lng" : "127.0430096",
+      "lat" : "37.6044450",
+      "fov" : "72"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250321_288/1742554769968nTCX6_JPEG/1000023905.jpg", "https://ldb-phinf.pstatic.net/20241219_202/17346179972542WHzj_JPEG/1000022916.jpg", "https://ldb-phinf.pstatic.net/20250103_289/1735897994878pWY3U_JPEG/1000023019.jpg" ],
+    "category" : "바(BAR)"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979608784,
+  "name" : "둥지왕돈까스라멘전문점",
+  "displayName" : "",
+  "px" : 127.040683,
+  "py" : 37.601393,
+  "type" : "place",
+  "useTime" : 1681706678000,
+  "lastUpdateTime" : 1681706678000,
+  "creationTime" : 1681706677000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1350963436",
+  "address" : "서울특별시 성북구 하월곡동 46-73 코업스타클래스 1층 113-3호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290136",
+  "cidPath" : [ "220036", "220038", "220081", "220804" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979608477,
+  "name" : "문화식당",
+  "displayName" : "",
+  "px" : 126.9982112,
+  "py" : 37.5927768,
+  "type" : "place",
+  "useTime" : 1681706660000,
+  "lastUpdateTime" : 1681706660000,
+  "creationTime" : 1681706660000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1723949279",
+  "address" : "서울특별시 성북구 성북동 122-7 2층, 3층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290101",
+  "cidPath" : [ "220036", "220044", "220126" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Rrzv15tvUayqTS+JW0cAOw==",
+      "pan" : "126.43",
+      "tilt" : "10.00",
+      "lng" : "126.9980607",
+      "lat" : "37.5928876",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240203_157/17069259246453xtfq_JPEG/IMG_1351.jpeg", "https://ldb-phinf.pstatic.net/20211103_94/1635890415524dbJt1_JPEG/OyC-iEyUAW7M7hcB3G2PLxmq.jpg", "https://ldb-phinf.pstatic.net/20250224_73/17403747589516xdLE_JPEG/IMG_7518.jpeg" ],
+    "category" : "양식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979608211,
+  "name" : "째즈스토리",
+  "displayName" : "",
+  "px" : 126.9981893,
+  "py" : 37.5928284,
+  "type" : "place",
+  "useTime" : 1681706644000,
+  "lastUpdateTime" : 1681706644000,
+  "creationTime" : 1681706644000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "11569500",
+  "address" : "서울특별시 성북구 성북동 122-7",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09290101",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "gBcuYiIDmdrj1/CIdeyC8A==",
+      "pan" : "81.60",
+      "tilt" : "4.44",
+      "lng" : "126.9979962",
+      "lat" : "37.5929516",
+      "fov" : "67"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20180209_45/15181047713625W9Rd_JPEG/QFm1NhuXE1E0YgTScaRqSyxH.jpg", "https://ldb-phinf.pstatic.net/20180209_158/1518104780186MhEU8_JPEG/Xgd9bKjTM_J9tLflkarDSSpn.jpg", "https://ldb-phinf.pstatic.net/20180205_121/1517821505090RyHaG_JPEG/kyGeZ4EDLCpIWYnP2uiPAalg.JPG.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979608025,
+  "name" : "조이하이볼",
+  "displayName" : "",
+  "px" : 127.0204997,
+  "py" : 37.5818932,
+  "type" : "place",
+  "useTime" : 1681706632000,
+  "lastUpdateTime" : 1681706632000,
+  "creationTime" : 1681706631000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1494615695",
+  "address" : "서울특별시 성북구 보문동5가 205-6 조이하이볼",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290127",
+  "cidPath" : [ "220036", "220044", "220126" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "rxosSsQ9tWxlYXM131cuIg==",
+      "pan" : "-120.95",
+      "tilt" : "10.00",
+      "lng" : "127.0205668",
+      "lat" : "37.5819334",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230606_296/1685990594695Iu7tb_JPEG/1685990517986.jpg", "https://ldb-phinf.pstatic.net/20250117_180/1737043098087O64xG_JPEG/1737000663170.jpg", "https://ldb-phinf.pstatic.net/20241201_1/1732983037346LWDeW_JPEG/1728221760812.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979607665,
+  "name" : "아리아 와인&마켓",
+  "displayName" : "",
+  "px" : 127.0313424,
+  "py" : 37.5993452,
+  "type" : "place",
+  "useTime" : 1681706622000,
+  "lastUpdateTime" : 1681706622000,
+  "creationTime" : 1681706609000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1223275243",
+  "address" : "서울특별시 성북구 종암동 133 . 상가동 제비110호(종암동, 래미 안세레니티)",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09290135",
+  "cidPath" : [ "220036", "220051", "220555", "221119" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979607486,
+  "name" : "써스티",
+  "displayName" : "",
+  "px" : 127.0329057,
+  "py" : 37.6008309,
+  "type" : "place",
+  "useTime" : 1681706599000,
+  "lastUpdateTime" : 1681706599000,
+  "creationTime" : 1681706599000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1204062632",
+  "address" : "서울특별시 성북구 종암동 83-6 2층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09290135",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "TSks0oXdNI0LXqu/8Qqv9A==",
+      "pan" : "-136.36",
+      "tilt" : "10.00",
+      "lng" : "127.0329797",
+      "lat" : "37.6009082",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230824_226/1692883290583jUURW_JPEG/1000001380.jpg", "https://ldb-phinf.pstatic.net/20230824_80/1692883431668Vlh8z_JPEG/1000001326.jpg", "https://ldb-phinf.pstatic.net/20230824_137/1692883410481Wzfp1_JPEG/1000001226.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979607290,
+  "name" : "한우팔등심",
+  "displayName" : "",
+  "px" : 127.0359201,
+  "py" : 37.5926199,
+  "type" : "place",
+  "useTime" : 1681706588000,
+  "lastUpdateTime" : 1681706588000,
+  "creationTime" : 1681706587000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1733590954",
+  "address" : "서울특별시 성북구 종암동 23-61",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290135",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "2GabvfzlmKvOF3/6ozRVLA==",
+      "pan" : "5.63",
+      "tilt" : "10.00",
+      "lng" : "127.0359089",
+      "lat" : "37.5925063",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210220_78/1613812001884YtdmC_JPEG/w1OazPDjeB-3lzXeWzYHnV3I.jpg", "https://ldb-phinf.pstatic.net/20210220_274/1613812060226f6T8N_JPEG/T0zMUXP9CC_Jo-X0ArVsyzQ4.jpg", "https://ldb-phinf.pstatic.net/20210220_74/1613812060488aPPsf_JPEG/02ICci_VcUgj34-kizrT9fi9.jpg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979607099,
+  "name" : "피플스플레이스",
+  "displayName" : "",
+  "px" : 126.999405,
+  "py" : 37.6109458,
+  "type" : "place",
+  "useTime" : 1681706577000,
+  "lastUpdateTime" : 1681706577000,
+  "creationTime" : 1681706576000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1671711826",
+  "address" : "서울특별시 성북구 정릉동 854-2 1층 피플스플레이스",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "CAFE",
+  "mcidName" : "카페",
+  "rcode" : "09290133",
+  "cidPath" : [ "220036", "220052", "220576", "221212" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "x1z1N7298o6sydTQ5d8fPA==",
+      "pan" : "121.12",
+      "tilt" : "10.00",
+      "lng" : "126.9992612",
+      "lat" : "37.6110324",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250130_225/1738245347292KFJ1k_JPEG/1738229785284.jpg", "https://ldb-phinf.pstatic.net/20250130_187/17382451639968VseY_JPEG/1738231171369.jpg", "https://ldb-phinf.pstatic.net/20250130_297/1738245176764SJjx8_JPEG/1738231612668.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979606902,
+  "name" : "먼치오케이샐러드클럽 성북점",
+  "displayName" : "",
+  "px" : 127.029431,
+  "py" : 37.6037098,
+  "type" : "place",
+  "useTime" : 1681706567000,
+  "lastUpdateTime" : 1681706567000,
+  "creationTime" : 1681706566000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1537847632",
+  "address" : "서울특별시 성북구 돈암동 2-1 1층 105호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290103",
+  "cidPath" : [ "220036", "220047", "220170", "230734" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "jK//3np0DAM2COHfVgm3fA==",
+      "pan" : "97.46",
+      "tilt" : "6.88",
+      "lng" : "127.0293293",
+      "lat" : "37.6037506",
+      "fov" : "40"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220613_9/1655090548934wIBw3_PNG/IMG_3311.PNG", "https://ldb-phinf.pstatic.net/20220722_42/1658464959434LF5yH_JPEG/KakaoTalk_20220721_202902733.jpg", "https://ldb-phinf.pstatic.net/20220722_197/1658464959497BV1sJ_JPEG/%B8%D5%C4%A1%BC%BA%BA%CF.jpg" ],
+    "category" : "다이어트,샐러드"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979606626,
+  "name" : "요이타코야끼 정릉점",
+  "displayName" : "",
+  "px" : 127.0205295,
+  "py" : 37.6010175,
+  "type" : "place",
+  "useTime" : 1681706551000,
+  "lastUpdateTime" : 1681706551000,
+  "creationTime" : 1681706551000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "1548084254",
+  "address" : "서울특별시 성북구 정릉동 16-53 104호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290133",
+  "cidPath" : [ "220036", "220038", "220081", "220804" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "S1ony5DjouDazrhMMhvAEQ==",
+      "pan" : "-107.33",
+      "tilt" : "10.00",
+      "lng" : "127.0188195",
+      "lat" : "37.5911536",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241002_223/1727807797788K93Wa_JPEG/1000016258.jpg", "https://ldb-phinf.pstatic.net/20241002_156/1727807882299bSny0_JPEG/1000016276.jpg", "https://ldb-phinf.pstatic.net/20241002_46/1727807883102Xid2Q_JPEG/1000016263.jpg" ],
+    "category" : "일식당"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979606479,
+  "name" : "테레",
+  "displayName" : "",
+  "px" : 127.0136407,
+  "py" : 37.6055179,
+  "type" : "place",
+  "useTime" : 1681706543000,
+  "lastUpdateTime" : 1681706543000,
+  "creationTime" : 1681706542000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1232178717",
+  "address" : "서울특별시 성북구 정릉동 171-14 지하1층, 1~2층 테레",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290133",
+  "cidPath" : [ "220036", "220044", "220126" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "8vDy675SXWTdoACOLjF6Bw==",
+      "pan" : "102.41",
+      "tilt" : "10.00",
+      "lng" : "127.0135024",
+      "lat" : "37.6055482",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211028_54/1635415220179CWW85_JPEG/LnFdqtK9gcPTEKdinhWXk3L8.jpeg.jpg", "https://ldb-phinf.pstatic.net/20211204_278/1638598642360LpCDU_JPEG/2.JPG", "https://ldb-phinf.pstatic.net/20211028_112/1635415220933MR7EN_JPEG/0EEIJoBY-gE5RKLdEvicJlHF.jpeg.jpg" ],
+    "category" : "카페,디저트"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979606127,
+  "name" : "동키타코스",
+  "displayName" : "",
+  "px" : 127.0134999,
+  "py" : 37.6057375,
+  "type" : "place",
+  "useTime" : 1681706522000,
+  "lastUpdateTime" : 1681706522000,
+  "creationTime" : 1681706522000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1464017643",
+  "address" : "서울특별시 성북구 정릉동 165-1 1층 동키타코스",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290133",
+  "cidPath" : [ "220036", "220044", "220132", "220930" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "uZeqMCYvqUJG3KTNKJjb0w==",
+      "pan" : "-88.09",
+      "tilt" : "-7.88",
+      "lng" : "127.0135653",
+      "lat" : "37.6057387",
+      "fov" : "72"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20221130_63/1669794854957I6S5y_JPEG/1DE4A04E-9F66-47F9-A9ED-2B3F3FE79C28.jpeg", "https://ldb-phinf.pstatic.net/20220625_150/1656132712729QznAk_JPEG/37F94F29-5850-46E5-808D-5EDA02265A42.jpeg", "https://ldb-phinf.pstatic.net/20221130_204/1669794854494a05N4_JPEG/38C15484-3A47-4D79-9DE5-C43F4FD665E9.jpeg" ],
+    "category" : "멕시코,남미음식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979605823,
+  "name" : "술이그린이밤",
+  "displayName" : "",
+  "px" : 126.9998208,
+  "py" : 37.6079125,
+  "type" : "place",
+  "useTime" : 1681706507000,
+  "lastUpdateTime" : 1681706507000,
+  "creationTime" : 1681706507000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1320986065",
+  "address" : "서울특별시 성북구 정릉동 892-9 1층 술이 그린 이밤",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09290133",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "QwQKsPG+S66dcSomN4Ofuw==",
+      "pan" : "81.27",
+      "tilt" : "10.94",
+      "lng" : "126.9996994",
+      "lat" : "37.6078657",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20221001_219/1664617655652sc6ao_JPEG/20220930_210916.jpg", "https://ldb-phinf.pstatic.net/20220902_296/1662077056771WPH75_JPEG/1662076910919.jpg", "https://ldb-phinf.pstatic.net/20220924_177/1664011507347mRxSo_JPEG/20220915_214653.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979605220,
+  "name" : "고기",
+  "displayName" : "",
+  "px" : 127.0434065,
+  "py" : 37.6045584,
+  "type" : "place",
+  "useTime" : 1681706474000,
+  "lastUpdateTime" : 1681706474000,
+  "creationTime" : 1681706474000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1291799501",
+  "address" : "서울특별시 성북구 하월곡동 19-2 102호 고기",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290136",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "c++eEunMDxgDOhcXv1L3Og==",
+      "pan" : "129.88",
+      "tilt" : "10.00",
+      "lng" : "127.0433128",
+      "lat" : "37.6046365",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240920_203/1726808821820CUcsH_JPEG/1000000473.jpg", "https://ldb-phinf.pstatic.net/20240920_178/1726808821050QemOy_JPEG/1000000477.jpg", "https://ldb-phinf.pstatic.net/20240920_217/1726808822064QokJ9_JPEG/1000000484.jpg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 979604375,
+  "name" : "599버거 장위뉴타운점",
+  "displayName" : "",
+  "px" : 127.048628,
+  "py" : 37.6162509,
+  "type" : "place",
+  "useTime" : 1681706425000,
+  "lastUpdateTime" : 1681706425000,
+  "creationTime" : 1681706424000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1002095869",
+  "address" : "서울특별시 성북구 장위동 237-280 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09290138",
+  "cidPath" : [ "220036", "220044", "220138", "221004" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+} ]

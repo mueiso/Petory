@@ -1,0 +1,994 @@
+{
+folder: {
+folderId: 82995124,
+name: "갈수있어 강아지도, 부산 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "7",
+lastUseTime: 1694772118000,
+creationTime: 1682346726000,
+shouldOverlay: true,
+bookmarkCount: 834,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa4251438fc3a9cc06a7d",
+reviewPageUrl: "https://m.place.naver.com/my/642fa4251438fc3a9cc06a7d/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_152/1680843802917uJyox_PNG/image.png?type=f102_102",
+nick: "N강아지도 맥스"
+},
+shareId: "5957ae4f45f14be49240f4cc431be7cb",
+encryptedUserIdNo: "KjcOVugg7JobZcI0:ULV0jD914QjoMe4a5NEgAfFgTR8QQA",
+followCount: 1631,
+viewCount: 8182,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007376992,
+name: "해물나라총각집조개구이",
+displayName: "",
+px: 129.0213781,
+py: 35.0626451,
+type: "place",
+useTime: 1683528495000,
+lastUpdateTime: 1683528495000,
+creationTime: 1683528495000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1140291758",
+address: "부산광역시 서구 암남동 620-27 암남공원주차장내",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08140124",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220801",
+"221674"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "L/T64U+5cP4njP81eKoPnQ==",
+pan: "121.95",
+tilt: "1.38",
+lng: "129.0212527",
+lat: "35.0628185",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231228_99/1703758950842lT6kI_PNG/04.png",
+"https://ldb-phinf.pstatic.net/20231228_62/1703758950938oqaaB_PNG/01.png",
+"https://ldb-phinf.pstatic.net/20231228_155/1703758950616CMpI6_PNG/02.png"
+],
+category: "조개요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007376813,
+name: "혜영이네",
+displayName: "",
+px: 129.0213342,
+py: 35.0625573,
+type: "place",
+useTime: 1683528485000,
+lastUpdateTime: 1683528485000,
+creationTime: 1683528485000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "38709992",
+address: "부산광역시 서구 암남동 620-24 혜영이네",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08140124",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220801",
+"221674"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "L/T64U+5cP4njP81eKoPnQ==",
+pan: "163.33",
+tilt: "2.00",
+lng: "129.0212527",
+lat: "35.0628185",
+fov: "55"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230708_210/1688785928161oYUBB_JPEG/137799BA-02A9-489B-940A-D632F1DC8C5B.jpeg",
+"https://ldb-phinf.pstatic.net/20230708_136/1688785886473C7hHH_JPEG/BEEF8BED-5CC1-419B-A766-DAA8F73BD162.jpeg",
+"https://ldb-phinf.pstatic.net/20221201_72/1669856795186UBNjn_PNG/2680901B-03CB-41AA-BF24-C9716494A01D.png"
+],
+category: "조개요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007376637,
+name: "희자매",
+displayName: "",
+px: 129.0215076,
+py: 35.0625674,
+type: "place",
+useTime: 1683528475000,
+lastUpdateTime: 1683528475000,
+creationTime: 1683528474000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1075606454",
+address: "부산광역시 서구 암남동 620-24",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08140124",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220801",
+"221674"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "L/T64U+5cP4njP81eKoPnQ==",
+pan: "134.64",
+tilt: "10.00",
+lng: "129.0212527",
+lat: "35.0628185",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221124_300/1669295309732Lc7l5_JPEG/20221122_133617.jpg",
+"https://ldb-phinf.pstatic.net/20221124_30/1669295308355z2562_JPEG/20221123_133746.jpg",
+"https://ldb-phinf.pstatic.net/20210525_216/1621945822473nwueR_JPEG/9WA5bzK6AVyF5reR9-IPIXvo.jpg"
+],
+category: "조개요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007376443,
+name: "숙이네조개구이",
+displayName: "",
+px: 129.0213728,
+py: 35.0626045,
+type: "place",
+useTime: 1683528464000,
+lastUpdateTime: 1683528464000,
+creationTime: 1683528463000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1586670539",
+address: "부산광역시 서구 암남동 620-24 암남공원 숙이네",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08140124",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220801",
+"221674"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "43XQvsyCqhlLuEu38DJyCw==",
+pan: "138.57",
+tilt: "1.69",
+lng: "129.0213499",
+lat: "35.0628759",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250321_85/1742532169512IYyP6_JPEG/KakaoTalk_Photo_2025-03-21-13-36-49_010.jpeg",
+"https://ldb-phinf.pstatic.net/20240213_114/1707786369071XkN53_JPEG/KakaoTalk_Photo_2024-02-13-10-05-59_001.jpeg",
+"https://ldb-phinf.pstatic.net/20240213_213/1707786083068Mrl3w_JPEG/KakaoTalk_Photo_2024-02-13-10-01-07_001.jpeg"
+],
+category: "조개요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007376257,
+name: "뚱보네",
+displayName: "",
+px: 129.0215048,
+py: 35.0625661,
+type: "place",
+useTime: 1683528454000,
+lastUpdateTime: 1683528454000,
+creationTime: 1683528454000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1048408001",
+address: "부산광역시 서구 암남동 620-24",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08140124",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220801",
+"221674"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "L/T64U+5cP4njP81eKoPnQ==",
+pan: "135.10",
+tilt: "10.00",
+lng: "129.0212527",
+lat: "35.0628185",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221205_22/1670212682082L2exK_JPEG/KakaoTalk_20221205_125422076.jpg",
+"https://ldb-phinf.pstatic.net/20221205_178/1670212688283Clhjg_JPEG/KakaoTalk_20221205_125519142.jpg",
+"https://ldb-phinf.pstatic.net/20221205_295/1670212692011bQBCK_JPEG/KakaoTalk_20221205_125601726.jpg"
+],
+category: "조개요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007376012,
+name: "오픈하우스가든",
+displayName: "",
+px: 129.0456751,
+py: 35.2130058,
+type: "place",
+useTime: 1683528441000,
+lastUpdateTime: 1683528441000,
+creationTime: 1683528440000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37249725",
+address: "부산광역시 북구 만덕동 62-4",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08320103",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "JPnijFYrvZqgh+rhApOFoA==",
+pan: "-133.08",
+tilt: "10.00",
+lng: "129.0457782",
+lat: "35.2131021",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20170813_267/1502598877227MuTbJ_JPEG/_SkiL_GMhLWbEuDAhAfQQzlF.jpg",
+"https://ldb-phinf.pstatic.net/20171027_10/1509096817529MbeIc_JPEG/GB-_I82Z6AA84TyB93LD2zGo.jpg",
+"https://ldb-phinf.pstatic.net/20151102_256/1446448950591pSomq_JPEG/166976638759453_0.jpeg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007272168,
+name: "월전장어구이집 뚱아저씨네",
+displayName: "",
+px: 129.2441431,
+py: 35.2381236,
+type: "place",
+useTime: 1683522333000,
+lastUpdateTime: 1683522333000,
+creationTime: 1683522333000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1732278233",
+address: "부산광역시 기장군 기장읍 죽성리 154-21 A-7",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0871025024",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220799"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1007271957,
+name: "하동집",
+displayName: "",
+px: 129.1161873,
+py: 35.2472783,
+type: "place",
+useTime: 1683522320000,
+lastUpdateTime: 1683522320000,
+creationTime: 1683522319000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1581524785",
+address: "부산광역시 금정구 오륜동 353-5 하동집",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08410106",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220769",
+"221553"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "SUaUnHm+rFQV06pBD2K7wQ==",
+pan: "151.69",
+tilt: "7.06",
+lng: "129.1160222",
+lat: "35.2474838",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240904_292/1725424862970fb4ot_JPEG/20240904_133830.jpg",
+"https://ldb-phinf.pstatic.net/20240904_276/1725424863012CYL16_JPEG/20240904_133950.jpg",
+"https://ldb-phinf.pstatic.net/20240903_241/1725343345376NIkHA_PNG/KakaoTalk_20240827_103946513.png"
+],
+category: "오리요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007271694,
+name: "성안집",
+displayName: "",
+px: 129.0618455,
+py: 35.2461354,
+type: "place",
+useTime: 1683522304000,
+lastUpdateTime: 1683522304000,
+creationTime: 1683522304000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "12890556",
+address: "부산광역시 금정구 금성동 630-1 성안집",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08410113",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220769",
+"221553"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "z2kNCvZabmwV8Zf8/m1s6A==",
+pan: "137.40",
+tilt: "-9.88",
+lng: "129.0626569",
+lat: "35.2463033",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150901_8/1441034805358RlVFz_JPEG/96580618532508_0.jpg",
+"https://ldb-phinf.pstatic.net/20150901_104/1441034805581Ejv5M_JPEG/96580618532508_1.jpg",
+"https://ldb-phinf.pstatic.net/20150901_146/1441034805774WFqTP_JPEG/96580618532508_2.jpg"
+],
+category: "오리요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989405483,
+name: "인사이드 버거",
+displayName: "",
+px: 129.1666037,
+py: 35.1602157,
+type: "place",
+useTime: 1682381277000,
+lastUpdateTime: 1682381277000,
+creationTime: 1682381276000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1836325036",
+address: "부산광역시 해운대구 중동 1124-2 팔레드시즈 1층 25호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08350106",
+cidPath: [
+"220036",
+"220044",
+"220138",
+"221004"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 981524896,
+name: "올레",
+displayName: "",
+px: 129.0780648,
+py: 35.0604903,
+type: "place",
+useTime: 1682381204000,
+lastUpdateTime: 1682381204000,
+creationTime: 1681828846000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1749524995",
+address: "부산광역시 영도구 동삼동 산19-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08200121",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220801",
+"221674"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "zsdbz4SqDS9qcv8NsFVIww==",
+pan: "46.25",
+tilt: "10.00",
+lng: "129.0778553",
+lat: "35.0600275",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20180706_75/1530810208570O5iau_JPEG/JBHVekS7RdUG8P7CtOoylXjX.jpg",
+"https://ldb-phinf.pstatic.net/20180706_259/1530810284064sK54X_JPEG/NmwCvabDxuFPIPcndIlHGGVC.jpg",
+"https://ldb-phinf.pstatic.net/20180706_262/1530810235794WtOTO_JPEG/HnBKRzSMrz1J9on7Ari9b2SE.jpg"
+],
+category: "조개요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989403117,
+name: "데이스위밍클럽",
+displayName: "",
+px: 129.1179783,
+py: 35.1644416,
+type: "place",
+useTime: 1682381110000,
+lastUpdateTime: 1682381110000,
+creationTime: 1682381109000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1705828497",
+address: "부산광역시 수영구 광안동 92-30",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220051",
+"220555",
+"221119"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "NnWNUUIcC04AtVbjO+M1vw==",
+pan: "-70.36",
+tilt: "10.00",
+lng: "129.1180860",
+lat: "35.1644031",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210814_156/1628917929663482Cp_JPEG/BRSZI_aecU0MEeaDAdJqXiKC.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210814_211/1628917935307Q0CsA_JPEG/Y02w7Dy-xGfQ-iByyl8OoVpV.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20210814_213/1628917946449L52By_JPEG/KfusQdAtEQDw6D5EV8AdRuMN.jpeg.jpg"
+],
+category: "와인"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989402720,
+name: "족발이다 괴정점",
+displayName: "",
+px: 128.9950055,
+py: 35.096396,
+type: "place",
+useTime: 1682381080000,
+lastUpdateTime: 1682381080000,
+creationTime: 1682381079000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1229990450",
+address: "부산광역시 사하구 괴정동 458-70",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08380101",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220766",
+"221504"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "WtCuHahMJz3LHB+GYU/81w==",
+pan: "62.20",
+tilt: "10.00",
+lng: "128.9949445",
+lat: "35.0963638",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240528_271/1716868464609uMOfq_JPEG/IMG_3261.jpeg",
+"https://ldb-phinf.pstatic.net/20240528_77/1716868464502Hnw7a_JPEG/IMG_3238.jpeg",
+"https://ldb-phinf.pstatic.net/20240528_114/171686846449448ruf_JPEG/IMG_3262.jpeg"
+],
+category: "족발,보쌈"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981445754,
+name: "야망대장어타운",
+displayName: "",
+px: 128.9774267,
+py: 35.0572667,
+type: "place",
+useTime: 1682381067000,
+lastUpdateTime: 1682381067000,
+creationTime: 1681824733000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1156182917",
+address: "부산광역시 사하구 다대동 336-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08380106",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220799"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "E+WIM16hTEF9HoLIydsQgA==",
+pan: "-51.14",
+tilt: "-20.00",
+lng: "128.9776043",
+lat: "35.0572199",
+fov: "90"
+},
+thumbnailUrls: [ ],
+category: "장어,먹장어요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981439292,
+name: "청기와샤브샤브",
+displayName: "",
+px: 128.9972892,
+py: 35.132826,
+type: "place",
+useTime: 1682381052000,
+lastUpdateTime: 1682381052000,
+creationTime: 1681824396000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "16789577",
+address: "부산광역시 사상구 학장동 160-7 청기와샤브샤브",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08530107",
+cidPath: [
+"220036",
+"220038",
+"220083",
+"220821"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "4bfBCb7ksgsXJLV34WtU2A==",
+pan: "25.52",
+tilt: "1.19",
+lng: "128.9971112",
+lat: "35.1326391",
+fov: "50"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230524_104/16849209667423XQtG_JPEG/KakaoTalk_20230524_183037895.jpg",
+"https://ldb-phinf.pstatic.net/20230524_292/1684916857649CSRYM_JPEG/KakaoTalk_20230518_115834202.jpg",
+"https://ldb-phinf.pstatic.net/20201129_141/1606595838622q3Qob_JPEG/image.jpg"
+],
+category: "중식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989402154,
+name: "바라또",
+displayName: "",
+px: 129.0081276,
+py: 35.1465318,
+type: "place",
+useTime: 1682381037000,
+lastUpdateTime: 1682381037000,
+creationTime: 1682381037000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1417453735",
+address: "부산광역시 사상구 주례동 92-307 우진아파트 상가",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08530106",
+cidPath: [
+"220036",
+"220044",
+"220132",
+"220930"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ZNG1NGrcv+mjYC+J99xx2Q==",
+pan: "102.80",
+tilt: "20.25",
+lng: "129.0079839",
+lat: "35.1465886",
+fov: "67"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20181102_77/1541146779305YomR8_JPEG/C5UEp0OmRbAuFAB_NrvuzQxq.jpg"
+],
+category: "멕시코,남미음식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989401936,
+name: "남경식당",
+displayName: "",
+px: 129.0108235,
+py: 35.1515701,
+type: "place",
+useTime: 1682381021000,
+lastUpdateTime: 1682381021000,
+creationTime: 1682381020000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1978358001",
+address: "부산광역시 사상구 주례동 216-2 대문집",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08530106",
+cidPath: [
+"220036",
+"220037",
+"220078"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "RQSiSee+uBKvAr9BdFnGQQ==",
+pan: "3.84",
+tilt: "10.00",
+lng: "129.0108030",
+lat: "35.1512648",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240617_110/1718598206233Pd4p4_JPEG/%B3%B2%B0%E6%BD%C4%B4%E7%B8%DE%B4%BA.jpg",
+"https://ldb-phinf.pstatic.net/20221004_209/1664857803056RWTT0_JPEG/20221003_131953.jpg",
+"https://ldb-phinf.pstatic.net/20221004_204/1664857784007VvCl0_JPEG/20221003_131908.jpg"
+],
+category: "백반,가정식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 989401729,
+name: "비꼴로",
+displayName: "",
+px: 128.9767185,
+py: 35.1283108,
+type: "place",
+useTime: 1682381006000,
+lastUpdateTime: 1682381006000,
+creationTime: 1682381005000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1995719212",
+address: "부산광역시 사상구 엄궁동 42-39",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08530108",
+cidPath: [
+"220036",
+"220044",
+"220127",
+"220914",
+"230079"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "5Gs9SvTiJJ51tk7qZr5b1Q==",
+pan: "-80.69",
+tilt: "10.00",
+lng: "128.9769360",
+lat: "35.1282750",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20171231_238/1514703273826t6Kv8_JPEG/RX6GEBX6XNXPAKaK6cA3bocA.jpg",
+"https://ldb-phinf.pstatic.net/20171231_1/1514703277915P6YHG_JPEG/E2LzLwRxNyRlTf_XAsFuNfxn.jpg",
+"https://ldb-phinf.pstatic.net/20171231_289/1514703293748yrL1R_JPEG/0d8FWQbekB3S7rgd80MenEF8.jpg"
+],
+category: "스파게티,파스타전문"
+},
+isIndoor: false
+},
+{
+bookmarkId: 981435421,
+name: "피그니소풍가는날",
+displayName: "",
+px: 128.9881258,
+py: 35.1595526,
+type: "place",
+useTime: 1682380972000,
+lastUpdateTime: 1682380972000,
+creationTime: 1681824197000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1860910898",
+address: "부산광역시 사상구 괘법동 552-20 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "08530104",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"220932"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 981432583,
+name: "포차오구오구",
+displayName: "",
+px: 128.9811974,
+py: 35.1651472,
+type: "place",
+useTime: 1682380955000,
+lastUpdateTime: 1682380955000,
+creationTime: 1681824046000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1219565455",
+address: "부산광역시 사상구 괘법동 525-11 1층 포차오구오구",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "08530104",
+cidPath: [
+"220036",
+"220051",
+"220559",
+"221149"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "nkVWV2RBoB0KjWIwPGcEIA==",
+pan: "108.88",
+tilt: "18.56",
+lng: "128.9811400",
+lat: "35.1651450",
+fov: "42"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211121_70/1637445659989MbIbV_JPEG/20211120_215128.jpg",
+"https://ldb-phinf.pstatic.net/20230810_98/16916568292240lBxd_JPEG/20230623_210603.jpg"
+],
+category: "포장마차"
+},
+isIndoor: false
+}
+],
+unavailableCount: 254,
+mismatchedCount: 25,
+removed: false
+}

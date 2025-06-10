@@ -1,0 +1,910 @@
+{
+folder: {
+folderId: 82084948,
+name: "갈수있어 강아지도, 경기서남 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "11",
+lastUseTime: 1684741651000,
+creationTime: 1680844362000,
+shouldOverlay: true,
+bookmarkCount: 938,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa6131438fc3a9cee4367",
+reviewPageUrl: "https://m.place.naver.com/my/642fa6131438fc3a9cee4367/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_107/1680844297660hqGc7_PNG/image.png?type=f102_102",
+nick: "N강아지도 찰리"
+},
+shareId: "993dd1e60bb4468bbe8620e3e9db26f7",
+encryptedUserIdNo: "a1lrBqQN72z8QMrC:Q9khz1kfc8kPZ4abpNa2AnFHXCTUiA",
+followCount: 869,
+viewCount: 3061,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007404309,
+name: "아이스크림 마을",
+displayName: "",
+px: 127.1271338,
+py: 36.9896628,
+type: "place",
+useTime: 1683529964000,
+lastUpdateTime: 1683529964000,
+creationTime: 1683529963000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1042751411",
+address: "경기도 평택시 소사동 101-8",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02220123",
+cidPath: [
+"220036",
+"220052",
+"220578",
+"221361"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "w3zX6UFBIv92ZiBCtpYOwg==",
+pan: "92.34",
+tilt: "14.13",
+lng: "127.1269635",
+lat: "36.9898108",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210218_195/1613642102580JtaCa_JPEG/u3UKpipcHopI1ES7QMrGx-o6.jpg",
+"https://ldb-phinf.pstatic.net/20210218_239/1613642119425WwIli_JPEG/sZ100laV1a34Z8M5ZN9XK1zv.jpg",
+"https://ldb-phinf.pstatic.net/20210218_300/1613642553073Dfsdq_JPEG/lerlW121ZqIpHFYbf3BfJTJB.jpg"
+],
+category: "아이스크림"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007403164,
+name: "박수진커피",
+displayName: "",
+px: 127.0695576,
+py: 37.1527065,
+type: "place",
+useTime: 1683529907000,
+lastUpdateTime: 1683529907000,
+creationTime: 1683529906000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1583759718",
+address: "경기도 오산시 오산동 844-2",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02370101",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "my+j7JdjndOeRY4ws5eI8w==",
+pan: "170.02",
+tilt: "10.00",
+lng: "127.0695469",
+lat: "37.1527668",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200721_216/1595293778154cBNjL_PNG/JDUI9OgYUhvlAyfk0Dl-r-xp.png"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007402675,
+name: "온유여월",
+displayName: "",
+px: 127.0134621,
+py: 37.2869872,
+type: "place",
+useTime: 1683529882000,
+lastUpdateTime: 1683529882000,
+creationTime: 1683529882000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1426137859",
+address: "경기도 수원시 팔달구 장안동 28-10 한옥카페 온유여월",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02115131",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "x9lKYXPT8AHgNnoHE7uyuw==",
+pan: "-102.65",
+tilt: "10.00",
+lng: "127.0136230",
+lat: "37.2869920",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250417_149/1744892853849odxdO_JPEG/%C1%A6%B8%F1%C0%BB-%C0%D4%B7%C2%C7%D8%C1%D6%BC%BC%BF%E4_-004.jpg",
+"https://ldb-phinf.pstatic.net/20250502_240/1746197865257tMOPh_JPEG/%C1%A6%B8%F1%C0%BB-%C0%D4%B7%C2%C7%D8%C1%D6%BC%BC%BF%E4_-005.jpg",
+"https://ldb-phinf.pstatic.net/20250410_229/1744283333374B4Ird_JPEG/KakaoTalk_20250410_200832028.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006988947,
+name: "카밍테이블",
+displayName: "",
+px: 127.2741257,
+py: 37.0102063,
+type: "place",
+useTime: 1683506084000,
+lastUpdateTime: 1683506084000,
+creationTime: 1683506084000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1777501284",
+address: "경기도 안성시 숭인동 22-1 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550102",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006988807,
+name: "카페아우라이",
+displayName: "",
+px: 127.2659646,
+py: 37.0361994,
+type: "place",
+useTime: 1683506074000,
+lastUpdateTime: 1683506074000,
+creationTime: 1683506073000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1211342925",
+address: "경기도 안성시 사곡동 38 카페아우라이",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550123",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "GOIKNUWjFbWWyUUHisVlTg==",
+pan: "162.27",
+tilt: "10.00",
+lng: "127.2659201",
+lat: "37.0363379",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20191011_183/1570793290925qRCG5_JPEG/gkh0eMDq0Zqk0cTY80S0GnaR.jpg",
+"https://ldb-phinf.pstatic.net/20191011_119/1570793315676gMQxc_JPEG/3eW6K6CECrRJ2mTu0XeTZaMr.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20191011_55/1570793301741kPTB2_JPEG/EezX5g0Um49d7lYZOJmHQ1Gn.JPG.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006988657,
+name: "아지트카페",
+displayName: "",
+px: 127.271188,
+py: 37.0056825,
+type: "place",
+useTime: 1683506063000,
+lastUpdateTime: 1683506063000,
+creationTime: 1683506063000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1382013268",
+address: "경기도 안성시 동본동 101 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550106",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "+dkY3tCCSxBOmoPdCGgsRQ==",
+pan: "80.39",
+tilt: "10.00",
+lng: "127.2710686",
+lat: "37.0056622",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221008_12/1665192207987NRYe2_JPEG/BD1C1791-BD48-44A0-BFBF-AF1018F8395F.jpeg",
+"https://ldb-phinf.pstatic.net/20231212_110/1702341442451maTE8_JPEG/IMG_1641.jpeg",
+"https://ldb-phinf.pstatic.net/20231212_290/1702341442710NzBOP_JPEG/IMG_1138.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006988481,
+name: "특별한시선",
+displayName: "",
+px: 127.2676486,
+py: 37.0081977,
+type: "place",
+useTime: 1683506052000,
+lastUpdateTime: 1683506052000,
+creationTime: 1683506051000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1056870303",
+address: "경기도 안성시 석정동 13-4 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550118",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006988380,
+name: "베지12",
+displayName: "",
+px: 127.2591446,
+py: 37.0122931,
+type: "place",
+useTime: 1683506044000,
+lastUpdateTime: 1683506044000,
+creationTime: 1683506044000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1042886367",
+address: "경기도 안성시 석정동 344 상가동 109호 카페 베지12",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550118",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006988255,
+name: "오픈 스탠스",
+displayName: "",
+px: 127.2580891,
+py: 37.0118525,
+type: "place",
+useTime: 1683506035000,
+lastUpdateTime: 1683506035000,
+creationTime: 1683506035000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1160270855",
+address: "경기도 안성시 석정동 131-26 2층 오픈 스탠스",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550118",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006988143,
+name: "더242cafe",
+displayName: "",
+px: 127.422182,
+py: 37.0744655,
+type: "place",
+useTime: 1683506027000,
+lastUpdateTime: 1683506027000,
+creationTime: 1683506026000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1601820240",
+address: "경기도 안성시 죽산면 죽산리 508-1",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255040021",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "RyIVoDSgYM/RX5gKw+DBWQ==",
+pan: "168.71",
+tilt: "10.13",
+lng: "127.4220263",
+lat: "37.0745817",
+fov: "40"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221221_200/1671589636458CNO4u_JPEG/%C4%AB%C6%E4%B7%CE%B0%ED.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006988026,
+name: "만나247",
+displayName: "",
+px: 127.4368801,
+py: 37.0930589,
+type: "place",
+useTime: 1683506019000,
+lastUpdateTime: 1683506019000,
+creationTime: 1683506019000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1944610015",
+address: "경기도 안성시 죽산면 매산리 253-1",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255040022",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "w4x4aeZ3TVGu6let2RNLrg==",
+pan: "117.63",
+tilt: "10.93",
+lng: "127.4367430",
+lat: "37.0932300",
+fov: "100"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210227_139/1614399033484CI0J5_JPEG/r0txITKgx5aYmLSYsHmQwU-T.jpg",
+"https://ldb-phinf.pstatic.net/20250426_93/1745637495349sFIJc_JPEG/20250425_145809_%281%29.jpg",
+"https://ldb-phinf.pstatic.net/20250426_174/1745637527806INyjg_JPEG/1745635838975.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006987785,
+name: "카페 온마이마인드",
+displayName: "",
+px: 127.4203929,
+py: 37.0766949,
+type: "place",
+useTime: 1683506002000,
+lastUpdateTime: 1683506002000,
+creationTime: 1683506001000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1844719056",
+address: "경기도 안성시 죽산면 죽산리 414 1층 카페 온마이마인드",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255040021",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006987656,
+name: "더남산",
+displayName: "",
+px: 127.4369636,
+py: 37.0704979,
+type: "place",
+useTime: 1683505993000,
+lastUpdateTime: 1683505993000,
+creationTime: 1683505992000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1932541165",
+address: "경기도 안성시 죽산면 장원리 1175-2 더남산",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255040023",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "HFa4rpyK9TsLw0bmdFUPyQ==",
+pan: "150.29",
+tilt: "10.00",
+lng: "127.4366221",
+lat: "37.0710946",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241013_45/1728799150245SU66W_JPEG/40A3E40A-09AB-4169-AC8A-18CACF0EBC1B.jpeg",
+"https://ldb-phinf.pstatic.net/20240911_178/1726036524531Tsnzw_JPEG/4A3D65D8-E97F-4CBA-A420-D8A87AC35F31.jpeg",
+"https://ldb-phinf.pstatic.net/20240911_218/17260369236159wYyp_JPEG/IMG_7699.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006987350,
+name: "정오의 카페",
+displayName: "",
+px: 127.4438637,
+py: 37.051467,
+type: "place",
+useTime: 1683505972000,
+lastUpdateTime: 1683505972000,
+creationTime: 1683505972000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1176006564",
+address: "경기도 안성시 죽산면 용설리 451-23 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255040027",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "77IyG6sIlASvOMlmZURQyg==",
+pan: "149.26",
+tilt: "10.00",
+lng: "127.4437936",
+lat: "37.0515845",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230723_15/1690091732679kXqlT_JPEG/1690091716229.jpg",
+"https://ldb-phinf.pstatic.net/20230723_52/1690091588457qzK2b_JPEG/20220716_192453.jpg",
+"https://ldb-phinf.pstatic.net/20230723_168/1690091339261gUP5D_JPEG/1647076376468.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006987209,
+name: "카페 레이크90",
+displayName: "",
+px: 127.4284621,
+py: 37.0094181,
+type: "place",
+useTime: 1683505962000,
+lastUpdateTime: 1683505962000,
+creationTime: 1683505962000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1748755454",
+address: "경기도 안성시 죽산면 두교리 465",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255040030",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "1A/cGfju958wIZedYCICdA==",
+pan: "-75.55",
+tilt: "-5.06",
+lng: "127.4286632",
+lat: "37.0090976",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190323_69/1553323278793lwRpm_JPEG/47W0cZZxObeSjConONj0Wx7e.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20190323_69/1553323278770F9cq3_JPEG/e-JH-iI5F_ClpYD-t4LKDMGx.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20190323_144/15533232789092nj6c_JPEG/pdq-lXjJKmfzWzfCxJD8rSlX.JPG.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006987042,
+name: "온스어폰어네이처",
+displayName: "",
+px: 127.4299355,
+py: 37.1132541,
+type: "place",
+useTime: 1683505951000,
+lastUpdateTime: 1683505951000,
+creationTime: 1683505951000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1546171761",
+address: "경기도 안성시 일죽면 방초리 355-1 온스어폰어네이처",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255039027",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "6oc33xc0xvzwpqQdknv8+A==",
+pan: "-115.50",
+tilt: "10.00",
+lng: "127.4302689",
+lat: "37.1134127",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221119_131/1668823237682sL2Av_JPEG/LSH02571-HDR-1.jpg",
+"https://ldb-phinf.pstatic.net/20250120_250/1737363331705iOhub_JPEG/%C7%C3%B7%B9%C0%CC%BD%BA%BB%E7%C1%F8.jpg",
+"https://ldb-phinf.pstatic.net/20231122_115/1700625117321mBWCx_JPEG/KakaoTalk_20231122_125134698_03.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006986907,
+name: "Triple.C",
+displayName: "",
+px: 127.4848565,
+py: 37.1043944,
+type: "place",
+useTime: 1683505942000,
+lastUpdateTime: 1683505942000,
+creationTime: 1683505941000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1067659152",
+address: "경기도 안성시 일죽면 능국리 348-9",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255039031",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "KnJfpsoUpVwnqxJQWEYwlg==",
+pan: "-81.87",
+tilt: "10.00",
+lng: "127.4853299",
+lat: "37.1043264",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250328_7/1743141630845ux3jC_JPEG/KakaoTalk_20250328_145829013.jpg",
+"https://ldb-phinf.pstatic.net/20250328_138/17431417752947JaMP_JPEG/001.jpg",
+"https://ldb-phinf.pstatic.net/20250328_225/1743141775270Ix0PJ_JPEG/002.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1006986782,
+name: "카페 듀공 Cafe Le Dugong",
+displayName: "",
+px: 127.2784,
+py: 37.0091707,
+type: "place",
+useTime: 1683505932000,
+lastUpdateTime: 1683505932000,
+creationTime: 1683505932000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "35413288",
+address: "경기도 안성시 봉산동 416-9",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "02550101",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006986650,
+name: "불멍하는 고양이",
+displayName: "",
+px: 127.1533495,
+py: 37.0507866,
+type: "place",
+useTime: 1683505923000,
+lastUpdateTime: 1683505923000,
+creationTime: 1683505922000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1029723096",
+address: "경기도 안성시 원곡면 칠곡리 284-1",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255038022",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 1006986422,
+name: "지니 커피",
+displayName: "",
+px: 127.1431279,
+py: 37.0616305,
+type: "place",
+useTime: 1683505905000,
+lastUpdateTime: 1683505905000,
+creationTime: 1683505904000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1320189300",
+address: "경기도 안성시 원곡면 지문리 산38-5",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "0255038023",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "l/7+2P2irLaUYmGAc/5ycw==",
+pan: "115.55",
+tilt: "10.00",
+lng: "127.1430310",
+lat: "37.0616767",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190603_222/1559557939561OxqaT_JPEG/pvJeIeRMoOGWVU9-OVEsUcyq.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20190603_116/1559557949496wYkD8_JPEG/jRlKpp89AIWuZLv8UwB-0iW-.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20190603_228/1559557959612OnChS_JPEG/gnPtFi7rydo5rPocD3tR5oCz.jpeg.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+}
+],
+unavailableCount: 356,
+mismatchedCount: 35,
+removed: false
+}

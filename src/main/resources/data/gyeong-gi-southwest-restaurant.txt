@@ -1,0 +1,968 @@
+{
+folder: {
+folderId: 82084164,
+name: "갈수있어 강아지도, 경기서남 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "11",
+lastUseTime: 1694770621000,
+creationTime: 1680843497000,
+shouldOverlay: true,
+bookmarkCount: 548,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa2a03010c46697dc0f0b",
+reviewPageUrl: "https://m.place.naver.com/my/642fa2a03010c46697dc0f0b/review?v=2",
+imageUrl: "https://myplace-phinf.pstatic.net/20230522_74/1684749293063dDMV7_PNG/221226_%B3%D7%C0%CC%B9%F6%C1%F6%B5%B5_%C4%B7%C6%E4%C0%CE%BF%EB_%C7%C1%B7%CE%C7%CA%C0%CC%B9%CC%C1%F6-01.png?type=f220_220_70_sharpen",
+nick: "N강아지도 코코"
+},
+shareId: "85055b9eb7774593b4847ba043965db5",
+encryptedUserIdNo: "OFQZdEUKcV5qChFV:iXsyLu_dOCjeVQueJB0bXM1UlbFKig",
+followCount: 1672,
+viewCount: 8278,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007389851,
+name: "남매가든",
+displayName: "",
+px: 126.8968306,
+py: 37.1917682,
+type: "place",
+useTime: 1683529214000,
+lastUpdateTime: 1683529214000,
+creationTime: 1683529213000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1406811837",
+address: "경기도 화성시 팔탄면 기천리 174-3",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0259036023",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "x5OapLUAU0h1A/Yti5dw5A==",
+pan: "161.60",
+tilt: "10.00",
+lng: "126.8967808",
+lat: "37.1919173",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20190409_165/1554817015074r1DKS_JPEG/QcIdwXQgROPQcFwl02441FDT.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20200905_43/15992918066039ISdj_JPEG/QTnQepxOECAjwTAHDCgkR4u7.jpg",
+"https://ldb-phinf.pstatic.net/20200905_129/1599291808381SkUtN_JPEG/MEYtUOTfwR664v1TCR4x1hBH.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007389538,
+name: "크라운호프 송산그린시티점",
+displayName: "",
+px: 126.8181287,
+py: 37.2846347,
+type: "place",
+useTime: 1683529196000,
+lastUpdateTime: 1683529196000,
+creationTime: 1683529195000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1682593668",
+address: "경기도 화성시 새솔동 175",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02590140",
+cidPath: [
+"220036",
+"220051",
+"220553",
+"1002527"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "qyDKmupYQkuBTAlO4HEDEw==",
+pan: "34.91",
+tilt: "10.00",
+lng: "126.8180865",
+lat: "37.2845742",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200916_247/1600194890722767yk_JPEG/Z3xT9IFZodDM12jI3UyOEaTW.jpg"
+],
+category: "맥주,호프"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007388419,
+name: "삼일수산",
+displayName: "",
+px: 127.0951613,
+py: 36.9823415,
+type: "place",
+useTime: 1683529138000,
+lastUpdateTime: 1683529138000,
+creationTime: 1683529137000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "17918118",
+address: "경기도 평택시 합정동 851-6 삼일수산",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02220117",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220799"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "iQV6yyu19lHHGjVyyJvNFQ==",
+pan: "51.91",
+tilt: "10.00",
+lng: "127.0949507",
+lat: "36.9821763",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211227_148/1640590422338MVAe2_JPEG/IMG_4803.jpg",
+"https://ldb-phinf.pstatic.net/20211227_243/1640590422034Ek5Gf_JPEG/IMG_4808.jpg",
+"https://ldb-phinf.pstatic.net/20211227_204/1640590422771r4O5K_JPEG/IMG_4811.jpg"
+],
+category: "장어,먹장어요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985511027,
+name: "언니네",
+displayName: "",
+px: 127.2709252,
+py: 37.0050024,
+type: "place",
+useTime: 1682111726000,
+lastUpdateTime: 1682111726000,
+creationTime: 1682111726000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1818718026",
+address: "경기도 안성시 인지동 376-2 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02550113",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 985510974,
+name: "카트만두 레스토랑",
+displayName: "",
+px: 127.2700366,
+py: 37.0077384,
+type: "place",
+useTime: 1682111714000,
+lastUpdateTime: 1682111714000,
+creationTime: 1682111713000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1155950453",
+address: "경기도 안성시 대천동 84",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02550116",
+cidPath: [
+"220036",
+"220042",
+"220118"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "9DKyk/5ddYVL/HT/+PgUeQ==",
+pan: "-118.54",
+tilt: "10.00",
+lng: "127.2703183",
+lat: "37.0078912",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20191206_104/1575623061306jsQp7_JPEG/S8dmcG8Pr19dGOArRHKo-oo1.jpg",
+"https://ldb-phinf.pstatic.net/20191206_221/1575623062074jFzfD_JPEG/XoaRepL6fIUq3SZ4aLUs8hnk.jpg",
+"https://ldb-phinf.pstatic.net/20191206_78/1575623062738WOhzq_JPEG/Niz9jKGGFRlutNjS0T8FzDT0.jpg"
+],
+category: "인도음식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510944,
+name: "37.5 안성점",
+displayName: "",
+px: 127.2448661,
+py: 37.0024049,
+type: "place",
+useTime: 1682111706000,
+lastUpdateTime: 1682111706000,
+creationTime: 1682111705000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1716818874",
+address: "경기도 안성시 옥산동 422-1 가동 1층 102호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02550122",
+cidPath: [
+"220036",
+"220044",
+"220133",
+"1000347"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "adPFOUD5kEQ8ABMLLEZijg==",
+pan: "-17.56",
+tilt: "10.00",
+lng: "127.2449596",
+lat: "37.0021094",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250211_3/1739234833330By7en_JPEG/KakaoTalk_20241122_150112451.jpg",
+"https://ldb-phinf.pstatic.net/20250211_221/1739234833932xSjyo_JPEG/KakaoTalk_20241122_150112451_01.jpg",
+"https://ldb-phinf.pstatic.net/20250211_148/1739234833141cdODB_JPEG/KakaoTalk_20241122_150112451_02.jpg"
+],
+category: "브런치"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510905,
+name: "강남댁",
+displayName: "",
+px: 127.1531209,
+py: 37.0448765,
+type: "place",
+useTime: 1682111699000,
+lastUpdateTime: 1682111699000,
+creationTime: 1682111699000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1130848510",
+address: "경기도 안성시 원곡면 칠곡리 397-5 강남댁",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255038022",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "8JgRoqWLj/vinvB7qD/VRg==",
+pan: "-76.70",
+tilt: "10.00",
+lng: "127.1535988",
+lat: "37.0447632",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241113_21/17314329118063KklY_JPEG/1000017593.jpg",
+"https://ldb-phinf.pstatic.net/20241113_52/1731432882011Qm8fP_JPEG/1000017588.jpg",
+"https://ldb-phinf.pstatic.net/20220723_22/16585475698506r2SS_JPEG/914AF726-6E30-485C-AEFC-3E1B3D99B07C.jpeg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510860,
+name: "촌집",
+displayName: "",
+px: 127.1579219,
+py: 37.0469471,
+type: "place",
+useTime: 1682111689000,
+lastUpdateTime: 1682111689000,
+creationTime: 1682111688000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "37990402",
+address: "경기도 안성시 원곡면 칠곡리 377-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255038022",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220773",
+"221605"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 985510829,
+name: "고기요기",
+displayName: "",
+px: 127.1487566,
+py: 37.0404793,
+type: "place",
+useTime: 1682111680000,
+lastUpdateTime: 1682111680000,
+creationTime: 1682111679000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1164403833",
+address: "경기도 안성시 원곡면 칠곡리 544-3 제 1동",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255038022",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "FXNfv6SWr4tgMkK1muib9Q==",
+pan: "168.80",
+tilt: "10.00",
+lng: "127.1485884",
+lat: "37.0413219",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240326_2/1711457265459qbgt8_JPEG/KakaoTalk_20240321_112513249.jpg",
+"https://ldb-phinf.pstatic.net/20250519_268/17476508750990kRWA_JPEG/1000018507.jpg",
+"https://ldb-phinf.pstatic.net/20250519_195/1747650875015KJtAq_JPEG/1000018509.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510797,
+name: "꼰띠고",
+displayName: "",
+px: 127.1327128,
+py: 37.0413193,
+type: "place",
+useTime: 1682111671000,
+lastUpdateTime: 1682111671000,
+creationTime: 1682111670000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1793814557",
+address: "경기도 안성시 원곡면 외가천리 173-2 102호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255038026",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "MFNoBCkMol3GwUwJEEWPwg==",
+pan: "-105.23",
+tilt: "10.00",
+lng: "127.1328872",
+lat: "37.0413666",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20211129_137/1638166557191FdJeh_JPEG/%B2%D9%B9%CC%B1%E211KakaoTalk_20211029_143824287_15.jpg",
+"https://ldb-phinf.pstatic.net/20211129_171/1638166557479C1hWa_JPEG/%B2%D9%B9%CC%B1%E211KakaoTalk_20211029_144107453_04.jpg",
+"https://ldb-phinf.pstatic.net/20211129_263/1638166557280q2V2s_JPEG/%B2%D9%B9%CC%B1%E211KakaoTalk_20211029_144107453.jpg"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510760,
+name: "숲속한우마을",
+displayName: "",
+px: 127.1967761,
+py: 37.0218611,
+type: "place",
+useTime: 1682111663000,
+lastUpdateTime: 1682111663000,
+creationTime: 1682111662000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "12925138",
+address: "경기도 안성시 양성면 삼암리 291-9 숲속한우마을",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255036037",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220764",
+"221440"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "QoKdByj3wE5NKGx+rTK0aw==",
+pan: "-85.94",
+tilt: "10.00",
+lng: "127.1970810",
+lat: "37.0218392",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221013_160/16656491497391mLTT_JPEG/20221013_165630.jpg",
+"https://ldb-phinf.pstatic.net/20221013_38/1665649151852JlCPw_JPEG/20221013_165459.jpg",
+"https://ldb-phinf.pstatic.net/20221013_4/1665649151157UwPTP_JPEG/20221013_165506.jpg"
+],
+category: "소고기구이"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510715,
+name: "취향마라 아양점",
+displayName: "",
+px: 127.2588959,
+py: 37.0078701,
+type: "place",
+useTime: 1682111653000,
+lastUpdateTime: 1682111653000,
+creationTime: 1682111653000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1094526612",
+address: "경기도 안성시 옥산동 591-1 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02550122",
+cidPath: [
+"220036",
+"220039",
+"220091",
+"220861"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Pcw4iA2wAbx+Qy9jmOPoAw==",
+pan: "61.68",
+tilt: "2.52",
+lng: "127.2587741",
+lat: "37.0078194",
+fov: "100"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220515_104/1652580511977mRTzR_JPEG/1652580494193.jpg",
+"https://ldb-phinf.pstatic.net/20220514_151/1652519420581zbo62_JPEG/20220512_213528_HDR.jpg",
+"https://ldb-phinf.pstatic.net/20220812_62/1660266395372WQbMB_JPEG/%DA%B0%E3%E1%F8%B8_20220510201005.jpg"
+],
+category: "중식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510681,
+name: "양촌바베큐",
+displayName: "",
+px: 127.2768546,
+py: 36.9473304,
+type: "place",
+useTime: 1682111647000,
+lastUpdateTime: 1682111647000,
+creationTime: 1682111646000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1895123525",
+address: "경기도 안성시 서운면 양촌리 89-1 양촌바베큐",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255033033",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "y5mxRTuk0coc8am53k0ENQ==",
+pan: "-127.30",
+tilt: "10.00",
+lng: "127.2771958",
+lat: "36.9475897",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220607_51/16546128625554tYOm_JPEG/6AD405D5-2CA5-45A5-9EDB-2EF62D4D3AC5.jpeg",
+"https://ldb-phinf.pstatic.net/20220507_34/16519119995530Dhjk_JPEG/SmartSelect_20220506-123557_Instagram.jpg",
+"https://ldb-phinf.pstatic.net/20220607_51/1654612847202YLrOq_JPEG/E9302F66-E66C-4855-9F66-7B03C5E4CF1A.jpeg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985510648,
+name: "대봉가든",
+displayName: "",
+px: 127.3012401,
+py: 37.0685343,
+type: "place",
+useTime: 1682111640000,
+lastUpdateTime: 1682111640000,
+creationTime: 1682111639000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "32540525",
+address: "경기도 안성시 보개면 가율리 141-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255031035",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "8jr+EKTsIFAHkcUUwrEC5Q==",
+pan: "179.25",
+tilt: "10.00",
+lng: "127.3012385",
+lat: "37.0686438",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250303_112/17409909501124UXm7_JPEG/IMG_7018.jpeg",
+"https://ldb-phinf.pstatic.net/20201218_46/1608282963419gklcu_JPEG/3tjnPPvlxj7pQ8bPnSyBK4S_.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20201003_282/1601711602311alQOi_JPEG/amVBV1w81V4GfCEqnMrnx6Zo.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985509995,
+name: "탕화쿵푸마라탕 안성11호점",
+displayName: "",
+px: 127.2251044,
+py: 37.0010393,
+type: "place",
+useTime: 1682111486000,
+lastUpdateTime: 1682111486000,
+creationTime: 1682111486000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1042439488",
+address: "경기도 안성시 대덕면 내리 686-4",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255035028",
+cidPath: [
+"220036",
+"220039",
+"220091",
+"1002666"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "mcspKTP0cbzseqBbMJUjHA==",
+pan: "-96.56",
+tilt: "21.75",
+lng: "127.2252015",
+lat: "37.0010096",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210502_130/1619941139513gM4G5_JPEG/uOiOvAjlQGOV3mF9Pq1VXFPx.jpg",
+"https://ldb-phinf.pstatic.net/20210502_223/1619941145088F4YaN_JPEG/heRz5WDM_ZkJ_ug16E29SHmo.jpg",
+"https://ldb-phinf.pstatic.net/20210502_193/1619941083242CcyMP_JPEG/TG4nUl7ajRyie3YSZtwl44Hb.jpg"
+],
+category: "마라탕"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985509920,
+name: "청학대 미술관 레스토랑 카페",
+displayName: "",
+px: 127.3439083,
+py: 37.0011268,
+type: "place",
+useTime: 1682111467000,
+lastUpdateTime: 1682111467000,
+creationTime: 1682111467000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "36454216",
+address: "경기도 안성시 금광면 오흥리 432-5 청학대미술관레스토랑",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255032029",
+cidPath: [
+"220036",
+"220045",
+"220141"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 985509901,
+name: "숯에굽닭",
+displayName: "",
+px: 127.1392117,
+py: 36.9927549,
+type: "place",
+useTime: 1682111462000,
+lastUpdateTime: 1682111462000,
+creationTime: 1682111461000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1946648919",
+address: "경기도 안성시 공도읍 진사리 20-41 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255025031",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220733"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "xoSXFCi2sw3my41XV/fmEw==",
+pan: "-173.40",
+tilt: "10.00",
+lng: "127.1391426",
+lat: "36.9928754",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240925_32/1727254320891Yfk3H_JPEG/20211125_153055.jpg",
+"https://ldb-phinf.pstatic.net/20240925_130/1727258091266P9dl7_JPEG/20240925_183619.jpg",
+"https://ldb-phinf.pstatic.net/20240925_32/1727254502225NnRSF_JPEG/20220124_191447.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985509872,
+name: "아메리카나 안성본점",
+displayName: "",
+px: 127.1754851,
+py: 36.9955912,
+type: "place",
+useTime: 1682111455000,
+lastUpdateTime: 1682111455000,
+creationTime: 1682111454000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1292783796",
+address: "경기도 안성시 공도읍 승두리 7-4 아메리카나",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255025026",
+cidPath: [
+"220036",
+"220044",
+"220138",
+"221004"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "nzu+PTytjzTCR8/iG+prVg==",
+pan: "46.38",
+tilt: "-5.63",
+lng: "127.1754419",
+lat: "36.9953105",
+fov: "90"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230201_39/1675241067460ACUIx_JPEG/56709742_m.jpg",
+"https://ldb-phinf.pstatic.net/20230202_90/1675331040948jIdjd_JPEG/1605710657029.jpg",
+"https://ldb-phinf.pstatic.net/20230202_277/1675331058891VwaIK_JPEG/1604287813542.jpg"
+],
+category: "햄버거"
+},
+isIndoor: false
+},
+{
+bookmarkId: 985509843,
+name: "고향",
+displayName: "",
+px: 127.196983,
+py: 37.0093402,
+type: "place",
+useTime: 1682111448000,
+lastUpdateTime: 1682111448000,
+creationTime: 1682111447000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "38589777",
+address: "경기도 안성시 공도읍 마정리 145",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255025030",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220770",
+"221569"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 985509687,
+name: "우미학 스타필드안성점",
+displayName: "",
+px: 127.147296,
+py: 36.9946904,
+type: "place",
+useTime: 1682111409000,
+lastUpdateTime: 1682111409000,
+creationTime: 1682111409000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1755124716",
+address: "경기도 안성시 공도읍 진사리 354",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0255025031",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"1003219"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "CfwtPk2Mj3q3bjZXom/GTw==",
+pan: "43.02",
+tilt: "10.00",
+lng: "127.1465884",
+lat: "36.9939315",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210119_60/1611042754701TPnzP_JPEG/-BQAALdJiXrsCTY1EQyxUFRY.jpg"
+],
+category: "육류,고기요리"
+},
+isIndoor: false
+}
+],
+unavailableCount: 174,
+mismatchedCount: 24,
+removed: false
+}

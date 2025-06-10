@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.CascadeType;
@@ -28,13 +28,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_owner_board")
 @NoArgsConstructor
 @Where(clause = "deleted_at IS NULL")
-public class OwnerBoard extends BaseEntityWithBothAt {
+public class OwnerBoard extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false,length = 100)
+	@Column(nullable = false, length = 100)
 	private String title;
 
 	@Column(nullable = false, columnDefinition = "TEXT")
@@ -57,7 +57,21 @@ public class OwnerBoard extends BaseEntityWithBothAt {
 		this.user = user;
 	}
 
-	public void updateTitle(String title) {this.title = title;}
+	public void updateTitle(String title) {
+		this.title = title;
+	}
 
-	public void updateContent(String content) {this.content = content;}
+	public void updateContent(String content) {
+		this.content = content;
+	}
+
+	// ownerBoardId 검증 메서드
+	public boolean isEqualId(Long ownerBoardId) {
+		return this.id.equals(ownerBoardId);
+	}
+
+	// user 검증 메서드
+	private boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
 }

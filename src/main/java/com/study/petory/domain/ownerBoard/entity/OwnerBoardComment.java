@@ -2,7 +2,7 @@ package com.study.petory.domain.ownerBoard.entity;
 
 import org.hibernate.annotations.Where;
 
-import com.study.petory.common.entity.BaseEntityWithBothAt;
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "tb_owner_board_comment")
 @Where(clause = "deleted_at IS NULL")
-public class OwnerBoardComment extends BaseEntityWithBothAt {
+public class OwnerBoardComment extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,5 +47,22 @@ public class OwnerBoardComment extends BaseEntityWithBothAt {
 		this.ownerBoard = ownerBoard;
 	}
 
-	public void updateContent(String content) {this.content = content;}
+	public void updateContent(String content) {
+		this.content = content;
+	}
+
+	// ownerBoardCommentId 검증 메서드
+	public boolean isEqualId(Long ownerBoardCommentId) {
+		return this.id.equals(ownerBoardCommentId);
+	}
+
+	// user 검증 메서드
+	public boolean isEqualUser(Long userId) {
+		return this.user.isEqualId(userId);
+	}
+
+	// ownerBoard 검증 메서드
+	public boolean isEqualOwnerBoard(Long ownerBoardId) {
+		return this.ownerBoard.isEqualId(ownerBoardId);
+	}
 }

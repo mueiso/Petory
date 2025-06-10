@@ -1,0 +1,750 @@
+[ {
+  "bookmarkId" : 1041560887,
+  "name" : "스테이페이브",
+  "displayName" : "",
+  "px" : 127.9986466,
+  "py" : 37.3760142,
+  "type" : "place",
+  "useTime" : 1685699356000,
+  "lastUpdateTime" : 1685699356000,
+  "creationTime" : 1685699355000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1063240769",
+  "address" : "강원도 원주시 소초면 흥양리 972-6",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0113031024",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "9y+WbbIvwmwVuuFgxLYAcQ==",
+      "pan" : "-179.15",
+      "tilt" : "10.00",
+      "lng" : "127.9986481",
+      "lat" : "37.3761055",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240517_223/1715925692482ss6TI_PNG/%C1%A6%B8%F1%C0%BB_%C0%D4%B7%C2%C7%D8%C1%D6%BC%BC%BF%E4_-001.png", "https://ldb-phinf.pstatic.net/20240517_282/1715925693924v5ozW_JPEG/IMG_8309.jpeg", "https://ldb-phinf.pstatic.net/20240517_145/1715925693975UfKdI_JPEG/IMG_8266.jpeg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999046462,
+  "name" : "바다이야기 펜션",
+  "displayName" : "",
+  "px" : 126.3248058,
+  "py" : 36.5934258,
+  "type" : "place",
+  "useTime" : 1682997709000,
+  "lastUpdateTime" : 1682997709000,
+  "creationTime" : 1682997708000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1429135263",
+  "address" : "충청남도 태안군 안면읍 창기리 292-13 바다이야기 펜션",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "1582525323",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "xJCRjoaULr3+5Gv1vteWIw==",
+      "pan" : "-179.56",
+      "tilt" : "10.00",
+      "lng" : "126.3248075",
+      "lat" : "36.5936085",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231006_208/16965591702788Jn8R_JPEG/1696127318060.jpg", "https://ldb-phinf.pstatic.net/20231026_41/1698282859363YVR7f_JPEG/1696127318133.jpg", "https://ldb-phinf.pstatic.net/20231006_299/1696560701750ct8rb_JPEG/20230816_210005.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999045799,
+  "name" : "꽃지사랑펜션",
+  "displayName" : "",
+  "px" : 126.3372129,
+  "py" : 36.4911039,
+  "type" : "place",
+  "useTime" : 1682997678000,
+  "lastUpdateTime" : 1682997678000,
+  "creationTime" : 1682997678000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "13291945",
+  "address" : "충청남도 태안군 안면읍 승언리 163",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "1582525321",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "hkCSp1U+AwwDuff7/Vk1SA==",
+      "pan" : "-16.96",
+      "tilt" : "10.00",
+      "lng" : "126.3372523",
+      "lat" : "36.4909751",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230311_134/1678508210770jQw4c_JPEG/IMG_4316.jpg", "https://naverbooking-phinf.pstatic.net/20230320_240/16793173566580j7zQ_JPEG/image.jpg", "https://naverbooking-phinf.pstatic.net/20230320_17/1679317431061NBtaG_JPEG/image.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999045406,
+  "name" : "콩밭매는 댕댕이 펜션",
+  "displayName" : "",
+  "px" : 126.8335885,
+  "py" : 36.4100958,
+  "type" : "place",
+  "useTime" : 1682997659000,
+  "lastUpdateTime" : 1682997659000,
+  "creationTime" : 1682997659000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "38281755",
+  "address" : "충청남도 청양군 대치면 광금리 427-6 콩밭매는 댕댕이 펜션",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "1579032023",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "GtV42mNhC9Z+WPwNyvsBoQ==",
+      "pan" : "106.02",
+      "tilt" : "10.00",
+      "lng" : "126.8332423",
+      "lat" : "36.4101950",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://naverbooking-phinf.pstatic.net/20230513_41/1683982791313AhO90_JPEG/mv_11.jpg", "https://naverbooking-phinf.pstatic.net/20230513_42/1683982701194aTWaW_JPEG/KakaoTalk_20230406_114638215.jpg", "https://naverbooking-phinf.pstatic.net/20230513_174/1683982790754KQico_JPEG/mv_05.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999040362,
+  "name" : "진흥채",
+  "displayName" : "",
+  "px" : 127.1214582,
+  "py" : 36.4508686,
+  "type" : "place",
+  "useTime" : 1682997420000,
+  "lastUpdateTime" : 1682997420000,
+  "creationTime" : 1682997420000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1165515384",
+  "address" : "충청남도 공주시 봉황동 127-2",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "15150102",
+  "cidPath" : [ "221941", "221954" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "AxUSAOfSOfYxUaNlzWlVJQ==",
+      "pan" : "88.48",
+      "tilt" : "10.00",
+      "lng" : "127.1212530",
+      "lat" : "36.4508630",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240813_104/1723533331474VtpDg_JPEG/KakaoTalk_20240813_160313311_11.jpg", "https://ldb-phinf.pstatic.net/20230905_69/1693924014485kiVia_JPEG/IMG_20230904_230441_453.jpg", "https://ldb-phinf.pstatic.net/20241226_184/1735179591625Llya4_JPEG/1000014502.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999038077,
+  "name" : "mong9mong9haus",
+  "displayName" : "",
+  "px" : 127.793396,
+  "py" : 37.6924458,
+  "type" : "place",
+  "useTime" : 1682997313000,
+  "lastUpdateTime" : 1682997313000,
+  "creationTime" : 1682997313000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "11891008",
+  "address" : "강원도 홍천군 북방면 장항리 98-4",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0172038033",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "KqHyU2yrJAkduzCampfFWA==",
+      "pan" : "161.97",
+      "tilt" : "10.00",
+      "lng" : "127.7933616",
+      "lat" : "37.6925510",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://naverbooking-phinf.pstatic.net/20241002_76/1727862312391UrKlJ_JPEG/s27.jpg", "https://ldb-phinf.pstatic.net/20241002_44/1727863923157CCrGB_JPEG/t7.jpg", "https://ldb-phinf.pstatic.net/20241002_126/17278639640471Xk0D_JPEG/t12.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999034427,
+  "name" : "양양 게스트하우스",
+  "displayName" : "",
+  "px" : 128.6821098,
+  "py" : 38.0565051,
+  "type" : "place",
+  "useTime" : 1682997147000,
+  "lastUpdateTime" : 1682997147000,
+  "creationTime" : 1682997146000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1332584226",
+  "address" : "강원도 양양군 손양면 동호리 130",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0183032021",
+  "cidPath" : [ "221941", "221954" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "NodcvV3IpSuefqXMUp+bzw==",
+      "pan" : "74.26",
+      "tilt" : "10.00",
+      "lng" : "128.6818327",
+      "lat" : "38.0564268",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210726_220/1627272161359pny53_JPEG/guesthouse1.jpg", "https://ldb-phinf.pstatic.net/20210726_139/1627272161353jKNnH_JPEG/guesthouse2.jpg", "https://ldb-phinf.pstatic.net/20210710_68/1625907320120s1gFS_PNG/nbYcS1XNZlpXsz5jeNPWQgxs.png" ],
+    "category" : "게스트하우스"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999029910,
+  "name" : "낙산톡게스트하우스",
+  "displayName" : "",
+  "px" : 128.6325291,
+  "py" : 38.1178644,
+  "type" : "place",
+  "useTime" : 1682996942000,
+  "lastUpdateTime" : 1682996942000,
+  "creationTime" : 1682996942000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "36547743",
+  "address" : "강원도 양양군 강현면 주청리 2-58",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0183035040",
+  "cidPath" : [ "221941", "221954" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999028790,
+  "name" : "게스트하우스웨이브",
+  "displayName" : "",
+  "px" : 128.5900118,
+  "py" : 38.2122898,
+  "type" : "place",
+  "useTime" : 1682996893000,
+  "lastUpdateTime" : 1682996893000,
+  "creationTime" : 1682996893000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1107452857",
+  "address" : "강원도 속초시 동명동 253-10",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "01210102",
+  "cidPath" : [ "221941", "221954" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "fRoYge0cn95RUuiVzgQcXg==",
+      "pan" : "90.42",
+      "tilt" : "10.00",
+      "lng" : "128.5894694",
+      "lat" : "38.2122933",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20180330_3/15223967596450OpSM_JPEG/BxVnhlBukqwMJsHu1_uCX68B.jpg", "https://ldb-phinf.pstatic.net/20180330_221/1522396787571ksX6q_JPEG/CCT5sLNGpgEFFea4FWXlwejz.jpg", "https://ldb-phinf.pstatic.net/20180330_153/1522396810295VKngD_JPEG/GNUYRvmdIzCUUhurstSmwoKb.jpg" ],
+    "category" : "게스트하우스"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999027264,
+  "name" : "스타비치펜션",
+  "displayName" : "",
+  "px" : 129.0888434,
+  "py" : 37.5906129,
+  "type" : "place",
+  "useTime" : 1682996825000,
+  "lastUpdateTime" : 1682996825000,
+  "creationTime" : 1682996825000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1768559727",
+  "address" : "강원도 동해시 망상동 363-1",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "01170129",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "dE3zwpbyILjfOpVPfQVzjQ==",
+      "pan" : "61.42",
+      "tilt" : "10.00",
+      "lng" : "129.0886337",
+      "lat" : "37.5904985",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250321_171/1742528107502KlSl5_JPEG/5.jpg", "https://ldb-phinf.pstatic.net/20250321_101/1742539943810NTfKS_JPEG/1.jpg", "https://ldb-phinf.pstatic.net/20250321_289/1742528107334XqKrE_JPEG/6.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999025994,
+  "name" : "씨에스타게스트하우스",
+  "displayName" : "",
+  "px" : 128.9124049,
+  "py" : 37.7968346,
+  "type" : "place",
+  "useTime" : 1682996771000,
+  "lastUpdateTime" : 1682996771000,
+  "creationTime" : 1682996770000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1073700555",
+  "address" : "강원도 강릉시 초당동 455-8",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "01150112",
+  "cidPath" : [ "221941", "221954" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "xr1Pop2VbCsTQMDjqpKbNA==",
+      "pan" : "86.57",
+      "tilt" : "10.00",
+      "lng" : "128.9120906",
+      "lat" : "37.7968155",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231108_241/1699411783279bAcCz_JPEG/20230901_064442.jpeg", "https://ldb-phinf.pstatic.net/20250602_229/1748830708556AL96O_JPEG/%BE%BE%BF%A1%BD%BA%C5%B8_%B4%DE%B7%C2_%2847%29.jpg", "https://ldb-phinf.pstatic.net/20230403_112/16805095806223bvH0_JPEG/KakaoTalk_Photo_2023-04-03-17-10-41_002.jpeg" ],
+    "category" : "게스트하우스"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999022216,
+  "name" : "더다온",
+  "displayName" : "",
+  "px" : 128.8946351,
+  "py" : 37.7608916,
+  "type" : "place",
+  "useTime" : 1682996602000,
+  "lastUpdateTime" : 1682996602000,
+  "creationTime" : 1682996601000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1419562428",
+  "address" : "강원도 강릉시 교동 183-200 2층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "01150110",
+  "cidPath" : [ "221941", "221954" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "LzIRq4vkrtnr3IKlpcRWXA==",
+      "pan" : "52.37",
+      "tilt" : "10.00",
+      "lng" : "128.8944537",
+      "lat" : "37.7607516",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210906_288/1630916651927AK1mA_JPEG/ht1lsLEQ4Yorb1egdYG0jIf-.jpg", "https://ldb-phinf.pstatic.net/20210817_271/1629188551628qqKCp_JPEG/6RdIzPNehpZRTKktHvE29Zky.jpg", "https://ldb-phinf.pstatic.net/20210906_113/1630916769782EFdOR_JPEG/uAeDtJA8ySA3WXvmO7s8yIWQ.jpg" ],
+    "category" : "게스트하우스"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 999017957,
+  "name" : "학산스테이",
+  "displayName" : "",
+  "px" : 128.8898464,
+  "py" : 37.7112347,
+  "type" : "place",
+  "useTime" : 1682996400000,
+  "lastUpdateTime" : 1682996400000,
+  "creationTime" : 1682996399000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1281812935",
+  "address" : "강원도 강릉시 구정면 학산리 492-20",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0115033022",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "M2ls+qAbgk5cM6WVt1ZcFw==",
+      "pan" : "-178.27",
+      "tilt" : "10.00",
+      "lng" : "128.8898490",
+      "lat" : "37.7113165",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230525_32/168499460607705mSR_JPEG/20230525_140841.jpg", "https://ldb-phinf.pstatic.net/20230525_109/1684994606798cIQzz_JPEG/20230525_144410.jpg", "https://ldb-phinf.pstatic.net/20230326_164/1679809236050letv7_JPEG/KakaoTalk_20230323_201206292_07.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 940509525,
+  "name" : "도그마실 케니스메이저",
+  "displayName" : "",
+  "px" : 128.0216717,
+  "py" : 37.5340801,
+  "type" : "place",
+  "useTime" : 1679416315000,
+  "lastUpdateTime" : 1679416315000,
+  "creationTime" : 1679032550000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "36215044",
+  "address" : "강원도 횡성군 횡성읍 송전로 77",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0173025026",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "4RokOZssJ7dsvDTkLwX4KQ==",
+      "pan" : "-0.59",
+      "tilt" : "10.00",
+      "lng" : "128.0216672",
+      "lat" : "37.5332153",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://naverbooking-phinf.pstatic.net/20230622_50/1687428708072xxuxB_JPEG/26-1.jpg", "https://naverbooking-phinf.pstatic.net/20230622_260/1687428705099FV5N3_JPEG/21.jpg", "https://ldb-phinf.pstatic.net/20230908_181/1694182911163LpXyc_JPEG/DJI_0128.MP4_snapshot_04.20_2023.09.07_18.07.22.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 940206472,
+  "name" : "펜션아이리스",
+  "displayName" : "",
+  "px" : 127.6751194,
+  "py" : 37.6215936,
+  "type" : "place",
+  "useTime" : 1679408750000,
+  "lastUpdateTime" : 1679408750000,
+  "creationTime" : 1679016577000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "21848533",
+  "address" : "강원도 홍천군 서면 굴업솔골길 60-9",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0172037024",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "UbHBY9d21/YDk4cKkX37vg==",
+      "pan" : "59.93",
+      "tilt" : "10.00",
+      "lng" : "127.6747925",
+      "lat" : "37.6214041",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240402_146/1712014622604VpdyK_JPEG/KakaoTalk_20240322_171703843.jpg", "https://ldb-phinf.pstatic.net/20230306_13/1678067312552XkSuI_PNG/20221026164825.png", "https://ldb-phinf.pstatic.net/20231130_21/1701323139264bS56j_JPEG/KakaoTalk_20231130_144504733_13.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 940187050,
+  "name" : "태안라루나스파펜션",
+  "displayName" : "",
+  "px" : 126.30745,
+  "py" : 36.6045733,
+  "type" : "place",
+  "useTime" : 1679408750000,
+  "lastUpdateTime" : 1679408750000,
+  "creationTime" : 1679015495000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1806035170",
+  "address" : "충청남도 태안군 남면 곰섬로 129-67",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "1582532028",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "M9zoq5n5Gj4seZ/ME6LuRQ==",
+      "pan" : "93.92",
+      "tilt" : "10.00",
+      "lng" : "126.3073258",
+      "lat" : "36.6045817",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250531_134/1748681625910IhHax_JPEG/%BB%E7%BA%BB_-Resized_20250531_133826_1748679869598.jpg", "https://ldb-phinf.pstatic.net/20250531_64/1748681601925jiMlb_JPEG/%BB%E7%BA%BB_-Resized_20250531_133655_1748679871040.jpg", "https://ldb-phinf.pstatic.net/20250531_126/1748681585518ydqBT_JPEG/20250530_174702.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 939538580,
+  "name" : "홍천아델펜션",
+  "displayName" : "",
+  "px" : 127.6744,
+  "py" : 37.62147,
+  "type" : "place",
+  "useTime" : 1679408750000,
+  "lastUpdateTime" : 1679408750000,
+  "creationTime" : 1678961981000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "32946009",
+  "address" : "강원도 홍천군 서면 굴업솔골길 60",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0172037024",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "dSeNJS+5U9DppqhY3hqLIA==",
+      "pan" : "-168.48",
+      "tilt" : "10.00",
+      "lng" : "127.6744247",
+      "lat" : "37.6215903",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200603_105/15911458707933YRSj_JPEG/nl2BZQzNvI82Vthh7BlDNsSE.jpg", "https://ldb-phinf.pstatic.net/20200603_100/1591145849064laFou_JPEG/gUH3e3JAtrWL48o8kOZZdHeP.jpg", "https://ldb-phinf.pstatic.net/20200603_172/15911458630878FoaK_JPEG/zVw44WJWYEuhUHYCf840Ri9u.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 939518514,
+  "name" : "안면애견프리독펜션",
+  "displayName" : "",
+  "px" : 126.3357483,
+  "py" : 36.5252327,
+  "type" : "place",
+  "useTime" : 1679408750000,
+  "lastUpdateTime" : 1679408750000,
+  "creationTime" : 1678960741000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1137502134",
+  "address" : "충청남도 태안군 안면읍 해안관광로 276-96",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "1582525321",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "vNzp6FzHw53a5nk0sgcO/A==",
+      "pan" : "171.96",
+      "tilt" : "10.00",
+      "lng" : "126.3357337",
+      "lat" : "36.5253349",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200728_131/1595930610842wu9OC_JPEG/Apmb-Njy2UIMAN_LKzkYl7nc.jpg", "https://ldb-phinf.pstatic.net/20230414_81/168145933536185xyn_JPEG/brown-pomeranian-dog-P63XR7L.jpg", "https://ldb-phinf.pstatic.net/20200728_222/1595930580127E17gw_JPEG/VNrwHPJsZOkrk6jyCayJ-NuS.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 939508337,
+  "name" : "메르벨르리조트",
+  "displayName" : "",
+  "px" : 126.2920408,
+  "py" : 36.6721522,
+  "type" : "place",
+  "useTime" : 1679408750000,
+  "lastUpdateTime" : 1679408750000,
+  "creationTime" : 1678960129000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1447894442",
+  "address" : "충청남도 태안군 남면 몽산포길 41-9 11, 13. 15",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "1582532023",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "eI98Y8wv17Q6w4QOATz0YA==",
+      "pan" : "-48.95",
+      "tilt" : "10.00",
+      "lng" : "126.2929014",
+      "lat" : "36.6714021",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20190523_62/15585946547269OgJj_JPEG/KwTQpa0MxCRkJkQeRno0rZny.jpg", "https://ldb-phinf.pstatic.net/20190523_169/1558594661366p6nbh_JPEG/g6BfxGq4wSXkcd89RWRn93Uk.jpg", "https://ldb-phinf.pstatic.net/20190523_81/1558594636603j2FeP_JPEG/my_l2IXYcqaVa4JJtio79PG_.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 939508093,
+  "name" : "펫클라스",
+  "displayName" : "",
+  "px" : 128.5417845,
+  "py" : 38.3031422,
+  "type" : "place",
+  "useTime" : 1679408750000,
+  "lastUpdateTime" : 1679408750000,
+  "creationTime" : 1678960113000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1979162558",
+  "address" : "강원도 고성군 죽왕면 문암항길 28",
+  "memo" : "",
+  "url" : null,
+  "mcid" : "ACCOMMODATION",
+  "mcidName" : "숙박",
+  "rcode" : "0182032031",
+  "cidPath" : [ "221941", "221947" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "9gechx8Ur3heETiHvyeqbg==",
+      "pan" : "-155.67",
+      "tilt" : "10.00",
+      "lng" : "128.5418531",
+      "lat" : "38.3032934",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200408_156/1586297167855ait4r_JPEG/03.jpg", "https://ldb-phinf.pstatic.net/20200408_297/15862972482922zUfW_JPEG/02_%281%29.jpg", "https://ldb-phinf.pstatic.net/20200331_236/1585610115921x7WDW_JPEG/sUOBbPnkh_7a0RpgAuBEKbkL.jpg" ],
+    "category" : "펜션"
+  },
+  "isIndoor" : false
+} ]

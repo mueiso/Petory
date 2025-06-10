@@ -1,0 +1,706 @@
+[ {
+  "bookmarkId" : 1007380981,
+  "name" : "블루페이지",
+  "displayName" : "",
+  "px" : 127.0079764,
+  "py" : 37.5193292,
+  "type" : "place",
+  "useTime" : 1683528721000,
+  "lastUpdateTime" : 1683528721000,
+  "creationTime" : 1683528721000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1665656799",
+  "address" : "서울특별시 서초구 잠원동 121-9 1층 블루페이지 라운지",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09650106",
+  "cidPath" : [ "220036", "220044", "220127", "220913" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982938139,
+  "name" : "하다식당",
+  "displayName" : "",
+  "px" : 127.1239929,
+  "py" : 37.5324715,
+  "type" : "place",
+  "useTime" : 1681927401000,
+  "lastUpdateTime" : 1681927401000,
+  "creationTime" : 1681927400000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1272578986",
+  "address" : "서울특별시 강동구 성내동 126-4 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740108",
+  "cidPath" : [ "220036", "220038", "220082", "220812" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982938047,
+  "name" : "철판살롱",
+  "displayName" : "",
+  "px" : 127.1250743,
+  "py" : 37.5360048,
+  "type" : "place",
+  "useTime" : 1681927387000,
+  "lastUpdateTime" : 1681927387000,
+  "creationTime" : 1681927386000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1369556659",
+  "address" : "서울특별시 강동구 성내동 38-9",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740108",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982937974,
+  "name" : "우돈숯불명가",
+  "displayName" : "",
+  "px" : 127.17076,
+  "py" : 37.546352,
+  "type" : "place",
+  "useTime" : 1681927375000,
+  "lastUpdateTime" : 1681927375000,
+  "creationTime" : 1681927375000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1134454343",
+  "address" : "서울특별시 강동구 상일동 309-1 1층 전체 전용주차5대",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740103",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Pdl4EYFl17506Gb0ABAY5Q==",
+      "pan" : "56.18",
+      "tilt" : "17.63",
+      "lng" : "127.1706212",
+      "lat" : "37.5461920",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20241113_168/1731423843170bUXwn_JPEG/Screenshot_20241112_235901_NAVER.jpg", "https://ldb-phinf.pstatic.net/20231004_193/1696393804251rRt8h_JPEG/1670582402710.jpg", "https://ldb-phinf.pstatic.net/20231004_224/1696393635479bn7Lt_JPEG/Screenshot_20230106_085419_NAVER.jpg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982937392,
+  "name" : "도깨비족발",
+  "displayName" : "",
+  "px" : 127.1312724,
+  "py" : 37.5381812,
+  "type" : "place",
+  "useTime" : 1681927288000,
+  "lastUpdateTime" : 1681927288000,
+  "creationTime" : 1681927288000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1161223147",
+  "address" : "서울특별시 강동구 천호동 166-115 1층 도깨비족발",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220037", "220075", "220766", "221504" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "6hb6Ky5JpJ0tYabFAhgGow==",
+      "pan" : "-86.13",
+      "tilt" : "15.56",
+      "lng" : "127.1313790",
+      "lat" : "37.5381249",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210323_10/16164564889881ay35_JPEG/bTBVNJMxqeSra4L0KNha0AIX.jpg" ],
+    "category" : "족발,보쌈"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982937268,
+  "name" : "곱창팩토리 천호본점",
+  "displayName" : "",
+  "px" : 127.1281564,
+  "py" : 37.5397267,
+  "type" : "place",
+  "useTime" : 1681927272000,
+  "lastUpdateTime" : 1681927272000,
+  "creationTime" : 1681927272000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1774443923",
+  "address" : "서울특별시 강동구 천호동 410-1 1층 곱창팩토리",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "6wAFUqRtpZz/E7QdDKkFUg==",
+      "pan" : "-68.01",
+      "tilt" : "10.00",
+      "lng" : "127.1282543",
+      "lat" : "37.5396871",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240613_57/1718255076190tGUGu_JPEG/IMG_9661.jpeg", "https://ldb-phinf.pstatic.net/20240613_69/1718255087301F1SGC_JPEG/IMG_9670.jpeg", "https://ldb-phinf.pstatic.net/20240613_116/1718255112307znKHh_JPEG/IMG_9664.jpeg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982937141,
+  "name" : "해임시",
+  "displayName" : "",
+  "px" : 127.1275552,
+  "py" : 37.5388549,
+  "type" : "place",
+  "useTime" : 1681927253000,
+  "lastUpdateTime" : 1681927253000,
+  "creationTime" : 1681927253000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1675545334",
+  "address" : "서울특별시 강동구 천호동 453-24 4층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220051", "220555", "221119" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "x6OCcbKraD2ApZN9Hwu/6w==",
+      "pan" : "-154.24",
+      "tilt" : "10.00",
+      "lng" : "127.1275890",
+      "lat" : "37.5389247",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220516_227/1652691644280COy6P_JPEG/7450A39A-AF4E-4536-9FDC-B27D85586871.jpeg", "https://ldb-phinf.pstatic.net/20231109_277/1699504501910oB1mD_JPEG/KakaoTalk_Photo_2023-11-09-13-33-50_003.jpeg", "https://ldb-phinf.pstatic.net/20231109_187/1699504501750PjBDW_JPEG/KakaoTalk_Photo_2023-11-09-13-33-50_004.jpeg" ],
+    "category" : "와인"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982937047,
+  "name" : "만국미식회",
+  "displayName" : "",
+  "px" : 127.1276641,
+  "py" : 37.5384928,
+  "type" : "place",
+  "useTime" : 1681927241000,
+  "lastUpdateTime" : 1681927241000,
+  "creationTime" : 1681927241000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1201777252",
+  "address" : "서울특별시 강동구 천호동 453-8 원방빌딩 지하 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "HMxz2PF9mdWQMtcWOwPFLw==",
+      "pan" : "-80.41",
+      "tilt" : "10.00",
+      "lng" : "127.1278609",
+      "lat" : "37.5384594",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20191207_122/1575723090610OipLh_JPEG/XCJw_uGUoFM4QsqIbzoAnf_s.jpg", "https://ldb-phinf.pstatic.net/20191207_25/15757230093027a3cH_JPEG/RzKH8WIUtJ3grF3R4wqo9fzf.jpg", "https://ldb-phinf.pstatic.net/20191207_300/1575723009325vNscQ_JPEG/wRwWBeZF-UsiS8sYHXFx8b13.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936997,
+  "name" : "구피데이즈",
+  "displayName" : "",
+  "px" : 127.1223994,
+  "py" : 37.5394615,
+  "type" : "place",
+  "useTime" : 1681927232000,
+  "lastUpdateTime" : 1681927232000,
+  "creationTime" : 1681927232000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1828760890",
+  "address" : "서울특별시 강동구 천호동 458-3 1층 구피데이즈",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220051", "220555", "221119" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "sxTL1nwIElSy6pChfL8Dyg==",
+      "pan" : "-87.08",
+      "tilt" : "1.13",
+      "lng" : "127.1226954",
+      "lat" : "37.5395062",
+      "fov" : "55"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230628_170/1687956519760YGBou_JPEG/FCF35143-2234-4389-A5A2-8DA2FA3FF8EE.jpeg", "https://naverbooking-phinf.pstatic.net/20240430_274/17144690709409vmz0_JPEG/KakaoTalk_20240421_203205254.jpg", "https://ldb-phinf.pstatic.net/20230628_211/1687956303988TQN8G_JPEG/07F17B80-A69D-481D-B4D8-D6E018159D38.jpeg" ],
+    "category" : "와인"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936920,
+  "name" : "우미관",
+  "displayName" : "",
+  "px" : 127.1334297,
+  "py" : 37.5365922,
+  "type" : "place",
+  "useTime" : 1681927222000,
+  "lastUpdateTime" : 1681927222000,
+  "creationTime" : 1681927222000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1168499942",
+  "address" : "서울특별시 강동구 천호동 447-17",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220039", "220091", "220861" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "+/QrLLsl89AxVvmL1EYvyA==",
+      "pan" : "126.41",
+      "tilt" : "10.00",
+      "lng" : "127.1329062",
+      "lat" : "37.5370463",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20201208_152/16074108679817r1hJ_JPEG/a7PM9f9sHFsl46GttLFtuIND.jpeg.jpg", "https://ldb-phinf.pstatic.net/20210607_195/1623065205086K4ert_JPEG/vwsh1gDuemmlPP9nsMAB_8AN.jpg", "https://ldb-phinf.pstatic.net/20210607_70/1623065203844W5jJC_JPEG/JxBKTfUmbuUXTLlZ6PpH9GVo.jpg" ],
+    "category" : "중식당"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936842,
+  "name" : "사이사이",
+  "displayName" : "",
+  "px" : 127.1330992,
+  "py" : 37.5365691,
+  "type" : "place",
+  "useTime" : 1681927211000,
+  "lastUpdateTime" : 1681927211000,
+  "creationTime" : 1681927210000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "35288188",
+  "address" : "서울특별시 강동구 천호동 447-17 신동아 파밀리에 1층b33호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936697,
+  "name" : "버거주의",
+  "displayName" : "",
+  "px" : 127.1303023,
+  "py" : 37.5368601,
+  "type" : "place",
+  "useTime" : 1681927191000,
+  "lastUpdateTime" : 1681927191000,
+  "creationTime" : 1681927191000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "1164659244",
+  "address" : "서울특별시 강동구 천호동 450 L층 104호 버거주의",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220044", "220138", "221004" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "4kuff/6HiKSaSAj4IQiMgw==",
+      "pan" : "51.73",
+      "tilt" : "10.00",
+      "lng" : "127.1276918",
+      "lat" : "37.5388875",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230814_294/1691999856710Q18L1_JPEG/3d.jpg" ],
+    "category" : "햄버거"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936653,
+  "name" : "샌드샐러드 천호점",
+  "displayName" : "",
+  "px" : 127.1237896,
+  "py" : 37.5380133,
+  "type" : "place",
+  "useTime" : 1681927183000,
+  "lastUpdateTime" : 1681927183000,
+  "creationTime" : 1681927183000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "1386358261",
+  "address" : "서울특별시 강동구 성내동 64-13 브라운스톤천호 지3층 B333호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740108",
+  "cidPath" : [ "220036", "220047", "220170", "230734" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "k1cBwsgOQwrMUmr9tq6Z6w==",
+      "pan" : "-58.87",
+      "tilt" : "10.31",
+      "lng" : "127.1357961",
+      "lat" : "37.5484527",
+      "fov" : "87"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230118_50/1674020782026E78GR_JPEG/KakaoTalk_20230114_090012791.jpg", "https://ldb-phinf.pstatic.net/20230118_200/16740207820455eUuD_JPEG/KakaoTalk_20230114_090013910.jpg", "https://ldb-phinf.pstatic.net/20230118_220/167402078208712nC2_JPEG/KakaoTalk_20230114_090014422.jpg" ],
+    "category" : "다이어트,샐러드"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936585,
+  "name" : "청춘뒷고기",
+  "displayName" : "",
+  "px" : 127.1329979,
+  "py" : 37.5465256,
+  "type" : "place",
+  "useTime" : 1681927174000,
+  "lastUpdateTime" : 1681927174000,
+  "creationTime" : 1681927173000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1345562811",
+  "address" : "서울특별시 강동구 천호동 295-31 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220037", "220075", "220765", "221458" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "sMbU1oLFAQvlDvm8wyyAqQ==",
+      "pan" : "-110.66",
+      "tilt" : "5.38",
+      "lng" : "127.1329976",
+      "lat" : "37.5466148",
+      "fov" : "60"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230604_185/1685806454283JSvIK_JPEG/6DD0905F-691B-4879-81DD-7FC4BBB7053F.jpeg", "https://ldb-phinf.pstatic.net/20250318_33/1742295256860rSVgW_JPEG/IMG_4602.jpeg", "https://ldb-phinf.pstatic.net/20250318_187/17422952561096IKrX_JPEG/IMG_4635.jpeg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936529,
+  "name" : "아람숯불바베큐",
+  "displayName" : "",
+  "px" : 127.1334364,
+  "py" : 37.5421787,
+  "type" : "place",
+  "useTime" : 1681927165000,
+  "lastUpdateTime" : 1681927165000,
+  "creationTime" : 1681927164000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "18920039",
+  "address" : "서울특별시 강동구 천호동 201-6",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220049", "220246" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "ibBtSASNldViY1w0BvtERA==",
+      "pan" : "95.82",
+      "tilt" : "10.00",
+      "lng" : "127.1333563",
+      "lat" : "37.5421868",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230706_254/1688627914738lQnEE_JPEG/IMG_1030.jpeg", "https://ldb-phinf.pstatic.net/20220606_68/1654508765308dVyod_JPEG/F81BBF7C-FA22-4225-A382-BBC557F66AD2.jpeg", "https://ldb-phinf.pstatic.net/20220606_74/16545087653157sXNp_JPEG/0AB4BE0F-3AE4-459F-9BE9-F662B7B9C268.jpeg" ],
+    "category" : "치킨,닭강정"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936491,
+  "name" : "떡순튀 천호점",
+  "displayName" : "",
+  "px" : 127.1318477,
+  "py" : 37.5392829,
+  "type" : "place",
+  "useTime" : 1681927158000,
+  "lastUpdateTime" : 1681927158000,
+  "creationTime" : 1681927157000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "310353702",
+  "address" : "서울특별시 강동구 천호동 166-64 1층 떡순튀",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220048", "220185" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "07Cca4mdP0UJlvvZzSyDew==",
+      "pan" : "-100.80",
+      "tilt" : "7.81",
+      "lng" : "127.1319150",
+      "lat" : "37.5391881",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20170309_21/1489033913983mKEP1_JPEG/186256577231018_0.jpeg", "https://ldb-phinf.pstatic.net/20171207_272/1512635528406KKhvc_JPEG/FgOOO9dy_ymh0kAwBRrbKMwg.jpg" ],
+    "category" : "종합분식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936404,
+  "name" : "군선생 길동점",
+  "displayName" : "",
+  "px" : 127.1373417,
+  "py" : 37.535963,
+  "type" : "place",
+  "useTime" : 1681927147000,
+  "lastUpdateTime" : 1681927147000,
+  "creationTime" : 1681927146000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "744112691",
+  "address" : "서울특별시 강동구 길동 414-10 강동한신휴플러스주상복합 109호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740105",
+  "cidPath" : [ "220036", "220051", "220552", "221077" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "V4rGEeFMA0A/m2TlX3uksg==",
+      "pan" : "-31.00",
+      "tilt" : "6.44",
+      "lng" : "127.1373547",
+      "lat" : "37.5357863",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20190715_82/1563192215795rChdO_JPEG/4VA1ZRdoYF_tFISTZEaHVXK2.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936311,
+  "name" : "그루 펍",
+  "displayName" : "",
+  "px" : 127.1412878,
+  "py" : 37.5324417,
+  "type" : "place",
+  "useTime" : 1681927135000,
+  "lastUpdateTime" : 1681927135000,
+  "creationTime" : 1681927134000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1952602120",
+  "address" : "서울특별시 강동구 둔촌동 426-10 1층 그루카페펍",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740106",
+  "cidPath" : [ "220036", "220051", "220553", "221078" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936219,
+  "name" : "그란데씨",
+  "displayName" : "",
+  "px" : 127.1246547,
+  "py" : 37.5451849,
+  "type" : "place",
+  "useTime" : 1681927117000,
+  "lastUpdateTime" : 1681927117000,
+  "creationTime" : 1681927117000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1627444163",
+  "address" : "서울특별시 강동구 천호동 332-5 1층 101호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220051", "220555", "221119" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "iaK8v/NbW1ETEiMygFhvfA==",
+      "pan" : "133.21",
+      "tilt" : "7.06",
+      "lng" : "127.1245501",
+      "lat" : "37.5452619",
+      "fov" : "85"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250225_125/1740482050322ovmtS_JPEG/1000024737.jpg", "https://ldb-phinf.pstatic.net/20250225_127/1740482049730JcfUw_JPEG/1000024770.jpg", "https://ldb-phinf.pstatic.net/20250225_227/1740482050489wepj2_JPEG/1000024702.jpg" ],
+    "category" : "와인"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 982936066,
+  "name" : "꽁꽁삼겹살",
+  "displayName" : "",
+  "px" : 127.1266593,
+  "py" : 37.5395168,
+  "type" : "place",
+  "useTime" : 1681927096000,
+  "lastUpdateTime" : 1681927096000,
+  "creationTime" : 1681927095000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1051331185",
+  "address" : "서울특별시 강동구 천호동 415-8 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09740109",
+  "cidPath" : [ "220036", "220037", "220075", "220733" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "TDHe/rn+jhBYMjWniitapg==",
+      "pan" : "30.46",
+      "tilt" : "10.00",
+      "lng" : "127.1264236",
+      "lat" : "37.5392383",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230211_217/1676053857969oN6Rk_JPEG/167CF03B-96E6-468A-9055-EF5A6B9395FE.jpeg", "https://ldb-phinf.pstatic.net/20240308_177/1709827023316QgHxP_JPEG/IMG_9904.jpeg", "https://ldb-phinf.pstatic.net/20240308_11/1709827023317dHwyU_JPEG/IMG_9912.jpeg" ],
+    "category" : "육류,고기요리"
+  },
+  "isIndoor" : false
+} ]

@@ -1,0 +1,972 @@
+{
+folder: {
+folderId: 82084118,
+name: "갈수있어 강아지도, 경기서북 식당",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "4",
+iconId: "1",
+markerColor: "4",
+lastUseTime: 1694771059000,
+creationTime: 1680843454000,
+shouldOverlay: true,
+bookmarkCount: 532,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa2a03010c46697dc0f0b",
+reviewPageUrl: "https://m.place.naver.com/my/642fa2a03010c46697dc0f0b/review?v=2",
+imageUrl: "https://myplace-phinf.pstatic.net/20230522_74/1684749293063dDMV7_PNG/221226_%B3%D7%C0%CC%B9%F6%C1%F6%B5%B5_%C4%B7%C6%E4%C0%CE%BF%EB_%C7%C1%B7%CE%C7%CA%C0%CC%B9%CC%C1%F6-01.png?type=f220_220_70_sharpen",
+nick: "N강아지도 코코"
+},
+shareId: "e413447e983249c9812255f5f4efc3eb",
+encryptedUserIdNo: "LY9cYPBcZ5s5ydIJ:Fa3Ka94UgiWbKIdABfNaYTEKjGqTrQ",
+followCount: 1553,
+viewCount: 7604,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 1007388062,
+name: "박석농장&일품양평해장국",
+displayName: "",
+px: 126.8329799,
+py: 37.9141214,
+type: "place",
+useTime: 1683529117000,
+lastUpdateTime: 1683529117000,
+creationTime: 1683529117000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "19314997",
+address: "경기도 파주시 파평면 두포리 310-1 박석농장&일품양평해장국 파주파평점",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0248036022",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "fnT0TDqlm+coY7DvGFH2KA==",
+pan: "126.43",
+tilt: "5.38",
+lng: "126.8327655",
+lat: "37.9142740",
+fov: "90"
+},
+thumbnailUrls: [ ],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007384948,
+name: "하동농원",
+displayName: "",
+px: 126.651814,
+py: 37.690489,
+type: "place",
+useTime: 1683528950000,
+lastUpdateTime: 1683528950000,
+creationTime: 1683528950000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "20758290",
+address: "경기도 김포시 하성면 봉성리 643-20",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0257036030",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "R2djcdCJvqCxs+5eHRMpyg==",
+pan: "70.93",
+tilt: "-8.13",
+lng: "126.6516547",
+lat: "37.6902442",
+fov: "70"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230626_70/16877846004863bG70_JPEG/20220417_115538.jpg",
+"https://ldb-phinf.pstatic.net/20230626_201/1687784404545vlCvw_JPEG/KakaoTalk_20230626_215930605.jpg",
+"https://ldb-phinf.pstatic.net/20200827_278/1598504191901c1zfU_JPEG/wD0wW7HSsmcc48PAQnsdpsgb.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 1007384248,
+name: "송학",
+displayName: "",
+px: 126.9520074,
+py: 37.6652806,
+type: "place",
+useTime: 1683528909000,
+lastUpdateTime: 1683528909000,
+creationTime: 1683528909000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "19035991",
+address: "경기도 고양시 덕양구 효자동 108-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02281108",
+cidPath: [
+"220036",
+"220037",
+"220056",
+"220594"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "W24OAO0TZt50iQViv/OdTw==",
+pan: "-93.05",
+tilt: "10.00",
+lng: "126.9524479",
+lat: "37.6653037",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20150831_25/1440996803139SWUSE_JPEG/146674413541179_0.jpeg",
+"https://ldb-phinf.pstatic.net/20150831_247/1440996803313OQes9_JPEG/146674413541179_1.jpeg",
+"https://ldb-phinf.pstatic.net/20150831_78/1440996803523ier1v_JPEG/146674413541179_2.jpeg"
+],
+category: "한정식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177866,
+name: "바위소리",
+displayName: "",
+px: 127.0949269,
+py: 37.9870442,
+type: "place",
+useTime: 1682012603000,
+lastUpdateTime: 1682012603000,
+creationTime: 1682012602000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "13316803",
+address: "경기도 연천군 청산면 초성리 7-2",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280032021",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220774",
+"221606"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "QJf5QDCJjTQRfCNK4YK68w==",
+pan: "-156.06",
+tilt: "10.00",
+lng: "127.0950012",
+lat: "37.9872109",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220707_211/1657121386379u69wi_JPEG/20220705_120614.jpg",
+"https://ldb-phinf.pstatic.net/20220707_15/16571217520850zqIk_PNG/Screenshot_20220707-003210_NAVER.png",
+"https://ldb-phinf.pstatic.net/20220707_99/1657121762411Ca8wN_PNG/Screenshot_20220707-003153_NAVER.png"
+],
+category: "백숙,삼계탕"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177813,
+name: "헨델스라르고",
+displayName: "",
+px: 127.0689267,
+py: 38.0504564,
+type: "place",
+useTime: 1682012595000,
+lastUpdateTime: 1682012595000,
+creationTime: 1682012594000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "34489929",
+address: "경기도 연천군 전곡읍 은대리 413-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280025322",
+cidPath: [
+"220036",
+"220044",
+"220126"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Q4nAXJFQXdx6I2yr5QHG+w==",
+pan: "-19.77",
+tilt: "5.69",
+lng: "127.0689293",
+lat: "38.0501746",
+fov: "60"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20230603_92/1685769383585yH7Xn_JPEG/9C207C78-323C-4486-B7FE-4B8B43FC4C15.jpeg",
+"https://ldb-phinf.pstatic.net/20230603_18/1685769383545mdP6M_JPEG/5FBFC379-D6DC-4CFB-AE1B-CFDF04F6F578.jpeg",
+"https://ldb-phinf.pstatic.net/20241014_105/1728903832645lXyOE_JPEG/GOO_6782.JPG"
+],
+category: "양식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177770,
+name: "한여울통나무랜드",
+displayName: "",
+px: 127.0646665,
+py: 38.0100573,
+type: "place",
+useTime: 1682012588000,
+lastUpdateTime: 1682012588000,
+creationTime: 1682012588000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "20087593",
+address: "경기도 연천군 전곡읍 전곡리 147-1",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280025321",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "WnEpR2G/TK7onu+Q3zdWJg==",
+pan: "-61.17",
+tilt: "10.00",
+lng: "127.0651917",
+lat: "38.0097678",
+fov: "120"
+},
+thumbnailUrls: [ ],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177733,
+name: "필라델피아",
+displayName: "",
+px: 127.0284513,
+py: 37.9707906,
+type: "place",
+useTime: 1682012583000,
+lastUpdateTime: 1682012583000,
+creationTime: 1682012582000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1729855625",
+address: "경기도 연천군 전곡읍 양원리 716-6",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280025326",
+cidPath: [
+"220036",
+"220044",
+"220137",
+"220994"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "wcBqwZAQSID791jF0M9atA==",
+pan: "118.33",
+tilt: "10.00",
+lng: "127.0283438",
+lat: "37.9708484",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221116_39/1668569419024g3LR6_JPEG/20210427_195024.jpg",
+"https://ldb-phinf.pstatic.net/20200917_17/1600313868937RBDqs_JPEG/Ictf18X3QhEyU-gHw-kmGylp.jpg",
+"https://ldb-phinf.pstatic.net/20200917_127/16003139123204vH7t_JPEG/IPTydQhtA9i4DYxiIjrr5cXI.jpg"
+],
+category: "샌드위치"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177630,
+name: "치킨678 연천점",
+displayName: "",
+px: 127.0755039,
+py: 38.1032294,
+type: "place",
+useTime: 1682012567000,
+lastUpdateTime: 1682012567000,
+creationTime: 1682012566000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "34291602",
+address: "경기도 연천군 연천읍 차탄리 35-6",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280025021",
+cidPath: [
+"220036",
+"220049",
+"220247"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 984177438,
+name: "익투스토종닭",
+displayName: "",
+px: 127.0040859,
+py: 38.0512263,
+type: "place",
+useTime: 1682012539000,
+lastUpdateTime: 1682012539000,
+creationTime: 1682012538000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1224360018",
+address: "경기도 연천군 미산면 우정리 831",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280034027",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "t1BM35zMakoRWVy1wvS0Lg==",
+pan: "-169.75",
+tilt: "10.00",
+lng: "127.0042214",
+lat: "38.0519694",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200525_111/1590392846212Tpmvf_JPEG/tDlrq6IKMzNGkDH_5mSS6kTx.jpg",
+"https://ldb-phinf.pstatic.net/20200525_62/1590392888980s5P5J_JPEG/iTCNFRVYhhANiZaeUi5d_A3Z.jpg",
+"https://ldb-phinf.pstatic.net/20200525_1/1590392922407xOCtz_JPEG/n2RWQA4_TJvKmGXeKDQMCMcL.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177338,
+name: "송림원",
+displayName: "",
+px: 126.9654143,
+py: 38.0377755,
+type: "place",
+useTime: 1682012524000,
+lastUpdateTime: 1682012524000,
+creationTime: 1682012524000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1323379399",
+address: "경기도 연천군 미산면 백석리 361-3",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280034023",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220769",
+"221553"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "KHUDgO6SfuoDMDPCLw/3IQ==",
+pan: "-70.61",
+tilt: "10.00",
+lng: "126.9660936",
+lat: "38.0375360",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210109_73/1610170709958GhViQ_JPEG/HTjV314Z4cxvHIkh1rHzzqT7.jpg",
+"https://ldb-phinf.pstatic.net/20210109_196/16101707186565l94A_JPEG/s4obhKXaBn9SR49wRJ0xqzi3.jpg",
+"https://ldb-phinf.pstatic.net/20210109_202/1610170735613yNNJh_JPEG/iJSef9b8t2N-VDhH2ghQjOrJ.jpg"
+],
+category: "오리요리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177150,
+name: "고려가든",
+displayName: "",
+px: 126.9728047,
+py: 38.0246639,
+type: "place",
+useTime: 1682012498000,
+lastUpdateTime: 1682012498000,
+creationTime: 1682012497000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "18872829",
+address: "경기도 연천군 미산면 아미리 11-2 경기도 연천군 숭의전로381 고려가든",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280034022",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "i9py0QFAJq49Hgj1dHPIAw==",
+pan: "-33.18",
+tilt: "10.00",
+lng: "126.9729546",
+lat: "38.0244345",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240505_262/1714902106603gzJV3_JPEG/1000008057.jpg",
+"https://ldb-phinf.pstatic.net/20150831_180/1440996064564pRKbo_JPEG/146374524475557_0.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177095,
+name: "연강술술효연재",
+displayName: "",
+px: 127.0419776,
+py: 38.1097592,
+type: "place",
+useTime: 1682012489000,
+lastUpdateTime: 1682012489000,
+creationTime: 1682012489000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "38320914",
+address: "경기도 연천군 군남면 옥계리 681-3",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "0280031022",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "AhlOTAq+Tfu9Cyi0zXxxWw==",
+pan: "131.03",
+tilt: "10.00",
+lng: "127.0414781",
+lat: "38.1101927",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20181205_297/1543982621430RQpC2_JPEG/-ixTowhg5PsWvAcgTU_dZuJk.jpg",
+"https://ldb-phinf.pstatic.net/20181205_285/1543982669579XNw17_JPEG/NaSLKDdjh-TMUaqmEl5ffWXt.jpg",
+"https://ldb-phinf.pstatic.net/20181205_98/15439827997496wJwE_JPEG/Pr1FHsow7lKScc1rBkokORII.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177057,
+name: "광어생각",
+displayName: "",
+px: 126.7633878,
+py: 37.6793495,
+type: "place",
+useTime: 1682012483000,
+lastUpdateTime: 1682012483000,
+creationTime: 1682012483000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37822467",
+address: "경기도 고양시 일산서구 일산동 1054-5 1층 102호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287101",
+cidPath: [
+"220036",
+"220037",
+"220076",
+"220792",
+"221629"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "c2l/6RPtLnAHEPFu5LGzQQ==",
+pan: "-58.52",
+tilt: "14.49",
+lng: "126.7635177",
+lat: "37.6792986",
+fov: "100"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210406_103/16177085502695QQ58_JPEG/7yYhUNnH5QCc-E8yD85qNhdw.jpg",
+"https://ldb-phinf.pstatic.net/20210406_28/1617708539214jINqC_JPEG/YMSQ_Qg2S6z3NMeLvzYwUcU5.jpg",
+"https://ldb-phinf.pstatic.net/20210406_169/1617708545875ufkU2_JPEG/qlZJMsFtbugbt13eCCkxQq9o.jpg"
+],
+category: "생선회"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984177007,
+name: "신라돈까스",
+displayName: "",
+px: 126.7505971,
+py: 37.6697442,
+type: "place",
+useTime: 1682012474000,
+lastUpdateTime: 1682012474000,
+creationTime: 1682012473000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1418101981",
+address: "경기도 고양시 일산서구 대화동 2288-5 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287104",
+cidPath: [
+"220036",
+"220038",
+"220081",
+"220804"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "xMQgyuNkEmv81WSBoOPJWQ==",
+pan: "-104.18",
+tilt: "-10.11",
+lng: "126.7506670",
+lat: "37.6698180",
+fov: "100"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210725_194/16271993916979ic4h_JPEG/GDVir9_7QAY2f-CBopMNcAUf.jpg",
+"https://ldb-phinf.pstatic.net/20240725_124/1721902619343hayvo_JPEG/20211208_173115.jpg"
+],
+category: "일식당"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984176889,
+name: "진배족발 일산점",
+displayName: "",
+px: 126.7522747,
+py: 37.6726489,
+type: "place",
+useTime: 1682012458000,
+lastUpdateTime: 1682012458000,
+creationTime: 1682012457000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1772337868",
+address: "경기도 고양시 일산서구 대화동 2243-3 1층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287104",
+cidPath: [
+"220036",
+"220037",
+"220075",
+"220766",
+"1000702"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 984176351,
+name: "엔와이카페",
+displayName: "",
+px: 126.7511122,
+py: 37.6684828,
+type: "place",
+useTime: 1682012380000,
+lastUpdateTime: 1682012380000,
+creationTime: 1682012379000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37039071",
+address: "경기도 고양시 일산서구 대화동 2602 현대백화점 일산점 5층",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287104",
+cidPath: [
+"220036",
+"220044",
+"220139",
+"221021"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "fDGZU5Y/icSDKNch4QoQag==",
+pan: "114.62",
+tilt: "10.00",
+lng: "126.7507227",
+lat: "37.6686610",
+fov: "120"
+},
+thumbnailUrls: [ ],
+category: "핫도그"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984176279,
+name: "시골이야기",
+displayName: "",
+px: 126.7716248,
+py: 37.6937482,
+type: "place",
+useTime: 1682012370000,
+lastUpdateTime: 1682012370000,
+creationTime: 1682012370000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "37548802",
+address: "경기도 고양시 일산서구 탄현동 1503-12",
+memo: "",
+url: "",
+mcid: "BAR",
+mcidName: "BAR",
+rcode: "02287103",
+cidPath: [
+"220036",
+"220051",
+"220558",
+"221135"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "yP5WWhdriazWRMX3GGm4Gw==",
+pan: "-42.55",
+tilt: "10.00",
+lng: "126.7716757",
+lat: "37.6936927",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20160205_71/1454635429151VzOJl_JPEG/176152573055532_0.jpeg",
+"https://ldb-phinf.pstatic.net/20160205_29/1454635429475CLFVW_JPEG/176152573055532_1.jpeg",
+"https://ldb-phinf.pstatic.net/20160205_19/14546354298502BTjF_JPEG/176152573055532_2.jpeg"
+],
+category: "전통,민속주점"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984176235,
+name: "외할머니레스토랑",
+displayName: "",
+px: 126.7545357,
+py: 37.6645742,
+type: "place",
+useTime: 1682012363000,
+lastUpdateTime: 1682012363000,
+creationTime: 1682012362000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1060472225",
+address: "경기도 고양시 일산서구 대화동 2606 원마운트 1184호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287104",
+cidPath: [
+"220036",
+"220037",
+"220053"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "6zdgB8CSRT0O16tv2rVe1A==",
+pan: "114.88",
+tilt: "10.00",
+lng: "126.7534079",
+lat: "37.6643839",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250331_181/1743415944006fMA8B_JPEG/1000009642.jpg",
+"https://ldb-phinf.pstatic.net/20220421_126/1650515155422cfqjB_JPEG/KakaoTalk_20220421_122751890_01.jpg",
+"https://ldb-phinf.pstatic.net/20230204_95/1675503703543WHaRQ_JPEG/%B8%C5%C0%E5%BB%E7%C1%F83_-_%BA%B9%BB%E7%BA%BB.jpg"
+],
+category: "한식"
+},
+isIndoor: false
+},
+{
+bookmarkId: 984176144,
+name: "닭치고오새",
+displayName: "",
+px: 126.7548548,
+py: 37.6639483,
+type: "place",
+useTime: 1682012351000,
+lastUpdateTime: 1682012351000,
+creationTime: 1682012350000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1530235697",
+address: "경기도 고양시 일산서구 대화동 2606 고양원마운트 1239호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287104",
+cidPath: [
+"220036",
+"220049",
+"220245"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 984176108,
+name: "상훈이네참치엔초밥",
+displayName: "",
+px: 126.7545357,
+py: 37.6645742,
+type: "place",
+useTime: 1682012346000,
+lastUpdateTime: 1682012346000,
+creationTime: 1682012345000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"GEOMETRY"
+]
+},
+sid: "1463363461",
+address: "경기도 고양시 일산서구 대화동 2606 127호",
+memo: "",
+url: "",
+mcid: "DINING",
+mcidName: "음식점",
+rcode: "02287104",
+cidPath: [
+"220036",
+"220038",
+"220081",
+"220804"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "1nHAkWXZ34Upfok/Bqdp7g==",
+pan: "113.07",
+tilt: "10.00",
+lng: "126.7543982",
+lat: "37.6658232",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20241218_133/1734493765914499Ti_JPEG/temp_picture.jpg",
+"https://ldb-phinf.pstatic.net/20241218_254/1734493781845E7rEa_JPEG/temp_picture.jpg",
+"https://ldb-phinf.pstatic.net/20241218_106/1734493890142MgPI8_JPEG/1000008655.jpg"
+],
+category: "일식당"
+},
+isIndoor: false
+}
+],
+unavailableCount: 172,
+mismatchedCount: 26,
+removed: false
+}

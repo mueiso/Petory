@@ -1,0 +1,859 @@
+{
+folder: {
+folderId: 82085190,
+name: "갈수있어 강아지도, 부산 카페",
+memo: "전국 애견동반지도, 갈수있어 강아지도",
+externalLink: "https://campaign.naver.com/puppymap/",
+userId: null,
+colorCode: "1",
+iconId: "1",
+markerColor: "10",
+lastUseTime: 1684743143000,
+creationTime: 1680844630000,
+shouldOverlay: true,
+bookmarkCount: 852,
+userIdNo: null,
+folderType: "SHARED",
+placeUserProfile: {
+placeUserId: "642fa7201438fc3a9c07620c",
+reviewPageUrl: "https://m.place.naver.com/my/642fa7201438fc3a9c07620c/review?v=2",
+imageUrl: "https://phinf.pstatic.net/contact/20230407_165/1680844568545UhDKa_PNG/image.png?type=f102_102",
+nick: "N강아지도 루비"
+},
+shareId: "41b662ef518d4b7c88ad81d011cf61b6",
+encryptedUserIdNo: "SQDyx7yellW8OzpV:a5WKfdnM3u2FVHcQtZJi-CtLcVSDmg",
+followCount: 966,
+viewCount: 3172,
+publicationStatus: "R",
+isExposed: true,
+isDefaultFolder: false,
+idNo: null
+},
+bookmarkList: [
+{
+bookmarkId: 983548310,
+name: "리베르타",
+displayName: "",
+px: 129.1457471,
+py: 35.1539099,
+type: "place",
+useTime: 1682416815000,
+lastUpdateTime: 1682416815000,
+creationTime: 1681975735000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1519469844",
+address: "부산광역시 해운대구 우동 1436-1 103호 리베르타",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08350105",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 990042319,
+name: "스몰굿커피 마린시티점",
+displayName: "",
+px: 129.1484341,
+py: 35.1569197,
+type: "place",
+useTime: 1682416802000,
+lastUpdateTime: 1682416802000,
+creationTime: 1682416802000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1669826790",
+address: "부산광역시 해운대구 우동 1434-2 현대하이페리온 상가 1층 103호 스몰굿커피 마린시티점",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08350105",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "/Gt6q+Mz/rF3D9/ZHdCyFg==",
+pan: "69.89",
+tilt: "10.00",
+lng: "129.1482355",
+lat: "35.1568322",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20210601_166/1622540213159UcBx0_JPEG/W2MFSbqIzIVWb16boiwFP7Vw.jpg",
+"https://ldb-phinf.pstatic.net/20210601_146/1622540208414gx1lm_JPEG/zDwDyZN0oBYlxd5A3NDJoXDB.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 990041942,
+name: "리콰이얼먼트커피브루얼스",
+displayName: "",
+px: 129.0352821,
+py: 35.1061474,
+type: "place",
+useTime: 1682416782000,
+lastUpdateTime: 1682416782000,
+creationTime: 1682416781000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1865041263",
+address: "부산광역시 중구 중앙동4가 52-5 동진빌딩 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08110107",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 990041728,
+name: "kunst204",
+displayName: "",
+px: 129.0445645,
+py: 35.0793612,
+type: "place",
+useTime: 1682416768000,
+lastUpdateTime: 1682416768000,
+creationTime: 1682416768000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1998828301",
+address: "부산광역시 영도구 영선동4가 920",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08200111",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "z7s7H6XdyZ+5GzJA2VM0dQ==",
+pan: "-145.53",
+tilt: "11.13",
+lng: "129.0445666",
+lat: "35.0794634",
+fov: "80"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20200812_282/1597209798542yBJKK_JPEG/4qOxljBS5mjJdD5m5qWrP-fJ.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20200812_103/1597210040632LPnWz_JPEG/NgLcDfAYQUUvS5k8VZ2Alo2B.JPG.jpg",
+"https://ldb-phinf.pstatic.net/20200812_58/159721001540167aDL_JPEG/lhxjgrFHs48TJRj_zLIYxxK2.JPG.jpg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983476936,
+name: "라비체",
+displayName: "",
+px: 129.1222662,
+py: 35.1555451,
+type: "place",
+useTime: 1682416669000,
+lastUpdateTime: 1682416669000,
+creationTime: 1681971678000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1856890706",
+address: "부산광역시 수영구 민락동 177-3 이안테라디움 1층 106호 206호",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500103",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983476669,
+name: "하우스멜",
+displayName: "",
+px: 129.1199679,
+py: 35.1586348,
+type: "place",
+useTime: 1682416660000,
+lastUpdateTime: 1682416660000,
+creationTime: 1681971662000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1067365238",
+address: "부산광역시 수영구 광안동 133-27 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "Ikc2ao55dbkYsePHWQoHjg==",
+pan: "-59.53",
+tilt: "10.00",
+lng: "129.1200696",
+lat: "35.1585749",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250501_286/1746072424319x3kRG_PNG/Summer-2.png",
+"https://ldb-phinf.pstatic.net/20220320_136/16477577327441uQrd_JPEG/%C7%CF%BF%EC%BD%BA%B8%E1_%BA%B8%C1%A4%BA%BB_%2837%29.jpg",
+"https://ldb-phinf.pstatic.net/20240210_33/1707566839357DDnBR_JPEG/16584700-9094-4D17-AA8B-CD4CA9496972.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983476374,
+name: "모구모구과자점 인 광안리",
+displayName: "",
+px: 129.1183106,
+py: 35.1563804,
+type: "place",
+useTime: 1682416649000,
+lastUpdateTime: 1682416649000,
+creationTime: 1681971644000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1444755174",
+address: "부산광역시 수영구 광안동 153-33 1층 모구모구 과자점 인 광안리",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"1005510"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "6nyXpawa3rUr46fGE78/Sw==",
+pan: "-98.05",
+tilt: "-9.50",
+lng: "129.1184240",
+lat: "35.1563904",
+fov: "57"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20220110_185/1641741836822nt1JC_JPEG/B6AA763B-9FC2-4680-93F9-7C5798B48EED.jpeg",
+"https://ldb-phinf.pstatic.net/20231225_62/1703490742026SigDu_JPEG/KakaoTalk_20230425_150716334_04.jpg",
+"https://ldb-phinf.pstatic.net/20231225_152/1703490741677bNo5n_JPEG/KakaoTalk_20230604_183654049_10.jpg"
+],
+category: "베이커리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983476118,
+name: "MLK",
+displayName: "",
+px: 129.1184056,
+py: 35.1562383,
+type: "place",
+useTime: 1682416640000,
+lastUpdateTime: 1682416640000,
+creationTime: 1681971627000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1212460799",
+address: "부산광역시 수영구 광안동 158-38",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983475842,
+name: "노아브루어스",
+displayName: "",
+px: 129.11816,
+py: 35.1563482,
+type: "place",
+useTime: 1682416630000,
+lastUpdateTime: 1682416630000,
+creationTime: 1681971610000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1333847046",
+address: "부산광역시 수영구 광안동 153-32 . 1층(광안동)",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "+JK/tg8PypWVNpJ/zbs+9g==",
+pan: "172.64",
+tilt: "10.00",
+lng: "129.1181433",
+lat: "35.1564760",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20221109_138/1667989028815WRPix_JPEG/_JJ10153.jpg",
+"https://ldb-phinf.pstatic.net/20221109_259/16679890028079E5cf_JPEG/_JJ10165.jpg",
+"https://ldb-phinf.pstatic.net/20221109_186/1667989003000q71WI_JPEG/_JJ10175.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983475577,
+name: "클러터",
+displayName: "",
+px: 129.1177632,
+py: 35.1557255,
+type: "place",
+useTime: 1682416621000,
+lastUpdateTime: 1682416621000,
+creationTime: 1681971592000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1109692912",
+address: "부산광역시 수영구 광안동 153-12 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "pvAa+nxRAIs1avvss08mSA==",
+pan: "-75.78",
+tilt: "10.00",
+lng: "129.1178974",
+lat: "35.1556914",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20231104_193/1699025630642z1Jih_JPEG/AE2762B4-76F2-417E-A021-DB7EF6C9595C.jpeg",
+"https://ldb-phinf.pstatic.net/20231104_259/1699025630505VwgAT_JPEG/FEA83C77-CC72-4852-A439-CBAC850D5270.jpeg",
+"https://ldb-phinf.pstatic.net/20231104_94/1699025630515CigGu_JPEG/5CEC1E41-ACF3-4921-93AE-2BB44C619AFC.jpeg"
+],
+category: "카페"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983475311,
+name: "마이피오라",
+displayName: "",
+px: 129.1171465,
+py: 35.1554828,
+type: "place",
+useTime: 1682416612000,
+lastUpdateTime: 1682416612000,
+creationTime: 1681971575000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1640048384",
+address: "부산광역시 수영구 광안동 152-45 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983475055,
+name: "카페비엔비",
+displayName: "",
+px: 129.1171667,
+py: 35.155485,
+type: "place",
+useTime: 1682416602000,
+lastUpdateTime: 1682416602000,
+creationTime: 1681971558000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1188914552",
+address: "부산광역시 수영구 광안동 152-45",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983474794,
+name: "고래당",
+displayName: "",
+px: 129.1169156,
+py: 35.1559064,
+type: "place",
+useTime: 1682416593000,
+lastUpdateTime: 1682416593000,
+creationTime: 1681971542000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1659566668",
+address: "부산광역시 수영구 광안동 152-27 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "fOKq37sgLvCyUINwF5wMxw==",
+pan: "168.82",
+tilt: "12.25",
+lng: "129.1168435",
+lat: "35.1559773",
+fov: "57"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20240604_255/1717488266548NJPMl_JPEG/1000008831.jpg",
+"https://ldb-phinf.pstatic.net/20240301_110/1709299252692jecVp_JPEG/IMG_20240224_151647_560.jpg",
+"https://ldb-phinf.pstatic.net/20240624_168/1719180551787ELywN_JPEG/1000009155.jpg"
+],
+category: "베이커리"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983474537,
+name: "카페소수",
+displayName: "",
+px: 129.1164428,
+py: 35.1563988,
+type: "place",
+useTime: 1682416583000,
+lastUpdateTime: 1682416583000,
+creationTime: 1681971525000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1768690295",
+address: "부산광역시 수영구 광안동 151-25 1층 오른쪽가게",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983474292,
+name: "마들렌보이",
+displayName: "",
+px: 129.1164394,
+py: 35.1564503,
+type: "place",
+useTime: 1682416574000,
+lastUpdateTime: 1682416574000,
+creationTime: 1681971508000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1699100985",
+address: "부산광역시 수영구 광안동 151-25 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220564",
+"221161"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983474027,
+name: "카페더메이",
+displayName: "",
+px: 129.1152808,
+py: 35.1581597,
+type: "place",
+useTime: 1682416564000,
+lastUpdateTime: 1682416564000,
+creationTime: 1681971491000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1162867910",
+address: "부산광역시 수영구 광안동 146-36 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983473743,
+name: "화이트아일랜드 카페",
+displayName: "",
+px: 129.1153792,
+py: 35.1575095,
+type: "place",
+useTime: 1682416554000,
+lastUpdateTime: 1682416554000,
+creationTime: 1681971474000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1497519199",
+address: "부산광역시 수영구 광안동 148-42 1층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "ATK/RUVSA/SEV1VUvZnEOQ==",
+pan: "89.69",
+tilt: "10.00",
+lng: "129.1152975",
+lat: "35.1575090",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250306_253/1741263233051J0eL9_JPEG/IMG_9953.jpeg",
+"https://ldb-phinf.pstatic.net/20190323_241/1553349114226YoGTh_JPEG/ewuLN8fwwiRaR9a-YmCTFiYG.jpeg.jpg",
+"https://ldb-phinf.pstatic.net/20250306_87/1741263233213n16dW_JPEG/IMG_3480.jpeg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983473473,
+name: "모모야코",
+displayName: "",
+px: 129.1136177,
+py: 35.1554227,
+type: "place",
+useTime: 1682416545000,
+lastUpdateTime: 1682416545000,
+creationTime: 1681971457000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1395429590",
+address: "부산광역시 수영구 광안동 509-91",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220576",
+"221212"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+},
+{
+bookmarkId: 983472923,
+name: "치키파이",
+displayName: "",
+px: 129.1182667,
+py: 35.1547587,
+type: "place",
+useTime: 1682416536000,
+lastUpdateTime: 1682416536000,
+creationTime: 1681971422000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: true,
+details: [
+"AVAILABLE"
+]
+},
+sid: "1225235936",
+address: "부산광역시 수영구 광안동 191-3 2층",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: true,
+folderMappings: null,
+placeInfo: {
+streetPanorama: {
+id: "+Yjt7Ni5v7lCV+3yR3Ja7w==",
+pan: "-147.47",
+tilt: "10.00",
+lng: "129.1183244",
+lat: "35.1548489",
+fov: "120"
+},
+thumbnailUrls: [
+"https://ldb-phinf.pstatic.net/20250413_225/1744525143905pJfzl_JPEG/IMG_3229.jpeg",
+"https://ldb-phinf.pstatic.net/20250520_248/1747725836096ch1Vm_JPEG/12782AD8-D68A-40C6-A007-E33B29835116.jpeg",
+"https://ldb-phinf.pstatic.net/20250602_116/1748843926713AXW57_JPEG/KakaoTalk_20250602_145715615_04.jpg"
+],
+category: "카페,디저트"
+},
+isIndoor: false
+},
+{
+bookmarkId: 983472626,
+name: "22도씨",
+displayName: "",
+px: 129.1165361,
+py: 35.1551934,
+type: "place",
+useTime: 1682416526000,
+lastUpdateTime: 1682416526000,
+creationTime: 1681971404000,
+order: 65535,
+bookmarkMismatchInfo: {
+isMatched: false,
+details: [
+"UNAVAILABLE"
+]
+},
+sid: "1190235673",
+address: "부산광역시 수영구 광안동 1330",
+memo: "",
+url: "",
+mcid: "CAFE",
+mcidName: "카페",
+rcode: "08500104",
+cidPath: [
+"220036",
+"220052",
+"220563"
+],
+available: false,
+folderMappings: null,
+placeInfo: null,
+isIndoor: false
+}
+],
+unavailableCount: 342,
+mismatchedCount: 35,
+removed: false
+}

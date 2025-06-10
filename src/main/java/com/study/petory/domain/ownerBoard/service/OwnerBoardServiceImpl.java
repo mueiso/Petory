@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,9 +72,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional(readOnly = true)
 	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
 
-		// int adjustedPage = (papage > 0) ? page - 1 : 0;
-		// PageRequest pageRequest = PageRequest.of(adjustedPage, 5, Sort.by("createdAt").descending());
-
 		Page<OwnerBoard> boards;
 		if (title != null) {
 			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
@@ -111,8 +106,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		ownerBoard.updateTitle(requestDto.getTitle());
-		ownerBoard.updateContent(requestDto.getContent());
+		ownerBoard.updateOwnerBoard(requestDto.getTitle(), requestDto.getContent());
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}

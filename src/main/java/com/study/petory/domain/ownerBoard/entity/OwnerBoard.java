@@ -59,11 +59,8 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 		this.user = user;
 	}
 
-	public void updateTitle(String title) {
+	public void updateOwnerBoard(String title, String content) {
 		this.title = title;
-	}
-
-	public void updateContent(String content) {
 		this.content = content;
 	}
 

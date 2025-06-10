@@ -65,7 +65,7 @@ public class OwnerBoardController {
 	 * 사진 삭제
 	 * @param boardId 사진이 포함된 게시글 ID
 	 * @param imageId 사진 ID
-	 * @return
+	 * @return 요청 성공 코드만 반환
 	 */
 	@DeleteMapping("/{boardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
@@ -80,7 +80,7 @@ public class OwnerBoardController {
 	 * 게시글 전체 조회
 	 * @param title 제목 검색 가능(nullable)
 	 * @param pageable 조회하려는 페이지 위치
-	 * @return List형식의 게시글 반환
+	 * @return 전체 게시글 페이징 처리되어 반환
 	 */
 	@GetMapping
 	public ResponseEntity<CommonResponse<Page<OwnerBoardGetAllResponseDto>>> getOwnerBoardsAll(
@@ -158,16 +158,17 @@ public class OwnerBoardController {
 
 	/**
 	 * 게시글의 댓글 전체 조회(페이징)
-	 * @param page 댓글 페이지
+	 * @param boardId 게시글 ID
+	 * @param pageable 페이징 설정
 	 * @return Page size 10, 생성일 기준 오름차순 정렬
 	 */
 	@GetMapping("/{boardId}/comments")
 	public ResponseEntity<CommonResponse<Page<OwnerBoardCommentGetResponseDto>>> getOwnerBoardCommentsAll(
 		@PathVariable long boardId,
-		@RequestParam(defaultValue = "1") int page) {
+		@PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable) {
 
 		return CommonResponse.of(SuccessCode.FOUND,
-			ownerBoardCommentService.findAllOwnerBoardComments(boardId, page));
+			ownerBoardCommentService.findAllOwnerBoardComments(boardId, pageable));
 	}
 
 	/**

@@ -1,8 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,12 +58,9 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, int page) {
+	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, Pageable pageable) {
 
-		int adjustedPage = (page > 0) ? page - 1 : 0;
-		PageRequest pageRequest = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").ascending());
-
-		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageRequest);
+		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageable);
 
 		return comments.map(OwnerBoardCommentGetResponseDto::from);
 	}

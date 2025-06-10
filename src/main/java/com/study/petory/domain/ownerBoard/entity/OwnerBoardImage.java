@@ -1,7 +1,7 @@
 package com.study.petory.domain.ownerBoard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.study.petory.common.entity.BaseEntityWithCreatedAt;
+import com.study.petory.common.entity.CreationBasedEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "tb_owner_board_image")
-public class OwnerBoardImage extends BaseEntityWithCreatedAt {
+public class OwnerBoardImage extends CreationBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +34,5 @@ public class OwnerBoardImage extends BaseEntityWithCreatedAt {
 	public OwnerBoardImage(String url, OwnerBoard ownerBoard) {
 		this.url = url;
 		this.ownerBoard = ownerBoard;
-	}
-
-	public void ClearOwnerBoard() {
-		this.ownerBoard = null;
 	}
 }

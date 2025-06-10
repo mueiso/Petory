@@ -1,5 +1,9 @@
 package com.study.petory.domain.place.entity;
 
+import java.math.BigDecimal;
+
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
@@ -20,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_place_review")
 @NoArgsConstructor
+@DynamicUpdate
 public class PlaceReview extends TimeFeatureBasedEntity {
 
 	@Id
@@ -38,10 +43,10 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 	private String content;
 
 	@Column(nullable = false)
-	private Integer ratio;
+	private BigDecimal ratio;
 
 	@Builder
-	public PlaceReview(Place place, User user, String content, Integer ratio) {
+	public PlaceReview(Place place, User user, String content, BigDecimal ratio) {
 		this.place = place;
 		this.user = user;
 		this.content = content;
@@ -49,14 +54,9 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 	}
 
 	// PlaceReviewUpdateRequestDto null 가능 여부에 따른 update 메서드
-	public void updatePlaceReview(String content, Integer ratio) {
-		if (content != null) {
-			this.content = content;
-		}
-
-		if (ratio != null) {
-			this.ratio = ratio;
-		}
+	public void updatePlaceReview(String content, BigDecimal ratio) {
+		this.content = content;
+		this.ratio = ratio;
 	}
 
 	// placeReviewId 검증 메서드

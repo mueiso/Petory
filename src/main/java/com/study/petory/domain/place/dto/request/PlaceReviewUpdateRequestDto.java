@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.dto.request;
 
+import java.math.BigDecimal;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -9,5 +11,5 @@ public class PlaceReviewUpdateRequestDto {
 
 	private final String content;
 
-	private final Integer ratio;
+	private final BigDecimal ratio;
 }

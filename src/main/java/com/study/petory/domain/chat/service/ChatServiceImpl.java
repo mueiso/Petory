@@ -73,7 +73,9 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public List<ChatRoomGetAllResponseDto> findAllChatRoom(int page) {
 
-		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, page);
+		int adjustPage = (page > 0) ? page - 1 : 0;
+
+		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, adjustPage);
 
 		return chatRooms.stream()
 			.map(chatRoom -> new ChatRoomGetAllResponseDto(chatRoom, 2L))

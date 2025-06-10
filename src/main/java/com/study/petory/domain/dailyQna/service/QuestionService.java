@@ -20,6 +20,8 @@ public interface QuestionService {
 
 	Question findQuestionByActive(Long questionId);
 
+	Question findQuestionByActiveOrInactive(Long questionId);
+
 	void existsByDate(String date);
 
 	void saveQuestion(Long userId, QuestionCreateRequestDto request);

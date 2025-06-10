@@ -2,7 +2,9 @@ package com.study.petory.domain.dailyQna.dto.response;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.study.petory.domain.dailyQna.entity.Question;
+import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 
 import lombok.Getter;
 
@@ -13,15 +15,18 @@ public class QuestionGetOneResponseDto {
 
 	private final String date;
 
-	private final LocalDateTime deletedAt;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private QuestionStatus questionStatus;
 
-	private QuestionGetOneResponseDto(String question, String date, LocalDateTime deletedAt) {
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private LocalDateTime updatedAt;
+
+	private QuestionGetOneResponseDto(String question, String date, QuestionStatus questionStatus, LocalDateTime updatedAt) {
 		this.question = question;
 		this.date = date;
-		if (deletedAt != null) {
-			this.deletedAt = deletedAt;
-		} else {
-			this.deletedAt = null;
+		if (questionStatus == QuestionStatus.INACTIVE) {
+			this.questionStatus = questionStatus;
+			this.updatedAt = updatedAt;
 		}
 	}
 
@@ -29,7 +34,8 @@ public class QuestionGetOneResponseDto {
 		return new QuestionGetOneResponseDto(
 			question.getQuestion(),
 			question.getDate(),
-			question.getDeletedAt()
+			question.getQuestionStatus(),
+			question.getUpdatedAt()
 		);
 	}
 }

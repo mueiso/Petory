@@ -79,7 +79,7 @@ public class QuestionController {
 	public ResponseEntity<CommonResponse<Page<QuestionGetAllResponseDto>>> getAllQuestion(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long adminId
-		@PageableDefault(size = 50, sort = "date", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(page = 1, size = 50, sort = "date", direction = Sort.Direction.ASC) Pageable pageable
 	) {
 		Long adminId = 1L;
 		return CommonResponse.of(SuccessCode.FOUND, questionService.findAllQuestion(adminId, pageable));
@@ -158,7 +158,7 @@ public class QuestionController {
 	public ResponseEntity<CommonResponse<Page<QuestionGetInactiveResponse>>> getInactiveQuestion(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long adminId
-		@PageableDefault(size = 50, sort = "updatedAt", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(page = 1, size = 50, sort = "updatedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
 		Long adminId = 1L;
 		return CommonResponse.of(SuccessCode.FOUND, questionService.findInactiveQuestion(adminId, pageable));
@@ -208,7 +208,7 @@ public class QuestionController {
 	public ResponseEntity<CommonResponse<Page<QuestionGetDeletedResponse>>> getQuestionByDeleted(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long adminId
-		@PageableDefault(size = 50, sort = "deletedAt", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(page = 1, size = 50, sort = "deletedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
 		Long adminId = 1L;
 		return CommonResponse.of(SuccessCode.FOUND, questionService.findQuestionByDeleted(adminId, pageable));
@@ -312,7 +312,7 @@ public class QuestionController {
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetHiddenResponse>>> getHiddenDailyQna(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
-		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+		@PageableDefault(page = 1, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		Long userId = 1L;
 		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findHiddenDailyQna(userId, pageable));
@@ -364,7 +364,7 @@ public class QuestionController {
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetDeletedResponse>>> getDeletedDailyQna(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long userId
-		@PageableDefault(size = 50, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+		@PageableDefault(page = 1, size = 50, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		Long userId = 1L;	// todo 어디서 받아올지 수정 필요. url이 유력
 		Long adminId = 1L;

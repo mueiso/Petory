@@ -17,6 +17,8 @@ public interface QuestionCustomRepository {
 
 	Optional<Question> findQuestionByActive(Long questionId);
 
+	Optional<Question> findQuestionByActiveOrInactive(Long questionId);
+
 	Page<Question> findQuestionByInactive(Pageable pageable);
 
 	Page<Question> findQuestionByDeleted(Pageable pageable);

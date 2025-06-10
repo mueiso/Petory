@@ -49,13 +49,18 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	@Override
 	public Page<DailyQna> findDailyQnaByHidden(Long userId, Pageable pageable) {
+		long offset = pageable.getOffset();
+		if (offset <= 0) {
+			offset = 0;
+		}
+
 		List<DailyQna> DailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.HIDDEN)
 			)
-			.offset(pageable.getOffset())
+			.offset(offset - 1)
 			.limit(pageable.getPageSize())
 			.fetch();
 
@@ -75,13 +80,19 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	@Override
 	public Page<DailyQna> findDailyQnaByDeleted(Long userId, Pageable pageable) {
+		long offset = pageable.getOffset();
+		if (offset <= 0) {
+			offset = 0;
+		}
+
+
 		List<DailyQna> DailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.DELETED)
 			)
-			.offset(pageable.getOffset())
+			.offset(offset - 1)
 			.limit(pageable.getPageSize())
 			.fetch();
 

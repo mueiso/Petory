@@ -36,9 +36,16 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 
 	@Override
 	public Page<Question> findQuestionByPage(Pageable pageable) {
+		long offset = pageable.getOffset();
+		if (offset <= 0) {
+			offset = 0;
+		}
 		List<Question> list = jpaQueryFactory
 			.selectFrom(qQuestion)
-			.offset(pageable.getOffset())
+			.where(
+				qQuestion.questionStatus.in(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE)
+			)
+			.offset(offset - 1)
 			.limit(pageable.getPageSize())
 			.fetch();
 
@@ -76,12 +83,17 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 	}
 
 	public Page<Question> findQuestionByInactive(Pageable pageable) {
+		long offset = pageable.getOffset();
+		if (offset <= 0) {
+			offset = 0;
+		}
+
 		List<Question> questionPage = jpaQueryFactory
 			.selectFrom(qQuestion)
 			.where(
 				qQuestion.questionStatus.eq(QuestionStatus.INACTIVE)
 			)
-			.offset(pageable.getOffset())
+			.offset(offset - 1)
 			.limit(pageable.getPageSize())
 			.fetch();
 
@@ -100,12 +112,17 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 
 	@Override
 	public Page<Question> findQuestionByDeleted(Pageable pageable) {
+		long offset = pageable.getOffset();
+		if (offset <= 0) {
+			offset = 0;
+		}
+
 		List<Question> questionPage = jpaQueryFactory
 			.selectFrom(qQuestion)
 			.where(
 				qQuestion.questionStatus.eq(QuestionStatus.DELETED)
 			)
-			.offset(pageable.getOffset())
+			.offset(offset - 1)
 			.limit(pageable.getPageSize())
 			.fetch();
 
@@ -120,5 +137,16 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 			total = 0L;
 		}
 		return new PageImpl<>(questionPage, pageable, total);
+	}
+
+	public Optional<Question> findQuestionByActiveOrInactive(Long questionId) {
+		return jpaQueryFactory
+			.selectFrom(qQuestion)
+			.where(
+				qQuestion.id.eq(questionId),
+				qQuestion.questionStatus.in(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE)
+			)
+			.fetch()
+			.stream().findAny();
 	}
 }

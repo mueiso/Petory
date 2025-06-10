@@ -10,18 +10,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.util.DateUtil;
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
-import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponse;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
-import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 import com.study.petory.domain.user.service.UserService;
@@ -70,6 +67,13 @@ public class QuestionServiceImpl implements QuestionService {
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
 	}
 
+	// id로 Active 또는 Inactive 상태인 질문 조회
+	@Override
+	public Question findQuestionByActiveOrInactive(Long questionId) {
+		return questionRepository.findQuestionByActiveOrInactive(questionId)
+			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+	}
+
 	// 해당 일자에 해당하는 질문이 있는지 확인
 	@Override
 	public void existsByDate(String date) {
@@ -113,7 +117,7 @@ public class QuestionServiceImpl implements QuestionService {
 		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		return QuestionGetOneResponseDto.from(findQuestionByQuestionId(questionId));
+		return QuestionGetOneResponseDto.from(findQuestionByActiveOrInactive(questionId));
 	}
 
 	// 오늘의 질문 조회

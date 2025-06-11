@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
@@ -85,8 +91,35 @@ public class OwnerBoardCommentServiceTest {
 		assertEquals("새 댓글", result.getContent());
 	}
 
+	@Test
+	void 댓글_전체_조회에_성공한다() {
+		// given
+		Long boardId = 1L;
+		Pageable pageable = PageRequest.of(0, 10);
 
-	// 댓글 조회
+		List<OwnerBoardComment> mockList = IntStream.range(0, 15)
+			.mapToObj(i -> OwnerBoardComment.builder()
+				.content("댓글 " + i)
+				.user(mockUser)
+				.ownerBoard(mockBoard)
+				.build())
+			.toList();
+
+		Page<OwnerBoardComment> mockPage = new PageImpl<>(
+			mockList.subList(0, 10), pageable, mockList.size());
+
+		given(ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageable)).willReturn(mockPage);
+
+		// when
+		Page<OwnerBoardCommentGetResponseDto> result = ownerBoardCommentService.findAllOwnerBoardComments(
+			boardId, pageable);
+
+		// then
+		assertEquals(15, result.getTotalElements());
+		assertEquals(10, result.getContent().size());
+		assertEquals("댓글 1", result.getContent().get(1).getContent());
+	}
+
 	// 댓글 수정
 	// 댓글 삭제
 

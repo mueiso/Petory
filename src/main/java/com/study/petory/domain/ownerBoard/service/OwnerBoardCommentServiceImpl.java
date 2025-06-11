@@ -30,7 +30,6 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	// CommentId로 OwnerBoardComment 조회
 	@Override
-	@Transactional(readOnly = true)
 	public OwnerBoardComment findOwnerBoardCommentById(Long commentId) {
 		return ownerBoardCommentRepository.findById(commentId)
 			.orElseThrow(() -> new CustomException(ErrorCode.OWNER_BOARD_COMMENT_NOT_FOUND));
@@ -57,7 +56,6 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	// 주인커뮤니티 댓글 조회
 	@Override
-	@Transactional(readOnly = true)
 	public Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, Pageable pageable) {
 
 		Page<OwnerBoardComment> comments = ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageable);

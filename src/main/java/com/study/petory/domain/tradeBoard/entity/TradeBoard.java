@@ -45,7 +45,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private String content;
 
-	@OneToMany(mappedBy = "tradeBoard", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	@OneToMany(mappedBy = "tradeBoard", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<TradeBoardImage> images = new ArrayList<>();
 
 	@Column(nullable = false)

@@ -91,6 +91,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return new TradeBoardGetResponseDto(tradeBoard);
 	}
 
+	// 유저별 게시글 조회
 	@Override
 	public Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable) {
 
@@ -142,6 +143,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		tradeBoard.updateStatus(status);
 	}
 
+	//게시글 내 사진 삭제
 	@Override
 	public void deleteImage(Long tradeBoardId, Long imageId) {
 

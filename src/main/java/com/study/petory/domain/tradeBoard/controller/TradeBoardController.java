@@ -58,7 +58,7 @@ public class TradeBoardController {
 	 * 게시글 전체 조회
 	 * @param category 카테고리 (nullable)
 	 * @param pageable 조회하려는 페이지
-	 * @return List 형식의 게시글 반환
+	 * @return 조회된 게시글 반환
 	 */
 	@GetMapping
 	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
@@ -80,6 +80,11 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByTradeBoardId(tradeBoardId));
 	}
 
+	/**
+	 * 유저별 게시글 조회
+	 * @param pageable 조회하려는 페이지
+	 * @return 조회된 게시글 반환
+	 */
 	@GetMapping("/myBoard")
 	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
 		Pageable pageable
@@ -90,7 +95,7 @@ public class TradeBoardController {
 	/**
 	 * 게시글 수정
 	 * @param tradeBoardId 수정하려는 게시글 id
-	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액 (nullable)
+	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
 	 */
 	@PutMapping("/{tradeBoardId}")
@@ -101,6 +106,12 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.UPDATED, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}
 
+	/**
+	 * 게시글 상태 변경
+	 * @param tradeBoardId 변경하려는 게시글
+	 * @param status 변경하려는 상태값
+	 * @return 변환 성공 메시지
+	 */
 	@PatchMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<Void>> updateTradeBoardStatus(
 		@PathVariable Long tradeBoardId,
@@ -110,6 +121,12 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
+	/**
+	 * 사진 삭제
+	 * @param tradeBoardId 사진 삭제를 진행할 게시글
+	 * @param imageId 삭제하려는 사진 아이디
+	 * @return 삭제 성공 메시지
+	 */
 	@DeleteMapping("/{tradeBoardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
 		@PathVariable Long tradeBoardId,

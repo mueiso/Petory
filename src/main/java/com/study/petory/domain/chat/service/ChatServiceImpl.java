@@ -31,11 +31,13 @@ public class ChatServiceImpl implements ChatService{
 	private final TradeBoardRepository tradeBoardRepository;
 	private final ChatAggregateRepository aggregateRepository;
 
+	//사용하지 않으면 삭제 예정
 	private User findUserById(Long userId) {
 		return userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 
+	//메시지 보내기
 	@Override
 	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
 
@@ -53,6 +55,7 @@ public class ChatServiceImpl implements ChatService{
 		return message;
 	}
 
+	//채팅방 생성
 	@Override
 	public ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId) {
 
@@ -70,6 +73,7 @@ public class ChatServiceImpl implements ChatService{
 		return new ChatRoomCreateResponseDto(chatRoom);
 	}
 
+	//채팅방 전체 조회
 	@Override
 	public List<ChatRoomGetAllResponseDto> findAllChatRoom(int page) {
 
@@ -82,6 +86,7 @@ public class ChatServiceImpl implements ChatService{
 			.toList();
 	}
 
+	//채팅방 단건 조회
 	@Override
 	public ChatRoomGetResponseDto findChatRoomById(String chatRoomId) {
 

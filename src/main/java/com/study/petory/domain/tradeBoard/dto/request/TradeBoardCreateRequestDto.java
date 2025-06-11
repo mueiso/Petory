@@ -24,8 +24,6 @@ public class TradeBoardCreateRequestDto {
 	@Size(max = 1000, message = "본문은 1000자를 넘어갈 수 없습니다.")
 	private final String content;
 
-	private final String photoUrl; //변수의 타입은 S3 등록 후 변경 예정
-
 	@NotNull(message = "금액을 입력해주세요.")
 	private final Integer price;
 }

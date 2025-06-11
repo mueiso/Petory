@@ -71,15 +71,20 @@ public class TradeBoardController {
 	/**
 	 * 게시글 단건 조회
 	 * @param tradeBoardId 조회하려는 게시글 id
-	 * @param page 조회하려는 페이지 위치
 	 * @return 해당 게시글 반환
 	 */
 	@GetMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<TradeBoardGetResponseDto>> getByTradeBoardId(
-		@PathVariable Long tradeBoardId,
-		@RequestParam(defaultValue = "1") int page
+		@PathVariable Long tradeBoardId
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByTradeBoardId(tradeBoardId));
+	}
+
+	@GetMapping("/myBoard")
+	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
+		Pageable pageable
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByUser(1L, pageable));
 	}
 
 	/**

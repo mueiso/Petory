@@ -24,6 +24,8 @@ public interface TradeBoardService {
 
 	TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId);
 
+	Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable);
+
 	TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto);
 
 	void updateTradeBoardStatus(Long tradeBoardId, TradeBoardStatus status);

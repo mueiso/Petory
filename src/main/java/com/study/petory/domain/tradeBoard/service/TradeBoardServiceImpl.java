@@ -91,6 +91,17 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return new TradeBoardGetResponseDto(tradeBoard);
 	}
 
+	@Override
+	public Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable) {
+
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		Page<TradeBoard> tradeBoards = tradeBoardRepository.findByUser(user, pageable);
+
+		return tradeBoards.map(TradeBoardGetAllResponseDto::new);
+	}
+
 	//게시글 수정
 	@Override
 	@Transactional

@@ -19,6 +19,7 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.domain.tradeBoard.repository.TradeBoardQueryRepository;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -34,6 +35,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
 	private final TradeBoardImageService tradeBoardImageService;
+	private final TradeBoardQueryRepository tradeBoardQueryRepository;
 
 	//tradeBoardId로 tradeBoard 조회
 	@Override
@@ -74,14 +76,9 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional(readOnly = true)
 	public Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, Pageable pageable) {
 
-		Page<TradeBoard> tradeBoard;
-		if (category != null) { //카테고리가 있다면 카테고리로 조회
-			tradeBoard = tradeBoardRepository.findAllByCategory(category, pageable);
-		} else {
-			tradeBoard = tradeBoardRepository.findAll(pageable);
-		}
+		Page<TradeBoard> tradeBoards = tradeBoardQueryRepository.findAll(category, pageable);
 
-		return tradeBoard.map(TradeBoardGetAllResponseDto::new);
+		return tradeBoards.map(TradeBoardGetAllResponseDto::new);
 	}
 
 	//게시글 단건 조회

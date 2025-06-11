@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -26,7 +26,7 @@ public class UserController {
 	 * @param request
 	 * @return 성공 메시지 + 내 정보 (이메일, 닉네임)
 	 */
-	@GetMapping("/myinfo")
+	@GetMapping("/me")
 	public ResponseEntity<CommonResponse<UserProfileResponseDto>> getMyInfo(HttpServletRequest request) {
 
 		String accessToken = jwtProvider.resolveToken(request);

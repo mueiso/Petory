@@ -4,8 +4,9 @@ import java.security.Key;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -26,11 +27,13 @@ import jakarta.servlet.http.HttpServletRequest;
 @Component
 public class JwtProvider {
 
-	private final StringRedisTemplate redisTemplate;
+	private final RedisTemplate<String, String> loginRefreshToken;
 
-	public JwtProvider(StringRedisTemplate redisTemplate) {
+	public JwtProvider(
+		@Qualifier("loginRefreshToken")
+		RedisTemplate<String, String> loginRefreshToken) {
 
-		this.redisTemplate = redisTemplate;
+		this.loginRefreshToken = loginRefreshToken;
 	}
 
 	/*
@@ -183,13 +186,13 @@ public class JwtProvider {
 		long expireMillis = refreshTokenLife;
 
 		// TODO - RefreshToken 저장 Key 를 이메일 말고 userId로
-		redisTemplate.opsForValue().set(email, refreshToken, expireMillis, TimeUnit.MILLISECONDS);
+		loginRefreshToken.opsForValue().set(email, refreshToken, expireMillis, TimeUnit.MILLISECONDS);
 	}
 
 	// 로그아웃 시 Redis 에서 해당 사용자의 Refresh Token 삭제
 	public void deleteRefreshToken(String email) {
 
-		redisTemplate.delete(email);
+		loginRefreshToken.delete(email);
 	}
 
 	/*
@@ -198,7 +201,7 @@ public class JwtProvider {
 	 */
 	public boolean isValidRefreshToken(String email, String refreshToken) {
 
-		String saved = redisTemplate.opsForValue().get(email);
+		String saved = loginRefreshToken.opsForValue().get(email);
 
 		return saved != null && saved.equals(refreshToken);
 	}

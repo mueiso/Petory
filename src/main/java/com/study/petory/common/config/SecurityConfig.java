@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.study.petory.common.security.CustomAccessDeniedHandler;
 import com.study.petory.common.security.JwtAuthenticationEntryPoint;
 import com.study.petory.common.security.JwtFilter;
 import com.study.petory.domain.user.service.CustomOAuth2UserService;
@@ -61,17 +62,24 @@ public class SecurityConfig {
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers(
 					"/auth/**",
+					"/login/**",
 					"/users/signup",
 					"/users/login",
 					"/oauth2/**",       // 소셜 로그인 진입점 (예: /oauth2/authorization/google)
 					"/login/oauth2/**", // 소셜 로그인 콜백 URI (예: /login/oauth2/code/google)
-					"/error"
+					"/error",
+					"/login.html",
+					"/login-success.html",
+					"/css/**",
+					"/js/**",
+					"/images/**"
 				).permitAll()
 				.anyRequest().authenticated()
 			)
 
 			.exceptionHandling(ex -> ex
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 분리된 클래스 사용
+				.accessDeniedHandler(new CustomAccessDeniedHandler())
 			)
 
 			.oauth2Login(oauth2 -> oauth2

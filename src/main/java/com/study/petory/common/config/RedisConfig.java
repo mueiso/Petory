@@ -6,6 +6,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -25,8 +26,16 @@ public class RedisConfig {
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
-		config.setDatabase(0);
+		config.setDatabase(1);
 		return new LettuceConnectionFactory(config);
+	}
+
+	@Bean(name = "redisCacheTemplate")
+	public RedisTemplate<String, Object> redisCacheTemplate() {
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(redisConnectionFactory());
+		redisTemplate.setValueSerializer(valueSerializer());
+		return redisTemplate;
 	}
 
 	private RedisSerializer<Object> valueSerializer() {
@@ -46,10 +55,18 @@ public class RedisConfig {
 	}
 
 	@Bean
+	@Primary
+	public RedisConnectionFactory redisConnectionManager() {
+		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
+		config.setDatabase(0);
+		return new LettuceConnectionFactory(config);
+	}
+
+	@Bean(name = "loginRefreshToken")
 	public RedisTemplate<String, String> loginRefreshToken() {
 		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
-		redisTemplate.setConnectionFactory(redisConnectionFactory());
+		redisTemplate.setConnectionFactory(redisConnectionManager());
 		return redisTemplate;
 	}
 }

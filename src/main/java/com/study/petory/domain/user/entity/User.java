@@ -7,6 +7,7 @@ import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,8 +38,7 @@ public class User extends TimeFeatureBasedEntity {
 	@JoinColumn(name = "user_private_info_id")
 	private UserPrivateInfo userPrivateInfo;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "user_id")  // 단방향 설정 시 꼭 사용
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<UserRole> userRole;
 
 	@Builder

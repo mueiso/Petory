@@ -3,15 +3,14 @@ package com.study.petory.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.exception.enums.ErrorCode;
@@ -48,5 +47,10 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<CommonResponse<Void>> CommonException(CustomException e) {
 		ErrorCode response = e.getErrorCode();
 		return CommonResponse.of(response, null);
+	}
+
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<Void> RuntimeException(RuntimeException e) {
+		return ResponseEntity.badRequest().build();
 	}
 }

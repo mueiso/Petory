@@ -29,14 +29,25 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtProvider jwtProvider;
 
-	private final RedisTemplate<String, String> redisTemplate;
+	private final RedisTemplate<String, String> loginRefreshToken;
+
+	public JwtFilter(
+		JwtProvider jwtProvider,
+		@Qualifier("loginRefreshToken")
+		RedisTemplate<String, String> loginRefreshToken
+	) {
+		this.jwtProvider = jwtProvider;
+		this.loginRefreshToken = loginRefreshToken;
+	}
 
 	// TODO - URL 추가 및 수정 필요
 	// WHITELIST
 	private static final List<String> WHITELIST = List.of(
 		"/auth/login",
 		"/users/signup",
-		"/auth/refresh"
+		"/auth/refresh",
+		"/login.html",
+		"/favicon.ico"
 	);
 
 	@Override
@@ -48,7 +59,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		debugLog("요청 URI: " + url);
 
 		// 요청된 URL 이 인증 우회 대상인지 판단 후 JWT 인증 필터 건너뛰기/ 후 다음 필터로 넘김
-		if (WHITELIST.contains(url)) {
+		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$") || WHITELIST.contains(url)) {
 			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 
@@ -57,12 +68,19 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// 클라이언트가 HTTP 요청에 Authorization 헤더 포함시켰는지 확인
 		String bearerJwt = request.getHeader("Authorization");
-		debugLog("Authorization 헤더: " + bearerJwt);
+
+		// 쿼리 파라미터에서도 accessToken 시도 (테스트 목적)
+		if (bearerJwt == null) {
+			String queryToken = request.getParameter("accessToken");
+			if (queryToken != null) {
+				bearerJwt = "Bearer " + queryToken;
+				debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
+			}
+		}
 
 		if (bearerJwt == null) {
 			debugLog("Authorization 헤더 없음. 필터 중단");
 			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "Authorization 헤더가 존재하지 않습니다.");
-
 			return;
 		}
 
@@ -94,7 +112,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		 * Redis 에서 tokenKey 존재하는지 확인
 		 * hasKey() : 해당 키가 Redis 에 존재하는지 여부에 따라 true/false 반환
 		 */
-		Boolean isBlackListed = redisTemplate.hasKey(tokenKey);
+		Boolean isBlackListed = loginRefreshToken.hasKey(tokenKey);
 		debugLog("Redis 블랙리스트 키 조회: " + tokenKey + " / 존재 여부: " + isBlackListed);
 
 		/*

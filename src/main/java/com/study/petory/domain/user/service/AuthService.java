@@ -2,7 +2,8 @@ package com.study.petory.domain.user.service;
 
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.common.security.JwtProvider;
@@ -15,15 +16,23 @@ import com.study.petory.exception.enums.ErrorCode;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
 
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
-	private final StringRedisTemplate redisTemplate;
+	private final RedisTemplate<String, String> loginRefreshToken;
+
+	public AuthService(
+		UserRepository userRepository,
+		JwtProvider jwtProvider,
+		@Qualifier("loginRefreshToken")
+		RedisTemplate<String, String> loginRefreshToken) {
+		this.userRepository = userRepository;
+		this.jwtProvider = jwtProvider;
+		this.loginRefreshToken = loginRefreshToken;
+	}
 
 	private static final String REFRESH_TOKEN_COOKIE_NAME = "refreshToken";
 
@@ -41,7 +50,8 @@ public class AuthService {
 		}
 
 		// Access Token: 사용자 정보를 포함해 짧은 생명주기로 발급
-		String accessToken = jwtProvider.createAccessToken(savedUser.getId(), savedUser.getEmail(), savedUser.getNickname());
+		String accessToken = jwtProvider.createAccessToken(savedUser.getId(), savedUser.getEmail(),
+			savedUser.getNickname());
 
 		// Refresh Token: ID만 기반으로 더 긴 생명주기로 발급
 		String refreshToken = jwtProvider.createRefreshToken(savedUser.getId());
@@ -90,7 +100,7 @@ public class AuthService {
 		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
 
 		// Redis 에 "BLACKLIST_{token}" 키로 남은 유효시간만큼 저장
-		redisTemplate
+		loginRefreshToken
 			.opsForValue()
 			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
 
@@ -140,7 +150,12 @@ public class AuthService {
 
 		for (Cookie cookie : request.getCookies()) {
 			if (REFRESH_TOKEN_COOKIE_NAME.equals(cookie.getName())) {
-				return cookie.getValue();
+				try {
+					return java.net.URLDecoder.decode(cookie.getValue(),
+						java.nio.charset.StandardCharsets.UTF_8.name());
+				} catch (Exception e) {
+					throw new CustomException(ErrorCode.INVALID_TOKEN);
+				}
 			}
 		}
 		throw new CustomException(ErrorCode.INVALID_TOKEN);

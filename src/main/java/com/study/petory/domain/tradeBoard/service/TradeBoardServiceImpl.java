@@ -94,34 +94,17 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
 
 		//나중에 토큰으로 값 받아오기
-		User user = userRepository.findById(1L)
+		User loginUser = userRepository.findById(1L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = findTradeBoardById(tradeBoardId);
 
-		if (tradeBoard.getUser() != user) {
-			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);
+		//로그인 유저와 게시글의 유저가 다를 경우 예외처리
+		if (!tradeBoard.isEqualUser(loginUser.getId())) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 
-		if (requestDto.getCategory() != null) {
-			tradeBoard.updateCategory(requestDto.getCategory());
-		}
-
-		if (requestDto.getTitle() != null && !requestDto.getTitle().isBlank()) {
-			tradeBoard.updateTitle(requestDto.getTitle());
-		}
-
-		if (requestDto.getContent() != null && !requestDto.getContent().isBlank()) {
-			tradeBoard.updateContent(requestDto.getContent());
-		}
-
-		if (requestDto.getPhotoUrl() != null && !requestDto.getPhotoUrl().isBlank()) {
-			tradeBoard.updatePhotoUrl(requestDto.getPhotoUrl());
-		}
-
-		if (requestDto.getPrice() != null) {
-			tradeBoard.updatePrice(requestDto.getPrice());
-		}
+		tradeBoard.updateTradeBoard(requestDto);
 
 		return new TradeBoardUpdateResponseDto(tradeBoard);
 	}
@@ -131,6 +114,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional
 	public void updateTradeBoardStatus(Long tradeBoardId, TradeBoardStatus status) {
 
+		//토큰 값으로 변경 예정
 		User loginUser = userRepository.findById(1L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 

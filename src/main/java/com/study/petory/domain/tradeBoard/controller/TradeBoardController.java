@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,7 +82,7 @@ public class TradeBoardController {
 	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액 (nullable)
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
 	 */
-	@PatchMapping("/{tradeBoardId}/1")
+	@PutMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
 		@PathVariable Long tradeBoardId,
 		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto

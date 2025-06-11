@@ -3,6 +3,7 @@ package com.study.petory.domain.tradeBoard.entity;
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
+import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -63,37 +64,21 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 		this.user = user;
 	}
 
-	public void updateCategory(TradeCategory tradeCategory) {
-		this.category = tradeCategory;
-	}
-
-	public void updateTitle(String title) {
+	public void updateTradeBoard(TradeBoardUpdateRequestDto requestDto) {
+		this.category = category;
 		this.title = title;
-	}
-
-	public void updateContent(String content) {
 		this.content = content;
-	}
-
-	public void updatePhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
-	}
-
-	public void updatePrice(Integer price) {
 		this.price = price;
+		this.status = requestDto.getStatus();
 	}
 
-	// tradeBoardId 검증 메서드
-	public boolean isEqualId(Long tradeBoardId) {
-		return this.id.equals(tradeBoardId);
+	public void updateStatus(TradeBoardStatus status) {
+		this.status = status;
 	}
 
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
-	}
-
-	public void updateStatus(TradeBoardStatus status) {
-		this.status = status;
 	}
 }

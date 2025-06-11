@@ -19,18 +19,23 @@ import com.study.petory.domain.user.entity.QUser;
 import lombok.RequiredArgsConstructor;
 
 @Repository
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
 	private final QDailyQna qDailyQna = QDailyQna.dailyQna;
 
+	private final QUser qUser = QUser.user;
+
+	private final QQuestion qQuestion = QQuestion.question1;
+
+	public DailyQnaCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
+		this.jpaQueryFactory = jpaQueryFactory;
+	}
+
 	@Override
 	public List<DailyQna> findDailyQna(Long userId, Long questionId) {
-		QUser qUser = QUser.user;
-		QQuestion qQuestion = QQuestion.question1;
-
 		return jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.join(qDailyQna.user, qUser).fetchJoin()
@@ -58,6 +63,7 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 	public Page<DailyQna> findDailyQnaByHidden(Long userId, Pageable pageable) {
 		List<DailyQna> DailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
+			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.HIDDEN)
@@ -69,6 +75,7 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		Long total = jpaQueryFactory
 			.select(qDailyQna.count())
 			.from(qDailyQna)
+			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.HIDDEN)
@@ -84,6 +91,7 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 	public Page<DailyQna> findDailyQnaByDeleted(Long userId, Pageable pageable) {
 		List<DailyQna> DailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
+			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.DELETED)
@@ -95,6 +103,7 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		Long total = jpaQueryFactory
 			.select(qDailyQna.count())
 			.from(qDailyQna)
+			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.DELETED)
@@ -113,6 +122,8 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		return jpaQueryFactory
 			.selectOne()
 			.from(qDailyQna)
+			.join(qDailyQna.user, qUser).fetchJoin()
+			.join(qDailyQna.question, qQuestion).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.question.id.eq(questionId),

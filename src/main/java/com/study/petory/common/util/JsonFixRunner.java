@@ -5,8 +5,8 @@ import java.io.File;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 

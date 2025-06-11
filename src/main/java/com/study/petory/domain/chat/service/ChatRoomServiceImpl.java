@@ -6,8 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
-import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.chat.dto.response.ChatRoomAllGetResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
@@ -17,8 +19,6 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 

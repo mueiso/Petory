@@ -3,13 +3,13 @@ package com.study.petory.domain.ownerBoard.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.util.AbstractImageService;
 import com.study.petory.common.util.S3Uploader;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardImageRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 @Service
 public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage> {

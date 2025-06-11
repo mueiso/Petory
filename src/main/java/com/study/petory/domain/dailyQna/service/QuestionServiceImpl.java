@@ -10,20 +10,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.util.DateUtil;
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponse;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 import com.study.petory.domain.user.service.UserService;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -130,7 +130,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return QuestionGetTodayResponseDto.from(question);
 	}
 
-	// 질문 수정
+	// 질문 수정 admin
 	@Override
 	@Transactional
 	@CacheEvict(value = "todayQuestion", allEntries = true)
@@ -143,11 +143,11 @@ public class QuestionServiceImpl implements QuestionService {
 		question.update(request.getQuestion(), request.getDate());
 	}
 
-	// 질문 비활성화
+	// 질문 비활성화 admin
 	@Override
 	@Transactional
 	@CacheEvict(value = "todayQuestion", allEntries = true)
-	public void InactiveQuestion(Long adminId, Long questionId) {
+	public void inactiveQuestion(Long adminId, Long questionId) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
@@ -156,19 +156,19 @@ public class QuestionServiceImpl implements QuestionService {
 		question.updateStatusInactive();
 	}
 
-	// 비활성화 된 질문 조회
+	// 비활성화 된 질문 조회 admin
 	@Override
-	public Page<QuestionGetInactiveResponse> findInactiveQuestion(Long adminId, Pageable pageable) {
+	public Page<QuestionGetInactiveResponseDto> findInactiveQuestion(Long adminId, Pageable pageable) {
 		// 수정 예정
 		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
 		Page<Question> questionPage = questionRepository.findQuestionByInactive(pageable);
 		return questionPage
-			.map(QuestionGetInactiveResponse::from);
+			.map(QuestionGetInactiveResponseDto::from);
 	}
 
-	// 비활성화 된 질문 복구
+	// 비활성화 된 질문 복구 admin
 	@Override
 	@Transactional
 	public void updateQuestionStatusActive(Long adminId, Long questionId) {
@@ -180,7 +180,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.updateStatusActive();
 	}
 
-	// 질문 삭제
+	// 질문 삭제 admin
 	@Override
 	@Transactional
 	public void deactivateQuestion(Long adminId, Long questionId) {
@@ -196,7 +196,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.updateStatusDelete();
 	}
 
-	// 삭제된 질문 복구
+	// 삭제된 질문 복구 admin
 	@Override
 	@Transactional
 	public void restoreQuestion(Long adminId, Long questionId) {
@@ -212,7 +212,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.updateStatusActive();
 	}
 
-	// 관리자가 삭제된 답변 조회
+	// 관리자가 삭제된 질문 조회 admin
 	@Override
 	public Page<QuestionGetDeletedResponse> findQuestionByDeleted(Long adminId, Pageable pageable) {
 		// 수정 예정

@@ -1,6 +1,6 @@
-package com.study.petory.exception;
+package com.study.petory.common.exception;
 
-import com.study.petory.exception.enums.ErrorCode;
+import com.study.petory.common.exception.enums.ErrorCode;
 
 public class CustomException extends RuntimeException {
 

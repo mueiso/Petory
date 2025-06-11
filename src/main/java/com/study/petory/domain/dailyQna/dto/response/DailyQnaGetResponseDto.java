@@ -24,4 +24,11 @@ public class DailyQnaGetResponseDto {
 			dailyQna.getCreatedAt()
 		);
 	}
+
+	public static DailyQnaGetResponseDto from(String answer, LocalDateTime createdAt) {
+		return new DailyQnaGetResponseDto(
+			answer,
+			createdAt
+		);
+	}
 }

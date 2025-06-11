@@ -7,7 +7,7 @@ import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponse;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
@@ -34,9 +34,9 @@ public interface QuestionService {
 
 	void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request);
 
-	void InactiveQuestion(Long adminId, Long questionId);
+	void inactiveQuestion(Long adminId, Long questionId);
 
-	Page<QuestionGetInactiveResponse> findInactiveQuestion(Long adminId, Pageable pageable);
+	Page<QuestionGetInactiveResponseDto> findInactiveQuestion(Long adminId, Pageable pageable);
 
 	void updateQuestionStatusActive(Long adminId, Long questionId);
 

@@ -2,13 +2,13 @@ package com.study.petory.domain.chat.service;
 
 import org.springframework.stereotype.Service;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.chat.dto.request.ChatMessageSendRequestDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
 import com.study.petory.domain.chat.repository.ChatMessageRepository;
 import com.study.petory.domain.chat.repository.ChatRoomRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 

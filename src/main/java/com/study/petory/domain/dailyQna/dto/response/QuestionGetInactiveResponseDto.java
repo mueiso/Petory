@@ -7,7 +7,7 @@ import com.study.petory.domain.dailyQna.entity.Question;
 import lombok.Getter;
 
 @Getter
-public class QuestionGetInactiveResponse {
+public class QuestionGetInactiveResponseDto {
 
 	private final String question;
 
@@ -15,14 +15,14 @@ public class QuestionGetInactiveResponse {
 
 	private final LocalDateTime inactiveTime;
 
-	private QuestionGetInactiveResponse(String question, String date, LocalDateTime inactiveTime) {
+	private QuestionGetInactiveResponseDto(String question, String date, LocalDateTime inactiveTime) {
 		this.question = question;
 		this.date = date;
 		this.inactiveTime = inactiveTime;
 	}
 
-	public static QuestionGetInactiveResponse from(Question question) {
-		return new QuestionGetInactiveResponse(
+	public static QuestionGetInactiveResponseDto from(Question question) {
+		return new QuestionGetInactiveResponseDto(
 			question.getQuestion(),
 			question.getDate(),
 			question.getUpdatedAt()

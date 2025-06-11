@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
@@ -27,12 +28,11 @@ import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponse;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponse;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.service.DailyQnaService;
 import com.study.petory.domain.dailyQna.service.QuestionService;
-import com.study.petory.exception.enums.SuccessCode;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -144,7 +144,7 @@ public class QuestionController {
 		@PathVariable Long questionId
 	) {
 		Long adminId = 1L;
-		questionService.InactiveQuestion(adminId ,questionId);
+		questionService.inactiveQuestion(adminId, questionId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -155,7 +155,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 수정일
 	 */
 	@GetMapping("/inactive")
-	public ResponseEntity<CommonResponse<Page<QuestionGetInactiveResponse>>> getInactiveQuestion(
+	public ResponseEntity<CommonResponse<Page<QuestionGetInactiveResponseDto>>> getInactiveQuestion(
 		// 유저 정보: 수정 예정
 		// 어노테이션 Long adminId
 		@PageableDefault(size = 50, sort = "updatedAt", direction = Sort.Direction.ASC) Pageable pageable

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
@@ -20,7 +21,6 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.service.TradeBoardService;
-import com.study.petory.exception.enums.SuccessCode;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

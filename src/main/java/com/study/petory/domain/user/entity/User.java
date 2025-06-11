@@ -33,11 +33,11 @@ public class User extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private String email;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "user_private_info_id")
 	private UserPrivateInfo userPrivateInfo;
 
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "user_id")  // 단방향 설정 시 꼭 사용
 	private List<UserRole> userRole;
 

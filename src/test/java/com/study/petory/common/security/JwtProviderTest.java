@@ -17,12 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
-
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @ExtendWith(MockitoExtension.class)
 class JwtProviderTest {

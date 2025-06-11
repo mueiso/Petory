@@ -32,12 +32,12 @@ public class ChatServiceImpl implements ChatService{
 	private final ChatAggregateRepository aggregateRepository;
 
 	//사용하지 않으면 삭제 예정
-	private User findUserById(Long userId) {
+	public User findUserById(Long userId) {
 		return userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 
-	private ChatRoom findByChatRoomId(String chatRoomId) {
+	public ChatRoom findByChatRoomId(String chatRoomId) {
 		return chatRepository.findById(new ObjectId(chatRoomId))
 			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
 	}

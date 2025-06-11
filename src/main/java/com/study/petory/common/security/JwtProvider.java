@@ -123,7 +123,7 @@ public class JwtProvider {
 		String bearerToken = request.getHeader("Authorization");
 
 		// 2. 값이 존재하고, "Bearer "로 시작하는지 확인
-		if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
 
 			// 3. 접두어 "Bearer "를 제거한 실제 토큰 반환
 			return bearerToken.substring(7);

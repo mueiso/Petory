@@ -72,10 +72,12 @@ public class JwtFilter extends OncePerRequestFilter {
 		// 쿼리 파라미터에서도 accessToken 시도 (테스트 목적)
 		if (bearerJwt == null) {
 			String queryToken = request.getParameter("accessToken");
-			if (queryToken != null) {
+			if (queryToken.startsWith("Bearer ")) {
+				bearerJwt = queryToken;
+			} else {
 				bearerJwt = "Bearer " + queryToken;
-				debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
 			}
+			debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
 		}
 
 		if (bearerJwt == null) {
@@ -129,6 +131,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		try {
 			// 내부에서 Bearer 제거 + 토큰의 유효성 검증 → Claims 객체로 반환
 			Claims claims = jwtProvider.getClaims(bearerJwt);
+
 			// Claims 는 JWT 내부 payload 정보들을 갖고 있어 getSubject() 로 값 추출 가능
 			String userId = claims.getSubject();
 			debugLog("JWT Claims 파싱 성공 - 사용자 ID: " + userId);

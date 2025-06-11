@@ -148,9 +148,12 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 사진 삭제
 	@Override
 	public void deleteImage(Long boardId, Long imageId) {
-		findOwnerBoardById(boardId);
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
 		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
-		ownerBoardImageService.deleteImageInternal(image);
+
+		ownerBoardImageService.deleteImageInternal(image); // S3 이미지 정보 삭제
+		ownerBoard.getImages().remove(image); // DB 이미지 정보 삭제, 연관관계를 끊어 고아객체로 만들면 delete 쿼리 발생
 	}
 
 }

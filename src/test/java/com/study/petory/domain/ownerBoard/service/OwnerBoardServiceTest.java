@@ -282,6 +282,36 @@ public class OwnerBoardServiceTest {
 		assertNull(deletedBoard.getDeletedAt());
 	}
 
-	// 유저소통_게시글_사진_삭제에_성공한다
+	@Test
+	void 게시글의_사진_삭제에_성공한다() {
+		// given
+		Long boardId = 1L;
+		Long imageId = 10L;
+
+		OwnerBoard board = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(mockUser)
+			.build();
+
+		OwnerBoardImage image1 = mock(OwnerBoardImage.class);
+		ReflectionTestUtils.setField(image1, "id", imageId);
+		OwnerBoardImage image2 = mock(OwnerBoardImage.class);
+
+		ReflectionTestUtils.setField(board, "id", boardId);
+		ReflectionTestUtils.setField(board, "images", new ArrayList<>(List.of(image1, image2)));
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
+		given(ownerBoardImageService.findImageById(imageId)).willReturn(image1);
+
+		// when
+		ownerBoardService.deleteImage(boardId, imageId);
+
+		// then
+		verify(ownerBoardRepository).findByIdWithImages(boardId);
+		verify(ownerBoardImageService).findImageById(imageId);
+		verify(ownerBoardImageService).deleteImageInternal(image1);
+		assertEquals(1, board.getImages().size());
+	}
 
 }

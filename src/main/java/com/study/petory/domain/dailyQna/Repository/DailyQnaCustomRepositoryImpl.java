@@ -41,7 +41,8 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 				qDailyQna.question.id.eq(questionId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.ACTIVE)
 			)
-			.stream().toList();
+			.orderBy(qDailyQna.createdAt.desc())
+			.fetch();
 	}
 
 	@Override

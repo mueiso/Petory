@@ -86,7 +86,6 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 
 		return dailyQnaList.stream()
 			.map(DailyQnaGetResponseDto::from)
-			.sorted(Comparator.comparing(DailyQnaGetResponseDto::getCreatedAt).reversed())
 			.collect(Collectors.toList());
 	}
 

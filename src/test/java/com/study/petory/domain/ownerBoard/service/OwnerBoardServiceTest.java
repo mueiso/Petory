@@ -186,7 +186,7 @@ public class OwnerBoardServiceTest {
 			.build();
 
 		List<OwnerBoardComment> mockComments = IntStream.range(0, 10)
-			.mapToObj(i ->  OwnerBoardComment.builder()
+			.mapToObj(i -> OwnerBoardComment.builder()
 				.content("댓글 " + i)
 				.user(mockUser)
 				.ownerBoard(mockBoard)
@@ -220,7 +220,7 @@ public class OwnerBoardServiceTest {
 			.user(mockUser)
 			.build();
 
-		ReflectionTestUtils.setField(originalBoard,"id", boardId);
+		ReflectionTestUtils.setField(originalBoard, "id", boardId);
 		OwnerBoardUpdateRequestDto requestDto = new OwnerBoardUpdateRequestDto("수정된 제목", "수정된 내용");
 
 		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(originalBoard));

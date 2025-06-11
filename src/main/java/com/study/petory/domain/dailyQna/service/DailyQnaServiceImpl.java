@@ -38,17 +38,15 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	// 단순 답변 조회
 	@Override
 	public DailyQna findDailyQnaByDailyQnaId(Long dailyQnaId) {
-		DailyQna dailyQna = dailyQnaRepository.findById(dailyQnaId)
+		return dailyQnaRepository.findById(dailyQnaId)
 			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
-		return dailyQna;
 	}
 
 	// 상태가 정상인 답변 조회
 	@Override
 	public DailyQna findDailyQnaByActive(Long dailyQnaId) {
-		DailyQna dailyQna = dailyQnaRepository.findDailyQnaByActive(dailyQnaId)
+		return dailyQnaRepository.findDailyQnaByActive(dailyQnaId)
 			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
-		return dailyQna;
 	}
 
 	// 본인의 답변이 맞는지 검증

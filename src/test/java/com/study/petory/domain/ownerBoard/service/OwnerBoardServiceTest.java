@@ -1,6 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import java.util.ArrayList;
@@ -54,15 +55,16 @@ public class OwnerBoardServiceTest {
 	}
 
 	@Test
-	void 유저소통_게시글과_이미지를_함께_저장에_성공다() {
+	void 유저소통_게시글_저장에_성공한다_이미지_포함() {
 		// given
-		OwnerBoardCreateRequestDto dto = new OwnerBoardCreateRequestDto("제목", "내용");
+		OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
 
 		List<MultipartFile> images = List.of(
 			new MockMultipartFile("image", "test.jpg", "image/jpeg", "image data".getBytes())
 		);
 
-		OwnerBoard mockBoard = OwnerBoard.builder().title("제목")
+		OwnerBoard mockBoard = OwnerBoard.builder()
+			.title("제목")
 			.content("내용")
 			.user(mockUser)
 			.build();
@@ -74,7 +76,7 @@ public class OwnerBoardServiceTest {
 		given(ownerBoardImageService.uploadAndSaveAll(any(), any())).willReturn(mockUrls);
 
 		// when
-		OwnerBoardCreateResponseDto response = ownerBoardService.saveOwnerBoard(dto, images);
+		OwnerBoardCreateResponseDto response = ownerBoardService.saveOwnerBoard(requestDto, images);
 
 		// then
 		assertThat(response.getTitle()).isEqualTo("제목");
@@ -82,7 +84,31 @@ public class OwnerBoardServiceTest {
 		assertThat(response.getImageUrls()).containsExactlyElementsOf(mockUrls);
 	}
 
-	// 유저소통_게시글_저장에_성공한다.
+	@Test
+	void 유저소통_게시글_저장에_성공한다_이미지_미포함() {
+		// given
+		OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
+		List<MultipartFile> images = null;
+
+		OwnerBoard mockBoard = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(mockUser)
+			.build();
+
+		given(userRepository.findById(1L)).willReturn(Optional.of(mockUser));
+		given(ownerBoardRepository.save(any(OwnerBoard.class))).willReturn(mockBoard);
+
+		// when
+		OwnerBoardCreateResponseDto response = ownerBoardService.saveOwnerBoard(requestDto, images);
+
+		// then
+		assertThat(response.getTitle()).isEqualTo("제목");
+		assertThat(response.getContent()).isEqualTo("내용");
+		assertTrue(response.getImageUrls().isEmpty());
+		verify(ownerBoardImageService, never()).uploadAndSaveAll(any(), any());
+	}
+
 	// 유저소통_게시글_검색어_없이_전체_조회에_성공한다
 	// 유저소통_게시글_검색어_포함_전체_조회에_성공한다
 	// 유저소통_게시글_단건_조회에_성공한다

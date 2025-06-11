@@ -14,6 +14,8 @@ public class TradeBoardGetResponseDto {
 
 	private final Long id;
 
+	private final Long sellerId;
+
 	private final TradeCategory category;
 
 	private final String title;
@@ -30,6 +32,7 @@ public class TradeBoardGetResponseDto {
 
 	public TradeBoardGetResponseDto(TradeBoard tradeBoard) {
 		this.id = tradeBoard.getId();
+		this.sellerId = tradeBoard.getUser().getId();
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
 		this.content = tradeBoard.getContent();

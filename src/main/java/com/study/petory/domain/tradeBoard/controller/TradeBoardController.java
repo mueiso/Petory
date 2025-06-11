@@ -1,6 +1,7 @@
 package com.study.petory.domain.tradeBoard.controller;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,15 +52,15 @@ public class TradeBoardController {
 	/**
 	 * 게시글 전체 조회
 	 * @param category 카테고리 (nullable)
-	 * @param page 조회하려는 페이지 위치
+	 * @param pageable 조회하려는 페이지
 	 * @return List 형식의 게시글 반환
 	 */
 	@GetMapping
 	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
 		@RequestParam(required = false) TradeCategory category,
-		@RequestParam(defaultValue = "1") int page
+		Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findAllTradeBoard(category, page));
+		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findAllTradeBoard(category, pageable));
 	}
 
 	/**

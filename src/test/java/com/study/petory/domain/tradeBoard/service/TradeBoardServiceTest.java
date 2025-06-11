@@ -112,7 +112,6 @@ class TradeBoardServiceTest {
 		tradeBoardRepository.save(tradeBoard2);
 
 		//when
-		Page<TradeBoardGetAllResponseDto> tradeBoards = tradeBoardService.findAllTradeBoard(null, page);
 
 		//then
 

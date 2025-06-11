@@ -2,6 +2,7 @@ package com.study.petory.domain.tradeBoard.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,10 +64,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 전체 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, int page) {
-
-		int adjustedPage = (page > 0) ? page - 1 : 0;
-		PageRequest pageable = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").descending());
+	public Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, Pageable pageable) {
 
 		Page<TradeBoard> tradeBoard;
 		if (category != null) { //카테고리가 있다면 카테고리로 조회

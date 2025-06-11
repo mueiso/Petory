@@ -1,6 +1,7 @@
 package com.study.petory.domain.tradeBoard.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
@@ -16,7 +17,7 @@ public interface TradeBoardService {
 
 	TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto);
 
-	Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, int page);
+	Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, Pageable pageable);
 
 	TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId);
 

@@ -3,13 +3,11 @@ package com.study.petory.domain.user.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.domain.user.dto.OAuth2LoginRequestDto;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.service.AuthService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -28,24 +26,24 @@ public class AuthController {
 
 	private static final String REFRESH_TOKEN_NAME = "refreshToken";
 
-	@PostMapping("/login")
-	public ResponseEntity<CommonResponse<TokenResponseDto>> login(
-		@RequestBody OAuth2LoginRequestDto loginRequestDto,
-		HttpServletResponse response) {
-
-		// 로그인 및 JWT 토큰 발급
-		TokenResponseDto tokenResponseDto = authService.login(loginRequestDto);
-
-		// refreshToken 을 HttpOnly 쿠키로 설정
-		Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, tokenResponseDto.getRefreshToken());
-		refreshCookie.setPath("/");
-		refreshCookie.setHttpOnly(true);
-		refreshCookie.setSecure(true);  // HTTPS 환경에서만 전송
-		refreshCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일
-		response.addCookie(refreshCookie);
-
-		return CommonResponse.of(SuccessCode.USER_LOGIN, tokenResponseDto);
-	}
+	// @PostMapping("/login")
+	// public ResponseEntity<CommonResponse<TokenResponseDto>> login(
+	// 	@RequestBody OAuth2LoginRequestDto loginRequestDto,
+	// 	HttpServletResponse response) {
+	//
+	// 	// 로그인 및 JWT 토큰 발급
+	// 	TokenResponseDto tokenResponseDto = authService.login(loginRequestDto);
+	//
+	// 	// refreshToken 을 HttpOnly 쿠키로 설정
+	// 	Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, tokenResponseDto.getRefreshToken());
+	// 	refreshCookie.setPath("/");
+	// 	refreshCookie.setHttpOnly(true);
+	// 	refreshCookie.setSecure(true);  // HTTPS 환경에서만 전송
+	// 	refreshCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일
+	// 	response.addCookie(refreshCookie);
+	//
+	// 	return CommonResponse.of(SuccessCode.USER_LOGIN, tokenResponseDto);
+	// }
 
 	/**
 	 * 로그아웃 처리

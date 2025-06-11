@@ -7,7 +7,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.common.security.JwtProvider;
-import com.study.petory.domain.user.dto.OAuth2LoginRequestDto;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -62,28 +61,28 @@ public class AuthService {
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
 
-	public TokenResponseDto login(OAuth2LoginRequestDto loginDto) {
-
-		// 1. 이메일로 사용자 조회
-		User user = userRepository.findByEmail(loginDto.getEmail())
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
-		// TODO - 임시 검증 (삭제 예정)
-		// 2. 비밀번호 검증
-		// if (!user.getPassword().equals(loginDto.getPassword())) {
-		// 	// 실무에선 BCrypt 사용: passwordEncoder.matches(...)
-		// 	throw new CustomException(ErrorCode.INVALID_PASSWORD);
-		// }
-
-		// 3. 토큰 발급
-		String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
-		String refreshToken = jwtProvider.createRefreshToken(user.getId());
-
-		// 4. Redis 저장
-		jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
-
-		return new TokenResponseDto(accessToken, refreshToken);
-	}
+	// public TokenResponseDto login(OAuth2LoginRequestDto loginDto) {
+	//
+	// 	// 1. 이메일로 사용자 조회
+	// 	User user = userRepository.findByEmail(loginDto.getEmail())
+	// 		.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+	//
+	// 	// TODO - 임시 검증 (삭제 예정)
+	// 	// 2. 비밀번호 검증
+	// 	// if (!user.getPassword().equals(loginDto.getPassword())) {
+	// 	// 	// 실무에선 BCrypt 사용: passwordEncoder.matches(...)
+	// 	// 	throw new CustomException(ErrorCode.INVALID_PASSWORD);
+	// 	// }
+	//
+	// 	// 3. 토큰 발급
+	// 	String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
+	// 	String refreshToken = jwtProvider.createRefreshToken(user.getId());
+	//
+	// 	// 4. Redis 저장
+	// 	jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
+	//
+	// 	return new TokenResponseDto(accessToken, refreshToken);
+	// }
 
 	/*
 	 * 로그아웃: Access Token 블랙리스트 처리 + Refresh Token 삭제

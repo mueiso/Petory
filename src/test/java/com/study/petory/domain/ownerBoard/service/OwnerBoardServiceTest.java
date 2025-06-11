@@ -25,9 +25,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
@@ -89,12 +91,12 @@ public class OwnerBoardServiceTest {
 		given(ownerBoardImageService.uploadAndSaveAll(any(), any())).willReturn(mockUrls);
 
 		// when
-		OwnerBoardCreateResponseDto response = ownerBoardService.saveOwnerBoard(requestDto, images);
+		OwnerBoardCreateResponseDto result = ownerBoardService.saveOwnerBoard(requestDto, images);
 
 		// then
-		assertThat(response.getTitle()).isEqualTo("제목");
-		assertThat(response.getContent()).isEqualTo("내용");
-		assertThat(response.getImageUrls()).containsExactlyElementsOf(mockUrls);
+		assertThat(result.getTitle()).isEqualTo("제목");
+		assertThat(result.getContent()).isEqualTo("내용");
+		assertThat(result.getImageUrls()).containsExactlyElementsOf(mockUrls);
 	}
 
 	@Test
@@ -113,12 +115,12 @@ public class OwnerBoardServiceTest {
 		given(ownerBoardRepository.save(any(OwnerBoard.class))).willReturn(mockBoard);
 
 		// when
-		OwnerBoardCreateResponseDto response = ownerBoardService.saveOwnerBoard(requestDto, images);
+		OwnerBoardCreateResponseDto result = ownerBoardService.saveOwnerBoard(requestDto, images);
 
 		// then
-		assertThat(response.getTitle()).isEqualTo("제목");
-		assertThat(response.getContent()).isEqualTo("내용");
-		assertTrue(response.getImageUrls().isEmpty());
+		assertThat(result.getTitle()).isEqualTo("제목");
+		assertThat(result.getContent()).isEqualTo("내용");
+		assertTrue(result.getImageUrls().isEmpty());
 		verify(ownerBoardImageService, never()).uploadAndSaveAll(any(), any());
 	}
 
@@ -197,17 +199,42 @@ public class OwnerBoardServiceTest {
 		given(ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(boardId)).willReturn(mockComments);
 
 		// when
-		OwnerBoardGetResponseDto responseDto = ownerBoardService.findOwnerBoard(boardId);
+		OwnerBoardGetResponseDto result = ownerBoardService.findOwnerBoard(boardId);
 
 		// then
-		assertEquals("제목", responseDto.getTitle());
-		assertEquals("내용", responseDto.getContent());
-		assertEquals(2, responseDto.getImages().size());
-		assertEquals(10, responseDto.getCommentsList().size());
+		assertEquals("제목", result.getTitle());
+		assertEquals("내용", result.getContent());
+		assertEquals(2, result.getImages().size());
+		assertEquals(10, result.getCommentsList().size());
 	}
 
-	// 유저소통_게시글_수정에_성공한다
-	// 유저소통_게시글_삭제에_성공한다
+	@Test
+	void 게시글_수정에_성공한다() {
+		// given
+		Long boardId = 1L;
+		OwnerBoard originalBoard = OwnerBoard.builder()
+			.title("원래 제목")
+			.content("원래 내용")
+			.user(mockUser)
+			.build();
+
+		ReflectionTestUtils.setField(originalBoard,"id", boardId);
+		OwnerBoardUpdateRequestDto requestDto = new OwnerBoardUpdateRequestDto("수정된 제목", "수정된 내용");
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(originalBoard));
+
+		// when
+		OwnerBoardUpdateResponseDto result = ownerBoardService.updateOwnerBoard(boardId, requestDto);
+
+		// then
+		assertEquals("수정된 제목", result.getTitle());
+		assertEquals("수정된 내용", result.getContent());
+	}
+
+
+	// 게시글_삭제에_성공한다
+
+	// 게시글_복구에_성공한다
 	// 유저소통_게시글_사진_삭제에_성공한다
 
 }

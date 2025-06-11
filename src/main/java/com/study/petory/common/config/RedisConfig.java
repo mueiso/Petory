@@ -11,7 +11,9 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
@@ -42,4 +44,14 @@ public class RedisConfig {
 			.cacheDefaults(config)
 			.build();
 	}
+
+	// X하정님의 요청입니다 삭제하지 말아주세요 ㅠ
+
+	// @Bean
+	// public RedisTemplate<String, String> loginRefreshToken() {
+	// 	RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+	// 	redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
+	// 	redisTemplate.setConnectionFactory(RedisConnectionFactory 아무거나);
+	// 	return redisTemplate;
+	// }
 }

@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -119,13 +119,19 @@ public class OwnerBoardServiceTest {
 	void 제목이_포함된_게시글_조회에_성공한다() {
 		// given
 		String keyword = "제목";
-		Pageable pageable = PageRequest.of(0,5);
+		Pageable pageable = PageRequest.of(0, 5);
 		List<OwnerBoard> mockList = List.of(
-			OwnerBoard.builder().title("제목입니다").content("내용").build()
+			OwnerBoard.builder().title("제목입니다").content("내용").build(),
+			OwnerBoard.builder().title("포함안된 글").content("내용").build()
 		);
-		Page<OwnerBoard> mockPage = new PageImpl<>(mockList);
 
-		given(ownerBoardRepository.findByTitleContaining(keyword, pageable)).willReturn(mockPage);
+		Page<OwnerBoard> filteredPage = new PageImpl<>(
+			mockList.stream()
+				.filter(board -> board.getTitle().contains(keyword))
+				.collect(Collectors.toList())
+		);
+
+		given(ownerBoardRepository.findByTitleContaining(keyword, pageable)).willReturn(filteredPage);
 
 		// when
 		Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(keyword, pageable);
@@ -137,8 +143,28 @@ public class OwnerBoardServiceTest {
 		verify(ownerBoardRepository, never()).findAll();
 	}
 
-	// 유저소통_게시글_검색어_없이_전체_조회에_성공한다
-	// 유저소통_게시글_검색어_포함_전체_조회에_성공한다
+	@Test
+	void 제목_검색어_없이_게시글_전체_조회에_성공한다() {
+		// given
+		Pageable pageable = PageRequest.of(0, 5);
+		List<OwnerBoard> mockList = List.of(
+			OwnerBoard.builder().title("제목입니다").content("내용").build(),
+			OwnerBoard.builder().title("포함안된 글").content("내용").build()
+		);
+
+		Page<OwnerBoard> mockPage = new PageImpl<>(mockList);
+
+		given(ownerBoardRepository.findAll(pageable)).willReturn(mockPage);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(null, pageable);
+
+		// then
+		assertEquals(2, result.getTotalElements());
+		verify(ownerBoardRepository, times(1)).findAll(pageable);
+	}
+
+
 	// 유저소통_게시글_단건_조회에_성공한다
 	// 유저소통_게시글_수정에_성공한다
 	// 유저소통_게시글_삭제에_성공한다

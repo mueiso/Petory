@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -259,7 +260,28 @@ public class OwnerBoardServiceTest {
 		assertNotNull(board.getDeletedAt());
 	}
 
-	// 게시글_복구에_성공한다
+	@Test
+	void 게시글_복구에_성공한다() {
+		// given
+		Long boardId = 1L;
+
+		OwnerBoard deletedBoard = OwnerBoard.builder()
+			.title("삭제된 제목")
+			.content("삭제된 내용")
+			.user(mockUser)
+			.build();
+		ReflectionTestUtils.setField(deletedBoard, "id", boardId);
+		ReflectionTestUtils.setField(deletedBoard, "deletedAt", LocalDateTime.now());
+
+		given(ownerBoardRepository.findByIdIncludingDeleted(boardId)).willReturn(Optional.of(deletedBoard));
+
+		// when
+		ownerBoardService.restoreOwnerBoard(boardId);
+
+		// then
+		assertNull(deletedBoard.getDeletedAt());
+	}
+
 	// 유저소통_게시글_사진_삭제에_성공한다
 
 }

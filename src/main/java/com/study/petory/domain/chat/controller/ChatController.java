@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("chat")
+@RequestMapping("/chat")
 @RequiredArgsConstructor
 public class ChatController {
 

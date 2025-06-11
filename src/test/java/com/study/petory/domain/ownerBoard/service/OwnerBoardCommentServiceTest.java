@@ -22,8 +22,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentUpdateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
@@ -63,14 +67,14 @@ public class OwnerBoardCommentServiceTest {
 	@BeforeEach
 	void SetBoard() {
 		this.mockBoard = new OwnerBoard("제목", "내용", mockUser);
-		ReflectionTestUtils.setField(mockBoard, "id", 1L);
+		ReflectionTestUtils.setField(mockBoard, "id", 10L);
 	}
 
 	@Test
 	void 댓글_생성에_성공한다() {
 		// given
 		Long userId = 1L;
-		Long boardId = 1L;
+		Long boardId = 10L;
 		OwnerBoardCommentCreateRequestDto requestDto = new OwnerBoardCommentCreateRequestDto("새 댓글");
 
 		OwnerBoardComment comment = OwnerBoardComment.builder()
@@ -120,7 +124,32 @@ public class OwnerBoardCommentServiceTest {
 		assertEquals("댓글 1", result.getContent().get(1).getContent());
 	}
 
-	// 댓글 수정
+	@Test
+	void 댓글_수정에_성공한다() {
+		// given
+		Long boardId = 10L;
+		Long commentId = 100L;
+
+		OwnerBoardComment comment = OwnerBoardComment.builder()
+			.content("기존 댓글")
+			.user(mockUser)
+			.ownerBoard(mockBoard)
+			.build();
+		ReflectionTestUtils.setField(comment, "id", commentId);
+
+		given(ownerBoardCommentRepository.findById(commentId)).willReturn(Optional.of(comment));
+
+		OwnerBoardCommentUpdateRequestDto requestDto = new OwnerBoardCommentUpdateRequestDto("수정된 댓글");
+
+		// when
+		OwnerBoardCommentUpdateResponseDto result = ownerBoardCommentService.updateOwnerBoardComment(
+			boardId, commentId, requestDto);
+
+		// then
+		assertEquals("수정된 댓글", result.getContent());
+	}
+
+
 	// 댓글 삭제
 
 }

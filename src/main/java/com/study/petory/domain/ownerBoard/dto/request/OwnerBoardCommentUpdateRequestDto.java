@@ -2,9 +2,11 @@ package com.study.petory.domain.ownerBoard.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class OwnerBoardCommentUpdateRequestDto {
 
 	@NotBlank(message = "내용은 필수 입력 값입니다.")

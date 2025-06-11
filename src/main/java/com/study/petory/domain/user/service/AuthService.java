@@ -1,6 +1,5 @@
 package com.study.petory.domain.user.service;
 
-import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -25,6 +24,7 @@ public class AuthService {
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
 	private final StringRedisTemplate redisTemplate;
+
 	private static final String REFRESH_TOKEN_COOKIE_NAME = "refreshToken";
 
 	/*

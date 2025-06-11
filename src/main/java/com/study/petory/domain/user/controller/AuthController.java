@@ -26,6 +26,8 @@ public class AuthController {
 
 	private final AuthService authService;
 
+	private static final String REFRESH_TOKEN_NAME = "refreshToken";
+
 	@PostMapping("/login")
 	public ResponseEntity<CommonResponse<TokenResponseDto>> login(
 		@RequestBody OAuth2LoginRequestDto loginRequestDto,
@@ -35,7 +37,7 @@ public class AuthController {
 		TokenResponseDto tokenResponseDto = authService.login(loginRequestDto);
 
 		// refreshToken 을 HttpOnly 쿠키로 설정
-		Cookie refreshCookie = new Cookie("refreshToken", tokenResponseDto.getRefreshToken());
+		Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, tokenResponseDto.getRefreshToken());
 		refreshCookie.setPath("/");
 		refreshCookie.setHttpOnly(true);
 		refreshCookie.setSecure(true);  // HTTPS 환경에서만 전송
@@ -63,7 +65,7 @@ public class AuthController {
 		authService.logout(bearerToken);
 
 		// 클라이언트의 refreshToken 쿠키 제거 (MaxAge = 0)
-		Cookie deleteCookie = new Cookie("refreshToken", null);
+		Cookie deleteCookie = new Cookie(REFRESH_TOKEN_NAME, null);
 		deleteCookie.setPath("/");
 		deleteCookie.setMaxAge(0);
 		deleteCookie.setHttpOnly(true);
@@ -91,7 +93,7 @@ public class AuthController {
 		TokenResponseDto tokenResponseDto = authService.reissue(request);
 
 		// 새 refreshToken 을 HttpOnly 쿠키로 설정
-		Cookie refreshCookie = new Cookie("refreshToken", tokenResponseDto.getRefreshToken());
+		Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, tokenResponseDto.getRefreshToken());
 		refreshCookie.setPath("/");
 		refreshCookie.setHttpOnly(true);
 		refreshCookie.setSecure(true);  // HTTPS 환경

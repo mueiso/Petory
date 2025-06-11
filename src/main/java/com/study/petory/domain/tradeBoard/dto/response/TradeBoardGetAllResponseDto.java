@@ -15,8 +15,6 @@ public class TradeBoardGetAllResponseDto {
 
 	private final String content;
 
-	private final String photoUrl;
-
 	private final Integer price;
 
 	public TradeBoardGetAllResponseDto(TradeBoard tradeBoard) {
@@ -25,7 +23,6 @@ public class TradeBoardGetAllResponseDto {
 		this.title = tradeBoard.getTitle();
 		this.content = (tradeBoard.getContent().length() > 30) ?
 			tradeBoard.getContent().substring(0, 30) + "..." : tradeBoard.getContent();
-		this.photoUrl = tradeBoard.getPhotoUrl();
 		this.price = tradeBoard.getPrice();
 	}
 }

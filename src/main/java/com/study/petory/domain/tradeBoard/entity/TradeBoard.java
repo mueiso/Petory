@@ -1,11 +1,15 @@
 package com.study.petory.domain.tradeBoard.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,7 +45,8 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private String content;
 
-	private String photoUrl;
+	@OneToMany(mappedBy = "tradeBoard", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private List<TradeBoardImage> images = new ArrayList<>();
 
 	@Column(nullable = false)
 	private Integer price;
@@ -54,22 +60,20 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	private User user;
 
 	@Builder
-	public TradeBoard(TradeCategory category, String title, String content, String photoUrl, Integer price, User user) {
+	public TradeBoard(TradeCategory category, String title, String content, Integer price, User user) {
 		this.category = category;
 		this.title = title;
 		this.content = content;
-		this.photoUrl = photoUrl;
 		this.price = price;
 		this.status = TradeBoardStatus.FOR_SALE;
 		this.user = user;
 	}
 
 	public void updateTradeBoard(TradeBoardUpdateRequestDto requestDto) {
-		this.category = category;
-		this.title = title;
-		this.content = content;
-		this.photoUrl = photoUrl;
-		this.price = price;
+		this.category = requestDto.getCategory();
+		this.title = requestDto.getTitle();
+		this.content = requestDto.getContent();
+		this.price = requestDto.getPrice();
 		this.status = requestDto.getStatus();
 	}
 

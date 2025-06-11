@@ -18,8 +18,6 @@ public class TradeBoardUpdateResponseDto {
 
 	private final String content;
 
-	private final String photoUrl;
-
 	private final Integer price;
 
 	private final LocalDateTime createdAt;
@@ -31,7 +29,6 @@ public class TradeBoardUpdateResponseDto {
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
 		this.content = tradeBoard.getContent();
-		this.photoUrl = tradeBoard.getPhotoUrl();
 		this.price = tradeBoard.getPrice();
 		this.createdAt = tradeBoard.getCreatedAt();
 		this.updatedAt = tradeBoard.getUpdatedAt();

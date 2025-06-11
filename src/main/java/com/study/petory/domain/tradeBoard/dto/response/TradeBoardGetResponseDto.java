@@ -1,8 +1,10 @@
 package com.study.petory.domain.tradeBoard.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 
 import lombok.Getter;
@@ -18,7 +20,7 @@ public class TradeBoardGetResponseDto {
 
 	private final String content;
 
-	private final String photoUrl;
+	private final List<TradeBoardImage> images;
 
 	private final Integer price;
 
@@ -31,7 +33,7 @@ public class TradeBoardGetResponseDto {
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
 		this.content = tradeBoard.getContent();
-		this.photoUrl = tradeBoard.getPhotoUrl();
+		this.images = tradeBoard.getImages();
 		this.price = tradeBoard.getPrice();
 		this.createdAt = tradeBoard.getCreatedAt();
 		this.updatedAt = tradeBoard.getUpdatedAt();

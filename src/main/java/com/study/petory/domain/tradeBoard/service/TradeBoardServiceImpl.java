@@ -1,11 +1,13 @@
 package com.study.petory.domain.tradeBoard.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
@@ -14,6 +16,7 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseD
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
@@ -30,6 +33,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
+	private final TradeBoardImageService tradeBoardImageService;
 
 	//tradeBoardId로 tradeBoard 조회
 	@Override
@@ -41,7 +45,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 생성
 	@Override
 	@Transactional
-	public TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto) {
+	public TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto, List<MultipartFile> images) {
 
 		//나중에 토큰으로 값을 받아올 예정
 		User user = userRepository.findById(1L)
@@ -51,14 +55,18 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.category(requestDto.getCategory())
 			.title(requestDto.getTitle())
 			.content(requestDto.getContent())
-			.photoUrl(requestDto.getPhotoUrl())
 			.price(requestDto.getPrice())
 			.user(user)
 			.build();
 
 		tradeBoardRepository.save(tradeBoard);
 
-		return new TradeBoardCreateResponseDto(tradeBoard);
+		List<String> urls = new ArrayList<>();
+		if (images != null && !images.isEmpty()) {
+			urls = tradeBoardImageService.uploadAndSaveAll(images, tradeBoard);
+		}
+
+		return new TradeBoardCreateResponseDto(tradeBoard, urls);
 	}
 
 	//게시글 전체 조회
@@ -126,4 +134,12 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		tradeBoard.updateStatus(status);
 	}
 
+	@Override
+	public void deleteImage(Long tradeBoardId, Long imageId) {
+
+		findTradeBoardById(tradeBoardId);
+		TradeBoardImage image = tradeBoardImageService.findImageById(imageId);
+		tradeBoardImageService.deleteImageInternal(image);
+
+	}
 }

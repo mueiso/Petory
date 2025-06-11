@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
@@ -61,7 +62,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 전체 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<TradeBoardGetResponseDto> findAllTradeBoard(TradeCategory category, int page) {
+	public Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, int page) {
 
 		int adjustedPage = (page > 0) ? page - 1 : 0;
 		PageRequest pageable = PageRequest.of(adjustedPage, 10, Sort.by("createdAt").descending());
@@ -73,7 +74,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			tradeBoard = tradeBoardRepository.findAll(pageable);
 		}
 
-		return tradeBoard.map(TradeBoardGetResponseDto::new);
+		return tradeBoard.map(TradeBoardGetAllResponseDto::new);
 	}
 
 	//게시글 단건 조회

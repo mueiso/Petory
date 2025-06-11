@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.dto.response;
 
+import java.math.BigDecimal;
+
 import com.study.petory.domain.place.entity.PlaceReview;
 
 import lombok.Getter;
@@ -13,7 +15,7 @@ public class PlaceReviewGetResponseDto {
 
 	private final String content;
 
-	private final Integer ratio;
+	private final BigDecimal ratio;
 
 	private PlaceReviewGetResponseDto(PlaceReview placeReview) {
 		this.id = placeReview.getId();

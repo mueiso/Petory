@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ChatMessageSendRequestDto {
+public class MessageSendRequestDto {
 
 	private final String chatRoomId;
 

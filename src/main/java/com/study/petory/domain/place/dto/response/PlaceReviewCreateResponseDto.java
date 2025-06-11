@@ -1,5 +1,6 @@
 package com.study.petory.domain.place.dto.response;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.study.petory.domain.place.entity.PlaceReview;
@@ -17,7 +18,7 @@ public class PlaceReviewCreateResponseDto {
 
 	private final String content;
 
-	private final Integer ratio;
+	private final BigDecimal ratio;
 
 	private final LocalDateTime createdAt;
 

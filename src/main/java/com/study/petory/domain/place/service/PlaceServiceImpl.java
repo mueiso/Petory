@@ -84,8 +84,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public PlaceGetResponseDto findByPlaceId(Long placeId) {
 
-		Place findPlace = placeRepository.findWithReviewsById(placeId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+		Place findPlace = findPlaceWithPlaceReviewByPlaceId(placeId);
 
 		List<PlaceReviewGetResponseDto> placeReviewList = findPlace.getPlaceReviewList().stream()
 			.filter(placeReview -> placeReview.getDeletedAt() == null)
@@ -140,4 +139,13 @@ public class PlaceServiceImpl implements PlaceService {
 		return placeRepository.findById(placeId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
+
+	// 다른 서비스에서 사용가능하게 설정한 메서드
+	// throws CustomException
+	@Override
+	public Place findPlaceWithPlaceReviewByPlaceId(Long placeId) {
+		return placeRepository.findWithReviewListById(placeId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	}
+
 }

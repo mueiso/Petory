@@ -16,8 +16,10 @@ import com.study.petory.domain.dailyQna.entity.QDailyQna;
 import com.study.petory.domain.dailyQna.entity.QQuestion;
 import com.study.petory.domain.user.entity.QUser;
 
+import lombok.RequiredArgsConstructor;
+
 @Repository
-// @RequiredArgsConstructor
+@RequiredArgsConstructor
 public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
@@ -27,10 +29,6 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 	private final QUser qUser = QUser.user;
 
 	private final QQuestion qQuestion = QQuestion.question1;
-
-	public DailyQnaCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
-		this.jpaQueryFactory = jpaQueryFactory;
-	}
 
 	@Override
 	public List<DailyQna> findDailyQna(Long userId, Long questionId) {
@@ -59,7 +57,7 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 
 	@Override
 	public Page<DailyQna> findDailyQnaByHidden(Long userId, Pageable pageable) {
-		List<DailyQna> DailyQnaList = jpaQueryFactory
+		List<DailyQna> dailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
@@ -73,7 +71,6 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		Long total = jpaQueryFactory
 			.select(qDailyQna.count())
 			.from(qDailyQna)
-			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.HIDDEN)
@@ -82,12 +79,12 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		if (total == null) {
 			total = 0L;
 		}
-		return new PageImpl<>(DailyQnaList, pageable, total);
+		return new PageImpl<>(dailyQnaList, pageable, total);
 	}
 
 	@Override
 	public Page<DailyQna> findDailyQnaByDeleted(Long userId, Pageable pageable) {
-		List<DailyQna> DailyQnaList = jpaQueryFactory
+		List<DailyQna> dailyQnaList = jpaQueryFactory
 			.selectFrom(qDailyQna)
 			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
@@ -101,7 +98,6 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		Long total = jpaQueryFactory
 			.select(qDailyQna.count())
 			.from(qDailyQna)
-			.join(qDailyQna.user, qUser).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.dailyQnaStatus.eq(DailyQnaStatus.DELETED)
@@ -110,18 +106,15 @@ public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {
 		if (total == null) {
 			total = 0L;
 		}
-		return new PageImpl<>(DailyQnaList, pageable, total);
+		return new PageImpl<>(dailyQnaList, pageable, total);
 	}
 
 	@Override
 	public boolean isDailyQnaToday(Long userId, Long questionId) {
 		LocalDate today = LocalDate.now();
-
 		return jpaQueryFactory
 			.selectOne()
 			.from(qDailyQna)
-			.join(qDailyQna.user, qUser).fetchJoin()
-			.join(qDailyQna.question, qQuestion).fetchJoin()
 			.where(
 				qDailyQna.user.id.eq(userId),
 				qDailyQna.question.id.eq(questionId),

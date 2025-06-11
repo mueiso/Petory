@@ -17,6 +17,7 @@ import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
@@ -52,7 +53,7 @@ public class TradeBoardController {
 	 * @return List 형식의 게시글 반환
 	 */
 	@GetMapping
-	private ResponseEntity<CommonResponse<Page<TradeBoardGetResponseDto>>> getAllTradeBoard(
+	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
 		@RequestParam(required = false) TradeCategory category,
 		@RequestParam(defaultValue = "1") int page
 	) {

@@ -35,8 +35,6 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'software.amazon.awssdk:s3:2.20.122'
 
-
-
     // .env 등록을 위한 의존성
     implementation 'io.github.cdimascio:dotenv-java:3.2.0'
 

@@ -16,8 +16,6 @@ import com.study.petory.domain.dailyQna.entity.QDailyQna;
 import com.study.petory.domain.dailyQna.entity.QQuestion;
 import com.study.petory.domain.user.entity.QUser;
 
-import lombok.RequiredArgsConstructor;
-
 @Repository
 // @RequiredArgsConstructor
 public class DailyQnaCustomRepositoryImpl implements DailyQnaCustomRepository {

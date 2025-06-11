@@ -17,4 +17,5 @@ public interface ChatService {
 	List<ChatRoomGetAllResponseDto> findAllChatRoom(int page);
 
 	ChatRoomGetResponseDto findChatRoomById(String chatRoomId);
+
 }

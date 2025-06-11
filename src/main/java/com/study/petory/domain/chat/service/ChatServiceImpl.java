@@ -37,12 +37,17 @@ public class ChatServiceImpl implements ChatService{
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 
+	private ChatRoom findByChatRoomId(String chatRoomId) {
+		return chatRepository.findById(new ObjectId(chatRoomId))
+			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+	}
+
 	//메시지 보내기
 	@Override
 	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
 
-		ChatRoom chatRoom = chatRepository.findById(new ObjectId(requestDto.getChatRoomId()))
-			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+		ChatRoom chatRoom = findByChatRoomId(requestDto.getChatRoomId());
+		findUserById(requestDto.getSenderId());
 
 		ChatMessage message = ChatMessage.builder()
 			.senderId(requestDto.getSenderId())
@@ -61,6 +66,8 @@ public class ChatServiceImpl implements ChatService{
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+
+		findUserById(tradeBoard.getUser().getId());
 
 		ChatRoom chatRoom = ChatRoom.builder()
 			.tradeBoardId(tradeBoardId)
@@ -90,9 +97,9 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public ChatRoomGetResponseDto findChatRoomById(String chatRoomId) {
 
-		ChatRoom chatRoom = chatRepository.findById(new ObjectId(chatRoomId))
-			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+		ChatRoom chatRoom = findByChatRoomId(chatRoomId);
 
 		return new ChatRoomGetResponseDto(chatRoom);
 	}
+
 }

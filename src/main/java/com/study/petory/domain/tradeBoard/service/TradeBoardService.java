@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
@@ -14,7 +15,7 @@ public interface TradeBoardService {
 
 	TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto);
 
-	Page<TradeBoardGetResponseDto> findAllTradeBoard(TradeCategory category, int page);
+	Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, int page);
 
 	TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId);
 

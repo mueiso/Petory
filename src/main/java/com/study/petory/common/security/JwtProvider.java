@@ -21,6 +21,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JwtProvider {
@@ -112,7 +113,22 @@ public class JwtProvider {
 			.compact();
 	}
 
-	// 순수 JWT 문자열만 반환하는 유틸 메서드 (Bearer 제거)
+	// HTTP 요청 헤더에서 JWT Access Token 을 직접 추출
+	public String resolveToken(HttpServletRequest request) {
+
+		// 1. 요청 헤더에서 Authorization 값을 꺼냄
+		String bearerToken = request.getHeader("Authorization");
+
+		// 2. 값이 존재하고, "Bearer "로 시작하는지 확인
+		if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+
+			// 3. 접두어 "Bearer "를 제거한 실제 토큰 반환
+			return bearerToken.substring(7);
+		}
+		throw new CustomException(ErrorCode.INVALID_TOKEN);
+	}
+
+	// 순수 JWT 문자열만 반환(이미 추출된 문자열에서 "Bearer "를 제거)
 	public String subStringToken(String token) {
 
 		if (!StringUtils.hasText(token) || !token.startsWith(prefix)) {

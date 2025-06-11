@@ -49,6 +49,10 @@ public class User extends TimeFeatureBasedEntity {
 		this.userRole = userRole;
 	}
 
+	public void updateNickname(String newNickname) {
+		this.nickname = newNickname;
+	}
+
 	// userId 검증 메서드
 	public boolean isEqualId(Long userId) {
 		return this.id.equals(userId);

@@ -1,7 +1,7 @@
 // package com.study.petory.domain.user.controller;
 //
 // import com.study.petory.common.response.CommonResponse;
-// import com.study.petory.domain.user.dto.UserProfileDto;
+// import com.study.petory.domain.user.dto.UserProfileResponseDto;
 // import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 // import com.study.petory.domain.user.service.UserService;
 // import com.study.petory.common.security.JwtProvider;
@@ -25,11 +25,11 @@
 // 	 * 내 정보 조회
 // 	 */
 // 	@GetMapping("/myinfo")
-// 	public ResponseEntity<CommonResponse<UserProfileDto>> getMyInfo(HttpServletRequest request) {
+// 	public ResponseEntity<CommonResponse<UserProfileResponseDto>> getMyInfo(HttpServletRequest request) {
 // 		String accessToken = jwtProvider.resolveToken(request);
 // 		String email = jwtProvider.getEmailFromToken(accessToken);
 //
-// 		UserProfileDto profile = userService.getMyProfile(email);
+// 		UserProfileResponseDto profile = userService.getMyProfile(email);
 // 		return CommonResponse.of(SuccessCode.USER_INFO_FETCHED, profile);
 // 	}
 //

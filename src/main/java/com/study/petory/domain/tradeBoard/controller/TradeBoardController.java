@@ -19,6 +19,7 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseD
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
+import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.service.TradeBoardService;
 import com.study.petory.exception.enums.SuccessCode;
@@ -80,7 +81,7 @@ public class TradeBoardController {
 	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액 (nullable)
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
 	 */
-	@PatchMapping("/{tradeBoardId}")
+	@PatchMapping("/{tradeBoardId}/1")
 	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
 		@PathVariable Long tradeBoardId,
 		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
@@ -88,16 +89,13 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.UPDATED, tradeBoardService.updateTradeBoard(tradeBoardId, requestDto));
 	}
 
-	/**
-	 * 게시글 삭제
-	 * @param tradeBoardId 삭제하려는 게시글 id
-	 * @return 상태코드 및 삭제 완료 메시지
-	 */
-	@DeleteMapping("/{tradeBoardId}")
-	private ResponseEntity<CommonResponse<Void>> deleteTradeBoard(
-		@PathVariable Long tradeBoardId
+	@PatchMapping("/{tradeBoardId}")
+	private ResponseEntity<CommonResponse<Void>> updateTradeBoardStatus(
+		@PathVariable Long tradeBoardId,
+		@RequestParam TradeBoardStatus status
 	) {
-		tradeBoardService.deleteTradeBoard(tradeBoardId);
-		return CommonResponse.of(SuccessCode.DELETED);
+		tradeBoardService.updateTradeBoardStatus(tradeBoardId, status);
+		return CommonResponse.of(SuccessCode.UPDATED);
 	}
+
 }

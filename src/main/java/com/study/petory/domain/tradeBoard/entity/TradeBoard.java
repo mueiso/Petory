@@ -7,6 +7,8 @@ import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_trade_board")
 @NoArgsConstructor
-@Where(clause = "deleted_at IS NULL")
+@Where(clause = "status != 'DELETED'")
 public class TradeBoard extends TimeFeatureBasedEntity {
 
 	@Id
@@ -42,6 +44,10 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private Integer price;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private TradeBoardStatus status;
+
 	@ManyToOne
 	@JoinColumn(name = "tb_user_id")
 	private User user;
@@ -53,6 +59,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 		this.content = content;
 		this.photoUrl = photoUrl;
 		this.price = price;
+		this.status = TradeBoardStatus.FOR_SALE;
 		this.user = user;
 	}
 
@@ -84,5 +91,9 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
+	}
+
+	public void updateStatus(TradeBoardStatus status) {
+		this.status = status;
 	}
 }

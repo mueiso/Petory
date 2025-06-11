@@ -13,6 +13,7 @@ import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseD
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
@@ -125,22 +126,22 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return new TradeBoardUpdateResponseDto(tradeBoard);
 	}
 
-	//User Status에 따라 상태값 변경하는 로직 구현 예정
-
+	//게시글 상태 업데이트
 	@Override
 	@Transactional
-	public void deleteTradeBoard(Long tradeBoardId) {
+	public void updateTradeBoardStatus(Long tradeBoardId, TradeBoardStatus status) {
 
-		//나중에 토큰으로 값 받아오기
-		User user = userRepository.findById(1L)
+		User loginUser = userRepository.findById(1L)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		TradeBoard tradeBoard = findTradeBoardById(tradeBoardId);
 
-		if (tradeBoard.getUser() != user) {
-			throw new CustomException(ErrorCode.TRADE_BOARD_FORBIDDEN);
+		//로그인 유저와 게시글의 유저가 다를 경우 예외처리
+		if (!tradeBoard.isEqualUser(loginUser.getId())) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 
-		tradeBoard.deactivateEntity();
+		tradeBoard.updateStatus(status);
 	}
+
 }

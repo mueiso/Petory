@@ -17,13 +17,5 @@ import lombok.Setter;
 public class OAuth2LoginRequestDto {
 
 	private String email;
-	private String nickname;
-
-	public User toUser() {
-		return User.builder()
-			.email(this.email)
-			.nickname(this.nickname)
-			.userRole(Collections.emptyList())  // null 방지
-			.build();
-	}
+	private String password;
 }

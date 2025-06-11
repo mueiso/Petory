@@ -20,6 +20,7 @@ public enum ErrorCode implements BaseCode {
 	EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
 	WRONG_SIGNATURE(HttpStatus.UNAUTHORIZED, "잘못된 서명입니다."),
 	INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
+	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 틀렸습니다."),
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),

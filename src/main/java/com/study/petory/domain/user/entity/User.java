@@ -43,8 +43,8 @@ public class User extends TimeFeatureBasedEntity {
 
 	@Builder
 	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
-		this.nickname = nickname;
 		this.email = email;
+		this.nickname = nickname;
 		this.userPrivateInfo = userPrivateInfo;
 		this.userRole = userRole;
 	}

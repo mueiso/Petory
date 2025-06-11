@@ -1,5 +1,6 @@
 package com.study.petory.domain.user.service;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -30,23 +31,22 @@ public class AuthService {
 	 */
 	public TokenResponseDto issueToken(User user) {
 
-		// 기존 유저 조회 또는 저장
+		// 기존 유저 조회 또는 저장 (없으면 저장 후 반환)
 		User savedUser = userRepository.findByEmail(user.getEmail())
-			.orElseGet(() -> userRepository.save(user)); // 없으면 저장 후 반환
+			.orElseGet(() -> userRepository.save(user));
 
 		if (savedUser.getId() == null) {
 			throw new IllegalStateException("사용자 정보를 저장했지만 ID가 생성되지 않았습니다. DB 설정을 확인하세요.");
 		}
 
 		// Access Token: 사용자 정보를 포함해 짧은 생명주기로 발급
-		String accessToken = jwtProvider.createAccessToken(savedUser.getId(), savedUser.getEmail(),
-			savedUser.getNickname());
+		String accessToken = jwtProvider.createAccessToken(savedUser.getId(), savedUser.getEmail(), savedUser.getNickname());
 
 		// Refresh Token: ID만 기반으로 더 긴 생명주기로 발급
 		String refreshToken = jwtProvider.createRefreshToken(savedUser.getId());
 
 		// Redis 에 Refresh Token 을 {email}키로 저장
-		jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
+		jwtProvider.storeRefreshToken(savedUser.getEmail(), refreshToken);
 
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
@@ -105,7 +105,9 @@ public class AuthService {
 		return new TokenResponseDto(newAccessToken, newRefreshToken); // refreshToken 은 Controller 에서 쿠키로 설정
 	}
 
-	// 쿠키에서 RefreshToken 추출
+	/*
+	 * 쿠키에서 RefreshToken 추출
+	 */
 	private String extractRefreshTokenFromCookie(HttpServletRequest request) {
 
 		if (request.getCookies() == null) {

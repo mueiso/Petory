@@ -3,6 +3,7 @@ package com.study.petory.common.security;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -23,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 // TODO - ResponseStatusException 대신 CustomException 으로 통일
 @Slf4j
 @Component
-@RequiredArgsConstructor
 // OncePerRequestFilter 를 상속받아 HTTP 요청당 한 번만 실행
 public class JwtFilter extends OncePerRequestFilter {
 

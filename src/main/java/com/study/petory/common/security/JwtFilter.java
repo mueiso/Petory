@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.study.petory.exception.CustomException;
+
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -95,9 +97,9 @@ public class JwtFilter extends OncePerRequestFilter {
 		try {
 			jwt = jwtProvider.subStringToken(bearerJwt);
 			debugLog("추출된 JWT: " + jwt);
-		} catch (ResponseStatusException e) {
-			debugLog("JWT 파싱 실패: " + e.getReason());
-			writeErrorResponse(response, e.getStatusCode(), e.getReason());
+		} catch (CustomException e) {
+			debugLog("JWT 파싱 실패: " + e.getMessage());
+			writeErrorResponse(response, e.getErrorCode().getStatus(), e.getMessage());
 
 			return;
 		}
@@ -151,9 +153,9 @@ public class JwtFilter extends OncePerRequestFilter {
 			debugLog("JWT 인증 완료. 다음 필터로 전달");
 			filterChain.doFilter(request, response);
 			// jwtProvider.getClaims() 에서 토큰 만료됐거나 위조된 경우 예외 발생
-		} catch (ResponseStatusException e) {
-			debugLog("JWT 검증 실패 - 이유: " + e.getReason());
-			writeErrorResponse(response, e.getStatusCode(), e.getReason());
+		} catch (CustomException e) {
+			debugLog("JWT 검증 실패 - 이유: " + e.getMessage());
+			writeErrorResponse(response, e.getErrorCode().getStatus(), e.getMessage());
 		}
 	}
 

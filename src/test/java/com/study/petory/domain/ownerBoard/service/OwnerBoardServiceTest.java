@@ -14,12 +14,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCreateResponseDto;
+import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.Role;
@@ -55,7 +61,7 @@ public class OwnerBoardServiceTest {
 	}
 
 	@Test
-	void 유저소통_게시글_저장에_성공한다_이미지_포함() {
+	void 게시글_저장에_성공한다_이미지_포함() {
 		// given
 		OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
 
@@ -85,7 +91,7 @@ public class OwnerBoardServiceTest {
 	}
 
 	@Test
-	void 유저소통_게시글_저장에_성공한다_이미지_미포함() {
+	void 게시글_저장에_성공한다_이미지_미포함() {
 		// given
 		OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
 		List<MultipartFile> images = null;
@@ -107,6 +113,28 @@ public class OwnerBoardServiceTest {
 		assertThat(response.getContent()).isEqualTo("내용");
 		assertTrue(response.getImageUrls().isEmpty());
 		verify(ownerBoardImageService, never()).uploadAndSaveAll(any(), any());
+	}
+
+	@Test
+	void 제목이_포함된_게시글_조회에_성공한다() {
+		// given
+		String keyword = "제목";
+		Pageable pageable = PageRequest.of(0,5);
+		List<OwnerBoard> mockList = List.of(
+			OwnerBoard.builder().title("제목입니다").content("내용").build()
+		);
+		Page<OwnerBoard> mockPage = new PageImpl<>(mockList);
+
+		given(ownerBoardRepository.findByTitleContaining(keyword, pageable)).willReturn(mockPage);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(keyword, pageable);
+
+		// then
+		assertEquals(1, result.getTotalElements());
+		assertEquals("제목입니다", result.getContent().get(0).getTitle());
+		verify(ownerBoardRepository, times(1)).findByTitleContaining(keyword, pageable);
+		verify(ownerBoardRepository, never()).findAll();
 	}
 
 	// 유저소통_게시글_검색어_없이_전체_조회에_성공한다

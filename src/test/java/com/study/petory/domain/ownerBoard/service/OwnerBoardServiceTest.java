@@ -32,6 +32,7 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.Role;
@@ -158,7 +159,7 @@ public class OwnerBoardServiceTest {
 		Pageable pageable = PageRequest.of(0, 5);
 		List<OwnerBoard> mockList = List.of(
 			OwnerBoard.builder().title("제목입니다").content("내용").build(),
-			OwnerBoard.builder().title("포함안된 글").content("내용").build()
+			OwnerBoard.builder().title("두번째 글").content("내용").build()
 		);
 
 		Page<OwnerBoard> mockPage = new PageImpl<>(mockList);
@@ -231,8 +232,32 @@ public class OwnerBoardServiceTest {
 		assertEquals("수정된 내용", result.getContent());
 	}
 
+	@Test
+	void 게시글_삭제에_성공한다() {
+		// given
+		Long boardId = 1L;
 
-	// 게시글_삭제에_성공한다
+		OwnerBoardImage image1 = mock(OwnerBoardImage.class);
+		OwnerBoardImage image2 = mock(OwnerBoardImage.class);
+
+		OwnerBoard board = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(mockUser)
+			.build();
+		ReflectionTestUtils.setField(board, "id", boardId);
+		ReflectionTestUtils.setField(board, "images", new ArrayList<>(List.of(image1, image2)));
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
+
+		// when
+		ownerBoardService.deleteOwnerBoard(boardId);
+
+		// then
+		verify(ownerBoardImageService, times(2)).deleteImage(any());
+		assertTrue(board.getImages().isEmpty());
+		assertNotNull(board.getDeletedAt());
+	}
 
 	// 게시글_복구에_성공한다
 	// 유저소통_게시글_사진_삭제에_성공한다

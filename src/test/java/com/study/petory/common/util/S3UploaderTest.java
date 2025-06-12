@@ -21,6 +21,7 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3ServiceClientConfiguration;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,7 +56,6 @@ public class S3UploaderTest {
 		given(mockFile.getInputStream()).willReturn(new ByteArrayInputStream("test".getBytes(StandardCharsets.UTF_8)));
 		given(mockFile.getSize()).willReturn(4L);
 
-
 		S3ServiceClientConfiguration mockConfig = mock(S3ServiceClientConfiguration.class);
 		Region mockRegion = mock(Region.class);
 
@@ -71,6 +71,18 @@ public class S3UploaderTest {
 		assertTrue(result.contains(regionId));
 		assertTrue(result.contains(folder));
 		verify(s3Client).putObject(any(PutObjectRequest.class),any(RequestBody.class));
+	}
+
+	@Test
+	void 파일_삭제에_성공한다() {
+		// given
+		String fileKey = "domain-name/1234";
+
+		// when
+		s3Uploader.deleteFile(fileKey);
+
+		// then
+		verify(s3Client, times(1)).deleteObject(any(DeleteObjectRequest.class));
 	}
 
 }

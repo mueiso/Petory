@@ -13,6 +13,7 @@ import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.exception.CustomException;
 import com.study.petory.exception.enums.ErrorCode;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -61,28 +62,31 @@ public class AuthService {
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
 
-	// public TokenResponseDto login(OAuth2LoginRequestDto loginDto) {
-	//
-	// 	// 1. 이메일로 사용자 조회
-	// 	User user = userRepository.findByEmail(loginDto.getEmail())
-	// 		.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-	//
-	// 	// TODO - 임시 검증 (삭제 예정)
-	// 	// 2. 비밀번호 검증
-	// 	// if (!user.getPassword().equals(loginDto.getPassword())) {
-	// 	// 	// 실무에선 BCrypt 사용: passwordEncoder.matches(...)
-	// 	// 	throw new CustomException(ErrorCode.INVALID_PASSWORD);
-	// 	// }
-	//
-	// 	// 3. 토큰 발급
-	// 	String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
-	// 	String refreshToken = jwtProvider.createRefreshToken(user.getId());
-	//
-	// 	// 4. Redis 저장
-	// 	jwtProvider.storeRefreshToken(user.getEmail(), refreshToken);
-	//
-	// 	return new TokenResponseDto(accessToken, refreshToken);
-	// }
+	// 헤더의 Bearer refreshToken 만으로 로그인(토큰 재발급) 처리
+	public TokenResponseDto login(String bearerRefreshToken) {
+		// 1) "Bearer " 제거
+		String rawRefreshToken = jwtProvider.subStringToken(bearerRefreshToken);
+
+		// 2) prefix 없는 JWT 파싱하여 Claims 얻기
+		Claims claims = jwtProvider.parseRawToken(rawRefreshToken);
+
+		// 3) 토큰에서 userId 추출
+		Long userId = Long.valueOf(claims.getSubject());
+
+		// 4) DB에서 사용자 조회
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		// 5) 새로운 AccessToken / RefreshToken 발급
+		String newAccessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
+		String newRefreshToken = jwtProvider.createRefreshToken(user.getId());
+
+		// 6) Redis에 저장된 이전 RT 삭제 후 신규 RT 저장
+		jwtProvider.deleteRefreshToken(user.getEmail());
+		jwtProvider.storeRefreshToken(user.getEmail(), newRefreshToken);
+
+		return new TokenResponseDto(newAccessToken, newRefreshToken);
+	}
 
 	/*
 	 * 로그아웃: Access Token 블랙리스트 처리 + Refresh Token 삭제

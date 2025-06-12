@@ -26,24 +26,25 @@ public class AuthController {
 
 	private static final String REFRESH_TOKEN_NAME = "refreshToken";
 
-	// @PostMapping("/login")
-	// public ResponseEntity<CommonResponse<TokenResponseDto>> login(
-	// 	@RequestBody OAuth2LoginRequestDto loginRequestDto,
-	// 	HttpServletResponse response) {
-	//
-	// 	// 로그인 및 JWT 토큰 발급
-	// 	TokenResponseDto tokenResponseDto = authService.login(loginRequestDto);
-	//
-	// 	// refreshToken 을 HttpOnly 쿠키로 설정
-	// 	Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, tokenResponseDto.getRefreshToken());
-	// 	refreshCookie.setPath("/");
-	// 	refreshCookie.setHttpOnly(true);
-	// 	refreshCookie.setSecure(true);  // HTTPS 환경에서만 전송
-	// 	refreshCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일
-	// 	response.addCookie(refreshCookie);
-	//
-	// 	return CommonResponse.of(SuccessCode.USER_LOGIN, tokenResponseDto);
-	// }
+	// 기존 RequestDto 없이, Authorization 헤더의 Bearer <refreshToken> 만으로 로그인(재발급)
+	@PostMapping("/login")
+	public ResponseEntity<CommonResponse<TokenResponseDto>> login(
+		@RequestHeader("Authorization") String bearerRefreshToken,
+		HttpServletResponse response) {
+
+		// AuthService.login 에서 새 토큰 발급
+		TokenResponseDto tokens = authService.login(bearerRefreshToken);
+
+		// refreshToken 쿠키로 재설정
+		Cookie refreshCookie = new Cookie(REFRESH_TOKEN_NAME, tokens.getRefreshToken());
+		refreshCookie.setPath("/");
+		refreshCookie.setHttpOnly(true);
+		refreshCookie.setSecure(true);
+		refreshCookie.setMaxAge(7 * 24 * 60 * 60);  // 7일
+		response.addCookie(refreshCookie);
+
+		return CommonResponse.of(SuccessCode.USER_LOGIN, tokens);
+	}
 
 	/**
 	 * 로그아웃 처리

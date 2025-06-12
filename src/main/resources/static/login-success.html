@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>로그인 성공</title>
+</head>
+<body>
+<h2>어서오세요! 로그인 성공 🎉</h2>
+<p id="token-output">accessToken: 로딩 중...</p>
+
+<script>
+    // URL에서 accessToken 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    let accessToken = urlParams.get("accessToken");
+
+    // Bearer 제거 (있는 경우만)
+    if (accessToken && accessToken.startsWith("Bearer ")) {
+        accessToken = accessToken.slice(7);
+    }
+
+    // accessToken 표시
+    const outputEl = document.getElementById("token-output");
+    if (accessToken) {
+        outputEl.textContent = "accessToken: " + accessToken;
+    } else {
+        outputEl.textContent = "accessToken이 전달되지 않았습니다.";
+    }
+</script>
+</body>
+</html>

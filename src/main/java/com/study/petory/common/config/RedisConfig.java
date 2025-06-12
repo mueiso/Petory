@@ -2,12 +2,11 @@ package com.study.petory.common.config;
 
 import static com.study.petory.common.util.DateUtil.*;
 
-import java.time.Duration;
-
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -23,12 +22,28 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @EnableCaching
 public class RedisConfig {
 
+	@Bean
+	@Primary
+	public RedisConnectionFactory redisConnectionManager() {
+		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
+		config.setDatabase(0);
+		return new LettuceConnectionFactory(config);
+	}
+
 	// 전역 캐시 설정
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
-		config.setDatabase(0);
+		config.setDatabase(1);
 		return new LettuceConnectionFactory(config);
+	}
+
+	@Bean(name = "redisCacheTemplate")
+	public RedisTemplate<String, Object> redisCacheTemplate() {
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(redisConnectionFactory());
+		redisTemplate.setValueSerializer(valueSerializer());
+		return redisTemplate;
 	}
 
 	private RedisSerializer<Object> valueSerializer() {
@@ -47,13 +62,11 @@ public class RedisConfig {
 			.build();
 	}
 
-	// X하정님의 요청입니다 삭제하지 말아주세요 ㅠ
-
-	// @Bean
-	// public RedisTemplate<String, String> loginRefreshToken() {
-	// 	RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
-	// 	redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
-	// 	redisTemplate.setConnectionFactory(RedisConnectionFactory 아무거나);
-	// 	return redisTemplate;
-	// }
+	@Bean(name = "loginRefreshToken")
+	public RedisTemplate<String, String> loginRefreshToken() {
+		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
+		redisTemplate.setConnectionFactory(redisConnectionManager());
+		return redisTemplate;
+	}
 }

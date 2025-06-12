@@ -3,7 +3,9 @@ package com.study.petory.common.security;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.security.Key;
 import java.util.Base64;
+import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,63 +19,139 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import io.jsonwebtoken.Claims;
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+/*
+ * JwtProvider 의 주요 기능(API)을 검증하는 단위 테스트 클래스
+ *
+ * AccessToken 생성 및 파싱
+ * 토큰 만료 예외 처리
+ * 서명 검증 예외 처리
+ * Redis 기반 RefreshToken 검증
+ */
 @ExtendWith(MockitoExtension.class)
 class JwtProviderTest {
 
+	// 테스트 대상 Bean
 	@InjectMocks
 	private JwtProvider jwtProvider;
 
+	// RedisTemplate 모킹
 	@Mock
 	private RedisTemplate<String, String> redisTemplate;
 
+	/*
+	 * 테스트용 시크릿 키(Base64 인코딩) 주입.
+	 * 실제 application.properties 의 설정을 대신함
+	 */
 	@Value("${jwt.secret.key}")
-	private String secretKey = Base64.getEncoder().encodeToString("testSecretKeytestSecretKeytestSecretKey".getBytes());
+	private String secretKey = Base64.getEncoder()
+		.encodeToString("testSecretKeytestSecretKeytestSecretKey".getBytes());
 
+	/*
+	 * 각 테스트 전, 리플렉션으로 secretKey 필드를 설정하고 init()을 호출해 Key 객체를 준비
+	 * 리플렉션(reflection): 자바에서 런타임에 클래스의 정보(필드, 메서드, 생성자 등)를 조회하거나 조작할 수 있도록 해 주는 기능
+	 */
 	@BeforeEach
 	void setUp() {
+		// private 필드 secretKey 에 값 주입
 		ReflectionTestUtils.setField(jwtProvider, "secretKey", secretKey);
-		jwtProvider.init(); // @PostConstruct 수동 호출
+		// @PostConstruct 역할 수행
+		jwtProvider.init();
 	}
 
+	/*
+	 * 유효한 사용자 정보로 Access Token 을 생성 후,
+	 * getClaims()로 정상 파싱되는지 검증
+	 */
 	@Test
 	void createAndParseAccessToken_success() {
-		String token = jwtProvider.createAccessToken(1L, "user@example.com", "nickname");
+		// given
+		long userId = 1L;
+		String email = "user@example.com";
+		String nickname = "nickname";
+
+		// when
+		String token = jwtProvider.createAccessToken(userId, email, nickname);
 		Claims claims = jwtProvider.getClaims(token);
 
-		assertEquals("1", claims.getSubject());
-		assertEquals("user@example.com", claims.get("email"));
-		assertEquals("nickname", claims.get("nickname"));
+		// then
+		assertEquals("1", claims.getSubject(), "Subject에 userId가 문자열로 저장되어야 한다");
+		assertEquals(email, claims.get("email", String.class), "Custom Claim 'email' 검증");
+		assertEquals(nickname, claims.get("nickname", String.class), "Custom Claim 'nickname' 검증");
 	}
 
-	// @Test
-	// void getClaims_expiredToken_throwsException() {
-	// 	// 직접 만료된 토큰 생성
-	// 	String expiredToken = Jwts.builder()
-	// 		.setSubject("1")
-	// 		.setExpiration(new Date(System.currentTimeMillis() - 1000))
-	// 		.signWith(jwtProvider.getKey(), SignatureAlgorithm.HS256)
-	// 		.compact();
-	//
-	// 	String bearerToken = "Bearer " + expiredToken;
-	//
-	// 	CustomException exception = assertThrows(CustomException.class, () ->
-	// 		jwtProvider.getClaims(bearerToken)
-	// 	);
-	// 	assertEquals(ErrorCode.EXPIRED_TOKEN, exception.getErrorCode());
-	// }
+	/*
+	 * 만료된 토큰을 getClaims()에 넘겼을 때,
+	 * CustomException(EXPIRED_TOKEN)이 발생하는지 검증
+	 */
+	@Test
+	void getClaims_expiredToken_throwsException() {
+		// given: 직접 만료 시점을 과거로 설정한 토큰 생성
+		Key key = (Key) ReflectionTestUtils.getField(jwtProvider, "key");
+		String expiredToken = Jwts.builder()
+			.setSubject("1")
+			.setExpiration(new Date(System.currentTimeMillis() - 1_000))
+			.signWith(key, SignatureAlgorithm.HS256)
+			.compact();
+		String bearer = "Bearer " + expiredToken;
 
+		// when / then
+		CustomException ex = assertThrows(CustomException.class, () ->
+			jwtProvider.getClaims(bearer)
+		);
+		assertEquals(ErrorCode.EXPIRED_TOKEN, ex.getErrorCode(),
+			"만료된 토큰은 EXPIRED_TOKEN 예외를 던져야 한다");
+	}
+
+	/*
+	 * 잘못된 서명 키로 생성된 토큰을 getClaims()에 넘겼을 때,
+	 * CustomException(WRONG_SIGNATURE)이 발생하는지 검증
+	 */
+	@Test
+	void getClaims_wrongSignature_throwsException() {
+		// given: 다른 키로 서명된 (잘못된) 토큰 생성
+		String tamperedKey = secretKey + "x";  // 잘못된 secret
+		Key badKey = Keys.hmacShaKeyFor(tamperedKey.getBytes());
+		String badToken = Jwts.builder()
+			.setSubject("1")
+			.signWith(badKey, SignatureAlgorithm.HS256)
+			.compact();
+		String bearerBad = "Bearer " + badToken;
+
+		// when / then
+		CustomException ex = assertThrows(CustomException.class, () ->
+			jwtProvider.getClaims(bearerBad)
+		);
+		assertEquals(ErrorCode.WRONG_SIGNATURE, ex.getErrorCode(),
+			"서명 검증 실패 시 WRONG_SIGNATURE 예외가 발생해야 한다");
+	}
+
+	/*
+	 * RedisTemplate 모킹을 통해, isValidRefreshToken()이
+	 * Redis 에 저장된 값과 비교해 true 를 반환하는지 검증
+	 */
 	@Test
 	void isValidRefreshToken_matchInRedis() {
+		// given
 		String email = "user@example.com";
 		String refreshToken = "Bearer mockToken";
 
+		// ValueOperations 모킹
 		ValueOperations<String, String> ops = Mockito.mock(ValueOperations.class);
 		when(redisTemplate.opsForValue()).thenReturn(ops);
 		when(ops.get(email)).thenReturn(refreshToken);
 
+		// when
 		boolean result = jwtProvider.isValidRefreshToken(email, refreshToken);
-		assertTrue(result);
+
+		// then
+		assertTrue(result, "Redis에 일치하는 리프레시 토큰이 있으면 true 반환해야 한다");
 	}
 }

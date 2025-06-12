@@ -26,11 +26,15 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceReview;
+import com.study.petory.domain.place.entity.PlaceStatus;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
@@ -214,7 +218,35 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 수정")
 	void updatePlace() {
+
+		Place place = Place.builder()
+			.placeName("testName")
+			.placeType(PlaceType.ACCOMMODATION)
+			.latitude(BigDecimal.ONE)
+			.longitude(BigDecimal.ONE)
+			.build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceUpdateRequestDto dto = new PlaceUpdateRequestDto(
+			"updateTestName",
+			null,
+			PlaceType.CAFE,
+			BigDecimal.ZERO,
+			BigDecimal.ZERO);
+
+		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
+
+		PlaceUpdateResponseDto responseDto = placeServiceImpl.updatePlace(1L, dto);
+
+		assertAll("장소 수정 로직 검증",
+			() -> assertEquals("updateTestName", responseDto.getPlaceName()),
+			() -> assertEquals(PlaceType.CAFE, responseDto.getPlaceType()),
+			() -> assertEquals(BigDecimal.ZERO, responseDto.getLatitude()),
+			() -> assertEquals(BigDecimal.ZERO, responseDto.getLongitude())
+			);
 	}
 
 	@Test

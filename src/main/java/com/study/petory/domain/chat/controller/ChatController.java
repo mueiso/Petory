@@ -19,7 +19,7 @@ import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.service.ChatService;
-import com.study.petory.exception.enums.SuccessCode;
+import com.study.petory.common.exception.enums.SuccessCode;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

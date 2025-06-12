@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.study.petory.exception.enums.BaseCode;
+import com.study.petory.common.exception.enums.BaseCode;
 
 import lombok.Getter;
 

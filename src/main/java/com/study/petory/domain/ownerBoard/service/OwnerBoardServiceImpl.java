@@ -36,10 +36,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardImageService ownerBoardImageService;
 
-	// 제거 예정, 유저 클래스 등록 전 임시 구현
-	public User user = userRepository.findById(1L).orElseThrow();
-	public Long userId = 1L;
-
 	/**
 	 * 게시글 소유권 검증 메서드
 	 * 이 메서드는 OwnerBoardService 내부에서만 사용됩니다.
@@ -62,6 +58,8 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional
 	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) {
 
+		User user = userRepository.findById(1L).orElseThrow();
+
 		OwnerBoard ownerBoard = OwnerBoard.builder()
 			.title(dto.getTitle())
 			.content(dto.getContent())
@@ -71,6 +69,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		ownerBoardRepository.save(ownerBoard);
 
 		List<String> urls = new ArrayList<>();
+
 		if (images != null && !images.isEmpty()) {
 			urls = ownerBoardImageService.uploadAndSaveAll(images, ownerBoard);
 		}
@@ -112,10 +111,9 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional
 	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long boardId, OwnerBoardUpdateRequestDto requestDto) {
 
-		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
-
 		// 본인 작성 글인지 검증 로직 추가
-		validateBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
 		ownerBoard.updateOwnerBoard(requestDto.getTitle(), requestDto.getContent());
 
@@ -158,12 +156,30 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		ownerBoard.restoreEntity();
 	}
 
-	// 게시글 사진 삭제
+	// 게시글 사진 추가
 	@Override
-	public void deleteImage(Long boardId, Long imageId) {
-		findOwnerBoardById(boardId);
-		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
-		ownerBoardImageService.deleteImageInternal(image);
+	@Transactional
+	public void addImages(Long boardId, List<MultipartFile> images) {
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+		List<OwnerBoardImage> imageEntities = ownerBoardImageService.uploadAndReturnEntities(images, ownerBoard);
+		for (OwnerBoardImage image : imageEntities) {
+			ownerBoard.addImage(image);
+		}
 	}
 
+	// 게시글 사진 삭제
+	@Override
+	@Transactional
+	public void deleteImage(Long boardId, Long imageId) {
+
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
+
+		if (!ownerBoard.isEqualId(image.getOwnerBoard().getId())) {
+			throw new CustomException(ErrorCode.INVALID_INPUT);
+		};
+
+		ownerBoardImageService.deleteImageInternal(image);
+		ownerBoard.getImages().remove(image);
+	}
 }

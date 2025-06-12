@@ -32,5 +32,8 @@ public interface OwnerBoardService {
 
 	void restoreOwnerBoard(Long boardId);
 
+	void addImages(Long boardId, List<MultipartFile> images);
+
 	void deleteImage(Long boardId, Long imageId);
+
 }

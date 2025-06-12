@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -46,5 +47,11 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<CommonResponse<Void>> CommonException(CustomException e) {
 		ErrorCode response = e.getErrorCode();
 		return CommonResponse.of(response, null);
+	}
+
+	@MessageExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<CommonResponse<Void>> massageValidException(MethodArgumentNotValidException e) {
+		log.info("Message Validation Fail");
+		return CommonResponse.of(ErrorCode.INVALID_PARAMETER);
 	}
 }

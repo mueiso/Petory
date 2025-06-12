@@ -48,10 +48,11 @@ public class ChatServiceImpl implements ChatService{
 	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
 
 		ChatRoom chatRoom = findByChatRoomId(requestDto.getChatRoomId());
-		findUserById(requestDto.getSenderId());
+		User user = findUserById(requestDto.getSenderId());
 
 		ChatMessage message = ChatMessage.builder()
-			.senderId(requestDto.getSenderId())
+			.senderId(user.getId())
+			.senderNickname(user.getNickname())
 			.message(requestDto.getMessage())
 			.build();
 

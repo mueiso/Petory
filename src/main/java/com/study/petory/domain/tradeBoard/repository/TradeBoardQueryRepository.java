@@ -10,4 +10,6 @@ import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 public interface TradeBoardQueryRepository {
 
 	Page<TradeBoard> findAll(TradeCategory category, Pageable pageable);
+
+	public Page<TradeBoard> findByUserId(Long userId, Pageable pageable);
 }

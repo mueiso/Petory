@@ -10,10 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
 import com.study.petory.domain.tradeBoard.entity.QTradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.domain.user.entity.QUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -53,5 +55,29 @@ public class TradeBoardQueryRepositoryImpl implements TradeBoardQueryRepository 
 			.fetchOne();
 
 		return new PageImpl<>(tradeBoards, pageable, total == null ? 0 : total);
+	}
+
+	@Override
+	public Page<TradeBoard> findByUserId(Long userId, Pageable pageable) {
+
+		QTradeBoard tradeBoard = QTradeBoard.tradeBoard;
+		QUser user = QUser.user;
+
+		List<TradeBoard> content = queryFactory
+			.selectFrom(tradeBoard)
+			.join(tradeBoard.user, user).fetchJoin()
+			.where(user.id.eq(userId))
+			.offset(pageable.getOffset())
+			.limit(pageable.getPageSize())
+			.orderBy(tradeBoard.createdAt.desc())
+			.fetch();
+
+		Long total = queryFactory
+			.select(tradeBoard.count())
+			.from(tradeBoard)
+			.where(user.id.eq(userId))
+			.fetchOne();
+
+		return new PageImpl<>(content, pageable, total == null ? 0 : total);
 	}
 }

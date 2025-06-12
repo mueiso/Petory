@@ -85,7 +85,7 @@ public class TradeBoardController {
 	 * @param pageable 조회하려는 페이지
 	 * @return 조회된 게시글 반환
 	 */
-	@GetMapping("/myBoard")
+	@GetMapping("/my-board")
 	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
 		Pageable pageable
 	) {

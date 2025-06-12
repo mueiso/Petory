@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
@@ -37,8 +38,13 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	private final TradeBoardImageService tradeBoardImageService;
 	private final TradeBoardQueryRepository tradeBoardQueryRepository;
 
+	public User findUser(Long userId) {
+		return userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+	}
+
 	//tradeBoardId로 tradeBoard 조회
-	public TradeBoard findTradeBoardById(Long tradeBoardId) {
+	public TradeBoard findTradeBoard(Long tradeBoardId) {
 		return tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
 	}
@@ -55,11 +61,10 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 생성
 	@Override
 	@Transactional
-	public TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto, List<MultipartFile> images) {
+	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto, List<MultipartFile> images) {
 
 		//나중에 토큰으로 값을 받아올 예정
-		User user = userRepository.findById(1L)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = findUser(userId);
 
 		TradeBoard tradeBoard = TradeBoard.builder()
 			.category(requestDto.getCategory())
@@ -94,7 +99,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional(readOnly = true)
 	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
 
-		TradeBoard tradeBoard = findTradeBoardById(tradeBoardId);
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 		List<String> urls = imageToUrlList(tradeBoard);
 
 		return new TradeBoardGetResponseDto(tradeBoard, urls);
@@ -112,13 +117,11 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 수정
 	@Override
 	@Transactional
-	public TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
+	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
 
-		//나중에 토큰으로 값 받아오기
-		User loginUser = userRepository.findById(1L)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User loginUser = findUser(userId);
 
-		TradeBoard tradeBoard = findTradeBoardById(tradeBoardId);
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
 		//로그인 유저와 게시글의 유저가 다를 경우 예외처리
 		if (!tradeBoard.isEqualUser(loginUser.getId())) {
@@ -133,13 +136,12 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 상태 업데이트
 	@Override
 	@Transactional
-	public void updateTradeBoardStatus(Long tradeBoardId, TradeBoardStatus status) {
+	public void updateTradeBoardStatus(Long userId, Long tradeBoardId, TradeBoardStatus status) {
 
 		//토큰 값으로 변경 예정
-		User loginUser = userRepository.findById(1L)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User loginUser = findUser(userId);
 
-		TradeBoard tradeBoard = findTradeBoardById(tradeBoardId);
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
 		//로그인 유저와 게시글의 유저가 다를 경우 예외처리
 		if (!tradeBoard.isEqualUser(loginUser.getId())) {
@@ -151,11 +153,14 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	//게시글 내 사진 삭제
 	@Override
-	public void deleteImage(Long tradeBoardId, Long imageId) {
+	public void deleteImage(Long userId, Long tradeBoardId, Long imageId) {
 
-		findTradeBoardById(tradeBoardId);
+		User user = findUser(userId);
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+		tradeBoard.isEqualUser(user.getId());
+
 		TradeBoardImage image = tradeBoardImageService.findImageById(imageId);
-		tradeBoardImageService.deleteImageInternal(image);
 
+		tradeBoardImageService.deleteImageInternal(image);
 	}
 }

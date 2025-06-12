@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
@@ -18,7 +19,7 @@ import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 
 public interface TradeBoardService {
 
-	TradeBoardCreateResponseDto saveTradeBoard(TradeBoardCreateRequestDto requestDto, List<MultipartFile> images);
+	TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto, List<MultipartFile> images);
 
 	Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, Pageable pageable);
 
@@ -26,12 +27,10 @@ public interface TradeBoardService {
 
 	Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable);
 
-	TradeBoardUpdateResponseDto updateTradeBoard(Long tradeBoardId, TradeBoardUpdateRequestDto requestDto);
+	TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId, TradeBoardUpdateRequestDto requestDto);
 
-	void updateTradeBoardStatus(Long tradeBoardId, TradeBoardStatus status);
+	void updateTradeBoardStatus(Long userId, Long tradeBoardId, TradeBoardStatus status);
 
-	TradeBoard findTradeBoardById(Long tradeBoardId);
-
-	void deleteImage(Long tradeBoardId, Long imageId);
+	void deleteImage(Long userId, Long tradeBoardId, Long imageId);
 
 }

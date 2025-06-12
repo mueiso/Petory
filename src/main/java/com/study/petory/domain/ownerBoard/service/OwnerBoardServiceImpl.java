@@ -53,10 +53,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
 	}
 
-	// 게시글 생성 todo 유저 검증
+	// 게시글 생성
 	@Override
 	@Transactional
-	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) {
+	public OwnerBoardCreateResponseDto saveOwnerBoard(Long userId, OwnerBoardCreateRequestDto dto, List<MultipartFile> images) {
 
 		User user = userRepository.findById(1L).orElseThrow();
 
@@ -109,7 +109,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 수정 //todo 본인글 검증
 	@Override
 	@Transactional
-	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long boardId, OwnerBoardUpdateRequestDto requestDto) {
+	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long userId, Long boardId, OwnerBoardUpdateRequestDto requestDto) {
 
 		// 본인 작성 글인지 검증 로직 추가
 
@@ -123,7 +123,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 삭제 //todo 본인 글 검증
 	@Override
 	@Transactional
-	public void deleteOwnerBoard(Long boardId) {
+	public void deleteOwnerBoard(Long userId, Long boardId) {
 		// 본인 작성 글인지 검증 로직 추가
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
@@ -143,7 +143,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 복구 todo 관리자 검증
 	@Override
 	@Transactional
-	public void restoreOwnerBoard(Long boardId) {
+	public void restoreOwnerBoard(Long userId, Long boardId) {
 		// 관리자 권한 검증 로직 추가
 
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)
@@ -159,7 +159,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 사진 추가
 	@Override
 	@Transactional
-	public void addImages(Long boardId, List<MultipartFile> images) {
+	public void addImages(Long userId, Long boardId, List<MultipartFile> images) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 		List<OwnerBoardImage> imageEntities = ownerBoardImageService.uploadAndReturnEntities(images, ownerBoard);
 		for (OwnerBoardImage image : imageEntities) {
@@ -170,7 +170,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 사진 삭제
 	@Override
 	@Transactional
-	public void deleteImage(Long boardId, Long imageId) {
+	public void deleteImage(Long userId, Long boardId, Long imageId) {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);

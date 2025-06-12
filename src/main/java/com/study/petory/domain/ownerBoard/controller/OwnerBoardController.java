@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
@@ -56,42 +58,42 @@ public class OwnerBoardController {
 	 */
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
-		// 어노테이션 Long userId,
-		// @AuthenticationPrincipal CustomPrincipal currentUser.getId()
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@RequestPart @Valid OwnerBoardCreateRequestDto dto,
 		@RequestPart(required = false) List<MultipartFile> images) {
 
-		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
+		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(currentUser.getId(), dto, images));
 	}
 
 	/**
-	 * 사진 단건 추가
+	 * 게시글 사진 추가
 	 * @param boardId 사진흘 추가할 게시글 ID
 	 * @param images 사진 file
 	 * @return void
 	 */
 	@PostMapping(value = "/{boardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CommonResponse<Void>> addImages(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId,
 		@RequestPart List<MultipartFile> images
 	) {
-		ownerBoardService.addImages(boardId, images);
+		ownerBoardService.addImages(currentUser.getId(), boardId, images);
 
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
 	/**
-	 * 사진 단건 삭제: 유저, 관리자 가능
+	 * 게시글 사진 단건 삭제: 유저, 관리자 가능
 	 * @param boardId 사진이 포함된 게시글 ID
 	 * @param imageId 사진 ID
 	 * @return 요청 성공 코드만 반환
 	 */
 	@DeleteMapping("/{boardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
-		// 어노테이션 Long adminId,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId,
 		@PathVariable Long imageId) {
-		ownerBoardService.deleteImage(boardId, imageId);
+		ownerBoardService.deleteImage(currentUser.getId(), boardId, imageId);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
@@ -130,10 +132,11 @@ public class OwnerBoardController {
 	 */
 	@PutMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardUpdateResponseDto>> updateOwnerBoard(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardUpdateRequestDto dto) {
 
-		return CommonResponse.of(SuccessCode.UPDATED, ownerBoardService.updateOwnerBoard(boardId, dto));
+		return CommonResponse.of(SuccessCode.UPDATED, ownerBoardService.updateOwnerBoard(currentUser.getId(), boardId, dto));
 	}
 
 	/**
@@ -143,8 +146,9 @@ public class OwnerBoardController {
 	 */
 	@DeleteMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoard(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId) {
-		ownerBoardService.deleteOwnerBoard(boardId);
+		ownerBoardService.deleteOwnerBoard(currentUser.getId(), boardId);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
@@ -156,8 +160,9 @@ public class OwnerBoardController {
 	 */
 	@PatchMapping("/{boardId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restoreOwnerBoard(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId) {
-		ownerBoardService.restoreOwnerBoard(boardId);
+		ownerBoardService.restoreOwnerBoard(currentUser.getId(), boardId);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
@@ -170,10 +175,11 @@ public class OwnerBoardController {
 	 */
 	@PostMapping("/{boardId}/comments")
 	public ResponseEntity<CommonResponse<OwnerBoardCommentCreateResponseDto>> createOwnerBoardComment(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId,
 		@Valid @RequestBody OwnerBoardCommentCreateRequestDto dto) {
 
-		return CommonResponse.of(SuccessCode.CREATED, ownerBoardCommentService.saveOwnerBoardComment(boardId, dto));
+		return CommonResponse.of(SuccessCode.CREATED, ownerBoardCommentService.saveOwnerBoardComment(currentUser.getId(), boardId, dto));
 	}
 
 	/**
@@ -200,13 +206,14 @@ public class OwnerBoardController {
 	 */
 	@PutMapping("/{boardId}/comments/{commentId}")
 	public ResponseEntity<CommonResponse<OwnerBoardCommentUpdateResponseDto>> updateOwnerBoardComment(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId,
 		@PathVariable Long commentId,
 		@Valid @RequestBody OwnerBoardCommentUpdateRequestDto dto
 	) {
 
 		return CommonResponse.of(SuccessCode.UPDATED,
-			ownerBoardCommentService.updateOwnerBoardComment(boardId, commentId, dto));
+			ownerBoardCommentService.updateOwnerBoardComment(currentUser.getId(), boardId, commentId, dto));
 	}
 
 	/**
@@ -217,10 +224,11 @@ public class OwnerBoardController {
 	 */
 	@DeleteMapping("/{boardId}/comments/{commentId}")
 	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoardComment(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long boardId,
 		@PathVariable Long commentId
 	) {
-		ownerBoardCommentService.deleteOwnerBoardComment(boardId, commentId);
+		ownerBoardCommentService.deleteOwnerBoardComment(currentUser.getId(), boardId, commentId);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}

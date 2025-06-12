@@ -20,20 +20,20 @@ import jakarta.validation.Valid;
 public interface OwnerBoardService {
 	OwnerBoard findOwnerBoardById(Long boardId);
 
-	OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images);
+	OwnerBoardCreateResponseDto saveOwnerBoard(Long userId, OwnerBoardCreateRequestDto dto, List<MultipartFile> images);
 
 	Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title,  Pageable pageable);
 
 	OwnerBoardGetResponseDto findOwnerBoard(Long boardId);
 
-	OwnerBoardUpdateResponseDto updateOwnerBoard(Long boardId, OwnerBoardUpdateRequestDto dto);
+	OwnerBoardUpdateResponseDto updateOwnerBoard(Long userId, Long boardId, OwnerBoardUpdateRequestDto dto);
 
-	void deleteOwnerBoard(Long boardId);
+	void deleteOwnerBoard(Long userId, Long boardId);
 
-	void restoreOwnerBoard(Long boardId);
+	void restoreOwnerBoard(Long userId, Long boardId);
 
-	void addImages(Long boardId, List<MultipartFile> images);
+	void addImages(Long userId, Long boardId, List<MultipartFile> images);
 
-	void deleteImage(Long boardId, Long imageId);
+	void deleteImage(Long userId, Long boardId, Long imageId);
 
 }

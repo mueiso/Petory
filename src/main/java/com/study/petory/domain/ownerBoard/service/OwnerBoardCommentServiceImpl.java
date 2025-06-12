@@ -37,7 +37,9 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	// 주인커뮤니티 댓글 생성
 	@Override
-	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId,
+	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(
+		Long userId,
+		Long boardId,
 		OwnerBoardCommentCreateRequestDto dto) {
 
 		User user = userRepository.findById(1L).orElseThrow(); // 임시로 유저 생성, 추후 로그인유저 변경 예정
@@ -66,7 +68,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 수정
 	@Override
 	@Transactional
-	public OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
+	public OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long userId, Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto) {
 		// 본인 댓글인지 검증 로직 추가 예정
 
@@ -86,7 +88,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 삭제
 	@Override
 	@Transactional
-	public void deleteOwnerBoardComment(Long boardId, Long commentId) {
+	public void deleteOwnerBoardComment(Long userId, Long boardId, Long commentId) {
 		// 본인 댓글인지 검증 로직 추가
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);

@@ -272,7 +272,25 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 복구")
 	void restorePlace() {
+
+		Place place = Place.builder()
+			.placeName("testName")
+			.build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceStatusChangeRequestDto dto = new PlaceStatusChangeRequestDto(PlaceStatus.ACTIVE);
+
+		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
+
+		placeServiceImpl.restorePlace(1L, dto);
+
+		assertAll("장소 삭제 로직 검증",
+			() -> assertEquals(PlaceStatus.ACTIVE, place.getPlaceStatus()),
+			() -> assertNull(place.getDeletedAt())
+		);
 	}
 
 	@Test

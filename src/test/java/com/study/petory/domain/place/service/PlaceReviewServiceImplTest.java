@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -139,7 +140,25 @@ class PlaceReviewServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 리뷰 복구")
 	void restorePlaceReview() {
+
+		Place place = Place.builder().build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceReview placeReview = PlaceReview.builder().build();
+
+		ReflectionTestUtils.setField(placeReview, "deletedAt", LocalDateTime.now());
+
+		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
+		when(placeReviewRepository.findById(1L)).thenReturn(Optional.of(placeReview));
+
+		placeReviewServiceImpl.restorePlaceReview(1L, 1L);
+
+		assertAll("장소 리뷰 복구 로직 검증",
+			() -> assertNull(placeReview.getDeletedAt())
+		);
 	}
 
 	@Test

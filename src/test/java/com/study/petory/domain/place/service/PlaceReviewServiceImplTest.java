@@ -17,7 +17,9 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceReview;
 import com.study.petory.domain.place.repository.PlaceReviewRepository;
@@ -104,7 +106,36 @@ class PlaceReviewServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 리뷰 수정")
 	void updatePlaceReview() {
+
+		Place place = Place.builder().build();
+
+		User user = new User();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceReview placeReview = PlaceReview.builder()
+			.place(place)
+			.user(user)
+			.content("testContent")
+			.ratio(BigDecimal.ONE)
+			.build();
+
+		ReflectionTestUtils.setField(placeReview, "id", 1L);
+
+		PlaceReviewUpdateRequestDto dto = new PlaceReviewUpdateRequestDto("updateTestContent", BigDecimal.ZERO);
+
+		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
+		when(placeReviewRepository.findById(1L)).thenReturn(Optional.of(placeReview));
+
+		PlaceReviewUpdateResponseDto responseDto = placeReviewServiceImpl.updatePlaceReview(1L, 1L,
+			dto);
+
+		assertAll("장소 리뷰 수정 로직 검증",
+			() -> assertEquals("updateTestContent", responseDto.getContent()),
+			() -> assertEquals(BigDecimal.ZERO, responseDto.getRatio())
+		);
 	}
 
 	@Test

@@ -36,6 +36,20 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardImageService ownerBoardImageService;
 
+	// 제거 예정, 유저 클래스 등록 전 임시 구현
+	public User user = userRepository.findById(1L).orElseThrow();
+	public Long userId = 1L;
+
+	/**
+	 * 게시글 소유권 검증 메서드
+	 * 이 메서드는 OwnerBoardService 내부에서만 사용됩니다.
+	 */
+	private void validateBoardOwnerShip(OwnerBoard ownerBoard, Long userId, ErrorCode errorCode) {
+		if (!ownerBoard.isEqualUser(userId)) {
+			throw new CustomException(errorCode);
+		}
+	}
+
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
 	public OwnerBoard findOwnerBoardById(Long boardId) {
@@ -43,11 +57,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
 	}
 
-	// 게시글 생성
+	// 게시글 생성 todo 유저 검증
 	@Override
 	@Transactional
 	public OwnerBoardCreateResponseDto saveOwnerBoard(OwnerBoardCreateRequestDto dto, List<MultipartFile> images) {
-		User user = userRepository.findById(1L).orElseThrow(); // 추후 토큰값으로 수정
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
 			.title(dto.getTitle())
@@ -67,7 +80,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 	// 게시글 전체 조회
 	@Override
-	@Transactional(readOnly = true)
 	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
 
 		Page<OwnerBoard> boards;
@@ -82,7 +94,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 	// 게시글 단건 조회
 	@Override
-	@Transactional(readOnly = true)
 	public OwnerBoardGetResponseDto findOwnerBoard(Long boardId) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
@@ -96,20 +107,22 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		return OwnerBoardGetResponseDto.of(ownerBoard, commentsList);
 	}
 
-	// 게시글 수정
+	// 게시글 수정 //todo 본인글 검증
 	@Override
 	@Transactional
 	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long boardId, OwnerBoardUpdateRequestDto requestDto) {
-		// 본인 작성 글인지 검증 로직 추가
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		// 본인 작성 글인지 검증 로직 추가
+		validateBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 
 		ownerBoard.updateOwnerBoard(requestDto.getTitle(), requestDto.getContent());
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}
 
-	// 게시글 삭제
+	// 게시글 삭제 //todo 본인 글 검증
 	@Override
 	@Transactional
 	public void deleteOwnerBoard(Long boardId) {
@@ -129,7 +142,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		ownerBoard.deactivateEntity();
 	}
 
-	// 게시글 복구
+	// 게시글 복구 todo 관리자 검증
 	@Override
 	@Transactional
 	public void restoreOwnerBoard(Long boardId) {

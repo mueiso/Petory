@@ -70,7 +70,7 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 	}
 
 	// user 검증 메서드
-	private boolean isEqualUser(Long userId) {
+	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
 	}
 }

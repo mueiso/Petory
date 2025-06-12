@@ -48,13 +48,15 @@ public class OwnerBoardController {
 	private final OwnerBoardCommentService ownerBoardCommentService;
 
 	/**
-	 * 게시글 생성
+	 * 게시글 생성: 유저, 관리자 가능
 	 * @param dto 제목,내용
 	 * @param images 사진 file
 	 * @return id, 제목, 내용, 생성일
 	 */
 	@PostMapping
 	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
+		// 어노테이션 Long userId,
+		// @AuthenticationPrincipal CustomPrincipal currentUser.getId()
 		@RequestPart @Valid OwnerBoardCreateRequestDto dto,
 		@RequestPart(required = false) List<MultipartFile> images) {
 
@@ -62,13 +64,14 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 사진 삭제
+	 * 사진 단건 삭제: 유저, 관리자 가능
 	 * @param boardId 사진이 포함된 게시글 ID
 	 * @param imageId 사진 ID
 	 * @return 요청 성공 코드만 반환
 	 */
 	@DeleteMapping("/{boardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
+		// 어노테이션 Long adminId,
 		@PathVariable Long boardId,
 		@PathVariable Long imageId) {
 		ownerBoardService.deleteImage(boardId, imageId);
@@ -77,7 +80,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 게시글 전체 조회
+	 * 게시글 전체 조회: 전체(유저, 관리자, 비회원) 가능
 	 * @param title 제목 검색 가능(nullable)
 	 * @param pageable 조회하려는 페이지 위치
 	 * @return 전체 게시글 페이징 처리되어 반환
@@ -91,7 +94,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 게시글 단건 조회
+	 * 게시글 단건 조회: 전체(유저, 관리자, 비회원) 가능
 	 * @param boardId 주인커뮤니티 게시글 ID
 	 * @return 게시글 id,제목,내용,작성일,수정일, 댓글리스트(오래된순 10개), 사진리스트
 	 */
@@ -103,7 +106,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 게시글 수정
+	 * 게시글 수정: 유저, 관리자 가능
 	 * @param boardId 수정할 주인커뮤니티 게시글 ID
 	 * @param dto 제목, 내용
 	 * @return 수정된 OwnerBoard 반환
@@ -117,7 +120,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 게시글 삭제
+	 * 게시글 삭제: 유저, 관리자 가능
 	 * @param boardId 삭제할 게시글 ID
 	 * @return NO_CONTENT 성공코드 반환
 	 */
@@ -130,7 +133,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 게시글 복구
+	 * 게시글 복구: 관리자 가능
 	 * @param boardId 복구할 게시글 ID
 	 * @return RESTORE 성공코드 반환
 	 */
@@ -143,7 +146,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 주인커뮤니티 댓글 생성
+	 * 주인커뮤니티 댓글 생성: 유저, 관리자 가능
 	 * @param boardId 게시글 Id
 	 * @param dto 내용 작성
 	 * @return 댓글 Id, 내용, 생성일, 작성자 ID 반환
@@ -157,7 +160,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 게시글의 댓글 전체 조회(페이징)
+	 * 게시글의 댓글 전체 조회(페이징): 전체(유저, 관리자, 비회원) 가능
 	 * @param boardId 게시글 ID
 	 * @param pageable 페이징 설정
 	 * @return Page size 10, 생성일 기준 오름차순 정렬
@@ -172,7 +175,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 주인커뮤니티 댓글 수정
+	 * 주인커뮤니티 댓글 수정: 유저, 관리자 가능
 	 * @param boardId 댓글이 속한 게시글 ID
 	 * @param commentId 댓글 ID
 	 * @param dto 수정 내용
@@ -190,7 +193,7 @@ public class OwnerBoardController {
 	}
 
 	/**
-	 * 주인커뮤니티 댓글 삭제
+	 * 주인커뮤니티 댓글 삭제: 유저, 관리자 가능
 	 * @param boardId 댓글이 속한 게시글 ID
 	 * @param commentId 댓글 ID
 	 * @return NO_CONTENT 성공코드 반환

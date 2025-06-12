@@ -21,7 +21,12 @@ public abstract class AbstractImageService<T> {
 		this.s3Uploader = s3Uploader;
 	}
 
-	// 파일 업로드 및 저장
+	/**
+	 * 이미지 파일 업로드 및 저장
+	 * @param files 업로드된 이미지 파일
+	 * @param context 객체(도메인)
+	 * @return 이미지 url List
+	 */
 	public List<String> uploadAndSaveAll(List<MultipartFile> files, Object context) {
 		List<String> urls = new ArrayList<>();
 
@@ -39,7 +44,10 @@ public abstract class AbstractImageService<T> {
 		return urls;
 	}
 
-	// 파일 삭제
+	/**
+	 * 이미지 파일 삭제
+	 * @param image 도메인 별 이미지엔티티 받기
+	 */
 	@Transactional
 	public void deleteImageInternal(T image) {
 		String key = extractKeyFromUrl(getImageUrl(image));

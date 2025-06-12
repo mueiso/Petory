@@ -13,10 +13,10 @@
     const urlParams = new URLSearchParams(window.location.search);
     let accessToken = urlParams.get("accessToken");
 
-    // // Bearer 제거 (있는 경우만)
-    // if (accessToken && accessToken.startsWith("Bearer ")) {
-    //     accessToken = accessToken.slice(7);
-    // }
+    // Bearer 제거 (있는 경우만)
+    if (accessToken && accessToken.startsWith("Bearer ")) {
+        accessToken = accessToken.slice(7);
+    }
 
     // accessToken 표시
     const outputEl = document.getElementById("token-output");

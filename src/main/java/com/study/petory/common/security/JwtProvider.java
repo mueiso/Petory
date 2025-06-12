@@ -177,6 +177,31 @@ public class JwtProvider {
 	}
 
 	/*
+	 * JwtProvider 의 getEmailFromToken 메서드 전용 getClaims
+	 * 이미 "Bearer " 접두사를 제거한 순수 JWT 문자열을 파싱하여 Claims 반환
+	 */
+	public Claims parseRawToken (String token) {
+
+		try {
+			// 정상적인 토큰 처리
+			return Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
+			// 토큰 만료
+		} catch (ExpiredJwtException e) {
+			throw new CustomException(ErrorCode.EXPIRED_TOKEN);
+			// 서명 불일치
+		} catch (SignatureException e) {
+			throw new CustomException(ErrorCode.WRONG_SIGNATURE);
+			// 기타 JWT 오류 (Malformed, Unsupported 등)
+		} catch (JwtException e) {
+			throw new CustomException(ErrorCode.INVALID_TOKEN);
+		}
+	}
+
+	/*
 	 * Redis 에 이메일을 키로 하여 Refresh Token 을 저장
 	   → 키는 이메일(또는 사용자 ID), 값은 토큰
 	 * Redis TTL(Time-To-Live)은 7일 → 자동 만료
@@ -208,7 +233,7 @@ public class JwtProvider {
 
 	// 이메일 추출 메서드
 	public String getEmailFromToken(String token) {
-		Claims claims = getClaims(token);
+		Claims claims = parseRawToken(token);
 		return claims.get("email", String.class);
 	}
 }

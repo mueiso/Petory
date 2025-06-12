@@ -30,51 +30,47 @@ public class UserController {
 	private final JwtProvider jwtProvider;
 
 	/**
-	 * 현재 로그인된 사용자 정보를 조회합니다.
-	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보 (ID, 이메일, 닉네임 등)
-	 * @return 성공 시 사용자 프로필 정보와 함께 응답 반환
+	 * 현재 로그인된 사용자의 프로필 정보를 조회합니다.
+	 *
+	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
+	 * @return 성공 시 사용자 프로필 정보와 함께 200 OK 응답
 	 */
 	@GetMapping("/me")
 	public ResponseEntity<CommonResponse<UserProfileResponseDto>> getMyInfo(
-		@AuthenticationPrincipal CustomPrincipal currentUser
-	) {
-		// currentUser.getId(), currentUser.getEmail(), currentUser.getNickname() 사용
-		var profile = userService.getMyProfile(currentUser.getEmail());
+		@AuthenticationPrincipal CustomPrincipal currentUser) {
+
+		// currentUser.getId(), currentUser.getEmail(), currentUser.getNickname() 사용 가능
+		UserProfileResponseDto profile = userService.getMyProfile(currentUser.getEmail());
 		return CommonResponse.of(SuccessCode.FOUND, profile);
 	}
 
 	/**
-	 * 닉네임 등 사용자 정보 수정
-	 * @param request
-	 * @param updateDto
-	 * @return 수정 성공 메시지만 반환
+	 * 현재 로그인된 사용자의 프로필을 업데이트합니다.
+	 *
+	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
+	 * @param updateDto   변경할 사용자 정보 DTO
+	 * @return 성공 시 200 OK 응답
 	 */
 	@PatchMapping("/update")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
-		HttpServletRequest request,
-		@Validated @RequestBody UpdateUserRequestDto updateDto) {
-
-		String accessToken = jwtProvider.resolveToken(request);
-		String email = jwtProvider.getEmailFromToken(accessToken);
-
-		userService.updateProfile(email, updateDto);
-
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@Validated @RequestBody UpdateUserRequestDto updateDto
+	) {
+		userService.updateProfile(currentUser.getEmail(), updateDto);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
-	 * 회원 탈퇴
-	 * @param request
-	 * @return 탈퇴 성공 메시지만 반환
+	 * 현재 로그인된 사용자의 계정을 삭제합니다.
+	 *
+	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
+	 * @return 성공 시 200 OK 응답
 	 */
 	@DeleteMapping("/delete")
-	public ResponseEntity<CommonResponse<Object>> deleteUser(HttpServletRequest request) {
-
-		String accessToken = jwtProvider.resolveToken(request);
-		String email = jwtProvider.getEmailFromToken(accessToken);
-
-		userService.deleteAccount(email);
-
+	public ResponseEntity<CommonResponse<Object>> deleteUser(
+		@AuthenticationPrincipal CustomPrincipal currentUser
+	) {
+		userService.deleteAccount(currentUser.getEmail());
 		return CommonResponse.of(SuccessCode.USER_DELETED);
 	}
 }

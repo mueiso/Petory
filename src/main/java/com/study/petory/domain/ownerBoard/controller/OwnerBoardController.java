@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,7 @@ public class OwnerBoardController {
 	 * @param images 사진 file
 	 * @return id, 제목, 내용, 생성일
 	 */
-	@PostMapping
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
 		// 어노테이션 Long userId,
 		// @AuthenticationPrincipal CustomPrincipal currentUser.getId()
@@ -61,6 +62,22 @@ public class OwnerBoardController {
 		@RequestPart(required = false) List<MultipartFile> images) {
 
 		return CommonResponse.of(SuccessCode.CREATED, ownerBoardService.saveOwnerBoard(dto, images));
+	}
+
+	/**
+	 * 사진 단건 추가
+	 * @param boardId 사진흘 추가할 게시글 ID
+	 * @param images 사진 file
+	 * @return void
+	 */
+	@PostMapping(value = "/{boardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<CommonResponse<Void>> addImages(
+		@PathVariable Long boardId,
+		@RequestPart List<MultipartFile> images
+	) {
+		ownerBoardService.addImages(boardId, images);
+
+		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
 	/**

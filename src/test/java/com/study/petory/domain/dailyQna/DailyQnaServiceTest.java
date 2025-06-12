@@ -61,7 +61,7 @@ public class DailyQnaServiceTest {
 	private QuestionServiceImpl questionService;
 
 	private final UserPrivateInfo testUserInfo = new UserPrivateInfo(
-		1L,
+		"1L",
 		"실명",
 		"000-0000-0000"
 	);

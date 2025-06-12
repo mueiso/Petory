@@ -3,6 +3,7 @@ package com.study.petory.domain.chat.service;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
@@ -31,16 +32,23 @@ public class ChatServiceImpl implements ChatService{
 	private final TradeBoardRepository tradeBoardRepository;
 	private final ChatAggregateRepository aggregateRepository;
 
-	private User findUserById(Long userId) {
+	//사용하지 않으면 삭제 예정
+	public User findUserById(Long userId) {
 		return userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 
+	public ChatRoom findByChatRoomId(String chatRoomId) {
+		return chatRepository.findById(new ObjectId(chatRoomId))
+			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+	}
+
+	//메시지 보내기
 	@Override
 	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
 
-		ChatRoom chatRoom = chatRepository.findById(new ObjectId(requestDto.getChatRoomId()))
-			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+		ChatRoom chatRoom = findByChatRoomId(requestDto.getChatRoomId());
+		findUserById(requestDto.getSenderId());
 
 		ChatMessage message = ChatMessage.builder()
 			.senderId(requestDto.getSenderId())
@@ -53,11 +61,14 @@ public class ChatServiceImpl implements ChatService{
 		return message;
 	}
 
+	//채팅방 생성
 	@Override
 	public ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId) {
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+
+		findUserById(tradeBoard.getUser().getId());
 
 		ChatRoom chatRoom = ChatRoom.builder()
 			.tradeBoardId(tradeBoardId)
@@ -70,24 +81,24 @@ public class ChatServiceImpl implements ChatService{
 		return new ChatRoomCreateResponseDto(chatRoom);
 	}
 
+	//채팅방 전체 조회
 	@Override
-	public List<ChatRoomGetAllResponseDto> findAllChatRoom(int page) {
+	public List<ChatRoomGetAllResponseDto> findAllChatRoom(Pageable pageable) {
 
-		int adjustPage = (page > 0) ? page - 1 : 0;
-
-		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, adjustPage);
+		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, pageable);
 
 		return chatRooms.stream()
 			.map(chatRoom -> new ChatRoomGetAllResponseDto(chatRoom, 2L))
 			.toList();
 	}
 
+	//채팅방 단건 조회
 	@Override
 	public ChatRoomGetResponseDto findChatRoomById(String chatRoomId) {
 
-		ChatRoom chatRoom = chatRepository.findById(new ObjectId(chatRoomId))
-			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
+		ChatRoom chatRoom = findByChatRoomId(chatRoomId);
 
 		return new ChatRoomGetResponseDto(chatRoom);
 	}
+
 }

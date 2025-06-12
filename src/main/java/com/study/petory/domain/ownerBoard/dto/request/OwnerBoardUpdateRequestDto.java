@@ -3,9 +3,11 @@ package com.study.petory.domain.ownerBoard.dto.request;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class OwnerBoardUpdateRequestDto {
 
 	@NotBlank

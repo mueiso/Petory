@@ -22,7 +22,6 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardImageRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -36,7 +35,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final UserRepository userRepository;
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardImageService ownerBoardImageService;
-	private final OwnerBoardImageRepository ownerBoardImageRepository;
 
 	// ownerBoardId로 OwnerBoard 조회
 	@Override
@@ -150,9 +148,12 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 사진 삭제
 	@Override
 	public void deleteImage(Long boardId, Long imageId) {
-		findOwnerBoardById(boardId);
+		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
 		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
-		ownerBoardImageService.deleteImageInternal(image);
+
+		ownerBoardImageService.deleteImageInternal(image); // S3 이미지 정보 삭제
+		ownerBoard.getImages().remove(image); // DB 이미지 정보 삭제, 연관관계를 끊어 고아객체로 만들면 delete 쿼리 발생
 	}
 
 }

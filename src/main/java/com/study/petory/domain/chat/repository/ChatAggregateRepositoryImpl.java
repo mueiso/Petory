@@ -2,6 +2,7 @@ package com.study.petory.domain.chat.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -19,8 +20,9 @@ public class ChatAggregateRepositoryImpl implements ChatAggregateRepository{
 	private final MongoTemplate mongoTemplate;
 
 	@Override
-	public List<ChatRoom> findChatRoomsByUserId(Long userId, int page) {
+	public List<ChatRoom> findChatRoomsByUserId(Long userId, Pageable pageable) {
 
+		//조회 기준 등록 QueryDSL BooleanBuilder와 유사
 		Criteria criteria = new Criteria().orOperator(
 			Criteria.where("sellerId").is(userId),
 			Criteria.where("customerId").is(userId)
@@ -29,8 +31,8 @@ public class ChatAggregateRepositoryImpl implements ChatAggregateRepository{
 		Aggregation aggregation = Aggregation.newAggregation(
 			Aggregation.match(criteria),
 			Aggregation.sort(Sort.by(Sort.Direction.DESC, "lastMessageDate")),
-			Aggregation.skip((long)page * 10),
-			Aggregation.limit(10)
+			Aggregation.skip(pageable.getOffset()),
+			Aggregation.limit(pageable.getPageSize())
 		);
 
 		return mongoTemplate.aggregate(aggregation, "chatroom", ChatRoom.class).getMappedResults();

@@ -31,14 +31,15 @@ public class ChatRoom {
 	private LocalDateTime lastMessageDate;
 
 	@Builder
-	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId) {
+	public ChatRoom(Long tradeBoardId, Long sellerId, Long customerId) {
+		this.tradeBoardId = tradeBoardId;
 		this.sellerId = sellerId;
 		this.customerId = customerId;
-		this.tradeBoardId = tradeBoardId;
 	}
 
 	public void addMessage(ChatMessage message) {
 		this.messages.add(message);
 		this.lastMessageDate = message.getCreatedAt();
 	}
+
 }

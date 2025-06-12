@@ -74,7 +74,19 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
-	void findAllPlace() {
+	@DisplayName("전체 장소 조회 - placeName과 placeType이 모두 입력되는 경우")
+	void findAllPlaceWithPlaceNameAndPlaceType() {
+
+		Place place = Place.builder()
+			.placeName("testName")
+			.placeInfo(null)
+			.placeType(PlaceType.ACCOMMODATION)
+			.address("testAddress")
+			.latitude(BigDecimal.ONE)
+			.longitude(BigDecimal.ONE)
+			.build();
+
+
 	}
 
 	@Test

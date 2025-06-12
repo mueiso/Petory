@@ -50,6 +50,10 @@ public class ChatServiceImpl implements ChatService{
 		ChatRoom chatRoom = findByChatRoomId(requestDto.getChatRoomId());
 		User user = findUserById(requestDto.getSenderId());
 
+		if (!chatRoom.isMember(user.getId())) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
 		ChatMessage message = ChatMessage.builder()
 			.senderId(user.getId())
 			.senderNickname(user.getNickname())

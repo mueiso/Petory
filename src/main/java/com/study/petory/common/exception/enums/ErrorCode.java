@@ -14,6 +14,7 @@ public enum ErrorCode implements BaseCode {
 	LONG_JSON_TYPE(HttpStatus.BAD_REQUEST, "요청 형식이 잘못되었습니다. JSON 구조를 확인하세요."),
 	ONLY_AUTHOR_CAN_EDIT(HttpStatus.FORBIDDEN, "작성자만 수정이 가능합니다."),
 	ONLY_AUTHOR_CAN_DELETE(HttpStatus.FORBIDDEN, "작성자만 삭제가 가능합니다."),
+	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
 
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),

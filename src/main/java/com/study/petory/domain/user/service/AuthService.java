@@ -44,7 +44,7 @@ public class AuthService {
 
 		// 기존 유저 조회 또는 저장 (없으면 저장 후 반환)
 		User savedUser = userRepository.findByEmail(user.getEmail())
-			.orElseGet(() -> userRepository.save(user));
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		if (savedUser.getId() == null) {
 			throw new IllegalStateException("사용자 정보를 저장했지만 ID가 생성되지 않았습니다. DB 설정을 확인하세요.");

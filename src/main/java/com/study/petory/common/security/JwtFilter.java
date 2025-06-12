@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -46,7 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	private static final List<String> WHITELIST = List.of(
 		"/auth/login",
 		"/users/signup",
-		"/auth/refresh",
+		"/auth/reissue",
 		"/login.html",
 		"/favicon.ico"
 	);
@@ -87,6 +88,13 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
+		// 헤더는 있으나 "Bearer " 형식이 아닐 때 (값이 비어 있거나 다른 형식)
+		if (!bearerJwt.startsWith("Bearer ")) {
+			writeErrorResponse(response, HttpStatus.UNAUTHORIZED,
+				"유효한 Bearer 토큰이 없습니다.");
+			return;
+		}
+
 		// 2) "Bearer " 제거 + 유효성 검사 : subStringToken()
 		String rawToken;
 
@@ -100,7 +108,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		// 3) 블랙리스트 체크
-		if (Boolean.TRUE.equals(loginRefreshToken.hasKey("BLACKLIST_" + rawToken))) {
+		if (loginRefreshToken.hasKey("BLACKLIST_" + rawToken)) {
 			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다.");
 			return;
 		}
@@ -143,6 +151,9 @@ public class JwtFilter extends OncePerRequestFilter {
 		} catch (CustomException e) {
 			debugLog("JWT 검증 실패 - 이유: " + e.getMessage());
 			writeErrorResponse(response, e.getErrorCode().getStatus(), e.getMessage());
+		} catch(Exception e) {
+			debugLog("검증 실패 - 이유: " + e.getMessage());
+			writeErrorResponse(response, ErrorCode.FAILED_AUTHORIZATION.getStatus(), e.getMessage());
 		}
 	}
 

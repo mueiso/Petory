@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +49,7 @@ public class UserController {
 	 * @param updateDto   변경할 사용자 정보 DTO
 	 * @return 성공 시 200 OK 응답
 	 */
-	@PatchMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Validated @RequestBody UpdateUserRequestDto updateDto

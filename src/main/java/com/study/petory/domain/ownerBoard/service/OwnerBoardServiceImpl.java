@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
@@ -37,10 +38,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardImageService ownerBoardImageService;
 
 	/**
-	 * 게시글 소유권 검증 메서드
+	 * 게시글 작성자 검증 메서드
 	 * 이 메서드는 OwnerBoardService 내부에서만 사용됩니다.
 	 */
-	private void validateBoardOwnerShip(OwnerBoard ownerBoard, Long userId, ErrorCode errorCode) {
+	private void validBoardOwnerShip(OwnerBoard ownerBoard, Long userId, ErrorCode errorCode) {
 		if (!ownerBoard.isEqualUser(userId)) {
 			throw new CustomException(errorCode);
 		}
@@ -56,9 +57,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 생성
 	@Override
 	@Transactional
-	public OwnerBoardCreateResponseDto saveOwnerBoard(Long userId, OwnerBoardCreateRequestDto dto, List<MultipartFile> images) {
+	public OwnerBoardCreateResponseDto saveOwnerBoard(Long userId, OwnerBoardCreateRequestDto dto,
+		List<MultipartFile> images) {
 
-		User user = userRepository.findById(1L).orElseThrow();
+		User user = userRepository.findById(userId).orElseThrow();
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
 			.title(dto.getTitle())
@@ -106,27 +108,31 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		return OwnerBoardGetResponseDto.of(ownerBoard, commentsList);
 	}
 
-	// 게시글 수정 //todo 본인글 검증
+	// 게시글 수정
 	@Override
 	@Transactional
-	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long userId, Long boardId, OwnerBoardUpdateRequestDto requestDto) {
-
-		// 본인 작성 글인지 검증 로직 추가
+	public OwnerBoardUpdateResponseDto updateOwnerBoard(Long userId, Long boardId,
+		OwnerBoardUpdateRequestDto requestDto) {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 
 		ownerBoard.updateOwnerBoard(requestDto.getTitle(), requestDto.getContent());
 
 		return OwnerBoardUpdateResponseDto.from(ownerBoard);
 	}
 
-	// 게시글 삭제 //todo 본인 글 검증
+	// 게시글 삭제
 	@Override
 	@Transactional
 	public void deleteOwnerBoard(Long userId, Long boardId) {
-		// 본인 작성 글인지 검증 로직 추가
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		if (!SecurityUtil.hasRole("ADMIN")) {
+			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		}
 
 		// 이미지 모두 hard delete(S3, DB)
 		List<OwnerBoardImage> images = ownerBoard.getImages();
@@ -140,11 +146,14 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		ownerBoard.deactivateEntity();
 	}
 
-	// 게시글 복구 todo 관리자 검증
+	// 게시글 복구
 	@Override
 	@Transactional
 	public void restoreOwnerBoard(Long userId, Long boardId) {
-		// 관리자 권한 검증 로직 추가
+
+		if (!SecurityUtil.hasRole("ADMIN")) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));
@@ -161,6 +170,9 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional
 	public void addImages(Long userId, Long boardId, List<MultipartFile> images) {
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+
 		List<OwnerBoardImage> imageEntities = ownerBoardImageService.uploadAndReturnEntities(images, ownerBoard);
 		for (OwnerBoardImage image : imageEntities) {
 			ownerBoard.addImage(image);
@@ -171,13 +183,15 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Override
 	@Transactional
 	public void deleteImage(Long userId, Long boardId, Long imageId) {
-
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
+
+		validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+
 		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
 
 		if (!ownerBoard.isEqualId(image.getOwnerBoard().getId())) {
 			throw new CustomException(ErrorCode.INVALID_INPUT);
-		};
+		}
 
 		ownerBoardImageService.deleteImageInternal(image);
 		ownerBoard.getImages().remove(image);

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
@@ -27,6 +28,16 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardService ownerBoardService;
 	private final UserRepository userRepository;
+
+	/**
+	 * 댓글 작성자 검증 메서드
+	 * 이 메서드는 OwnerBoardCommentService 내부에서만 사용됩니다.
+	 */
+	private void validBoardOwnerShip(OwnerBoardComment comment, Long userId, ErrorCode errorCode) {
+		if (!comment.isEqualUser(userId)) {
+			throw new CustomException(errorCode);
+		}
+	}
 
 	// CommentId로 OwnerBoardComment 조회
 	@Override
@@ -70,9 +81,10 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	@Transactional
 	public OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long userId, Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto) {
-		// 본인 댓글인지 검증 로직 추가 예정
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
+
+		validBoardOwnerShip(comment,userId,ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
@@ -89,9 +101,12 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	@Override
 	@Transactional
 	public void deleteOwnerBoardComment(Long userId, Long boardId, Long commentId) {
-		// 본인 댓글인지 검증 로직 추가
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
+
+		if (!SecurityUtil.hasRole("ADMIN")) {
+			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);

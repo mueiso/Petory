@@ -2,6 +2,8 @@ package com.study.petory.domain.chat.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
@@ -14,7 +16,8 @@ public interface ChatService {
 
 	ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId);
 
-	List<ChatRoomGetAllResponseDto> findAllChatRoom(int page);
+	List<ChatRoomGetAllResponseDto> findAllChatRoom(Pageable pageable);
 
 	ChatRoomGetResponseDto findChatRoomById(String chatRoomId);
+
 }

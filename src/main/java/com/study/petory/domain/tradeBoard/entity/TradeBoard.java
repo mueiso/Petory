@@ -86,4 +86,8 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
 	}
+
+	public Long getUserId() {
+		return this.user.getId();
+	}
 }

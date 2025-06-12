@@ -49,11 +49,11 @@ public class TradeBoardController {
 	 */
 	@PostMapping
 	private ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
-		@AuthenticationPrincipal CustomPrincipal principal,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid @RequestPart TradeBoardCreateRequestDto requestDto,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(principal.getId(), requestDto, images));
+		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(currentUser.getId(), requestDto, images));
 	}
 
 	/**
@@ -89,10 +89,10 @@ public class TradeBoardController {
 	 */
 	@GetMapping("/my-board")
 	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
-		@AuthenticationPrincipal CustomPrincipal principal,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByUser(principal.getId(), pageable));
+		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByUser(currentUser.getId(), pageable));
 	}
 
 	/**
@@ -103,11 +103,11 @@ public class TradeBoardController {
 	 */
 	@PutMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
-		@AuthenticationPrincipal CustomPrincipal principal,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long tradeBoardId,
 		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, tradeBoardService.updateTradeBoard(principal.getId(), tradeBoardId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, tradeBoardService.updateTradeBoard(currentUser.getId(), tradeBoardId, requestDto));
 	}
 
 	/**
@@ -118,11 +118,11 @@ public class TradeBoardController {
 	 */
 	@PatchMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<Void>> updateTradeBoardStatus(
-		@AuthenticationPrincipal CustomPrincipal principal,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long tradeBoardId,
 		@RequestParam TradeBoardStatus status
 	) {
-		tradeBoardService.updateTradeBoardStatus(principal.getId(), tradeBoardId, status);
+		tradeBoardService.updateTradeBoardStatus(currentUser.getId(), tradeBoardId, status);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -134,11 +134,11 @@ public class TradeBoardController {
 	 */
 	@DeleteMapping("/{tradeBoardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
-		@AuthenticationPrincipal CustomPrincipal principal,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long tradeBoardId,
 		@PathVariable Long imageId
 	) {
-		tradeBoardService.deleteImage(principal.getId(), tradeBoardId, imageId);
+		tradeBoardService.deleteImage(currentUser.getId(), tradeBoardId, imageId);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}

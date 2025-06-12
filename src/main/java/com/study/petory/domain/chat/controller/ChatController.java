@@ -2,6 +2,7 @@ package com.study.petory.domain.chat.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
@@ -59,14 +59,14 @@ public class ChatController {
 
 	/**
 	 * 채팅방 전체 조회
-	 * @param page 페이지 번호 (사이즈를 설정해주지 않아도 된다고 생각해 page만 받았습니다)
+	 * @param pageable
 	 * @return 채팅방 아이디, 상대방 아이디
 	 */
 	@GetMapping
 	public ResponseEntity<CommonResponse<List<ChatRoomGetAllResponseDto>>> getAllChatRoom(
-		@RequestParam(defaultValue = "1") int page
+		Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(page));
+		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(pageable));
 	}
 
 	/**

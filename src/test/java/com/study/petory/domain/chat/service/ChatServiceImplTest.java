@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
@@ -108,7 +109,7 @@ class ChatServiceImplTest {
 	@Test
 	void 채팅방_전체_조회_성공() {
 		// given
-		int page = 0;
+		PageRequest pageable = PageRequest.of(0, 10);
 		Long loginUserId = 2L;
 
 		List<ChatRoom> chatRooms = new ArrayList<>();
@@ -128,10 +129,10 @@ class ChatServiceImplTest {
 		ReflectionTestUtils.setField(chatRoom2, "id", new ObjectId());
 		chatRooms.add(chatRoom2);
 
-		when(chatAggregateRepository.findChatRoomsByUserId(loginUserId, page)).thenReturn(chatRooms);
+		when(chatAggregateRepository.findChatRoomsByUserId(loginUserId, pageable)).thenReturn(chatRooms);
 
 		// when
-		List<ChatRoomGetAllResponseDto> responseDto = chatService.findAllChatRoom(page);
+		List<ChatRoomGetAllResponseDto> responseDto = chatService.findAllChatRoom(pageable);
 
 		// then
 		assertThat(responseDto).hasSize(2);

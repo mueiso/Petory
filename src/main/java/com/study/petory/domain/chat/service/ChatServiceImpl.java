@@ -3,6 +3,7 @@ package com.study.petory.domain.chat.service;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
@@ -82,11 +83,9 @@ public class ChatServiceImpl implements ChatService{
 
 	//채팅방 전체 조회
 	@Override
-	public List<ChatRoomGetAllResponseDto> findAllChatRoom(int page) {
+	public List<ChatRoomGetAllResponseDto> findAllChatRoom(Pageable pageable) {
 
-		int adjustPage = (page > 0) ? page - 1 : 0;
-
-		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, adjustPage);
+		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(2L, pageable);
 
 		return chatRooms.stream()
 			.map(chatRoom -> new ChatRoomGetAllResponseDto(chatRoom, 2L))

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,13 +17,20 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceReview;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
@@ -77,20 +86,131 @@ class PlaceServiceImplTest {
 	@DisplayName("전체 장소 조회 - placeName과 placeType이 모두 입력되는 경우")
 	void findAllPlaceWithPlaceNameAndPlaceType() {
 
-		Place place = Place.builder()
-			.placeName("testName")
-			.placeInfo(null)
-			.placeType(PlaceType.ACCOMMODATION)
-			.address("testAddress")
-			.latitude(BigDecimal.ONE)
-			.longitude(BigDecimal.ONE)
-			.build();
+		String placeName = "test";
+		PlaceType placeType = PlaceType.ACCOMMODATION;
+		Pageable pageable = PageRequest.of(0, 10);
 
+		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
+		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
+		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
 
+		when(placeRepository.findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable)).thenReturn(page);
+
+		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
+
+		assertAll("파람이 모두 있을 경우 조회 로직 검증",
+			() -> assertEquals(1, findAllPlace.getContent().size()),
+			() -> verify(placeRepository).findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable)
+		);
 	}
 
 	@Test
+	@DisplayName("전체 장소 조회 - placeName만 입력되는 경우")
+	void findAllPlaceWithPlaceName() {
+
+		String placeName = "test";
+		PlaceType placeType = null;
+		Pageable pageable = PageRequest.of(0, 10);
+
+		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
+		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
+		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
+
+		when(placeRepository.findAllByPlaceNameContaining(placeName, pageable)).thenReturn(page);
+
+		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
+
+		assertAll("placeName만 있을 경우 조회 로직 검증",
+			() -> assertEquals(1, findAllPlace.getContent().size()),
+			() -> verify(placeRepository).findAllByPlaceNameContaining(placeName, pageable)
+		);
+	}
+
+	@Test
+	@DisplayName("전체 장소 조회 - placeType만 입력되는 경우")
+	void findAllPlaceWithPlaceType() {
+
+		String placeName = null;
+		PlaceType placeType = PlaceType.ACCOMMODATION;
+		Pageable pageable = PageRequest.of(0, 10);
+
+		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
+		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
+		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
+
+		when(placeRepository.findAllByPlaceType(placeType, pageable)).thenReturn(page);
+
+		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
+
+		assertAll("파람이 모두 있을 경우 조회 로직 검증",
+			() -> assertEquals(1, findAllPlace.getContent().size()),
+			() -> verify(placeRepository).findAllByPlaceType(placeType, pageable)
+		);
+	}
+
+	@Test
+	@DisplayName("전체 장소 조회 - 파람이 모두 입력되지 않는 경우")
+	void findAllPlace() {
+
+		String placeName = null;
+		PlaceType placeType = null;
+		Pageable pageable = PageRequest.of(0, 10);
+
+		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
+		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
+		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
+
+		when(placeRepository.findAllPlace(pageable)).thenReturn(page);
+
+		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
+
+		assertAll("파람이 모두 있을 경우 조회 로직 검증",
+			() -> assertEquals(1, findAllPlace.getContent().size()),
+			() -> verify(placeRepository).findAllPlace(pageable)
+		);
+	}
+
+	@Test
+	@DisplayName("특정 장소 조회")
 	void findByPlaceId() {
+
+		Place place = Place.builder()
+			.placeName("testName")
+			.placeType(PlaceType.ACCOMMODATION)
+			.build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceReview placeReview1 = PlaceReview.builder()
+			.place(place)
+			.user(mock(User.class))
+			.content("testContent1")
+			.ratio(BigDecimal.ZERO)
+			.build();
+
+		PlaceReview placeReview2 = PlaceReview.builder()
+			.place(place)
+			.user(mock(User.class))
+			.content("testContent2")
+			.ratio(BigDecimal.ZERO)
+			.build();
+
+		ReflectionTestUtils.setField(placeReview1, "id", 1L);
+		ReflectionTestUtils.setField(placeReview2, "id", 2L);
+		ReflectionTestUtils.setField(placeReview1, "deletedAt", null);
+		ReflectionTestUtils.setField(placeReview2, "deletedAt", LocalDateTime.now());
+
+		ReflectionTestUtils.setField(place, "placeReviewList", List.of(placeReview1, placeReview2));
+
+		when(placeRepository.findWithReviewListById(1L)).thenReturn(Optional.of(place));
+
+		PlaceGetResponseDto dto = placeServiceImpl.findByPlaceId(1L);
+
+		assertAll("특정 장소 조회 로직 검증",
+			() -> assertEquals(1, dto.getPlaceReviewList().size()),
+			() -> assertEquals("testName", dto.getPlaceName()),
+			() -> assertEquals("testContent1", dto.getPlaceReviewList().get(0).getContent())
+		);
 	}
 
 	@Test

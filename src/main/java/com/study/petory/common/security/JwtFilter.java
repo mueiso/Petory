@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -58,7 +59,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String url = request.getRequestURI();
 		debugLog("요청 URI: " + url);
 
-		// 요청된 URL 이 인증 우회 대상인지 판단 후 JWT 인증 필터 건너뛰기/ 후 다음 필터로 넘김
+		// WHITELIST or 정적 리소스는 필터 우회
 		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$") || WHITELIST.contains(url)) {
 			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
@@ -66,7 +67,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// 클라이언트가 HTTP 요청에 Authorization 헤더 포함시켰는지 확인
+		// 1. 클라이언트가 HTTP 요청에 Authorization 헤더 포함시켰는지 확인
 		String bearerJwt = request.getHeader("Authorization");
 
 		// 쿼리 파라미터에서도 accessToken 시도 (테스트 목적)
@@ -86,60 +87,47 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		/*
-		 * 토큰 파싱 및 유효성 검사
-		 * subStringToken() : 유효성 검사 + Bearer 제거
-		 * subStringToken() 안에서 발생한 예외 잡아서 HTTP 응답에 401 에러와 함께 메시지 JSON 으로 응답
-		 */
-		String jwt;
+		// 2) "Bearer " 제거 + 유효성 검사 : subStringToken()
+		String rawToken;
 
 		try {
-			jwt = jwtProvider.subStringToken(bearerJwt);
-			debugLog("추출된 JWT: " + jwt);
+			rawToken = jwtProvider.subStringToken(bearerJwt);
+			debugLog("추출된 JWT: " + rawToken);
 		} catch (CustomException e) {
-			debugLog("JWT 파싱 실패: " + e.getMessage());
 			writeErrorResponse(response, e.getErrorCode().getStatus(), e.getMessage());
 
 			return;
 		}
 
-		/*
-		 * tokenKey : Redis 에 저장된 블랙리스트 토큰의 Key 를 구성하는 부분
-		 * jwt 는 현재 요청에서 추출한 Access Token 문자열이기 때문에
-		   → Redis 에 저장할 때 "BLACKLIST_" 접두어 붙여서 구분
-		 */
-		String tokenKey = "BLACKLIST_" + jwt;
-
-		/*
-		 * Redis 에서 tokenKey 존재하는지 확인
-		 * hasKey() : 해당 키가 Redis 에 존재하는지 여부에 따라 true/false 반환
-		 */
-		Boolean isBlackListed = loginRefreshToken.hasKey(tokenKey);
-		debugLog("Redis 블랙리스트 키 조회: " + tokenKey + " / 존재 여부: " + isBlackListed);
-
-		/*
-		 * isBlackListed 가 true 인지 확인 → null-safe 체크
-		 * Redis 에서 해당 토큰이 블랙리스트에 등록되어 있으면 writeErrorResponse 로직으로 진입
-		 */
-		if (Boolean.TRUE.equals(isBlackListed)) {
-			debugLog("블랙리스트 토큰 발견. 필터 중단");
-			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다. 다시 로그인 해주세요.");
-
+		// 3) 블랙리스트 체크
+		if (Boolean.TRUE.equals(loginRefreshToken.hasKey("BLACKLIST_" + rawToken))) {
+			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다.");
 			return;
 		}
 
 		try {
-			// 내부에서 Bearer 제거 + 토큰의 유효성 검증 → Claims 객체로 반환
-			Claims claims = jwtProvider.getClaims(bearerJwt);
+			/*
+			 * 4) 토큰 파싱
+			 * 내부에서 토큰의 유효성 검증 → Claims 객체로 반환
+			 */
+			Claims claims = jwtProvider.parseRawToken(rawToken);
 
 			// Claims 는 JWT 내부 payload 정보들을 갖고 있어 getSubject() 로 값 추출 가능
-			String userId = claims.getSubject();
-			debugLog("JWT Claims 파싱 성공 - 사용자 ID: " + userId);
+			Long userId = Long.valueOf(claims.getSubject());
+			String email = claims.get("email", String.class);
+			String nickname = claims.get("nickname", String.class);
+			debugLog("JWT Claims 파싱 성공 - userId: " + userId);
 
-			// TODO - 권한 부여 로직 추가 후 권한 목록 수정 → List.of()
-			// Spring Security 에서 사용하는 인증 객체 생성
-			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userId, null,
-				List.of());
+			// 5) 권한 매핑 (예시: ROLE_USER)
+			var authorities  = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+
+			// 6)  UserDetails 대신 CustomPrincipal 생성
+			CustomPrincipal principal =
+				new CustomPrincipal(userId, email, nickname, authorities);
+
+			// 7) Authentication 객체 생성 & SecurityContext 에 저장
+			var authentication =
+				new UsernamePasswordAuthenticationToken(principal, null, authorities);
 
 			/*
 			 * 보안 컨텍스트에 방금 만든 authentication 객체를 저장
@@ -147,7 +135,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			   → 인증을 수동으로 완료 처리함
 			 */
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			debugLog("SecurityContext 등록 완료 - 인증 사용자 ID: " + userId);
+			debugLog("SecurityContext 등록 완료 - principal: " + principal.getEmail());
 
 			debugLog("JWT 인증 완료. 다음 필터로 전달");
 			filterChain.doFilter(request, response);

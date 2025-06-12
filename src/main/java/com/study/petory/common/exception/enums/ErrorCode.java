@@ -23,6 +23,7 @@ public enum ErrorCode implements BaseCode {
 
 	// Album
 	ALBUM_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
+	ALBUM_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
 
 	// Calender
 	CALENDER_NOT_FOUND(HttpStatus.NOT_FOUND, "캘린더가 존재하지 않습니다."),

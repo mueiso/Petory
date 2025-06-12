@@ -3,6 +3,7 @@ package com.study.petory.domain.tradeBoard.dto.response;
 import java.time.LocalDateTime;
 
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 
 import lombok.Getter;
@@ -18,9 +19,9 @@ public class TradeBoardUpdateResponseDto {
 
 	private final String content;
 
-	private final String photoUrl;
-
 	private final Integer price;
+
+	private final TradeBoardStatus status;
 
 	private final LocalDateTime createdAt;
 
@@ -31,8 +32,8 @@ public class TradeBoardUpdateResponseDto {
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
 		this.content = tradeBoard.getContent();
-		this.photoUrl = tradeBoard.getPhotoUrl();
 		this.price = tradeBoard.getPrice();
+		this.status = tradeBoard.getStatus();
 		this.createdAt = tradeBoard.getCreatedAt();
 		this.updatedAt = tradeBoard.getUpdatedAt();
 	}

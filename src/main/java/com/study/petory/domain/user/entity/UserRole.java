@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +29,13 @@ public class UserRole {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Builder
 	public UserRole(Role role) {
 		this.role = role;
 	}
+
+	// @Builder
+	// public UserRole(Role role, User user) {
+	// 	this.role = role;
+	// }
 }

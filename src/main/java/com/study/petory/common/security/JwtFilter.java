@@ -59,7 +59,24 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// 요청 URI
 		String url = request.getRequestURI();
-		debugLog("요청 URI: " + url);
+		String method = request.getMethod();
+		String servletPath = request.getServletPath();
+		String contextPath = request.getContextPath();
+		String fullUrl = request.getRequestURL().toString();
+
+		debugLog("요청 로그 확인 --------------------------");
+		debugLog("Method: " + method);
+		debugLog("Request URI: " + url);
+		debugLog("Servlet Path: " + servletPath);
+		debugLog("Context Path: " + contextPath);
+		debugLog("전체 URL: " + fullUrl);
+
+		// GET /owner-boards 하위 경로 모두 허용
+		if ("GET".equalsIgnoreCase(method) && url.startsWith("/owner-boards")) {
+			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
 
 		// 정적 리소스 또는 화이트리스트 우회
 		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$") || WHITELIST.contains(url)) {
@@ -84,7 +101,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			}
 		}
 
-		// 3. 최종적으로 bearerJwt 가 null이면 인증 실패
+		// 3. 최종적으로 bearerJwt 가 null 이면 인증 실패
 		if (bearerJwt == null) {
 			debugLog("Authorization 헤더 없음. 필터 중단");
 			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "Authorization 헤더가 존재하지 않습니다.");

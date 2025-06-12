@@ -186,37 +186,39 @@ public class JwtProvider {
 	}
 
 	/*
-	 * Redis 에 이메일을 키로 하여 Refresh Token 을 저장
-	   → 키는 이메일(또는 사용자 ID), 값은 토큰
+	 * Redis 에 userId를 키로 하여 Refresh Token 을 저장
 	 * Redis TTL(Time-To-Live)은 7일 → 자동 만료
 	 */
-	public void storeRefreshToken(String email, String refreshToken) {
+	public void storeRefreshToken(Long userId, String refreshToken) {
 
 		long expireMillis = refreshTokenLife;
-
-		// TODO - RefreshToken 저장 Key 를 이메일 말고 userId로
-		loginRefreshToken.opsForValue().set(email, refreshToken, expireMillis, TimeUnit.MILLISECONDS);
+		loginRefreshToken.opsForValue().set(
+			String.valueOf(userId),
+			refreshToken,
+			expireMillis,
+			TimeUnit.MILLISECONDS
+		);
 	}
 
 	// 로그아웃 시 Redis 에서 해당 사용자의 Refresh Token 삭제
-	public void deleteRefreshToken(String email) {
+	public void deleteRefreshToken(Long userId) {
 
-		loginRefreshToken.delete(email);
+		loginRefreshToken.delete(String.valueOf(userId));
 	}
 
 	/*
 	 * Redis 에 저장된 토큰과 전달된 토큰이 일치하는지 검사
 	 * 유효하지 않거나 존재하지 않으면 false 반환
 	 */
-	public boolean isValidRefreshToken(String email, String refreshToken) {
+	public boolean isValidRefreshToken(Long userId, String refreshToken) {
 
-		String saved = loginRefreshToken.opsForValue().get(email);
-
+		String saved = loginRefreshToken.opsForValue().get(String.valueOf(userId));
 		return saved != null && saved.equals(refreshToken);
 	}
 
 	// 이메일 추출 메서드
 	public String getEmailFromToken(String token) {
+
 		Claims claims = parseRawToken(token);
 		return claims.get("email", String.class);
 	}

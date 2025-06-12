@@ -42,7 +42,7 @@ public class TradeBoardQueryRepositoryImpl implements TradeBoardQueryRepository 
 			.where(builder)
 			.orderBy(tradeBoard.createdAt.desc())
 			.offset(pageable.getOffset())
-			.limit(pageable.getPageNumber())
+			.limit(pageable.getPageSize())
 			.fetch();
 
 		//Page로 만들기위해 전체 페이지 계산

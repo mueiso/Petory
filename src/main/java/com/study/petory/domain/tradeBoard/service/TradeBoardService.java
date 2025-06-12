@@ -33,4 +33,5 @@ public interface TradeBoardService {
 	TradeBoard findTradeBoardById(Long tradeBoardId);
 
 	void deleteImage(Long tradeBoardId, Long imageId);
+
 }

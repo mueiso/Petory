@@ -8,8 +8,8 @@ import com.study.petory.common.util.S3Uploader;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardImageRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 
 @Service
 public class TradeBoardImageService extends AbstractImageService<TradeBoardImage> {

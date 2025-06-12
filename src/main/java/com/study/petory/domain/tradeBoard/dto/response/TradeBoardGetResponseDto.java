@@ -22,7 +22,7 @@ public class TradeBoardGetResponseDto {
 
 	private final String content;
 
-	private final List<TradeBoardImage> images;
+	private final List<String> urls;
 
 	private final Integer price;
 
@@ -30,13 +30,13 @@ public class TradeBoardGetResponseDto {
 
 	private final LocalDateTime updatedAt;
 
-	public TradeBoardGetResponseDto(TradeBoard tradeBoard) {
+	public TradeBoardGetResponseDto(TradeBoard tradeBoard, List<String> urls) {
 		this.id = tradeBoard.getId();
 		this.sellerId = tradeBoard.getUser().getId();
 		this.category = tradeBoard.getCategory();
 		this.title = tradeBoard.getTitle();
 		this.content = tradeBoard.getContent();
-		this.images = tradeBoard.getImages();
+		this.urls = urls;
 		this.price = tradeBoard.getPrice();
 		this.createdAt = tradeBoard.getCreatedAt();
 		this.updatedAt = tradeBoard.getUpdatedAt();

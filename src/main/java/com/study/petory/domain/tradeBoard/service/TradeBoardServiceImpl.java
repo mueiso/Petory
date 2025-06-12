@@ -38,10 +38,18 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	private final TradeBoardQueryRepository tradeBoardQueryRepository;
 
 	//tradeBoardId로 tradeBoard 조회
-	@Override
 	public TradeBoard findTradeBoardById(Long tradeBoardId) {
 		return tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+	}
+
+	public List<String> imageToUrlList(TradeBoard tradeBoard){
+		if (!tradeBoard.getImages().isEmpty()) {
+			return tradeBoard.getImages().stream()
+				.map(TradeBoardImage::getUrl)
+				.toList();
+		}
+		return List.of();
 	}
 
 	//게시글 생성
@@ -87,8 +95,9 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
 
 		TradeBoard tradeBoard = findTradeBoardById(tradeBoardId);
+		List<String> urls = imageToUrlList(tradeBoard);
 
-		return new TradeBoardGetResponseDto(tradeBoard);
+		return new TradeBoardGetResponseDto(tradeBoard, urls);
 	}
 
 	// 유저별 게시글 조회

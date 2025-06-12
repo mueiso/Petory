@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
@@ -21,8 +23,6 @@ import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -84,8 +84,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	public PlaceGetResponseDto findByPlaceId(Long placeId) {
 
-		Place findPlace = placeRepository.findWithReviewsById(placeId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+		Place findPlace = findPlaceWithPlaceReviewByPlaceId(placeId);
 
 		List<PlaceReviewGetResponseDto> placeReviewList = findPlace.getPlaceReviewList().stream()
 			.filter(placeReview -> placeReview.getDeletedAt() == null)
@@ -140,4 +139,13 @@ public class PlaceServiceImpl implements PlaceService {
 		return placeRepository.findById(placeId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
+
+	// 다른 서비스에서 사용가능하게 설정한 메서드
+	// throws CustomException
+	@Override
+	public Place findPlaceWithPlaceReviewByPlaceId(Long placeId) {
+		return placeRepository.findWithReviewListById(placeId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	}
+
 }

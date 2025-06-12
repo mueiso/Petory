@@ -1,17 +1,18 @@
 package com.study.petory.domain.user.service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
@@ -155,7 +156,7 @@ public class AuthService {
 			if (REFRESH_TOKEN_COOKIE_NAME.equals(cookie.getName())) {
 				try {
 					return java.net.URLDecoder.decode(cookie.getValue(),
-						java.nio.charset.StandardCharsets.UTF_8.name());
+						StandardCharsets.UTF_8);
 				} catch (Exception e) {
 					throw new CustomException(ErrorCode.INVALID_TOKEN);
 				}

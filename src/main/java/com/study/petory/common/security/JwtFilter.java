@@ -11,9 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.study.petory.exception.CustomException;
+import com.study.petory.common.exception.CustomException;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

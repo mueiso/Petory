@@ -3,12 +3,12 @@ package com.study.petory.domain.user.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,17 +1,23 @@
 package com.study.petory.domain.user.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.domain.user.dto.UserProfileResponseDto;
-import com.study.petory.domain.user.dto.UpdateUserRequestDto;
-import com.study.petory.domain.user.service.UserService;
 import com.study.petory.common.security.JwtProvider;
-import com.study.petory.exception.enums.SuccessCode;
+import com.study.petory.domain.user.dto.UpdateUserRequestDto;
+import com.study.petory.domain.user.dto.UserProfileResponseDto;
+import com.study.petory.domain.user.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")

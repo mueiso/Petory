@@ -1,6 +1,6 @@
 package com.study.petory.common.config;
 
-import java.time.Duration;
+import static com.study.petory.common.util.DateUtil.*;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -45,7 +45,7 @@ public class RedisConfig {
 	@Bean
 	public CacheManager cacheManager() {
 		RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-			.entryTtl(Duration.ofDays(1))
+			.entryTtl(remainderTime())
 			.serializeValuesWith(
 				RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer())
 			);

@@ -10,8 +10,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -180,7 +180,7 @@ public class JwtProvider {
 	 * JwtProvider 의 getEmailFromToken 메서드 전용 getClaims
 	 * 이미 "Bearer " 접두사를 제거한 순수 JWT 문자열을 파싱하여 Claims 반환
 	 */
-	public Claims parseRawToken (String token) {
+	public Claims parseRawToken(String token) {
 
 		try {
 			// 정상적인 토큰 처리

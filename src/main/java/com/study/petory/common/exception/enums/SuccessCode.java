@@ -1,4 +1,4 @@
-package com.study.petory.exception.enums;
+package com.study.petory.common.exception.enums;
 
 import org.springframework.http.HttpStatus;
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
@@ -34,7 +35,6 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardCommentService;
 import com.study.petory.domain.ownerBoard.service.OwnerBoardService;
-import com.study.petory.exception.enums.SuccessCode;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

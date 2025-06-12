@@ -3,22 +3,27 @@ package com.study.petory.domain.dailyQna.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.util.DateUtil;
 import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
+import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 import com.study.petory.domain.user.service.UserService;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,7 +45,8 @@ public class QuestionServiceImpl implements QuestionService {
 			String monthDay = date.format(DateTimeFormatter.ofPattern("MM-dd"));
 			Question question = new Question(
 				"질문 " + i,
-				monthDay
+				monthDay,
+				QuestionStatus.ACTIVE
 			);
 			date = date.plusDays(1);
 			questionRepository.save(question);
@@ -54,106 +60,168 @@ public class QuestionServiceImpl implements QuestionService {
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
 	}
 
+	// id로 Active 상태인 질문 조회
+	@Override
+	public Question findQuestionByActive(Long questionId) {
+		return questionRepository.findQuestionByActive(questionId)
+			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+	}
+
+	// id로 Active 또는 Inactive 상태인 질문 조회
+	@Override
+	public Question findQuestionByActiveOrInactive(Long questionId) {
+		return questionRepository.findQuestionByActiveOrInactive(questionId)
+			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+	}
+
 	// 해당 일자에 해당하는 질문이 있는지 확인
 	@Override
-	public boolean existsByDate(String date) {
+	public void existsByDate(String date) {
 		if (questionRepository.existsByDate(date)) {
 			throw new CustomException(ErrorCode.DATE_IS_EXIST);
 		}
-		return true;
 	}
 
 	// 질문을 저장 admin
 	@Override
 	@Transactional
-	public void saveQuestion(Long userId, QuestionCreateRequestDto request) {
+	public void saveQuestion(Long adminId, QuestionCreateRequestDto request) {
 		existsByDate(request.getDate());
 		// 수정 예정
-		// if (!userService.권한검증메서드(userId)) {
+		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
 		questionRepository.save(Question.builder()
 			.question(request.getQuestion())
 			.date(request.getDate())
+			.questionStatus(QuestionStatus.ACTIVE)
 			.build()
 		);
 	}
 
 	// 질문 전체 조회 admin
 	@Override
-	public Page<QuestionGetAllResponseDto> findAllQuestion(Long userId, int page) {
+	public Page<QuestionGetAllResponseDto> findAllQuestion(Long adminId, Pageable pageable) {
 		// 수정 예정
-		// if (!userService.권한검증메서드(userId)) {
+		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		int p = 0;
-		if (page > 1) {
-			p = page - 1;
-		}
-		PageRequest pageable = PageRequest.of(p, 50, Sort.by("date").ascending());
-
-		return questionRepository.findQuestionByPage(pageable);
+		Page<Question> questionPage = questionRepository.findQuestionByPage(pageable);
+		return questionPage.map(QuestionGetAllResponseDto::from);
 	}
 
 	// 질문 단건 조회 admin
 	@Override
-	@Transactional
-	public QuestionGetOneResponseDto findOneQuestion(Long userId, Long questionId) {
+	public QuestionGetOneResponseDto findOneQuestion(Long adminId, Long questionId) {
 		// 수정 예정
-		// if (!userService.권한검증메서드(userId)) {
+		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
-		return QuestionGetOneResponseDto.from(findQuestionByQuestionId(questionId));
+		return QuestionGetOneResponseDto.from(findQuestionByActiveOrInactive(questionId));
 	}
 
 	// 오늘의 질문 조회
 	@Override
+	@Cacheable(value = "todayQuestion")
 	public QuestionGetTodayResponseDto findTodayQuestion() {
-		LocalDate date = LocalDate.now();
-		String today = date.format(DateTimeFormatter.ofPattern("MM-dd"));
-		return questionRepository.findTodayQuestion(today)
+		String today = DateUtil.getFormatDate();
+		Question question = questionRepository.findTodayQuestion(today)
 			.orElseThrow(() -> new CustomException(ErrorCode.TODAY_QUESTION_IS_DEACTIVATED));
+		return QuestionGetTodayResponseDto.from(question);
 	}
 
-	// 질문 수정
+	// 질문 수정 admin
 	@Override
 	@Transactional
-	public void updateQuestion(Long userId, Long questionId, QuestionUpdateRequestDto request) {
+	@CacheEvict(value = "todayQuestion", allEntries = true)
+	public void updateQuestion(Long adminId, Long questionId, QuestionUpdateRequestDto request) {
 		// 수정 예정
-		// if (!userService.권한검증메서드(userId)) {
+		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
 		Question question = findQuestionByQuestionId(questionId);
 		question.update(request.getQuestion(), request.getDate());
 	}
 
-	// 질문 비활성화
+	// 질문 비활성화 admin
 	@Override
 	@Transactional
-	public void deactivateQuestion(Long userId, Long questionId) {
+	@CacheEvict(value = "todayQuestion", allEntries = true)
+	public void inactiveQuestion(Long adminId, Long questionId) {
 		// 수정 예정
-		// if (!userService.권한검증메서드(userId)) {
+		// if (!userService.권한검증메서드(adminId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Question question = findQuestionByActive(questionId);
+		question.updateStatusInactive();
+	}
+
+	// 비활성화 된 질문 조회 admin
+	@Override
+	public Page<QuestionGetInactiveResponseDto> findInactiveQuestion(Long adminId, Pageable pageable) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(adminId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Page<Question> questionPage = questionRepository.findQuestionByInactive(pageable);
+		return questionPage
+			.map(QuestionGetInactiveResponseDto::from);
+	}
+
+	// 비활성화 된 질문 복구 admin
+	@Override
+	@Transactional
+	public void updateQuestionStatusActive(Long adminId, Long questionId) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
 		Question question = findQuestionByQuestionId(questionId);
-		if (question.getDeletedAt() != null) {
+		question.updateStatusActive();
+	}
+
+	// 질문 삭제 admin
+	@Override
+	@Transactional
+	public void deactivateQuestion(Long adminId, Long questionId) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(adminId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Question question = findQuestionByQuestionId(questionId);
+		if (question.isDeleted()) {
 			throw new CustomException(ErrorCode.QUESTION_IS_DEACTIVATED);
 		}
 		question.deactivateEntity();
+		question.updateStatusDelete();
 	}
 
-	// 질문 복구
+	// 삭제된 질문 복구 admin
 	@Override
 	@Transactional
-	public void restoreQuestion(Long userId, Long questionId) {
+	public void restoreQuestion(Long adminId, Long questionId) {
 		// 수정 예정
-		// if (!userService.권한검증메서드(userId)) {
+		// if (!userService.권한검증메서드(adminId)) {
 		// 	throw new CustomException(ErrorCode.FORBIDDEN);
 		// }
 		Question question = findQuestionByQuestionId(questionId);
-		if (question.getDeletedAt() == null) {
+		if (!question.isDeleted()) {
 			throw new CustomException(ErrorCode.QUESTION_IS_NOT_DEACTIVATED);
 		}
 		question.restoreEntity();
+		question.updateStatusActive();
+	}
+
+	// 관리자가 삭제된 질문 조회 admin
+	@Override
+	public Page<QuestionGetDeletedResponse> findQuestionByDeleted(Long adminId, Pageable pageable) {
+		// 수정 예정
+		// if (!userService.권한검증메서드(adminId)) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
+		Page<Question> questionList = questionRepository.findQuestionByDeleted(pageable);
+
+		return questionList
+			.map(QuestionGetDeletedResponse::from);
 	}
 }

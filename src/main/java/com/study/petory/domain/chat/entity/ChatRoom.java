@@ -1,8 +1,10 @@
 package com.study.petory.domain.chat.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
@@ -16,39 +18,27 @@ import lombok.NoArgsConstructor;
 public class ChatRoom {
 
 	@Id
-	private String id;
+	private ObjectId id;
+
+	private Long tradeBoardId;
 
 	private Long sellerId;
 
 	private Long customerId;
 
-	private Long tradeBoardId;
+	private List<ChatMessage> messages = new ArrayList<>();
 
-	private String tradeBoardTitle;
-
-	private String tradeBoardUrl;
-
-	private String lastMessage;
-
-	private boolean isDeleted = false;
-
-	@CreatedDate
-	private LocalDateTime createdAt;
+	private LocalDateTime lastMessageDate;
 
 	@Builder
-	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId, String tradeBoardTitle, String tradeBoardUrl) {
+	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId) {
 		this.sellerId = sellerId;
 		this.customerId = customerId;
 		this.tradeBoardId = tradeBoardId;
-		this.tradeBoardTitle = tradeBoardTitle;
-		this.tradeBoardUrl = tradeBoardUrl;
 	}
 
-	public void deactivateChatRoom() {
-		this.isDeleted = true;
-	}
-
-	public void updateLastMessage(String message) {
-		this.lastMessage = message;
+	public void addMessage(ChatMessage message) {
+		this.messages.add(message);
+		this.lastMessageDate = message.getCreatedAt();
 	}
 }

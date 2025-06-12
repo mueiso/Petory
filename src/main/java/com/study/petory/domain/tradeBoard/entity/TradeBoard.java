@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.Where;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
+import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
@@ -89,5 +91,14 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 
 	public Long getUserId() {
 		return this.user.getId();
+	}
+
+	public void addImage(TradeBoardImage image) {
+		images.add(image);
+		image.setTradeBoard(this);
+	}
+
+	public boolean isImageOver(List<MultipartFile> images) {
+		return (this.images.size() + images.size()) > 5;
 	}
 }

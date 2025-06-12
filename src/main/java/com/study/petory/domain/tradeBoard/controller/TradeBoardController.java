@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +48,7 @@ public class TradeBoardController {
 	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일 반환
 	 */
-	@PostMapping
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	private ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid @RequestPart TradeBoardCreateRequestDto requestDto,
@@ -124,6 +125,16 @@ public class TradeBoardController {
 	) {
 		tradeBoardService.updateTradeBoardStatus(currentUser.getId(), tradeBoardId, status);
 		return CommonResponse.of(SuccessCode.UPDATED);
+	}
+
+	@PostMapping(value = "/{tradeBoardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<CommonResponse<Void>> addImages(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long tradeBoardId,
+		@RequestPart List<MultipartFile> images
+	) {
+		tradeBoardService.addImages(currentUser.getId(), tradeBoardId, images);
+		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
 	/**

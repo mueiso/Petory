@@ -31,6 +31,8 @@ public interface TradeBoardService {
 
 	void updateTradeBoardStatus(Long userId, Long tradeBoardId, TradeBoardStatus status);
 
+	void addImages(Long userId, Long tradeBoardId, List<MultipartFile> images);
+
 	void deleteImage(Long userId, Long tradeBoardId, Long imageId);
 
 }

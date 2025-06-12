@@ -58,6 +58,13 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return List.of();
 	}
 
+	//게시글의 유저가 맞는지 검증
+	public void isOwner(Long userId, TradeBoard tradeBoard) {
+		if (!tradeBoard.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+	}
+
 	//게시글 생성
 	@Override
 	@Transactional
@@ -75,6 +82,10 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.build();
 
 		tradeBoardRepository.save(tradeBoard);
+
+		if (!tradeBoard.isImageOver(images)) {
+			throw new CustomException(ErrorCode.TRADE_BOARD_IMAGE_OVERFLOW);
+		}
 
 		List<String> urls = new ArrayList<>();
 		if (images != null && !images.isEmpty()) {
@@ -119,14 +130,9 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional
 	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
 
-		User loginUser = findUser(userId);
-
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
-		//로그인 유저와 게시글의 유저가 다를 경우 예외처리
-		if (!tradeBoard.isEqualUser(loginUser.getId())) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		isOwner(userId, tradeBoard);
 
 		tradeBoard.updateTradeBoard(requestDto);
 
@@ -143,21 +149,40 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
-		//로그인 유저와 게시글의 유저가 다를 경우 예외처리
-		if (!tradeBoard.isEqualUser(loginUser.getId())) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		isOwner(userId, tradeBoard);
 
 		tradeBoard.updateStatus(status);
+	}
+
+	//사진 추가
+	@Override
+	@Transactional
+	public void addImages(Long userId, Long tradeBoardId, List<MultipartFile> images) {
+
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+
+		isOwner(userId, tradeBoard);
+
+		if (!tradeBoard.isImageOver(images)) {
+			throw new CustomException(ErrorCode.TRADE_BOARD_IMAGE_OVERFLOW);
+		}
+
+		List<TradeBoardImage> imageEntities = tradeBoardImageService.uploadAndReturnEntities(images, tradeBoard);
+
+		for (TradeBoardImage image : imageEntities) {
+			tradeBoard.addImage(image);
+		}
 	}
 
 	//게시글 내 사진 삭제
 	@Override
 	public void deleteImage(Long userId, Long tradeBoardId, Long imageId) {
 
-		User user = findUser(userId);
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
-		tradeBoard.isEqualUser(user.getId());
+
+		if (!tradeBoard.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		TradeBoardImage image = tradeBoardImageService.findImageById(imageId);
 

@@ -38,7 +38,7 @@ public class ChatServiceImpl implements ChatService{
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 
-	public ChatRoom findByChatRoomId(String chatRoomId) {
+	public ChatRoom findChatRoom(String chatRoomId) {
 		return chatRepository.findById(new ObjectId(chatRoomId))
 			.orElseThrow(() -> new CustomException(ErrorCode.CHAT_ROOM_NOT_FOUND));
 	}
@@ -47,7 +47,7 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
 
-		ChatRoom chatRoom = findByChatRoomId(requestDto.getChatRoomId());
+		ChatRoom chatRoom = findChatRoom(requestDto.getChatRoomId());
 		User user = findUserById(requestDto.getSenderId());
 
 		if (!chatRoom.isMember(user.getId())) {
@@ -101,7 +101,7 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public ChatRoomGetResponseDto findChatRoomById(String chatRoomId) {
 
-		ChatRoom chatRoom = findByChatRoomId(chatRoomId);
+		ChatRoom chatRoom = findChatRoom(chatRoomId);
 
 		return new ChatRoomGetResponseDto(chatRoom);
 	}

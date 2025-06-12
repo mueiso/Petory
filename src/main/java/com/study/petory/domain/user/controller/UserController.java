@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
-import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.service.UserService;

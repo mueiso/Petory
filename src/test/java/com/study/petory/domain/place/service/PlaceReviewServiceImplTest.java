@@ -73,7 +73,34 @@ class PlaceReviewServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 리뷰 등록 - 중복 리뷰인 경우")
 	void saveDuplicatedPlaceReview() {
+
+		Place place = Place.builder()
+			.build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		User user = new User();
+
+		ReflectionTestUtils.setField(user, "id", 1L);
+
+		PlaceReviewCreateRequestDto dto = new PlaceReviewCreateRequestDto("testContent", BigDecimal.ZERO);
+
+		PlaceReview placeReview = PlaceReview.builder().build();
+
+		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
+		when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+		when(placeReviewRepository.findByUserAndPlace(user, place)).thenReturn(Optional.of(placeReview));
+
+		// 예외 발생을 기대하는 테스트 코드
+		// assertThrows는 실제 발생한 예외를 리턴해준다
+		CustomException customException = assertThrows(
+			CustomException.class,
+			() -> placeReviewServiceImpl.savePlaceReview(1L, dto)
+		);
+
+		assertEquals(ErrorCode.DUPLICATE_REVIEW, customException.getErrorCode());
 	}
 
 	@Test

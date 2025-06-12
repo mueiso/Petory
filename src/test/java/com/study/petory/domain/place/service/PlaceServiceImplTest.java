@@ -250,7 +250,25 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 삭제")
 	void deletePlace() {
+
+		Place place = Place.builder()
+			.placeName("testName")
+			.build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceStatusChangeRequestDto dto = new PlaceStatusChangeRequestDto(PlaceStatus.DELETED);
+
+		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
+
+		placeServiceImpl.deletePlace(1L, dto);
+
+		assertAll("장소 삭제 로직 검증",
+			() -> assertEquals(PlaceStatus.DELETED, place.getPlaceStatus()),
+			() -> assertNotNull(place.getDeletedAt())
+			);
 	}
 
 	@Test

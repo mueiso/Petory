@@ -162,6 +162,24 @@ class PlaceReviewServiceImplTest {
 	}
 
 	@Test
+	@DisplayName("장소 리뷰 삭제")
 	void deletePlaceReview() {
+
+		Place place = Place.builder().build();
+
+		ReflectionTestUtils.setField(place, "id", 1L);
+
+		PlaceReview placeReview = PlaceReview.builder().build();
+
+		ReflectionTestUtils.setField(placeReview, "id", 1L);
+
+		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
+		when(placeReviewRepository.findById(1L)).thenReturn(Optional.of(placeReview));
+
+		placeReviewServiceImpl.deletePlaceReview(1L, 1L);
+
+		assertAll("장소 리뷰 삭제 로직 검증",
+			() -> assertNotNull(placeReview.getDeletedAt())
+		);
 	}
 }

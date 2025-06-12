@@ -2,6 +2,8 @@ package com.study.petory.common.util;
 
 import org.springframework.stereotype.Component;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.repository.AlbumRepository;
 import com.study.petory.domain.calender.entity.Calender;
@@ -21,8 +23,6 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
-import com.study.petory.exception.CustomException;
-import com.study.petory.exception.enums.ErrorCode;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

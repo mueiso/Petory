@@ -37,6 +37,7 @@ public class SecurityConfig {
 	private final OAuth2SuccessHandler oAuth2SuccessHandler;
 	private final OAuth2FailureHandler oAuth2FailureHandler;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
 	/*
 	 * 1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
@@ -79,7 +80,7 @@ public class SecurityConfig {
 
 			.exceptionHandling(ex -> ex
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 분리된 클래스 사용
-				.accessDeniedHandler(new CustomAccessDeniedHandler())
+				.accessDeniedHandler(customAccessDeniedHandler)
 			)
 
 			.oauth2Login(oauth2 -> oauth2
@@ -120,7 +121,7 @@ public class SecurityConfig {
 		config.setAllowedOrigins(List.of("http://localhost:3000"));  // React 등 프론트엔드 개발 서버
 
 		// 허용할 HTTP 메서드 지정
-		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
 		// 허용할 요청 헤더 지정 (예: Authorization, Content-Type 등)
 		config.setAllowedHeaders(List.of("*"));

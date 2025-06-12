@@ -22,6 +22,14 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @EnableCaching
 public class RedisConfig {
 
+	@Bean
+	@Primary
+	public RedisConnectionFactory redisConnectionManager() {
+		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
+		config.setDatabase(0);
+		return new LettuceConnectionFactory(config);
+	}
+
 	// 전역 캐시 설정
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
@@ -52,14 +60,6 @@ public class RedisConfig {
 		return RedisCacheManager.builder(redisConnectionFactory())
 			.cacheDefaults(config)
 			.build();
-	}
-
-	@Bean
-	@Primary
-	public RedisConnectionFactory redisConnectionManager() {
-		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
-		config.setDatabase(0);
-		return new LettuceConnectionFactory(config);
 	}
 
 	@Bean(name = "loginRefreshToken")

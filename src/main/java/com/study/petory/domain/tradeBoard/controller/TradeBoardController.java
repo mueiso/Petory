@@ -127,6 +127,13 @@ public class TradeBoardController {
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
+	/**
+	 * 사진 추가
+	 * @param currentUser 로그인한 유저
+	 * @param tradeBoardId 게시글
+	 * @param images 추가하려는 사진
+	 * @return 수정한 게시글
+	 */
 	@PostMapping(value = "/{tradeBoardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CommonResponse<Void>> addImages(
 		@AuthenticationPrincipal CustomPrincipal currentUser,

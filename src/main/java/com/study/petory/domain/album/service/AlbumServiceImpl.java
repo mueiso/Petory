@@ -1,14 +1,17 @@
 package com.study.petory.domain.album.service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.album.dto.request.AlbumCreateRequestDto;
+import com.study.petory.domain.album.dto.response.AlbumGetAllResponseDto;
+import com.study.petory.domain.album.dto.response.AlbumGetOneResponseDto;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.entity.AlbumVisibility;
 import com.study.petory.domain.album.repository.AlbumRepository;
@@ -52,20 +55,24 @@ public class AlbumServiceImpl implements AlbumService {
 
 	// 유저의 앨범 전체 조회
 	@Override
-	public void findAllAlbum(Long userId, Pageable pageable) {
-
+	public Page<AlbumGetAllResponseDto> findUserAllAlbum(Long userId, Pageable pageable) {
+		Page<Album> albumPage = findPageAlbum(userId, pageable);
+		return albumPage.map(AlbumGetAllResponseDto::from);
 	}
 
+	// 단일 앨범 조회
 	@Override
-	public void findOneAlbum() {
-		// page<Album> 조회 후 List 중 원하는거 꺼내기
-		//
-		// Page<AlbumDto> 조회 후
+	public AlbumGetOneResponseDto findOneAlbum(Long albumId) {
+		Album album = albumRepository.findOneAlbumByUser(albumId)
+			.orElseThrow(() -> new CustomException(ErrorCode.ALBUM_NOT_FOUND));
+		return AlbumGetOneResponseDto.from(album);
 	}
 
+	// 앨범 전체 조회
 	@Override
-	public void findOtherAlbum() {
-
+	public Page<AlbumGetAllResponseDto> findAllAlbum(Pageable pageable) {
+		Page<Album> albumPage = findPageAlbum(null, pageable);
+		return albumPage.map(AlbumGetAllResponseDto::from);
 	}
 
 	@Override
@@ -86,5 +93,10 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	public void restoreAlbum() {
 
+	}
+
+	@Override
+	public Page<Album> findPageAlbum(Long userId, Pageable pageable) {
+		return albumRepository.findAllAlbum(userId, pageable);
 	}
 }

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,14 +72,16 @@ class JwtProviderTest {
 	 * getClaims()로 정상 파싱되는지 검증
 	 */
 	@Test
-	void createAndParseAccessToken_success() {
+	void AccessToken_생성_및_Claim_추출_success() {
+
 		// given
 		long userId = 1L;
 		String email = "user@example.com";
 		String nickname = "nickname";
+		List<String> roles = List.of("ROLE_USER");
 
 		// when
-		String token = jwtProvider.createAccessToken(userId, email, nickname);
+		String token = jwtProvider.createAccessToken(userId, email, nickname, roles);
 		Claims claims = jwtProvider.getClaims(token);
 
 		// then
@@ -92,7 +95,8 @@ class JwtProviderTest {
 	 * CustomException(EXPIRED_TOKEN)이 발생하는지 검증
 	 */
 	@Test
-	void getClaims_expiredToken_throwsException() {
+	void 만료된_JWT_파싱하면_throwsException() {
+
 		// given: 직접 만료 시점을 과거로 설정한 토큰 생성
 		Key key = (Key) ReflectionTestUtils.getField(jwtProvider, "key");
 		String expiredToken = Jwts.builder()
@@ -115,7 +119,8 @@ class JwtProviderTest {
 	 * CustomException(WRONG_SIGNATURE)이 발생하는지 검증
 	 */
 	@Test
-	void getClaims_wrongSignature_throwsException() {
+	void 위조된_JWT_파싱하면_throwsException() {
+
 		// given: 다른 키로 서명된 (잘못된) 토큰 생성
 		String tamperedKey = secretKey + "x";  // 잘못된 secret
 		Key badKey = Keys.hmacShaKeyFor(tamperedKey.getBytes());
@@ -138,18 +143,19 @@ class JwtProviderTest {
 	 * Redis 에 저장된 값과 비교해 true 를 반환하는지 검증
 	 */
 	@Test
-	void isValidRefreshToken_matchInRedis() {
+	void Redis에_저장된_RefreshToken과_일치하면_true_반환() {
+
 		// given
-		String email = "user@example.com";
+		Long userId = 1L;
 		String refreshToken = "Bearer mockToken";
 
 		// ValueOperations 모킹
 		ValueOperations<String, String> ops = Mockito.mock(ValueOperations.class);
 		when(redisTemplate.opsForValue()).thenReturn(ops);
-		when(ops.get(email)).thenReturn(refreshToken);
+		when(ops.get(String.valueOf(userId))).thenReturn(refreshToken);
 
 		// when
-		boolean result = jwtProvider.isValidRefreshToken(email, refreshToken);
+		boolean result = jwtProvider.isValidRefreshToken(userId, refreshToken);
 
 		// then
 		assertTrue(result, "Redis에 일치하는 리프레시 토큰이 있으면 true 반환해야 한다");

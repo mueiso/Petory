@@ -46,8 +46,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	// WHITELIST (인증이 필요 없는 경로 리스트)
 	private static final List<String> WHITELIST = List.of(
-		"/auth/login",
-		"/users/signup",
 		"/auth/reissue",
 		"/login.html",
 		"/favicon.ico"

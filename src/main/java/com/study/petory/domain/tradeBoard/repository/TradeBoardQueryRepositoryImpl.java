@@ -71,11 +71,13 @@ public class TradeBoardQueryRepositoryImpl implements TradeBoardQueryRepository 
 	public Page<TradeBoard> findByUserId(Long userId, Pageable pageable) {
 
 		QTradeBoard tradeBoard = QTradeBoard.tradeBoard;
+		QTradeBoardImage tradeBoardImage = QTradeBoardImage.tradeBoardImage;
 		QUser user = QUser.user;
 
 		List<TradeBoard> content = queryFactory
 			.selectFrom(tradeBoard)
 			.join(tradeBoard.user, user).fetchJoin()
+			.leftJoin(tradeBoard.images, tradeBoardImage).fetchJoin()
 			.where(user.id.eq(userId))
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())

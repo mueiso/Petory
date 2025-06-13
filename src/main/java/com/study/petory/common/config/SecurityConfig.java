@@ -77,7 +77,8 @@ public class SecurityConfig {
 					"/images/**",
 					"/map.html",                    // 프론트 지도 진입점
 					"/trade-boards",
-					"/trade-boards/{tradeBoardId}"
+					"/trade-boards/{tradeBoardId}",
+					"./questions/today "
 				).permitAll()
 				.requestMatchers(HttpMethod.GET, "/owner-boards/**").permitAll()  // /owner-boards 하위의 경로 중 GET 매핑만 모두 허용
 				.requestMatchers(HttpMethod.GET, "/places/**").permitAll()        // /places 하위의 경로 중 GET 매핑만 모두 허용

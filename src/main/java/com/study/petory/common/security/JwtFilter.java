@@ -51,7 +51,8 @@ public class JwtFilter extends OncePerRequestFilter {
 		"/favicon.ico",
 		"/map.html",
 		"/trade-boards",
-		"/trade-boards/{tradeBoardId}"
+		"/trade-boards/{tradeBoardId}",
+		"./questions/today "
 	);
 
 	@Override

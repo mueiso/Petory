@@ -1,57 +1,81 @@
-// package com.study.petory.domain.user.service;
-//
-// import static org.junit.jupiter.api.Assertions.*;
-// import static org.mockito.Mockito.*;
-//
-// import org.junit.jupiter.api.Test;
-// import org.mockito.InjectMocks;
-// import org.mockito.Mock;
-// import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-// import org.springframework.mock.web.MockHttpServletResponse;
-// import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-//
-// import com.fasterxml.jackson.databind.ObjectMapper;
-// import com.study.petory.common.security.JwtProvider;
-//
-// import jakarta.servlet.http.HttpServletResponse;
-//
-// @WebMvcTest
-// class OAuth2SuccessHandlerTest {
-//
-// 	@InjectMocks
-// 	private OAuth2SuccessHandler successHandler;
-//
-// 	@Mock
-// 	private JwtProvider jwtProvider;
-//
-// 	@Mock
-// 	private ObjectMapper objectMapper;
-//
-// 	@Mock
-// 	private HttpServletResponse response;
-//
-// 	@Mock
-// 	private OAuth2AuthenticationToken authentication;
-//
-// 	@Test
-// 	void onAuthenticationSuccess_정상발급_테스트() throws Exception {
-// 		CustomOAuth2User oAuth2User = new CustomOAuth2User(1L, "user@example.com", "nickname");
-//
-// 		when(authentication.getPrincipal()).thenReturn(oAuth2User);
-// 		when(jwtProvider.createAccessToken(anyLong(), anyString(), anyString()))
-// 			.thenReturn("Bearer accessToken");
-// 		when(jwtProvider.createRefreshToken(anyLong()))
-// 			.thenReturn("Bearer refreshToken");
-//
-// 		doNothing().when(jwtProvider).storeRefreshToken(anyString(), anyString());
-// 		when(objectMapper.writeValueAsString(any())).thenReturn("{\"accessToken\":\"Bearer accessToken\"}");
-//
-// 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
-//
-// 		successHandler.onAuthenticationSuccess(null, servletResponse, authentication);
-//
-// 		assertEquals("application/json", servletResponse.getContentType());
-// 		assertTrue(servletResponse.getContentAsString().contains("accessToken"));
-// 		assertNotNull(servletResponse.getCookie("refreshToken"));
-// 	}
-// }
+package com.study.petory.domain.user.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
+
+import com.study.petory.domain.user.dto.TokenResponseDto;
+import com.study.petory.domain.user.entity.User;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@ExtendWith(MockitoExtension.class)
+class OAuth2SuccessHandlerTest {
+
+	@Mock
+	private AuthService authService;
+
+	@InjectMocks
+	private OAuth2SuccessHandler oAuth2SuccessHandler;
+
+	@Mock
+	private HttpServletRequest request;
+
+	@Mock
+	private HttpServletResponse response;
+
+	@Test
+	void onAuthenticationSuccess_정상동작_테스트() throws Exception {
+		// given
+		Map<String, Object> attributes = new HashMap<>();
+		attributes.put("email", "user@example.com");
+		attributes.put("name", "nickname");
+
+		// 실제 OAuth2User 구현체 사용
+		OAuth2User oauth2User = new DefaultOAuth2User(
+			java.util.List.of(new OAuth2UserAuthority(attributes)),
+			attributes,
+			"email"
+		);
+
+		UsernamePasswordAuthenticationToken authentication =
+			new UsernamePasswordAuthenticationToken(oauth2User, null, oauth2User.getAuthorities());
+
+		TokenResponseDto tokens = new TokenResponseDto("accessTokenValue", "refreshTokenValue");
+		when(authService.issueToken(any(User.class))).thenReturn(tokens);
+
+		// response mock: 쿠키, sendRedirect 체크
+		doNothing().when(response).addCookie(any(Cookie.class));
+		doNothing().when(response).sendRedirect(anyString());
+
+		// when
+		oAuth2SuccessHandler.onAuthenticationSuccess(request, response, authentication);
+
+		// then: 토큰 발급 및 쿠키 등록, 리다이렉트 동작 여부 검증
+		verify(authService).issueToken(any(User.class));
+		verify(response).addCookie(argThat(cookie -> {
+			assertEquals("refreshToken", cookie.getName());
+			assertTrue(cookie.isHttpOnly());
+			assertTrue(cookie.getSecure());
+			assertEquals("/", cookie.getPath());
+			assertTrue(cookie.getMaxAge() > 0);
+			return true;
+		}));
+		verify(response).sendRedirect(contains("accessToken=accessTokenValue"));
+	}
+}

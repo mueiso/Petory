@@ -1,75 +1,122 @@
-// package com.study.petory.common.security;
-//
-// import static org.mockito.Mockito.*;
-//
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.InjectMocks;
-// import org.mockito.Mock;
-// import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-// import org.springframework.data.redis.core.RedisTemplate;
-// import org.springframework.mock.web.MockHttpServletRequest;
-// import org.springframework.mock.web.MockHttpServletResponse;
-// import org.springframework.security.core.context.SecurityContextHolder;
-//
-// import io.jsonwebtoken.Claims;
-// import io.jsonwebtoken.Jwts;
-// import jakarta.servlet.FilterChain;
-//
-// @WebMvcTest
-// class JwtFilterTest {
-//
-// 	@InjectMocks
-// 	private JwtFilter jwtFilter;
-//
-// 	@Mock
-// 	private JwtProvider jwtProvider;
-//
-// 	@Mock
-// 	private RedisTemplate<String, String> redisTemplate;
-//
-// 	private MockHttpServletRequest request;
-// 	private MockHttpServletResponse response;
-// 	private FilterChain filterChain;
-//
-// 	@BeforeEach
-// 	void setUp() {
-// 		request = new MockHttpServletRequest();
-// 		response = new MockHttpServletResponse();
-// 		filterChain = mock(FilterChain.class);
-// 	}
-//
-// 	@Test
-// 	void doFilter_ValidToken_SetsAuthentication() throws Exception {
-// 		String token = "Bearer validToken";
-//
-// 		request.addHeader("Authorization", token);
-//
-// 		Claims claims = Jwts.claims().setSubject("1");
-// 		claims.put("email", "user@example.com");
-// 		claims.put("nickname", "nickname");
-//
-// 		when(jwtProvider.resolveToken(any())).thenReturn("validToken");
-// 		when(jwtProvider.getClaims(any())).thenReturn(claims);
-// 		when(redisTemplate.hasKey("logout:validToken")).thenReturn(false);
-//
-// 		jwtFilter.doFilter(request, response, filterChain);
-//
-// 		assertNotNull(SecurityContextHolder.getContext().getAuthentication());
-// 		verify(filterChain).doFilter(request, response);
-// 	}
-//
-// 	@Test
-// 	void doFilter_BlacklistedToken_ShouldNotAuthenticate() throws Exception {
-// 		String token = "Bearer blacklisted";
-//
-// 		request.addHeader("Authorization", token);
-//
-// 		when(jwtProvider.resolveToken(any())).thenReturn("blacklisted");
-// 		when(redisTemplate.hasKey("logout:blacklisted")).thenReturn(true);
-//
-// 		jwtFilter.doFilter(request, response, filterChain);
-//
-// 		assertNull(SecurityContextHolder.getContext().getAuthentication());
-// 	}
-// }
+package com.study.petory.common.security;
+
+import static org.mockito.Mockito.*;
+
+import java.io.PrintWriter;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpStatus;
+
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+class JwtFilterTest {
+
+	@Mock
+	private JwtProvider jwtProvider;
+
+	@Mock
+	private RedisTemplate<String, String> redisTemplate;
+
+	@InjectMocks
+	private JwtFilter jwtFilter;
+
+	@Mock
+	private HttpServletRequest request;
+
+	@Mock
+	private HttpServletResponse response;
+
+	@Mock
+	private FilterChain filterChain;
+
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+		jwtFilter = new JwtFilter(jwtProvider, redisTemplate);
+	}
+
+	@Test
+	void doFilterInternal_WHITELIST_패스() throws Exception {
+		// given
+		when(request.getRequestURI()).thenReturn("/auth/login");
+
+		// when
+		jwtFilter.doFilterInternal(request, response, filterChain);
+
+		// then
+		verify(filterChain).doFilter(request, response);
+		verifyNoInteractions(jwtProvider);
+	}
+
+	@Test
+	void doFilterInternal_Authorization_헤더_없으면_401() throws Exception {
+		// given
+		when(request.getRequestURI()).thenReturn("/api/protected");
+		when(request.getHeader("Authorization")).thenReturn(null);
+		// response.getWriter()를 mock 처리
+		PrintWriter writer = mock(PrintWriter.class);
+		when(response.getWriter()).thenReturn(writer);
+
+		// when
+		jwtFilter.doFilterInternal(request, response, filterChain);
+
+		// then
+		verify(response).setStatus(HttpStatus.UNAUTHORIZED.value());
+		verify(writer).write(contains("Authorization 헤더가 존재하지 않습니다."));
+		verifyNoInteractions(jwtProvider);
+	}
+
+	@Test
+	void doFilterInternal_블랙리스트된_토큰이면_401() throws Exception {
+		// given
+		String bearerJwt = "Bearer validToken";
+		when(request.getRequestURI()).thenReturn("/api/protected");
+		when(request.getHeader("Authorization")).thenReturn(bearerJwt);
+
+		// 정상적인 JWT 파싱
+		when(jwtProvider.subStringToken(bearerJwt)).thenReturn("validToken");
+		when(redisTemplate.hasKey("BLACKLIST_validToken")).thenReturn(true);
+
+		PrintWriter writer = mock(PrintWriter.class);
+		when(response.getWriter()).thenReturn(writer);
+
+		// when
+		jwtFilter.doFilterInternal(request, response, filterChain);
+
+		// then
+		verify(response).setStatus(HttpStatus.UNAUTHORIZED.value());
+		verify(writer).write(contains("로그아웃된 토큰입니다."));
+		verifyNoInteractions(filterChain);
+	}
+
+	@Test
+	void doFilterInternal_정상_토큰이면_인증성공() throws Exception {
+		// given
+		String bearerJwt = "Bearer validToken";
+		when(request.getRequestURI()).thenReturn("/api/protected");
+		when(request.getHeader("Authorization")).thenReturn(bearerJwt);
+		when(jwtProvider.subStringToken(bearerJwt)).thenReturn("validToken");
+		when(redisTemplate.hasKey("BLACKLIST_validToken")).thenReturn(false);
+
+		// Claims mock (유저 정보 포함)
+		Claims claims = mock(Claims.class);
+		when(jwtProvider.parseRawToken("validToken")).thenReturn(claims);
+		when(claims.getSubject()).thenReturn("1");
+		when(claims.get("email", String.class)).thenReturn("user@example.com");
+		when(claims.get("nickname", String.class)).thenReturn("nickname");
+
+		// when
+		jwtFilter.doFilterInternal(request, response, filterChain);
+
+		// then
+		verify(filterChain).doFilter(request, response);
+	}
+}

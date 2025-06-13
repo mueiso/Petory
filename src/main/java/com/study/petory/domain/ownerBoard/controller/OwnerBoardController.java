@@ -204,5 +204,4 @@ public class OwnerBoardController {
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
-
 }

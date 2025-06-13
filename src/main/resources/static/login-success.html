@@ -11,8 +11,15 @@
 
 <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById("accessToken").textContent = params.get("accessToken");
-    document.getElementById("refreshToken").textContent = params.get("refreshToken");
+
+    const accessTokenRaw = params.get("accessToken");
+    const refreshTokenRaw = params.get("refreshToken");
+
+    const cleanAccessToken = accessTokenRaw ? accessTokenRaw.replace(/^Bearer\s*/, "") : "";
+    const cleanRefreshToken = refreshTokenRaw ? refreshTokenRaw.replace(/^Bearer\s*/, "") : "";
+
+    document.getElementById("accessToken").textContent = cleanAccessToken;
+    document.getElementById("refreshToken").textContent = cleanRefreshToken;
 </script>
 </body>
 </html>

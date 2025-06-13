@@ -44,7 +44,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 			.nickname(name)
 			.build();
 
-		// TODO - 배포 전 refreshToken → HttpOnly 헤더 또는 response body 로만 처리
+		// TODO - 배포 전 refreshToken → HttpOnly 헤더 또는 response body 로만 처리 필요
 		// 토큰 발급 및 저장 처리
 		TokenResponseDto tokens = authService.issueToken(user);
 

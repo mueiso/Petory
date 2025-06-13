@@ -12,12 +12,12 @@ import com.study.petory.domain.chat.entity.ChatMessage;
 
 public interface ChatService {
 
-	ChatMessage createMessage(MessageSendRequestDto requestDto);
+	ChatMessage createMessage(Long userId, MessageSendRequestDto requestDto);
 
-	ChatRoomCreateResponseDto saveChatRoom(Long tradeBoardId);
+	ChatRoomCreateResponseDto saveChatRoom(Long userId, Long tradeBoardId);
 
-	List<ChatRoomGetAllResponseDto> findAllChatRoom(Pageable pageable);
+	List<ChatRoomGetAllResponseDto> findAllChatRoom(Long userId, Pageable pageable);
 
-	ChatRoomGetResponseDto findChatRoomById(String chatRoomId);
+	ChatRoomGetResponseDto findChatRoomById(Long userId, String chatRoomId);
 
 }

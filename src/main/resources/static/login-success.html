@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>로그인 성공</title>
 </head>
 <body>
-<h2>어서오세요! 로그인 성공 🎉</h2>
-<p id="token-output">accessToken: 로딩 중...</p>
+<h1>어서오세요! 로그인 성공 🎉</h1>
+<p>accessToken: <span id="accessToken"></span></p>
+<p>refreshToken: <span id="refreshToken"></span></p>
 
 <script>
-    // URL에서 accessToken 추출
-    const urlParams = new URLSearchParams(window.location.search);
-    let accessToken = urlParams.get("accessToken");
+    const params = new URLSearchParams(window.location.search);
 
-    // Bearer 제거 (있는 경우만)
-    if (accessToken && accessToken.startsWith("Bearer ")) {
-        accessToken = accessToken.slice(7);
-    }
+    const accessTokenRaw = params.get("accessToken");
+    const refreshTokenRaw = params.get("refreshToken");
 
-    // accessToken 표시
-    const outputEl = document.getElementById("token-output");
-    if (accessToken) {
-        outputEl.textContent = "accessToken: " + accessToken;
-    } else {
-        outputEl.textContent = "accessToken이 전달되지 않았습니다.";
-    }
+    const cleanAccessToken = accessTokenRaw ? accessTokenRaw.replace(/^Bearer\s*/, "") : "";
+    const cleanRefreshToken = refreshTokenRaw ? refreshTokenRaw.replace(/^Bearer\s*/, "") : "";
+
+    document.getElementById("accessToken").textContent = cleanAccessToken;
+    document.getElementById("refreshToken").textContent = cleanRefreshToken;
 </script>
 </body>
 </html>

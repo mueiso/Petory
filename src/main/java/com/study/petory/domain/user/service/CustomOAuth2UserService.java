@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
@@ -39,7 +41,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 		// 4. 이메일이 없으면 예외 발생 → 회원 식별이 불가하므로
 		if (email == null || email.isBlank()) {
-			throw new IllegalArgumentException("이메일 정보가 제공되지 않았습니다.");
+			throw new CustomException(ErrorCode.OAUTH2_EMAIL_NOT_FOUND);
 		}
 
 		// 5. 사용자 정보가 DB에 존재하지 않으면 새로 생성
@@ -62,7 +64,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				.nickname(name)  // 초기 닉네임 설정
 				.email(email)
 				.userPrivateInfo(privateInfo)
-				.userRole(List.of(userRole))  // 역할 연결
+				.userRole(List.of(userRole))
 				.build());
 		});
 

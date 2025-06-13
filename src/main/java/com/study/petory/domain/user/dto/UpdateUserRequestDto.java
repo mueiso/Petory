@@ -11,7 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateUserRequestDto {
 
-	@NotBlank(message = "닉네임은 필수 입력 값입니다.")
 	@Size(max = 30, message = "최대 입력 가능한 글자수는 30자 입니다.")
 	private String nickname;
+
+	@NotBlank(message = "전화번호는 필수 입력 값입니다.")
+	private String mobileNum;
 }

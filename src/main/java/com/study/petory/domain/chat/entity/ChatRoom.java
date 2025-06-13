@@ -42,4 +42,7 @@ public class ChatRoom {
 		this.lastMessageDate = message.getCreatedAt();
 	}
 
+	public boolean isMember(Long userId) {
+		return this.sellerId.equals(userId) || this.customerId.equals(userId);
+	}
 }

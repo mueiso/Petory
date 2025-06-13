@@ -82,12 +82,14 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		tradeBoardRepository.save(tradeBoard);
 
-		if (!tradeBoard.isImageOver(images)) {
-			throw new CustomException(ErrorCode.TRADE_BOARD_IMAGE_OVERFLOW);
-		}
 
 		List<String> urls = new ArrayList<>();
 		if (images != null && !images.isEmpty()) {
+
+			if (!tradeBoard.isImageOver(images)) {
+				throw new CustomException(ErrorCode.TRADE_BOARD_IMAGE_OVERFLOW);
+			}
+
 			urls = tradeBoardImageService.uploadAndSaveAll(images, tradeBoard);
 		}
 
@@ -117,6 +119,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	// 유저별 게시글 조회
 	@Override
+	@Transactional(readOnly = true)
 	public Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable) {
 
 		Page<TradeBoard> tradeBoards = tradeBoardQueryRepository.findByUserId(userId, pageable);
@@ -175,6 +178,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	//게시글 내 사진 삭제
 	@Override
+	@Transactional
 	public void deleteImage(Long userId, Long tradeBoardId, Long imageId) {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);

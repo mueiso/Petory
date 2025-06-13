@@ -20,4 +20,5 @@ public interface ChatService {
 
 	ChatRoomGetResponseDto findChatRoomById(Long userId, String chatRoomId);
 
+	void leaveChatRoomById(Long userId, String chatRoomId);
 }

@@ -25,7 +25,7 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,9 +33,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OwnerBoardServiceImpl implements OwnerBoardService {
 	private final OwnerBoardRepository ownerBoardRepository;
-	private final UserRepository userRepository;
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardImageService ownerBoardImageService;
+	private final UserServiceImpl userService;
 
 	/**
 	 * 게시글 작성자 검증 메서드
@@ -60,7 +60,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	public OwnerBoardCreateResponseDto saveOwnerBoard(Long userId, OwnerBoardCreateRequestDto dto,
 		List<MultipartFile> images) {
 
-		User user = userRepository.findById(userId).orElseThrow();
+		User user = userService.getUserById(userId);
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
 			.title(dto.getTitle())

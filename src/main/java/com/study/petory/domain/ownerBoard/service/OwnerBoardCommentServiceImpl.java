@@ -17,7 +17,7 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +27,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardService ownerBoardService;
-	private final UserRepository userRepository;
+	private final UserServiceImpl userService;
 
 	/**
 	 * 댓글 작성자 검증 메서드
@@ -48,12 +48,11 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	// 주인커뮤니티 댓글 생성
 	@Override
-	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(
-		Long userId,
-		Long boardId,
+	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long userId, Long boardId,
 		OwnerBoardCommentCreateRequestDto dto) {
 
-		User user = userRepository.findById(1L).orElseThrow(); // 임시로 유저 생성, 추후 로그인유저 변경 예정
+		User user = userService.getUserById(userId);
+
 		OwnerBoard ownerBoard = ownerBoardService.findOwnerBoardById(boardId);
 
 		OwnerBoardComment comment = OwnerBoardComment.builder()
@@ -84,7 +83,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
 
-		validBoardOwnerShip(comment,userId,ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);

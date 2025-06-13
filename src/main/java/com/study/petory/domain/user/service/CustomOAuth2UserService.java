@@ -64,7 +64,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				.nickname(name)  // 초기 닉네임 설정
 				.email(email)
 				.userPrivateInfo(privateInfo)
-				.userRole(List.of(userRole))  // 역할 연결
+				.userRole(List.of(userRole))
 				.build());
 		});
 

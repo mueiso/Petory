@@ -103,9 +103,25 @@ public class ChatServiceImpl implements ChatService{
 
 		ChatRoom chatRoom = findChatRoom(chatRoomId);
 
-		chatRoom.isMember(userId);
+		if (chatRoom.isMember(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		return new ChatRoomGetResponseDto(chatRoom);
+	}
+
+	//채팅방 나가기
+	@Override
+	public void leaveChatRoomById(Long userId, String chatRoomId) {
+
+		ChatRoom chatRoom = findChatRoom(chatRoomId);
+
+		if (chatRoom.isMember(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
+		chatRoom.leaveChatRoom(userId);
+		chatRepository.save(chatRoom);
 	}
 
 }

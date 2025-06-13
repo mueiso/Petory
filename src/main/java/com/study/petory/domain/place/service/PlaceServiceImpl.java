@@ -60,24 +60,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
-
-		// placeName, placeType이 둘 다 있는 경우. 두 가지의 필터를 모두 포함한 조회
-		if (placeName != null && placeType != null) {
-			return placeRepository.findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable);
-		}
-
-		// placeName이 존재하는 경우 placeName 중 일부만 입력되는 경우에도 조회 가능
-		if (placeName != null) {
-			return placeRepository.findAllByPlaceNameContaining(placeName, pageable);
-		}
-
-		// placeType이 존재하는 경우 placeType 기준 조회
-		if (placeType != null) {
-			return placeRepository.findAllByPlaceType(placeType, pageable);
-		}
-
-		// 전체 조회
-		return placeRepository.findAllPlace(pageable);
+		return placeRepository.findAllPlace(placeName, placeType, pageable);
 	}
 
 	// 특정 장소 조회

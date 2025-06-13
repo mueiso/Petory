@@ -48,7 +48,10 @@ public class JwtFilter extends OncePerRequestFilter {
 	private static final List<String> WHITELIST = List.of(
 		"/auth/reissue",
 		"/login.html",
-		"/favicon.ico"
+		"/favicon.ico",
+		"/map.html",
+		"/trade-boards",
+		"/trade-boards/{tradeBoardId}"
 	);
 
 	@Override
@@ -71,6 +74,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// GET /owner-boards 하위 경로 모두 허용
 		if ("GET".equalsIgnoreCase(method) && url.startsWith("/owner-boards")) {
+			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// GET /owner-boards 하위 경로 모두 허용
+		if ("GET".equalsIgnoreCase(method) && url.startsWith("/places")) {
 			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;

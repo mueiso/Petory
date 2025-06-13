@@ -66,8 +66,6 @@ public class SecurityConfig {
 				.requestMatchers(
 					"/auth/**",
 					"/login/**",
-					"/users/signup",
-					"/users/login",
 					"/oauth2/**",       		      // 소셜 로그인 진입점 (예: /oauth2/authorization/google)
 					"/login/oauth2/**", 		      // 소셜 로그인 콜백 URI (예: /login/oauth2/code/google)
 					"/error",

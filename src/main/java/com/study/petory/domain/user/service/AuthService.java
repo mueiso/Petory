@@ -1,5 +1,6 @@
 package com.study.petory.domain.user.service;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,8 +45,17 @@ public class AuthService {
 			throw new CustomException(ErrorCode.USER_ID_NOT_GENERATED);
 		}
 
-		String accessToken = jwtProvider.createAccessToken(savedUser.getId(), savedUser.getEmail(),
-			savedUser.getNickname());
+		List<String> roles = savedUser.getUserRole().stream()
+			.map(userRole -> "ROLE_" + userRole.getRole().name())
+			.toList();
+
+		String accessToken = jwtProvider.createAccessToken(
+			savedUser.getId(),
+			savedUser.getEmail(),
+			savedUser.getNickname(),
+			roles  // JWT Claim 에 포함된 권한 리스트
+		);
+
 		String refreshToken = jwtProvider.createRefreshToken(savedUser.getId());
 
 		jwtProvider.storeRefreshToken(savedUser.getId(), refreshToken);
@@ -92,7 +102,17 @@ public class AuthService {
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		String newAccessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail(), user.getNickname());
+		List<String> roles = user.getUserRole().stream()
+			.map(userRole -> "Role" + userRole.getRole().name())
+			.toList();
+
+		String newAccessToken = jwtProvider.createAccessToken(
+			user.getId(),
+			user.getEmail(),
+			user.getNickname(),
+			roles
+			);
+
 		String newRefreshToken = jwtProvider.createRefreshToken(user.getId());
 
 		// Redis 에 기존 RefreshToken 삭제 및 신규 저장

@@ -38,7 +38,8 @@ public class User extends TimeFeatureBasedEntity {
 	@JoinColumn(name = "user_private_info_id")
 	private UserPrivateInfo userPrivateInfo;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "user_id")
 	private List<UserRole> userRole;
 
 	@Builder

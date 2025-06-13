@@ -46,7 +46,7 @@ public class AuthService {
 		}
 
 		List<String> roles = savedUser.getUserRole().stream()
-			.map(userRole -> "Role" + userRole.getRole().name())
+			.map(userRole -> "ROLE_" + userRole.getRole().name())
 			.toList();
 
 		String accessToken = jwtProvider.createAccessToken(

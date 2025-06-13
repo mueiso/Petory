@@ -25,10 +25,6 @@ public class UserRole {
 	@Column(nullable = false)
 	private Role role;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
 	@Builder
 	public UserRole(Role role) {
 		this.role = role;

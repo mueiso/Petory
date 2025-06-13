@@ -49,7 +49,7 @@ public class JwtProvider {
 	 * 15분 * 60초 * 1000밀리초 = 900,000밀리초 = 15분
 	 * 7일 * 24시간 * 60분 * 60초 * 1000밀리초 = 604,800,000밀리초 = 7일
 	 */
-	private static final long accessTokenLife = 30 * 1000L;  // 30초
+	private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
 	private static final long refreshTokenLife = 7 * 24 * 60 * 60 * 1000L;  // 7일
 
 	/*

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
@@ -38,9 +40,10 @@ public class ChatController {
 	 */
 	@MessageMapping("/message")
 	public void sendMessage(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid MessageSendRequestDto requestDto
 	) {
-		ChatMessage message = chatService.createMessage(requestDto);
+		ChatMessage message = chatService.createMessage(currentUser.getId(), requestDto);
 
 		messagingTemplate.convertAndSend("/sub/room/" + requestDto.getChatRoomId(), message);
 	}
@@ -52,9 +55,10 @@ public class ChatController {
 	 */
 	@PostMapping({"/{tradeBoardId}"})
 	public ResponseEntity<CommonResponse<ChatRoomCreateResponseDto>> createChatRoom(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long tradeBoardId
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, chatService.saveChatRoom(tradeBoardId));
+		return CommonResponse.of(SuccessCode.CREATED, chatService.saveChatRoom(currentUser.getId(), tradeBoardId));
 	}
 
 	/**
@@ -64,9 +68,10 @@ public class ChatController {
 	 */
 	@GetMapping
 	public ResponseEntity<CommonResponse<List<ChatRoomGetAllResponseDto>>> getAllChatRoom(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(pageable));
+		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(currentUser.getId(), pageable));
 	}
 
 	/**
@@ -76,9 +81,10 @@ public class ChatController {
 	 */
 	@GetMapping("/{chatRoomId}")
 	public ResponseEntity<CommonResponse<ChatRoomGetResponseDto>> getByChatRoomId(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable String chatRoomId
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, chatService.findChatRoomById(chatRoomId));
+		return CommonResponse.of(SuccessCode.FOUND, chatService.findChatRoomById(currentUser.getId(), chatRoomId));
 	}
 
 }

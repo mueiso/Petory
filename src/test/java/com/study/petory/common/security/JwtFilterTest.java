@@ -2,25 +2,23 @@
 //
 // import static org.mockito.Mockito.*;
 //
+// import java.io.PrintWriter;
+// import java.util.List;
+//
 // import org.junit.jupiter.api.BeforeEach;
 // import org.junit.jupiter.api.Test;
 // import org.mockito.InjectMocks;
 // import org.mockito.Mock;
-// import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+// import org.mockito.MockitoAnnotations;
 // import org.springframework.data.redis.core.RedisTemplate;
-// import org.springframework.mock.web.MockHttpServletRequest;
-// import org.springframework.mock.web.MockHttpServletResponse;
-// import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.http.HttpStatus;
 //
 // import io.jsonwebtoken.Claims;
-// import io.jsonwebtoken.Jwts;
 // import jakarta.servlet.FilterChain;
+// import jakarta.servlet.http.HttpServletRequest;
+// import jakarta.servlet.http.HttpServletResponse;
 //
-// @WebMvcTest
 // class JwtFilterTest {
-//
-// 	@InjectMocks
-// 	private JwtFilter jwtFilter;
 //
 // 	@Mock
 // 	private JwtProvider jwtProvider;
@@ -28,48 +26,82 @@
 // 	@Mock
 // 	private RedisTemplate<String, String> redisTemplate;
 //
-// 	private MockHttpServletRequest request;
-// 	private MockHttpServletResponse response;
+// 	@InjectMocks
+// 	private JwtFilter jwtFilter;
+//
+// 	@Mock
+// 	private HttpServletRequest request;
+//
+// 	@Mock
+// 	private HttpServletResponse response;
+//
+// 	@Mock
 // 	private FilterChain filterChain;
 //
 // 	@BeforeEach
 // 	void setUp() {
-// 		request = new MockHttpServletRequest();
-// 		response = new MockHttpServletResponse();
-// 		filterChain = mock(FilterChain.class);
+// 		MockitoAnnotations.openMocks(this);
+// 		jwtFilter = new JwtFilter(jwtProvider, redisTemplate);
 // 	}
 //
 // 	@Test
-// 	void doFilter_ValidToken_SetsAuthentication() throws Exception {
-// 		String token = "Bearer validToken";
+// 	void doFilterInternal_WHITELIST_shouldPassThrough() throws Exception {
+// 		when(request.getRequestURI()).thenReturn("/auth/login");
 //
-// 		request.addHeader("Authorization", token);
+// 		jwtFilter.doFilterInternal(request, response, filterChain);
 //
-// 		Claims claims = Jwts.claims().setSubject("1");
-// 		claims.put("email", "user@example.com");
-// 		claims.put("nickname", "nickname");
-//
-// 		when(jwtProvider.resolveToken(any())).thenReturn("validToken");
-// 		when(jwtProvider.getClaims(any())).thenReturn(claims);
-// 		when(redisTemplate.hasKey("logout:validToken")).thenReturn(false);
-//
-// 		jwtFilter.doFilter(request, response, filterChain);
-//
-// 		assertNotNull(SecurityContextHolder.getContext().getAuthentication());
 // 		verify(filterChain).doFilter(request, response);
+// 		verifyNoInteractions(jwtProvider);
 // 	}
 //
 // 	@Test
-// 	void doFilter_BlacklistedToken_ShouldNotAuthenticate() throws Exception {
-// 		String token = "Bearer blacklisted";
+// 	void doFilterInternal_shouldRespond401_whenAuthorizationHeaderMissing() throws Exception {
+// 		when(request.getRequestURI()).thenReturn("/api/protected");
+// 		when(request.getHeader("Authorization")).thenReturn(null);
+// 		PrintWriter writer = mock(PrintWriter.class);
+// 		when(response.getWriter()).thenReturn(writer);
 //
-// 		request.addHeader("Authorization", token);
+// 		jwtFilter.doFilterInternal(request, response, filterChain);
 //
-// 		when(jwtProvider.resolveToken(any())).thenReturn("blacklisted");
-// 		when(redisTemplate.hasKey("logout:blacklisted")).thenReturn(true);
+// 		verify(response).setStatus(HttpStatus.UNAUTHORIZED.value());
+// 		verify(writer).write(contains("Authorization 헤더가 존재하지 않습니다."));
+// 		verifyNoInteractions(jwtProvider);
+// 	}
 //
-// 		jwtFilter.doFilter(request, response, filterChain);
+// 	@Test
+// 	void doFilterInternal_shouldRespond401_whenTokenIsBlacklisted() throws Exception {
+// 		String bearerJwt = "Bearer validToken";
+// 		when(request.getRequestURI()).thenReturn("/api/protected");
+// 		when(request.getHeader("Authorization")).thenReturn(bearerJwt);
+// 		when(jwtProvider.subStringToken(bearerJwt)).thenReturn("validToken");
+// 		when(redisTemplate.hasKey("BLACKLIST_validToken")).thenReturn(true);
+// 		PrintWriter writer = mock(PrintWriter.class);
+// 		when(response.getWriter()).thenReturn(writer);
 //
-// 		assertNull(SecurityContextHolder.getContext().getAuthentication());
+// 		jwtFilter.doFilterInternal(request, response, filterChain);
+//
+// 		verify(response).setStatus(HttpStatus.UNAUTHORIZED.value());
+// 		verify(writer).write(contains("로그아웃된 토큰입니다."));
+// 		verifyNoInteractions(filterChain);
+// 	}
+//
+// 	@Test
+// 	void doFilterInternal_shouldAuthenticate_whenValidToken() throws Exception {
+// 		String bearerJwt = "Bearer validToken";
+// 		when(request.getRequestURI()).thenReturn("/api/protected");
+// 		when(request.getHeader("Authorization")).thenReturn(bearerJwt);
+// 		when(jwtProvider.subStringToken(bearerJwt)).thenReturn("validToken");
+// 		when(redisTemplate.hasKey("BLACKLIST_validToken")).thenReturn(false);
+//
+// 		Claims claims = mock(Claims.class);
+// 		when(jwtProvider.parseRawToken("validToken")).thenReturn(claims);
+// 		when(claims.getSubject()).thenReturn("1");
+// 		when(claims.get("email", String.class)).thenReturn("user@example.com");
+// 		when(claims.get("nickname", String.class)).thenReturn("nickname");
+// 		when(claims.get("roles", List.class)).thenReturn(List.of("ROLE_USER"));
+//
+// 		jwtFilter.doFilterInternal(request, response, filterChain);
+//
+// 		verify(filterChain).doFilter(request, response);
 // 	}
 // }

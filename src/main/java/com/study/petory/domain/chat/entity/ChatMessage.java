@@ -12,14 +12,17 @@ public class ChatMessage {
 
 	private Long senderId;
 
+	private String senderNickname;
+
 	private String message;
 
 	private LocalDateTime createdAt;
 
 	@Builder
-	public ChatMessage(Long senderId, String message) {
+	public ChatMessage(Long senderId, String message, String senderNickname) {
 		this.senderId = senderId;
 		this.message = message;
+		this.senderNickname = senderNickname;
 		this.createdAt = LocalDateTime.now();
 	}
 }

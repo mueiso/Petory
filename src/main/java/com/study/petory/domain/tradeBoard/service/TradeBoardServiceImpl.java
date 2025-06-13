@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
@@ -60,7 +59,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	//게시글의 유저가 맞는지 검증
 	public void isOwner(Long userId, TradeBoard tradeBoard) {
-		if (!tradeBoard.isEqualUser(userId)) {
+		if (!tradeBoard.isOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 	}
@@ -180,7 +179,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
-		if (!tradeBoard.isEqualUser(userId)) {
+		if (!tradeBoard.isOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 

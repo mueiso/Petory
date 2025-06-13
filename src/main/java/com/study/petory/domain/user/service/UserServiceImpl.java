@@ -65,5 +65,12 @@ public class UserServiceImpl implements UserService {
 		// 또는 user.markAsDeleted(); -> 소프트 삭제를 원한다면
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public User getUserById(Long userId) {
+		return userRepository.findUserById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+	}
+
 	// TODO - 사용자 계정 정지 및 비활성화 위한 API 필요
 }

@@ -82,72 +82,6 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("전체 장소 조회 - placeName과 placeType이 모두 입력되는 경우")
-	void findAllPlaceWithPlaceNameAndPlaceType() {
-
-		String placeName = "test";
-		PlaceType placeType = PlaceType.ACCOMMODATION;
-		Pageable pageable = PageRequest.of(0, 10);
-
-		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
-		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
-		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
-
-		when(placeRepository.findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable)).thenReturn(page);
-
-		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
-
-		assertAll("파람이 모두 있을 경우 조회 로직 검증",
-			() -> assertEquals(1, findAllPlace.getContent().size()),
-			() -> verify(placeRepository).findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable)
-		);
-	}
-
-	@Test
-	@DisplayName("전체 장소 조회 - placeName만 입력되는 경우")
-	void findAllPlaceWithPlaceName() {
-
-		String placeName = "test";
-		PlaceType placeType = null;
-		Pageable pageable = PageRequest.of(0, 10);
-
-		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
-		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
-		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
-
-		when(placeRepository.findAllByPlaceNameContaining(placeName, pageable)).thenReturn(page);
-
-		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
-
-		assertAll("placeName만 있을 경우 조회 로직 검증",
-			() -> assertEquals(1, findAllPlace.getContent().size()),
-			() -> verify(placeRepository).findAllByPlaceNameContaining(placeName, pageable)
-		);
-	}
-
-	@Test
-	@DisplayName("전체 장소 조회 - placeType만 입력되는 경우")
-	void findAllPlaceWithPlaceType() {
-
-		String placeName = null;
-		PlaceType placeType = PlaceType.ACCOMMODATION;
-		Pageable pageable = PageRequest.of(0, 10);
-
-		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
-		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
-		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
-
-		when(placeRepository.findAllByPlaceType(placeType, pageable)).thenReturn(page);
-
-		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
-
-		assertAll("파람이 모두 있을 경우 조회 로직 검증",
-			() -> assertEquals(1, findAllPlace.getContent().size()),
-			() -> verify(placeRepository).findAllByPlaceType(placeType, pageable)
-		);
-	}
-
-	@Test
 	@DisplayName("전체 장소 조회 - 파람이 모두 입력되지 않는 경우")
 	void findAllPlace() {
 
@@ -159,13 +93,13 @@ class PlaceServiceImplTest {
 		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
 		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
 
-		when(placeRepository.findAllPlace(pageable)).thenReturn(page);
+		when(placeRepository.findAllPlace(placeName, placeType, pageable)).thenReturn(page);
 
 		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
 
 		assertAll("파람이 모두 있을 경우 조회 로직 검증",
 			() -> assertEquals(1, findAllPlace.getContent().size()),
-			() -> verify(placeRepository).findAllPlace(pageable)
+			() -> verify(placeRepository).findAllPlace(placeName, placeType, pageable)
 		);
 	}
 

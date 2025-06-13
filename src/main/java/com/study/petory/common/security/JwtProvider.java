@@ -49,7 +49,11 @@ public class JwtProvider {
 	 * 15분 * 60초 * 1000밀리초 = 900,000밀리초 = 15분
 	 * 7일 * 24시간 * 60분 * 60초 * 1000밀리초 = 604,800,000밀리초 = 7일
 	 */
-	private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
+	// private static final long accessTokenLife = 5 * 60 * 1000L;  // 5분
+	private static final long accessTokenLife = 2 * 60 * 1000L;  // 2분
+	// private static final long accessTokenLife = 10 * 1000L;  // 10초
+	// private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
+	// private static final long accessTokenLife = 15 * 60 * 1000L;  // 15분
 	private static final long refreshTokenLife = 7 * 24 * 60 * 60 * 1000L;  // 7일
 
 	/*
@@ -247,5 +251,20 @@ public class JwtProvider {
 
 		Claims claims = parseRawToken(token);
 		return claims.get("email", String.class);
+	}
+
+	// JWT 에서 roles 클레임을 추출하여 문자열 리스트로 반환
+	public List<String> getRolesFromToken(String token) {
+		Claims claims = getClaims(token);
+
+		Object rolesObject = claims.get("roles");
+
+		if (rolesObject instanceof List<?> rolesList) {
+			return rolesList.stream()
+				.map(Object::toString)
+				.toList();  // ["ROLE_USER", "ROLE_ADMIN"]
+		}
+
+		return List.of();  // roles 클레임이 없거나 비어 있으면 빈 리스트
 	}
 }

@@ -145,10 +145,11 @@ public class JwtFilter extends OncePerRequestFilter {
 			String email = claims.get("email", String.class);
 			String nickname = claims.get("nickname", String.class);
 
-			List<String> roleList = claims.get("roles", List.class);
+			List<String> roleList = jwtProvider.getRolesFromToken(rawToken);
 			List<SimpleGrantedAuthority> authorities = roleList.stream()
 				.map(SimpleGrantedAuthority::new)
 				.toList();
+
 
 			debugLog("JWT Claims 파싱 성공 - userId: " + userId);
 

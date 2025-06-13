@@ -64,7 +64,8 @@ public class SecurityConfig {
 			// TODO - 배포 전 체크
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers(
-					"/auth/**",
+					"/auth/reissue",
+					"/auth/logout",
 					"/login/**",
 					"/oauth2/**",       		      // 소셜 로그인 진입점 (예: /oauth2/authorization/google)
 					"/login/oauth2/**", 		      // 소셜 로그인 콜백 URI (예: /login/oauth2/code/google)

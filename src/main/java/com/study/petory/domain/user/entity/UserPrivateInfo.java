@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +23,7 @@ public class UserPrivateInfo extends TimeFeatureBasedEntity {
 	private Long id;
 
 	@Column(nullable = false)
-	private Long authId;
+	private String authId;
 
 	@Column(nullable = false)
 	private String name;
@@ -30,8 +31,14 @@ public class UserPrivateInfo extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private String mobileNum;
 
-	public UserPrivateInfo(Long authId, String name, String mobileNum) {
+	@Builder
+	public UserPrivateInfo(String authId, String name, String mobileNum) {
 		this.authId = authId;
+		this.name = name;
+		this.mobileNum = mobileNum;
+	}
+
+	public void update(String name, String mobileNum) {
 		this.name = name;
 		this.mobileNum = mobileNum;
 	}

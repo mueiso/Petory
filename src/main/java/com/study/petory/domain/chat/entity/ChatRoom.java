@@ -30,15 +30,37 @@ public class ChatRoom {
 
 	private LocalDateTime lastMessageDate;
 
+	private boolean sellerExist;
+
+	private boolean customerExist;
+
 	@Builder
-	public ChatRoom(Long sellerId, Long customerId, Long tradeBoardId) {
+	public ChatRoom(Long tradeBoardId, Long sellerId, Long customerId) {
+		this.tradeBoardId = tradeBoardId;
 		this.sellerId = sellerId;
 		this.customerId = customerId;
-		this.tradeBoardId = tradeBoardId;
+		this.sellerExist = true;
+		this.customerExist = true;
 	}
 
 	public void addMessage(ChatMessage message) {
 		this.messages.add(message);
 		this.lastMessageDate = message.getCreatedAt();
+	}
+
+	public boolean isMember(Long userId) {
+		return this.sellerId.equals(userId) || this.customerId.equals(userId);
+	}
+
+	public boolean isSeller(Long userId) {
+		return this.sellerId.equals(userId);
+	}
+
+	public void leaveChatRoom(Long userId) {
+		if (this.isSeller(userId)) {
+			this.sellerExist = false;
+		} else {
+			this.customerExist = false;
+		}
 	}
 }

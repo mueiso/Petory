@@ -39,6 +39,29 @@ public abstract class AbstractImageService<T> {
 		return urls;
 	}
 
+	/**
+	 * 이미지 파일 업로드 및 저장 (entity 반환)
+	 * @param files 업로드된 이미지 파일
+	 * @param context 객체(도메인)
+	 * @return 이미지 url List
+	 */
+	public List<T> uploadAndReturnEntities(List<MultipartFile> files, Object context) {
+		List<T> imageEntities = new ArrayList<>();
+
+		if (files == null || files.isEmpty()) {
+			return imageEntities; //파일이 없을 때 빈 리스트 반환
+		}
+
+		for (MultipartFile file : files) {
+			String url = s3Uploader.uploadFile(file, getFolderName());
+			T entity = createImageEntity(url, context);
+			save(entity);
+			imageEntities.add(entity);
+		}
+
+		return imageEntities;
+	}
+
 	// 파일 삭제
 	@Transactional
 	public void deleteImageInternal(T image) {

@@ -2,7 +2,6 @@ package com.study.petory.domain.tradeBoard.dto.request;
 
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -23,9 +22,6 @@ public class TradeBoardCreateRequestDto {
 	@NotBlank
 	@Size(max = 1000, message = "본문은 1000자를 넘어갈 수 없습니다.")
 	private final String content;
-
-	@Nullable
-	private final String photoUrl; //변수의 타입은 S3 등록 후 변경 예정
 
 	@NotNull(message = "금액을 입력해주세요.")
 	private final Integer price;

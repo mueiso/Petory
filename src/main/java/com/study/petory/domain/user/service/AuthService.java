@@ -141,7 +141,7 @@ public class AuthService {
 	/*
 	 * [권한 추가]
 	 * 중복되는 권한이면 예외 처리
-	 * 권한 추가 성공 시 현재 유저가 가진 권한 모두 반환
+	 * 지정한 사용자에게 새 Role 을 부여하고, 전체 권한 목록 반환
 	 */
 	@Transactional
 	public List<Role> addRoleToUser(Long userId, Role newRole) {
@@ -149,7 +149,6 @@ public class AuthService {
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		// 객체지향 방식으로 중복 Role 체크
 		boolean alreadyHasSameRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(newRole));
 
@@ -157,17 +156,16 @@ public class AuthService {
 			throw new CustomException(ErrorCode.ALREADY_HAS_SAME_ROLE);
 		}
 
-		// 새 권한 추가
 		user.getUserRole().add(UserRole.builder().role(newRole).build());
 
-		// 유저가 가진 권한 목록 반환
 		return user.getUserRole().stream()
 			.map(UserRole::getRole)
 			.toList();
 	}
 
-	/*
+	/**
 	 * [권한 제거]
+	 * 지정한 사용자에게서 Role 을 제거하고, 전체 권한 목록 반환
 	 */
 	@Transactional
 	public List<Role> removeRoleFromUser(Long userId, Role roleToRemove) {
@@ -175,16 +173,15 @@ public class AuthService {
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		// 해당 Role 이 존재하는지 확인
 		boolean hasRole = user.getUserRole().stream()
-			.anyMatch(userRole -> userRole.getRole().equals(roleToRemove));
+			.anyMatch(userRole -> userRole.isEqualRole(roleToRemove));
 
 		if (!hasRole) {
 			throw new CustomException(ErrorCode.ROLE_NOT_FOUND);
 		}
 
 		// Role 제거
-		user.getUserRole().removeIf(userRole -> userRole.getRole().equals(roleToRemove));
+		user.getUserRole().removeIf(userRole -> userRole.isEqualRole(roleToRemove));
 
 		return user.getUserRole().stream()
 			.map(UserRole::getRole)

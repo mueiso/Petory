@@ -1,5 +1,7 @@
 package com.study.petory.domain.user.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -62,40 +64,44 @@ public class AuthController {
 	}
 
 	/**
-	 * [권한 추가]
-	 * 사용자에게 새로운 권한(Role)을 부여
-	 * 이미 동일한 권한이 존재하는 경우 예외 발생
+	 * [관리자 전용 - 권한 추가]
+	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있음
 	 *
-	 * @param currentUser 현재 로그인한 사용자
-	 * @param role 추가할 권한
-	 * @return 수정 성공 메시지
+	 * @param targetUserId 권한을 부여할 사용자 ID
+	 * @param role 부여할 권한
+	 * @param currentUser 현재 로그인한 관리자 (자동 주입)
+	 * @return 부여 이후 해당 사용자의 전체 권한 목록
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/role")
-	public ResponseEntity<CommonResponse<Object>> addRole(
-		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@RequestParam("role") Role role
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<CommonResponse<Object>> addUserRole(
+		@RequestParam("userId") Long targetUserId,
+		@RequestParam("role") Role role,
+		@AuthenticationPrincipal CustomPrincipal currentUser
 	) {
 
-		return CommonResponse.of(SuccessCode.UPDATED, authService.addRoleToUser(currentUser.getId(), role));
+		List<Role> updatedRoles = authService.addRoleToUser(targetUserId, role);
+		return CommonResponse.of(SuccessCode.UPDATED, updatedRoles);
 	}
 
 	/**
-	 * [권한 제거]
-	 * 사용자에게 부여된 특정 권한을 제거
-	 * 해당 권한이 사용자에게 존재하지 않는 경우 예외 발생
+	 * [관리자 전용 - 권한 제거]
+	 * ADMIN 권한이 있는 사용자만 다른 사용자의 권한을 제거할 수 있음
 	 *
-	 * @param userId 권한 삭제당할 유저의 id
+	 * @param targetUserId 권한 제거당할 사용자 ID
 	 * @param role 제거할 권한
-	 * @return 삭제 성공 메시지
+	 * @param currentUser 현재 로그인한 관리자
+	 * @return 제거 이후 해당 사용자의 전체 권한 목록
 	 */
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/role/remove")
-	public ResponseEntity<CommonResponse<Object>> removeRole(
-		@RequestParam Long userId,
-		@RequestParam("role") Role role
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<CommonResponse<Object>> removeUserRole(
+		@RequestParam("userId") Long targetUserId,
+		@RequestParam("role") Role role,
+		@AuthenticationPrincipal CustomPrincipal currentUser
 	) {
 
-		return CommonResponse.of(SuccessCode.DELETED, authService.removeRoleFromUser(userId, role));
+		List<Role> updatedRoles = authService.removeRoleFromUser(targetUserId, role);
+		return CommonResponse.of(SuccessCode.DELETED, updatedRoles);
 	}
 }

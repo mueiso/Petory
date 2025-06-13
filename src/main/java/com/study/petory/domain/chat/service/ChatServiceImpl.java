@@ -73,7 +73,11 @@ public class ChatServiceImpl implements ChatService{
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
 
-		findUser(userId);
+		User user = findUser(userId);
+
+		if (tradeBoard.isOwner(userId)) {
+			throw new CustomException(ErrorCode.CANNOT_SEND_MESSAGE_TO_SELF);
+		}
 
 		ChatRoom chatRoom = ChatRoom.builder()
 			.tradeBoardId(tradeBoardId)

@@ -136,12 +136,17 @@ public class JwtFilter extends OncePerRequestFilter {
 			Long userId = Long.valueOf(claims.getSubject());
 			String email = claims.get("email", String.class);
 			String nickname = claims.get("nickname", String.class);
+
+			List<String> roleList = claims.get("roles", List.class);
+			List<SimpleGrantedAuthority> authorities = roleList.stream()
+				.map(SimpleGrantedAuthority::new)
+				.toList();
+
 			debugLog("JWT Claims 파싱 성공 - userId: " + userId);
 
-			var authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
 			CustomPrincipal principal = new CustomPrincipal(userId, email, nickname, authorities);
 
-			var authentication = new UsernamePasswordAuthenticationToken(principal, null, authorities);
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(principal, null, authorities);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			debugLog("SecurityContext 등록 완료 - principal: " + principal.getEmail());
 

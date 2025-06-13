@@ -33,9 +33,4 @@ public class UserRole {
 	public UserRole(Role role) {
 		this.role = role;
 	}
-
-	// @Builder
-	// public UserRole(Role role, User user) {
-	// 	this.role = role;
-	// }
 }

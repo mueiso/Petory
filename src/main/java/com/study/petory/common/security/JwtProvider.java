@@ -2,6 +2,7 @@ package com.study.petory.common.security;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -79,7 +80,7 @@ public class JwtProvider {
 	 * 리턴값 = 최종 생성된 JWT 문자열 (앞에 Bearer 포함)
 	 * Date : 현재 시각 기준으로 Date 객체 생성 → issuedAt(토큰 발행 시점)과 expiration(만료 시점) 계산에 사용
 	 */
-	public String createAccessToken(Long userId, String email, String nickname) {
+	public String createAccessToken(Long userId, String email, String nickname, List<String> roles) {
 
 		Date date = new Date();
 
@@ -96,6 +97,7 @@ public class JwtProvider {
 			.setSubject(String.valueOf(userId))
 			.claim("email", email)
 			.claim("nickname", nickname)
+			.claim("roles", roles)
 			.setExpiration(new Date(date.getTime() + accessTokenLife))
 			.setIssuedAt(date)
 			.signWith(key, SignatureAlgorithm.HS256)

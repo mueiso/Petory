@@ -91,8 +91,7 @@ public class AuthService {
 
 	/*
 	 * [토큰 재발급]
-	 * AccessToken 이 만료된 경우에만,
-	 * 전달된 refreshToken 기반으로 AccessToken 재발급
+	 * AccessToken 이 만료된 경우에만, 전달된 refreshToken 기반으로 AccessToken 재발급
 	 */
 	public TokenResponseDto reissue(String accessToken, String refreshTokenRaw) {
 
@@ -139,6 +138,11 @@ public class AuthService {
 		return new TokenResponseDto(newAccessToken, newRefreshToken);
 	}
 
+	/*
+	 * [권한 추가]
+	 * 중복되는 권한이면 예외 처리
+	 * 권한 추가 성공 시 현재 유저가 가진 권한 모두 반환
+	 */
 	@Transactional
 	public List<Role> addRoleToUser(Long userId, Role newRole) {
 
@@ -149,7 +153,7 @@ public class AuthService {
 		boolean alreadyHasSameRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(newRole));
 
-		if (!alreadyHasSameRole) {
+		if (alreadyHasSameRole) {
 			throw new CustomException(ErrorCode.ALREADY_HAS_SAME_ROLE);
 		}
 
@@ -162,8 +166,12 @@ public class AuthService {
 			.toList();
 	}
 
+	/*
+	 * [권한 제거]
+	 */
 	@Transactional
 	public void removeRoleFromUser(Long userId, Role roleToRemove) {
+
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 

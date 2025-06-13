@@ -39,6 +39,7 @@ public class AuthController {
 		@RequestHeader("Authorization") String accessToken,
 		@RequestHeader("Authorization-Refresh") String refreshToken
 	) {
+
 		TokenResponseDto tokenResponseDto = authService.reissue(accessToken, refreshToken);
 		return CommonResponse.of(SuccessCode.TOKEN_REISSUE, tokenResponseDto);
 	}
@@ -72,7 +73,7 @@ public class AuthController {
 		@RequestParam("userId") Long userId,
 		@RequestParam("role") Role role
 	) {
-		authService.addRoleToUser(userId, role);
+
 		return CommonResponse.of(SuccessCode.UPDATED, authService.addRoleToUser(userId, role));
 	}
 
@@ -91,6 +92,7 @@ public class AuthController {
 		@RequestParam("userId") Long userId,
 		@RequestParam("role") Role role
 	) {
+
 		authService.removeRoleFromUser(userId, role);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}

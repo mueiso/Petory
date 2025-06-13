@@ -24,19 +24,20 @@ public class AuthController {
 
 	/**
 	 * [토큰 재발급]
-	 * Authorization 헤더에서 refreshToken 을 추출해 Redis 검증 후
-	 * AccessToken 과 새로운 RefreshToken 을 재발급
-	 * 새 RefreshToken 은 응답 본문에 포함 (쿠키 사용 안함)
+	 * AccessToken 이 만료된 경우에만 RefreshToken 을 기반으로 새로운 AccessToken + RefreshToken 을 재발급
+	 * AccessToken 은 "Authorization" 헤더로 전달
+	 * RefreshToken 은 "Authorization-Refresh" 헤더로 전달
 	 *
-	 * @param bearerRefreshToken : "Bearer {refreshToken}" 형식의 헤더
-	 * @return 새로 발급된 AccessToken + RefreshToken 포함 응답
+	 * @param accessToken 클라이언트가 보유한 기존 AccessToken (만료 상태)
+	 * @param refreshToken 클라이언트가 보유한 RefreshToken (Redis 에 저장된 것과 비교됨)
+	 * @return 새로 발급된 AccessToken + RefreshToken 을 포함한 응답
 	 */
 	@PostMapping("/reissue")
 	public ResponseEntity<CommonResponse<TokenResponseDto>> reissue(
-		@RequestHeader("Authorization") String bearerRefreshToken
+		@RequestHeader("Authorization") String accessToken,
+		@RequestHeader("Authorization-Refresh") String refreshToken
 	) {
-
-		TokenResponseDto tokenResponseDto = authService.reissue(bearerRefreshToken);
+		TokenResponseDto tokenResponseDto = authService.reissue(accessToken, refreshToken);
 		return CommonResponse.of(SuccessCode.TOKEN_REISSUE, tokenResponseDto);
 	}
 
@@ -46,14 +47,10 @@ public class AuthController {
 	 * Redis 에 저장된 RefreshToken 삭제
 	 *
 	 * @param bearerToken : "Bearer {accessToken}" 형식의 헤더
-	 * @param response : (쿠키 방식일 경우 제거용)
 	 * @return 로그아웃 성공 메시지
 	 */
 	@DeleteMapping("/logout")
-	public ResponseEntity<CommonResponse<Object>> logout(
-		@RequestHeader("Authorization") String bearerToken,
-		HttpServletResponse response
-	) {
+	public ResponseEntity<CommonResponse<Object>> logout(@RequestHeader("Authorization") String bearerToken) {
 
 		authService.logout(bearerToken);
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);

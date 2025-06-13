@@ -65,7 +65,7 @@ public class AuthService {
 
 	/*
 	 * [로그아웃 처리]
-	 * AccessToken 을 블랙리스트 등록
+	 * AccessToken 을 블랙리스트 등록 - 만료시간되면 자동 삭제
 	 * Redis 에 저장된 RefreshToken 제거
 	 */
 	public void logout(String accessToken) {
@@ -75,6 +75,10 @@ public class AuthService {
 
 		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
 
+		/*
+		 * AccessToken 을 블랙리스트에 등록하는 로직
+		 * expiration 시간은 AccessToken 의 남은 유효기간만큼 설정되어, 만료 시 자동으로 삭제
+		 */
 		loginRefreshToken.opsForValue()
 			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
 
@@ -83,39 +87,48 @@ public class AuthService {
 
 	/*
 	 * [토큰 재발급]
-	 * Authorization 헤더로 전달된 refreshToken 기반으로 AccessToken 재발급
-	 * Redis 의 refreshToken 과 일치하는지 검증
+	 * AccessToken 이 만료된 경우에만,
+	 * 전달된 refreshToken 기반으로 AccessToken 재발급
 	 */
-	public TokenResponseDto reissue(String bearerRefreshToken) {
+	public TokenResponseDto reissue(String accessToken, String refreshTokenRaw) {
 
-		// Bearer 접두어 제거
-		String refreshToken = jwtProvider.subStringToken(bearerRefreshToken);
+		// 1. AccessToken 만료 여부 확인
+		if (!jwtProvider.isAccessTokenExpired(accessToken)) {
+			throw new CustomException(ErrorCode.TOKEN_NOT_EXPIRED);
+		}
 
-		// JWT Claims 에서 userId 추출
+		// 2. Bearer 접두사 제거 (있는 경우만)
+		String refreshToken;
+		if (refreshTokenRaw.startsWith("Bearer ")) {
+			refreshToken = jwtProvider.subStringToken(refreshTokenRaw);
+		} else {
+			refreshToken = refreshTokenRaw;
+		}
+
+		// 3. userId 추출
 		Long userId = Long.valueOf(jwtProvider.getClaims(refreshToken).getSubject());
 
-		// Redis 에 저장된 RefreshToken 과 비교
+		// 4. Redis RefreshToken 검증
 		if (!jwtProvider.isValidRefreshToken(userId, refreshToken)) {
 			throw new CustomException(ErrorCode.INVALID_TOKEN);
 		}
 
+		// 5. 사용자 조회
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		// 6. 역할 목록 추출
 		List<String> roles = user.getUserRole().stream()
-			.map(userRole -> "Role" + userRole.getRole().name())
+			.map(userRole -> "ROLE_" + userRole.getRole().name())
 			.toList();
 
+		// 7. 새 토큰 발급
 		String newAccessToken = jwtProvider.createAccessToken(
-			user.getId(),
-			user.getEmail(),
-			user.getNickname(),
-			roles
-			);
-
+			user.getId(), user.getEmail(), user.getNickname(), roles
+		);
 		String newRefreshToken = jwtProvider.createRefreshToken(user.getId());
 
-		// Redis 에 기존 RefreshToken 삭제 및 신규 저장
+		// 8. Redis 저장 갱신
 		jwtProvider.deleteRefreshToken(user.getId());
 		jwtProvider.storeRefreshToken(user.getId(), newRefreshToken);
 

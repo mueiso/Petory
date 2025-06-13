@@ -49,7 +49,7 @@ public class JwtProvider {
 	 * 15분 * 60초 * 1000밀리초 = 900,000밀리초 = 15분
 	 * 7일 * 24시간 * 60분 * 60초 * 1000밀리초 = 604,800,000밀리초 = 7일
 	 */
-	private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
+	private static final long accessTokenLife = 30 * 1000L;  // 30초
 	private static final long refreshTokenLife = 7 * 24 * 60 * 60 * 1000L;  // 7일
 
 	/*
@@ -117,14 +117,19 @@ public class JwtProvider {
 			.compact();
 	}
 
-	// 순수 JWT 문자열만 반환(이미 추출된 문자열에서 "Bearer "를 제거)
+	// "Bearer " 접두사가 있을 경우만 제거하고, 없으면 그대로 반환
 	public String subStringToken(String token) {
 
-		if (!StringUtils.hasText(token) || !token.startsWith(prefix)) {
-			throw new CustomException(ErrorCode.INVALID_TOKEN);
+		if (!StringUtils.hasText(token)) {
+			throw new CustomException(ErrorCode.NO_TOKEN);
 		}
 
-		return token.substring(prefix.length());
+		// 접두사가 있을 경우만 제거
+		if (token.startsWith(prefix)) {
+			return token.substring(prefix.length());
+		}
+
+		return token;
 	}
 
 	/*
@@ -193,6 +198,12 @@ public class JwtProvider {
 	 */
 	public void storeRefreshToken(Long userId, String refreshToken) {
 
+		if (refreshToken.startsWith("Bearer ")) {
+			refreshToken = subStringToken(refreshToken);
+		} else {
+			return;
+		}
+
 		long expireMillis = refreshTokenLife;
 		loginRefreshToken.opsForValue().set(
 			String.valueOf(userId),
@@ -216,6 +227,19 @@ public class JwtProvider {
 
 		String saved = loginRefreshToken.opsForValue().get(String.valueOf(userId));
 		return saved != null && saved.equals(refreshToken);
+	}
+
+	// AccessToken 만료 여부 확인 메서드
+	public boolean isAccessTokenExpired(String token) {
+		try {
+			getClaims(token);
+			return false; // 예외 없이 Claims 얻었으면 유효
+		} catch (CustomException ex) {
+			if (ex.getErrorCode() == ErrorCode.EXPIRED_TOKEN) {
+				return true;
+			}
+			throw ex;  // 그 외 예외는 그대로 던짐
+		}
 	}
 
 	// 이메일 추출 메서드

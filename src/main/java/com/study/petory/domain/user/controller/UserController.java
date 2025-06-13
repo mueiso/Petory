@@ -54,6 +54,7 @@ public class UserController {
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Validated @RequestBody UpdateUserRequestDto updateDto
 	) {
+
 		userService.updateProfile(currentUser.getEmail(), updateDto);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
@@ -64,11 +65,11 @@ public class UserController {
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
 	 * @return 성공 시 200 OK 응답
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/delete")
 	public ResponseEntity<CommonResponse<Object>> deleteUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser
 	) {
+
 		userService.deleteAccount(currentUser.getEmail());
 		return CommonResponse.of(SuccessCode.USER_DELETED);
 	}

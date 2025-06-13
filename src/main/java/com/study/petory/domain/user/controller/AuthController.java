@@ -2,6 +2,7 @@ package com.study.petory.domain.user.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.service.AuthService;
@@ -64,17 +66,18 @@ public class AuthController {
 	 * 사용자에게 새로운 권한(Role)을 부여
 	 * 이미 동일한 권한이 존재하는 경우 예외 발생
 	 *
-	 * @param userId 권한을 추가할 대상 사용자의 ID
+	 * @param currentUser 현재 로그인한 사용자
 	 * @param role 추가할 권한
 	 * @return 수정 성공 메시지
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/role")
 	public ResponseEntity<CommonResponse<Object>> addRole(
-		@RequestParam("userId") Long userId,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@RequestParam("role") Role role
 	) {
 
-		return CommonResponse.of(SuccessCode.UPDATED, authService.addRoleToUser(userId, role));
+		return CommonResponse.of(SuccessCode.UPDATED, authService.addRoleToUser(currentUser.getId(), role));
 	}
 
 	/**
@@ -82,18 +85,17 @@ public class AuthController {
 	 * 사용자에게 부여된 특정 권한을 제거
 	 * 해당 권한이 사용자에게 존재하지 않는 경우 예외 발생
 	 *
-	 * @param userId 권한을 제거할 대상 사용자의 ID
+	 * @param userId 권한 삭제당할 유저의 id
 	 * @param role 제거할 권한
 	 * @return 삭제 성공 메시지
 	 */
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/role/remove")
 	public ResponseEntity<CommonResponse<Object>> removeRole(
-		@RequestParam("userId") Long userId,
+		@RequestParam Long userId,
 		@RequestParam("role") Role role
 	) {
 
-		authService.removeRoleFromUser(userId, role);
-		return CommonResponse.of(SuccessCode.DELETED);
+		return CommonResponse.of(SuccessCode.DELETED, authService.removeRoleFromUser(userId, role));
 	}
 }

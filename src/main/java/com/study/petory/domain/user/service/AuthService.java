@@ -170,7 +170,7 @@ public class AuthService {
 	 * [권한 제거]
 	 */
 	@Transactional
-	public void removeRoleFromUser(Long userId, Role roleToRemove) {
+	public List<Role> removeRoleFromUser(Long userId, Role roleToRemove) {
 
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
@@ -185,5 +185,9 @@ public class AuthService {
 
 		// Role 제거
 		user.getUserRole().removeIf(userRole -> userRole.getRole().equals(roleToRemove));
+
+		return user.getUserRole().stream()
+			.map(UserRole::getRole)
+			.toList();
 	}
 }

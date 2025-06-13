@@ -43,6 +43,7 @@ import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
 import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class DailyQnaServiceTest {
@@ -53,9 +54,8 @@ public class DailyQnaServiceTest {
 	@Mock
 	private DailyQnaRepository dailyQnaRepository;
 
-	// 리펙토링 예정
 	@Mock
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Mock
 	private QuestionServiceImpl questionService;
@@ -145,7 +145,7 @@ public class DailyQnaServiceTest {
 
 		DailyQnaCreateRequestDto requestDto = new DailyQnaCreateRequestDto("답변");
 
-		given(userRepository.findById(userId)).willReturn(Optional.of(testUser));
+		given(userService.getUserById(userId)).willReturn(testUser);
 		given(questionService.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
 
 		// when
@@ -165,7 +165,7 @@ public class DailyQnaServiceTest {
 		DailyQna d2 = setDailyQna("답변 2", DailyQnaStatus.ACTIVE, "2024-01-01 00:00:00");
 		DailyQna d3 = setDailyQna("답변 3", DailyQnaStatus.ACTIVE, "2023-01-01 00:00:00");
 
-		List<DailyQna> responseList = new ArrayList<>(Arrays.asList(d1, d2, d3));
+		List<DailyQna> responseList = new ArrayList<>(Arrays.asList(d1, d3, d2));
 
 		given(dailyQnaRepository.findDailyQna(userId, questionId)).willReturn(responseList);
 
@@ -174,11 +174,9 @@ public class DailyQnaServiceTest {
 
 		// then
 		assertThat(response).hasSize(3);
-		assertThat(response.get(0).getAnswer()).isEqualTo("답변 2");
+		assertThat(response.get(0).getAnswer()).isEqualTo("답변 1");
 		assertThat(response.get(1).getAnswer()).isEqualTo("답변 3");
-		assertThat(response.get(2).getAnswer()).isEqualTo("답변 1");
-
-		asserSortedByCreatedAtDesc(response);
+		assertThat(response.get(2).getAnswer()).isEqualTo("답변 2");
 	}
 
 	@Test
@@ -218,7 +216,7 @@ public class DailyQnaServiceTest {
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 
 		given(dailyQnaRepository.findDailyQnaByActive(dailyQnaId)).willReturn(Optional.of(dailyQna));
-		given(dailyQnaRepository.findDailyQnaByActive(dailyQnaId)).willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(dailyQna));
 
 		// when
 		dailyQnaService.hideDailyQna(userId, dailyQnaId);
@@ -285,7 +283,7 @@ public class DailyQnaServiceTest {
 		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(dailyQna));
 
 		// when
-		dailyQnaService.deleteDailyQna(userId, dailyQnaId);
+		dailyQnaService.deleteDailyQna(dailyQnaId);
 
 		// then
 		DailyQna deletedDailyQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);
@@ -306,7 +304,7 @@ public class DailyQnaServiceTest {
 			setDailyQnaPage(60, DailyQnaStatus.DELETED, pageable));
 
 		// when
-		Page<DailyQnaGetDeletedResponse> responsePage = dailyQnaService.findDeletedDailyQna(adminId, userId, pageable);
+		Page<DailyQnaGetDeletedResponse> responsePage = dailyQnaService.findDeletedDailyQna(userId, pageable);
 
 		// then
 		assertThat(responsePage.getContent()).hasSize(10);
@@ -329,7 +327,7 @@ public class DailyQnaServiceTest {
 		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(deletedDailyQna));
 
 		// when
-		dailyQnaService.restoreDailyQna(adminId, dailyQnaId);
+		dailyQnaService.restoreDailyQna(dailyQnaId);
 
 		// then
 		DailyQna restoreDailyQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);

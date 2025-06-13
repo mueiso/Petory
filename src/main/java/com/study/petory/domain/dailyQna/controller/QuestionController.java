@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
@@ -59,12 +61,9 @@ public class QuestionController {
 	 */
 	@PostMapping
 	public ResponseEntity<CommonResponse<Void>> createQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@Valid @RequestBody QuestionCreateRequestDto request
 	) {
-		Long adminId = 1L;
-		questionService.saveQuestion(adminId, request);
+		questionService.saveQuestion(request);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
@@ -77,12 +76,9 @@ public class QuestionController {
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<CommonResponse<Page<QuestionGetAllResponseDto>>> getAllQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PageableDefault(size = 50, sort = "date", direction = Sort.Direction.ASC) Pageable pageable
 	) {
-		Long adminId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, questionService.findAllQuestion(adminId, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, questionService.findAllQuestion(pageable));
 	}
 
 	/**
@@ -93,12 +89,9 @@ public class QuestionController {
 	 */
 	@GetMapping("/{questionId}")
 	public ResponseEntity<CommonResponse<QuestionGetOneResponseDto>> getOneQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long questionId
 	) {
-		Long adminId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, questionService.findOneQuestion(adminId, questionId));
+		return CommonResponse.of(SuccessCode.FOUND, questionService.findOneQuestion(questionId));
 	}
 
 	/**
@@ -121,13 +114,10 @@ public class QuestionController {
 	 */
 	@PutMapping("/{questionId}")
 	public ResponseEntity<CommonResponse<Void>> updateQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long questionId,
 		@Valid @RequestBody QuestionUpdateRequestDto request
 		) {
-		Long adminId = 1L;
-		questionService.updateQuestion(adminId ,questionId, request);
+		questionService.updateQuestion(questionId, request);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -139,12 +129,9 @@ public class QuestionController {
 	 */
 	@PatchMapping("/{questionId}/inactive")
 	public ResponseEntity<CommonResponse<Void>> InactiveQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long questionId
 	) {
-		Long adminId = 1L;
-		questionService.inactiveQuestion(adminId, questionId);
+		questionService.inactiveQuestion(questionId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -156,12 +143,9 @@ public class QuestionController {
 	 */
 	@GetMapping("/inactive")
 	public ResponseEntity<CommonResponse<Page<QuestionGetInactiveResponseDto>>> getInactiveQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PageableDefault(size = 50, sort = "updatedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
-		Long adminId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, questionService.findInactiveQuestion(adminId, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, questionService.findInactiveQuestion(pageable));
 	}
 
 	/**
@@ -172,12 +156,9 @@ public class QuestionController {
 	 */
 	@PatchMapping("/{questionId}/activate/restore")
 	public ResponseEntity<CommonResponse<Void>> updateQuestionStatusActive(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long questionId
 	) {
-		Long adminId = 1L;
-		questionService.updateQuestionStatusActive(adminId, questionId);
+		questionService.updateQuestionStatusActive(questionId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -189,12 +170,9 @@ public class QuestionController {
 	 */
 	@DeleteMapping("/{questionId}")
 	public ResponseEntity<CommonResponse<Void>> deactivateQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long questionId
 	) {
-		Long adminId = 1L;
-		questionService.deactivateQuestion(adminId, questionId);
+		questionService.deactivateQuestion(questionId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
@@ -206,12 +184,9 @@ public class QuestionController {
 	 */
 	@GetMapping("/deleted")
 	public ResponseEntity<CommonResponse<Page<QuestionGetDeletedResponse>>> getQuestionByDeleted(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PageableDefault(size = 50, sort = "deletedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
-		Long adminId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, questionService.findQuestionByDeleted(adminId, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, questionService.findQuestionByDeleted(pageable));
 	}
 
 	/**
@@ -222,12 +197,9 @@ public class QuestionController {
 	 */
 	@PatchMapping("/{questionId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restoreQuestion(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long questionId
 	) {
-		Long adminId = 1L;
-		questionService.restoreQuestion(adminId, questionId);
+		questionService.restoreQuestion(questionId);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -240,13 +212,11 @@ public class QuestionController {
 	 */
 	@PostMapping("/{questionId}/daily-qnas")
 	public ResponseEntity<CommonResponse<Void>> createDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long questionId,
 		@Valid @RequestBody DailyQnaCreateRequestDto request
 	) {
-		Long userId = 1L;
-		dailyQnaService.saveDailyQna(userId, questionId, request);
+		dailyQnaService.saveDailyQna(user.getId(), questionId, request);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
@@ -258,12 +228,10 @@ public class QuestionController {
 	 */
 	@GetMapping("/{questionId}/daily-qnas")
 	public ResponseEntity<CommonResponse<List<DailyQnaGetResponseDto>>> getDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long questionId
 	) {
-		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findDailyQna(userId, questionId));
+		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findDailyQna(user.getId(), questionId));
 	}
 
 	/**
@@ -275,13 +243,11 @@ public class QuestionController {
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}")
 	public ResponseEntity<CommonResponse<Void>> updateDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long dailyQnaId,
 		@Valid @RequestBody DailyQnaUpdateRequestDto request
 	) {
-		Long userId = 1L;
-		dailyQnaService.updateDailyQna(userId, dailyQnaId, request);
+		dailyQnaService.updateDailyQna(user.getId(), dailyQnaId, request);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -293,12 +259,10 @@ public class QuestionController {
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/hide")
 	public ResponseEntity<CommonResponse<Void>> hideDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long dailyQnaId
 	) {
-		Long userId = 1L;
-		dailyQnaService.hideDailyQna(userId, dailyQnaId);
+		dailyQnaService.hideDailyQna(user.getId(), dailyQnaId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
@@ -310,12 +274,10 @@ public class QuestionController {
 	 */
 	@GetMapping("/daily-qnas/hide")
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetHiddenResponse>>> getHiddenDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
-		Long userId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findHiddenDailyQna(userId, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findHiddenDailyQna(user.getId(), pageable));
 	}
 
 	/**
@@ -326,17 +288,15 @@ public class QuestionController {
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/visibility/restore")
 	public ResponseEntity<CommonResponse<Void>> updateDailyQnaStatusActive(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long dailyQnaId
 	) {
-		Long userId = 1L;
-		dailyQnaService.updateDailyQnaStatusActive(userId, dailyQnaId);
+		dailyQnaService.updateDailyQnaStatusActive(user.getId(), dailyQnaId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
-	 * 답변 삭제				관리자만 삭제 가능
+	 * 답변 삭제				관리자만 가능
 	 * adminId				관리자인지 검증
 	 * userId				삭제할 답변의 유저 Id
 	 * @param dailyQnaId    관리자가 삭제할 답변의 id
@@ -344,47 +304,38 @@ public class QuestionController {
 	 */
 	@DeleteMapping("/daily-qnas/{dailyQnaId}")
 	public ResponseEntity<CommonResponse<Void>> deleteDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long dailyQnaId
 	) {
-		Long adminId = 1L;
-		dailyQnaService.deleteDailyQna(adminId, dailyQnaId);
+		dailyQnaService.deleteDailyQna(dailyQnaId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 	/**
-	 * 유저의 삭제된 답변 조회	관리자만 조회 가능
+	 * 유저의 삭제된 답변 조회	관리자만 가능
 	 * adminId				관리자인지 검증
 	 * userId				조회할 유저의 id
 	 * @param pageable		한 번에 50개씩 반환하여 원하는 페이지를 선택
 	 * @return	CommonResponse 성공 메세지, data: 답변, 생성일, 삭제일
 	 */
-	@GetMapping("/daily-qnas/deleted")
+	@GetMapping("/daily-qnas/users/{userId}/deleted")
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetDeletedResponse>>> getDeletedDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long userId
+		@PathVariable Long userId,
 		@PageableDefault(size = 50, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
-		Long userId = 1L;	// todo 어디서 받아올지 수정 필요. url이 유력
-		Long adminId = 1L;
-		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findDeletedDailyQna(adminId, userId, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findDeletedDailyQna(userId, pageable));
 	}
 
 	/**
-	 * 삭제된 답변 복구
+	 * 삭제된 답변 복구		관리자만 가능
 	 * adminId				관리자인지 검증
 	 * @param dailyQnaId	복구할 답변의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restoreDailyQna(
-		// 유저 정보: 수정 예정
-		// 어노테이션 Long adminId
 		@PathVariable Long dailyQnaId
 	) {
-		Long adminId = 1L;
-		dailyQnaService.restoreDailyQna(adminId, dailyQnaId);
+		dailyQnaService.restoreDailyQna(dailyQnaId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 }

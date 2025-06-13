@@ -97,7 +97,4 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 		image.setTradeBoard(this);
 	}
 
-	public boolean isImageOver(List<MultipartFile> images) {
-		return (this.images.size() + images.size()) > 5;
-	}
 }

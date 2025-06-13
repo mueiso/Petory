@@ -44,12 +44,12 @@ public class JwtProvider {
 	 */
 	private static final String prefix = "Bearer ";
 
-	/*
+	/* TODO - 배포 전 accessTokenLife 15분으로 다시 수정
 	 * JWT 토큰의 유효 시간 설정하는 상수
 	 * 15분 * 60초 * 1000밀리초 = 900,000밀리초 = 15분
 	 * 7일 * 24시간 * 60분 * 60초 * 1000밀리초 = 604,800,000밀리초 = 7일
 	 */
-	private static final long accessTokenLife = 15 * 60 * 1000L;  // 15분
+	private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
 	private static final long refreshTokenLife = 7 * 24 * 60 * 60 * 1000L;  // 7일
 
 	/*

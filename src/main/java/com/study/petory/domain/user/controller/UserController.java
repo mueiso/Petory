@@ -1,6 +1,7 @@
 package com.study.petory.domain.user.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,6 +64,7 @@ public class UserController {
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
 	 * @return 성공 시 200 OK 응답
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/delete")
 	public ResponseEntity<CommonResponse<Object>> deleteUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser

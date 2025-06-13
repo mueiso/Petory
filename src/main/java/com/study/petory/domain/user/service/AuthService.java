@@ -11,8 +11,12 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
+import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class AuthService {
@@ -133,5 +137,45 @@ public class AuthService {
 		jwtProvider.storeRefreshToken(user.getId(), newRefreshToken);
 
 		return new TokenResponseDto(newAccessToken, newRefreshToken);
+	}
+
+	@Transactional
+	public List<Role> addRoleToUser(Long userId, Role newRole) {
+
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		// 객체지향 방식으로 중복 Role 체크
+		boolean alreadyHasSameRole = user.getUserRole().stream()
+			.anyMatch(userRole -> userRole.isEqualRole(newRole));
+
+		if (!alreadyHasSameRole) {
+			throw new CustomException(ErrorCode.ALREADY_HAS_SAME_ROLE);
+		}
+
+		// 새 권한 추가
+		user.getUserRole().add(UserRole.builder().role(newRole).build());
+
+		// 유저가 가진 권한 목록 반환
+		return user.getUserRole().stream()
+			.map(UserRole::getRole)
+			.toList();
+	}
+
+	@Transactional
+	public void removeRoleFromUser(Long userId, Role roleToRemove) {
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		// 해당 Role 이 존재하는지 확인
+		boolean hasRole = user.getUserRole().stream()
+			.anyMatch(userRole -> userRole.getRole().equals(roleToRemove));
+
+		if (!hasRole) {
+			throw new CustomException(ErrorCode.ROLE_NOT_FOUND);
+		}
+
+		// Role 제거
+		user.getUserRole().removeIf(userRole -> userRole.getRole().equals(roleToRemove));
 	}
 }

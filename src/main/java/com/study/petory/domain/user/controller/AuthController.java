@@ -124,9 +124,13 @@ public class AuthController {
 	}
 
 	/**
+	 * [관리자 전용 - 유저 복구]
+	 * softDelete 처리된 사용자의 계정을 복구
+	 * deletedAt 필드를 null 로 되돌려 계정을 활성화 상태로 변경
+	 * 이미 활성화된 계정일 경우 예외 처리
 	 *
-	 * @param userId
-	 * @return
+	 * @param userId 복구할 대상 사용자의 ID
+	 * @return 복구 성공 메시지
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/restore")

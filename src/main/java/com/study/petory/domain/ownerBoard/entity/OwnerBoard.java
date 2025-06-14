@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_owner_board")
 @NoArgsConstructor
-@SQLRestriction("deleted_at is NULL")
+@Where(clause = "deleted_at IS NULL")
 @DynamicUpdate
 public class OwnerBoard extends TimeFeatureBasedEntity {
 

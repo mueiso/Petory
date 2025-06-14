@@ -2,6 +2,7 @@ package com.study.petory.common.config;
 
 import java.util.List;
 
+// TODO - 배포 전 체크
 public class SecurityWhitelist {
 
 	// 인증 없이 접근 가능한 경로

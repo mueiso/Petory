@@ -62,7 +62,6 @@ public class SecurityConfig {
 			.formLogin(AbstractHttpConfigurer::disable)
 			.logout(AbstractHttpConfigurer::disable)
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			// TODO - 배포 전 체크
 			.authorizeHttpRequests(auth -> auth
 				// Security 전용 WHITELIST
 				.requestMatchers(SecurityWhitelist.URL_WHITELIST.toArray(new String[0])).permitAll()

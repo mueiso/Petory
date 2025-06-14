@@ -1,6 +1,7 @@
 package com.study.petory.domain.user.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +34,7 @@ public class UserController {
 	 * @return 성공 시 사용자 프로필 정보와 함께 200 OK 응답
 	 */
 	@GetMapping("/me")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<UserProfileResponseDto>> getMyInfo(
 		@AuthenticationPrincipal CustomPrincipal currentUser) {
 
@@ -49,10 +51,12 @@ public class UserController {
 	 * @return 성공 시 200 OK 응답
 	 */
 	@PutMapping("/update")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Validated @RequestBody UpdateUserRequestDto updateDto
 	) {
+
 		userService.updateProfile(currentUser.getEmail(), updateDto);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
@@ -64,9 +68,11 @@ public class UserController {
 	 * @return 성공 시 200 OK 응답
 	 */
 	@DeleteMapping("/delete")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> deleteUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser
 	) {
+
 		userService.deleteAccount(currentUser.getEmail());
 		return CommonResponse.of(SuccessCode.USER_DELETED);
 	}

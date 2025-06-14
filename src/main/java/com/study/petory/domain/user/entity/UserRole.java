@@ -7,8 +7,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,5 +29,10 @@ public class UserRole {
 	@Builder
 	public UserRole(Role role) {
 		this.role = role;
+	}
+
+	// userRole 중복 검증 메서드
+	public boolean isEqualRole(Role role) {
+		return this.role == role;
 	}
 }

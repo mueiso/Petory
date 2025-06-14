@@ -48,7 +48,11 @@ public class JwtFilter extends OncePerRequestFilter {
 	private static final List<String> WHITELIST = List.of(
 		"/auth/reissue",
 		"/login.html",
-		"/favicon.ico"
+		"/favicon.ico",
+		"/map.html",
+		"/trade-boards",
+		"/trade-boards/{tradeBoardId}",
+		"./questions/today "
 	);
 
 	@Override
@@ -71,6 +75,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// GET /owner-boards 하위 경로 모두 허용
 		if ("GET".equalsIgnoreCase(method) && url.startsWith("/owner-boards")) {
+			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// GET /owner-boards 하위 경로 모두 허용
+		if ("GET".equalsIgnoreCase(method) && url.startsWith("/places")) {
 			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;
@@ -135,10 +146,11 @@ public class JwtFilter extends OncePerRequestFilter {
 			String email = claims.get("email", String.class);
 			String nickname = claims.get("nickname", String.class);
 
-			List<String> roleList = claims.get("roles", List.class);
+			List<String> roleList = jwtProvider.getRolesFromToken(rawToken);
 			List<SimpleGrantedAuthority> authorities = roleList.stream()
 				.map(SimpleGrantedAuthority::new)
 				.toList();
+
 
 			debugLog("JWT Claims 파싱 성공 - userId: " + userId);
 

@@ -64,7 +64,8 @@ public class SecurityConfig {
 			// TODO - 배포 전 체크
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers(
-					"/auth/**",
+					"/auth/reissue",
+					"/auth/logout",
 					"/login/**",
 					"/oauth2/**",       		      // 소셜 로그인 진입점 (예: /oauth2/authorization/google)
 					"/login/oauth2/**", 		      // 소셜 로그인 콜백 URI (예: /login/oauth2/code/google)
@@ -73,9 +74,14 @@ public class SecurityConfig {
 					"/login-success.html",          // 프론트 로그인 성공 시 진입점
 					"/css/**",
 					"/js/**",
-					"/images/**"
+					"/images/**",
+					"/map.html",                    // 프론트 지도 진입점
+					"/trade-boards",
+					"/trade-boards/{tradeBoardId}",
+					"./questions/today "
 				).permitAll()
 				.requestMatchers(HttpMethod.GET, "/owner-boards/**").permitAll()  // /owner-boards 하위의 경로 중 GET 매핑만 모두 허용
+				.requestMatchers(HttpMethod.GET, "/places/**").permitAll()        // /places 하위의 경로 중 GET 매핑만 모두 허용
 				.anyRequest().authenticated()
 			)
 

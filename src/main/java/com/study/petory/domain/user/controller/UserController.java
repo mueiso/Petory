@@ -28,6 +28,7 @@ public class UserController {
 	private final UserService userService;
 
 	/**
+	 * [유저 프로필 조회]
 	 * 현재 로그인된 사용자의 프로필 정보를 조회합니다.
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
@@ -40,10 +41,12 @@ public class UserController {
 
 		// currentUser.getId(), currentUser.getEmail(), currentUser.getNickname() 사용 가능
 		UserProfileResponseDto profile = userService.getMyProfile(currentUser.getEmail());
+
 		return CommonResponse.of(SuccessCode.FOUND, profile);
 	}
 
 	/**
+	 * [유저 프로필 수정]
 	 * 현재 로그인된 사용자의 프로필을 업데이트합니다.
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
@@ -58,10 +61,12 @@ public class UserController {
 	) {
 
 		userService.updateProfile(currentUser.getEmail(), updateDto);
+
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
+	 * [계정 삭제]
 	 * 현재 로그인된 사용자의 계정을 삭제합니다.
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
@@ -74,6 +79,7 @@ public class UserController {
 	) {
 
 		userService.deleteAccount(currentUser.getEmail());
+
 		return CommonResponse.of(SuccessCode.USER_DELETED);
 	}
 }

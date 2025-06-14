@@ -45,6 +45,10 @@ public class AuthService {
 		User savedUser = userRepository.findByEmail(user.getEmail())
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		if (savedUser.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.USER_DEACTIVATED);
+		}
+
 		if (savedUser.getId() == null) {
 			throw new CustomException(ErrorCode.USER_ID_NOT_GENERATED);
 		}
@@ -139,7 +143,7 @@ public class AuthService {
 	}
 
 	/*
-	 * [권한 추가]
+	 * [관리자 전용 - 권한 추가]
 	 * 중복되는 권한이면 예외 처리
 	 * 지정한 사용자에게 새 Role 을 부여하고, 전체 권한 목록 반환
 	 */
@@ -164,7 +168,7 @@ public class AuthService {
 	}
 
 	/**
-	 * [권한 제거]
+	 * [관리자 전용 - 권한 제거]
 	 * 지정한 사용자에게서 Role 을 제거하고, 전체 권한 목록 반환
 	 */
 	@Transactional
@@ -186,5 +190,39 @@ public class AuthService {
 		return user.getUserRole().stream()
 			.map(UserRole::getRole)
 			.toList();
+	}
+
+	/*
+	 * [관리자 전용 - 유저 비활성화]
+	 * 지정한 사용자를 softDelete 처리
+	 */
+	@Transactional
+	public void deactivateUser(Long targetUserId) {
+
+		User user = userRepository.findById(targetUserId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.ALREADY_DEACTIVATED);
+		}
+
+		user.deactivateEntity();
+	}
+
+	/**
+	 * [관리자 전용 - 유저 복구]
+	 * Soft Delete 처리된 유저를 복구
+	 */
+	@Transactional
+	public void restoreUser(Long targetUserId) {
+
+		User user = userRepository.findById(targetUserId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		if (user.getDeletedAt() == null) {
+			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);
+		}
+
+		user.restoreEntity();
 	}
 }

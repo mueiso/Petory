@@ -45,6 +45,7 @@ public class AuthController {
 	) {
 
 		TokenResponseDto tokenResponseDto = authService.reissue(accessToken, refreshToken);
+
 		return CommonResponse.of(SuccessCode.TOKEN_REISSUE, tokenResponseDto);
 	}
 
@@ -61,6 +62,7 @@ public class AuthController {
 	public ResponseEntity<CommonResponse<Object>> logout(@RequestHeader("Authorization") String bearerToken) {
 
 		authService.logout(bearerToken);
+
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);
 	}
 
@@ -70,18 +72,17 @@ public class AuthController {
 	 *
 	 * @param targetUserId 권한을 부여할 사용자 ID
 	 * @param role 부여할 권한
-	 * @param currentUser 현재 로그인한 관리자 (자동 주입)
 	 * @return 부여 이후 해당 사용자의 전체 권한 목록
 	 */
 	@PostMapping("/role")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> addUserRole(
 		@RequestParam("userId") Long targetUserId,
-		@RequestParam("role") Role role,
-		@AuthenticationPrincipal CustomPrincipal currentUser
+		@RequestParam("role") Role role
 	) {
 
 		List<Role> updatedRoles = authService.addRoleToUser(targetUserId, role);
+
 		return CommonResponse.of(SuccessCode.UPDATED, updatedRoles);
 	}
 
@@ -91,18 +92,48 @@ public class AuthController {
 	 *
 	 * @param targetUserId 권한 제거당할 사용자 ID
 	 * @param role 제거할 권한
-	 * @param currentUser 현재 로그인한 관리자
 	 * @return 제거 이후 해당 사용자의 전체 권한 목록
 	 */
 	@DeleteMapping("/role/remove")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> removeUserRole(
 		@RequestParam("userId") Long targetUserId,
-		@RequestParam("role") Role role,
-		@AuthenticationPrincipal CustomPrincipal currentUser
+		@RequestParam("role") Role role
 	) {
 
 		List<Role> updatedRoles = authService.removeRoleFromUser(targetUserId, role);
+
 		return CommonResponse.of(SuccessCode.DELETED, updatedRoles);
+	}
+
+	/**
+	 * [관리자 전용 - 유저 비활성화]
+	 * 지정한 사용자의 계정을 softDelete 처리
+	 * 이미 비활성화된 계정일 경우 예외 처리
+	 *
+	 * @param userId 비활성화할 대상 사용자의 ID
+	 * @return 삭제 성공 메시지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/deactivate")
+	public ResponseEntity<CommonResponse<Object>> deactivateUser(@RequestParam Long userId) {
+
+		authService.deactivateUser(userId);
+
+		return CommonResponse.of(SuccessCode.DELETED);
+	}
+
+	/**
+	 *
+	 * @param userId
+	 * @return
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/restore")
+	public ResponseEntity<CommonResponse<Object>> restoreUser(@RequestParam Long userId) {
+
+		authService.restoreUser(userId);
+
+		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 }

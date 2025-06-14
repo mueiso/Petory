@@ -28,9 +28,9 @@ public enum ErrorCode implements BaseCode {
 	OAUTH2_EMAIL_NOT_FOUND(HttpStatus.BAD_REQUEST, "OAuth2 인증에 이메일 정보가 없습니다."),
 	ALREADY_HAS_SAME_ROLE(HttpStatus.BAD_REQUEST, "중복되는 권한입니다."),
 	ROLE_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자에게 해당 권한이 존재하지 않습니다."),
+	DEACTIVATED_USER(HttpStatus.FORBIDDEN, "로그인 불가합니다. 비활성화된 사용자입니다."),
 	ALREADY_DEACTIVATED(HttpStatus.BAD_REQUEST, "이미 비활성화된 유저입니다."),
 	USER_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 유저가 아닙니다."),
-	USER_DEACTIVATED(HttpStatus.FORBIDDEN, "로그인 불가합니다. 임시 정지된 계정입니다."),
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),

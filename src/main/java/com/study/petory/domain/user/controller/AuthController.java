@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.service.AuthService;
@@ -138,6 +136,6 @@ public class AuthController {
 
 		authService.restoreUser(userId);
 
-		return CommonResponse.of(SuccessCode.UPDATED);
+		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 }

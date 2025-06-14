@@ -46,7 +46,7 @@ public class AuthService {
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		if (savedUser.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.USER_DEACTIVATED);
+			throw new CustomException(ErrorCode.DEACTIVATED_USER);
 		}
 
 		if (savedUser.getId() == null) {

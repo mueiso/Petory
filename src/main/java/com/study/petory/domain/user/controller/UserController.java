@@ -6,14 +6,17 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
+import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.service.UserService;
@@ -26,6 +29,22 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private final UserService userService;
+
+	/**
+	 * [테스트 전용 - 로그인]
+	 * userId를 기준으로 로그인
+	 * 비활성화된 유저는 로그인 불가 예외 발생
+	 *
+	 * @param userId 로그인 시도할 해당 유저 ID
+	 * @return accessToken, refreshToken
+	 */
+	@PostMapping("/test-login")
+	public ResponseEntity<CommonResponse<TokenResponseDto>> testLogin(@RequestParam Long userId) {
+
+		TokenResponseDto tokens = userService.testLogin(userId);
+
+		return CommonResponse.of(SuccessCode.USER_LOGIN, tokens);
+	}
 
 	/**
 	 * [유저 프로필 조회]

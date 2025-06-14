@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -26,6 +27,7 @@ public class OwnerBoardImage extends CreationBasedEntity {
 
 	private String url;
 
+	@Setter // 양방향 연관관계 설정을 위한 setter
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "owner_board_id")
 	@JsonIgnore
@@ -35,4 +37,5 @@ public class OwnerBoardImage extends CreationBasedEntity {
 		this.url = url;
 		this.ownerBoard = ownerBoard;
 	}
+
 }

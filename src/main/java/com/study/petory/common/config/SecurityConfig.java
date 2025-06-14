@@ -65,6 +65,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers(
 					"/auth/reissue",
+					"/users/test-login",
 					"/auth/logout",
 					"/login/**",
 					"/oauth2/**",       		      // 소셜 로그인 진입점 (예: /oauth2/authorization/google)

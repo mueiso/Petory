@@ -1,10 +1,14 @@
 package com.study.petory.domain.user.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.JwtProvider;
+import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
@@ -18,6 +22,40 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
+	private final JwtProvider jwtProvider;
+
+	/*
+	 * [테스트 전용 - 로그인]
+	 * userId를 기준으로 로그인
+	 * 비활성화된 유저는 로그인 불가 예외 발생
+	 */
+	@Override
+	@Transactional
+	public TokenResponseDto testLogin(Long userId) {
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.DEACTIVATED_USER);
+		}
+
+		List<String> roles = user.getUserRole().stream()
+			.map(userRole -> "ROLE_" + userRole.getRole().name())
+			.toList();
+
+		String accessToken = jwtProvider.createAccessToken(
+			user.getId(),
+			user.getEmail(),
+			user.getNickname(),
+			roles
+		);
+
+		String refreshToken = jwtProvider.createRefreshToken(user.getId());
+		jwtProvider.storeRefreshToken(user.getId(), refreshToken);
+
+		return new TokenResponseDto(accessToken, refreshToken);
+	}
+
 
 	// 현재 사용자 정보 조회
 	@Override
@@ -72,6 +110,4 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
-
-	// TODO - 사용자 계정 정지 및 비활성화 위한 API 필요
 }

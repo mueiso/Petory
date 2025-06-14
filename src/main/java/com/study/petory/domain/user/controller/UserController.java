@@ -34,6 +34,7 @@ public class UserController {
 	 * @return 성공 시 사용자 프로필 정보와 함께 200 OK 응답
 	 */
 	@GetMapping("/me")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<UserProfileResponseDto>> getMyInfo(
 		@AuthenticationPrincipal CustomPrincipal currentUser) {
 
@@ -50,6 +51,7 @@ public class UserController {
 	 * @return 성공 시 200 OK 응답
 	 */
 	@PutMapping("/update")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Validated @RequestBody UpdateUserRequestDto updateDto
@@ -66,6 +68,7 @@ public class UserController {
 	 * @return 성공 시 200 OK 응답
 	 */
 	@DeleteMapping("/delete")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> deleteUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser
 	) {

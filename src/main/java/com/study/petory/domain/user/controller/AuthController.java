@@ -57,6 +57,7 @@ public class AuthController {
 	 * @return 로그아웃 성공 메시지
 	 */
 	@DeleteMapping("/logout")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> logout(@RequestHeader("Authorization") String bearerToken) {
 
 		authService.logout(bearerToken);

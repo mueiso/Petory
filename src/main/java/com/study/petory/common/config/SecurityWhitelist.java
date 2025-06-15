@@ -11,7 +11,7 @@ import lombok.Getter;
 public class SecurityWhitelist {
 
 	private final List<String> urlWhitelist;
-	private final List<String> PermittedGETPrefixList;
+	private final List<String> permitGetPrefixList;
 
 	public SecurityWhitelist() {
 
@@ -20,6 +20,7 @@ public class SecurityWhitelist {
 			"/auth/logout",
 			"/users/test-login",
 			"/login.html",
+			"/login-success.html",
 			"/favicon.ico",
 			"/map.html",
 			"/trade-boards",
@@ -27,7 +28,7 @@ public class SecurityWhitelist {
 			"/questions/today"
 		);
 
-		this.PermittedGETPrefixList = List.of(
+		this.permitGetPrefixList = List.of(
 			"/owner-boards",
 			"/places"
 		);

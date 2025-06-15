@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletResponse;
 class OAuth2SuccessHandlerTest {
 
 	@Mock
-	private AuthService authService;
+	private AuthServiceImpl authServiceImpl;
 
 	@InjectMocks
 	private OAuth2SuccessHandler oAuth2SuccessHandler;
@@ -57,7 +57,7 @@ class OAuth2SuccessHandlerTest {
 			new UsernamePasswordAuthenticationToken(oauth2User, null, oauth2User.getAuthorities());
 
 		TokenResponseDto tokens = new TokenResponseDto("accessTokenValue", "refreshTokenValue");
-		when(authService.issueToken(any(User.class))).thenReturn(tokens);
+		when(authServiceImpl.issueToken(any(User.class))).thenReturn(tokens);
 
 		// response mock: 쿠키, sendRedirect 체크
 		doNothing().when(response).addCookie(any(Cookie.class));
@@ -67,7 +67,7 @@ class OAuth2SuccessHandlerTest {
 		oAuth2SuccessHandler.onAuthenticationSuccess(request, response, authentication);
 
 		// then: 토큰 발급 및 쿠키 등록, 리다이렉트 동작 여부 검증
-		verify(authService).issueToken(any(User.class));
+		verify(authServiceImpl).issueToken(any(User.class));
 		verify(response).addCookie(argThat(cookie -> {
 			assertEquals("refreshToken", cookie.getName());
 			assertTrue(cookie.isHttpOnly());

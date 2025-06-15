@@ -14,17 +14,17 @@ import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 
 public interface PlaceService {
-	PlaceCreateResponseDto savePlace(PlaceCreateRequestDto requestDto);
+	PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto);
 
 	Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable);
 
 	PlaceGetResponseDto findByPlaceId(Long placeId);
 
-	PlaceUpdateResponseDto updatePlace(Long placeId, PlaceUpdateRequestDto requestDto);
+	PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto);
 
-	void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto);
+	void deletePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto);
 
-	void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto);
+	void restorePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto);
 
 	Place findPlaceByPlaceId(Long placeId);
 

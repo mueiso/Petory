@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
@@ -22,7 +23,7 @@ import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,21 +32,24 @@ import lombok.RequiredArgsConstructor;
 public class PlaceServiceImpl implements PlaceService {
 
 	private final PlaceRepository placeRepository;
-	private final UserRepository userRepository;
+	private final UserService userService;
 
 	// 장소 등록
 	@Override
 	@Transactional
-	public PlaceCreateResponseDto savePlace(PlaceCreateRequestDto requestDto) {
+	public PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto) {
 
-		User user = userRepository.findById(1L).orElseThrow();
+		User user = userService.getUserById(userId);
+
+		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		Place place = Place.builder()
 			.user(user)
 			.placeName(requestDto.getPlaceName())
 			.placeInfo(requestDto.getPlaceInfo())
 			.placeType(requestDto.getPlaceType())
-			// .ratio()
 			.address(requestDto.getAddress())
 			.latitude(requestDto.getLatitude())
 			.longitude(requestDto.getLongitude())
@@ -80,7 +84,11 @@ public class PlaceServiceImpl implements PlaceService {
 	// 장소 수정
 	@Override
 	@Transactional
-	public PlaceUpdateResponseDto updatePlace(Long placeId, PlaceUpdateRequestDto requestDto) {
+	public PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto) {
+
+		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		Place findPlace = findPlaceByPlaceId(placeId);
 
@@ -97,7 +105,12 @@ public class PlaceServiceImpl implements PlaceService {
 	// 장소 삭제
 	@Override
 	@Transactional
-	public void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
+	public void deletePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto) {
+
+		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
 		Place findPlace = findPlaceByPlaceId(placeId);
 
 		findPlace.deactivateEntity();
@@ -107,7 +120,11 @@ public class PlaceServiceImpl implements PlaceService {
 	// 삭제된 장소 복구
 	@Override
 	@Transactional
-	public void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
+	public void restorePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto) {
+
+		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		Place findPlace = findPlaceByPlaceId(placeId);
 

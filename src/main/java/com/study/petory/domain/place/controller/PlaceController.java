@@ -4,11 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
@@ -52,9 +55,10 @@ public class PlaceController {
 	 */
 	@PostMapping
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@Valid @RequestBody PlaceCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(user.getId(), requestDto));
 	}
 
 	/**
@@ -94,12 +98,13 @@ public class PlaceController {
 	 * @param requestDto 장소 수정에 필요한 정보
 	 * @return CommonResponse 방식의 특정 장소의 수정된 정보
 	 */
-	@PatchMapping("/{placeId}")
+	@PutMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<PlaceUpdateResponseDto>> updatePlace(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(user.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -112,10 +117,11 @@ public class PlaceController {
 	 */
 	@PatchMapping("/{placeId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlace(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
-		placeService.restorePlace(placeId, requestDto);
+		placeService.restorePlace(user.getId(), placeId, requestDto);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -129,10 +135,11 @@ public class PlaceController {
 	 */
 	@DeleteMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlace(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
-		placeService.deletePlace(placeId, requestDto);
+		placeService.deletePlace(user.getId(), placeId, requestDto);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
@@ -145,10 +152,11 @@ public class PlaceController {
 	 */
 	@PostMapping("/{placeId}/reviews")
 	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(user.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -158,13 +166,15 @@ public class PlaceController {
 	 * @param requestDto 리뷰 등록에 필요한 정보
 	 * @return CommonResponse 방식의 수정된 리뷰에 대한 정보
 	 */
-	@PatchMapping("/{placeId}/reviews/{reviewId}")
+	@PutMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED,
+			placeReviewService.updatePlaceReview(user.getId(), placeId, reviewId, requestDto));
 	}
 
 	/**
@@ -176,10 +186,11 @@ public class PlaceController {
 	 */
 	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.restorePlaceReview(placeId, reviewId);
+		placeReviewService.restorePlaceReview(user.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -192,10 +203,11 @@ public class PlaceController {
 	 */
 	@DeleteMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
+		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.deletePlaceReview(placeId, reviewId);
+		placeReviewService.deletePlaceReview(user.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
@@ -204,10 +216,12 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 성공 메시지
 	 */
 	@PostMapping("/write-json")
-	public ResponseEntity<CommonResponse<Void>> writeJsonData() {
+	public ResponseEntity<CommonResponse<Void>> writeJsonData(
+		@AuthenticationPrincipal CustomPrincipal user
+	) {
 		// 현재 프로젝트의 루트 경로를 가져와서 src 이하의 경로를 붙이는 과정
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/data";
-		bookmarkPlaceService.writeJsonData(filePath);
+		bookmarkPlaceService.writeJsonData(user.getId(), filePath);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 }

@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.place.dto.request.BookmarkPlaceRequestDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,10 +30,6 @@ public class BookmarkPlaceService {
 	public void writeJsonData(Long userId, String filePath) {
 
 		User user = userService.getUserById(userId);
-
-		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
 
 		// filePath에 해당하는 폴더에서 fixed.json으로 끝나는 파일만 가져오는 과정
 		File folder = new File(filePath);

@@ -11,6 +11,6 @@ public interface AlbumCustomRepository {
 
 	Page<Album> findAllAlbum(Long userId, Pageable pageable);
 
-	Optional<Album> findOneAlbumByUser(Long userId, Long albumId);
+	Optional<Album> findOneAlbumByUser(boolean showOnlyPublic, Long albumId);
 }
 

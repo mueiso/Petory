@@ -35,7 +35,7 @@ public interface AlbumService {
 
 	Page<Album> findAlbumByPage(Long userId, Pageable pageable);
 
-	Album findAlbumByAlbumId(boolean isPublic, Long albumId);
+	Album findAlbumByAlbumId(boolean showOnlyPublic, Long albumId);
 
 	void validateAuthor(Long userId, Album album);
 }

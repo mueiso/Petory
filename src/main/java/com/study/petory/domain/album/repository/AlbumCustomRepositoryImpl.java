@@ -94,9 +94,9 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 	}
 
 	@Override
-	public Optional<Album> findOneAlbumByUser(Long userId, Long albumId) {
+	public Optional<Album> findOneAlbumByUser(boolean showOnlyPublic, Long albumId) {
 		BooleanBuilder builder = new BooleanBuilder();
-		if (userId == null) {
+		if (showOnlyPublic) {
 			builder.and(qAlbum.albumVisibility.eq(AlbumVisibility.PUBLIC));
 		}
 		return Optional.ofNullable(

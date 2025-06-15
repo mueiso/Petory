@@ -74,14 +74,18 @@ public class AlbumServiceImpl implements AlbumService {
 	// 앨범 단일 조회
 	@Override
 	public AlbumGetOneResponseDto findOneAlbum(Long userId, Long albumId) {
-		return AlbumGetOneResponseDto.from(findAlbumByAlbumId(userId, albumId));
+		boolean showOnlyPublic = true;
+		if (userId != null) {
+			showOnlyPublic = false;
+		}
+		return AlbumGetOneResponseDto.from(findAlbumByAlbumId(showOnlyPublic, albumId));
 	}
 
 	// 앨범 수정
 	@Override
 	@Transactional
 	public void updateAlbum(Long userId, Long albumId, AlbumUpdateRequestDto request) {
-		Album album = findAlbumByAlbumId(albumId);
+		Album album = findAlbumByAlbumId(false, albumId);
 		validateAuthor(userId, album);
 		album.updateAlbum(
 			request.getContent()
@@ -92,7 +96,7 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	@Transactional
 	public void updateVisibility(Long userId, Long albumId, AlbumVisibilityUpdateRequestDto request) {
-		Album album = findAlbumByAlbumId(albumId);
+		Album album = findAlbumByAlbumId(false, albumId);
 		validateAuthor(userId, album);
 		album.updateVisibility(request.getAlbumVisibility());
 	}
@@ -101,7 +105,7 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	@Transactional
 	public void deleteAlbum(Long userId, Long albumId) {
-		Album album = findAlbumByAlbumId(albumId);
+		Album album = findAlbumByAlbumId(false, albumId);
 		validateAuthor(userId, album);
 
 		List<AlbumImage> albumImageList = album.getAlbumImageList();
@@ -117,7 +121,7 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	@Transactional
 	public void saveNewAlbumImage(Long userId, Long albumId, List<MultipartFile> images) {
-		Album album = findAlbumByAlbumId(albumId);
+		Album album = findAlbumByAlbumId(false, albumId);
 		validateAuthor(userId, album);
 		albumImageService.uploadAndSaveAll(images, album);
 	}
@@ -127,7 +131,7 @@ public class AlbumServiceImpl implements AlbumService {
 	@Transactional
 	public void deleteAlbumImage(Long userId, Long imageId) {
 		AlbumImage albumImage = albumImageService.findImageById(imageId);
-		Album album = findAlbumByAlbumId(userId, albumImage.getAlbum().getId());
+		Album album = findAlbumByAlbumId(false, albumImage.getAlbum().getId());
 
 		albumImageService.deleteImageInternal(albumImage);
 		album.getAlbumImageList().remove(albumImage);
@@ -141,8 +145,8 @@ public class AlbumServiceImpl implements AlbumService {
 
 	// 앨범과 앨범의 이미지 조회
 	@Override
-	public Album findAlbumByAlbumId(Long userId, Long albumId) {
-		return albumRepository.findOneAlbumByUser(userId, albumId)
+	public Album findAlbumByAlbumId(boolean showOnlyPublic, Long albumId) {
+		return albumRepository.findOneAlbumByUser(showOnlyPublic, albumId)
 			.orElseThrow(() -> new CustomException(ErrorCode.ALBUM_NOT_FOUND));
 	}
 

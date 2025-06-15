@@ -87,7 +87,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		if (title != null) {
 			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
 		} else {
-			boards = ownerBoardRepository.findAll(pageable);
+			boards = ownerBoardRepository.findAllWithImages(pageable);
 		}
 
 		return boards.map(OwnerBoardGetAllResponseDto::from);

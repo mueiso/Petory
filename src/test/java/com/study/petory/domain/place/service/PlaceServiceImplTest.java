@@ -52,6 +52,8 @@ class PlaceServiceImplTest {
 	void savePlace() {
 		User user = new User();
 
+		ReflectionTestUtils.setField(user, "id", 1L);
+
 		PlaceCreateRequestDto dto = new PlaceCreateRequestDto("testName", null,
 			PlaceType.ACCOMMODATION, "testAddress", BigDecimal.ONE, BigDecimal.ONE);
 
@@ -70,7 +72,7 @@ class PlaceServiceImplTest {
 			return savedPlace;
 		});
 
-		PlaceCreateResponseDto responseDto = placeServiceImpl.savePlace(dto);
+		PlaceCreateResponseDto responseDto = placeServiceImpl.savePlace(1L, dto);
 
 		assertAll("저장 로직 검증",
 			() -> assertEquals(1L, responseDto.getId()),
@@ -168,7 +170,7 @@ class PlaceServiceImplTest {
 
 		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
 
-		PlaceUpdateResponseDto responseDto = placeServiceImpl.updatePlace(1L, dto);
+		PlaceUpdateResponseDto responseDto = placeServiceImpl.updatePlace(1L, 1L, dto);
 
 		assertAll("장소 수정 로직 검증",
 			() -> assertEquals("updateTestName", responseDto.getPlaceName()),
@@ -192,7 +194,7 @@ class PlaceServiceImplTest {
 
 		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
 
-		placeServiceImpl.deletePlace(1L, dto);
+		placeServiceImpl.deletePlace(1L, 1L, dto);
 
 		assertAll("장소 삭제 로직 검증",
 			() -> assertEquals(PlaceStatus.DELETED, place.getPlaceStatus()),
@@ -214,7 +216,7 @@ class PlaceServiceImplTest {
 
 		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
 
-		placeServiceImpl.restorePlace(1L, dto);
+		placeServiceImpl.restorePlace(1L, 1L, dto);
 
 		assertAll("장소 삭제 로직 검증",
 			() -> assertEquals(PlaceStatus.ACTIVE, place.getPlaceStatus()),

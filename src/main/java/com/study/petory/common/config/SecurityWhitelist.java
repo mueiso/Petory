@@ -15,6 +15,7 @@ public class SecurityWhitelist {
 
 	public SecurityWhitelist() {
 
+		// Security 전용 WHITELIST
 		this.urlWhitelist = List.of(
 			"/auth/reissue",
 			"/auth/logout",
@@ -28,6 +29,7 @@ public class SecurityWhitelist {
 			"/questions/today"
 		);
 
+		// 하위 경로 중 GET 매핑만 허용 (예: HttpMethod.GET, /places/**)
 		this.permitGetPrefixList = List.of(
 			"/owner-boards",
 			"/places"

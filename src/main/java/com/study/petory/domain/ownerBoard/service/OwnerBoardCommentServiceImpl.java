@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
@@ -16,7 +17,7 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +27,17 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardService ownerBoardService;
-	private final UserRepository userRepository;
+	private final UserServiceImpl userService;
+
+	/**
+	 * 댓글 작성자 검증 메서드
+	 * 이 메서드는 OwnerBoardCommentService 내부에서만 사용됩니다.
+	 */
+	private void validBoardOwnerShip(OwnerBoardComment comment, Long userId, ErrorCode errorCode) {
+		if (!comment.isEqualUser(userId)) {
+			throw new CustomException(errorCode);
+		}
+	}
 
 	// CommentId로 OwnerBoardComment 조회
 	@Override
@@ -37,10 +48,11 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	// 주인커뮤니티 댓글 생성
 	@Override
-	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId,
+	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long userId, Long boardId,
 		OwnerBoardCommentCreateRequestDto dto) {
 
-		User user = userRepository.findById(1L).orElseThrow(); // 임시로 유저 생성, 추후 로그인유저 변경 예정
+		User user = userService.getUserById(userId);
+
 		OwnerBoard ownerBoard = ownerBoardService.findOwnerBoardById(boardId);
 
 		OwnerBoardComment comment = OwnerBoardComment.builder()
@@ -66,11 +78,12 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 수정
 	@Override
 	@Transactional
-	public OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
+	public OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long userId, Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto) {
-		// 본인 댓글인지 검증 로직 추가 예정
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
+
+		validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
@@ -86,10 +99,13 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	// 주인커뮤니티 댓글 삭제
 	@Override
 	@Transactional
-	public void deleteOwnerBoardComment(Long boardId, Long commentId) {
-		// 본인 댓글인지 검증 로직 추가
+	public void deleteOwnerBoardComment(Long userId, Long boardId, Long commentId) {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
+
+		if (!SecurityUtil.hasRole("ADMIN")) {
+			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);

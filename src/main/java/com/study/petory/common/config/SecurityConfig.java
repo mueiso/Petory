@@ -39,6 +39,7 @@ public class SecurityConfig {
 	private final OAuth2FailureHandler oAuth2FailureHandler;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final CustomAccessDeniedHandler customAccessDeniedHandler;
+	private final SecurityWhitelist securityWhitelist;
 
 	/*
 	 * 1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
@@ -64,9 +65,9 @@ public class SecurityConfig {
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
 				// Security 전용 WHITELIST
-				.requestMatchers(SecurityWhitelist.URL_WHITELIST.toArray(new String[0])).permitAll()
+				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0])).permitAll()
 				// GET 메서드의 특정 경로 한정 허용
-				.requestMatchers(HttpMethod.GET, SecurityWhitelist.PERMIT_GET_PREFIXES.toArray(new String[0])).permitAll()
+				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermittedGETPrefixList().toArray(new String[0])).permitAll()
 				.anyRequest().authenticated()
 			)
 

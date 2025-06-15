@@ -22,6 +22,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -31,22 +32,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
-
-	public JwtFilter(
-		JwtProvider jwtProvider,
-		@Qualifier("loginRefreshToken")
-		RedisTemplate<String, String> loginRefreshToken
-	) {
-		this.jwtProvider = jwtProvider;
-		this.loginRefreshToken = loginRefreshToken;
-	}
-
-	// WHITELIST (인증이 필요 없는 경로 리스트 - SecurityWhitelist 와 통일)
-	private static final List<String> WHITELIST = SecurityWhitelist.URL_WHITELIST;
+	private final SecurityWhitelist securityWhitelist;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -81,7 +72,8 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		// 정적 리소스 또는 화이트리스트 우회
-		if (url.endsWith(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$") || WHITELIST.contains(url)) {
+		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$")
+			|| securityWhitelist.getUrlWhitelist().contains(url)) {
 			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;

@@ -76,6 +76,7 @@ public class TradeBoardQueryRepositoryImpl implements TradeBoardQueryRepository 
 
 		List<TradeBoard> content = queryFactory
 			.selectFrom(tradeBoard)
+			.distinct()
 			.join(tradeBoard.user, user).fetchJoin()
 			.leftJoin(tradeBoard.images, tradeBoardImage).fetchJoin()
 			.where(user.id.eq(userId))

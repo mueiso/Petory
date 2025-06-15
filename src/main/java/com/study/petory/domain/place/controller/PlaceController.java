@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +54,7 @@ public class PlaceController {
 	 * @param requestDto 장소 등록에 필요한 정보
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -98,6 +100,7 @@ public class PlaceController {
 	 * @param requestDto 장소 수정에 필요한 정보
 	 * @return CommonResponse 방식의 특정 장소의 수정된 정보
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<PlaceUpdateResponseDto>> updatePlace(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -115,6 +118,7 @@ public class PlaceController {
 	 * @param requestDto 장소 복구에 필요한 정보
 	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlace(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -133,6 +137,7 @@ public class PlaceController {
 	 * @param requestDto 장소 삭제에 필요한 Enum 정보
 	 * @return CommonResponse 방식의 장소 삭제 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlace(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -150,6 +155,7 @@ public class PlaceController {
 	 * @param requestDto 리뷰 등록에 필요한 정보
 	 * @return CommonResponse 방식의 등록된 리뷰에 대한 정보
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/{placeId}/reviews")
 	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -166,6 +172,7 @@ public class PlaceController {
 	 * @param requestDto 리뷰 등록에 필요한 정보
 	 * @return CommonResponse 방식의 수정된 리뷰에 대한 정보
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -184,6 +191,7 @@ public class PlaceController {
 	 * @param reviewId 리뷰 식별자
 	 * @return CommonResponse 방식의 삭제된 리뷰 복구 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -201,6 +209,7 @@ public class PlaceController {
 	 * @param reviewId 리뷰 식별자
 	 * @return CommonResponse 방식의 리뷰 삭제 메시지
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
 		@AuthenticationPrincipal CustomPrincipal user,
@@ -215,6 +224,7 @@ public class PlaceController {
 	 * Json data 저장하기
 	 * @return CommonResponse 방식의 성공 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/write-json")
 	public ResponseEntity<CommonResponse<Void>> writeJsonData(
 		@AuthenticationPrincipal CustomPrincipal user

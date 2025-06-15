@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
@@ -19,6 +18,7 @@ import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 import com.study.petory.domain.dailyQna.entity.Question;
+import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
 import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;

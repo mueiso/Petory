@@ -26,7 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.study.petory.domain.dailyQna.Repository.DailyQnaRepository;
+import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
@@ -42,7 +42,6 @@ import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
 import com.study.petory.domain.user.entity.UserRole;
-import com.study.petory.domain.user.repository.UserRepository;
 import com.study.petory.domain.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,8 +64,9 @@ public class DailyQnaServiceTest {
 		"실명",
 		"000-0000-0000"
 	);
-	private final UserRole userRole = new UserRole(Role.USER);
+
 	private final List<UserRole> testUserRole = new ArrayList<>(List.of(new UserRole(Role.USER)));
+
 	private final User testUser = new User(
 		"닉네임",
 		"email@email.com",
@@ -79,13 +79,6 @@ public class DailyQnaServiceTest {
 		"01-01",
 		QuestionStatus.ACTIVE
 	);
-
-	// 더미 DailyQna 생성 메서드
-	// private DailyQna createDummyDailyQna(String answer, LocalDateTime date) {
-	// 	DailyQna qna = new DailyQna(testUser, testQuestion, answer, DailyQnaStatus.ACTIVE);
-	// 	ReflectionTestUtils.setField(qna, "createdAt", date);
-	// 	return qna;
-	// }
 
 	// 날짜의 정렬을 확인하는 메서드
 	private void asserSortedByCreatedAtDesc(List<DailyQnaGetResponseDto> dtoList) {
@@ -273,7 +266,6 @@ public class DailyQnaServiceTest {
 	@DisplayName("관리자가 답변을 삭제한다.")
 	public void deleteDailyQna() {
 		// given
-		Long userId = 1L;
 		Long dailyQnaId = 1L;
 
 		DailyQna dailyQna = setDailyQna("삭제 전 답변", DailyQnaStatus.ACTIVE, "2022-01-01 00:00:00");
@@ -296,7 +288,6 @@ public class DailyQnaServiceTest {
 	@DisplayName("관리자가 삭제된 답변 조회")
 	public void findDeletedDailyQna() {
 		// given
-		Long adminId = 1L;
 		Long userId = 1L;
 
 		Pageable pageable = PageRequest.of(1, 50, Sort.by("date").ascending());
@@ -317,7 +308,6 @@ public class DailyQnaServiceTest {
 	@DisplayName("관리자가 삭제된 답변 복구")
 	public void restoreDailyQna() {
 		// given
-		Long adminId = 1L;
 		Long dailyQnaId = 1L;
 
 		DailyQna deletedDailyQna = setDailyQna("삭제 전 답변", DailyQnaStatus.DELETED, "2022-01-01 00:00:00");

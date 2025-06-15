@@ -23,7 +23,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.study.petory.domain.dailyQna.Repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
@@ -33,6 +32,7 @@ import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.entity.QuestionStatus;
+import com.study.petory.domain.dailyQna.repository.QuestionRepository;
 import com.study.petory.domain.dailyQna.service.QuestionServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -76,8 +76,6 @@ public class QuestionServiceTest {
 		QuestionCreateRequestDto request = new QuestionCreateRequestDto("질문입니다.", "01-01");
 
 		given(questionRepository.existsByDate("01-01")).willReturn(false);
-
-		// refactor: 유저 권한 검증 추가
 
 		// when
 		questionService.saveQuestion(request);

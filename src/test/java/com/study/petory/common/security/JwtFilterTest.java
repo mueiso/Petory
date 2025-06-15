@@ -65,7 +65,7 @@ class JwtFilterTest {
 	void 정상_토큰_인증_성공() throws Exception {
 
 
-		/*
+		/* [given]
 		 * 1. 정상 토큰
 		 * 2. Bearer 제거한 토큰
 		 * 3. 보호된 URI 설정
@@ -98,50 +98,67 @@ class JwtFilterTest {
 		when(jwtProvider.parseRawToken(rawToken)).thenReturn(claims);
 		when(jwtProvider.getRolesFromToken(rawToken)).thenReturn(List.of("ROLE_USER"));
 
-		// 필터 직접 호출
+		/* [when]
+		 * 필터 직접 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 다음 필터 호출되었는지 확인
+		/* [then]
+		 * 다음 필터 호출되었는지 확인
+		 * // 인증 정보가 등록되었는지 확인
+		 */
 		verify(filterChain, times(1)).doFilter(request, response);
-		// 인증 정보가 등록되었는지 확인
 		assertNotNull(SecurityContextHolder.getContext().getAuthentication());
 	}
 
 	@Test
 	void Authorization_헤더_없으면_401반환() throws Exception {
 
-		// 보호된 URL 설정
+		/* [given]
+		 * 보호된 URL 설정
+		 */
 		request.setRequestURI("/api/protected");
 
-		// 필터 호출
+		/* [when]
+		 * 필터 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 401 반환 여부 확인
+		/* [then]
+		 * 401 반환 여부 확인
+		 * 필터 체인 호출되지 않았는지 확인
+		 */
 		assertEquals(401, response.getStatus());
-		// 필터 체인 호출되지 않았는지 확인
 		verify(filterChain, never()).doFilter(any(), any());
 	}
 
 	@Test
 	void 토큰_형식_오류_401반환() throws Exception {
 
-		// 보호된 URL
+		/* [given]
+		 * 보호된 URL
+		 * Bearer 없이 잘못된 포맷
+		 */
 		request.setRequestURI("/api/protected");
-		// Bearer 없이 잘못된 포맷
 		request.addHeader("Authorization", "InvalidFormat");
 
-		// 필터 호출
+		/* [when]
+		 * 필터 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 응답이 401인지 확인
+		/* [then]
+		 * 응답이 401인지 확인
+		 * 필터 체인 호출되지 않음
+		 */
 		assertEquals(401, response.getStatus());
-		// 필터 체인 호출되지 않음
 		verify(filterChain, never()).doFilter(any(), any());
 	}
 
 	@Test
 	void 블랙리스트_토큰이면_401반환() throws Exception {
 
+		// [given]
 		String token = "Bearer black.token";
 		String rawToken = "black.token";
 		request.setRequestURI("/api/protected");
@@ -154,18 +171,23 @@ class JwtFilterTest {
 		when(jwtProvider.subStringToken(token)).thenReturn(rawToken);
 		when(loginRefreshToken.hasKey("BLACKLIST_" + rawToken)).thenReturn(true);
 
-		// 필터 호출
+		/* [when]
+		 * 필터 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 401 확인
+		/* [then]
+		 * 401 확인
+		 * 다음 필터 호출 안 됨
+		 */
 		assertEquals(401, response.getStatus());
-		// 다음 필터 호출 안 됨
 		verify(filterChain, never()).doFilter(any(), any());
 	}
 
 	@Test
 	void 토큰_만료_예외_401반환() throws Exception {
 
+		// [given]
 		String token = "Bearer expired.token";
 		String rawToken = "expired.token";
 		request.setRequestURI("/api/protected");
@@ -180,42 +202,58 @@ class JwtFilterTest {
 		when(loginRefreshToken.hasKey("BLACKLIST_" + rawToken)).thenReturn(false);
 		when(jwtProvider.parseRawToken(rawToken)).thenThrow(new CustomException(ErrorCode.EXPIRED_TOKEN));
 
-		// 필터 호출
+		/* [when]
+		 * 필터 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 401 반환 확인
+		/* [then]
+		 * 401 반환 확인
+		 * 필터 체인 호출 안 됨
+		 */
 		assertEquals(401, response.getStatus());
-		// 필터 체인 호출 안 됨
 		verify(filterChain, never()).doFilter(any(), any());
 	}
 
 	@Test
 	void 화이트리스트_URL_우회() throws Exception {
 
-		// 화이트리스트 URL
+		/* [given]
+		 * 화이트리스트 URL
+		 * 화이트리스트에 등록됨
+		 */
 		request.setRequestURI("/auth/reissue");
-		// 화이트리스트에 등록됨
 		when(securityWhitelist.getUrlWhitelist()).thenReturn(List.of("/auth/reissue"));
 
-		// 필터 호출
+		/* [when]
+		 * 필터 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 필터 통과 확인
+		/* [then]
+		 * 필터 통과 확인
+		 */
 		verify(filterChain, times(1)).doFilter(request, response);
 	}
 
 	@Test
 	void 허용된_GET_경로_우회() throws Exception {
 
-		// GET 요청
+		/* [given]
+		 * GET 요청
+		 * 허용된 Prefix 경로
+		 */
 		request.setMethod("GET");
-		// 허용된 Prefix 경로
 		request.setRequestURI("/places/abc");
 
-		// 필터 호출
+		/* [when]
+		 * 필터 호출
+		 */
 		jwtFilter.doFilterInternal(request, response, filterChain);
 
-		// 필터 통과 확인
+		/* [then]
+		 * 필터 통과 확인
+		 */
 		verify(filterChain, times(1)).doFilter(request, response);
 	}
 }

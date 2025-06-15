@@ -34,6 +34,7 @@ import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 class PlaceServiceImplTest {
@@ -42,7 +43,7 @@ class PlaceServiceImplTest {
 	private PlaceRepository placeRepository;
 
 	@Mock
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@InjectMocks
 	private PlaceServiceImpl placeServiceImpl;
@@ -57,7 +58,7 @@ class PlaceServiceImplTest {
 		PlaceCreateRequestDto dto = new PlaceCreateRequestDto("testName", null,
 			PlaceType.ACCOMMODATION, "testAddress", BigDecimal.ONE, BigDecimal.ONE);
 
-		when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
+		when(userService.getUserById(1L)).thenReturn(user);
 
 		// 서비스 로직에서 placeRepository에서 save했을 때의 변수를 return에 사용하지 않는다
 		// 근데 서비스 로직에서는 실제로 insert 쿼리가 발생하기 때문에 상관없지만

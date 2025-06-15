@@ -44,7 +44,7 @@ public class AlbumImageServiceImpl extends AbstractImageService<AlbumImage> {
 	}
 
 	@Override
-	protected AlbumImage findImageById(Long imageId) {
+	public AlbumImage findImageById(Long imageId) {
 		return albumImageRepository.findById(imageId)
 			.orElseThrow(() -> new CustomException(ErrorCode.ALBUM_IMAGE_NOT_FOUND));
 	}

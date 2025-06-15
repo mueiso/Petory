@@ -41,9 +41,13 @@ public class AlbumServiceImpl implements AlbumService {
 	public void saveAlbum(Long userId, AlbumCreateRequestDto requestDto, List<MultipartFile> images) {
 		User user = userService.getUserById(userId);
 
-		AlbumVisibility albumVisibility = AlbumVisibility.PUBLIC;
+		AlbumVisibility albumVisibility = requestDto.getAlbumVisibility();
 
-		if (requestDto.getAlbumVisibility().equals(AlbumVisibility.PRIVATE)) {
+		if (albumVisibility == null || albumVisibility == AlbumVisibility.PUBLIC) {
+			albumVisibility = AlbumVisibility.PUBLIC;
+		}
+
+		if (albumVisibility == AlbumVisibility.PRIVATE) {
 			albumVisibility = AlbumVisibility.PRIVATE;
 		}
 

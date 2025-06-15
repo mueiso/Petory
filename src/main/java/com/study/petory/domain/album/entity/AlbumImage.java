@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +34,7 @@ public class AlbumImage extends CreationBasedEntity {
 	@Column(nullable = false)
 	private String url;
 
+	@Builder
 	public AlbumImage(String url, Album album) {
 		this.album = album;
 		this.url = url;

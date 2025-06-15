@@ -17,6 +17,7 @@ import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.petory.domain.album.entity.Album;
+import com.study.petory.domain.album.entity.AlbumVisibility;
 import com.study.petory.domain.album.entity.QAlbum;
 import com.study.petory.domain.album.entity.QAlbumImage;
 import com.study.petory.domain.user.entity.QUser;
@@ -35,10 +36,14 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 
 	private final QUser qUser = QUser.user;
 
+	@Override
 	public Page<Album> findAllAlbum(Long userId, Pageable pageable) {
 		BooleanBuilder builder = new BooleanBuilder();
 		if (userId != null) {
 			builder.and(qAlbum.user.id.eq(userId));
+		}
+		if (userId == null) {
+			builder.and(qAlbum.albumVisibility.eq(AlbumVisibility.PUBLIC));
 		}
 
 		JPAQuery<Album> query = jpaQueryFactory
@@ -50,13 +55,13 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 			 */
 			.leftJoin(qAlbum.albumImageList, qAlbumImage).fetchJoin()
 			.where(
+				builder,
 				qAlbumImage.id.eq(
 					JPAExpressions
 						.select(qAlbumImage.id.min())
 						.from(qAlbumImage)
 						.where(qAlbumImage.album.id.eq(qAlbum.id))
-				),
-				builder
+				)
 			)
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize());
@@ -75,7 +80,9 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 		Long total = jpaQueryFactory
 			.select(qAlbum.count())
 			.from(qAlbum)
-			.where(builder)
+			.where(
+				builder
+			)
 			.fetchOne();
 
 		if (total == null) {
@@ -86,14 +93,22 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 		return new PageImpl<>(albumList, pageable, total);
 	}
 
-	public Optional<Album> findOneAlbumByUser(Long albumId) {
+	@Override
+	public Optional<Album> findOneAlbumByUser(Long userId, Long albumId) {
+		BooleanBuilder builder = new BooleanBuilder();
+		if (userId == null) {
+			builder.and(qAlbum.albumVisibility.eq(AlbumVisibility.PUBLIC));
+		}
 		return Optional.ofNullable(
 			jpaQueryFactory
 				.selectFrom(qAlbum)
 				.distinct()
 				.leftJoin(qAlbum.albumImageList, qAlbumImage)
 				.fetchJoin()
-				.where(qAlbum.id.eq(albumId))
+				.where(
+					qAlbum.id.eq(albumId),
+					builder
+				)
 				.fetchOne()
 		);
 	}

@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.album.dto.request.AlbumCreateRequestDto;
+import com.study.petory.domain.album.dto.request.AlbumUpdateRequestDto;
+import com.study.petory.domain.album.dto.request.AlbumVisibilityUpdateRequestDto;
 import com.study.petory.domain.album.dto.response.AlbumGetAllResponseDto;
 import com.study.petory.domain.album.dto.response.AlbumGetOneResponseDto;
 import com.study.petory.domain.album.entity.Album;
@@ -15,19 +17,25 @@ public interface AlbumService {
 
 	void saveAlbum(Long userId, AlbumCreateRequestDto requestDto,  List<MultipartFile> images);
 
-	Page<AlbumGetAllResponseDto> findUserAllAlbum(Long userId, Pageable pageable);
-
-	AlbumGetOneResponseDto findOneAlbum(Long albumId);
-
 	Page<AlbumGetAllResponseDto> findAllAlbum(Pageable pageable);
 
-	void updateAlbum();
+	Page<AlbumGetAllResponseDto> findUserAllAlbum(Long userId, Pageable pageable);
 
-	void deleteAlbum();
+	AlbumGetOneResponseDto findOneAlbum(Long userId, Long albumId);
 
-	void findDeletedAlbum();
+	void updateAlbum(Long userId, Long albumId, AlbumUpdateRequestDto request);
 
-	void restoreAlbum();
+	void updateVisibility(Long userId, Long albumId, AlbumVisibilityUpdateRequestDto request);
 
-	Page<Album> findPageAlbum(Long userId, Pageable pageable);
+	void deleteAlbum(Long userId, Long albumId);
+
+	void saveNewAlbumImage(Long userId, Long albumId, List<MultipartFile> images);
+
+	void deleteAlbumImage(Long userId, Long imageId);
+
+	Page<Album> findAlbumByPage(Long userId, Pageable pageable);
+
+	Album findAlbumByAlbumId(boolean isPublic, Long albumId);
+
+	void validateAuthor(Long userId, Album album);
 }

@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
@@ -88,10 +87,6 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	@Override
 	@Transactional
 	public void restorePlaceReview(Long userId, Long placeId, Long reviewId) {
-
-		if (!SecurityUtil.hasRole("ROLE_ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
 
 		// 해당 장소가 존재하는지 검증하기 위한 로직
 		Place findPlace = placeService.findPlaceWithPlaceReviewByPlaceId(placeId);

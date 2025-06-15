@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
@@ -40,10 +39,6 @@ public class PlaceServiceImpl implements PlaceService {
 	public PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto) {
 
 		User user = userService.getUserById(userId);
-
-		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
 
 		Place place = Place.builder()
 			.user(user)
@@ -86,10 +81,6 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto) {
 
-		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
-
 		Place findPlace = findPlaceByPlaceId(placeId);
 
 		findPlace.updatePlace(
@@ -107,11 +98,11 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public void deletePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto) {
 
-		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
-
 		Place findPlace = findPlaceByPlaceId(placeId);
+
+		if (findPlace.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.ALREADY_DELETED_PLACE);
+		}
 
 		findPlace.deactivateEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());
@@ -122,11 +113,11 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public void restorePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto) {
 
-		if(!SecurityUtil.hasRole("ROLE_ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
-
 		Place findPlace = findPlaceByPlaceId(placeId);
+
+		if (findPlace.getDeletedAt() == null) {
+			throw new CustomException(ErrorCode.PLACE_NOT_DELETED);
+		}
 
 		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());

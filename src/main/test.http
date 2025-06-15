@@ -1,0 +1,88 @@
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJqYWVobzkyMjlAZ21haWwuY29tIiwibmlja25hbWUiOiLslpHsnqztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNzQ5ODIwODQ2LCJpYXQiOjE3NDk4MTcyNDZ9.hG-rX5dSQnhmsymC303Mf29z4IhUfm9zp1TyNwTuyuM
+
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### Json data 저장
+POST http://localhost:8080/places/write-json
+Authorization: {{bearerToken}}
+
+### 장소 등록
+POST http://localhost:8080/places
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+  "placeName" : "테스트장소",
+  "placeInfo" : "테스트장소 정보",
+  "placeType": "ACCOMMODATION",
+  "address": "테스트 주소",
+  "latitude": 1.11,
+  "longitude": 1.11
+}
+
+### 전체 장소 조회
+GET http://localhost:8080/places
+
+### 특정 장소 조회
+GET http://localhost:8080/places/1
+
+### 장소 수정
+PUT http://localhost:8080/places/1
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+  "placeName": "테스트장소",
+  "placeInfo": "테스트 정보",
+  "placeType": "CAFE",
+  "latitude": 2.22,
+  "longitude": 2.22
+}
+
+### 장소 삭제
+DELETE http://localhost:8080/places/1
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+  "placeStatus": "DELETED"
+}
+
+### 장소 복구
+PATCH http://localhost:8080/places/1/restore
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+  "placeStatus": "ACTIVE"
+}
+
+### 리뷰 등록
+POST http://localhost:8080/places/1/reviews
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+  "content": "테스트리뷰",
+  "ratio": 5
+}
+
+### 리뷰 수정
+PUT http://localhost:8080/places/1/reviews/1
+Content-Type: application/json
+Authorization: {{bearerToken}}
+
+{
+  "content": "테스트리뷰",
+  "ratio": 2
+}
+
+### 리뷰 삭제
+DELETE http://localhost:8080/places/1/reviews/1
+Authorization: {{bearerToken}}
+
+### 리뷰 복구
+PATCH http://localhost:8080/places/1/reviews/1/restore
+Authorization: {{bearerToken}}

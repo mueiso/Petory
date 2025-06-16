@@ -1,6 +1,7 @@
 package com.study.petory.domain.place.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -37,6 +38,13 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	@Transactional
 	public PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto) {
+
+		Optional<Place> findPlace = placeRepository.findByPlaceNameAndAddress(requestDto.getPlaceName(),
+			requestDto.getAddress());
+
+		if(findPlace.isPresent()) {
+			throw new CustomException(ErrorCode.DUPLICATE_PLACE);
+		}
 
 		User user = userService.getUserById(userId);
 
@@ -81,8 +89,13 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto) {
 
+		User findUser = userService.getUserById(userId);
+
 		Place findPlace = findPlaceByPlaceId(placeId);
 
+		if(!findUser.equals(findPlace.getUser())){
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
 		findPlace.updatePlace(
 			requestDto.getPlaceName(),
 			requestDto.getPlaceInfo(),
@@ -96,7 +109,7 @@ public class PlaceServiceImpl implements PlaceService {
 	// 장소 삭제
 	@Override
 	@Transactional
-	public void deletePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto) {
+	public void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
 
 		Place findPlace = findPlaceByPlaceId(placeId);
 
@@ -111,7 +124,7 @@ public class PlaceServiceImpl implements PlaceService {
 	// 삭제된 장소 복구
 	@Override
 	@Transactional
-	public void restorePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto) {
+	public void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
 
 		Place findPlace = findPlaceByPlaceId(placeId);
 

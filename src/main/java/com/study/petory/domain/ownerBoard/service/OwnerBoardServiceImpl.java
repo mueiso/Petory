@@ -23,6 +23,7 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
+import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserServiceImpl;
 
@@ -86,7 +87,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 		if (title != null) {
 			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
 		} else {
-			boards = ownerBoardRepository.findAll(pageable);
+			boards = ownerBoardRepository.findAllWithImages(pageable);
 		}
 
 		return boards.map(OwnerBoardGetAllResponseDto::from);
@@ -129,9 +130,11 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		// if (!SecurityUtil.hasRole("ADMIN")) {
-		// 	validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
-		// }
+		User user = userService.getUserById(userId);
+
+		if (!user.hasRole(Role.ADMIN)) {
+			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		}
 
 		// 이미지 모두 hard delete(S3, DB)
 		List<OwnerBoardImage> images = ownerBoard.getImages();
@@ -149,10 +152,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Override
 	@Transactional
 	public void restoreOwnerBoard(Long userId, Long boardId) {
-
-		// if (!SecurityUtil.hasRole("ADMIN")) {
-		// 	throw new CustomException(ErrorCode.FORBIDDEN);
-		// }
 
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));

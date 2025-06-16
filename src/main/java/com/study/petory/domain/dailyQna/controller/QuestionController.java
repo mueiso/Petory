@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,7 @@ public class QuestionController {
 	private final QuestionService questionService;
 
 	@PostMapping("/test")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> test() {
 		questionService.setQuestion();
 		return CommonResponse.of(SuccessCode.CREATED);
@@ -60,6 +62,7 @@ public class QuestionController {
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> createQuestion(
 		@Valid @RequestBody QuestionCreateRequestDto request
 	) {
@@ -75,6 +78,7 @@ public class QuestionController {
 	 * 											질문을 날짜 기준 내림차순으로 조회, 한 페이지에 50개씩 출력
 	 */
 	@GetMapping("/all")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Page<QuestionGetAllResponseDto>>> getAllQuestion(
 		@PageableDefault(size = 50, sort = "date", direction = Sort.Direction.ASC) Pageable pageable
 	) {
@@ -88,6 +92,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 비활성화 시 비활성화 날짜 표시
 	 */
 	@GetMapping("/{questionId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<QuestionGetOneResponseDto>> getOneQuestion(
 		@PathVariable Long questionId
 	) {
@@ -113,6 +118,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PutMapping("/{questionId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> updateQuestion(
 		@PathVariable Long questionId,
 		@Valid @RequestBody QuestionUpdateRequestDto request
@@ -128,6 +134,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/{questionId}/inactive")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> InactiveQuestion(
 		@PathVariable Long questionId
 	) {
@@ -142,6 +149,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 수정일
 	 */
 	@GetMapping("/inactive")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Page<QuestionGetInactiveResponseDto>>> getInactiveQuestion(
 		@PageableDefault(size = 50, sort = "updatedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
@@ -155,6 +163,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/{questionId}/activate/restore")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> updateQuestionStatusActive(
 		@PathVariable Long questionId
 	) {
@@ -169,6 +178,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping("/{questionId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> deactivateQuestion(
 		@PathVariable Long questionId
 	) {
@@ -183,6 +193,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 삭제일
 	 */
 	@GetMapping("/deleted")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Page<QuestionGetDeletedResponse>>> getQuestionByDeleted(
 		@PageableDefault(size = 50, sort = "deletedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
@@ -196,6 +207,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/{questionId}/restore")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> restoreQuestion(
 		@PathVariable Long questionId
 	) {
@@ -211,6 +223,7 @@ public class QuestionController {
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping("/{questionId}/daily-qnas")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> createDailyQna(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long questionId,
@@ -227,6 +240,7 @@ public class QuestionController {
 	 * @return CommonResponse 성공 메세지, data: 작성일 기준 내림차순 답변 조회
 	 */
 	@GetMapping("/{questionId}/daily-qnas")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<List<DailyQnaGetResponseDto>>> getDailyQna(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long questionId
@@ -242,6 +256,7 @@ public class QuestionController {
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateDailyQna(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long dailyQnaId,
@@ -258,6 +273,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/hide")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> hideDailyQna(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long dailyQnaId
@@ -273,6 +289,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: 답변, 생성일, 숨긴일
 	 */
 	@GetMapping("/daily-qnas/hide")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetHiddenResponse>>> getHiddenDailyQna(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
@@ -287,6 +304,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/visibility/restore")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateDailyQnaStatusActive(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long dailyQnaId
@@ -303,6 +321,7 @@ public class QuestionController {
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping("/daily-qnas/{dailyQnaId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> deleteDailyQna(
 		@PathVariable Long dailyQnaId
 	) {
@@ -318,6 +337,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: 답변, 생성일, 삭제일
 	 */
 	@GetMapping("/daily-qnas/users/{userId}/deleted")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetDeletedResponse>>> getDeletedDailyQna(
 		@PathVariable Long userId,
 		@PageableDefault(size = 50, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
@@ -332,6 +352,7 @@ public class QuestionController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/restore")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> restoreDailyQna(
 		@PathVariable Long dailyQnaId
 	) {

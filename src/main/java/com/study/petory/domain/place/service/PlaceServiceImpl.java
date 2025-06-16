@@ -1,6 +1,7 @@
 package com.study.petory.domain.place.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,21 +32,27 @@ import lombok.RequiredArgsConstructor;
 public class PlaceServiceImpl implements PlaceService {
 
 	private final PlaceRepository placeRepository;
-	private final UserRepository userRepository;
+	private final UserService userService;
 
 	// 장소 등록
 	@Override
 	@Transactional
-	public PlaceCreateResponseDto savePlace(PlaceCreateRequestDto requestDto) {
+	public PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto) {
 
-		User user = userRepository.findById(1L).orElseThrow();
+		Optional<Place> findPlace = placeRepository.findByPlaceNameAndAddress(requestDto.getPlaceName(),
+			requestDto.getAddress());
+
+		if (findPlace.isPresent()) {
+			throw new CustomException(ErrorCode.DUPLICATE_PLACE);
+		}
+
+		User user = userService.getUserById(userId);
 
 		Place place = Place.builder()
 			.user(user)
 			.placeName(requestDto.getPlaceName())
 			.placeInfo(requestDto.getPlaceInfo())
 			.placeType(requestDto.getPlaceType())
-			// .ratio()
 			.address(requestDto.getAddress())
 			.latitude(requestDto.getLatitude())
 			.longitude(requestDto.getLongitude())
@@ -60,24 +67,7 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
-
-		// placeName, placeType이 둘 다 있는 경우. 두 가지의 필터를 모두 포함한 조회
-		if (placeName != null && placeType != null) {
-			return placeRepository.findAllByPlaceNameContainingAndPlaceType(placeName, placeType, pageable);
-		}
-
-		// placeName이 존재하는 경우 placeName 중 일부만 입력되는 경우에도 조회 가능
-		if (placeName != null) {
-			return placeRepository.findAllByPlaceNameContaining(placeName, pageable);
-		}
-
-		// placeType이 존재하는 경우 placeType 기준 조회
-		if (placeType != null) {
-			return placeRepository.findAllByPlaceType(placeType, pageable);
-		}
-
-		// 전체 조회
-		return placeRepository.findAllPlace(pageable);
+		return placeRepository.findAllPlace(placeName, placeType, pageable);
 	}
 
 	// 특정 장소 조회
@@ -97,9 +87,13 @@ public class PlaceServiceImpl implements PlaceService {
 	// 장소 수정
 	@Override
 	@Transactional
-	public PlaceUpdateResponseDto updatePlace(Long placeId, PlaceUpdateRequestDto requestDto) {
+	public PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto) {
 
 		Place findPlace = findPlaceByPlaceId(placeId);
+
+		if (!findPlace.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
 
 		findPlace.updatePlace(
 			requestDto.getPlaceName(),
@@ -115,7 +109,12 @@ public class PlaceServiceImpl implements PlaceService {
 	@Override
 	@Transactional
 	public void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
+
 		Place findPlace = findPlaceByPlaceId(placeId);
+
+		if (!findPlace.isDeletedAtNull()) {
+			throw new CustomException(ErrorCode.ALREADY_DELETED_PLACE);
+		}
 
 		findPlace.deactivateEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());
@@ -127,6 +126,10 @@ public class PlaceServiceImpl implements PlaceService {
 	public void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto) {
 
 		Place findPlace = findPlaceByPlaceId(placeId);
+
+		if (findPlace.isDeletedAtNull()) {
+			throw new CustomException(ErrorCode.PLACE_NOT_DELETED);
+		}
 
 		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());

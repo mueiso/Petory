@@ -19,27 +19,27 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserCleanupScheduler {
 
-	private final UserRepository userRepository;
-	private final EmailService emailService;
+	// private final UserRepository userRepository;
+	// private final EmailService emailService;
 
-	@Scheduled(cron = "0 0 2 * * ?")  // 매일 새벽 2시: 삭제 예정 알림
-	@Transactional
-	public void notifyPendingDeletionUsers() {
+	// @Scheduled(cron = "0 0 2 * * ?")  // 매일 새벽 2시: 삭제 예정 알림
+	// @Transactional
+	// public void notifyPendingDeletionUsers() {
+	//
+	// 	LocalDateTime now = LocalDateTime.now();
+	// 	LocalDateTime from = now.minusDays(90).plusDays(1);  // 89일 전
+	// 	LocalDateTime to = now.minusDays(85);                // 85일 전
+	//
+	// 	List<User> pendingUsers = userRepository.findByDeletedAtBetween(from, to);
 
-		LocalDateTime now = LocalDateTime.now();
-		LocalDateTime from = now.minusDays(90).plusDays(1);  // 89일 전
-		LocalDateTime to = now.minusDays(85);                // 85일 전
-
-		List<User> pendingUsers = userRepository.findByDeletedAtBetween(from, to);
-
-		for (User user : pendingUsers) {
-			String email = user.getEmail();
-			String name = user.getUserPrivateInfo().getName();
-
-			log.info("[알림] 삭제 예정 사용자에게 이메일 전송 - email: {}", email);
-
-			emailService.sendDeletionWarning(email, name, user.getDeletedAt());
-		}
-	}
+	// 	for (User user : pendingUsers) {
+	// 		String email = user.getEmail();
+	// 		String name = user.getUserPrivateInfo().getName();
+	//
+	// 		log.info("[알림] 삭제 예정 사용자에게 이메일 전송 - email: {}", email);
+	//
+	// 		emailService.sendDeletionWarning(email, name, user.getDeletedAt());
+	// 	}
+	// }
 
 }

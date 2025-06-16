@@ -18,7 +18,6 @@ public class SecurityWhitelist {
 		// Security 전용 WHITELIST
 		this.urlWhitelist = List.of(
 			"/auth/reissue",
-			"/auth/logout",
 			"/users/test-login",
 			"/login.html",
 			"/login-success.html",

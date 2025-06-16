@@ -110,13 +110,9 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}
 
-		// if (!SecurityUtil.hasRole("ADMIN")) {
-		// 	validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
-		// }
-		//
-		// if (!comment.isEqualOwnerBoard(boardId)) {
-		// 	throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
-		// }
+		if (!comment.isEqualOwnerBoard(boardId)) {
+			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);
+		}
 
 		comment.deactivateEntity();
 	}

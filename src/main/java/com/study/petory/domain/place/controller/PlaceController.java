@@ -4,11 +4,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
@@ -50,11 +54,13 @@ public class PlaceController {
 	 * @param requestDto 장소 등록에 필요한 정보
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@Valid @RequestBody PlaceCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(CurrentUser.getId(), requestDto));
 	}
 
 	/**
@@ -94,12 +100,14 @@ public class PlaceController {
 	 * @param requestDto 장소 수정에 필요한 정보
 	 * @return CommonResponse 방식의 특정 장소의 수정된 정보
 	 */
-	@PatchMapping("/{placeId}")
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<PlaceUpdateResponseDto>> updatePlace(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(CurrentUser.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -110,6 +118,7 @@ public class PlaceController {
 	 * @param requestDto 장소 복구에 필요한 정보
 	 * @return CommonResponse 방식의 삭제된 장소 복구 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlace(
 		@PathVariable Long placeId,
@@ -127,6 +136,7 @@ public class PlaceController {
 	 * @param requestDto 장소 삭제에 필요한 Enum 정보
 	 * @return CommonResponse 방식의 장소 삭제 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlace(
 		@PathVariable Long placeId,
@@ -143,12 +153,14 @@ public class PlaceController {
 	 * @param requestDto 리뷰 등록에 필요한 정보
 	 * @return CommonResponse 방식의 등록된 리뷰에 대한 정보
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/{placeId}/reviews")
 	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(placeId, requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(CurrentUser.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -158,13 +170,16 @@ public class PlaceController {
 	 * @param requestDto 리뷰 등록에 필요한 정보
 	 * @return CommonResponse 방식의 수정된 리뷰에 대한 정보
 	 */
-	@PatchMapping("/{placeId}/reviews/{reviewId}")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PutMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, placeReviewService.updatePlaceReview(placeId, reviewId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED,
+			placeReviewService.updatePlaceReview(CurrentUser.getId(), placeId, reviewId, requestDto));
 	}
 
 	/**
@@ -174,12 +189,14 @@ public class PlaceController {
 	 * @param reviewId 리뷰 식별자
 	 * @return CommonResponse 방식의 삭제된 리뷰 복구 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.restorePlaceReview(placeId, reviewId);
+		placeReviewService.restorePlaceReview(CurrentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -190,12 +207,14 @@ public class PlaceController {
 	 * @param reviewId 리뷰 식별자
 	 * @return CommonResponse 방식의 리뷰 삭제 메시지
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.deletePlaceReview(placeId, reviewId);
+		placeReviewService.deletePlaceReview(CurrentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
@@ -203,11 +222,14 @@ public class PlaceController {
 	 * Json data 저장하기
 	 * @return CommonResponse 방식의 성공 메시지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/write-json")
-	public ResponseEntity<CommonResponse<Void>> writeJsonData() {
+	public ResponseEntity<CommonResponse<Void>> writeJsonData(
+		@AuthenticationPrincipal CustomPrincipal CurrentUser
+	) {
 		// 현재 프로젝트의 루트 경로를 가져와서 src 이하의 경로를 붙이는 과정
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/data";
-		bookmarkPlaceService.writeJsonData(filePath);
+		bookmarkPlaceService.writeJsonData(CurrentUser.getId(), filePath);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 }

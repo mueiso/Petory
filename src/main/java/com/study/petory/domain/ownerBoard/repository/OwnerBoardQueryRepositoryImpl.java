@@ -79,7 +79,6 @@ public class OwnerBoardQueryRepositoryImpl implements OwnerBoardQueryRepository 
 			.select(ownerBoard.id)
 			.from(ownerBoard)
 			.where(notDeleted())
-			.orderBy(ownerBoard.createdAt.desc(), ownerBoard.id.desc())
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
 			.fetch();
@@ -88,6 +87,7 @@ public class OwnerBoardQueryRepositoryImpl implements OwnerBoardQueryRepository 
 			.selectFrom(ownerBoard)
 			.leftJoin(ownerBoard.images).fetchJoin()
 			.where(ownerBoard.id.in(boardIds))
+			.orderBy(ownerBoard.createdAt.desc(), ownerBoard.id.desc())
 			.fetch();
 
 		Long total = queryFactory

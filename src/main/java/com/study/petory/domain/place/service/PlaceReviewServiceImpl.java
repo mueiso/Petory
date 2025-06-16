@@ -71,9 +71,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 		PlaceReview findPlaceReview = findPlaceReviewByReviewId(reviewId);
 
-		if (!userId.equals(findPlaceReview.getUser().getId())) {
-			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
-		}
+		verifyAuthorEdit(findPlaceReview, userId);
 
 		findPlaceReview.updatePlaceReview(requestDto.getContent(), requestDto.getRatio());
 
@@ -114,9 +112,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 		PlaceReview findPlaceReview = findPlaceReviewByReviewId(reviewId);
 
-		if (!userId.equals(findPlaceReview.getUser().getId())) {
-			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);
-		}
+		verifyAuthorDelete(findPlaceReview, userId);
 
 		// deletedAt이 null 이 아니라면 즉, 삭제되었다면 삭제가 안되므로 그것에 관한 검증 로직
 		if (findPlaceReview.getDeletedAt() != null) {
@@ -135,5 +131,17 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	public PlaceReview findPlaceReviewByReviewId(Long placeReviewId) {
 		return placeReviewRepository.findById(placeReviewId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_REVIEW_NOT_FOUND));
+	}
+
+	private void verifyAuthorEdit(PlaceReview placeReview, Long userId) {
+		if (!placeReview.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
+	}
+
+	private void verifyAuthorDelete(PlaceReview placeReview, Long userId) {
+		if (!placeReview.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		}
 	}
 }

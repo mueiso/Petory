@@ -22,8 +22,7 @@ public class SecurityWhitelist {
 			"/login.html",
 			"/login-success.html",
 			"/favicon.ico",
-			"/map.html",
-			"/questions/today"
+			"/map.html"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)
@@ -35,7 +34,8 @@ public class SecurityWhitelist {
 			"/trade-boards/{tradeBoardId}",
 			"/albums/all",
 			"/albums/all/users/{userId}",
-			"/albums/{albumId}"
+			"/albums/{albumId}",
+			"/questions/today"
 		);
 	}
 }

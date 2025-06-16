@@ -42,6 +42,10 @@ public class AlbumServiceImpl implements AlbumService {
 	public void saveAlbum(Long userId, AlbumCreateRequestDto requestDto, List<MultipartFile> images) {
 		User user = userService.getUserById(userId);
 
+		if (albumRepository.existTodayAlbum(userId)) {
+			throw new CustomException(ErrorCode.ALREADY_SAVED_ALBUM_TODAY);
+		}
+
 		validImageSize(user.getUserRole(), images);
 
 		AlbumVisibility albumVisibility = requestDto.getAlbumVisibility();

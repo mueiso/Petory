@@ -1,5 +1,6 @@
 package com.study.petory.domain.album.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,5 +119,22 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 				)
 				.fetchOne()
 		);
+	}
+
+	@Override
+	public boolean existTodayAlbum(Long userId) {
+		LocalDate today = LocalDate.now();
+		return jpaQueryFactory
+			.selectOne()
+			.from(qAlbum)
+			.join(qUser).on(qUser.id.eq(qAlbum.user.id)).fetchJoin()
+			.where(
+				qAlbum.user.id.eq(userId),
+				qAlbum.createdAt.between(
+					today.atStartOfDay(),
+					today.plusDays(1).atStartOfDay().minusNanos(1)
+				)
+			)
+			.fetchFirst() != null;
 	}
 }

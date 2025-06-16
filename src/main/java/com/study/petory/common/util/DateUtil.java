@@ -12,10 +12,6 @@ public class DateUtil {
 		return LocalDateTime.now().format(DateTimeFormatter.ofPattern(FORMAT_DATE));
 	}
 
-	public static String getToday() {
-		return LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_PATTERN));
-	}
-
 	public static Duration remainderTime() {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime lastTime = now.toLocalDate().plusDays(1).atStartOfDay().minusNanos(1);

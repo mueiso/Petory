@@ -44,7 +44,7 @@ public class AlbumController {
 
 	/**
 	 * 앨범 저장
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser			앨범을 생성한 유저
 	 * @param text			앨범에 작성한 내용
 	 * @param images		앨범에 등록하는 이미지
 	 * @return	CommonResponse 성공 메세지, data: null
@@ -52,11 +52,11 @@ public class AlbumController {
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> save(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@RequestPart @Valid AlbumCreateRequestDto text,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		albumService.saveAlbum(user.getId(), text, images);
+		albumService.saveAlbum(currentUser.getId(), text, images);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
@@ -79,6 +79,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 첫 번째 이미지 url, 생성일
 	 */
 	@GetMapping("/all/users/my")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
@@ -107,15 +108,15 @@ public class AlbumController {
 	 */
 	@GetMapping("/{albumId}")
 	public ResponseEntity<CommonResponse<AlbumGetOneResponseDto>> getOneAlbum(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, albumService.findOneAlbum(user.getId(), albumId));
+		return CommonResponse.of(SuccessCode.FOUND, albumService.findOneAlbum(currentUser.getId(), albumId));
 	}
 
 	/**
 	 * 앨범 수정
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser			앨범을 생성한 유저
 	 * @param albumId		수정할 앨범 id
 	 * @param request		수정할 내용
 	 * @return	CommonResponse 성공 메세지, data: null
@@ -123,17 +124,17 @@ public class AlbumController {
 	@PutMapping("/{albumId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateAlbum(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId,
 		@RequestBody AlbumUpdateRequestDto request
 	) {
-		albumService.updateAlbum(user.getId(), albumId, request);
+		albumService.updateAlbum(currentUser.getId(), albumId, request);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
 	 * 앨범 공개 여부 변경
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser			앨범을 생성한 유저
 	 * @param albumId		변경할 앨범 id
 	 * @param request		변경하는 앨범 공개 여부
 	 * @return	CommonResponse 성공 메세지, data: null
@@ -141,33 +142,33 @@ public class AlbumController {
 	@PatchMapping("/{albumId}/visibility")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateVisibility(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId,
 		@RequestBody AlbumVisibilityUpdateRequestDto request
 	) {
-		albumService.updateVisibility(user.getId(), albumId, request);
+		albumService.updateVisibility(currentUser.getId(), albumId, request);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
 	 * 앨범 삭제
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser			앨범을 생성한 유저
 	 * @param albumId		삭제할 앨범 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping("/{albumId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteAlbum(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId
 	) {
-		albumService.deleteAlbum(user.getId(), albumId);
+		albumService.deleteAlbum(currentUser.getId(), albumId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
 	/**
 	 * 앨범 사진 추가
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser			앨범을 생성한 유저
 	 * @param albumId		사진을 추가할 앨범 id
 	 * @param images		추가할 사진
 	 * @return	CommonResponse 성공 메세지, data: null
@@ -175,27 +176,27 @@ public class AlbumController {
 	@PostMapping(value = "/{albumId}/images", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> saveNewAlbumImage(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		albumService.saveNewAlbumImage(user.getId(), albumId, images);
+		albumService.saveNewAlbumImage(currentUser.getId(), albumId, images);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
 	/**
 	 * 앨범 사진 삭제
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser			앨범을 생성한 유저
 	 * @param albumImageId	삭제할 앨범 이미지 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping(value = "/images/{albumImageId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteAlbumImage(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumImageId
 	) {
-		albumService.deleteAlbumImage(user.getId(), albumImageId);
+		albumService.deleteAlbumImage(currentUser.getId(), albumImageId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 }

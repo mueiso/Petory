@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
@@ -24,6 +23,7 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
+import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserServiceImpl;
 
@@ -130,7 +130,10 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		if (!SecurityUtil.hasRole("ADMIN")) {
+		User user = userService.getUserById(userId);
+
+		if (!user.getUserRole().stream()
+			.anyMatch(userRole -> userRole.isEqualRole(Role.ADMIN))) {
 			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}
 
@@ -150,10 +153,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Override
 	@Transactional
 	public void restoreOwnerBoard(Long userId, Long boardId) {
-
-		if (!SecurityUtil.hasRole("ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
 
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));

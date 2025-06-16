@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +58,7 @@ public class OwnerBoardController {
 	 * @param images 사진 file
 	 * @return id, 제목, 내용, 생성일
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -73,6 +75,7 @@ public class OwnerBoardController {
 	 * @param images 사진 file(여러장 가능)
 	 * @return void
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(value = "/{boardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CommonResponse<Void>> addImages(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -91,6 +94,7 @@ public class OwnerBoardController {
 	 * @param imageId 사진 file(단건만 가능)
 	 * @return void
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{boardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -134,6 +138,7 @@ public class OwnerBoardController {
 	 * @param dto 제목, 내용
 	 * @return 수정된 OwnerBoard 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<OwnerBoardUpdateResponseDto>> updateOwnerBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -149,6 +154,7 @@ public class OwnerBoardController {
 	 * @param boardId 삭제할 게시글 ID
 	 * @return NO_CONTENT 성공코드 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{boardId}")
 	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -164,6 +170,7 @@ public class OwnerBoardController {
 	 * @param boardId 복구할 게시글 ID
 	 * @return RESTORE 성공코드 반환
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{boardId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restoreOwnerBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -180,6 +187,7 @@ public class OwnerBoardController {
 	 * @param dto 내용 작성
 	 * @return 댓글 Id, 내용, 생성일, 작성자 ID 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/{boardId}/comments")
 	public ResponseEntity<CommonResponse<OwnerBoardCommentCreateResponseDto>> createOwnerBoardComment(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -212,6 +220,7 @@ public class OwnerBoardController {
 	 * @param dto 수정 내용
 	 * @return 댓글 ID, 수정된 내용, 수정일, 작성자 ID
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{boardId}/comments/{commentId}")
 	public ResponseEntity<CommonResponse<OwnerBoardCommentUpdateResponseDto>> updateOwnerBoardComment(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -231,6 +240,7 @@ public class OwnerBoardController {
 	 * @param commentId 댓글 ID
 	 * @return NO_CONTENT 성공코드 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{boardId}/comments/{commentId}")
 	public ResponseEntity<CommonResponse<Void>> deleteOwnerBoardComment(
 		@AuthenticationPrincipal CustomPrincipal currentUser,

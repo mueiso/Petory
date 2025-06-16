@@ -57,10 +57,10 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@Valid @RequestBody PlaceCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(user.getId(), requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(CurrentUser.getId(), requestDto));
 	}
 
 	/**
@@ -103,11 +103,11 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<PlaceUpdateResponseDto>> updatePlace(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(user.getId(), placeId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(CurrentUser.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -156,11 +156,11 @@ public class PlaceController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/{placeId}/reviews")
 	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(user.getId(), placeId, requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(CurrentUser.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -173,13 +173,13 @@ public class PlaceController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.UPDATED,
-			placeReviewService.updatePlaceReview(user.getId(), placeId, reviewId, requestDto));
+			placeReviewService.updatePlaceReview(CurrentUser.getId(), placeId, reviewId, requestDto));
 	}
 
 	/**
@@ -192,11 +192,11 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.restorePlaceReview(user.getId(), placeId, reviewId);
+		placeReviewService.restorePlaceReview(CurrentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -210,11 +210,11 @@ public class PlaceController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal CurrentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.deletePlaceReview(user.getId(), placeId, reviewId);
+		placeReviewService.deletePlaceReview(CurrentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
@@ -225,11 +225,11 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/write-json")
 	public ResponseEntity<CommonResponse<Void>> writeJsonData(
-		@AuthenticationPrincipal CustomPrincipal user
+		@AuthenticationPrincipal CustomPrincipal CurrentUser
 	) {
 		// 현재 프로젝트의 루트 경로를 가져와서 src 이하의 경로를 붙이는 과정
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/data";
-		bookmarkPlaceService.writeJsonData(user.getId(), filePath);
+		bookmarkPlaceService.writeJsonData(CurrentUser.getId(), filePath);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 }

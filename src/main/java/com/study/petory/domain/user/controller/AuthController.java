@@ -15,7 +15,7 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
-import com.study.petory.domain.user.service.AuthService;
+import com.study.petory.domain.user.service.AuthServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final AuthService authService;
+	private final AuthServiceImpl authServiceImpl;
 
 	/**
 	 * [토큰 재발급]
@@ -39,10 +39,9 @@ public class AuthController {
 	@PostMapping("/reissue")
 	public ResponseEntity<CommonResponse<TokenResponseDto>> reissue(
 		@RequestHeader("Authorization") String accessToken,
-		@RequestHeader("Authorization-Refresh") String refreshToken
-	) {
+		@RequestHeader("Authorization-Refresh") String refreshToken) {
 
-		TokenResponseDto tokenResponseDto = authService.reissue(accessToken, refreshToken);
+		TokenResponseDto tokenResponseDto = authServiceImpl.reissue(accessToken, refreshToken);
 
 		return CommonResponse.of(SuccessCode.TOKEN_REISSUE, tokenResponseDto);
 	}
@@ -57,9 +56,10 @@ public class AuthController {
 	 */
 	@DeleteMapping("/logout")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	public ResponseEntity<CommonResponse<Object>> logout(@RequestHeader("Authorization") String bearerToken) {
+	public ResponseEntity<CommonResponse<Object>> logout(
+		@RequestHeader("Authorization") String bearerToken) {
 
-		authService.logout(bearerToken);
+		authServiceImpl.logout(bearerToken);
 
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);
 	}
@@ -76,10 +76,9 @@ public class AuthController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> addUserRole(
 		@RequestParam("userId") Long targetUserId,
-		@RequestParam("role") Role role
-	) {
+		@RequestParam("role") Role role) {
 
-		List<Role> updatedRoles = authService.addRoleToUser(targetUserId, role);
+		List<Role> updatedRoles = authServiceImpl.addRoleToUser(targetUserId, role);
 
 		return CommonResponse.of(SuccessCode.UPDATED, updatedRoles);
 	}
@@ -96,10 +95,9 @@ public class AuthController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> removeUserRole(
 		@RequestParam("userId") Long targetUserId,
-		@RequestParam("role") Role role
-	) {
+		@RequestParam("role") Role role) {
 
-		List<Role> updatedRoles = authService.removeRoleFromUser(targetUserId, role);
+		List<Role> updatedRoles = authServiceImpl.removeRoleFromUser(targetUserId, role);
 
 		return CommonResponse.of(SuccessCode.DELETED, updatedRoles);
 	}
@@ -114,9 +112,10 @@ public class AuthController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deactivate")
-	public ResponseEntity<CommonResponse<Object>> deactivateUser(@RequestParam Long userId) {
+	public ResponseEntity<CommonResponse<Object>> deactivateUser(
+		@RequestParam Long userId) {
 
-		authService.deactivateUser(userId);
+		authServiceImpl.deactivateUser(userId);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
@@ -132,9 +131,10 @@ public class AuthController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/restore")
-	public ResponseEntity<CommonResponse<Object>> restoreUser(@RequestParam Long userId) {
+	public ResponseEntity<CommonResponse<Object>> restoreUser(
+		@RequestParam Long userId) {
 
-		authService.restoreUser(userId);
+		authServiceImpl.restoreUser(userId);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}

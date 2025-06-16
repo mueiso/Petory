@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-// import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
@@ -16,6 +15,7 @@ import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentUpdateRe
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserServiceImpl;
 
@@ -103,9 +103,11 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
 
-		// if (!SecurityUtil.hasRole("ADMIN")) {
-		// 	validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
-		// }
+		User user = userService.getUserById(userId);
+
+		if (!user.hasRole(Role.ADMIN)) {
+			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		}
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);

@@ -29,7 +29,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_owner_board")
 @NoArgsConstructor
-@Where(clause = "deleted_at IS NULL")
 @DynamicUpdate
 public class OwnerBoard extends TimeFeatureBasedEntity {
 

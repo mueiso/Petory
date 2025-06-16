@@ -15,6 +15,7 @@ public enum ErrorCode implements BaseCode {
 	ONLY_AUTHOR_CAN_EDIT(HttpStatus.FORBIDDEN, "작성자만 수정이 가능합니다."),
 	ONLY_AUTHOR_CAN_DELETE(HttpStatus.FORBIDDEN, "작성자만 삭제가 가능합니다."),
 	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
+	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
 
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
@@ -60,6 +61,9 @@ public enum ErrorCode implements BaseCode {
 	// Place
 	PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "장소가 존재하지 않습니다."),
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON 처리 중 에러가 발생했습니다."),
+	PLACE_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 장소입니다."),
+	ALREADY_DELETED_PLACE(HttpStatus.BAD_REQUEST, "이미 삭제된 장소입니다."),
+	DUPLICATE_PLACE(HttpStatus.BAD_REQUEST, "이미 등록된 장소입니다."),
 
 	// PlaceReview
 	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),

@@ -18,21 +18,21 @@ public class SecurityWhitelist {
 		// Security 전용 WHITELIST
 		this.urlWhitelist = List.of(
 			"/auth/reissue",
-			"/auth/logout",
 			"/users/test-login",
 			"/login.html",
 			"/login-success.html",
 			"/favicon.ico",
 			"/map.html",
-			"/trade-boards",
-			"/trade-boards/{tradeBoardId}",
 			"/questions/today"
 		);
 
-		// 하위 경로 중 GET 매핑만 허용 (예: HttpMethod.GET, /places/**)
+		// GET 매핑만 허용 (예: HttpMethod.GET, /places)
 		this.permitGetPrefixList = List.of(
-			"/owner-boards",
+			"/owner-boards/**",
 			"/places",
+			"/places/{placeId}",
+			"/trade-boards",
+			"/trade-boards/{tradeBoardId}",
 			"/albums/all",
 			"albums/{albumId}"
 		);

@@ -124,9 +124,8 @@ public class DailyQnaServiceTest {
 		}
 		int start = (int)pageable.getOffset();
 		int end = Math.min(start + pageable.getPageSize(), dailyQnaList.size());
-		List<DailyQna> pageC = dailyQnaList.subList(start, end);
-		Page<DailyQna> testPage = new PageImpl<>(pageC, pageable, dailyQnaList.size());
-		return testPage;
+		List<DailyQna> startAndEnd = dailyQnaList.subList(start, end);
+		return new PageImpl<>(startAndEnd, pageable, dailyQnaList.size());
 	}
 
 	@Test

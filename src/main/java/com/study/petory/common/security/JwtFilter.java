@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.study.petory.common.config.SecurityWhitelist;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 
@@ -21,6 +22,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -30,26 +32,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
-
-	public JwtFilter(
-		JwtProvider jwtProvider,
-		@Qualifier("loginRefreshToken")
-		RedisTemplate<String, String> loginRefreshToken
-	) {
-		this.jwtProvider = jwtProvider;
-		this.loginRefreshToken = loginRefreshToken;
-	}
-
-	// WHITELIST (인증이 필요 없는 경로 리스트)
-	private static final List<String> WHITELIST = List.of(
-		"/auth/reissue",
-		"/login.html",
-		"/favicon.ico"
-	);
+	private final SecurityWhitelist securityWhitelist;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -76,8 +64,16 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
+		// GET /owner-boards 하위 경로 모두 허용
+		if ("GET".equalsIgnoreCase(method) && url.startsWith("/places")) {
+			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
 		// 정적 리소스 또는 화이트리스트 우회
-		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$") || WHITELIST.contains(url)) {
+		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$")
+			|| securityWhitelist.getUrlWhitelist().contains(url)) {
 			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;
@@ -135,10 +131,11 @@ public class JwtFilter extends OncePerRequestFilter {
 			String email = claims.get("email", String.class);
 			String nickname = claims.get("nickname", String.class);
 
-			List<String> roleList = claims.get("roles", List.class);
+			List<String> roleList = jwtProvider.getRolesFromToken(rawToken);
 			List<SimpleGrantedAuthority> authorities = roleList.stream()
 				.map(SimpleGrantedAuthority::new)
 				.toList();
+
 
 			debugLog("JWT Claims 파싱 성공 - userId: " + userId);
 

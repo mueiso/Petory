@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.Where;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
@@ -48,6 +48,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	private String content;
 
 	@OneToMany(mappedBy = "tradeBoard", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	@JsonIgnore
 	private List<TradeBoardImage> images = new ArrayList<>();
 
 	@Column(nullable = false)
@@ -84,12 +85,8 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	}
 
 	// user 검증 메서드
-	public boolean isOwner(Long userId) {
-		return this.user.isEqualId(userId);
-	}
-
-	public Long getUserId() {
-		return this.user.getId();
+	public boolean isOwner(User user) {
+		return this.user.equals(user);
 	}
 
 	public void addImage(TradeBoardImage image) {
@@ -97,7 +94,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 		image.setTradeBoard(this);
 	}
 
-	public boolean isImageOver(List<MultipartFile> images) {
-		return (this.images.size() + images.size()) > 5;
+	public Long getUserId() {
+		return this.getUser().getId();
 	}
 }

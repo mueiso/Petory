@@ -11,5 +11,5 @@ public interface TradeBoardQueryRepository {
 
 	Page<TradeBoard> findAll(TradeCategory category, Pageable pageable);
 
-	public Page<TradeBoard> findByUserId(Long userId, Pageable pageable);
+	Page<TradeBoard> findByUserId(Long userId, Pageable pageable);
 }

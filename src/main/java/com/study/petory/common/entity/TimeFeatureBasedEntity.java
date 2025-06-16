@@ -34,4 +34,8 @@ public abstract class TimeFeatureBasedEntity {
 	public void restoreEntity() {
 		this.deletedAt = null;
 	}
+
+	public boolean isDeletedAtNull() {
+		return this.deletedAt == null;
+	}
 }

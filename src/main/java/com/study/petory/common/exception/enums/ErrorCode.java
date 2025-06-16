@@ -15,6 +15,7 @@ public enum ErrorCode implements BaseCode {
 	ONLY_AUTHOR_CAN_EDIT(HttpStatus.FORBIDDEN, "작성자만 수정이 가능합니다."),
 	ONLY_AUTHOR_CAN_DELETE(HttpStatus.FORBIDDEN, "작성자만 삭제가 가능합니다."),
 	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
+	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
 
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
@@ -37,6 +38,9 @@ public enum ErrorCode implements BaseCode {
 
 	// Album
 	ALBUM_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
+	ALBUM_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
+	ALBUM_IMAGE_SIZE_OVER(HttpStatus.BAD_REQUEST, "한 번에 등록하실 수 있는 이미지 수량을 초과했습니다."),
+	ALREADY_SAVED_ALBUM_TODAY(HttpStatus.BAD_REQUEST, "오늘은 이미 데일리 앨범을 등록하였습니다."),
 
 	// Calender
 	CALENDER_NOT_FOUND(HttpStatus.NOT_FOUND, "캘린더가 존재하지 않습니다."),
@@ -58,6 +62,9 @@ public enum ErrorCode implements BaseCode {
 	// Place
 	PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "장소가 존재하지 않습니다."),
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON 처리 중 에러가 발생했습니다."),
+	PLACE_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 장소입니다."),
+	ALREADY_DELETED_PLACE(HttpStatus.BAD_REQUEST, "이미 삭제된 장소입니다."),
+	DUPLICATE_PLACE(HttpStatus.BAD_REQUEST, "이미 등록된 장소입니다."),
 
 	// PlaceReview
 	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),
@@ -84,6 +91,7 @@ public enum ErrorCode implements BaseCode {
 	//Chat
 	CHAT_ROOM_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "이미 존재하는 채팅방입니다."),
 	CHAT_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 채팅방입니다."),
+	CANNOT_SEND_MESSAGE_TO_SELF(HttpStatus.BAD_REQUEST, "자신의 게시물에 메시지를 보낼 수 없습니다."),
 
 	// S3
 	FILE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),

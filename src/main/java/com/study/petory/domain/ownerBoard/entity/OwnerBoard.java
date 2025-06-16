@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.Where;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
@@ -28,7 +29,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_owner_board")
 @NoArgsConstructor
-@Where(clause = "deleted_at IS NULL")
 @DynamicUpdate
 public class OwnerBoard extends TimeFeatureBasedEntity {
 
@@ -64,13 +64,20 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 		this.content = content;
 	}
 
+	// 양방향 연관관계 편의 메서드
+	public void addImage(OwnerBoardImage image) {
+		images.add(image);
+		image.setOwnerBoard(this);
+	}
+
 	// ownerBoardId 검증 메서드
 	public boolean isEqualId(Long ownerBoardId) {
 		return this.id.equals(ownerBoardId);
 	}
 
 	// user 검증 메서드
-	private boolean isEqualUser(Long userId) {
+	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
 	}
 }
+

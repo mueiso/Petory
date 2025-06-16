@@ -23,6 +23,7 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardQueryRepository;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
+import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 
@@ -57,13 +58,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return List.of();
 	}
 
-	//게시글의 유저가 맞는지 검증
-	public void isOwner(Long userId, TradeBoard tradeBoard) {
-		if (!tradeBoard.isOwner(userId)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
-	}
-
 	//게시글 생성
 	@Override
 	@Transactional
@@ -82,9 +76,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		tradeBoardRepository.save(tradeBoard);
 
-		if (!tradeBoard.isImageOver(images)) {
-			throw new CustomException(ErrorCode.TRADE_BOARD_IMAGE_OVERFLOW);
-		}
 
 		List<String> urls = new ArrayList<>();
 		if (images != null && !images.isEmpty()) {
@@ -117,6 +108,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	// 유저별 게시글 조회
 	@Override
+	@Transactional(readOnly = true)
 	public Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable) {
 
 		Page<TradeBoard> tradeBoards = tradeBoardQueryRepository.findByUserId(userId, pageable);
@@ -131,7 +123,11 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
-		isOwner(userId, tradeBoard);
+		User user = findUser(userId);
+
+		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		tradeBoard.updateTradeBoard(requestDto);
 
@@ -144,11 +140,13 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public void updateTradeBoardStatus(Long userId, Long tradeBoardId, TradeBoardStatus status) {
 
 		//토큰 값으로 변경 예정
-		User loginUser = findUser(userId);
+		User user = findUser(userId);
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
-		isOwner(userId, tradeBoard);
+		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		tradeBoard.updateStatus(status);
 	}
@@ -159,11 +157,10 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public void addImages(Long userId, Long tradeBoardId, List<MultipartFile> images) {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+		User user = findUser(userId);
 
-		isOwner(userId, tradeBoard);
-
-		if (!tradeBoard.isImageOver(images)) {
-			throw new CustomException(ErrorCode.TRADE_BOARD_IMAGE_OVERFLOW);
+		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 
 		List<TradeBoardImage> imageEntities = tradeBoardImageService.uploadAndReturnEntities(images, tradeBoard);
@@ -175,11 +172,13 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 	//게시글 내 사진 삭제
 	@Override
+	@Transactional
 	public void deleteImage(Long userId, Long tradeBoardId, Long imageId) {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+		User user = findUser(userId);
 
-		if (!tradeBoard.isOwner(userId)) {
+		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 

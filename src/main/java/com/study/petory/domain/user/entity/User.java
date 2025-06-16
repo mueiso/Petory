@@ -58,4 +58,8 @@ public class User extends TimeFeatureBasedEntity {
 	public boolean isEqualId(Long userId) {
 		return this.id.equals(userId);
 	}
+
+	public boolean hasRole(Role role) {
+		return userRole.stream().anyMatch(userRole -> userRole.getRole().equals(role));
+	}
 }

@@ -24,8 +24,8 @@ public class ChatAggregateRepositoryImpl implements ChatAggregateRepository{
 
 		//조회 기준 등록 QueryDSL BooleanBuilder와 유사
 		Criteria criteria = new Criteria().orOperator(
-			Criteria.where("sellerId").is(userId),
-			Criteria.where("customerId").is(userId)
+			Criteria.where("sellerId").is(userId).and("sellerExist").is(true),
+			Criteria.where("customerId").is(userId).and("customerExist").is(true)
 		);
 
 		Aggregation aggregation = Aggregation.newAggregation(

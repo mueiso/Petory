@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.response.CommonResponse;
@@ -53,5 +54,10 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<CommonResponse<Void>> massageValidException(MethodArgumentNotValidException e) {
 		log.info("Message Validation Fail");
 		return CommonResponse.of(ErrorCode.INVALID_PARAMETER);
+	}
+
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+	public ResponseEntity<CommonResponse<Void>> MaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
+		return CommonResponse.of(ErrorCode.FILE_SIZE_EXCEEDED);
 	}
 }

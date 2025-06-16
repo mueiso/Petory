@@ -13,12 +13,12 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 public interface OwnerBoardCommentService {
 	OwnerBoardComment findOwnerBoardCommentById(Long commentId);
 
-	OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long boardId, OwnerBoardCommentCreateRequestDto dto);
+	OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long userId, Long boardId, OwnerBoardCommentCreateRequestDto dto);
 
 	Page<OwnerBoardCommentGetResponseDto> findAllOwnerBoardComments(Long boardId, Pageable pageable);
 
-	OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long boardId, Long commentId,
+	OwnerBoardCommentUpdateResponseDto updateOwnerBoardComment(Long userId, Long boardId, Long commentId,
 		OwnerBoardCommentUpdateRequestDto dto);
 
-	void deleteOwnerBoardComment(Long boardId, Long commentId);
+	void deleteOwnerBoardComment(Long userId, Long boardId, Long commentId);
 }

@@ -42,7 +42,7 @@ public class PlaceServiceImpl implements PlaceService {
 		Optional<Place> findPlace = placeRepository.findByPlaceNameAndAddress(requestDto.getPlaceName(),
 			requestDto.getAddress());
 
-		if(findPlace.isPresent()) {
+		if (findPlace.isPresent()) {
 			throw new CustomException(ErrorCode.DUPLICATE_PLACE);
 		}
 
@@ -89,13 +89,12 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional
 	public PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto) {
 
-		User findUser = userService.getUserById(userId);
-
 		Place findPlace = findPlaceByPlaceId(placeId);
 
-		if(!findUser.equals(findPlace.getUser())){
+		if (!findPlace.isEqualUser(userId)) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
 		}
+
 		findPlace.updatePlace(
 			requestDto.getPlaceName(),
 			requestDto.getPlaceInfo(),

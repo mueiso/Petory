@@ -42,7 +42,7 @@ public class UserCleanupScheduler {
 		}
 	}
 
-	@Scheduled(cron = "0 0 3 * * ?")  // 매일 새벽 3시: 하드 삭제 실행
+	@Scheduled(cron = "0 0 3 * * ?")  // 매일 새벽 3시: hardDelete 실행
 	@Transactional
 	public void hardDeleteExpiredUsers() {
 		LocalDateTime cutoff = LocalDateTime.now().minusDays(90);

@@ -25,6 +25,7 @@ public class AuthServiceImpl implements AuthService{
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
+	private final UserService userService;
 
 	/*
 	 * [토큰 발급]
@@ -118,8 +119,7 @@ public class AuthServiceImpl implements AuthService{
 		}
 
 		// 5. 사용자 조회
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(userId);
 
 		// 6. 역할 목록 추출
 		List<String> roles = user.getUserRole().stream()
@@ -148,8 +148,7 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public List<Role> addRoleToUser(Long userId, Role newRole) {
 
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(userId);
 
 		boolean alreadyHasSameRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(newRole));
@@ -173,8 +172,7 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public List<Role> removeRoleFromUser(Long userId, Role roleToRemove) {
 
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(userId);
 
 		boolean hasRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(roleToRemove));
@@ -199,8 +197,7 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public void deactivateUser(Long targetUserId) {
 
-		User user = userRepository.findById(targetUserId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(targetUserId);
 
 		if (user.getDeletedAt() != null) {
 			throw new CustomException(ErrorCode.ALREADY_DEACTIVATED);
@@ -217,8 +214,7 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public void restoreUser(Long targetUserId) {
 
-		User user = userRepository.findById(targetUserId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(targetUserId);
 
 		if (user.getDeletedAt() == null) {
 			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);

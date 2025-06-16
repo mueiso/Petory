@@ -112,7 +112,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		Place findPlace = findPlaceByPlaceId(placeId);
 
-		if (findPlace.getDeletedAt() != null) {
+		if (!findPlace.isDeletedAtNull()) {
 			throw new CustomException(ErrorCode.ALREADY_DELETED_PLACE);
 		}
 
@@ -127,7 +127,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		Place findPlace = findPlaceByPlaceId(placeId);
 
-		if (findPlace.getDeletedAt() == null) {
+		if (findPlace.isDeletedAtNull()) {
 			throw new CustomException(ErrorCode.PLACE_NOT_DELETED);
 		}
 

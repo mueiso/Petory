@@ -42,15 +42,4 @@ public class UserCleanupScheduler {
 		}
 	}
 
-	@Scheduled(cron = "0 0 3 * * ?")  // 매일 새벽 3시: hardDelete 실행
-	@Transactional
-	public void hardDeleteExpiredUsers() {
-		LocalDateTime cutoff = LocalDateTime.now().minusDays(90);
-		List<User> expiredUsers = userRepository.findByDeletedAtBefore(cutoff);
-
-		for (User user : expiredUsers) {
-			log.info("[하드삭제] 90일 초과 사용자 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
-			userRepository.delete(user);
-		}
-	}
 }

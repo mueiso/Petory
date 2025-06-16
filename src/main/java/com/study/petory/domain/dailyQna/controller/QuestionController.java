@@ -57,7 +57,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 생성				관리자만 가능
-	 * adminId				관리자인지 검증
 	 * @param request       관리자가 추가하는 질문
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
@@ -72,7 +71,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 전체 조회			관리자만 가능
-	 * adminId				관리자인지 검증
 	 * @param pageable		한 번에 50개씩 반환하여 원하는 페이지를 선택
 	 * @return CommonResponse 성공 메세지, data: 질문, 날짜, 비활성화 시 비활성화 날짜 표시
 	 * 											질문을 날짜 기준 내림차순으로 조회, 한 페이지에 50개씩 출력
@@ -87,7 +85,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 단건 조회			관리자만 가능
-	 * adminId				관리자인지 검증
 	 * @param questionId	조회할 질문의 id
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 비활성화 시 비활성화 날짜 표시
 	 */
@@ -112,7 +109,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 수정				관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param questionId	수정할 질문의 id
 	 * @param request		수정할 내용
 	 * @return	CommonResponse 성공 메세지, data: null
@@ -129,7 +125,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 비활성화			관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param questionId	비활성화 할 질문의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
@@ -144,7 +139,6 @@ public class QuestionController {
 
 	/**
 	 * 비활성화 된 질문 조회	관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param pageable		한 번에 50개씩 반환하여 원하는 페이지를 선택
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 수정일
 	 */
@@ -158,7 +152,6 @@ public class QuestionController {
 
 	/**
 	 * 비활성화 된 질문 활성화	관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param questionId	활성화 할 질문의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
@@ -173,7 +166,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 삭제				관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param questionId	삭제 할 질문의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
@@ -188,7 +180,6 @@ public class QuestionController {
 
 	/**
 	 * 삭제된 질문 조회		관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param pageable		한 번에 50개씩 반환하여 원하는 페이지를 선택
 	 * @return	CommonResponse 성공 메세지, data: 질문, 날짜, 삭제일
 	 */
@@ -202,7 +193,6 @@ public class QuestionController {
 
 	/**
 	 * 질문 복구				관리자만 가능
-	 * adminId 				관리자인지 검증
 	 * @param questionId	복구 할 질문의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
@@ -217,40 +207,40 @@ public class QuestionController {
 
 	/**
 	 * 답변 등록
-	 * userId				답변을 작성한 유저
+	 * @param currentUser	답변을 작성한 유저
 	 * @param questionId    유저가 답변을 작성한 질문의 Id
-	 * @param request        유저가 작성한 답변
+	 * @param request       유저가 작성한 답변
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping("/{questionId}/daily-qnas")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> createDailyQna(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long questionId,
 		@Valid @RequestBody DailyQnaCreateRequestDto request
 	) {
-		dailyQnaService.saveDailyQna(user.getId(), questionId, request);
+		dailyQnaService.saveDailyQna(currentUser.getId(), questionId, request);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
 	/**
 	 * 질문의 답변 조회
-	 * userId				답변을 작성한 유저
+	 * @param currentUser	답변을 작성한 유저
 	 * @param questionId    질문 Id로 유저가 작성한 답변을 검색
 	 * @return CommonResponse 성공 메세지, data: 작성일 기준 내림차순 답변 조회
 	 */
 	@GetMapping("/{questionId}/daily-qnas")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<List<DailyQnaGetResponseDto>>> getDailyQna(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long questionId
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findDailyQna(user.getId(), questionId));
+		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findDailyQna(currentUser.getId(), questionId));
 	}
 
 	/**
 	 * 답변 수정
-	 * userId				답변을 작성한 유저
+	 * @param currentUser				답변을 작성한 유저
 	 * @param dailyQnaId    유저가 수정할 답변의 id
 	 * @param request        유저가 작성한 수정 할 내용
 	 * @return CommonResponse 성공 메세지, data: null
@@ -258,65 +248,63 @@ public class QuestionController {
 	@PatchMapping("/daily-qnas/{dailyQnaId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateDailyQna(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long dailyQnaId,
 		@Valid @RequestBody DailyQnaUpdateRequestDto request
 	) {
-		dailyQnaService.updateDailyQna(user.getId(), dailyQnaId, request);
+		dailyQnaService.updateDailyQna(currentUser.getId(), dailyQnaId, request);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
 	 * 답변 숨김
-	 * userId				답변을 작성한 유저
+	 * @param currentUser				답변을 작성한 유저
 	 * @param dailyQnaId	숨길 답변의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/hide")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> hideDailyQna(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long dailyQnaId
 	) {
-		dailyQnaService.hideDailyQna(user.getId(), dailyQnaId);
+		dailyQnaService.hideDailyQna(currentUser.getId(), dailyQnaId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
 	 * 숨긴 답변 조회
-	 * userId				삭제할 답변의 유저 id
+	 * @param currentUser				삭제할 답변의 유저 id
 	 * @param pageable		한 번에 10개씩 반환하여 원하는 페이지를 선택
 	 * @return	CommonResponse 성공 메세지, data: 답변, 생성일, 숨긴일
 	 */
 	@GetMapping("/daily-qnas/hide")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Page<DailyQnaGetHiddenResponse>>> getHiddenDailyQna(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findHiddenDailyQna(user.getId(), pageable));
+		return CommonResponse.of(SuccessCode.FOUND, dailyQnaService.findHiddenDailyQna(currentUser.getId(), pageable));
 	}
 
 	/**
 	 * 숨긴 답변 복구
-	 * userId				복구할 답변의 유저 id
+	 * @param currentUser				복구할 답변의 유저 id
 	 * @param dailyQnaId	복구할 답변의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/daily-qnas/{dailyQnaId}/visibility/restore")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateDailyQnaStatusActive(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long dailyQnaId
 	) {
-		dailyQnaService.updateDailyQnaStatusActive(user.getId(), dailyQnaId);
+		dailyQnaService.updateDailyQnaStatusActive(currentUser.getId(), dailyQnaId);
 		return CommonResponse.of(SuccessCode.UPDATED);
 	}
 
 	/**
 	 * 답변 삭제				관리자만 가능
-	 * adminId				관리자인지 검증
-	 * userId				삭제할 답변의 유저 Id
 	 * @param dailyQnaId    관리자가 삭제할 답변의 id
 	 * @return CommonResponse 성공 메세지, data: null
 	 */
@@ -331,8 +319,7 @@ public class QuestionController {
 
 	/**
 	 * 유저의 삭제된 답변 조회	관리자만 가능
-	 * adminId				관리자인지 검증
-	 * userId				조회할 유저의 id
+	 * @param userId				조회할 유저의 id
 	 * @param pageable		한 번에 50개씩 반환하여 원하는 페이지를 선택
 	 * @return	CommonResponse 성공 메세지, data: 답변, 생성일, 삭제일
 	 */
@@ -347,7 +334,6 @@ public class QuestionController {
 
 	/**
 	 * 삭제된 답변 복구		관리자만 가능
-	 * adminId				관리자인지 검증
 	 * @param dailyQnaId	복구할 답변의 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */

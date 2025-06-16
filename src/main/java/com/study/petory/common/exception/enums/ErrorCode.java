@@ -15,6 +15,7 @@ public enum ErrorCode implements BaseCode {
 	ONLY_AUTHOR_CAN_EDIT(HttpStatus.FORBIDDEN, "작성자만 수정이 가능합니다."),
 	ONLY_AUTHOR_CAN_DELETE(HttpStatus.FORBIDDEN, "작성자만 삭제가 가능합니다."),
 	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
+	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
 
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
@@ -37,6 +38,9 @@ public enum ErrorCode implements BaseCode {
 
 	// Album
 	ALBUM_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
+	ALBUM_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
+	ALBUM_IMAGE_SIZE_OVER(HttpStatus.BAD_REQUEST, "한 번에 등록하실 수 있는 이미지 수량을 초과했습니다."),
+	ALREADY_SAVED_ALBUM_TODAY(HttpStatus.BAD_REQUEST, "오늘은 이미 데일리 앨범을 등록하였습니다."),
 
 	// Calender
 	CALENDER_NOT_FOUND(HttpStatus.NOT_FOUND, "캘린더가 존재하지 않습니다."),

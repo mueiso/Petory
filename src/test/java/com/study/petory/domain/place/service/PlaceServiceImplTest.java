@@ -195,7 +195,7 @@ class PlaceServiceImplTest {
 
 		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
 
-		placeServiceImpl.deletePlace(1L, 1L, dto);
+		placeServiceImpl.deletePlace(1L, dto);
 
 		assertAll("장소 삭제 로직 검증",
 			() -> assertEquals(PlaceStatus.DELETED, place.getPlaceStatus()),
@@ -217,7 +217,7 @@ class PlaceServiceImplTest {
 
 		when(placeRepository.findById(1L)).thenReturn(Optional.of(place));
 
-		placeServiceImpl.restorePlace(1L, 1L, dto);
+		placeServiceImpl.restorePlace(1L, dto);
 
 		assertAll("장소 삭제 로직 검증",
 			() -> assertEquals(PlaceStatus.ACTIVE, place.getPlaceStatus()),

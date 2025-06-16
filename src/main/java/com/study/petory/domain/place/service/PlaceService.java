@@ -22,9 +22,9 @@ public interface PlaceService {
 
 	PlaceUpdateResponseDto updatePlace(Long userId, Long placeId, PlaceUpdateRequestDto requestDto);
 
-	void deletePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto);
+	void deletePlace(Long placeId, PlaceStatusChangeRequestDto requestDto);
 
-	void restorePlace(Long userId, Long placeId, PlaceStatusChangeRequestDto requestDto);
+	void restorePlace(Long placeId, PlaceStatusChangeRequestDto requestDto);
 
 	Place findPlaceByPlaceId(Long placeId);
 

@@ -121,11 +121,10 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlace(
-		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
-		placeService.restorePlace(user.getId(), placeId, requestDto);
+		placeService.restorePlace(placeId, requestDto);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -140,11 +139,10 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlace(
-		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceStatusChangeRequestDto requestDto
 	) {
-		placeService.deletePlace(user.getId(), placeId, requestDto);
+		placeService.deletePlace(placeId, requestDto);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 

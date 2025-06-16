@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCommentUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentCreateResponseDto;
@@ -103,9 +102,9 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
 
-		if (!SecurityUtil.hasRole("ADMIN")) {
-			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
-		}
+		// if (!SecurityUtil.hasRole("ADMIN")) {
+		// 	validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		// }
 
 		if (!comment.isEqualOwnerBoard(boardId)) {
 			throw new CustomException(ErrorCode.OWNER_BOARD_COMMENT_MISMATCH);

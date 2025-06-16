@@ -1,9 +1,18 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJqYWVobzkyMjlAZ21haWwuY29tIiwibmlja25hbWUiOiLslpHsnqztmLgiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNzQ5ODIwODQ2LCJpYXQiOjE3NDk4MTcyNDZ9.hG-rX5dSQnhmsymC303Mf29z4IhUfm9zp1TyNwTuyuM
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJqYWVobzkyMjlAZ21haWwuY29tIiwibmlja25hbWUiOiLslpHsnqztmLgiLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sImV4cCI6MTc1MDA0MTk1NiwiaWF0IjoxNzUwMDM4MzU2fQ.2jCyfPhYlRFUOlm7JOd5fS7o5TE3LoYdy0hc40EkLRc
 
 ### GET request to example server
 GET https://examples.http-client.intellij.net/get
     ?generated-in=IntelliJ IDEA
 
+## 🎈🎈 유저 관련 🎈🎈
+### 토큰 재발급
+POST http://localhost:8080/auth/reissue
+
+### 로그아웃
+DELETE http://localhost:8080/auth/logout
+Authorization: {{bearerToken}}
+
+## 🎈🎈 장소 관련 🎈🎈
 ### Json data 저장
 POST http://localhost:8080/places/write-json
 Authorization: {{bearerToken}}

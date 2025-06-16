@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public TokenResponseDto testLogin(Long userId) {
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		User user = getUserById(userId);
 
 		if (user.getDeletedAt() != null) {
 			throw new CustomException(ErrorCode.DEACTIVATED_USER);
@@ -55,7 +55,6 @@ public class UserServiceImpl implements UserService {
 
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
-
 
 	// 현재 사용자 정보 조회
 	@Override

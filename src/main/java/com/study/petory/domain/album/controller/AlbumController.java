@@ -67,7 +67,7 @@ public class AlbumController {
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllAlbum(
-		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(true, null, pageable));
 	}
@@ -82,7 +82,7 @@ public class AlbumController {
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(false, currentUser.getId(), pageable));
 	}
@@ -96,7 +96,7 @@ public class AlbumController {
 	@GetMapping("/all/users/{userId}")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
 		@PathVariable Long userId,
-		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(false, userId, pageable));
 	}

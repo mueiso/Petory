@@ -12,14 +12,13 @@ import com.study.petory.domain.album.dto.request.AlbumVisibilityUpdateRequestDto
 import com.study.petory.domain.album.dto.response.AlbumGetAllResponseDto;
 import com.study.petory.domain.album.dto.response.AlbumGetOneResponseDto;
 import com.study.petory.domain.album.entity.Album;
+import com.study.petory.domain.user.entity.UserRole;
 
 public interface AlbumService {
 
 	void saveAlbum(Long userId, AlbumCreateRequestDto requestDto,  List<MultipartFile> images);
 
-	Page<AlbumGetAllResponseDto> findAllAlbum(Pageable pageable);
-
-	Page<AlbumGetAllResponseDto> findUserAllAlbum(Long userId, Pageable pageable);
+	Page<AlbumGetAllResponseDto> findAllAlbum(boolean showOnlyPublic, Long userId, Pageable pageable);
 
 	AlbumGetOneResponseDto findOneAlbum(Long userId, Long albumId);
 
@@ -33,9 +32,11 @@ public interface AlbumService {
 
 	void deleteAlbumImage(Long userId, Long imageId);
 
-	Page<Album> findAlbumByPage(Long userId, Pageable pageable);
+	Page<Album> findAlbumByPage(boolean showOnlyPublic, Long userId, Pageable pageable);
 
 	Album findAlbumByAlbumId(boolean showOnlyPublic, Long albumId);
 
 	void validateAuthor(Long userId, Album album);
+
+	void validImageSize(List<UserRole> userRoles, List<MultipartFile> images);
 }

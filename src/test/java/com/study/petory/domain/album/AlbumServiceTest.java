@@ -29,7 +29,6 @@ import com.study.petory.domain.album.dto.request.AlbumUpdateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumVisibilityUpdateRequestDto;
 import com.study.petory.domain.album.dto.response.AlbumGetAllResponseDto;
 import com.study.petory.domain.album.dto.response.AlbumGetOneResponseDto;
-import com.study.petory.domain.album.dto.response.AlbumImageGetAllResponseDto;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.entity.AlbumImage;
 import com.study.petory.domain.album.entity.AlbumVisibility;
@@ -105,10 +104,16 @@ public class AlbumServiceTest {
 	public void set() {
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 		ReflectionTestUtils.setField(testAlbum, "id", 1L);
-		for (int i = 0; i < 3; i++) {
+	}
+
+	public void setImageSize(int imageSize) {
+		testImages.clear();
+		testAlbumImageList.clear();
+
+		for (int i = 0; i < imageSize; i++) {
 			testImages.add(mockMultipartFile);
 		}
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < imageSize; i++) {
 			testAlbumImageList.add(testAlbumImage);
 		}
 		ReflectionTestUtils.setField(testAlbum, "albumImageList", testAlbumImageList);
@@ -131,6 +136,11 @@ public class AlbumServiceTest {
 	public void saveAlbum() {
 		// given
 		Long userId = 1L;
+		int imageSize = 1;
+
+		setImageSize(imageSize);
+
+		given(albumImageService.findImageSize(testUser.getUserRole())).willReturn(imageSize);
 
 		given(userService.getUserById(userId)).willReturn(testUser);
 
@@ -150,14 +160,18 @@ public class AlbumServiceTest {
 	@DisplayName("앨범 전체를 조회한다.")
 	public void findAllAlbum() {
 		// given
+		int imageSize = 3;
+
+		setImageSize(imageSize);
+
 		Pageable pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
 
 		Page<Album> albumPage = setAlbumPage(12, AlbumVisibility.PUBLIC, pageable);
 
-		given(albumRepository.findAllAlbum(null, pageable)).willReturn(albumPage);
+		given(albumRepository.findAllAlbum(true, null, pageable)).willReturn(albumPage);
 
 		// when
-		Page<AlbumGetAllResponseDto> response = albumService.findAllAlbum(pageable);
+		Page<AlbumGetAllResponseDto> response = albumService.findAllAlbum(true, null, pageable);
 
 		// then
 		assertThat(response.getContent()).hasSize(10);
@@ -167,19 +181,47 @@ public class AlbumServiceTest {
 	}
 
 	@Test
-	@DisplayName("유저의 앨범 전체를 조회한다.")
-	public void findUserAllAlbum() {
+	@DisplayName("사용자의 앨범 전체를 조회한다.")
+	public void findAuthUserAllAlbum() {
 		// given
 		Long userId = 1L;
+		int imageSize = 3;
+
+		setImageSize(imageSize);
 
 		Pageable pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
 
 		Page<Album> albumPage = setAlbumPage(12, AlbumVisibility.PUBLIC, pageable);
 
-		given(albumRepository.findAllAlbum(userId, pageable)).willReturn(albumPage);
+		given(albumRepository.findAllAlbum(false, userId, pageable)).willReturn(albumPage);
 
 		// when
-		Page<AlbumGetAllResponseDto> response = albumService.findUserAllAlbum(userId, pageable);
+		Page<AlbumGetAllResponseDto> response = albumService.findAllAlbum(false, userId, pageable);
+
+		// then
+		assertThat(response.getContent()).hasSize(10);
+		assertThat(response.getTotalElements()).isEqualTo(12);
+		assertThat(response.getTotalPages()).isEqualTo(2);
+		assertThat(response.isFirst()).isTrue();
+	}
+
+	@Test
+	@DisplayName("다른 유저의 앨범 전체를 조회한다.")
+	public void findUserAllAlbum() {
+		// given
+		Long userId = 1L;
+		int imageSize = 3;
+
+		setImageSize(imageSize);
+
+		Pageable pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
+
+		Page<Album> albumPage = setAlbumPage(12, AlbumVisibility.PUBLIC, pageable);
+
+		given(albumRepository.findAllAlbum(true, userId, pageable)).willReturn(albumPage);
+
+		// when
+		Page<AlbumGetAllResponseDto> response = albumService.findAllAlbum(true, userId, pageable);
 
 		// then
 		assertThat(response.getContent()).hasSize(10);
@@ -194,6 +236,9 @@ public class AlbumServiceTest {
 		// given
 		Long userId = null;
 		Long albumId = 1L;
+		int imageSize = 3;
+
+		setImageSize(imageSize);
 
 		AlbumGetOneResponseDto dto = AlbumGetOneResponseDto.from(testAlbum);
 
@@ -205,7 +250,7 @@ public class AlbumServiceTest {
 		// then
 		assertThat(response.getAlbumId()).isEqualTo(1L);
 		assertThat(response.getContent()).isEqualTo("내용");
-		assertThat(response.getAlbumImageList()).hasSize(3);
+		assertThat(response.getAlbumImageList()).hasSize(imageSize);
 	}
 
 	@Test
@@ -252,6 +297,9 @@ public class AlbumServiceTest {
 		// given
 		Long userId = 1L;
 		Long albumId = 1L;
+		int imageSize = 3;
+
+		setImageSize(imageSize);
 
 		given(albumRepository.findOneAlbumByUser(false, albumId)).willReturn(Optional.of(testAlbum));
 
@@ -260,7 +308,7 @@ public class AlbumServiceTest {
 
 		// then
 		verify(albumRepository, times(1)).deleteById(albumId);
-		verify(albumImageService, times(3)).deleteImage(any());
+		verify(albumImageService, times(imageSize)).deleteImage(any());
 	}
 
 	@Test
@@ -269,8 +317,14 @@ public class AlbumServiceTest {
 		// given
 		Long userId = 1L;
 		Long albumId = 1L;
+		int imageSize = 1;
+
+		setImageSize(imageSize);
+
+		given(albumImageService.findImageSize(testUser.getUserRole())).willReturn(imageSize);
 
 		given(albumRepository.findOneAlbumByUser(false, albumId)).willReturn(Optional.of(testAlbum));
+		given(userService.getUserById(userId)).willReturn(testUser);
 
 		// when
 		albumService.saveNewAlbumImage(userId, albumId, testImages);
@@ -285,6 +339,9 @@ public class AlbumServiceTest {
 		// given
 		Long userId = 1L;
 		Long imageId = 1L;
+		int imageSize = 3;
+
+		setImageSize(imageSize);
 
 		Album album = testAlbumImage.getAlbum();
 		given(albumImageService.findImageById(imageId)).willReturn(testAlbumImage);
@@ -296,6 +353,6 @@ public class AlbumServiceTest {
 
 		// then
 		verify(albumImageService, times(1)).deleteImageInternal(any(AlbumImage.class));
-		assertThat(album.getAlbumImageList()).hasSize(2);
+		assertThat(album.getAlbumImageList()).hasSize(imageSize - 1);
 	}
 }

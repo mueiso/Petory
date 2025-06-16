@@ -9,7 +9,7 @@ import com.study.petory.domain.album.entity.Album;
 
 public interface AlbumCustomRepository {
 
-	Page<Album> findAllAlbum(Long userId, Pageable pageable);
+	Page<Album> findAllAlbum(boolean showOnlyPublic, Long userId, Pageable pageable);
 
 	Optional<Album> findOneAlbumByUser(boolean showOnlyPublic, Long albumId);
 }

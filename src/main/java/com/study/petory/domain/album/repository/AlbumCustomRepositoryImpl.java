@@ -37,7 +37,12 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 	private final QUser qUser = QUser.user;
 
 	@Override
-	public Page<Album> findAllAlbum(Long userId, Pageable pageable) {
+	public Page<Album> findAllAlbum(boolean showOnlyPublic, Long userId, Pageable pageable) {
+		BooleanBuilder isPublic = new BooleanBuilder();
+		if (showOnlyPublic) {
+			isPublic.and(qAlbum.albumVisibility.eq(AlbumVisibility.PUBLIC));
+		}
+
 		BooleanBuilder builder = new BooleanBuilder();
 		if (userId != null) {
 			builder.and(qAlbum.user.id.eq(userId));
@@ -61,7 +66,8 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 						.select(qAlbumImage.id.min())
 						.from(qAlbumImage)
 						.where(qAlbumImage.album.id.eq(qAlbum.id))
-				)
+				),
+				isPublic
 			)
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize());
@@ -81,7 +87,8 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 			.select(qAlbum.count())
 			.from(qAlbum)
 			.where(
-				builder
+				builder,
+				isPublic
 			)
 			.fetchOne();
 
@@ -95,9 +102,9 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 
 	@Override
 	public Optional<Album> findOneAlbumByUser(boolean showOnlyPublic, Long albumId) {
-		BooleanBuilder builder = new BooleanBuilder();
+		BooleanBuilder isPublic = new BooleanBuilder();
 		if (showOnlyPublic) {
-			builder.and(qAlbum.albumVisibility.eq(AlbumVisibility.PUBLIC));
+			isPublic.and(qAlbum.albumVisibility.eq(AlbumVisibility.PUBLIC));
 		}
 		return Optional.ofNullable(
 			jpaQueryFactory
@@ -107,7 +114,7 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 				.fetchJoin()
 				.where(
 					qAlbum.id.eq(albumId),
-					builder
+					isPublic
 				)
 				.fetchOne()
 		);

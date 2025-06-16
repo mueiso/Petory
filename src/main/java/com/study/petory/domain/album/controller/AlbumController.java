@@ -69,21 +69,35 @@ public class AlbumController {
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllAlbum(
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(pageable));
+		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(true, null, pageable));
 	}
 
 	/**
 	 * 유저의 앨범 전체 조회
-	 * @param user			앨범을 생성한 유저
+	 * @param currentUser	앨범을 생성한 유저
 	 * @param pageable		정렬 기준 및 방식
 	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 첫 번째 이미지 url, 생성일
 	 */
-	@GetMapping("/all/user")
+	@GetMapping("/all/users/my")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
-		@AuthenticationPrincipal CustomPrincipal user,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, albumService.findUserAllAlbum(user.getId(), pageable));
+		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(false, currentUser.getId(), pageable));
+	}
+
+	/**
+	 * 다른 유저의 앨범 전체 조회
+	 * @param userId		조회할 앨범의 유저
+	 * @param pageable		정렬 기준 및 방식
+	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 첫 번째 이미지 url, 생성일
+	 */
+	@GetMapping("/all/users/{userId}")
+	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
+		@PathVariable Long userId,
+		@PageableDefault(sort = "createdAt", direction = Sort.Direction.ASC) Pageable pageable
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, albumService.findAllAlbum(false, userId, pageable));
 	}
 
 	/**

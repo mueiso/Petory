@@ -66,15 +66,8 @@ public class AlbumServiceImpl implements AlbumService {
 
 	// 앨범 전체 조회
 	@Override
-	public Page<AlbumGetAllResponseDto> findAllAlbum(Pageable pageable) {
-		Page<Album> albumPage = findAlbumByPage(null, pageable);
-		return albumPage.map(AlbumGetAllResponseDto::from);
-	}
-
-	// 유저의 앨범 전체 조회
-	@Override
-	public Page<AlbumGetAllResponseDto> findUserAllAlbum(Long userId, Pageable pageable) {
-		Page<Album> albumPage = findAlbumByPage(userId, pageable);
+	public Page<AlbumGetAllResponseDto> findAllAlbum(boolean showOnlyPublic, Long userId, Pageable pageable) {
+		Page<Album> albumPage = findAlbumByPage(showOnlyPublic, userId, pageable);
 		return albumPage.map(AlbumGetAllResponseDto::from);
 	}
 
@@ -151,8 +144,8 @@ public class AlbumServiceImpl implements AlbumService {
 
 	// 앨범 페이징과 첫 이미지 조회
 	@Override
-	public Page<Album> findAlbumByPage(Long userId, Pageable pageable) {
-		return albumRepository.findAllAlbum(userId, pageable);
+	public Page<Album> findAlbumByPage(boolean showOnlyPublic, Long userId, Pageable pageable) {
+		return albumRepository.findAllAlbum(showOnlyPublic, userId, pageable);
 	}
 
 	// 앨범과 앨범의 이미지 조회
@@ -171,6 +164,7 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 
 	// 한 번에 등록할 수 있는 이미지 수량 검증
+	@Override
 	public void validImageSize(List<UserRole> userRoles, List<MultipartFile> images) {
 		int imageSize = albumImageService.findImageSize(userRoles);
 		if (images.size() > imageSize) {

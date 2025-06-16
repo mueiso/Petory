@@ -63,9 +63,16 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// GET /owner-boards 하위 경로 모두 허용
+		// GET /places 하위 경로 모두 허용
 		if ("GET".equalsIgnoreCase(method) && url.startsWith("/places")) {
-			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+			debugLog("GET /places 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// GET /trade-boards, /trade-boards/{tradeBoardId} 허용
+		if ("GET".equalsIgnoreCase(method) && (url.endsWith("/trade-boards") || url.matches("^/trade-boards/\\d+$"))) {
+			debugLog("GET /trade-boards 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;
 		}

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,6 +41,7 @@ public class ChatController {
 	 * 메시지 보내기
 	 * @param requestDto 채팅방 아이디, 판매자 아이디, 보내려는 메시지
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@MessageMapping("/message")
 	public void sendMessage(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -55,6 +57,7 @@ public class ChatController {
 	 * @param tradeBoardId 게시글 아이디
 	 * @return 채팅방 아이디, 게시글 아이디, 구매.판매자 아이디
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping({"/{tradeBoardId}"})
 	public ResponseEntity<CommonResponse<ChatRoomCreateResponseDto>> createChatRoom(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -68,6 +71,7 @@ public class ChatController {
 	 * @param pageable
 	 * @return 채팅방 아이디, 상대방 아이디
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping
 	public ResponseEntity<CommonResponse<List<ChatRoomGetAllResponseDto>>> getAllChatRoom(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -81,6 +85,7 @@ public class ChatController {
 	 * @param chatRoomId 조회하려는 채팅방 아이디
 	 * @return 게시판 아이디, 판매.구매자 아이디, 메시지 리스트
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/{chatRoomId}")
 	public ResponseEntity<CommonResponse<ChatRoomGetResponseDto>> getByChatRoomId(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -94,6 +99,7 @@ public class ChatController {
 	 * @param chatRoomId 나가려는 방 아이디
 	 * @return 성공 코드
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{chatRoomId}")
 	public ResponseEntity<CommonResponse<Void>> leaveChatRoom(
 		@AuthenticationPrincipal CustomPrincipal currentUser,

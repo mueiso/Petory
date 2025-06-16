@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,7 @@ public class TradeBoardController {
 	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	private ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -88,6 +90,7 @@ public class TradeBoardController {
 	 * @param pageable 조회하려는 페이지
 	 * @return 조회된 게시글 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/my-board")
 	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -102,6 +105,7 @@ public class TradeBoardController {
 	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
 	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -117,6 +121,7 @@ public class TradeBoardController {
 	 * @param status 변경하려는 상태값
 	 * @return 변환 성공 메시지
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PatchMapping("/{tradeBoardId}")
 	private ResponseEntity<CommonResponse<Void>> updateTradeBoardStatus(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -134,6 +139,7 @@ public class TradeBoardController {
 	 * @param images 추가하려는 사진
 	 * @return 수정한 게시글
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(value = "/{tradeBoardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CommonResponse<Void>> addImages(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -150,6 +156,7 @@ public class TradeBoardController {
 	 * @param imageId 삭제하려는 사진 아이디
 	 * @return 삭제 성공 메시지
 	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{tradeBoardId}/images/{imageId}")
 	public ResponseEntity<CommonResponse<Void>> deleteImage(
 		@AuthenticationPrincipal CustomPrincipal currentUser,

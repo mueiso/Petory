@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.study.petory.common.entity.TimeFeatureBasedEntity;
+import com.study.petory.common.entity.UpdateBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.CascadeType;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @DynamicUpdate
 @Table(name = "tb_album")
 @NoArgsConstructor
-public class Album extends TimeFeatureBasedEntity {
+public class Album extends UpdateBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

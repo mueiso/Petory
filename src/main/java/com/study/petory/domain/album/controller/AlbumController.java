@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> save(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@RequestPart @Valid AlbumCreateRequestDto text,
@@ -105,6 +107,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PutMapping("/{albumId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateAlbum(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long albumId,
@@ -122,6 +125,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PatchMapping("/{albumId}/visibility")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateVisibility(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long albumId,
@@ -138,6 +142,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping("/{albumId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteAlbum(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long albumId
@@ -154,6 +159,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@PostMapping(value = "/{albumId}/images", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> saveNewAlbumImage(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long albumId,
@@ -170,6 +176,7 @@ public class AlbumController {
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping(value = "/images/{albumImageId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteAlbumImage(
 		@AuthenticationPrincipal CustomPrincipal user,
 		@PathVariable Long albumImageId

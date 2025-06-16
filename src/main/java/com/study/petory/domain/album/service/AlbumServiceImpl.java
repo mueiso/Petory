@@ -21,6 +21,7 @@ import com.study.petory.domain.album.entity.AlbumImage;
 import com.study.petory.domain.album.entity.AlbumVisibility;
 import com.study.petory.domain.album.repository.AlbumRepository;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,8 @@ public class AlbumServiceImpl implements AlbumService {
 	@Transactional
 	public void saveAlbum(Long userId, AlbumCreateRequestDto requestDto, List<MultipartFile> images) {
 		User user = userService.getUserById(userId);
+
+		validImageSize(user.getUserRole(), images);
 
 		AlbumVisibility albumVisibility = requestDto.getAlbumVisibility();
 
@@ -126,7 +129,12 @@ public class AlbumServiceImpl implements AlbumService {
 	@Transactional
 	public void saveNewAlbumImage(Long userId, Long albumId, List<MultipartFile> images) {
 		Album album = findAlbumByAlbumId(false, albumId);
+
 		validateAuthor(userId, album);
+		User user = userService.getUserById(userId);
+
+		validImageSize(user.getUserRole(), images);
+
 		albumImageService.uploadAndSaveAll(images, album);
 	}
 
@@ -159,6 +167,14 @@ public class AlbumServiceImpl implements AlbumService {
 	public void validateAuthor(Long userId, Album album) {
 		if (!album.isEqualUser(userId)) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
+	}
+
+	// 한 번에 등록할 수 있는 이미지 수량 검증
+	public void validImageSize(List<UserRole> userRoles, List<MultipartFile> images) {
+		int imageSize = albumImageService.findImageSize(userRoles);
+		if (images.size() > imageSize) {
+			throw new CustomException(ErrorCode.ALBUM_IMAGE_SIZE_OVER);
 		}
 	}
 }

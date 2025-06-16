@@ -34,7 +34,8 @@ public class SecurityWhitelist {
 			"/trade-boards",
 			"/trade-boards/{tradeBoardId}",
 			"/albums/all",
-			"albums/{albumId}"
+			"/albums/all/users/{userId}",
+			"/albums/{albumId}"
 		);
 	}
 }

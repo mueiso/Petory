@@ -94,4 +94,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 		image.setTradeBoard(this);
 	}
 
+	public Long getUserId() {
+		return this.getUser().getId();
+	}
 }

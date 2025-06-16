@@ -75,7 +75,7 @@ public class ChatServiceImpl implements ChatService{
 
 		User user = findUser(userId);
 
-		if (tradeBoard.isOwner(userId)) {
+		if (tradeBoard.isOwner(user)) {
 			throw new CustomException(ErrorCode.CANNOT_SEND_MESSAGE_TO_SELF);
 		}
 

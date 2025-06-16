@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.Where;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
@@ -86,12 +85,8 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	}
 
 	// user 검증 메서드
-	public boolean isOwner(Long userId) {
-		return this.user.isEqualId(userId);
-	}
-
-	public Long getUserId() {
-		return this.user.getId();
+	public boolean isOwner(User user) {
+		return this.user.equals(user);
 	}
 
 	public void addImage(TradeBoardImage image) {

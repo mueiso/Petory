@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.security.SecurityUtil;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerBoard.dto.response.OwnerBoardCommentGetResponseDto;
@@ -130,9 +129,9 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		if (!SecurityUtil.hasRole("ADMIN")) {
-			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
-		}
+		// if (!SecurityUtil.hasRole("ADMIN")) {
+		// 	validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		// }
 
 		// 이미지 모두 hard delete(S3, DB)
 		List<OwnerBoardImage> images = ownerBoard.getImages();
@@ -151,9 +150,9 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	@Transactional
 	public void restoreOwnerBoard(Long userId, Long boardId) {
 
-		if (!SecurityUtil.hasRole("ADMIN")) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		// if (!SecurityUtil.hasRole("ADMIN")) {
+		// 	throw new CustomException(ErrorCode.FORBIDDEN);
+		// }
 
 		OwnerBoard ownerBoard = ownerBoardRepository.findByIdIncludingDeleted(boardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NO_RESOURCE));

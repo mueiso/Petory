@@ -22,34 +22,40 @@ public class OwnerBoardImageService extends AbstractImageService<OwnerBoardImage
 		this.ownerBoardImageRepository = ownerBoardImageRepository;
 	}
 
+	// S3에서 이미지 파일 삭제
 	@Override
 	@Transactional // 구현클래스에서 반드시 붙이기
 	public void deleteImage(OwnerBoardImage image) {
 		deleteImageInternal(image);
 	}
 
+	// S3 버킷 폴더명 설정
 	@Override
 	protected String getFolderName() {
 		return "owner-board";
 	}
 
+	// 이미지 URL과 게시글 정보(OwnerBoard)를 기반으로 엔티티 생성
 	@Override
 	protected OwnerBoardImage createImageEntity(String url, Object context) {
 		OwnerBoard ownerBoard = (OwnerBoard)context; // 도메인에 맞게 다운캐스팅
 		return new OwnerBoardImage(url, ownerBoard);
 	}
 
+	// 이미지 엔티티 DB에 저장
 	@Override
 	protected void save(OwnerBoardImage entity) {
 		ownerBoardImageRepository.save(entity);
 	}
 
+	// 이미지 ID로 엔티티 조회
 	@Override
 	protected OwnerBoardImage findImageById(Long imageId) {
 		return ownerBoardImageRepository.findById(imageId)
 			.orElseThrow(() -> new CustomException(ErrorCode.FILE_NOT_FOUND));
 	}
 
+	// 이미지엔티티에서 Url 추출
 	@Override
 	protected String getImageUrl(OwnerBoardImage image) {
 		return image.getUrl();

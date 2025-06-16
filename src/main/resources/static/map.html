@@ -49,7 +49,7 @@
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
-                <form onsubmit="searchPlaces(); return false;">
+                <form id="searchForm">
                     키워드 : <input type="text" value="" id="keyword" size="15">
                     <button type="submit">검색하기</button>
                 </form>
@@ -86,32 +86,42 @@
             .then(response => response.json())
             .then(res => {
                 allPlaces = res.data.content; // 전체 목록 저장
-                displayPlaces(allPlaces); // 초기 전체 출력
             });
     };
 
-    function searchPlaces() {
+    function searchPlaces(page = 0) {
         const keyword = document.getElementById('keyword').value.trim();
+        const size = 10;
 
         if (!keyword) {
-            // 키워드 없을 경우 전체 데이터 다시 불러오기
-            fetch('/places?size=3000')
-                .then(response => response.json())
-                .then(res => {
-                    displayPlaces(res.data.content);
-                });
+            alert('검색어를 입력하세요.');
             return;
         }
 
-        // 키워드 있으면 서버에 필터된 데이터 요청
-        fetch(`/places?placeName=${encodeURIComponent(keyword)}&size=3000`)
+        fetch(`/places?placeName=${encodeURIComponent(keyword)}&page=${page}&size=${size}`)
             .then(response => response.json())
             .then(res => {
-                const places = res.data.content;
-                if (places.length === 0) {
-                    alert('검색 결과가 존재하지 않습니다.');
+                const data = res.data;
+
+                if (!data || !Array.isArray(data.content)) {
+                    alert('검색 결과가 없거나 데이터 형식이 잘못되었습니다.');
+                    return;
                 }
+
+                const places = data.content;
                 displayPlaces(places);
+
+                displayPagination({
+                    current: data.number + 1,
+                    last: data.totalPages,
+                    gotoPage: function(p) {
+                        searchPlaces(p - 1);  // page는 0부터 시작
+                    }
+                });
+            })
+            .catch(err => {
+                console.error("검색 실패:", err);
+                alert("검색 중 오류가 발생했습니다.");
             });
     }
 
@@ -253,14 +263,24 @@
         const place = data.data;
 
         detailDiv.innerHTML = `
-        <h3>${place.placeName ?? '이름 없음'}</h3>
-        <p>주소: ${place.address ?? '주소 없음'}</p>
-        <p>평점: ${place.ratio ?? '없음'}</p>
+        <div style="text-align: center;">
+            <h3 style="margin-bottom: 10px;">${place.placeName ?? '이름 없음'}</h3>
+            <img src="${place.placePhoto ?? 'https://via.placeholder.com/250x150?text=No+Image'}"
+                alt="장소 사진"
+                style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px;" />
+        </div>
+        <div style="margin-top: 10px;">
+            <p><strong>주소:</strong> ${place.address ?? '주소 없음'}</p>
+            <p><strong>평점:</strong> ${place.ratio ?? '없음'}</p>
+            <p><strong>설명:</strong> ${place.placeInfo ?? '설명 없음'}</p>
+        </div>
         <hr />
         <h4>리뷰</h4>
-        ${Array.isArray(place.placeReviewList) && place.placeReviewList.length > 0
+        <div>
+            ${Array.isArray(place.placeReviewList) && place.placeReviewList.length > 0
             ? place.placeReviewList.map(r => `<p>⭐ ${r.ratio ?? '-'} - ${r.content ?? ''}</p>`).join('')
             : '<p>리뷰 정보 없음</p>'}
+        </div>
     `;
     }
 
@@ -279,6 +299,11 @@
             el.removeChild (el.lastChild);
         }
     }
+
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // 기본 제출(새로고침) 막기
+        searchPlaces();     // 검색 실행 (page=0 으로 시작)
+    });
 </script>
 <div id="placeDetail" style="
     position: fixed;

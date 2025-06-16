@@ -105,8 +105,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		User user = userService.getUserById(userId);
 
-		if (!user.getUserRole().stream()
-			.anyMatch(userRole -> userRole.isEqualRole(Role.ADMIN))) {
+		if (!user.hasRole(Role.ADMIN)) {
 			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}
 

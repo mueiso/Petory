@@ -132,8 +132,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		User user = userService.getUserById(userId);
 
-		if (!user.getUserRole().stream()
-			.anyMatch(userRole -> userRole.isEqualRole(Role.ADMIN))) {
+		if (!user.hasRole(Role.ADMIN)) {
 			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}
 

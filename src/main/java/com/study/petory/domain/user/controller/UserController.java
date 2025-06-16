@@ -39,7 +39,8 @@ public class UserController {
 	 * @return accessToken, refreshToken
 	 */
 	@PostMapping("/test-login")
-	public ResponseEntity<CommonResponse<TokenResponseDto>> testLogin(@RequestParam Long userId) {
+	public ResponseEntity<CommonResponse<TokenResponseDto>> testLogin(
+		@RequestParam Long userId) {
 
 		TokenResponseDto tokens = userService.testLogin(userId);
 
@@ -76,8 +77,7 @@ public class UserController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Validated @RequestBody UpdateUserRequestDto updateDto
-	) {
+		@Validated @RequestBody UpdateUserRequestDto updateDto) {
 
 		userService.updateProfile(currentUser.getEmail(), updateDto);
 
@@ -94,8 +94,7 @@ public class UserController {
 	@DeleteMapping("/delete")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> deleteUser(
-		@AuthenticationPrincipal CustomPrincipal currentUser
-	) {
+		@AuthenticationPrincipal CustomPrincipal currentUser) {
 
 		userService.deleteAccount(currentUser.getEmail());
 

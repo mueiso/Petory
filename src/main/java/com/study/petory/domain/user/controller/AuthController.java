@@ -39,8 +39,7 @@ public class AuthController {
 	@PostMapping("/reissue")
 	public ResponseEntity<CommonResponse<TokenResponseDto>> reissue(
 		@RequestHeader("Authorization") String accessToken,
-		@RequestHeader("Authorization-Refresh") String refreshToken
-	) {
+		@RequestHeader("Authorization-Refresh") String refreshToken) {
 
 		TokenResponseDto tokenResponseDto = authServiceImpl.reissue(accessToken, refreshToken);
 
@@ -57,7 +56,8 @@ public class AuthController {
 	 */
 	@DeleteMapping("/logout")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	public ResponseEntity<CommonResponse<Object>> logout(@RequestHeader("Authorization") String bearerToken) {
+	public ResponseEntity<CommonResponse<Object>> logout(
+		@RequestHeader("Authorization") String bearerToken) {
 
 		authServiceImpl.logout(bearerToken);
 
@@ -76,8 +76,7 @@ public class AuthController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> addUserRole(
 		@RequestParam("userId") Long targetUserId,
-		@RequestParam("role") Role role
-	) {
+		@RequestParam("role") Role role) {
 
 		List<Role> updatedRoles = authServiceImpl.addRoleToUser(targetUserId, role);
 
@@ -96,8 +95,7 @@ public class AuthController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> removeUserRole(
 		@RequestParam("userId") Long targetUserId,
-		@RequestParam("role") Role role
-	) {
+		@RequestParam("role") Role role) {
 
 		List<Role> updatedRoles = authServiceImpl.removeRoleFromUser(targetUserId, role);
 
@@ -114,7 +112,8 @@ public class AuthController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deactivate")
-	public ResponseEntity<CommonResponse<Object>> deactivateUser(@RequestParam Long userId) {
+	public ResponseEntity<CommonResponse<Object>> deactivateUser(
+		@RequestParam Long userId) {
 
 		authServiceImpl.deactivateUser(userId);
 
@@ -132,7 +131,8 @@ public class AuthController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/restore")
-	public ResponseEntity<CommonResponse<Object>> restoreUser(@RequestParam Long userId) {
+	public ResponseEntity<CommonResponse<Object>> restoreUser(
+		@RequestParam Long userId) {
 
 		authServiceImpl.restoreUser(userId);
 

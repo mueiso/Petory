@@ -24,5 +24,4 @@ public class CustomPrincipal {
 		this.nickname = nickname;
 		this.authorities = authorities;
 	}
-
 }

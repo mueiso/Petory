@@ -8,7 +8,7 @@ import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceReview;
 import com.study.petory.domain.user.entity.User;
 
-public interface PlaceReviewRepository extends JpaRepository<PlaceReview, Long> {
+public interface PlaceReviewRepository extends JpaRepository<PlaceReview, Long>, PlaceReviewCustomRepository{
 
 	Optional<PlaceReview> findByUserAndPlace(User user, Place place);
 }

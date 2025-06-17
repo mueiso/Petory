@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -52,10 +54,8 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 		placeReviewRepository.save(placeReview);
 
-		findPlace.getPlaceReviewList().add(placeReview);
-
 		// 평균 평점 로직
-		findPlace.updateRatio();
+		findPlace.updateRatio(calculateAvgRatio(placeId));
 
 		return PlaceReviewCreateResponseDto.from(placeReview);
 	}
@@ -76,7 +76,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		findPlaceReview.updatePlaceReview(requestDto.getContent(), requestDto.getRatio());
 
 		// 평균 평점 로직
-		findPlace.updateRatio();
+		findPlace.updateRatio(calculateAvgRatio(placeId));
 
 		return PlaceReviewUpdateResponseDto.from(findPlaceReview);
 	}
@@ -99,7 +99,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		findPlaceReview.restoreEntity();
 
 		// 평균 평점 로직
-		findPlace.updateRatio();
+		findPlace.updateRatio(calculateAvgRatio(placeId));
 	}
 
 	// 리뷰 삭제
@@ -122,7 +122,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		findPlaceReview.deactivateEntity();
 
 		// 평균 평점 로직
-		findPlace.updateRatio();
+		findPlace.updateRatio(calculateAvgRatio(placeId));
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드
@@ -143,5 +143,16 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		if (!placeReview.isEqualUser(userId)) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}
+	}
+
+	private BigDecimal calculateAvgRatio(Long placeId) {
+		Double doubleAvg = placeReviewRepository.calculateAvgRatioByPlaceId(placeId);
+
+		if(doubleAvg == null) {
+			doubleAvg = 0.0;
+		}
+
+		return BigDecimal.valueOf(doubleAvg)
+			.setScale(1, RoundingMode.HALF_UP);
 	}
 }

@@ -12,7 +12,7 @@ import com.study.petory.domain.chat.entity.ChatMessage;
 
 public interface ChatService {
 
-	ChatMessage createMessage(Long userId, MessageSendRequestDto requestDto);
+	ChatMessage createMessage(MessageSendRequestDto requestDto);
 
 	ChatRoomCreateResponseDto saveChatRoom(Long userId, Long tradeBoardId);
 

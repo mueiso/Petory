@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.study.petory.common.config.SecurityWhitelist;
@@ -37,6 +38,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
 	private final SecurityWhitelist securityWhitelist;
+	private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -74,6 +76,20 @@ public class JwtFilter extends OncePerRequestFilter {
 		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$")
 			|| securityWhitelist.getUrlWhitelist().contains(url)) {
 			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		//웹소켓 요청 우회
+		if (isWebSocketRequest(url)) {
+			debugLog("WebSocket 연결 요청. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		//아이콘 요청 우회
+		if ("/favicon.ico".equals(url)) {
+			debugLog("favicon 요청. 필터 우회");
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -168,4 +184,10 @@ public class JwtFilter extends OncePerRequestFilter {
 	private void debugLog(String message) {
 		log.debug("[JwtFilter] {}", message);
 	}
+
+	//웹소켓 경로 검증
+	private boolean isWebSocketRequest(String url) {
+		return pathMatcher.match("/ws-chat/**", url);
+	}
+
 }

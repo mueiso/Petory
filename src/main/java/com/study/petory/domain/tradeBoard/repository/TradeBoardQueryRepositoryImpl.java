@@ -36,28 +36,24 @@ public class TradeBoardQueryRepositoryImpl implements TradeBoardQueryRepository 
 
 		BooleanBuilder builder = new BooleanBuilder();
 
-		if (category != null) { //카테고리가 null이 아니라면 category별로 조회
+		// 카테고리 필터
+		if (category != null) {
 			builder.and(tradeBoard.category.eq(category));
 		}
 
-		builder.and(tradeBoard.status.ne(TradeBoardStatus.HIDDEN)); //게시글의 상태가 HIDDEN 일 경우 조회 X
+		// 삭제되지 않은 게시글만
+		builder.and(tradeBoard.status.ne(TradeBoardStatus.HIDDEN));
 
 		List<TradeBoard> tradeBoards = queryFactory
 			.selectFrom(tradeBoard)
+			.distinct()
 			.leftJoin(tradeBoard.images, tradeBoardImage).fetchJoin()
-			.where(
-				tradeBoardImage.id.eq(
-					JPAExpressions
-						.select(tradeBoardImage.id.min())
-						.from(tradeBoardImage)
-						.where(tradeBoardImage.tradeBoard.id.eq(tradeBoard.id))
-				)
-				,builder)
+			.where(builder)
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
+			.orderBy(tradeBoard.createdAt.desc())
 			.fetch();
 
-		//Page로 만들기위해 전체 페이지 계산
 		Long total = queryFactory
 			.select(tradeBoard.count())
 			.from(tradeBoard)

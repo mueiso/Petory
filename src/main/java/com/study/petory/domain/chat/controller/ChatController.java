@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,10 +43,9 @@ public class ChatController {
 	 */
 	@MessageMapping("/message")
 	public void sendMessage(
-		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid MessageSendRequestDto requestDto
 	) {
-		ChatMessage message = chatService.createMessage(currentUser.getId(), requestDto);
+		ChatMessage message = chatService.createMessage(requestDto);
 
 		messagingTemplate.convertAndSend("/sub/room/" + requestDto.getChatRoomId(), message);
 	}

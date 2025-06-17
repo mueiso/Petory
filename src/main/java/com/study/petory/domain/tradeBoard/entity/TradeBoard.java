@@ -47,8 +47,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private String content;
 
-	@OneToMany(mappedBy = "tradeBoard", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-	@JsonIgnore
+	@OneToMany(mappedBy = "tradeBoard", cascade = {CascadeType.ALL, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<TradeBoardImage> images = new ArrayList<>();
 
 	@Column(nullable = false)
@@ -85,8 +84,8 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	}
 
 	// user 검증 메서드
-	public boolean isOwner(User user) {
-		return this.user.equals(user);
+	public boolean isOwner(Long userId) {
+		return this.getUser().getId().equals(userId);
 	}
 
 	public void addImage(TradeBoardImage image) {

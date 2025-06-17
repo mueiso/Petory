@@ -45,10 +45,10 @@ public class ChatServiceImpl implements ChatService{
 
 	//메시지 보내기
 	@Override
-	public ChatMessage createMessage(Long userId, MessageSendRequestDto requestDto) {
+	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
 
 		ChatRoom chatRoom = findChatRoom(requestDto.getChatRoomId());
-		User user = findUser(userId);
+		User user = findUser(requestDto.getSenderId());
 
 		if (!chatRoom.isMember(user.getId())) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
@@ -73,9 +73,9 @@ public class ChatServiceImpl implements ChatService{
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
 
-		User user = findUser(userId);
+		findUser(userId);
 
-		if (tradeBoard.isOwner(user)) {
+		if (tradeBoard.isOwner(userId)) {
 			throw new CustomException(ErrorCode.CANNOT_SEND_MESSAGE_TO_SELF);
 		}
 
@@ -107,7 +107,7 @@ public class ChatServiceImpl implements ChatService{
 
 		ChatRoom chatRoom = findChatRoom(chatRoomId);
 
-		if (chatRoom.isMember(userId)) {
+		if (!chatRoom.isMember(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 
@@ -120,7 +120,7 @@ public class ChatServiceImpl implements ChatService{
 
 		ChatRoom chatRoom = findChatRoom(chatRoomId);
 
-		if (chatRoom.isMember(userId)) {
+		if (!chatRoom.isMember(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 

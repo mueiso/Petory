@@ -76,7 +76,6 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 			)
 			.fetchOne();
 
-		// 오류 발생 위치
 		List<Question> questionList = query.fetch();
 
 		return new PageImpl<>(questionList, pageable, total);

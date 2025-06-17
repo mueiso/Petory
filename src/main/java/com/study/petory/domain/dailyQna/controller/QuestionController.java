@@ -78,7 +78,7 @@ public class QuestionController {
 	@GetMapping("/all")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CommonResponse<Page<QuestionGetAllResponseDto>>> getAllQuestion(
-		@PageableDefault(size = 50, sort = "data", direction = Sort.Direction.ASC) Pageable pageable
+		@PageableDefault(size = 50, sort = "date", direction = Sort.Direction.ASC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, questionService.findAllQuestion(pageable));
 	}

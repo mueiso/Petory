@@ -7,16 +7,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.study.petory.domain.dailyQna.entity.DailyQna;
+import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 
 public interface DailyQnaCustomRepository {
 
-	Optional<DailyQna> findDailyQnaByActive(Long dailyQnaId);
-
-	Page<DailyQna> findDailyQnaByHidden(Long userId, Pageable pageable);
-
-	Page<DailyQna> findDailyQnaByDeleted(Long userId, Pageable pageable);
-
 	boolean isDailyQnaToday(Long userId, Long questionId);
 
+	Optional<DailyQna> findDailyQnaByStatusAndId(List<DailyQnaStatus> statusList, Long dailyQnaId);
+
 	List<DailyQna> findDailyQna(Long userId, Long questionId);
+
+	Page<DailyQna> findDailyQnaPageByStatus(List<DailyQnaStatus> statusList, Long userId, Pageable pageable);
+
+	Optional<DailyQnaStatus> findDailyQnaStatusById(Long dailyQnaId);
 }

@@ -13,11 +13,12 @@ import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponse;
+import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 import com.study.petory.domain.dailyQna.entity.Question;
+import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
 import com.study.petory.domain.user.service.UserService;
 
@@ -31,28 +32,6 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	private final QuestionService questionService;
 	private final UserService userService;
 
-	// 단순 답변 조회
-	@Override
-	public DailyQna findDailyQnaByDailyQnaId(Long dailyQnaId) {
-		return dailyQnaRepository.findById(dailyQnaId)
-			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
-	}
-
-	// 상태가 정상인 답변 조회
-	@Override
-	public DailyQna findDailyQnaByActive(Long dailyQnaId) {
-		return dailyQnaRepository.findDailyQnaByActive(dailyQnaId)
-			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
-	}
-
-	// 본인의 답변이 맞는지 검증
-	@Override
-	public void validateAuthor(Long userId, DailyQna dailyQna) {
-		if (!dailyQna.isEqualUser(userId)) {
-			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
-		}
-	}
-
 	// 사용자의 답변을 저장
 	@Override
 	@Transactional
@@ -61,7 +40,8 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 			throw new CustomException(ErrorCode.ALREADY_WRITTEN_TODAY);
 		}
 
-		Question todayQuestion = questionService.findQuestionByQuestionId(questionId);
+		Question todayQuestion = questionService.findQuestionByIdAndStatus(List.of(QuestionStatus.ACTIVE), questionId);
+
 		dailyQnaRepository.save(DailyQna.builder()
 			.user(userService.getUserById(userId))
 			.question(todayQuestion)
@@ -86,7 +66,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void updateDailyQna(Long userId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto) {
-		DailyQna dailyQna = findDailyQnaByActive(dailyQnaId);
+		DailyQna dailyQna = findDailyQnaByStatusAndId(activeStatus(), dailyQnaId);
 		validateAuthor(userId, dailyQna);
 		dailyQna.updateDailyQna(requestDto.getAnswer());
 	}
@@ -95,24 +75,31 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void hideDailyQna(Long userId, Long dailyQnaId) {
-		DailyQna dailyQna = findDailyQnaByActive(dailyQnaId);
+		if (findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.HIDDEN)) {
+			throw new CustomException(ErrorCode.DAILY_QNA_IS_HIDDEN);
+		}
+		DailyQna dailyQna = findDailyQnaByStatusAndId(activeStatus(), dailyQnaId);
 		validateAuthor(userId, dailyQna);
 		dailyQna.updateStatusHidden();
 	}
 
 	// 숨김 처리한 답변 조회
 	@Override
-	public Page<DailyQnaGetHiddenResponse> findHiddenDailyQna(Long userId, Pageable pageable) {
-		Page<DailyQna> dailyQnaList = dailyQnaRepository.findDailyQnaByHidden(userId, pageable);
+	public Page<DailyQnaGetHiddenResponseDto> findHiddenDailyQna(Long userId, Pageable pageable) {
+		Page<DailyQna> dailyQnaList = dailyQnaRepository.findDailyQnaPageByStatus(List.of(DailyQnaStatus.HIDDEN),
+			userId, pageable);
 		return dailyQnaList
-			.map(DailyQnaGetHiddenResponse::from);
+			.map(DailyQnaGetHiddenResponseDto::from);
 	}
 
 	// 숨김 처리한 답변 정상으로 복구
 	@Override
 	@Transactional
 	public void updateDailyQnaStatusActive(Long userId, Long dailyQnaId) {
-		DailyQna dailyQna = findDailyQnaByDailyQnaId(dailyQnaId);
+		if (!findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.HIDDEN)) {
+			throw new CustomException(ErrorCode.DAILY_QNA_IS_NOT_HIDDEN);
+		}
+		DailyQna dailyQna = findDailyQnaByStatusAndId(hiddenStatus(), dailyQnaId);
 		validateAuthor(userId, dailyQna);
 		dailyQna.updateStatusActive();
 	}
@@ -121,7 +108,10 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void deleteDailyQna(Long dailyQnaId) {
-		DailyQna dailyQna = findDailyQnaByActive(dailyQnaId);
+		if (findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.DELETED)) {
+			throw new CustomException(ErrorCode.DAILY_QNA_IS_DELETED);
+		}
+		DailyQna dailyQna = findDailyQnaByStatusAndId(activeAndHiddenStatus(), dailyQnaId);
 		dailyQna.deactivateEntity();
 		dailyQna.updateStatusDelete();
 	}
@@ -129,8 +119,8 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	// 관리자가 삭제된 답변 조회
 	@Override
 	public Page<DailyQnaGetDeletedResponse> findDeletedDailyQna(Long userId, Pageable pageable) {
-		Page<DailyQna> dailyQnaList = dailyQnaRepository.findDailyQnaByDeleted(userId, pageable);
-
+		Page<DailyQna> dailyQnaList = dailyQnaRepository.findDailyQnaPageByStatus(List.of(DailyQnaStatus.DELETED),
+			userId, pageable);
 		return dailyQnaList
 			.map(DailyQnaGetDeletedResponse::from);
 	}
@@ -139,8 +129,49 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void restoreDailyQna(Long dailyQnaId) {
-		DailyQna dailyQna = findDailyQnaByDailyQnaId(dailyQnaId);
+		if (!findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.DELETED)) {
+			throw new CustomException(ErrorCode.DAILY_QNA_IS_NOT_DELETED);
+		}
+		DailyQna dailyQna = findDailyQnaByStatusAndId(deleteStatus(), dailyQnaId);
 		dailyQna.updateStatusActive();
 		dailyQna.restoreEntity();
+	}
+
+	// 상태가 정상인 답변 조회
+	@Override
+	public DailyQna findDailyQnaByStatusAndId(List<DailyQnaStatus> statusList, Long dailyQnaId) {
+		return dailyQnaRepository.findDailyQnaByStatusAndId(statusList, dailyQnaId)
+			.orElseThrow(() -> new CustomException(ErrorCode.DAILY_QNA_NOT_FOUND));
+	}
+
+	// 본인의 답변이 맞는지 검증
+	@Override
+	public void validateAuthor(Long userId, DailyQna dailyQna) {
+		if (!dailyQna.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
+	}
+
+	// 답변의 상태 조회
+	@Override
+	public DailyQnaStatus findDailyQnaStatusById(Long dailyQnaId) {
+		return dailyQnaRepository.findDailyQnaStatusById(dailyQnaId)
+			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
+	}
+
+	public List<DailyQnaStatus> activeStatus() {
+		return List.of(DailyQnaStatus.ACTIVE);
+	}
+
+	public List<DailyQnaStatus> hiddenStatus() {
+		return List.of(DailyQnaStatus.HIDDEN);
+	}
+
+	public List<DailyQnaStatus> deleteStatus() {
+		return List.of(DailyQnaStatus.DELETED);
+	}
+
+	public List<DailyQnaStatus> activeAndHiddenStatus() {
+		return List.of(DailyQnaStatus.ACTIVE, DailyQnaStatus.HIDDEN);
 	}
 }

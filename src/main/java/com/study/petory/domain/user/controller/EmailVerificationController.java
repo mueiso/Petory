@@ -1,15 +1,18 @@
 package com.study.petory.domain.user.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.exception.enums.SuccessCode;
-import com.study.petory.domain.user.dto.EmailVerificationRequestDto;
+import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.user.dto.EmailVerificationConfirmRequestDto;
+import com.study.petory.domain.user.dto.EmailVerificationRequestDto;
 import com.study.petory.domain.user.service.EmailVerificationService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +31,7 @@ public class EmailVerificationController {
 	 */
 	@PostMapping("/verify-email")
 	public ResponseEntity<CommonResponse<Object>> sendVerificationCode(
-		@RequestBody @Validated EmailVerificationRequestDto request) {
+		@RequestBody @Valid EmailVerificationRequestDto request) {
 
 		emailVerificationService.sendVerificationCode(request.getEmail());
 
@@ -44,7 +47,7 @@ public class EmailVerificationController {
 	 */
 	@PostMapping("/verify-email/code")
 	public ResponseEntity<CommonResponse<Object>> verifyCode(
-		@RequestBody @Validated EmailVerificationConfirmRequestDto request) {
+		@RequestBody @Valid EmailVerificationConfirmRequestDto request) {
 
 		emailVerificationService.verifyCode(request.getEmail(), request.getCode());
 

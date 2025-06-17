@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petory 이메일 인증</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+<h2>📧 Petory 이메일 인증</h2>
+<p>안녕하세요, Petory 사용자님!</p>
+<p>요청하신 이메일 인증 코드는 다음과 같습니다:</p>
+
+<h1 style="color: #2c3e50; font-size: 32px;">[[${code}]]</h1>
+
+<p>본 코드는 [[${expiration}]]분 동안만 유효합니다.</p>
+<p>감사합니다.</p>
+<br>
+<footer style="font-size: 12px; color: #888;">
+    ※ 본 메일은 발신 전용입니다.
+</footer>
+</body>
+</html>

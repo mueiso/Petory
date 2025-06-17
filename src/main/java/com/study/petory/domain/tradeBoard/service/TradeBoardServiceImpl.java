@@ -58,6 +58,12 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		return List.of();
 	}
 
+	public void validateOwner(TradeBoard tradeBoard, User user) {
+		if (!tradeBoard.isOwner(user.getId()) || user.hasRole(Role.ADMIN)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+	}
+
 	//게시글 생성
 	@Override
 	@Transactional
@@ -125,9 +131,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		User user = findUser(userId);
 
-		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		validateOwner(tradeBoard, user);
 
 		tradeBoard.updateTradeBoard(requestDto);
 
@@ -144,9 +148,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 
-		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		validateOwner(tradeBoard, user);
 
 		tradeBoard.updateStatus(status);
 	}
@@ -159,9 +161,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 		User user = findUser(userId);
 
-		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		validateOwner(tradeBoard, user);
 
 		List<TradeBoardImage> imageEntities = tradeBoardImageService.uploadAndReturnEntities(images, tradeBoard);
 
@@ -178,9 +178,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 		User user = findUser(userId);
 
-		if (!tradeBoard.isOwner(user) || user.hasRole(Role.ADMIN)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
-		}
+		validateOwner(tradeBoard, user);
 
 		TradeBoardImage image = tradeBoardImageService.findImageById(imageId);
 

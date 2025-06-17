@@ -23,6 +23,7 @@ public class SecurityWhitelist {
 			"/login-success.html",
 			"/favicon.ico",
 			"/map.html",
+			"/chat.html",
 			"/ws-chat",
 			"/ws-chat/**"
 		);
@@ -32,8 +33,7 @@ public class SecurityWhitelist {
 			"/owner-boards/**",
 			"/places",
 			"/places/{placeId}",
-			"/trade-boards",
-			"/trade-boards/{tradeBoardId}",
+			"/trade-boards/**",
 			"/albums/all",
 			"/albums/all/users/{userId}",
 			"/albums/{albumId}",

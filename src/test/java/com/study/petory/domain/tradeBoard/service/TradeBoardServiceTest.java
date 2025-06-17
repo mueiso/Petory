@@ -52,6 +52,10 @@ class TradeBoardServiceTest {
 	@InjectMocks
 	private TradeBoardServiceImpl tradeBoardService;
 
+	@Mock
+	private TradeBoardImageService tradeBoardImageService;
+
+
 	private User user;
 	private TradeBoard tradeBoard1;
 	private TradeBoard tradeBoard2;

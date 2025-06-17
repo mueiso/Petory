@@ -13,6 +13,7 @@ public class SecurityWhitelist {
 	private final List<String> urlWhitelist;
 	private final List<String> permitGetPrefixList;
 
+	// TODO - 배포 전 확인 필요
 	public SecurityWhitelist() {
 
 		// Security 전용 WHITELIST

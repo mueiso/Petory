@@ -22,7 +22,9 @@ public class SecurityWhitelist {
 			"/login.html",
 			"/login-success.html",
 			"/favicon.ico",
-			"/map.html"
+			"/map.html",
+			"/ws-chat",
+			"/ws-chat/**"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

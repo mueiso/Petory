@@ -56,7 +56,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		debugLog("Context Path: " + contextPath);
 		debugLog("전체 URL: " + fullUrl);
 
-		// GET /owner-boards 하위 경로 모두 허용
+		// GET /owner-boards 하위 경로 모두 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
 			&& url.startsWith("/owner-boards")) {
 
@@ -65,7 +65,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// GET /places 하위 경로 모두 허용
+		// GET /places 하위 경로 모두 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
 			&& url.startsWith("/places")) {
 
@@ -74,7 +74,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// GET /trade-boards, /trade-boards/{tradeBoardId} 허용
+		// GET /trade-boards, /trade-boards/{tradeBoardId} 경로 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
 			&& (url.endsWith("/trade-boards")
 			|| url.matches("^/trade-boards/\\d+$"))) {
@@ -84,7 +84,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// GET /questions/today 경로 허용
+		// GET /questions/today 경로 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
 			&& url.equals("/questions/today")) {
 
@@ -93,11 +93,11 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// GET /albums/all, /albums/all/users/{userId}, /albums/{albumId} 허용
-		if ("GET".equalsIgnoreCase(method) &&
-			(url.equals("/albums/all")
-				|| url.matches("^/albums/all/users/\\d+$")
-				|| url.matches("^/albums/\\d+$"))) {
+		// GET /albums/all, /albums/all/users/{userId}, /albums/{albumId} 경로 비회원 허용
+		if ("GET".equalsIgnoreCase(method)
+			&& (url.equals("/albums/all")
+			|| url.matches("^/albums/all/users/\\d+$")
+			|| (url.matches("^/albums/\\d+$") && request.getHeader("Authorization") == null))) {
 
 			debugLog("GET /albums 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);

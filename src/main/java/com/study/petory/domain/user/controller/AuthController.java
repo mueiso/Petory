@@ -66,11 +66,11 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 권한 추가]
-	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있음
+	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있습니다.
 	 *
 	 * @param targetUserId 권한을 부여할 사용자 ID
 	 * @param role 부여할 권한
-	 * @return 부여 이후 해당 사용자의 전체 권한 목록
+	 * @return 수정 성공 메시지 + 권한 부여 받은 사용자의 전체 권한 목록
 	 */
 	@PostMapping("/roles")
 	@PreAuthorize("hasRole('ADMIN')")
@@ -85,7 +85,7 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 권한 제거]
-	 * ADMIN 권한이 있는 사용자만 다른 사용자의 권한을 제거할 수 있음
+	 * ADMIN 권한이 있는 사용자만 다른 사용자의 권한을 제거할 수 있습니다.
 	 *
 	 * @param targetUserId 권한 제거당할 사용자 ID
 	 * @param role 제거할 권한

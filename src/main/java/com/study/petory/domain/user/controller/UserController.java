@@ -36,7 +36,7 @@ public class UserController {
 	 * 비활성화된 유저는 로그인 불가 예외 발생
 	 *
 	 * @param userId 로그인 시도할 해당 유저 ID
-	 * @return accessToken, refreshToken
+	 * @return 로그인 성공 메시지 + accessToken, refreshToken
 	 */
 	@PostMapping("/test-login")
 	public ResponseEntity<CommonResponse<TokenResponseDto>> testLogin(
@@ -52,7 +52,7 @@ public class UserController {
 	 * 현재 로그인된 사용자의 프로필 정보를 조회합니다.
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
-	 * @return 성공 시 사용자 프로필 정보와 함께 200 OK 응답
+	 * @return 조회 성공 메시지 + 사용자 프로필 정보
 	 */
 	@GetMapping("/me")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -71,7 +71,7 @@ public class UserController {
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
 	 * @param updateDto   변경할 사용자 정보 DTO
-	 * @return 성공 시 200 OK 응답
+	 * @return 수정 성공 메시지
 	 */
 	@PutMapping("/update")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -89,7 +89,7 @@ public class UserController {
 	 * 현재 로그인된 사용자의 계정을 삭제합니다.
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
-	 * @return 성공 시 200 OK 응답
+	 * @return 탈퇴 성공 메시지
 	 */
 	@DeleteMapping("/delete")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.album.dto.request.AlbumCreateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumUpdateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumVisibilityUpdateRequestDto;
@@ -77,11 +78,13 @@ public class AlbumServiceImpl implements AlbumService {
 
 	// 앨범 단일 조회
 	@Override
-	public AlbumGetOneResponseDto findOneAlbum(Long userId, Long albumId) {
+	public AlbumGetOneResponseDto findOneAlbum(CustomPrincipal currentUser, Long albumId) {
 		boolean showOnlyPublic = true;
-		if (userId != null) {
+
+		if (currentUser != null && albumRepository.isUserAlbum(currentUser.getId(), albumId)) {
 			showOnlyPublic = false;
 		}
+
 		return AlbumGetOneResponseDto.from(findAlbumByAlbumId(showOnlyPublic, albumId));
 	}
 

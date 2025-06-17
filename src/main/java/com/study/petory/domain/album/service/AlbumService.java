@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.album.dto.request.AlbumCreateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumUpdateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumVisibilityUpdateRequestDto;
@@ -20,7 +21,7 @@ public interface AlbumService {
 
 	Page<AlbumGetAllResponseDto> findAllAlbum(boolean showOnlyPublic, Long userId, Pageable pageable);
 
-	AlbumGetOneResponseDto findOneAlbum(Long userId, Long albumId);
+	AlbumGetOneResponseDto findOneAlbum(CustomPrincipal currentUser, Long albumId);
 
 	void updateAlbum(Long userId, Long albumId, AlbumUpdateRequestDto request);
 

@@ -32,6 +32,7 @@ public enum ErrorCode implements BaseCode {
 	DEACTIVATED_USER(HttpStatus.FORBIDDEN, "로그인 불가합니다. 비활성화된 사용자입니다."),
 	ALREADY_DEACTIVATED(HttpStatus.BAD_REQUEST, "이미 비활성화된 유저입니다."),
 	USER_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 유저가 아닙니다."),
+	INVALID_VERIFICATION_CODE(HttpStatus.BAD_REQUEST, "인증 코드가 틀렸습니다."),
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),

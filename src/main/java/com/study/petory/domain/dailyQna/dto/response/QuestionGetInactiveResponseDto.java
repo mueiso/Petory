@@ -9,21 +9,21 @@ import lombok.Getter;
 @Getter
 public class QuestionGetInactiveResponseDto {
 
-	private final String question;
+	private final String content;
 
 	private final String date;
 
 	private final LocalDateTime inactiveTime;
 
-	private QuestionGetInactiveResponseDto(String question, String date, LocalDateTime inactiveTime) {
-		this.question = question;
+	private QuestionGetInactiveResponseDto(String content, String date, LocalDateTime inactiveTime) {
+		this.content = content;
 		this.date = date;
 		this.inactiveTime = inactiveTime;
 	}
 
 	public static QuestionGetInactiveResponseDto from(Question question) {
 		return new QuestionGetInactiveResponseDto(
-			question.getQuestion(),
+			question.getContent(),
 			question.getDate(),
 			question.getUpdatedAt()
 		);

@@ -14,5 +14,7 @@ public interface AlbumCustomRepository {
 	Optional<Album> findOneAlbumByUser(boolean showOnlyPublic, Long albumId);
 
 	boolean existTodayAlbum(Long userId);
+
+	boolean isUserAlbum(Long userId, Long albumId);
 }
 

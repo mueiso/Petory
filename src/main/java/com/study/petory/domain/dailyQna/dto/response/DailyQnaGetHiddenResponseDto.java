@@ -7,7 +7,7 @@ import com.study.petory.domain.dailyQna.entity.DailyQna;
 import lombok.Getter;
 
 @Getter
-public class DailyQnaGetHiddenResponse {
+public class DailyQnaGetHiddenResponseDto {
 
 	private final String answer;
 
@@ -15,14 +15,14 @@ public class DailyQnaGetHiddenResponse {
 
 	private final LocalDateTime hiddenTime;
 
-	private DailyQnaGetHiddenResponse(String answer, LocalDateTime createdAt, LocalDateTime hiddenTime) {
+	private DailyQnaGetHiddenResponseDto(String answer, LocalDateTime createdAt, LocalDateTime hiddenTime) {
 		this.answer = answer;
 		this.createdAt = createdAt;
 		this.hiddenTime = hiddenTime;
 	}
 
-	public static DailyQnaGetHiddenResponse from(DailyQna dailyQna) {
-		return new DailyQnaGetHiddenResponse(
+	public static DailyQnaGetHiddenResponseDto from(DailyQna dailyQna) {
+		return new DailyQnaGetHiddenResponseDto(
 			dailyQna.getAnswer(),
 			dailyQna.getCreatedAt(),
 			dailyQna.getUpdatedAt()

@@ -11,6 +11,7 @@ public enum SuccessCode implements BaseCode {
 	UPDATED(HttpStatus.OK, "성공적으로 수정되었습니다."),
 	DELETED(HttpStatus.OK, "성공적으로 삭제되었습니다."),
 	RESTORED(HttpStatus.OK, "성공적으로 복구되었습니다."),
+	EMAIL_SENT(HttpStatus.OK, "성공적으로 이메일이 전송되었습니다."),
 
 	// USER
 	USER_LOGIN(HttpStatus.OK, "성공적으로 로그인되었습니다."),
@@ -18,7 +19,6 @@ public enum SuccessCode implements BaseCode {
 	ADMIN_LOGIN(HttpStatus.OK, "성공적으로 관리자로 로그인되었습니다."),
 	TOKEN_REISSUE(HttpStatus.OK, "성공적으로 토큰이 재발급되었습니다."),
 	USER_DELETED(HttpStatus.OK, "성공적으로 탈퇴되었습니다."),
-	EMAIL_SENT(HttpStatus.OK, "인증 코드가 이메일로 전송되었습니다."),
 	VERIFIED(HttpStatus.OK, "성공적으로 인증되었습니다.");
 
 	private final HttpStatus httpStatus;

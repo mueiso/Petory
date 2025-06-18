@@ -87,13 +87,6 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		//아이콘 요청 우회
-		if ("/favicon.ico".equals(url)) {
-			debugLog("favicon 요청. 필터 우회");
-			filterChain.doFilter(request, response);
-			return;
-		}
-
 		// 1. Authorization 헤더 확인
 		String bearerJwt = request.getHeader("Authorization");
 

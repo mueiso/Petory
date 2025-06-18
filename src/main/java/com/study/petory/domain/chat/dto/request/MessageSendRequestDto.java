@@ -9,7 +9,5 @@ public class MessageSendRequestDto {
 
 	private final String chatRoomId;
 
-	private final Long senderId;
-
 	private final String message;
 }

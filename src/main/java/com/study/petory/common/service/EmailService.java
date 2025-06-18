@@ -69,26 +69,4 @@ public class EmailService {
 			throw new RuntimeException("삭제 안내 이메일 전송 실패", e);
 		}
 	}
-
-	// public void sendVerificationEmailHtml(String to, String code) {
-	// 	Context context = new Context();
-	// 	context.setVariable("code", code);
-	// 	context.setVariable("expiration", 10);
-	//
-	// 	String htmlContent = templateEngine.process("email/verification", context);
-	//
-	// 	try {
-	// 		MimeMessage message = mailSender.createMimeMessage();
-	// 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-	//
-	// 		helper.setTo(to);
-	// 		helper.setSubject("[Petory] 이메일 인증 코드 안내");
-	// 		helper.setFrom(FROM_EMAIL);
-	// 		helper.setText(htmlContent, true); // HTML 사용
-	//
-	// 		mailSender.send(message);
-	// 	} catch (MessagingException e) {
-	// 		throw new RuntimeException("이메일 전송 실패", e);
-	// 	}
-	// }
 }

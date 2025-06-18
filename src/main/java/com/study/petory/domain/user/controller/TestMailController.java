@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.schedule.UserDeletionScheduler;
 import com.study.petory.common.service.EmailService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class TestMailController {
 
 	private final EmailService emailService;
+	private final UserDeletionScheduler userDeletionScheduler;
 
 	@PostMapping("/send-email")
 	public ResponseEntity<CommonResponse<Object>> sendTestMail(
@@ -31,6 +33,12 @@ public class TestMailController {
 		return CommonResponse.of(SuccessCode.EMAIL_SENT);
 	}
 
+	@PostMapping("/send-deletion-warning")
+	public ResponseEntity<CommonResponse<Object>> testAutoDeletionWarning(@RequestParam String date) {
 
-
+		// 예: "2025-06-18T00:00"
+		LocalDateTime simulatedNow = LocalDateTime.parse(date);
+		userDeletionScheduler.testSendDeletionWarningEmails(simulatedNow);
+		return CommonResponse.of(SuccessCode.EMAIL_SENT);
+	}
 }

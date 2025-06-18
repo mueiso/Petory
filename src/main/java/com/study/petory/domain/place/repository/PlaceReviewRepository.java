@@ -11,4 +11,6 @@ import com.study.petory.domain.user.entity.User;
 public interface PlaceReviewRepository extends JpaRepository<PlaceReview, Long>, PlaceReviewCustomRepository{
 
 	Optional<PlaceReview> findByUserAndPlace(User user, Place place);
+
+	boolean existsByUserAndPlace(User user, Place place);
 }

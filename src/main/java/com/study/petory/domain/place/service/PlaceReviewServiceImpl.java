@@ -2,7 +2,6 @@ package com.study.petory.domain.place.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +38,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		User findUser = userService.getUserById(userId);
 
 		// 한 유저가 같은 장소에 한 개의 리뷰만 등록할 수 있도록 검증하는 로직
-		Optional<PlaceReview> findPlaceReview = placeReviewRepository.findByUserAndPlace(findUser, findPlace);
-
-		if (findPlaceReview.isPresent()) {
+		if (placeReviewRepository.existsByUserAndPlace(findUser, findPlace)) {
 			throw new CustomException(ErrorCode.DUPLICATE_REVIEW);
 		}
 

@@ -34,13 +34,20 @@ public class StompHandler implements ChannelInterceptor {
 
 	@Override
 	public Message<?> preSend(Message<?> message, MessageChannel channel) {
+
+		//stompCommand 확인할 수 있도록 랩핑
 		StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
 		StompCommand command = accessor.getCommand();
 
+		//command 값이 CONNECT 라면 인증 정보 설정
 		if (StompCommand.CONNECT.equals(command)) {
+
 			String token = accessor.getFirstNativeHeader("Authorization");
-			if (!StringUtils.hasText(token)) throw new CustomException(ErrorCode.NO_TOKEN);
+
+			if (!StringUtils.hasText(token)) {
+				throw new CustomException(ErrorCode.NO_TOKEN);
+			}
 
 			String rawToken = jwtProvider.subStringToken(token);
 			Claims claims = jwtProvider.getClaims(rawToken);
@@ -54,15 +61,18 @@ public class StompHandler implements ChannelInterceptor {
 
 			CustomPrincipal principal = new CustomPrincipal(userId, email, nickname, authorities);
 
-
+			//웹소켓 세션에 사용자 정보 저장
 			accessor.getSessionAttributes().put("user", principal);
 			accessor.setUser(principal);
 
 			accessor.setLeaveMutable(true);
 			return MessageBuilder.createMessage(message.getPayload(), accessor.getMessageHeaders());
 
+			// command 값이 SEND 이거나 SUBSCRIBE 이면 CONNECT 에서 생성한 정보를 가져와 유저 정보 확인
 		} else if (StompCommand.SEND.equals(command) || StompCommand.SUBSCRIBE.equals(command)) {
+
 			Object sessionUser = accessor.getSessionAttributes().get("user");
+
 			if (sessionUser instanceof Principal principal) {
 				accessor.setUser(principal);
 			}

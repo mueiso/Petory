@@ -111,12 +111,12 @@ public class AlbumController {
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, albumService.findOneAlbum(currentUser.getId(), albumId));
+		return CommonResponse.of(SuccessCode.FOUND, albumService.findOneAlbum(currentUser, albumId));
 	}
 
 	/**
 	 * 앨범 수정
-	 * @param currentUser			앨범을 생성한 유저
+	 * @param currentUser	앨범을 생성한 유저
 	 * @param albumId		수정할 앨범 id
 	 * @param request		수정할 내용
 	 * @return	CommonResponse 성공 메세지, data: null

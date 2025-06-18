@@ -18,7 +18,7 @@ public class PlaceReviewCustomRepositoryImpl implements PlaceReviewCustomReposit
 			.select(qPlaceReview.ratio.avg())
 			.from(qPlaceReview)
 			.where(qPlaceReview.place.id.eq(placeId)
-				.and(qPlaceReview.deletedAt.isNull()))
+				, (qPlaceReview.deletedAt.isNull()))
 			.fetchOne();
 	}
 }

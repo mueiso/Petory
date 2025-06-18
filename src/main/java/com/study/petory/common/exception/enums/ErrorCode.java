@@ -48,6 +48,10 @@ public enum ErrorCode implements BaseCode {
 	// DailyQna
 	DAILY_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "질의 응답이 존재하지 않습니다."),
 	ALREADY_WRITTEN_TODAY(HttpStatus.BAD_REQUEST, "오늘은 이미 작성하였습니다."),
+	DAILY_QNA_IS_HIDDEN(HttpStatus.BAD_REQUEST, "이미 숨겨진 질문입니다."),
+	DAILY_QNA_IS_NOT_HIDDEN(HttpStatus.BAD_REQUEST, "숨겨진 질문이 아닙니다."),
+	DAILY_QNA_IS_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 질문입니다."),
+	DAILY_QNA_IS_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제된 질문이 아닙니다."),
 
 	// Faq
 	FAQ_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "자주 찾는 질문은 존재하지 않습니다."),
@@ -80,9 +84,11 @@ public enum ErrorCode implements BaseCode {
 	// Question
 	QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "질문이 존재하지 않습니다."),
 	DATE_IS_EXIST(HttpStatus.CONFLICT, "해당 날짜에는 질문이 이미 존재합니다."),
+	TODAY_QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "관리자에 의해 비활성화된 질문입니다."),
 	QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "이미 비활성화된 질문입니다."),
 	QUESTION_IS_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 질문이 아닙니다."),
-	TODAY_QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "관리자에 의해 비활성화된 질문입니다."),
+	QUESTION_IS_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 질문입니다."),
+	QUESTION_IS_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제된 질문이 아닙니다."),
 
 	// OwnerBoardComment
 	OWNER_BOARD_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다."),

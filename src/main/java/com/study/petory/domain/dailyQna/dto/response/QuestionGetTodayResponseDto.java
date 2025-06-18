@@ -1,7 +1,6 @@
 package com.study.petory.domain.dailyQna.dto.response;
 
 import com.study.petory.domain.dailyQna.entity.Question;
-import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,18 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(force = true)
 public class QuestionGetTodayResponseDto {
 
-	private final String question;
+	private final String content;
 
 	private final String date;
 
-	private QuestionGetTodayResponseDto(String question, String date) {
-		this.question = question;
+	private QuestionGetTodayResponseDto(String content, String date) {
+		this.content = content;
 		this.date = date;
 	}
 
 	public static QuestionGetTodayResponseDto from(Question question) {
 		return new QuestionGetTodayResponseDto(
-			question.getQuestion(),
+			question.getContent(),
 			question.getDate()
 		);
 	}

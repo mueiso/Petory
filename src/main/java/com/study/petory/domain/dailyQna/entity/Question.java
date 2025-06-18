@@ -25,7 +25,7 @@ public class Question extends TimeFeatureBasedEntity {
 	private Long id;
 
 	@Column(nullable = false)
-	private String question;
+	private String content;
 
 	@Column(nullable = false, unique = true, length = 10)
 	private String date;
@@ -35,14 +35,14 @@ public class Question extends TimeFeatureBasedEntity {
 	private QuestionStatus questionStatus;
 
 	@Builder
-	public Question(String question, String date, QuestionStatus questionStatus) {
-		this.question = question;
+	public Question(String content, String date, QuestionStatus questionStatus) {
+		this.content = content;
 		this.date = date;
 		this.questionStatus = questionStatus;
 	}
 
 	public void update(String question, String date) {
-		this.question = question;
+		this.content = question;
 		this.date = date;
 	}
 

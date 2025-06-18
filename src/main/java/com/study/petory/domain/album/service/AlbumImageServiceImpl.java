@@ -63,6 +63,9 @@ public class AlbumImageServiceImpl extends AbstractImageService<AlbumImage> {
 		if (userRole.contains(Role.USER)) {
 			imageSize = 1;
 		}
+		if (userRole.contains(Role.ADMIN)) {
+			imageSize = 5;
+		}
 		return imageSize;
 	}
 }

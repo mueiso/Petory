@@ -8,15 +8,16 @@ import org.springframework.data.domain.Pageable;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponse;
+import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
+import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 
 public interface DailyQnaService {
 
-	DailyQna findDailyQnaByDailyQnaId(Long dailyQnaId);
+	DailyQna findDailyQnaByStatusAndId(List<DailyQnaStatus> statusList, Long dailyQnaId);
 
-	DailyQna findDailyQnaByActive(Long dailyQnaId);
+	DailyQnaStatus findDailyQnaStatusById(Long dailyQnaId);
 
 	void validateAuthor(Long userId, DailyQna dailyQna);
 
@@ -28,7 +29,7 @@ public interface DailyQnaService {
 
 	void hideDailyQna(Long userId, Long dailyQnaId);
 
-	Page<DailyQnaGetHiddenResponse> findHiddenDailyQna(Long userId, Pageable pageable);
+	Page<DailyQnaGetHiddenResponseDto> findHiddenDailyQna(Long userId, Pageable pageable);
 
 	void updateDailyQnaStatusActive(Long userId, Long dailyQnaId);
 

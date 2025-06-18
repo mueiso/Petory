@@ -27,10 +27,10 @@ import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponse;
+import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
@@ -185,7 +185,7 @@ public class QuestionController {
 	 */
 	@GetMapping("/deleted")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<CommonResponse<Page<QuestionGetDeletedResponse>>> getQuestionByDeleted(
+	public ResponseEntity<CommonResponse<Page<QuestionGetDeletedResponseDto>>> getQuestionByDeleted(
 		@PageableDefault(size = 50, sort = "deletedAt", direction = Sort.Direction.ASC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, questionService.findQuestionByDeleted(pageable));
@@ -280,7 +280,7 @@ public class QuestionController {
 	 */
 	@GetMapping("/daily-qnas/hide")
 	@PreAuthorize("hasRole('USER')")
-	public ResponseEntity<CommonResponse<Page<DailyQnaGetHiddenResponse>>> getHiddenDailyQna(
+	public ResponseEntity<CommonResponse<Page<DailyQnaGetHiddenResponseDto>>> getHiddenDailyQna(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {

@@ -114,6 +114,15 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
+		// POST /test 하위 경로 모두 비회원 허용
+		if ("POST".equalsIgnoreCase(method)
+			&& url.startsWith("/test")) {
+
+			debugLog("POST /test 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
 		// 정적 리소스 또는 화이트리스트 우회
 		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$")
 			|| securityWhitelist.getUrlWhitelist().contains(url)) {

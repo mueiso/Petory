@@ -31,8 +31,8 @@ public class UserController {
 	private final UserService userService;
 
 	/**
-	 * [테스트 전용 - 로그인]
-	 * userId를 기준으로 로그인
+	 * [TEST - 로그인]
+	 * 구글 로그인 없이 userId를 기준으로 로그인 가능한 테스트용 API
 	 * 비활성화된 유저는 로그인 불가 예외 발생
 	 *
 	 * @param userId 로그인 시도할 해당 유저 ID

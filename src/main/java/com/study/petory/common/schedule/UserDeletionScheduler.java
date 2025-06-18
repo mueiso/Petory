@@ -35,7 +35,7 @@ public class UserDeletionScheduler {
 		LocalDateTime from = now.minusDays(90).plusDays(1);
 		LocalDateTime to = now.minusDays(85);
 
-		// 위 시간 범위 안에서 softDelete 처리된 사용자 목록 조회
+		// 위 시간 범위 안에서 softDelete 처리된 유저 목록 조회
 		List<User> usersToBeDeleted = userRepository.findByDeletedAtBetween(from, to);
 
 		for (User user : usersToBeDeleted) {
@@ -44,7 +44,7 @@ public class UserDeletionScheduler {
 
 			// 이메일 발송 + 삭제 예정일 함께 전달
 			emailService.sendDeletionWarning(email, name, user.getDeletedAt());
-			log.info("[알림] 삭제 예정 사용자에게 이메일 전송 - email: {}", email);
+			log.info("[알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
 		}
 	}
 
@@ -55,20 +55,21 @@ public class UserDeletionScheduler {
 		// 90일 전 날짜를 기준으로 삭제 시점 설정
 		LocalDateTime deletionLimitDate = LocalDateTime.now().minusDays(90);
 
-		// softDelete 된 시점이 90일보다 더 이전인 사용자들 조회 (= softDelete 된지 90일 초과된 유저 조회)
+		// softDelete 된 시점이 90일보다 더 이전인 유저들 조회 (= softDelete 된지 90일 초과된 유저 조회)
 		List<User> expiredUsers = userRepository.findByDeletedAtBefore(deletionLimitDate);
 
 		for (User user : expiredUsers) {
 
 			// softDelete 이후 90일 초과 유저 hardDelete
 			userRepository.delete(user);
-			log.info("[하드삭제] 90일 초과 사용자 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[하드삭제] 90일 초과 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 
-	// TEST (메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드)
+	// TEST 스테줄러에 맞춰 메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testSendDeletionWarningEmails(LocalDateTime now) {
+
 		LocalDateTime from = now.minusDays(90).plusDays(1);
 		LocalDateTime to = now.minusDays(85);
 
@@ -77,8 +78,9 @@ public class UserDeletionScheduler {
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();
 			String name = user.getUserPrivateInfo().getName();
+
 			emailService.sendDeletionWarning(email, name, user.getDeletedAt());
-			log.info("[테스트 알림] 삭제 예정 사용자에게 이메일 전송 - email: {}", email);
+			log.info("[테스트 알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
 		}
 	}
 }

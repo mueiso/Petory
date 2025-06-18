@@ -44,7 +44,7 @@ public class TestMailController {
 
 	/**
 	 * [TEST]
-	 * 스테줄러에 맞춰 메일 자동 발송 되는지 바로 확인하기 위한 테스트용 API
+	 * 스테줄러에 맞춰 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
 	 *
 	 * @param date 이메일 발송 예정 날짜
 	 * @return 이메일 발송 성공 메시지
@@ -53,11 +53,31 @@ public class TestMailController {
 	public ResponseEntity<CommonResponse<Object>> testAutoDeletionWarning(
 		@RequestParam String date) {
 
-		// 현재 날짜를 임의로 조작해서 테스트 (예: 이메일 발송 예정 날짜인 "2025-06-18T00:00")
+		// 현재 날짜를 임의로 설정해서 테스트 (예: 이메일 발송 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
 		userDeletionScheduler.testSendDeletionWarningEmails(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.EMAIL_SENT);
+	}
+
+	/**
+	 * [TEST]
+	 * 스케줄러에 맞춰 softDelete 된 지 90일 초과된 유저 자동 hardDelete 되는지 테스트용 API
+	 * DELETE 매핑이 아닌 POST 매핑인 이유: 직접 삭제하는 행위보다, 자동 삭제하는 로직을 수동으로 실행하는 트리거성 API 이기 때문
+	 *
+	 * @param date 유저 영구 삭제 예정 날짜
+	 * @return 삭제 성공 메시지
+	 */
+	@PostMapping("/delete-expired-users")
+	public ResponseEntity<CommonResponse<Object>> testAutoHardDelete(
+		@RequestParam String date) {
+
+		// 현재 날짜를 임의로 설정해서 테스트 (예: HardDelete 예정 날짜인 "2025-06-18T00:00")
+		LocalDateTime simulatedNow = LocalDateTime.parse(date);
+
+		userDeletionScheduler.testHardDeleteExpiredUsers(simulatedNow);
+
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 }

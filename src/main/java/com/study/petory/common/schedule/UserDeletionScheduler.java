@@ -86,7 +86,7 @@ public class UserDeletionScheduler {
 		}
 	}
 
-	// TEST
+	// TEST 스케줄러에 맞춰 softDelete 된 지 90일 초과된 유저 자동 hardDelete 되는지 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testHardDeleteExpiredUsers(LocalDateTime simulatedNow) {
 
@@ -94,7 +94,7 @@ public class UserDeletionScheduler {
 
 		List<User> expiredUsers = userRepository.findByDeletedAtBefore(deletionLimitDate);
 
-		for(User user : expiredUsers) {
+		for (User user : expiredUsers) {
 
 			userRepository.delete(user);
 			log.info("[테스트 알림] 휴면 계정 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());

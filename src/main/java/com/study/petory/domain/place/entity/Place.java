@@ -103,27 +103,8 @@ public class Place extends TimeFeatureBasedEntity {
 	}
 
 	// 평균 평점 계산 로직
-	public void updateRatio() {
-		BigDecimal sumRatio = BigDecimal.ZERO;
-		int countPlaceReview = 0;
-
-		for (PlaceReview placeReview : this.placeReviewList) {
-			if (placeReview.getDeletedAt() == null) {
-				// BigDecimal의 경우 객체이기 때문에 add메서드로 더해야하고 불변객체이므로 반환 값을 다시 변수에 할당해야 함
-				sumRatio = sumRatio.add(placeReview.getRatio());
-				countPlaceReview++;
-			}
-		}
-
-		// 만약 리뷰 갯수가 0개인 경우 0으로 반환
-		if (countPlaceReview == 0) {
-			this.ratio = BigDecimal.ZERO;
-			return;
-		}
-
-		// 정수형 타입을 BigDecimal 형태로 변환함과 동시에 나누는 로직. 소수점 첫째 자리까지 계산, 둘째 자리에서 반올림.
-		this.ratio = sumRatio
-			.divide(BigDecimal.valueOf(countPlaceReview), 1, RoundingMode.HALF_UP);
+	public void updateRatio(BigDecimal ratio) {
+		this.ratio = ratio;
 	}
 
 	// placeId 검증 메서드

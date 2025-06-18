@@ -238,6 +238,13 @@ public class PlaceController {
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
+	/**
+	 * 장소 신고
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @param requestDto 장소 신고에 필요한 정보
+	 * @return CommonResponse 방식의 신고 완료 메시지
+	 */
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<String>> reportPlace(

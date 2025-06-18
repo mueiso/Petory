@@ -68,6 +68,8 @@ public enum ErrorCode implements BaseCode {
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON 처리 중 에러가 발생했습니다."),
 	PLACE_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 장소입니다."),
 	ALREADY_DELETED_PLACE(HttpStatus.BAD_REQUEST, "이미 삭제된 장소입니다."),
+	ALREADY_INACTIVE_PLACE(HttpStatus.BAD_REQUEST, "이미 비활성화 된 장소입니다."),
+	ALREADY_REPORT_PLACE(HttpStatus.BAD_REQUEST, "이미 신고한 장소입니다."),
 	DUPLICATE_PLACE(HttpStatus.BAD_REQUEST, "이미 등록된 장소입니다."),
 
 	// PlaceReview

@@ -69,8 +69,8 @@ public class UserServiceImpl implements UserService {
 
 		return new UserProfileResponseDto(
 			user.getEmail(),
-			user.getNickname(),
 			userPrivateInfo.getName(),
+			user.getNickname(),
 			userPrivateInfo.getMobileNum()
 		);
 	}
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
 		user.updateNickname(dto.getNickname());
 
 		// UserPrivateInfo 수정
-		user.getUserPrivateInfo().update(dto.getNickname(), dto.getMobileNum());
+		user.getUserPrivateInfo().update(dto.getMobileNum());
 	}
 
 	// 사용자 탈퇴

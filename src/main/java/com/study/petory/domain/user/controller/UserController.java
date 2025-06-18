@@ -98,6 +98,6 @@ public class UserController {
 
 		userService.deleteAccount(currentUser.getEmail());
 
-		return CommonResponse.of(SuccessCode.USER_DELETED);
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 }

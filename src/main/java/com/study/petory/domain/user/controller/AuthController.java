@@ -117,7 +117,7 @@ public class AuthController {
 
 		authServiceImpl.deactivateUser(userId);
 
-		return CommonResponse.of(SuccessCode.DELETED);
+		return CommonResponse.of(SuccessCode.USER_DEACTIVATED);
 	}
 
 	/**

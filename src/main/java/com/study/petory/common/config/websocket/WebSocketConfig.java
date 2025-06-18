@@ -32,4 +32,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 		registry.setApplicationDestinationPrefixes("/pub"); //클라이언트가 서버에 메시지 보내는 경로
 	}
+
+	@Override
+	public void configureClientInboundChannel(ChannelRegistration registration) {
+		registration.interceptors(stompHandler);
+	}
 }

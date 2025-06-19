@@ -22,12 +22,12 @@ public class EmailService {
 
 	private final String FROM_EMAIL = "noreply@petory.com";
 
-	// softDelete 되어있는 계정에게 삭제 경고 이메일을 발송하는 메서드
+	// soft delete 되어있는 계정에게 삭제 경고 이메일을 발송하는 메서드
 	public void sendDeletionWarning(String to, String name, LocalDateTime deletedAt) {
 
-		// 최종 삭제될 날짜 (softDelete 된 후 90일 경과)
+		// 최종 삭제될 날짜 (soft delete 된 후 90일 경과)
 		LocalDate deletionDate = deletedAt.plusDays(90).toLocalDate();
-		// softDelete 된 날짜
+		// soft delete 된 날짜
 		LocalDate deactivatedDate = deletedAt.toLocalDate();
 
 		/*

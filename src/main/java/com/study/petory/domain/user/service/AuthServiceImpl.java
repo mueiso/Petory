@@ -191,7 +191,7 @@ public class AuthServiceImpl implements AuthService{
 
 	/*
 	 * [관리자 전용 - 유저 비활성화]
-	 * 지정한 사용자를 softDelete 처리
+	 * 지정한 사용자를 soft delete 처리
 	 */
 	@Override
 	@Transactional
@@ -208,7 +208,7 @@ public class AuthServiceImpl implements AuthService{
 
 	/**
 	 * [관리자 전용 - 유저 복구]
-	 * Soft Delete 처리된 유저를 복구
+	 * soft delete 처리된 유저를 복구
 	 */
 	@Override
 	@Transactional

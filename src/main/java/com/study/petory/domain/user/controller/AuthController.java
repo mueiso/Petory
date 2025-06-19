@@ -104,7 +104,7 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 유저 비활성화]
-	 * 지정한 사용자의 계정을 softDelete 처리
+	 * 지정한 사용자의 계정을 soft delete 처리
 	 * 이미 비활성화된 계정일 경우 예외 처리
 	 *
 	 * @param userId 비활성화할 대상 사용자의 ID
@@ -122,7 +122,7 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 유저 복구]
-	 * softDelete 처리된 사용자의 계정을 복구
+	 * soft delete 처리된 사용자의 계정을 복구
 	 * deletedAt 필드를 null 로 되돌려 계정을 활성화 상태로 변경
 	 * 이미 활성화된 계정일 경우 예외 처리
 	 *

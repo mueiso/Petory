@@ -63,7 +63,7 @@ public class TestMailController {
 
 	/**
 	 * [TEST]
-	 * 스케줄러에 맞춰 softDelete 된 지 90일 초과된 유저 자동 hardDelete 되는지 테스트용 API
+	 * 스케줄러에 맞춰 soft delete 된 지 90일 초과된 유저 자동 hard delete 되는지 테스트용 API
 	 * DELETE 매핑이 아닌 POST 매핑인 이유: 직접 삭제하는 행위보다, 자동 삭제하는 로직을 수동으로 실행하는 트리거성 API 이기 때문
 	 *
 	 * @param date 유저 영구 삭제 예정 날짜
@@ -73,7 +73,7 @@ public class TestMailController {
 	public ResponseEntity<CommonResponse<Object>> testAutoHardDelete(
 		@RequestParam String date) {
 
-		// 현재 날짜를 임의로 설정해서 테스트 (예: HardDelete 예정 날짜인 "2025-06-18T00:00")
+		// 현재 날짜를 임의로 설정해서 테스트 (예: Hard delete 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
 		userDeletionScheduler.testHardDeleteExpiredUsers(simulatedNow);

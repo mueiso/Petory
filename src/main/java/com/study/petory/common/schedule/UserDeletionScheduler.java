@@ -39,7 +39,8 @@ public class UserDeletionScheduler {
 		LocalDateTime to = now.minusDays(85);
 
 		// 위 시간 범위 안에서 soft delete 처리된 유저 목록 조회
-		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
+		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from,
+			to);
 
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();
@@ -51,7 +52,7 @@ public class UserDeletionScheduler {
 		}
 	}
 
-	// 유저 자동 삭제 메서드 (soft delete 된 지 90일 초과된 유저 자동 hardDelete)
+	// 유저 자동 삭제 메서드 (휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete)
 	@Scheduled(cron = "0 0 3 * * ?", zone = "Asia/Seoul")  // 매일 새벽 3시: hard delete 실행 (한국 시간대 기준)
 	@Transactional
 	public void hardDeleteExpiredUsers() {
@@ -59,8 +60,10 @@ public class UserDeletionScheduler {
 		// 90일 전 날짜를 기준으로 삭제 시점 설정
 		LocalDateTime deletionLimitDate = LocalDateTime.now().minusDays(90);
 
-		// soft delete 된 시점이 90일보다 더 이전인 유저들 조회 (= soft delete 된지 90일 초과된 유저 조회)
-		List<User> expiredUsers = userRepository.findByDeletedAtBefore(deletionLimitDate);
+		// DEACTIVATED 또는 DELETED 상태 중 deletedAt 기준으로 90일 이상 지난 유저만 조회
+		List<User> expiredUsers = userRepository.findByUserStatusInAndDeletedAtBefore(
+			List.of(UserStatus.DEACTIVATED, UserStatus.DELETED),
+			deletionLimitDate);
 
 		for (User user : expiredUsers) {
 
@@ -70,14 +73,15 @@ public class UserDeletionScheduler {
 		}
 	}
 
-	// TEST 스테줄러에 맞춰 메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
+	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testSendDeletionWarningEmails(LocalDateTime simulatedNow) {
 
 		LocalDateTime from = simulatedNow.minusDays(90).plusDays(1);
 		LocalDateTime to = simulatedNow.minusDays(85);
 
-		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
+		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from,
+			to);
 
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();
@@ -88,13 +92,15 @@ public class UserDeletionScheduler {
 		}
 	}
 
-	// TEST 스케줄러에 맞춰 soft delete 된 지 90일 초과된 유저 자동 hard delete 되는지 확인하기 위한 테스트용 메서드
+	// TEST 스케줄러에 맞춰 휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete 되는지 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testHardDeleteExpiredUsers(LocalDateTime simulatedNow) {
 
 		LocalDateTime deletionLimitDate = simulatedNow.minusDays(90);
 
-		List<User> expiredUsers = userRepository.findByDeletedAtBefore(deletionLimitDate);
+		List<User> expiredUsers = userRepository.findByUserStatusInAndDeletedAtBefore(
+			List.of(UserStatus.DEACTIVATED, UserStatus.DELETED),
+			deletionLimitDate);
 
 		for (User user : expiredUsers) {
 

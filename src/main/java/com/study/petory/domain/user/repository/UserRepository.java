@@ -19,8 +19,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@EntityGraph(attributePaths = {"userRole"})
 	Optional<User> findUserById(Long id);
 
+	// UserStatus 가 DEACTIVATED + 삭제일 85일~90일 사이인 사용자 (hard delete 예정자)
 	List<User> findByUserStatusAndDeletedAtBetween(UserStatus userStatus, LocalDateTime from, LocalDateTime to);
 
-	// 삭제일 90일 초과된 사용자 (하드 삭제 대상)
-	List<User> findByDeletedAtBefore(LocalDateTime cutoff);
+	// UserStatus 가 DEACTIVATED/DELETED + deletedAt 90일 초과된 사용자 (hard delete 대상)
+	List<User> findByUserStatusInAndDeletedAtBefore(List<UserStatus> statusList, LocalDateTime deletedAtBefore);
 }

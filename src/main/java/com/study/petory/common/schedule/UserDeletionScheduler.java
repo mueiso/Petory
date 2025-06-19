@@ -23,7 +23,6 @@ public class UserDeletionScheduler {
 	private final UserRepository userRepository;
 	private final EmailService emailService;
 
-	// TODO 메일 발송 시간 정하기
 	@Scheduled(cron = "0 0 2 * * ?", zone = "Asia/Seoul")  // 매일 새벽 2시: 삭제 예정 알림 (한국 시간대 기준)
 	@Transactional
 	// 이메일 자동 발송 스케줄러 메서드 (soft delete 된 지 85일 경과 & 89일 미만 유저에게 메일 발송)
@@ -39,8 +38,7 @@ public class UserDeletionScheduler {
 		LocalDateTime to = now.minusDays(85);
 
 		// 위 시간 범위 안에서 soft delete 처리된 유저 목록 조회
-		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from,
-			to);
+		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
 
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();
@@ -69,7 +67,7 @@ public class UserDeletionScheduler {
 
 			// soft delete 이후 90일 초과 유저 hardDelete
 			userRepository.delete(user);
-			log.info("[하드삭제] 90일 초과 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[알림] 90일 초과 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 
@@ -80,8 +78,7 @@ public class UserDeletionScheduler {
 		LocalDateTime from = simulatedNow.minusDays(90).plusDays(1);
 		LocalDateTime to = simulatedNow.minusDays(85);
 
-		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from,
-			to);
+		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
 
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();

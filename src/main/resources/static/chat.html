@@ -184,7 +184,6 @@
         };
 
         stompClient.send("/pub/message", { Authorization: `Bearer ${token}` }, JSON.stringify(payload));
-        addMessage("나", message, "me");
         input.value = "";
     }
 

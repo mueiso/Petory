@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
@@ -58,7 +57,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	private TradeBoardStatus status;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tb_user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	@Builder

@@ -2,6 +2,7 @@ package com.study.petory.domain.place.entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +75,9 @@ public class Place extends TimeFeatureBasedEntity {
 	@Column(nullable = false, length = 10)
 	private PlaceStatus placeStatus = PlaceStatus.ACTIVE;
 
+	@Column
+	private LocalDateTime reportResetAt;
+
 	@Builder
 	public Place(User user, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio, String address,
 		BigDecimal latitude, BigDecimal longitude) {
@@ -105,6 +109,11 @@ public class Place extends TimeFeatureBasedEntity {
 	// 평균 평점 계산 로직
 	public void updateRatio(BigDecimal ratio) {
 		this.ratio = ratio;
+	}
+
+	// 신고 초기화
+	public void updateReportResetAt() {
+		this.reportResetAt = LocalDateTime.now();
 	}
 
 	// placeId 검증 메서드

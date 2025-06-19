@@ -30,6 +30,12 @@ public class NotificationController {
 
 	private final NotificationService notificationService;
 
+	/**
+	 * 유저별 알림 조회
+	 * @param currentUser 로그인한 유저
+	 * @param pageable 페이지 조회용 pageable
+	 * @return 알림 내용과 생성일
+	 */
 	@GetMapping
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Page<NotificationGetResponseDto>>> getNotificationByUser(
@@ -39,6 +45,11 @@ public class NotificationController {
 		return CommonResponse.of(SuccessCode.FOUND, notificationService.findNotificationByUser(currentUser.getId(), pageable));
 	}
 
+	/**
+	 * 알림 삭제
+	 * @param currentUser 로그인한 유저
+	 * @param notificationId 지우려는 알림 id
+	 */
 	@DeleteMapping("/{notificationId}")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> deleteNotification(

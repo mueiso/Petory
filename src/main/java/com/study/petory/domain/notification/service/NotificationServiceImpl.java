@@ -13,6 +13,7 @@ import com.study.petory.domain.notification.repository.NotificationRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,13 +23,12 @@ public class NotificationServiceImpl implements NotificationService{
 
 	private final NotificationRepository notificationRepository;
 	private final NotificationQueryRepository notificationQueryRepository;
-	private final UserRepository userRepository;
+	private final UserService userService;
 
 	@Override
 	public Page<NotificationGetResponseDto> findNotificationByUser(Long userId, Pageable pageable) {
 
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(userId);
 
 		return notificationQueryRepository.findByUserId(userId, pageable)
 			.map(NotificationGetResponseDto::new);
@@ -37,8 +37,7 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public void deleteNotification(Long userId, Long notificationId) {
 
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = userService.getUserById(userId);
 
 		Notification notification = notificationRepository.findById(notificationId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOTIFICATION_NOT_FOUND));

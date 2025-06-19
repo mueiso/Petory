@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -75,7 +77,7 @@ public class ChatController {
 	@GetMapping
 	public ResponseEntity<CommonResponse<List<ChatRoomGetAllResponseDto>>> getAllChatRoom(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		Pageable pageable
+		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(currentUser.getId(), pageable));
 	}

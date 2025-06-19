@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.study.petory.domain.chat.entity.ChatRoom;
 
-public interface ChatRepository extends MongoRepository<ChatRoom, ObjectId> {
+public interface ChatRepository extends MongoRepository<ChatRoom, ObjectId>, ChatAggregateRepository {
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -68,7 +70,7 @@ public class TradeBoardController {
 	@GetMapping
 	public ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
 		@RequestParam(required = false) TradeCategory category,
-		Pageable pageable
+		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findAllTradeBoard(category, pageable));
 	}
@@ -94,7 +96,7 @@ public class TradeBoardController {
 	@GetMapping("/my-board")
 	public ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		Pageable pageable
+		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByUser(currentUser.getId(), pageable));
 	}

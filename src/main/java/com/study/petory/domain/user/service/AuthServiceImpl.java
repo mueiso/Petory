@@ -25,9 +25,9 @@ import lombok.RequiredArgsConstructor;
 public class AuthServiceImpl implements AuthService {
 
 	private final UserRepository userRepository;
+	private final UserService userService;
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
-	private final UserService userService;
 
 	/*
 	 * [토큰 발급]

@@ -29,7 +29,7 @@ public class PlaceReportService {
 
 		Place findPlace = placeService.findPlaceByPlaceId(placeId);
 
-		if (!findPlace.isDeletedAtNull()) {
+		if (!findPlace.isDeletedAtNull() || findPlace.getPlaceStatus() != PlaceStatus.ACTIVE) {
 			throw new CustomException(ErrorCode.ALREADY_INACTIVE_PLACE);
 		}
 

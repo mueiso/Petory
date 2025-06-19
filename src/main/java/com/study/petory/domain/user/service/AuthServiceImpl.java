@@ -1,5 +1,6 @@
 package com.study.petory.domain.user.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -40,9 +41,22 @@ public class AuthServiceImpl implements AuthService {
 		User savedUser = userRepository.findByEmail(user.getEmail())
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		// 로그인 불가 상태는 예외 처리: 계정 정지(SUSPENDED) & 계정 탈퇴(DELETED)
 		if (savedUser.getUserStatus() != UserStatus.ACTIVE
 			&& savedUser.getUserStatus() != UserStatus.DEACTIVATED) {
 			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
+		}
+
+		// userStatus 가 DEACTIVATED 상태이면서 90일이 지나지 않은 경우 복구
+		if (savedUser.getUserStatus() == UserStatus.DEACTIVATED) {
+			LocalDateTime deletedAt = savedUser.getDeletedAt();
+
+			if (deletedAt != null && deletedAt.plusDays(90).isAfter(LocalDateTime.now())) {
+
+				// 로그인 되었기 때문에 복구 처리
+				savedUser.restoreEntity();
+				savedUser.updateStatus(UserStatus.ACTIVE);
+			}
 		}
 
 		if (savedUser.getId() == null) {

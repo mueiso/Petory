@@ -25,7 +25,7 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public Page<NotificationGetResponseDto> findNotificationByUser(Long userId, Pageable pageable) {
 
-		User user = userService.getUserById(userId);
+		userService.getUserById(userId);
 
 		return notificationRepository.findByUserId(userId, pageable)
 			.map(NotificationGetResponseDto::new);

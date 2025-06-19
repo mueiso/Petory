@@ -1,5 +1,6 @@
 package com.study.petory.domain.place.entity;
 
+import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_report_place")
 @NoArgsConstructor
-public class ReportPlace {
+public class PlaceReport extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,14 +37,34 @@ public class ReportPlace {
 	@Column(nullable = false)
 	private String content;
 
+	@Column(nullable = false)
+	private boolean isValid = true;
+
+	@Column
+	private Long adminId;
+
+	@Column(length = 300)
+	private String reason;
+
 	@Builder
-	public ReportPlace(User user, Place place, String content) {
+	public PlaceReport(User user, Place place, String content) {
 		this.user = user;
 		this.place = place;
 		this.content = content;
 	}
 
+	// 관리자 판단으로 신고 취소하는 메서드
+	public void updatePlaceReport(Long adminId, String reason) {
+		this.isValid = false;
+		this.adminId = adminId;
+		this.reason = reason;
+	}
+
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
+	}
+
+	public boolean isEqualPlace(Long placeId) {
+		return this.place.isEqualId(placeId);
 	}
 }

@@ -21,11 +21,12 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReportCancelRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
-import com.study.petory.domain.place.dto.request.ReportPlaceRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReportRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -36,7 +37,7 @@ import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.BookmarkPlaceService;
 import com.study.petory.domain.place.service.PlaceReviewService;
 import com.study.petory.domain.place.service.PlaceService;
-import com.study.petory.domain.place.service.ReportPlaceService;
+import com.study.petory.domain.place.service.PlaceReportService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,7 @@ public class PlaceController {
 	private final PlaceService placeService;
 	private final PlaceReviewService placeReviewService;
 	private final BookmarkPlaceService bookmarkPlaceService;
-	private final ReportPlaceService reportPlaceService;
+	private final PlaceReportService placeReportService;
 
 	/**
 	 * 장소 등록
@@ -246,13 +247,33 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 신고 완료 메시지
 	 */
 	@PreAuthorize("hasRole('USER')")
-	@PostMapping("/{placeId}")
+	@PostMapping("/{placeId}/reports")
 	public ResponseEntity<CommonResponse<String>> reportPlace(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long placeId,
-		@Valid @RequestBody ReportPlaceRequestDto requestDto
+		@Valid @RequestBody PlaceReportRequestDto requestDto
 	) {
-		reportPlaceService.reportPlace(currentUser.getId(), placeId, requestDto);
+		placeReportService.reportPlace(currentUser.getId(), placeId, requestDto);
 		return CommonResponse.of(SuccessCode.CREATED, "신고가 완료되었습니다.");
+	}
+
+	/**
+	 * 장소 신고 취소
+	 * @param currentUser login user 정보(관리자 정보)
+	 * @param placeId 장소 식별자
+	 * @param reportId 신고 식별자
+	 * @param requestDto 장소 신고 취소에 필요한 정보
+	 * @return CommonResponse 방식의 신고 취소 메세지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@PatchMapping("/{placeId}/reports/{reportId}")
+	public ResponseEntity<CommonResponse<String>> cancelReportPlace(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@PathVariable Long reportId,
+		@Valid @RequestBody PlaceReportCancelRequestDto requestDto
+	) {
+		placeReportService.cancelReportPlace(currentUser.getId(), placeId, reportId, requestDto);
+		return CommonResponse.of(SuccessCode.UPDATED, "신고 취소가 완료되었습니다.");
 	}
 }

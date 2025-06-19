@@ -14,13 +14,14 @@ import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserRole;
+import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
@@ -39,8 +40,9 @@ public class AuthServiceImpl implements AuthService{
 		User savedUser = userRepository.findByEmail(user.getEmail())
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		if (savedUser.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.DEACTIVATED_USER);
+		if (savedUser.getUserStatus() != UserStatus.ACTIVE
+			&& savedUser.getUserStatus() != UserStatus.DEACTIVATED) {
+			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
 		}
 
 		if (savedUser.getId() == null) {
@@ -164,7 +166,7 @@ public class AuthServiceImpl implements AuthService{
 			.toList();
 	}
 
-	/**
+	/*
 	 * [관리자 전용 - 권한 제거]
 	 * 지정한 사용자에게서 Role 을 제거하고, 전체 권한 목록 반환
 	 */
@@ -191,24 +193,25 @@ public class AuthServiceImpl implements AuthService{
 
 	/*
 	 * [관리자 전용 - 유저 비활성화]
-	 * 지정한 사용자를 soft delete 처리
+	 * 지정한 사용자를 계정 정지 처리
 	 */
 	@Override
 	@Transactional
-	public void deactivateUser(Long targetUserId) {
+	public void suspendUser(Long targetUserId) {
 
 		User user = userService.getUserById(targetUserId);
 
-		if (user.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.ALREADY_DEACTIVATED);
+		if (user.getUserStatus() == UserStatus.SUSPENDED) {
+			throw new CustomException(ErrorCode.ALREADY_SUSPENDED);
 		}
 
 		user.deactivateEntity();
+		user.updateStatus(UserStatus.SUSPENDED);
 	}
 
-	/**
+	/*
 	 * [관리자 전용 - 유저 복구]
-	 * soft delete 처리된 유저를 복구
+	 * 계정 정지 처리된 유저를 복구
 	 */
 	@Override
 	@Transactional
@@ -221,5 +224,6 @@ public class AuthServiceImpl implements AuthService{
 		}
 
 		user.restoreEntity();
+		user.updateStatus(UserStatus.ACTIVE);
 	}
 }

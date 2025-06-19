@@ -13,6 +13,7 @@ import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
+import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -35,8 +36,9 @@ public class UserServiceImpl implements UserService {
 
 		User user = getUserById(userId);
 
-		if (user.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.DEACTIVATED_USER);
+		if (user.getUserStatus() != UserStatus.ACTIVE
+			&& user.getUserStatus() != UserStatus.DEACTIVATED) {
+			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
 		}
 
 		List<String> roles = user.getUserRole().stream()

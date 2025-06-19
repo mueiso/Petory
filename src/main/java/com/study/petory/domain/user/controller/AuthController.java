@@ -107,17 +107,17 @@ public class AuthController {
 	 * 지정한 사용자의 계정을 soft delete 처리
 	 * 이미 비활성화된 계정일 경우 예외 처리
 	 *
-	 * @param userId 비활성화할 대상 사용자의 ID
-	 * @return 삭제 성공 메시지
+	 * @param userId 계정 정지 대상 사용자의 ID
+	 * @return 계정 정지 성공 메시지
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("/deactivate")
-	public ResponseEntity<CommonResponse<Object>> deactivateUser(
+	@DeleteMapping("/suspend")
+	public ResponseEntity<CommonResponse<Object>> suspendUser(
 		@RequestParam Long userId) {
 
-		authServiceImpl.deactivateUser(userId);
+		authServiceImpl.suspendUser(userId);
 
-		return CommonResponse.of(SuccessCode.USER_DEACTIVATED);
+		return CommonResponse.of(SuccessCode.USER_SUSPENDED);
 	}
 
 	/**

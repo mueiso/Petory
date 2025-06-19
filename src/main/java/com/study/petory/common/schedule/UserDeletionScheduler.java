@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.service.EmailService;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class UserDeletionScheduler {
 		LocalDateTime to = now.minusDays(85);
 
 		// 위 시간 범위 안에서 soft delete 처리된 유저 목록 조회
-		List<User> usersToBeDeleted = userRepository.findByDeletedAtBetween(from, to);
+		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
 
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();
@@ -76,7 +77,7 @@ public class UserDeletionScheduler {
 		LocalDateTime from = simulatedNow.minusDays(90).plusDays(1);
 		LocalDateTime to = simulatedNow.minusDays(85);
 
-		List<User> usersToBeDeleted = userRepository.findByDeletedAtBetween(from, to);
+		List<User> usersToBeDeleted = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
 
 		for (User user : usersToBeDeleted) {
 			String email = user.getEmail();

@@ -87,6 +87,7 @@ public class UserController {
 	/**
 	 * [계정 삭제]
 	 * 현재 로그인된 사용자의 계정을 삭제합니다.
+	 * soft delete 처리합니다.
 	 *
 	 * @param currentUser 현재 SecurityContext 에 저장된 사용자 정보
 	 * @return 탈퇴 성공 메시지

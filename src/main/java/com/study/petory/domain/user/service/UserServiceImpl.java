@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 		user.getUserPrivateInfo().update(dto.getMobileNum());
 	}
 
-	// 사용자 탈퇴
+	// 사용자 탈퇴 (soft delete 처리)
 	@Override
 	@Transactional
 	public void deleteAccount(String email) {
@@ -100,7 +100,8 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		userRepository.delete(user);
+		user.deactivateEntity();
+		user.updateStatus(UserStatus.DELETED);
 	}
 
 	@Override

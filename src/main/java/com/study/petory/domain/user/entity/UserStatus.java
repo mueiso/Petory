@@ -1,5 +1,8 @@
 package com.study.petory.domain.user.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum UserStatus {
 	ACTIVE,       // 정상 상태
 	DEACTIVATED,  // 휴면 상태

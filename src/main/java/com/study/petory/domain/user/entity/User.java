@@ -7,6 +7,8 @@ import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,12 +44,21 @@ public class User extends TimeFeatureBasedEntity {
 	@JoinColumn(name = "user_id")
 	private List<UserRole> userRole;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private UserStatus userStatus = UserStatus.ACTIVE;
+
 	@Builder
 	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
 		this.email = email;
 		this.nickname = nickname;
 		this.userPrivateInfo = userPrivateInfo;
 		this.userRole = userRole;
+	}
+
+	// soft delete 구현 위한 메서드
+	public void updateStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
 	}
 
 	public void updateNickname(String newNickname) {

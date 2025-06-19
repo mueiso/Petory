@@ -3,6 +3,7 @@ package com.study.petory.domain.notification.entity;
 import com.study.petory.common.entity.CreationBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,7 @@ public class Notification extends CreationBasedEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Column(nullable = false)
 	private String content;
 
 	@Builder

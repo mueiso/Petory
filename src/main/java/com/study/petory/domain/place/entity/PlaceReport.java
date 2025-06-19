@@ -38,7 +38,7 @@ public class PlaceReport extends TimeFeatureBasedEntity {
 	private String content;
 
 	@Column(nullable = false)
-	private boolean isValid = true;
+	private Boolean isValid = true;
 
 	@Column
 	private Long adminId;

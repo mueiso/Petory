@@ -6,8 +6,7 @@ import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceReport;
 import com.study.petory.domain.user.entity.User;
 
-public interface PlaceReportRepository extends JpaRepository<PlaceReport, Long> {
-	boolean existsByUserAndPlace(User user, Place place);
+public interface PlaceReportRepository extends JpaRepository<PlaceReport, Long>, PlaceReportCustomRepository {
 
-	long countPlaceReportByPlaceAndValid(Place place, boolean valid);
+	boolean existsByUserAndPlace(User user, Place place);
 }

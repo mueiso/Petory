@@ -133,6 +133,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());
+		findPlace.updateReportResetAt();
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드

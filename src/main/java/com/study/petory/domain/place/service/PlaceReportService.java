@@ -47,7 +47,7 @@ public class PlaceReportService {
 
 		placeReportRepository.save(placeReport);
 
-		if (placeReportRepository.countPlaceReportByPlaceAndValid(findPlace, true) >= 10) {
+		if (placeReportRepository.countPlaceReportByPlaceAndIsValidAndReportResetAt(findPlace) >= 10) {
 			findPlace.deactivateEntity();
 			findPlace.updateStatus(PlaceStatus.INACTIVE);
 		}

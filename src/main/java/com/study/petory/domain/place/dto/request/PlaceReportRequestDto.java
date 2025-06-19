@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class ReportPlaceRequestDto {
+public class PlaceReportRequestDto {
 
 	private final String content;
 }

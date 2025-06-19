@@ -45,10 +45,10 @@ public class ChatServiceImpl implements ChatService{
 
 	//메시지 보내기
 	@Override
-	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
+	public ChatMessage createMessage(Long userId, MessageSendRequestDto requestDto) {
 
 		ChatRoom chatRoom = findChatRoom(requestDto.getChatRoomId());
-		User user = findUser(requestDto.getSenderId());
+		User user = findUser(userId);
 
 		if (!chatRoom.isMember(user.getId())) {
 			throw new CustomException(ErrorCode.FORBIDDEN);

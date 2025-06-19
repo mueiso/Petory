@@ -43,6 +43,7 @@ dependencies {
 
     //웹소켓
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.security:spring-security-messaging'
 
     // json 데이터 파싱을 위한 의존성(YAMLFactory 사용가능)
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'

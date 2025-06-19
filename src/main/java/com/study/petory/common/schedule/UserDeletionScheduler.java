@@ -89,7 +89,7 @@ public class UserDeletionScheduler {
 		}
 	}
 
-	// TEST 스케줄러에 맞춰 휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete 되는지 확인하기 위한 테스트용 메서드
+	// TEST 스케줄러에 맞춰 휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete 되는지 바로 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testHardDeleteExpiredUsers(LocalDateTime simulatedNow) {
 

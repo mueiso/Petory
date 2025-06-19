@@ -71,12 +71,17 @@ public enum ErrorCode implements BaseCode {
 	ALREADY_INACTIVE_PLACE(HttpStatus.BAD_REQUEST, "이미 비활성화 된 장소입니다."),
 	ALREADY_REPORT_PLACE(HttpStatus.BAD_REQUEST, "이미 신고한 장소입니다."),
 	DUPLICATE_PLACE(HttpStatus.BAD_REQUEST, "이미 등록된 장소입니다."),
+	INCONSISTENT_PLACE(HttpStatus.BAD_REQUEST, "요청사항과 장소가 일치하지 않습니다."),
 
 	// PlaceReview
 	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),
 	DUPLICATE_REVIEW(HttpStatus.BAD_REQUEST, "이미 리뷰를 작성한 장소입니다."),
 	REVIEW_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 리뷰입니다."),
 	ALREADY_DELETED_REVIEW(HttpStatus.BAD_REQUEST, "이미 삭제된 리뷰입니다."),
+
+	// PlaceReport
+	PLACE_REPORT_NOT_FOUND(HttpStatus.NOT_FOUND, "신고가 존재하지 않습니다."),
+	ALREADY_INVALID_REPORT(HttpStatus.BAD_REQUEST, "이미 유효하지 않는 신고입니다."),
 
 	// TradeBoard
 	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "거래 글이 존재하지 않습니다."),

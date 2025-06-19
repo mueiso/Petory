@@ -21,7 +21,7 @@ public class PlaceReportCustomRepositoryImpl implements PlaceReportCustomReposit
 			.select(qPlaceReport.count())
 			.from(qPlaceReport)
 			.where(
-				qPlaceReport.place.eq(place),
+				qPlaceReport.place.id.eq(place.getId()),
 				qPlaceReport.isValid.eq(true),
 				place.getReportResetAt() == null ? null : qPlaceReport.createdAt.after(place.getReportResetAt())
 			)

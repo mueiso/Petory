@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "tb_report_place")
+@Table(name = "tb_place_report")
 @NoArgsConstructor
 public class PlaceReport extends TimeFeatureBasedEntity {
 

@@ -37,13 +37,25 @@ public class UserRestoreScheduler {
 			user.restoreEntity();
 			user.updateStatus(UserStatus.ACTIVE);
 
-			log.info("[알림] 30일 정지 계정 활성화 계정으로 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 
-	// // TEST 관리자에 의해 정지된 계정 30일 후 자동 복구되는지 바로 확인하기 위한 테스트용 메서드
-	// @Transactional
-	// public void testRestoreSuspendedUsers() {
-	//
-	// }
+	// TEST 관리자에 의해 정지된 계정 30일 후 자동 복구되는지 바로 확인하기 위한 테스트용 메서드
+	@Transactional
+	public void testRestoreSuspendedUsers(LocalDateTime simulatedNow) {
+
+		LocalDateTime reactivationTime = simulatedNow.minusDays(30);
+
+		List<User> suspendedUsers = userRepository.findByUserStatusAndDeletedAtBefore(
+			UserStatus.SUSPENDED,
+			reactivationTime);
+
+		for(User user : suspendedUsers) {
+			user.restoreEntity();
+			user.updateStatus(UserStatus.ACTIVE);
+
+			log.info("[테스트 알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
+		}
+	}
 }

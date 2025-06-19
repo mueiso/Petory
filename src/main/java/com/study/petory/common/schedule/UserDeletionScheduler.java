@@ -67,7 +67,7 @@ public class UserDeletionScheduler {
 
 			// soft delete 이후 90일 초과 유저 hardDelete
 			userRepository.delete(user);
-			log.info("[알림] 90일 초과 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[알림] 휴면 계정 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 

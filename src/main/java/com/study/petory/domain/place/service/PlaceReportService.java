@@ -8,8 +8,8 @@ import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.place.dto.request.PlaceReportCancelRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReportRequestDto;
 import com.study.petory.domain.place.entity.Place;
-import com.study.petory.domain.place.entity.PlaceStatus;
 import com.study.petory.domain.place.entity.PlaceReport;
+import com.study.petory.domain.place.entity.PlaceStatus;
 import com.study.petory.domain.place.repository.PlaceReportRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserService;
@@ -35,7 +35,7 @@ public class PlaceReportService {
 
 		User findUser = userService.getUserById(userId);
 
-		if (placeReportRepository.existsByUserAndPlace(findUser, findPlace)) {
+		if (placeReportRepository.existsByUserIdAndPlaceId(findUser.getId(), findPlace.getId())) {
 			throw new CustomException(ErrorCode.ALREADY_REPORT_PLACE);
 		}
 
@@ -58,11 +58,11 @@ public class PlaceReportService {
 
 		PlaceReport findPlaceReport = findPlaceReportByPlaceReportId(reportId);
 
-		if(!findPlaceReport.isEqualPlace(placeId)) {
+		if (!findPlaceReport.isEqualPlace(placeId)) {
 			throw new CustomException(ErrorCode.INCONSISTENT_PLACE);
 		}
 
-		if(!findPlaceReport.isValid()) {
+		if (!findPlaceReport.isValid()) {
 			throw new CustomException(ErrorCode.ALREADY_INVALID_REPORT);
 		}
 

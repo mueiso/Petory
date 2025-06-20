@@ -46,7 +46,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 		}
 
 		// userId를 확인
-		Long userId = extractUserId(httpServletRequest);
+		Long userId = extractUserId();
 		if (userId == null) {
 			// sendError의 경우 매개변수로 0번 째 인덱스는 int, 1번 째 인덱스는 String으로 받기 때문에 .value로 값을 꺼내줘야 함
 			httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "로그인이 필요합니다.");
@@ -82,7 +82,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 			.build();
 	}
 
-	private Long extractUserId(HttpServletRequest httpServletRequest) {
+	private Long extractUserId() {
 
 		// 현재 로그인된 사용자의 인증 정보를 꺼내는 과정
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

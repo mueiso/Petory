@@ -59,6 +59,11 @@ public class AuthServiceImpl implements AuthService {
 			}
 		}
 
+		// updatedAt 자동 변경 유도
+		savedUser.updateLoginTimeStamp();
+		// save 호출로 LastModifiedDate 반영
+		userRepository.save(savedUser);
+
 		if (savedUser.getId() == null) {
 			throw new CustomException(ErrorCode.USER_ID_NOT_GENERATED);
 		}

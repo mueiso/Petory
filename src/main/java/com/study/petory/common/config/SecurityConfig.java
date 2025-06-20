@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.study.petory.common.filter.RateLimitFilter;
 import com.study.petory.common.security.CustomAccessDeniedHandler;
 import com.study.petory.common.security.JwtAuthenticationEntryPoint;
 import com.study.petory.common.security.JwtFilter;
@@ -55,7 +56,7 @@ public class SecurityConfig {
 	 * 5. addFilterBefore : JWT 필터를 Security 필터 체인에 등록 → JWT 토큰 유효한지 먼저 검증 후 인증 처리 진행
 	 */
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http, RateLimitFilter rateLimitFilter) throws Exception {
 		http
 			// CORS 설정 적용
 			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -65,12 +66,17 @@ public class SecurityConfig {
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
 				// Security 전용 WHITELIST
-				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0])).permitAll()
+				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0]))
+				.permitAll()
 				// GET 메서드의 특정 경로 한정 허용
-				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0])).permitAll()
-				.requestMatchers("/ws-chat/**").permitAll()
-				.requestMatchers("/favicon.ico").permitAll()
-				.anyRequest().authenticated()
+				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0]))
+				.permitAll()
+				.requestMatchers("/ws-chat/**")
+				.permitAll()
+				.requestMatchers("/favicon.ico")
+				.permitAll()
+				.anyRequest()
+				.authenticated()
 			)
 
 			.exceptionHandling(ex -> ex
@@ -86,7 +92,8 @@ public class SecurityConfig {
 				.failureHandler(oAuth2FailureHandler)  // 로그인 실패 시 처리
 			)
 
-			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+			.addFilterAfter(rateLimitFilter, JwtFilter.class);
 
 		return http.build();
 	}

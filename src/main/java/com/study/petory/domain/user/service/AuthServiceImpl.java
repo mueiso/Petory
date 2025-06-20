@@ -58,6 +58,13 @@ public class AuthServiceImpl implements AuthService {
 			}
 		}
 
+		if (savedUser.getUserStatus() == UserStatus.DELETED) {
+
+			// 재로그인/재회원가입 했기 때문에 복구 처리
+			savedUser.restoreEntity();
+			savedUser.updateStatus(UserStatus.ACTIVE);
+		}
+
 		// updatedAt 자동 변경 유도
 		savedUser.updateLoginTimeStamp();
 		// save 호출로 LastModifiedDate 반영

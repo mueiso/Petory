@@ -93,7 +93,7 @@ public class SecurityConfig {
 			)
 
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-			.addFilterAfter(rateLimitFilter, JwtFilter.class);
+			.addFilterAfter(rateLimitFilter, JwtFilter.class); // rateLimitFilter는 jwtFilter 이후에 실행
 
 		return http.build();
 	}

@@ -99,13 +99,15 @@ public class RedisConfig {
 			.connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE)); // 키는 UTF-8 문자로, 값은 바이트 배열로 직렬화
 	}
 
-	// proxy manager 가 redis 사용한다.
-	// LettuceBasedProxyManager 는 비동기 고성능 처리 지원
+	// proxy manager 는 key를 기준으로 Bucket 객체를 Redis가 사용할 수 있게 해줌
+	// LettuceBasedProxyManager 는 Lettuce 클라이언트를 사용하는 비동기 고성능 구현체
 	@Bean
 	public ProxyManager<String> lettuceBasedProxyManager(
 		StatefulRedisConnection<String, byte[]> redisBucket4jConnection) {
 
-		// Expiration 전략 설정
+		// Expiration 전략 설정(Redis에 저장되는 Bucket의 TTL 전략 설정)
+		// 해당 Bucket이 Redis에 쓰여진 이후 고정 1시간 동안 살아있게 설정
+		// 버킷 사용여부를 떠나 1시간이 지나면 자동 삭제
 		return LettuceBasedProxyManager.builderFor(redisBucket4jConnection)
 			.withExpirationStrategy(
 				ExpirationAfterWriteStrategy.fixedTimeToLive(Duration.ofHours(1)))

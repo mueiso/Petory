@@ -2,6 +2,8 @@ package com.study.petory.common.config;
 
 import static com.study.petory.common.util.DateUtil.*;
 
+import java.time.Duration;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +20,19 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
+import io.github.bucket4j.distributed.ExpirationAfterWriteStrategy;
+import io.github.bucket4j.distributed.proxy.ProxyManager;
+import io.github.bucket4j.redis.lettuce.cas.LettuceBasedProxyManager;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.codec.ByteArrayCodec;
+import io.lettuce.core.codec.RedisCodec;
+import io.lettuce.core.codec.StringCodec;
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
 @EnableCaching
+@Slf4j
 public class RedisConfig {
 
 	@Bean
@@ -36,6 +49,12 @@ public class RedisConfig {
 		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
 		config.setDatabase(1);
 		return new LettuceConnectionFactory(config);
+	}
+
+	// bucket4j + redis
+	@Bean
+	public RedisClient redisClientBucket4j() {
+		return RedisClient.create("redis://localhost:6381/2");
 	}
 
 	@Bean(name = "redisCacheTemplate")
@@ -68,5 +87,28 @@ public class RedisConfig {
 		redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
 		redisTemplate.setConnectionFactory(redisConnectionManager());
 		return redisTemplate;
+	}
+
+	/**
+	 * Reference
+	 * https://bucket4j.com/8.9.0/toc.html#bucket4j-redis
+	 */
+	@Bean
+	public StatefulRedisConnection<String, byte[]> redisBucket4jConnection(RedisClient redisClientBucket4j) {
+		return redisClientBucket4j
+			.connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE)); // 키는 UTF-8 문자로, 값은 바이트 배열로 직렬화
+	}
+
+	// proxy manager 가 redis 사용한다.
+	// LettuceBasedProxyManager 는 비동기 고성능 처리 지원
+	@Bean
+	public ProxyManager<String> lettuceBasedProxyManager(
+		StatefulRedisConnection<String, byte[]> redisBucket4jConnection) {
+
+		// Expiration 전략 설정
+		return LettuceBasedProxyManager.builderFor(redisBucket4jConnection)
+			.withExpirationStrategy(
+				ExpirationAfterWriteStrategy.fixedTimeToLive(Duration.ofHours(1)))
+			.build();
 	}
 }

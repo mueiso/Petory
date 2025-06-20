@@ -52,17 +52,14 @@ public class AuthServiceImpl implements AuthService {
 
 			if (deletedAt != null && deletedAt.plusDays(90).isAfter(LocalDateTime.now())) {
 
-				// 로그인 되었기 때문에 복구 처리
-				savedUser.restoreEntity();
-				savedUser.updateStatus(UserStatus.ACTIVE);
+				// 기간 안에 로그인 했기 때문에 복구 처리
+				savedUser.activateUser();
 			}
 		}
 
+		// 재로그인/재회원가입 했을 경우 복구 처리
 		if (savedUser.getUserStatus() == UserStatus.DELETED) {
-
-			// 재로그인/재회원가입 했기 때문에 복구 처리
-			savedUser.restoreEntity();
-			savedUser.updateStatus(UserStatus.ACTIVE);
+			savedUser.activateUser();
 		}
 
 		// updatedAt 자동 변경 유도
@@ -244,11 +241,10 @@ public class AuthServiceImpl implements AuthService {
 
 		User user = userService.getUserById(targetUserId);
 
-		if (user.getDeletedAt() == null) {
+		if (user.isDeletedAtNull()) {
 			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);
 		}
 
-		user.restoreEntity();
-		user.updateStatus(UserStatus.ACTIVE);
+		user.activateUser();
 	}
 }

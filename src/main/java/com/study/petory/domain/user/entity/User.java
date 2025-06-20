@@ -65,6 +65,11 @@ public class User extends TimeFeatureBasedEntity {
 		this.nickname = newNickname;
 	}
 
+	// 더티채킹 유도용
+	public void updateLoginTimeStamp() {
+		this.nickname = this.nickname;
+	}
+
 	// userId 검증 메서드
 	public boolean isEqualId(Long userId) {
 		return this.id.equals(userId);

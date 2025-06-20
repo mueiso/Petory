@@ -20,6 +20,7 @@ public class EmailService {
 	private final JavaMailSender mailSender;  // 이메일 전송할 때 사용하는 JavaMailSender 객체
 	private final TemplateEngine templateEngine;  // HTML 템플릿을 렌더링하기 위한 Thymeleaf 템플릿 엔진
 
+	// TODO - 배포 전 메일 발신 주소 수정 필요할지 확인
 	private final String FROM_EMAIL = "noreply@petory.com";
 
 	// soft delete 되어있는 계정에게 삭제 경고 이메일을 발송하는 메서드
@@ -64,7 +65,7 @@ public class EmailService {
 
 			// 이메일 전송
 			mailSender.send(message);
-			// 이메일 전송 중 예외 발생 시, 런타임 예외처리
+			// TODO - 이메일 전송 중 예외 발생 시, 복구(재전송) 루틴 필요
 		} catch (MessagingException e) {
 			throw new RuntimeException("삭제 안내 이메일 전송 실패", e);
 		}

@@ -41,13 +41,12 @@ public class AuthServiceImpl implements AuthService {
 		User savedUser = userRepository.findByEmail(user.getEmail())
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		// 로그인 불가 상태는 예외 처리: 계정 정지(SUSPENDED) & 계정 탈퇴(DELETED)
-		if (savedUser.getUserStatus() != UserStatus.ACTIVE
-			&& savedUser.getUserStatus() != UserStatus.DEACTIVATED) {
+		// 로그인 불가 상태는 예외 처리: 계정 정지 상태 (SUSPENDED)
+		if (savedUser.getUserStatus() == UserStatus.SUSPENDED) {
 			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
 		}
 
-		// userStatus 가 DEACTIVATED 상태이면서 90일이 지나지 않은 경우 복구
+		// userStatus 가 휴면 (DEACTIVATED) 상태로 90일이 지나기 전에 로그인 한 경우 휴면 상태 해제
 		if (savedUser.getUserStatus() == UserStatus.DEACTIVATED) {
 			LocalDateTime deletedAt = savedUser.getDeletedAt();
 

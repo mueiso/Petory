@@ -26,6 +26,7 @@ public class UserRestoreScheduler {
 	// 유저 자동 복구 메서드 (관리자에 의해 정지된 계정 30일 후 자동 복구)
 	public void restoreSuspendedUsers() {
 
+		// 30일 전 날짜를 기준으로 복구 시점 설정
 		LocalDateTime reactivationTime = LocalDateTime.now().minusDays(30);
 
 		// SUSPENDED 상태이면서 deletedAt 이 30일 이상 된 유저

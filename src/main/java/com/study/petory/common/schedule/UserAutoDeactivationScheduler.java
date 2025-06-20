@@ -40,4 +40,22 @@ public class UserAutoDeactivationScheduler {
 			log.info("[알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
+
+	// TEST 90알간 미접속 시 자동 휴면 계정으로 전환되는지 바로 확인하기 위한 테스트용 메서드
+	@Transactional
+	public void testDeactivateInactiveUsers(LocalDateTime simulatedNow) {
+
+		LocalDateTime inactivationTime = simulatedNow.minusDays(90);
+
+		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
+			UserStatus.ACTIVE,
+			inactivationTime);
+
+		for (User user : deactivationCandidates) {
+			user.deactivateEntity();
+			user.updateStatus(UserStatus.DEACTIVATED);
+
+			log.info("[테스트 알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
+		}
+	}
 }

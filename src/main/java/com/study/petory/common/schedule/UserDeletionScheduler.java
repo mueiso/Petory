@@ -20,8 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserDeletionScheduler {
 
-	private final UserRepository userRepository;
 	private final EmailService emailService;
+	private final UserRepository userRepository;
 
 	@Scheduled(cron = "0 0 2 * * ?", zone = "Asia/Seoul")  // 매일 새벽 2시: 삭제 예정 알림 (한국 시간대 기준)
 	@Transactional

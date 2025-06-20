@@ -27,7 +27,8 @@ public class SecurityWhitelist {
 			"/chat.html",
 			"/ws-chat",
 			"/ws-chat/**",
-			"/test/**"
+			"/test/**",
+			"/image-petory.png"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

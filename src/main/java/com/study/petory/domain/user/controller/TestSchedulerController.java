@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.schedule.UserDeactivationScheduler;
 import com.study.petory.common.schedule.UserDeletionScheduler;
 import com.study.petory.common.schedule.UserRestoreScheduler;
 import com.study.petory.common.service.EmailService;
@@ -24,6 +25,7 @@ public class TestSchedulerController {
 	private final EmailService emailService;
 	private final UserDeletionScheduler userDeletionScheduler;
 	private final UserRestoreScheduler userRestoreScheduler;
+	private final UserDeactivationScheduler userDeactivationScheduler;
 
 	/**
 	 * [TEST]
@@ -100,5 +102,24 @@ public class TestSchedulerController {
 		userRestoreScheduler.testRestoreSuspendedUsers(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
+	}
+
+	/**
+	 * [TEST]
+	 * 스케줄러에 맞춰 계정이 미접속 상태로 90일 경과 시 해당 유저 자동으로 휴면 계정 처리되는지 확인할 수 있는 테스트용 API
+	 *
+	 * @param date 계정 휴면 상태로 전환 예정 날짜
+	 * @return 휴면 처리 성공 메시지
+	 */
+	@PostMapping("deactivate-inactive-users")
+	public ResponseEntity<CommonResponse<Object>> testAutoDeactivate(
+		@RequestParam String date) {
+
+		// 현재 날짜를 임의로 설정해서 테스트 (예: 휴면 계정으로 전환 예정 날짜인 "2025-06-18T00:00")
+		LocalDateTime simulatedNow = LocalDateTime.parse(date);
+
+		userDeactivationScheduler.testDeactivateInactiveUsers(simulatedNow);
+
+		return CommonResponse.of(SuccessCode.USER_DEACTIVATED);
 	}
 }

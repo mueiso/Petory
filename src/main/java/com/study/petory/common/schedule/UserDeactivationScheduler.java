@@ -28,7 +28,7 @@ public class UserDeactivationScheduler {
 		// 90일전 날짜를 기준으로 비활성화 시점 설정 (= 90일간 미접속 시)
 		LocalDateTime inactivationTime = LocalDateTime.now().minusDays(90);
 
-		// ACTIVE 상태이면서 90일간 updatedAt 의 변화가 없는 유저
+		// ACTIVE 상태이면서 90일 이상 updatedAt 의 변화가 없는 유저
 		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
 			UserStatus.ACTIVE,
 			inactivationTime);

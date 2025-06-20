@@ -56,9 +56,13 @@ public class User extends TimeFeatureBasedEntity {
 		this.userRole = userRole;
 	}
 
-	// soft delete 구현 위한 메서드
 	public void updateStatus(UserStatus userStatus) {
 		this.userStatus = userStatus;
+	}
+
+	public void activateUser() {
+		this.restoreEntity();
+		this.updateStatus(UserStatus.ACTIVE);
 	}
 
 	public void updateNickname(String newNickname) {

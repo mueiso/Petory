@@ -17,14 +17,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
+import com.study.petory.domain.chat.dto.request.PresignedUrlRequestDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
+import com.study.petory.domain.chat.dto.response.PresignedUrlResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.service.ChatService;
 import com.study.petory.common.exception.enums.SuccessCode;

@@ -1,5 +1,6 @@
 package com.study.petory.domain.chat.service;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -7,9 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
+import com.study.petory.domain.chat.dto.request.PresignedUrlRequestDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
 import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
+import com.study.petory.domain.chat.dto.response.PresignedUrlResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
 import com.study.petory.domain.chat.repository.ChatAggregateRepository;
@@ -22,6 +25,8 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
 @Service
 @RequiredArgsConstructor
@@ -56,7 +61,8 @@ public class ChatServiceImpl implements ChatService{
 		ChatMessage message = ChatMessage.builder()
 			.senderId(user.getId())
 			.senderNickname(user.getNickname())
-			.message(requestDto.getMessage())
+			.messageType(requestDto.getMessageType())
+			.content(requestDto.getContent())
 			.build();
 
 		chatRoom.addMessage(message);

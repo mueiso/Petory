@@ -1,5 +1,6 @@
 package com.study.petory.domain.user.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
@@ -48,6 +49,9 @@ public class User extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private UserStatus userStatus = UserStatus.ACTIVE;
 
+	@Column
+	private LocalDateTime lastLoginAt;
+
 	@Builder
 	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
 		this.email = email;
@@ -69,9 +73,9 @@ public class User extends TimeFeatureBasedEntity {
 		this.nickname = newNickname;
 	}
 
-	// 더티채킹 유도용
-	public void updateLoginTimeStamp() {
-		this.nickname = this.nickname;
+	// 로그인 시간 기록용
+	public void updateLastLoginAt(LocalDateTime time) {
+		this.lastLoginAt = time;
 	}
 
 	// userId 검증 메서드

@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.study.petory.common.filter.RateLimitFilter;
 import com.study.petory.common.security.CustomAccessDeniedHandler;
 import com.study.petory.common.security.JwtAuthenticationEntryPoint;
 import com.study.petory.common.security.JwtFilter;
@@ -55,7 +56,7 @@ public class SecurityConfig {
 	 * 5. addFilterBefore : JWT 필터를 Security 필터 체인에 등록 → JWT 토큰 유효한지 먼저 검증 후 인증 처리 진행
 	 */
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http, RateLimitFilter rateLimitFilter) throws Exception {
 		http
 			// TODO - 배포 전 확인 필요
 			// CORS 설정 적용
@@ -85,7 +86,8 @@ public class SecurityConfig {
 				.failureHandler(oAuth2FailureHandler)  // 로그인 실패 시 처리
 			)
 
-			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+			.addFilterAfter(rateLimitFilter, JwtFilter.class); // rateLimitFilter는 jwtFilter 이후에 실행
 
 		return http.build();
 	}

@@ -1,5 +1,6 @@
 package com.study.petory.common.security;
 
+import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -7,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import lombok.Getter;
 
 @Getter
-public class CustomPrincipal {
+public class CustomPrincipal implements Principal {
 	private final Long id;
 	private final String email;
 	private final String nickname;
@@ -23,5 +24,10 @@ public class CustomPrincipal {
 		this.email = email;
 		this.nickname = nickname;
 		this.authorities = authorities;
+	}
+
+	@Override
+	public String getName() {
+		return String.valueOf(this.id);
 	}
 }

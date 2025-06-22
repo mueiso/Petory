@@ -26,7 +26,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
-import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponse;
+import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
@@ -89,8 +89,9 @@ public class QuestionServiceTest {
 	public void findAllQuestion() {
 		// given
 		Pageable pageable = PageRequest.of(7, 50, Sort.by("date").ascending());
-		given(questionRepository.findQuestionByPage(pageable)).willReturn(
-			setQuestion(366, QuestionStatus.ACTIVE, pageable));
+		given(questionRepository.findQuestionPageByStatus(List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE),
+			pageable))
+			.willReturn(setQuestion(366, QuestionStatus.ACTIVE, pageable));
 
 		// when
 		Page<QuestionGetAllResponseDto> responsePage = questionService.findAllQuestion(pageable);
@@ -112,13 +113,15 @@ public class QuestionServiceTest {
 		ReflectionTestUtils.setField(question, "id", 1L);
 		question.deactivateEntity();
 
-		given(questionRepository.findQuestionByActiveOrInactive(questionId)).willReturn(Optional.of(question));
+		given(questionRepository.findQuestionByStatusAndId(List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE),
+			questionId))
+			.willReturn(Optional.of(question));
 
 		// when
 		QuestionGetOneResponseDto response = questionService.findOneQuestion(questionId);
 
 		// then
-		assertThat(response.getQuestion()).isEqualTo("질문 1");
+		assertThat(response.getContent()).isEqualTo("질문 1");
 		assertThat(response.getDate()).isEqualTo("01-01");
 		assertThat(response.getQuestionStatus()).isNull();
 		assertThat(response.getUpdatedAt()).isNull();
@@ -133,13 +136,14 @@ public class QuestionServiceTest {
 
 		Question question = new Question("오늘의 질문", today, QuestionStatus.ACTIVE);
 
-		given(questionRepository.findTodayQuestion(today)).willReturn(Optional.of(question));
+		given(questionRepository.findTodayQuestion(today))
+			.willReturn(Optional.of(question));
 
 		// when
 		QuestionGetTodayResponseDto response = questionService.findTodayQuestion();
 
 		// then
-		assertThat(response.getQuestion()).isEqualTo("오늘의 질문");
+		assertThat(response.getContent()).isEqualTo("오늘의 질문");
 		assertThat(response.getDate()).isEqualTo(today);
 	}
 
@@ -152,7 +156,9 @@ public class QuestionServiceTest {
 		Question question = new Question("수정 전 질문", "01-01", QuestionStatus.ACTIVE);
 		ReflectionTestUtils.setField(question, "id", 1L);
 
-		given(questionRepository.findById(questionId)).willReturn(Optional.of(question));
+		given(questionRepository.findQuestionByStatusAndId(List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE),
+			questionId))
+			.willReturn(Optional.of(question));
 
 		QuestionUpdateRequestDto request = new QuestionUpdateRequestDto("수정된 질문", "01-02");
 
@@ -160,9 +166,10 @@ public class QuestionServiceTest {
 		questionService.updateQuestion(questionId, request);
 
 		//then
-		Question updatedQuestion = questionService.findQuestionByQuestionId(questionId);
+		Question updatedQuestion = questionService.findQuestionByIdAndStatus(
+			List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE), questionId);
 
-		assertThat(updatedQuestion.getQuestion()).isEqualTo("수정된 질문");
+		assertThat(updatedQuestion.getContent()).isEqualTo("수정된 질문");
 		assertThat(updatedQuestion.getDate()).isEqualTo("01-02");
 	}
 
@@ -175,16 +182,20 @@ public class QuestionServiceTest {
 		Question question = new Question("비활성화 전 질문", "01-01", QuestionStatus.ACTIVE);
 		ReflectionTestUtils.setField(question, "id", 1L);
 
-		given(questionRepository.findQuestionByActive(questionId)).willReturn(Optional.of(question));
-		given(questionRepository.findById(questionId)).willReturn(Optional.of(question));
+		given(questionRepository.findQuestionStatusById(questionId))
+			.willReturn(Optional.of(QuestionStatus.ACTIVE));
+
+		given(questionRepository.findQuestionByStatusAndId(
+			List.of(QuestionStatus.ACTIVE),
+			questionId))
+			.willReturn(Optional.of(question)
+			);
 
 		// when
 		questionService.inactiveQuestion(questionId);
 
 		// then
-		Question inactiveQuestion = questionService.findQuestionByQuestionId(questionId);
-
-		assertThat(inactiveQuestion.getQuestionStatus()).isEqualTo(QuestionStatus.INACTIVE);
+		assertThat(question.getQuestionStatus()).isEqualTo(QuestionStatus.INACTIVE);
 	}
 
 	@Test
@@ -193,8 +204,8 @@ public class QuestionServiceTest {
 		// given
 		Pageable pageable = PageRequest.of(1, 50, Sort.by("updatedAt").ascending());
 
-		given(questionRepository.findQuestionByInactive(pageable)).willReturn(
-			setQuestion(60, QuestionStatus.INACTIVE, pageable));
+		given(questionRepository.findQuestionPageByStatus(List.of(QuestionStatus.INACTIVE), pageable))
+			.willReturn(setQuestion(60, QuestionStatus.INACTIVE, pageable));
 
 		// when
 		Page<QuestionGetInactiveResponseDto> responsePage = questionService.findInactiveQuestion(pageable);
@@ -215,15 +226,16 @@ public class QuestionServiceTest {
 		Question question = new Question("질문", "01-01", QuestionStatus.INACTIVE);
 		ReflectionTestUtils.setField(question, "id", 1L);
 
-		given(questionRepository.findById(questionId)).willReturn(Optional.of(question));
+		given(questionRepository.findQuestionByStatusAndId(List.of(QuestionStatus.INACTIVE), questionId))
+			.willReturn(Optional.of(question));
+		given(questionRepository.findQuestionStatusById(questionId))
+			.willReturn(Optional.of(QuestionStatus.INACTIVE));
 
 		// when
 		questionService.updateQuestionStatusActive(questionId);
 
 		// then
-		Question updatedStatusQuestion = questionService.findQuestionByQuestionId(questionId);
-
-		assertThat(updatedStatusQuestion.getQuestionStatus()).isEqualTo(QuestionStatus.ACTIVE);
+		assertThat(question.getQuestionStatus()).isEqualTo(QuestionStatus.ACTIVE);
 	}
 
 	@Test
@@ -236,16 +248,18 @@ public class QuestionServiceTest {
 		ReflectionTestUtils.setField(question, "id", 1L);
 		ReflectionTestUtils.setField(question, "deletedAt", null);
 
-		given(questionRepository.findById(questionId)).willReturn(Optional.of(question));
+		given(questionRepository.findQuestionByStatusAndId(List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE),
+			questionId))
+			.willReturn(Optional.of(question));
+		given(questionRepository.findQuestionStatusById(questionId))
+			.willReturn(Optional.of(QuestionStatus.ACTIVE));
 
 		// when
 		questionService.deactivateQuestion(questionId);
 
 		// then
-		Question deactivatedQuestion = questionService.findQuestionByQuestionId(questionId);
-
-		assertThat(deactivatedQuestion.getQuestionStatus()).isEqualTo(QuestionStatus.DELETED);
-		assertThat(deactivatedQuestion.getDeletedAt()).isNotNull();
+		assertThat(question.getQuestionStatus()).isEqualTo(QuestionStatus.DELETED);
+		assertThat(question.getDeletedAt()).isNotNull();
 	}
 
 	@Test
@@ -254,11 +268,11 @@ public class QuestionServiceTest {
 		// given
 		Pageable pageable = PageRequest.of(1, 50, Sort.by("deletedAt").ascending());
 
-		given(questionRepository.findQuestionByDeleted(pageable)).willReturn(
-			setQuestion(60, QuestionStatus.DELETED, pageable));
+		given(questionRepository.findQuestionPageByStatus(List.of(QuestionStatus.DELETED), pageable))
+			.willReturn(setQuestion(60, QuestionStatus.DELETED, pageable));
 
 		// when
-		Page<QuestionGetDeletedResponse> responsePage = questionService.findQuestionByDeleted(pageable);
+		Page<QuestionGetDeletedResponseDto> responsePage = questionService.findQuestionByDeleted(pageable);
 
 		// then
 		assertThat(responsePage.getContent()).hasSize(10);
@@ -278,15 +292,17 @@ public class QuestionServiceTest {
 		ReflectionTestUtils.setField(question, "id", 1L);
 		ReflectionTestUtils.setField(question, "deletedAt", deletedTime);
 
-		given(questionRepository.findById(questionId)).willReturn(Optional.of(question));
+		given(questionRepository.findQuestionByStatusAndId(List.of(QuestionStatus.DELETED), questionId))
+			.willReturn(Optional.of(question));
+		given(questionRepository.findQuestionStatusById(questionId))
+			.willReturn(Optional.of(QuestionStatus.DELETED));
+
 
 		// when
 		questionService.restoreQuestion(questionId);
 
 		// then
-		Question restoredQuestion = questionService.findQuestionByQuestionId(questionId);
-
-		assertThat(restoredQuestion.getQuestionStatus()).isEqualTo(QuestionStatus.ACTIVE);
-		assertThat(restoredQuestion.getDeletedAt()).isNull();
+		assertThat(question.getQuestionStatus()).isEqualTo(QuestionStatus.ACTIVE);
+		assertThat(question.getDeletedAt()).isNull();
 	}
 }

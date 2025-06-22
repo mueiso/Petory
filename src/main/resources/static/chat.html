@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico">
     <title>채팅 테스트</title>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
@@ -112,7 +111,9 @@
     <ul id="messages"></ul>
 
     <div class="input-area">
-        <input type="text" id="senderIdInput" placeholder="아이디를 입력하세요" />
+        <input type="text" id="tokenInput" placeholder="JWT 토큰을 입력하세요" />
+        <button onclick="connectStomp()">연결</button>
+
         <div class="input-row">
             <input type="text" id="messageInput" placeholder="메시지를 입력하세요" />
             <button onclick="sendMessage()">보내기</button>
@@ -121,44 +122,68 @@
 </div>
 
 <script>
-    const chatRoomId = "6850c9ac975d6bdf41d1da7f";
+    let stompClient = null;
+    let token = null;
+    let myUserId = null;
 
-    const socket = new SockJS("http://localhost:8080/ws-chat");
-    const stompClient = Stomp.over(socket);
+    const chatRoomId = "6850c96a74235b2beafb7112";
 
-    stompClient.connect({}, (frame) => {
-        console.log("STOMP 연결됨:", frame);
+    function connectStomp() {
+        token = document.getElementById("tokenInput").value.trim();
+        if (!token) {
+            alert("토큰을 입력하세요!");
+            return;
+        }
 
-        stompClient.subscribe(`/sub/room/${chatRoomId}`, (message) => {
-            const data = JSON.parse(message.body);
-            const mySenderId = parseInt(document.getElementById("senderIdInput").value, 10);
+        try {
+            const parsedToken = JSON.parse(atob(token.split('.')[1]));
+            myUserId = parseInt(parsedToken.sub, 10);
+        } catch (e) {
+            alert("유효하지 않은 토큰입니다.");
+            return;
+        }
 
-            if (data.senderId === mySenderId) return;
+        const socket = new SockJS("http://localhost:8080/ws-chat");
+        stompClient = Stomp.over(socket);
 
-            addMessage("상대방", data.message, "server");
-        });
-    });
+        stompClient.connect(
+            {
+                Authorization: `Bearer ${token}`
+            },
+            (frame) => {
+                console.log("🟢 STOMP 연결됨:", frame);
+
+                stompClient.subscribe(`/sub/room/${chatRoomId}`, (message) => {
+                    const data = JSON.parse(message.body);
+
+                    const isMine = data.senderId === myUserId;
+                    const className = isMine ? "me" : "server";
+                    const sender = isMine ? "나" : data.senderNickname || "상대방";
+
+                    addMessage(sender, data.message, className);
+                });
+            },
+            (error) => {
+                console.error("🔴 STOMP 연결 실패:", error);
+            }
+        );
+    }
 
     function sendMessage() {
         const input = document.getElementById("messageInput");
-        const senderInput = document.getElementById("senderIdInput");
-
         const message = input.value.trim();
-        const senderId = parseInt(senderInput.value, 10);
 
-        if (!message || !senderId) {
-            alert("메시지와 senderId를 모두 입력하세요!");
+        if (!message) {
+            alert("메시지를 입력하세요!");
             return;
         }
 
         const payload = {
             chatRoomId: chatRoomId,
-            senderId: senderId,
             message: message
         };
 
-        stompClient.send("/pub/message", {}, JSON.stringify(payload));
-        addMessage("나", message, "me");
+        stompClient.send("/pub/message", { Authorization: `Bearer ${token}` }, JSON.stringify(payload));
         input.value = "";
     }
 

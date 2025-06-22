@@ -30,7 +30,6 @@ public class ChatServiceImpl implements ChatService{
 	private final ChatRepository chatRepository;
 	private final UserRepository userRepository;
 	private final TradeBoardRepository tradeBoardRepository;
-	private final ChatAggregateRepository aggregateRepository;
 
 	//사용하지 않으면 삭제 예정
 	public User findUser(Long userId) {
@@ -45,10 +44,10 @@ public class ChatServiceImpl implements ChatService{
 
 	//메시지 보내기
 	@Override
-	public ChatMessage createMessage(MessageSendRequestDto requestDto) {
+	public ChatMessage createMessage(Long userId, MessageSendRequestDto requestDto) {
 
 		ChatRoom chatRoom = findChatRoom(requestDto.getChatRoomId());
-		User user = findUser(requestDto.getSenderId());
+		User user = findUser(userId);
 
 		if (!chatRoom.isMember(user.getId())) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
@@ -94,7 +93,7 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public List<ChatRoomGetAllResponseDto> findAllChatRoom(Long userId, Pageable pageable) {
 
-		List<ChatRoom> chatRooms = aggregateRepository.findChatRoomsByUserId(userId, pageable);
+		List<ChatRoom> chatRooms = chatRepository.findChatRoomsByUserId(userId, pageable);
 
 		return chatRooms.stream()
 			.map(chatRoom -> new ChatRoomGetAllResponseDto(chatRoom, userId))

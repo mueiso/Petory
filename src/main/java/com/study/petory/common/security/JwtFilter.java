@@ -123,6 +123,13 @@ public class JwtFilter extends OncePerRequestFilter {
 			return;
 		}
 
+		//아이콘 요청 우회
+		if ("/favicon.ico".equals(url)) {
+			debugLog("favicon 요청. 필터 우회");
+			filterChain.doFilter(request, response);
+			return;
+		}
+
 		// 정적 리소스 또는 화이트리스트 우회
 		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$")
 			|| securityWhitelist.getUrlWhitelist().contains(url)) {

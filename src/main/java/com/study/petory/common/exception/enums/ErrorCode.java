@@ -48,6 +48,10 @@ public enum ErrorCode implements BaseCode {
 	// DailyQna
 	DAILY_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "질의 응답이 존재하지 않습니다."),
 	ALREADY_WRITTEN_TODAY(HttpStatus.BAD_REQUEST, "오늘은 이미 작성하였습니다."),
+	DAILY_QNA_IS_HIDDEN(HttpStatus.BAD_REQUEST, "이미 숨겨진 질문입니다."),
+	DAILY_QNA_IS_NOT_HIDDEN(HttpStatus.BAD_REQUEST, "숨겨진 질문이 아닙니다."),
+	DAILY_QNA_IS_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 질문입니다."),
+	DAILY_QNA_IS_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제된 질문이 아닙니다."),
 
 	// Faq
 	FAQ_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "자주 찾는 질문은 존재하지 않습니다."),
@@ -64,13 +68,20 @@ public enum ErrorCode implements BaseCode {
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON 처리 중 에러가 발생했습니다."),
 	PLACE_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 장소입니다."),
 	ALREADY_DELETED_PLACE(HttpStatus.BAD_REQUEST, "이미 삭제된 장소입니다."),
+	ALREADY_INACTIVE_PLACE(HttpStatus.BAD_REQUEST, "이미 비활성화 된 장소입니다."),
+	ALREADY_REPORT_PLACE(HttpStatus.BAD_REQUEST, "이미 신고한 장소입니다."),
 	DUPLICATE_PLACE(HttpStatus.BAD_REQUEST, "이미 등록된 장소입니다."),
+	INCONSISTENT_PLACE(HttpStatus.BAD_REQUEST, "요청사항과 장소가 일치하지 않습니다."),
 
 	// PlaceReview
 	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),
 	DUPLICATE_REVIEW(HttpStatus.BAD_REQUEST, "이미 리뷰를 작성한 장소입니다."),
 	REVIEW_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 리뷰입니다."),
 	ALREADY_DELETED_REVIEW(HttpStatus.BAD_REQUEST, "이미 삭제된 리뷰입니다."),
+
+	// PlaceReport
+	PLACE_REPORT_NOT_FOUND(HttpStatus.NOT_FOUND, "신고가 존재하지 않습니다."),
+	ALREADY_INVALID_REPORT(HttpStatus.BAD_REQUEST, "이미 유효하지 않는 신고입니다."),
 
 	// TradeBoard
 	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "거래 글이 존재하지 않습니다."),
@@ -80,9 +91,11 @@ public enum ErrorCode implements BaseCode {
 	// Question
 	QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "질문이 존재하지 않습니다."),
 	DATE_IS_EXIST(HttpStatus.CONFLICT, "해당 날짜에는 질문이 이미 존재합니다."),
+	TODAY_QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "관리자에 의해 비활성화된 질문입니다."),
 	QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "이미 비활성화된 질문입니다."),
 	QUESTION_IS_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 질문이 아닙니다."),
-	TODAY_QUESTION_IS_DEACTIVATED(HttpStatus.BAD_REQUEST, "관리자에 의해 비활성화된 질문입니다."),
+	QUESTION_IS_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 질문입니다."),
+	QUESTION_IS_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제된 질문이 아닙니다."),
 
 	// OwnerBoardComment
 	OWNER_BOARD_COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다."),
@@ -96,7 +109,10 @@ public enum ErrorCode implements BaseCode {
 	// S3
 	FILE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),
 	FILE_NOT_FOUND(HttpStatus.BAD_REQUEST, "존재하지 않는 파일입니다."),
-	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다.");
+	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다."),
+
+	//notification
+	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다");
 
 
 	private final HttpStatus httpStatus;

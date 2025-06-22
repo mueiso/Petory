@@ -8,7 +8,7 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.user.entity.User;
 
-public interface TradeBoardRepository extends JpaRepository<TradeBoard, Long> {
+public interface TradeBoardRepository extends JpaRepository<TradeBoard, Long>, TradeBoardQueryRepository {
 
 	Page<TradeBoard> findByUser(User user, Pageable pageable);
 }

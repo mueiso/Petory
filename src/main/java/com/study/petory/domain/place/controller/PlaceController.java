@@ -21,10 +21,12 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReportCancelRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReportRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
@@ -35,6 +37,7 @@ import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.BookmarkPlaceService;
 import com.study.petory.domain.place.service.PlaceReviewService;
 import com.study.petory.domain.place.service.PlaceService;
+import com.study.petory.domain.place.service.PlaceReportService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +50,7 @@ public class PlaceController {
 	private final PlaceService placeService;
 	private final PlaceReviewService placeReviewService;
 	private final BookmarkPlaceService bookmarkPlaceService;
+	private final PlaceReportService placeReportService;
 
 	/**
 	 * 장소 등록
@@ -57,10 +61,10 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid @RequestBody PlaceCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(CurrentUser.getId(), requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(currentUser.getId(), requestDto));
 	}
 
 	/**
@@ -103,11 +107,12 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{placeId}")
 	public ResponseEntity<CommonResponse<PlaceUpdateResponseDto>> updatePlace(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, placeService.updatePlace(CurrentUser.getId(), placeId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED,
+			placeService.updatePlace(currentUser.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -156,11 +161,12 @@ public class PlaceController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/{placeId}/reviews")
 	public ResponseEntity<CommonResponse<PlaceReviewCreateResponseDto>> createPlaceReview(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long placeId,
 		@Valid @RequestBody PlaceReviewCreateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeReviewService.savePlaceReview(CurrentUser.getId(), placeId, requestDto));
+		return CommonResponse.of(SuccessCode.CREATED,
+			placeReviewService.savePlaceReview(currentUser.getId(), placeId, requestDto));
 	}
 
 	/**
@@ -173,13 +179,13 @@ public class PlaceController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<PlaceReviewUpdateResponseDto>> updatePlaceReview(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId,
 		@Valid @RequestBody PlaceReviewUpdateRequestDto requestDto
 	) {
 		return CommonResponse.of(SuccessCode.UPDATED,
-			placeReviewService.updatePlaceReview(CurrentUser.getId(), placeId, reviewId, requestDto));
+			placeReviewService.updatePlaceReview(currentUser.getId(), placeId, reviewId, requestDto));
 	}
 
 	/**
@@ -192,11 +198,11 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/{placeId}/reviews/{reviewId}/restore")
 	public ResponseEntity<CommonResponse<Void>> restorePlaceReview(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.restorePlaceReview(CurrentUser.getId(), placeId, reviewId);
+		placeReviewService.restorePlaceReview(currentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 
@@ -210,11 +216,11 @@ public class PlaceController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{placeId}/reviews/{reviewId}")
 	public ResponseEntity<CommonResponse<Void>> deletePlaceReview(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser,
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long placeId,
 		@PathVariable Long reviewId
 	) {
-		placeReviewService.deletePlaceReview(CurrentUser.getId(), placeId, reviewId);
+		placeReviewService.deletePlaceReview(currentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
 
@@ -225,11 +231,49 @@ public class PlaceController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/write-json")
 	public ResponseEntity<CommonResponse<Void>> writeJsonData(
-		@AuthenticationPrincipal CustomPrincipal CurrentUser
+		@AuthenticationPrincipal CustomPrincipal currentUser
 	) {
 		// 현재 프로젝트의 루트 경로를 가져와서 src 이하의 경로를 붙이는 과정
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/data";
-		bookmarkPlaceService.writeJsonData(CurrentUser.getId(), filePath);
+		bookmarkPlaceService.writeJsonData(currentUser.getId(), filePath);
 		return CommonResponse.of(SuccessCode.CREATED);
+	}
+
+	/**
+	 * 장소 신고
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @param requestDto 장소 신고에 필요한 정보
+	 * @return CommonResponse 방식의 신고 완료 메시지
+	 */
+	@PreAuthorize("hasRole('USER')")
+	@PostMapping("/{placeId}/reports")
+	public ResponseEntity<CommonResponse<String>> reportPlace(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@Valid @RequestBody PlaceReportRequestDto requestDto
+	) {
+		placeReportService.reportPlace(currentUser.getId(), placeId, requestDto);
+		return CommonResponse.of(SuccessCode.CREATED, "신고가 완료되었습니다.");
+	}
+
+	/**
+	 * 장소 신고 취소
+	 * @param currentUser login user 정보(관리자 정보)
+	 * @param placeId 장소 식별자
+	 * @param reportId 신고 식별자
+	 * @param requestDto 장소 신고 취소에 필요한 정보
+	 * @return CommonResponse 방식의 신고 취소 메세지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@PatchMapping("/{placeId}/reports/{reportId}")
+	public ResponseEntity<CommonResponse<String>> cancelReportPlace(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@PathVariable Long reportId,
+		@Valid @RequestBody PlaceReportCancelRequestDto requestDto
+	) {
+		placeReportService.cancelReportPlace(currentUser.getId(), placeId, reportId, requestDto);
+		return CommonResponse.of(SuccessCode.UPDATED, "신고 취소가 완료되었습니다.");
 	}
 }

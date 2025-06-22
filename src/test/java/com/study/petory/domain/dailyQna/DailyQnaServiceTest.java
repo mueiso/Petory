@@ -8,10 +8,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,16 +24,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.DailyQnaUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetDeletedResponse;
-import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponse;
+import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetHiddenResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.DailyQnaGetResponseDto;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.entity.QuestionStatus;
+import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.service.DailyQnaServiceImpl;
 import com.study.petory.domain.dailyQna.service.QuestionServiceImpl;
 import com.study.petory.domain.user.entity.Role;
@@ -79,18 +77,6 @@ public class DailyQnaServiceTest {
 		"01-01",
 		QuestionStatus.ACTIVE
 	);
-
-	// 날짜의 정렬을 확인하는 메서드
-	private void asserSortedByCreatedAtDesc(List<DailyQnaGetResponseDto> dtoList) {
-		List<LocalDateTime> resultCreatedAt = dtoList.stream()
-			.map(DailyQnaGetResponseDto::getCreatedAt)
-			.collect(Collectors.toList());
-
-		List<LocalDateTime> sortedCreatedAt = new ArrayList<>(resultCreatedAt);
-		sortedCreatedAt.sort(Comparator.reverseOrder());
-
-		assertThat(resultCreatedAt).isEqualTo(sortedCreatedAt);
-	}
 
 	// 더미 DailyQna 생성 메서드
 	private DailyQna setDailyQna(String answer, DailyQnaStatus dailyQnaStatus, String date) {
@@ -137,8 +123,10 @@ public class DailyQnaServiceTest {
 
 		DailyQnaCreateRequestDto requestDto = new DailyQnaCreateRequestDto("답변");
 
-		given(userService.getUserById(userId)).willReturn(testUser);
-		given(questionService.findQuestionByQuestionId(questionId)).willReturn(testQuestion);
+		given(userService.getUserById(userId))
+			.willReturn(testUser);
+		given(questionService.findQuestionByIdAndStatus(List.of(QuestionStatus.ACTIVE), questionId))
+			.willReturn(testQuestion);
 
 		// when
 		dailyQnaService.saveDailyQna(userId, questionId, requestDto);
@@ -159,7 +147,8 @@ public class DailyQnaServiceTest {
 
 		List<DailyQna> responseList = new ArrayList<>(Arrays.asList(d1, d3, d2));
 
-		given(dailyQnaRepository.findDailyQna(userId, questionId)).willReturn(responseList);
+		given(dailyQnaRepository.findDailyQna(userId, questionId))
+			.willReturn(responseList);
 
 		// when
 		List<DailyQnaGetResponseDto> response = dailyQnaService.findDailyQna(userId, questionId);
@@ -182,8 +171,8 @@ public class DailyQnaServiceTest {
 		ReflectionTestUtils.setField(dailyQna, "id", 1L);
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 
-		given(dailyQnaRepository.findDailyQnaByActive(dailyQnaId)).willReturn(Optional.of(dailyQna));
-		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaByStatusAndId(List.of(DailyQnaStatus.ACTIVE), dailyQnaId))
+			.willReturn(Optional.of(dailyQna));
 
 		DailyQnaUpdateRequestDto request = new DailyQnaUpdateRequestDto("수정 후 답변");
 
@@ -191,9 +180,7 @@ public class DailyQnaServiceTest {
 		dailyQnaService.updateDailyQna(userId, dailyQnaId, request);
 
 		// then
-		DailyQna updateQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);
-
-		assertThat(updateQna.getAnswer()).isEqualTo("수정 후 답변");
+		assertThat(dailyQna.getAnswer()).isEqualTo("수정 후 답변");
 	}
 
 	@Test
@@ -207,16 +194,16 @@ public class DailyQnaServiceTest {
 		ReflectionTestUtils.setField(dailyQna, "id", 1L);
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 
-		given(dailyQnaRepository.findDailyQnaByActive(dailyQnaId)).willReturn(Optional.of(dailyQna));
-		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaByStatusAndId(List.of(DailyQnaStatus.ACTIVE), dailyQnaId))
+			.willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaStatusById(dailyQnaId))
+			.willReturn(Optional.of(DailyQnaStatus.ACTIVE));
 
 		// when
 		dailyQnaService.hideDailyQna(userId, dailyQnaId);
 
 		//then
-		DailyQna hideDailyQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);
-
-		assertThat(hideDailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.HIDDEN);
+		assertThat(dailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.HIDDEN);
 	}
 
 	@Test
@@ -226,11 +213,11 @@ public class DailyQnaServiceTest {
 		Long userId = 1L;
 
 		Pageable pageable = PageRequest.of(1, 50, Sort.by("date").ascending());
-		given(dailyQnaRepository.findDailyQnaByHidden(userId, pageable)).willReturn(
-			setDailyQnaPage(60, DailyQnaStatus.HIDDEN, pageable));
+		given(dailyQnaRepository.findDailyQnaPageByStatus(List.of(DailyQnaStatus.HIDDEN), userId, pageable))
+			.willReturn(setDailyQnaPage(60, DailyQnaStatus.HIDDEN, pageable));
 
 		// when
-		Page<DailyQnaGetHiddenResponse> responsePage = dailyQnaService.findHiddenDailyQna(userId, pageable);
+		Page<DailyQnaGetHiddenResponseDto> responsePage = dailyQnaService.findHiddenDailyQna(userId, pageable);
 
 		// then
 		assertThat(responsePage.getContent()).hasSize(10);
@@ -250,15 +237,16 @@ public class DailyQnaServiceTest {
 		ReflectionTestUtils.setField(dailyQna, "id", 1L);
 		ReflectionTestUtils.setField(testUser, "id", 1L);
 
-		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaByStatusAndId(List.of(DailyQnaStatus.HIDDEN), dailyQnaId))
+			.willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaStatusById(dailyQnaId))
+			.willReturn(Optional.of(DailyQnaStatus.HIDDEN));
 
 		// when
 		dailyQnaService.updateDailyQnaStatusActive(userId, dailyQnaId);
 
 		// then
-		DailyQna updatedDailyQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);
-
-		assertThat(updatedDailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.ACTIVE);
+		assertThat(dailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.ACTIVE);
 	}
 
 	@Test
@@ -270,17 +258,18 @@ public class DailyQnaServiceTest {
 		DailyQna dailyQna = setDailyQna("삭제 전 답변", DailyQnaStatus.ACTIVE, "2022-01-01 00:00:00");
 		ReflectionTestUtils.setField(dailyQna, "id", 1L);
 
-		given(dailyQnaRepository.findDailyQnaByActive(dailyQnaId)).willReturn(Optional.of(dailyQna));
-		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaByStatusAndId(List.of(DailyQnaStatus.ACTIVE, DailyQnaStatus.HIDDEN),
+			dailyQnaId))
+			.willReturn(Optional.of(dailyQna));
+		given(dailyQnaRepository.findDailyQnaStatusById(dailyQnaId))
+			.willReturn(Optional.of(DailyQnaStatus.ACTIVE));
 
 		// when
 		dailyQnaService.deleteDailyQna(dailyQnaId);
 
 		// then
-		DailyQna deletedDailyQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);
-
-		assertThat(deletedDailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.DELETED);
-		assertThat(deletedDailyQna.getDeletedAt()).isNotNull();
+		assertThat(dailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.DELETED);
+		assertThat(dailyQna.getDeletedAt()).isNotNull();
 	}
 
 	@Test
@@ -290,7 +279,9 @@ public class DailyQnaServiceTest {
 		Long userId = 1L;
 
 		Pageable pageable = PageRequest.of(1, 50, Sort.by("date").ascending());
-		given(dailyQnaRepository.findDailyQnaByDeleted(userId, pageable)).willReturn(
+
+		given(
+			dailyQnaRepository.findDailyQnaPageByStatus(List.of(DailyQnaStatus.DELETED), userId, pageable)).willReturn(
 			setDailyQnaPage(60, DailyQnaStatus.DELETED, pageable));
 
 		// when
@@ -312,17 +303,17 @@ public class DailyQnaServiceTest {
 		DailyQna deletedDailyQna = setDailyQna("삭제 전 답변", DailyQnaStatus.DELETED, "2022-01-01 00:00:00");
 		ReflectionTestUtils.setField(deletedDailyQna, "id", 1L);
 
-		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(deletedDailyQna));
-		given(dailyQnaRepository.findById(dailyQnaId)).willReturn(Optional.of(deletedDailyQna));
+		given(dailyQnaRepository.findDailyQnaByStatusAndId(List.of(DailyQnaStatus.DELETED), dailyQnaId))
+			.willReturn(Optional.of(deletedDailyQna));
+		given(dailyQnaRepository.findDailyQnaStatusById(dailyQnaId))
+			.willReturn(Optional.of(DailyQnaStatus.DELETED));
 
 		// when
 		dailyQnaService.restoreDailyQna(dailyQnaId);
 
 		// then
-		DailyQna restoreDailyQna = dailyQnaService.findDailyQnaByDailyQnaId(dailyQnaId);
-
-		assertThat(restoreDailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.ACTIVE);
-		assertThat(restoreDailyQna.getDeletedAt()).isNull();
+		assertThat(deletedDailyQna.getDailyQnaStatus()).isEqualTo(DailyQnaStatus.ACTIVE);
+		assertThat(deletedDailyQna.getDeletedAt()).isNull();
 
 	}
 }

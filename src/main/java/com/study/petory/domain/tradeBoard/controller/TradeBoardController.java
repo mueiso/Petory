@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,7 +36,6 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
 import com.study.petory.domain.tradeBoard.service.TradeBoardService;
 
-import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -52,7 +53,7 @@ public class TradeBoardController {
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-	private ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
+	public ResponseEntity<CommonResponse<TradeBoardCreateResponseDto>> createTradeBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid @RequestPart TradeBoardCreateRequestDto requestDto,
 		@RequestPart(required = false) List<MultipartFile> images
@@ -67,9 +68,9 @@ public class TradeBoardController {
 	 * @return 조회된 게시글 반환
 	 */
 	@GetMapping
-	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
+	public ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
 		@RequestParam(required = false) TradeCategory category,
-		Pageable pageable
+		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findAllTradeBoard(category, pageable));
 	}
@@ -80,7 +81,7 @@ public class TradeBoardController {
 	 * @return 해당 게시글 반환
 	 */
 	@GetMapping("/{tradeBoardId}")
-	private ResponseEntity<CommonResponse<TradeBoardGetResponseDto>> getByTradeBoardId(
+	public ResponseEntity<CommonResponse<TradeBoardGetResponseDto>> getByTradeBoardId(
 		@PathVariable Long tradeBoardId
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByTradeBoardId(tradeBoardId));
@@ -93,9 +94,9 @@ public class TradeBoardController {
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/my-board")
-	private ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
+	public ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getByUserId(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		Pageable pageable
+		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
 		return CommonResponse.of(SuccessCode.FOUND, tradeBoardService.findByUser(currentUser.getId(), pageable));
 	}
@@ -108,7 +109,7 @@ public class TradeBoardController {
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{tradeBoardId}")
-	private ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
+	public ResponseEntity<CommonResponse<TradeBoardUpdateResponseDto>> updateTradeBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long tradeBoardId,
 		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
@@ -124,7 +125,7 @@ public class TradeBoardController {
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PatchMapping("/{tradeBoardId}")
-	private ResponseEntity<CommonResponse<Void>> updateTradeBoardStatus(
+	public ResponseEntity<CommonResponse<Void>> updateTradeBoardStatus(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long tradeBoardId,
 		@RequestParam TradeBoardStatus status

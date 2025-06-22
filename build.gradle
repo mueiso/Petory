@@ -45,6 +45,7 @@ dependencies {
 
     //웹소켓
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.security:spring-security-messaging'
 
     // json 데이터 파싱을 위한 의존성(YAMLFactory 사용가능)
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
@@ -72,6 +73,10 @@ dependencies {
 
     // OAuth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // bucket4j
+    implementation 'com.bucket4j:bucket4j-core:8.9.0'
+    implementation 'com.bucket4j:bucket4j-redis:8.9.0'  // bucket4j와 redis를 연동하기 위한 의존성
 
     // SMTP
     implementation 'org.springframework.boot:spring-boot-starter-mail'

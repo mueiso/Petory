@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class QuestionGetAllResponseDto {
 
-	private final String question;
+	private final String content;
 
 	private final String date;
 
@@ -21,8 +21,8 @@ public class QuestionGetAllResponseDto {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private LocalDateTime updatedAt;
 
-	private QuestionGetAllResponseDto(String question, String date, QuestionStatus questionStatus, LocalDateTime updatedAt) {
-		this.question = question;
+	private QuestionGetAllResponseDto(String content, String date, QuestionStatus questionStatus, LocalDateTime updatedAt) {
+		this.content = content;
 		this.date = date;
 		if (questionStatus == QuestionStatus.INACTIVE) {
 			this.questionStatus = questionStatus;
@@ -32,7 +32,7 @@ public class QuestionGetAllResponseDto {
 
 	public static QuestionGetAllResponseDto from(Question question) {
 		return new QuestionGetAllResponseDto(
-			question.getQuestion(),
+			question.getContent(),
 			question.getDate(),
 			question.getQuestionStatus(),
 			question.getUpdatedAt()

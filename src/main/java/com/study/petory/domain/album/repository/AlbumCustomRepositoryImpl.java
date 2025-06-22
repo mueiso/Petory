@@ -137,4 +137,17 @@ public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
 			)
 			.fetchFirst() != null;
 	}
+
+	@Override
+	public boolean isUserAlbum(Long userId, Long albumId) {
+		return jpaQueryFactory
+			.selectOne()
+			.from(qAlbum)
+			.join(qUser).on(qUser.id.eq(qAlbum.user.id)).fetchJoin()
+			.where(
+				qAlbum.id.eq(albumId),
+				qAlbum.user.id.eq(userId)
+			)
+			.fetchFirst() != null;
+	}
 }

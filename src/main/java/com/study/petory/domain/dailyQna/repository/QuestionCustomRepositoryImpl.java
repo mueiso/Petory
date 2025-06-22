@@ -6,8 +6,14 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.petory.domain.dailyQna.entity.QQuestion;
 import com.study.petory.domain.dailyQna.entity.Question;
@@ -21,7 +27,9 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
-	private final QQuestion qQuestion = QQuestion.question1;
+	private final QQuestion qQuestion = QQuestion.question;
+
+	private final PathBuilder pathBuilder = new PathBuilder<>(Question.class, "question");
 
 	@Override
 	public boolean existsByDate(String date) {
@@ -35,104 +43,90 @@ public class QuestionCustomRepositoryImpl implements QuestionCustomRepository {
 	}
 
 	@Override
-	public Page<Question> findQuestionByPage(Pageable pageable) {
-		List<Question> list = jpaQueryFactory
+	public Page<Question> findQuestionPageByStatus(List<QuestionStatus> statusList, Pageable pageable) {
+		BooleanBuilder status = new BooleanBuilder();
+		if (statusList.contains(QuestionStatus.ACTIVE)) {
+			status.or(qQuestion.questionStatus.eq(QuestionStatus.ACTIVE));
+		}
+		if (statusList.contains(QuestionStatus.INACTIVE)) {
+			status.or(qQuestion.questionStatus.eq(QuestionStatus.INACTIVE));
+		}
+		if (statusList.contains(QuestionStatus.DELETED)) {
+			status.or(qQuestion.questionStatus.eq(QuestionStatus.DELETED));
+		}
+
+		JPAQuery<Question> query = jpaQueryFactory
 			.selectFrom(qQuestion)
 			.where(
-				qQuestion.questionStatus.in(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE)
+				status
 			)
 			.offset(pageable.getOffset())
-			.limit(pageable.getPageSize())
-			.fetch();
+			.limit(pageable.getPageSize());
+
+		for (Sort.Order o : pageable.getSort()) {
+			query.orderBy(new OrderSpecifier(o.isAscending() ? Order.ASC : Order.DESC,
+				pathBuilder.get(o.getProperty())));
+		}
 
 		Long total = jpaQueryFactory
 			.select(qQuestion.count())
 			.from(qQuestion)
+			.where(
+				status
+			)
 			.fetchOne();
-		if (total == null) {
-			total = 0L;
-		}
-		return new PageImpl<>(list, pageable, total);
+
+		List<Question> questionList = query.fetch();
+
+		return new PageImpl<>(questionList, pageable, total);
 	}
 
 	@Override
 	public Optional<Question> findTodayQuestion(String date) {
-		return jpaQueryFactory
-			.selectFrom(qQuestion)
-			.where(
-				qQuestion.date.eq(date),
-				qQuestion.questionStatus.eq(QuestionStatus.ACTIVE)
-			)
-			.fetch()
-			.stream().findAny();
+		return Optional.ofNullable(
+			jpaQueryFactory
+				.selectFrom(qQuestion)
+				.where(
+					qQuestion.date.eq(date),
+					qQuestion.questionStatus.eq(QuestionStatus.ACTIVE)
+				)
+				.fetchFirst()
+		);
 	}
 
 	@Override
-	public Optional<Question> findQuestionByActive(Long questionId) {
-		return jpaQueryFactory
-			.selectFrom(qQuestion)
-			.where(
-				qQuestion.id.eq(questionId),
-				qQuestion.questionStatus.eq(QuestionStatus.ACTIVE)
-			)
-			.stream().findAny();
-	}
-
-	public Page<Question> findQuestionByInactive(Pageable pageable) {
-		List<Question> questionPage = jpaQueryFactory
-			.selectFrom(qQuestion)
-			.where(
-				qQuestion.questionStatus.eq(QuestionStatus.INACTIVE)
-			)
-			.offset(pageable.getOffset())
-			.limit(pageable.getPageSize())
-			.fetch();
-
-		Long total = jpaQueryFactory
-			.select(qQuestion.count())
-			.from(qQuestion)
-			.where(
-				qQuestion.questionStatus.eq(QuestionStatus.INACTIVE)
-			)
-			.fetchOne();
-		if (total == null) {
-			total = 0L;
+	public Optional<Question> findQuestionByStatusAndId(List<QuestionStatus> statusList, Long questionId) {
+		BooleanBuilder status = new BooleanBuilder();
+		if (statusList.contains(QuestionStatus.ACTIVE)) {
+			status.or(qQuestion.questionStatus.eq(QuestionStatus.ACTIVE));
 		}
-		return new PageImpl<>(questionPage, pageable, total);
+		if (statusList.contains(QuestionStatus.INACTIVE)) {
+			status.or(qQuestion.questionStatus.eq(QuestionStatus.INACTIVE));
+		}
+		if (statusList.contains(QuestionStatus.DELETED)) {
+			status.or(qQuestion.questionStatus.eq(QuestionStatus.DELETED));
+		}
+		return Optional.ofNullable(
+			jpaQueryFactory
+				.selectFrom(qQuestion)
+				.where(
+					qQuestion.id.eq(questionId),
+					status
+				)
+				.fetchFirst()
+		);
 	}
 
 	@Override
-	public Page<Question> findQuestionByDeleted(Pageable pageable) {
-		List<Question> questionPage = jpaQueryFactory
-			.selectFrom(qQuestion)
-			.where(
-				qQuestion.questionStatus.eq(QuestionStatus.DELETED)
-			)
-			.offset(pageable.getOffset())
-			.limit(pageable.getPageSize())
-			.fetch();
-
-		Long total = jpaQueryFactory
-			.select(qQuestion.count())
-			.from(qQuestion)
-			.where(
-				qQuestion.questionStatus.eq(QuestionStatus.DELETED)
-			)
-			.fetchOne();
-		if (total == null) {
-			total = 0L;
-		}
-		return new PageImpl<>(questionPage, pageable, total);
-	}
-
-	public Optional<Question> findQuestionByActiveOrInactive(Long questionId) {
-		return jpaQueryFactory
-			.selectFrom(qQuestion)
-			.where(
-				qQuestion.id.eq(questionId),
-				qQuestion.questionStatus.in(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE)
-			)
-			.fetch()
-			.stream().findAny();
+	public Optional<QuestionStatus> findQuestionStatusById(Long questionId) {
+		return Optional.ofNullable(
+			jpaQueryFactory
+				.select(qQuestion.questionStatus)
+				.from(qQuestion)
+				.where(
+					qQuestion.id.eq(questionId)
+				)
+				.fetchFirst()
+		);
 	}
 }

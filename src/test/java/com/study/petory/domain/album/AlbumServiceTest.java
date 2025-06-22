@@ -23,6 +23,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.common.util.AbstractImageService;
 import com.study.petory.domain.album.dto.request.AlbumCreateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumUpdateRequestDto;
@@ -234,18 +235,19 @@ public class AlbumServiceTest {
 	@DisplayName("단일 앨범을 조회한다.")
 	public void findOneAlbum() {
 		// given
-		Long userId = null;
+		Long userId = 1L;
 		Long albumId = 1L;
 		int imageSize = 3;
 
 		setImageSize(imageSize);
 
-		AlbumGetOneResponseDto dto = AlbumGetOneResponseDto.from(testAlbum);
+		CustomPrincipal customUser = new CustomPrincipal(userId, "email.com", "별명", List.of());
 
 		given(albumRepository.findOneAlbumByUser(true, albumId)).willReturn(Optional.of(testAlbum));
+		given(albumRepository.isUserAlbum(userId, albumId)).willReturn(false);
 
 		// when
-		AlbumGetOneResponseDto response = albumService.findOneAlbum(userId, albumId);
+		AlbumGetOneResponseDto response = albumService.findOneAlbum(customUser, albumId);
 
 		// then
 		assertThat(response.getAlbumId()).isEqualTo(1L);

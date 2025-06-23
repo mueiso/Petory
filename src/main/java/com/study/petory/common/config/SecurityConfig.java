@@ -113,19 +113,20 @@ public class SecurityConfig {
 		// CORS 설정 객체 생성
 		CorsConfiguration config = new CorsConfiguration();
 
+		// TODO - 배포 전 주소 변경 필요 ("https://www.petory.com")
 		// 허용할 프론트 주소 (클라이언트 도메인 지정)
 		config.setAllowedOrigins(List.of("http://localhost:3000"));  // React 등 프론트엔드 개발 서버
 
 		// 허용할 HTTP 메서드 지정
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
-		/* TODO - 배포 전 체크
+		/*
 		 * 허용할 요청 헤더 지정 (예: Authorization, Content-Type 등)
 		 */
 		config.setAllowedHeaders(List.of("*"));
 
 		// 자격 증명 포함 허용 (예: 쿠키, Authorization 헤더 등)
-		config.setAllowCredentials(true);  // 쿠키/인증정보 포함 허용 (프론트에서 withCredentials: true 필요)
+		config.setAllowCredentials(false);
 
 		// CORS 설정을 특정 경로 패턴에 매핑
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -16,6 +16,8 @@ public interface ChatService {
 
 	ChatMessage createMessage(Long userId, MessageSendRequestDto requestDto);
 
+	PresignedUrlResponseDto createPresignedUrl(PresignedUrlRequestDto requestDto);
+
 	ChatRoomCreateResponseDto saveChatRoom(Long userId, Long tradeBoardId);
 
 	List<ChatRoomGetAllResponseDto> findAllChatRoom(Long userId, Pageable pageable);

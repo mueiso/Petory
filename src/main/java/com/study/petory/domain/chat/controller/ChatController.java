@@ -12,13 +12,13 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
@@ -34,7 +34,7 @@ import com.study.petory.common.exception.enums.SuccessCode;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequestMapping("/chat")
 @RequiredArgsConstructor
 public class ChatController {
@@ -55,6 +55,18 @@ public class ChatController {
 		ChatMessage message = chatService.createMessage(currentUser.getId(), requestDto);
 
 		messagingTemplate.convertAndSend("/sub/room/" + requestDto.getChatRoomId(), message);
+	}
+
+	/**
+	 * presigned url 생성
+	 * @param requestDto 채팅방 아이디, 파일 이름, 파일 타입
+	 * @return 업로드할 url, 파일 url
+	 */
+	@PostMapping("/image")
+	public ResponseEntity<CommonResponse<PresignedUrlResponseDto>> getPresignedUrl(
+		@RequestBody PresignedUrlRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.CREATED, chatService.createPresignedUrl(requestDto));
 	}
 
 	/**

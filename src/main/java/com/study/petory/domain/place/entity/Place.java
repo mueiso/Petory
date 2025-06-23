@@ -77,8 +77,8 @@ public class Place extends TimeFeatureBasedEntity {
 	@Column
 	private LocalDateTime reportResetAt;
 
-	@Column
-	private Long likeCount;
+	@Column(nullable = false)
+	private Long likeCount = 0L;
 
 	@Builder
 	public Place(User user, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio, String address,

@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.service.EmailService;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -20,6 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 public class UserDeactivationScheduler {
 
 	private final UserRepository userRepository;
+	private final EmailService emailService;
+
+	// @Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Seoul")  // 매일 자정
+	// @Transactional
+	// public void sendDeactivationWarningEmails() {
+	//
+	// 	LocalDateTime now =
+	// }
 
 	@Scheduled(cron = "0 0 1 * * ?", zone = "Asia/Seoul")  // 매일 새벽 1시: 미접속 유저의 계정 휴면처리 실행
 	@Transactional

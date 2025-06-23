@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.User;
 
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 	private final AuthServiceImpl authServiceImpl;
+	private final ObjectMapper objectMapper = new ObjectMapper();  // JSON 변환용
 
 	@Override
 	public void onAuthenticationSuccess(
@@ -44,25 +46,34 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 			.nickname(name)
 			.build();
 
-		// TODO - 배포 전 refreshToken → HttpOnly 헤더 또는 response body 로만 처리 필요
 		// 토큰 발급 및 저장 처리
 		TokenResponseDto tokens = authServiceImpl.issueToken(user);
 
-		// RefreshToken 헤더에 담기 (인코딩 포함)
-		String encodedRefreshToken = URLEncoder.encode(tokens.getRefreshToken(), StandardCharsets.UTF_8);
-		response.setHeader("Authorization-Refresh", encodedRefreshToken);
+		// JSON 응답 설정
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.setContentType("application/json;charset=UTF-8");
 
-		/* TODO - 배포된 프론트엔트 주소로 변경 필요 (예: "https://www.petory.com/oauth/success")
-		 * UriComponentsBuilder 사용
-		 * 클라이언트 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
+		// accessToken + refreshToken 을 JSON 응답으로 전달
+		objectMapper.writeValue(response.getWriter(), tokens);
+
+		/* TODO - 배포 전 주석라인 삭제 가능
+		 * 개발 과정 편의성 프론트 리다이렉트용 로직
 		 */
-		String targetUrl = UriComponentsBuilder
-			.fromUriString("http://localhost:8080/login-success.html")
-			.queryParam("accessToken", tokens.getAccessToken())
-			.queryParam("refreshToken", tokens.getRefreshToken())
-			.build()
-			.toUriString();
-
-		response.sendRedirect(targetUrl);
+		// // RefreshToken 헤더에 담기 (인코딩 포함)
+		// String encodedRefreshToken = URLEncoder.encode(tokens.getRefreshToken(), StandardCharsets.UTF_8);
+		// response.setHeader("Authorization-Refresh", encodedRefreshToken);
+		//
+		// /* TODO - 배포용 프론트엔트 주소로 변경 필요 (예: "https://www.petory.com/oauth/success")
+		//  * UriComponentsBuilder 사용
+		//  * 클라이언트 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
+		//  */
+		// String targetUrl = UriComponentsBuilder
+		// 	.fromUriString("http://localhost:8080/login-success.html")
+		// 	.queryParam("accessToken", tokens.getAccessToken())
+		// 	.queryParam("refreshToken", tokens.getRefreshToken())
+		// 	.build()
+		// 	.toUriString();
+		//
+		// response.sendRedirect(targetUrl);
 	}
 }

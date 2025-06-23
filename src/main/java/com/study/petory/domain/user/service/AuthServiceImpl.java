@@ -97,7 +97,10 @@ public class AuthServiceImpl implements AuthService {
 	public void logout(String accessToken) {
 
 		String pureToken = jwtProvider.subStringToken(accessToken);
-		Long userId = Long.valueOf(jwtProvider.getClaims(accessToken).getSubject());
+		/* TODO - 배포 전 주석 라인 삭제 가능
+		 * Long userId = Long.valueOf(jwtProvider.getClaims(accessToken).getSubject());
+		 */
+		Long userId = Long.valueOf(jwtProvider.getClaims(pureToken).getSubject());
 
 		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
 

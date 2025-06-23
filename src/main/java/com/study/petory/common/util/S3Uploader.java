@@ -30,7 +30,7 @@ public class S3Uploader {
 	private static final List<String> ALLOWED_EXTENSIONS = List.of("jpg", "jpeg", "png", "gif", "webp");
 
 	// 파일 확장자 추출 메서드
-	private String getExtension(String fileName) {
+	public String getExtension(String fileName) {
 		String ext = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 
 		if (!ALLOWED_EXTENSIONS.contains(ext)) {

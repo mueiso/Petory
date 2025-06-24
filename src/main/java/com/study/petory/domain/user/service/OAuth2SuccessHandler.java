@@ -55,25 +55,5 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 		// accessToken + refreshToken 을 JSON 응답으로 전달
 		objectMapper.writeValue(response.getWriter(), tokens);
-
-		/* TODO - 배포 전 주석라인 삭제 가능
-		 * 개발 과정 편의성 프론트 리다이렉트용 로직
-		 */
-		// RefreshToken 헤더에 담기 (인코딩 포함)
-		String encodedRefreshToken = URLEncoder.encode(tokens.getRefreshToken(), StandardCharsets.UTF_8);
-		response.setHeader("Authorization-Refresh", encodedRefreshToken);
-
-		/* TODO - 배포용 프론트엔트 주소로 변경 필요 (예: "https://www.petory.com/oauth/success")
-		 * UriComponentsBuilder 사용
-		 * 클라이언트 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
-		 */
-		String targetUrl = UriComponentsBuilder
-			.fromUriString("http://localhost:8080/login-success.html")
-			.queryParam("accessToken", tokens.getAccessToken())
-			.queryParam("refreshToken", tokens.getRefreshToken())
-			.build()
-			.toUriString();
-
-		response.sendRedirect(targetUrl);
 	}
 }

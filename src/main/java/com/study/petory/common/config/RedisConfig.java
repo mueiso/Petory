@@ -4,6 +4,7 @@ import static com.study.petory.common.util.DateUtil.*;
 
 import java.time.Duration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -35,10 +36,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RedisConfig {
 
+	@Value("${data.redis.host}")
+	private String hostName;
+
+	@Value("${data.redis.port}")
+	private int port;
+
+	private static final String REDIS_PREFIX = "redis://";
+
 	@Bean
 	@Primary
 	public RedisConnectionFactory redisConnectionManager() {
-		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
+		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(hostName, port);
 		config.setDatabase(0);
 		return new LettuceConnectionFactory(config);
 	}
@@ -46,7 +55,7 @@ public class RedisConfig {
 	// 전역 캐시 설정
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
-		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6381);
+		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(hostName, port);
 		config.setDatabase(1);
 		return new LettuceConnectionFactory(config);
 	}
@@ -54,7 +63,7 @@ public class RedisConfig {
 	// bucket4j + redis
 	@Bean
 	public RedisClient redisClientBucket4j() {
-		return RedisClient.create("redis://localhost:6381/2");
+		return RedisClient.create(REDIS_PREFIX + hostName + ":" + port);
 	}
 
 	@Bean(name = "redisCacheTemplate")

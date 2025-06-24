@@ -58,6 +58,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http, RateLimitFilter rateLimitFilter) throws Exception {
 		http
+			// TODO - 배포 전 확인 필요
 			// CORS 설정 적용
 			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.csrf(AbstractHttpConfigurer::disable)
@@ -66,17 +67,10 @@ public class SecurityConfig {
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
 				// Security 전용 WHITELIST
-				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0]))
-				.permitAll()
+				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0])).permitAll()
 				// GET 메서드의 특정 경로 한정 허용
-				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0]))
-				.permitAll()
-				.requestMatchers("/ws-chat/**")
-				.permitAll()
-				.requestMatchers("/favicon.ico")
-				.permitAll()
-				.anyRequest()
-				.authenticated()
+				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0])).permitAll()
+				.anyRequest().authenticated()
 			)
 
 			.exceptionHandling(ex -> ex

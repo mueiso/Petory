@@ -58,16 +58,74 @@ public class JwtFilter extends OncePerRequestFilter {
 		debugLog("Context Path: " + contextPath);
 		debugLog("전체 URL: " + fullUrl);
 
-		// GET /owner-boards 하위 경로 모두 허용
-		if ("GET".equalsIgnoreCase(method) && url.startsWith("/owner-boards")) {
-			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+		// GET /owner-boards 하위 경로 모두 비회원 허용
+		if ("GET".equalsIgnoreCase(method)
+			&& url.startsWith("/owner-boards")) {
+
+			debugLog("GET /owner-boards 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;
 		}
 
-		// GET /owner-boards 하위 경로 모두 허용
-		if ("GET".equalsIgnoreCase(method) && url.startsWith("/places")) {
-			debugLog("GET /owner-boards 경로입니다. 필터 우회: " + url);
+		// GET /places 하위 경로 모두 비회원 허용
+		if ("GET".equalsIgnoreCase(method)
+			&& url.startsWith("/places")) {
+
+			debugLog("GET /places 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// GET /trade-boards, /trade-boards/{tradeBoardId} 경로 비회원 허용
+		if ("GET".equalsIgnoreCase(method)
+			&& (url.endsWith("/trade-boards")
+			|| url.matches("^/trade-boards/\\d+$"))) {
+
+			debugLog("GET /trade-boards 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// GET /questions/today 경로 비회원 허용
+		if ("GET".equalsIgnoreCase(method)
+			&& url.equals("/questions/today")) {
+
+			debugLog("GET /questions/today 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// GET /albums/all, /albums/all/users/{userId}, /albums/{albumId} 경로 비회원 허용
+		if ("GET".equalsIgnoreCase(method)
+			&& (url.equals("/albums/all")
+			|| url.matches("^/albums/all/users/\\d+$")
+			|| (url.matches("^/albums/\\d+$") && request.getHeader("Authorization") == null))) {
+
+			debugLog("GET /albums 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// 웹소켓 요청 우회
+		if (isWebSocketRequest(url)) {
+
+			debugLog("WebSocket 연결 요청. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		// POST /test 하위 경로 모두 비회원 허용
+		if ("POST".equalsIgnoreCase(method)
+			&& url.startsWith("/test")) {
+
+			debugLog("POST /test 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
+
+		//아이콘 요청 우회
+		if ("/favicon.ico".equals(url)) {
+			debugLog("favicon 요청. 필터 우회");
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -75,14 +133,8 @@ public class JwtFilter extends OncePerRequestFilter {
 		// 정적 리소스 또는 화이트리스트 우회
 		if (url.matches(".*(\\.html|\\.css|\\.js|\\.png|\\.jpg|\\.ico)$")
 			|| securityWhitelist.getUrlWhitelist().contains(url)) {
-			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
-			filterChain.doFilter(request, response);
-			return;
-		}
 
-		//웹소켓 요청 우회
-		if (isWebSocketRequest(url)) {
-			debugLog("WebSocket 연결 요청. 필터 우회: " + url);
+			debugLog("WHITELIST 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -182,5 +234,4 @@ public class JwtFilter extends OncePerRequestFilter {
 	private boolean isWebSocketRequest(String url) {
 		return pathMatcher.match("/ws-chat/**", url);
 	}
-
 }

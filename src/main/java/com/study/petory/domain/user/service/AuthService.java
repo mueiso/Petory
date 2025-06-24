@@ -18,7 +18,7 @@ public interface AuthService {
 
 	List<Role> removeRoleFromUser(Long userId, Role roleToRemove);
 
-	void deactivateUser(Long targetUserId);
+	void suspendUser(Long targetUserId);
 
 	void restoreUser(Long targetUserId);
 }

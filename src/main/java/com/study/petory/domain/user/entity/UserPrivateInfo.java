@@ -38,8 +38,7 @@ public class UserPrivateInfo extends TimeFeatureBasedEntity {
 		this.mobileNum = mobileNum;
 	}
 
-	public void update(String name, String mobileNum) {
-		this.name = name;
+	public void update(String mobileNum) {
 		this.mobileNum = mobileNum;
 	}
 }

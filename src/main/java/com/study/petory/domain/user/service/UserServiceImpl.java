@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public TokenResponseDto testLogin(Long userId) {
 
-		User user = getUserById(userId);
+		User user = findUserById(userId);
 
 		if (user.getUserStatus() != UserStatus.ACTIVE
 			&& user.getUserStatus() != UserStatus.DEACTIVATED) {
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 	// 현재 사용자 정보 조회
 	@Override
 	@Transactional(readOnly = true)
-	public UserProfileResponseDto getMyProfile(String email) {
+	public UserProfileResponseDto findMyProfile(String email) {
 
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
@@ -106,9 +106,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public User getUserById(Long userId) {
+	public User findUserById(Long userId) {
 
 		return userRepository.findUserById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+	}
+
+	@Override
+	@Transactional
+	public User findUserByEmail(String email) {
+
+		return userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 }

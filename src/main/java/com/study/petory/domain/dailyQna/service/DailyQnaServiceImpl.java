@@ -43,7 +43,7 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		Question todayQuestion = questionService.findQuestionByIdAndStatus(List.of(QuestionStatus.ACTIVE), questionId);
 
 		dailyQnaRepository.save(DailyQna.builder()
-			.user(userService.getUserById(userId))
+			.user(userService.findUserById(userId))
 			.question(todayQuestion)
 			.answer(requestDto.getAnswer())
 			.dailyQnaStatus(DailyQnaStatus.ACTIVE)

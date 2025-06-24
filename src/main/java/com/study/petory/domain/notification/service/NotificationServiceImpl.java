@@ -25,7 +25,7 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public Page<NotificationGetResponseDto> findNotificationByUser(Long userId, Pageable pageable) {
 
-		userService.getUserById(userId);
+		userService.findUserById(userId);
 
 		return notificationRepository.findByUserId(userId, pageable)
 			.map(NotificationGetResponseDto::new);
@@ -34,7 +34,7 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public void deleteNotification(Long userId, Long notificationId) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		Notification notification = notificationRepository.findById(notificationId)
 			.orElseThrow(() -> new CustomException(ErrorCode.NOTIFICATION_NOT_FOUND));

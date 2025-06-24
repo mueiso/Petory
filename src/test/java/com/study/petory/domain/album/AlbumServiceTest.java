@@ -143,7 +143,7 @@ public class AlbumServiceTest {
 
 		given(albumImageService.findImageSize(testUser.getUserRole())).willReturn(imageSize);
 
-		given(userService.getUserById(userId)).willReturn(testUser);
+		given(userService.findUserById(userId)).willReturn(testUser);
 
 		AlbumCreateRequestDto requestDto = new AlbumCreateRequestDto("내용", null);
 
@@ -326,7 +326,7 @@ public class AlbumServiceTest {
 		given(albumImageService.findImageSize(testUser.getUserRole())).willReturn(imageSize);
 
 		given(albumRepository.findOneAlbumByUser(false, albumId)).willReturn(Optional.of(testAlbum));
-		given(userService.getUserById(userId)).willReturn(testUser);
+		given(userService.findUserById(userId)).willReturn(testUser);
 
 		// when
 		albumService.saveNewAlbumImage(userId, albumId, testImages);

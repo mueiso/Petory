@@ -60,7 +60,7 @@ public class UserController {
 		@AuthenticationPrincipal CustomPrincipal currentUser) {
 
 		// currentUser.getId(), currentUser.getEmail(), currentUser.getNickname() 사용 가능
-		UserProfileResponseDto profile = userService.getMyProfile(currentUser.getEmail());
+		UserProfileResponseDto profile = userService.findMyProfile(currentUser.getEmail());
 
 		return CommonResponse.of(SuccessCode.FOUND, profile);
 	}

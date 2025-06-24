@@ -89,7 +89,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 			return currentUser.getId();
 		}
 
-		// 로그인 되지 않았을 경우 null이 반환되고 401 에러 반환
+		// 로그인 되지 않았을 경우 null이 반환되고 429 에러 반환
 		return null;
 	}
 }

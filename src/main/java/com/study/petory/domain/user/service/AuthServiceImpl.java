@@ -2,9 +2,7 @@ package com.study.petory.domain.user.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +14,6 @@ import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.entity.UserStatus;
-import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +23,6 @@ public class AuthServiceImpl implements AuthService {
 
 	private final UserService userService;
 	private final JwtProvider jwtProvider;
-	private final RedisTemplate<String, String> loginRefreshToken;
 
 	/*
 	 * [토큰 발급]
@@ -83,33 +79,6 @@ public class AuthServiceImpl implements AuthService {
 		jwtProvider.storeRefreshToken(savedUser.getId(), refreshToken);
 
 		return new TokenResponseDto(accessToken, refreshToken);
-	}
-
-	/*
-	 * [로그아웃 처리]
-	 * AccessToken 을 블랙리스트 등록 - 만료시간되면 자동 삭제
-	 * Redis 에 저장된 RefreshToken 제거
-	 */
-	@Override
-	@Transactional
-	public void logout(String accessToken) {
-
-		String pureToken = jwtProvider.subStringToken(accessToken);
-		/* TODO - 배포 전 주석 라인 삭제 가능
-		 * Long userId = Long.valueOf(jwtProvider.getClaims(accessToken).getSubject());
-		 */
-		Long userId = Long.valueOf(jwtProvider.getClaims(pureToken).getSubject());
-
-		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
-
-		/*
-		 * AccessToken 을 블랙리스트에 등록하는 로직
-		 * expiration 시간은 AccessToken 의 남은 유효기간만큼 설정되어, 만료 시 자동으로 삭제
-		 */
-		loginRefreshToken.opsForValue()
-			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
-
-		jwtProvider.deleteRefreshToken(userId);
 	}
 
 	/*

@@ -13,6 +13,8 @@ public interface UserService {
 
 	void updateProfile(String email, UpdateUserRequestDto dto);
 
+	void logout(String accessToken);
+
 	void deleteAccount(String email);
 
 	User findUserById(Long userId);

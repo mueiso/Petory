@@ -47,24 +47,6 @@ public class AuthController {
 	}
 
 	/**
-	 * [로그아웃 처리]
-	 * AccessToken 을 블랙리스트에 등록하고,
-	 * Redis 에 저장된 RefreshToken 삭제
-	 *
-	 * @param accessToken : "Bearer {accessToken}" 형식의 헤더
-	 * @return 로그아웃 성공 메시지
-	 */
-	@DeleteMapping("/logout")
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	public ResponseEntity<CommonResponse<Object>> logout(
-		@RequestHeader("Authorization") String accessToken) {
-
-		authServiceImpl.logout(accessToken);
-
-		return CommonResponse.of(SuccessCode.USER_LOGOUT);
-	}
-
-	/**
 	 * [관리자 전용 - 권한 추가]
 	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있습니다.
 	 *

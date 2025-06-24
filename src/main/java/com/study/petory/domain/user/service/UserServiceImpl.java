@@ -1,7 +1,9 @@
 package com.study.petory.domain.user.service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
+	private final RedisTemplate<String, String> loginRefreshToken;
 
 	/*
 	 * [테스트 전용 - 로그인]
@@ -90,6 +93,31 @@ public class UserServiceImpl implements UserService {
 
 		// UserPrivateInfo 수정
 		user.getUserPrivateInfo().update(dto.getMobileNum());
+	}
+
+	/*
+	 * [로그아웃 처리]
+	 * AccessToken 을 블랙리스트 등록 - 만료시간되면 자동 삭제
+	 * Redis 에 저장된 RefreshToken 제거
+	 */
+	@Override
+	@Transactional
+	public void logout(String accessToken) {
+
+		String pureToken = jwtProvider.subStringToken(accessToken);
+
+		Long userId = Long.valueOf(jwtProvider.getClaims(pureToken).getSubject());
+
+		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
+
+		/*
+		 * AccessToken 을 블랙리스트에 등록하는 로직
+		 * expiration 시간은 AccessToken 의 남은 유효기간만큼 설정되어, 만료 시 자동으로 삭제
+		 */
+		loginRefreshToken.opsForValue()
+			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
+
+		jwtProvider.deleteRefreshToken(userId);
 	}
 
 	// 사용자 탈퇴 (soft delete 처리)

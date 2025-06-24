@@ -28,8 +28,10 @@ public class PlaceGetAllResponseDto {
 
 	private final BigDecimal longitude;
 
+	private final Long likeCount;
+
 	public PlaceGetAllResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, String address,
-		BigDecimal ratio, BigDecimal latitude, BigDecimal longitude) {
+		BigDecimal ratio, BigDecimal latitude, BigDecimal longitude, Long likeCount) {
 		this.id = id;
 		this.placeName = placeName;
 		this.placeInfo = placeInfo;
@@ -38,6 +40,7 @@ public class PlaceGetAllResponseDto {
 		this.ratio = ratio;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.likeCount = likeCount;
 	}
 
 	public static PlaceGetAllResponseDto from(Place place) {
@@ -49,7 +52,8 @@ public class PlaceGetAllResponseDto {
 			place.getAddress(),
 			place.getRatio(),
 			place.getLatitude(),
-			place.getLongitude()
+			place.getLongitude(),
+			place.getLikeCount()
 		);
 	}
 }

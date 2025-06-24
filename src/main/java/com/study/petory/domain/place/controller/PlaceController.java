@@ -22,22 +22,24 @@ import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReportCancelRequestDto;
+import com.study.petory.domain.place.dto.request.PlaceReportRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReviewUpdateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceUpdateRequestDto;
-import com.study.petory.domain.place.dto.request.PlaceReportRequestDto;
 import com.study.petory.domain.place.dto.response.PlaceCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
+import com.study.petory.domain.place.dto.response.PlaceLikeResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.service.BookmarkPlaceService;
+import com.study.petory.domain.place.service.PlaceLikeService;
+import com.study.petory.domain.place.service.PlaceReportService;
 import com.study.petory.domain.place.service.PlaceReviewService;
 import com.study.petory.domain.place.service.PlaceService;
-import com.study.petory.domain.place.service.PlaceReportService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +53,7 @@ public class PlaceController {
 	private final PlaceReviewService placeReviewService;
 	private final BookmarkPlaceService bookmarkPlaceService;
 	private final PlaceReportService placeReportService;
+	private final PlaceLikeService placeLikeService;
 
 	/**
 	 * 장소 등록
@@ -275,5 +278,20 @@ public class PlaceController {
 	) {
 		placeReportService.cancelReportPlace(currentUser.getId(), placeId, reportId, requestDto);
 		return CommonResponse.of(SuccessCode.UPDATED, "신고 취소가 완료되었습니다.");
+	}
+
+	/**
+	 * 장소 좋아요
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @return CommonResponse 방식의 좋아요에 대한 정보
+	 */
+	@PreAuthorize("hasRole('USER')")
+	@PostMapping("/{placeId}/like")
+	public ResponseEntity<CommonResponse<PlaceLikeResponseDto>> likePlace(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId
+	) {
+		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
 	}
 }

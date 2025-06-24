@@ -23,7 +23,7 @@ public class UserDeactivationScheduler {
 	private final UserRepository userRepository;
 	private final EmailService emailService;
 
-	// @Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Seoul")  // 매일 자정
+	// @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")  // 매일 자정
 	// @Transactional
 	// public void sendDeactivationWarningEmails() {
 	//

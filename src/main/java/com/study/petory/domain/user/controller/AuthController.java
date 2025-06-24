@@ -66,11 +66,11 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 권한 추가]
-	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있음
+	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있습니다.
 	 *
 	 * @param targetUserId 권한을 부여할 사용자 ID
 	 * @param role 부여할 권한
-	 * @return 부여 이후 해당 사용자의 전체 권한 목록
+	 * @return 수정 성공 메시지 + 권한 부여 받은 사용자의 전체 권한 목록
 	 */
 	@PostMapping("/roles")
 	@PreAuthorize("hasRole('ADMIN')")
@@ -85,7 +85,7 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 권한 제거]
-	 * ADMIN 권한이 있는 사용자만 다른 사용자의 권한을 제거할 수 있음
+	 * ADMIN 권한이 있는 사용자만 다른 사용자의 권한을 제거할 수 있습니다.
 	 *
 	 * @param targetUserId 권한 제거당할 사용자 ID
 	 * @param role 제거할 권한
@@ -104,25 +104,25 @@ public class AuthController {
 
 	/**
 	 * [관리자 전용 - 유저 비활성화]
-	 * 지정한 사용자의 계정을 softDelete 처리
+	 * 지정한 사용자의 계정을 soft delete 처리
 	 * 이미 비활성화된 계정일 경우 예외 처리
 	 *
-	 * @param userId 비활성화할 대상 사용자의 ID
-	 * @return 삭제 성공 메시지
+	 * @param userId 계정 정지 대상 사용자의 ID
+	 * @return 계정 정지 성공 메시지
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("/deactivate")
-	public ResponseEntity<CommonResponse<Object>> deactivateUser(
+	@DeleteMapping("/suspend")
+	public ResponseEntity<CommonResponse<Object>> suspendUser(
 		@RequestParam Long userId) {
 
-		authServiceImpl.deactivateUser(userId);
+		authServiceImpl.suspendUser(userId);
 
-		return CommonResponse.of(SuccessCode.DELETED);
+		return CommonResponse.of(SuccessCode.USER_SUSPENDED);
 	}
 
 	/**
 	 * [관리자 전용 - 유저 복구]
-	 * softDelete 처리된 사용자의 계정을 복구
+	 * soft delete 처리된 사용자의 계정을 복구
 	 * deletedAt 필드를 null 로 되돌려 계정을 활성화 상태로 변경
 	 * 이미 활성화된 계정일 경우 예외 처리
 	 *

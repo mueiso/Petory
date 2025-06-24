@@ -13,6 +13,7 @@ import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
+import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -32,11 +33,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public TokenResponseDto testLogin(Long userId) {
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		if (user.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.DEACTIVATED_USER);
+		User user = getUserById(userId);
+
+		if (user.getUserStatus() != UserStatus.ACTIVE
+			&& user.getUserStatus() != UserStatus.DEACTIVATED) {
+			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
 		}
 
 		List<String> roles = user.getUserRole().stream()
@@ -56,7 +58,6 @@ public class UserServiceImpl implements UserService {
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
 
-
 	// 현재 사용자 정보 조회
 	@Override
 	@Transactional(readOnly = true)
@@ -70,8 +71,8 @@ public class UserServiceImpl implements UserService {
 
 		return new UserProfileResponseDto(
 			user.getEmail(),
-			user.getNickname(),
 			userPrivateInfo.getName(),
+			user.getNickname(),
 			userPrivateInfo.getMobileNum()
 		);
 	}
@@ -88,10 +89,10 @@ public class UserServiceImpl implements UserService {
 		user.updateNickname(dto.getNickname());
 
 		// UserPrivateInfo 수정
-		user.getUserPrivateInfo().update(dto.getNickname(), dto.getMobileNum());
+		user.getUserPrivateInfo().update(dto.getMobileNum());
 	}
 
-	// 사용자 탈퇴
+	// 사용자 탈퇴 (soft delete 처리)
 	@Override
 	@Transactional
 	public void deleteAccount(String email) {
@@ -99,7 +100,8 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		userRepository.delete(user);
+		user.deactivateEntity();
+		user.updateStatus(UserStatus.DELETED);
 	}
 
 	@Override

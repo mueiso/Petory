@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>OAuth2 Login Test</title>
+  <title>Petory 로그인</title>
+
+  <link rel="icon" href="/petory.ico" type="image/x-icon">
+
+  <!-- Google Fonts 둥근 글꼴 로딩 -->
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Jua&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #d8b38c;
+      font-family: 'Gowun Dodum', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background-color: #fff4e6;
+      padding: 100px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      width: 350px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-family: 'Jua', sans-serif;
+      color: #5a3e2b;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .login-btn {
+      background-color: #fbbc05;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Jua', sans-serif;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .login-btn:hover {
+      background-color: #e0a800;
+    }
+  </style>
 </head>
 <body>
-<h1>구글 로그인 테스트</h1>
-<a href="http://localhost:8080/oauth2/authorization/google">
-  <button>Google 로그인</button>
-</a>
+<div class="container">
+  <img class="logo" src="/image-petory.png" alt="Petory Logo">
+  <h1>Petory에 오신 걸 환영합니다!</h1>
+  <a href="http://localhost:8080/oauth2/authorization/google">
+    <button class="login-btn">Google 로그인</button>
+  </a>
+</div>
 </body>
 </html>

@@ -120,11 +120,10 @@ public class SecurityConfig {
 		// 허용할 HTTP 메서드 지정
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
-		/*
-		 * 허용할 요청 헤더 지정 (예: Authorization, Content-Type 등)
-		 */
-		config.setAllowedHeaders(List.of("*"));
+		// 허용할 요청 헤더 지정
+		config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
+		// TODO - 프론트 구현하여 연동 시 true 로 설정 변경 필요
 		// 자격 증명 포함 허용 (예: 쿠키, Authorization 헤더 등)
 		config.setAllowCredentials(false);
 

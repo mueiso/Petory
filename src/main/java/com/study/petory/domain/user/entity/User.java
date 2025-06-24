@@ -14,6 +14,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -24,7 +25,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "tb_user")
+@Table(
+	name = "tb_user",
+	indexes = {
+		@Index(name = "idx_user_email", columnList = "email"),
+		@Index(name = "idx_user_status_deleted_at", columnList = "user_status, deleted_at"),
+		@Index(name = "idx_user_status_updated_at", columnList = "user_status, updated_at")
+	}
+)
 @NoArgsConstructor
 public class User extends TimeFeatureBasedEntity {
 

@@ -51,15 +51,15 @@ public class AuthController {
 	 * AccessToken 을 블랙리스트에 등록하고,
 	 * Redis 에 저장된 RefreshToken 삭제
 	 *
-	 * @param bearerToken : "Bearer {accessToken}" 형식의 헤더
+	 * @param accessToken : "Bearer {accessToken}" 형식의 헤더
 	 * @return 로그아웃 성공 메시지
 	 */
 	@DeleteMapping("/logout")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> logout(
-		@RequestHeader("Authorization") String bearerToken) {
+		@RequestHeader("Authorization") String accessToken) {
 
-		authServiceImpl.logout(bearerToken);
+		authServiceImpl.logout(accessToken);
 
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);
 	}

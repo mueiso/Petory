@@ -100,6 +100,10 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		if (user.getUserStatus() == UserStatus.DELETED) {
+			throw new CustomException(ErrorCode.USER_ALREADY_DELETED);
+		}
+
 		user.deactivateEntity();
 		user.updateStatus(UserStatus.DELETED);
 	}

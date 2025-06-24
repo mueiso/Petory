@@ -2,6 +2,7 @@ package com.study.petory.common.filter;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.http.HttpStatus;
@@ -39,16 +40,13 @@ public class RateLimitFilter extends OncePerRequestFilter {
 		// 신고 요청을 확인
 		String uri = httpServletRequest.getRequestURI();
 
-		// \\d+ 는 숫자 1개 이상으로 이루어진 문자열을 의미
-		String keyPrefix;
-		if (uri.matches("/places/\\d+/reviews")) {
-			keyPrefix = "rate-limit:review:";
-		} else if (uri.matches("/places/\\d+/reports")) {
-			keyPrefix = "rate-limit:report:";
-		} else {
+		// enum을 활용하여 동적 처리
+		Optional<RateLimitType> rateLimitType = RateLimitType.fromUri(uri);
+		if (rateLimitType.isEmpty()) {
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
 			return;
 		}
+		String keyPrefix = rateLimitType.get().getUriSuffix();
 
 		// userId를 확인
 		Long userId = extractUserId();

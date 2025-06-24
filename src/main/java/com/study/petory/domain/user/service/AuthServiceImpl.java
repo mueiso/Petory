@@ -24,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-	private final UserRepository userRepository;
 	private final UserService userService;
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
@@ -38,8 +37,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public TokenResponseDto issueToken(User user) {
 
-		User savedUser = userRepository.findByEmail(user.getEmail())
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User savedUser = userService.findUserByEmail(user.getEmail());
 
 		// 로그인 불가 상태는 예외 처리: 계정 정지 상태 (SUSPENDED)
 		if (savedUser.getUserStatus() == UserStatus.SUSPENDED) {
@@ -144,7 +142,7 @@ public class AuthServiceImpl implements AuthService {
 		}
 
 		// 5. 사용자 조회
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		// 6. 역할 목록 추출
 		List<String> roles = user.getUserRole().stream()
@@ -173,7 +171,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public List<Role> addRoleToUser(Long userId, Role newRole) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		boolean alreadyHasSameRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(newRole));
@@ -197,7 +195,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public List<Role> removeRoleFromUser(Long userId, Role roleToRemove) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		boolean hasRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(roleToRemove));
@@ -222,7 +220,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public void suspendUser(Long targetUserId) {
 
-		User user = userService.getUserById(targetUserId);
+		User user = userService.findUserById(targetUserId);
 
 		if (user.getUserStatus() == UserStatus.SUSPENDED) {
 			throw new CustomException(ErrorCode.ALREADY_SUSPENDED);
@@ -240,7 +238,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public void restoreUser(Long targetUserId) {
 
-		User user = userService.getUserById(targetUserId);
+		User user = userService.findUserById(targetUserId);
 
 		if (user.isDeletedAtNull()) {
 			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);

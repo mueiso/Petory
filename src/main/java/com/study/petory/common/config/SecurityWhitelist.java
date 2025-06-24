@@ -29,7 +29,8 @@ public class SecurityWhitelist {
 			"/ws-chat/**",
 			"/test/**",
 			"/image-petory.png",
-			"/petory.ico"
+			"/petory.ico",
+			"/actuator/prometheus"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

@@ -68,8 +68,10 @@ public class RateLimitFilter extends OncePerRequestFilter {
 		// 버킷에서 요청시마다 토큰 1개를 소비
 		// 만약 잔여 토큰이 0개라면 요청 거부
 		if (bucket.tryConsume(1)) {
+			log.info("✔️ 요청 허용 - 남은 토큰 : {}, (key : {})", bucket.getAvailableTokens(), key);
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
 		} else {
+			log.info("❌ 요청 차단 - 남은 토큰 : {}, (key : {})", bucket.getAvailableTokens(), key);
 			CommonResponse<Object> errorResponse = new CommonResponse<>(ErrorCode.TOO_MANY_REQUESTS, null);
 
 			httpServletResponse.setStatus(HttpStatus.TOO_MANY_REQUESTS.value()); // ResponseEntity로 감싸지 않았기 때문에 필요

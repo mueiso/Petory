@@ -1,7 +1,6 @@
 package com.study.petory.common.filter;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -32,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RateLimitFilter extends OncePerRequestFilter {
 
 	private final ProxyManager<String> proxyManager;
-	private final Supplier<BucketConfiguration> bucketConfigurationSupplier = createBucketConfig();
+	private final Supplier<BucketConfiguration> bucketConfigurationSupplier;
 	private final ObjectMapper objectMapper;
 
 	@Override
@@ -78,17 +77,6 @@ public class RateLimitFilter extends OncePerRequestFilter {
 			httpServletResponse.setContentType("application/json; charset=UTF-8");
 			httpServletResponse.getWriter().write(objectMapper.writeValueAsString(errorResponse));
 		}
-	}
-
-	// final 필드로 부여하여 계속 재사용하는 방식
-	private Supplier<BucketConfiguration> createBucketConfig() {
-
-		// 버킷 설정 Greedy 방식
-		// 1시간에 최대 10개의 토큰 사용가능
-		// 토큰은 1시간 주기로 10개의 토큰을 한번에 채워줌
-		return () -> BucketConfiguration.builder()
-			.addLimit(limit -> limit.capacity(10).refillGreedy(10, Duration.ofHours(1)))
-			.build();
 	}
 
 	private Long extractUserId() {

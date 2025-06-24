@@ -14,14 +14,17 @@ public class ChatMessage {
 
 	private String senderNickname;
 
-	private String message;
+	private MessageType messageType;
+
+	private String content;
 
 	private LocalDateTime createdAt;
 
 	@Builder
-	public ChatMessage(Long senderId, String message, String senderNickname) {
+	public ChatMessage(Long senderId, MessageType messageType, String content, String senderNickname) {
 		this.senderId = senderId;
-		this.message = message;
+		this.messageType = messageType;
+		this.content = content;
 		this.senderNickname = senderNickname;
 		this.createdAt = LocalDateTime.now();
 	}

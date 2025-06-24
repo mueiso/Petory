@@ -30,7 +30,7 @@ public class UserDeactivationScheduler {
 	// 	LocalDateTime now =
 	// }
 
-	@Scheduled(cron = "0 0 1 * * ?", zone = "Asia/Seoul")  // 매일 새벽 1시: 미접속 유저의 계정 휴면처리 실행
+	@Scheduled(cron = "0 0 1 * * *", zone = "Asia/Seoul")  // 매일 새벽 1시: 미접속 유저의 계정 휴면처리 실행
 	@Transactional
 	public void deactivateInactiveUsers() {
 

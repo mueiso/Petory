@@ -69,8 +69,16 @@ public class RateLimitFilter extends OncePerRequestFilter {
 		} else {
 			httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			httpServletResponse.setCharacterEncoding("UTF-8"); // 한글 깨짐 방지
-			httpServletResponse.setContentType("text/plain; charset=UTF-8");
-			httpServletResponse.getWriter().write("같은 요청은 1시간에 최대 10회까지 가능합니다.");
+			httpServletResponse.setContentType("application/json; charset=UTF-8");
+
+			String json = """
+				{
+				"status": 429,
+				"message": "요청이 너무 많습니다. 같은 요청은 1시간에 최대 10회까지 가능합니다."
+				}
+				""";
+
+			httpServletResponse.getWriter().write(json);
 		}
 	}
 

@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.common.scheduler.UserDeactivationScheduler;
-import com.study.petory.common.scheduler.UserDeletionScheduler;
-import com.study.petory.common.scheduler.UserRestoreScheduler;
 import com.study.petory.common.service.EmailService;
 import com.study.petory.common.service.UserSchedulerService;
 
@@ -24,8 +21,6 @@ import lombok.RequiredArgsConstructor;
 public class TestSchedulerController {
 
 	private final EmailService emailService;
-	private final UserRestoreScheduler userRestoreScheduler;
-	private final UserDeactivationScheduler userDeactivationScheduler;
 	private final UserSchedulerService userSchedulerService;
 
 	/**

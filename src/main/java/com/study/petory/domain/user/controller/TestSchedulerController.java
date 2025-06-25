@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
-import com.study.petory.common.schedule.UserDeactivationScheduler;
-import com.study.petory.common.schedule.UserDeletionScheduler;
-import com.study.petory.common.schedule.UserRestoreScheduler;
+import com.study.petory.common.scheduler.UserDeactivationScheduler;
+import com.study.petory.common.scheduler.UserDeletionScheduler;
+import com.study.petory.common.scheduler.UserRestoreScheduler;
 import com.study.petory.common.service.EmailService;
+import com.study.petory.common.service.UserSchedulerService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,9 +24,9 @@ import lombok.RequiredArgsConstructor;
 public class TestSchedulerController {
 
 	private final EmailService emailService;
-	private final UserDeletionScheduler userDeletionScheduler;
 	private final UserRestoreScheduler userRestoreScheduler;
 	private final UserDeactivationScheduler userDeactivationScheduler;
+	private final UserSchedulerService userSchedulerService;
 
 	/**
 	 * [TEST]
@@ -37,8 +38,8 @@ public class TestSchedulerController {
 	 */
 	@PostMapping("/send-email")
 	public ResponseEntity<CommonResponse<Object>> testSendMail(
-		@RequestParam String email,
-		@RequestParam String name) {
+		@RequestParam("email") String email,
+		@RequestParam("name") String name) {
 
 		// 계정이 85일 전에 비활성화 되었다고 가정 → 5일 후에 계정 삭제될거라는 메일 발송
 		emailService.sendDeletionWarning(email, name, LocalDateTime.now().minusDays(85));
@@ -55,12 +56,12 @@ public class TestSchedulerController {
 	 */
 	@PostMapping("/send-deletion-warning")
 	public ResponseEntity<CommonResponse<Object>> testAutoDeletionWarning(
-		@RequestParam String date) {
+		@RequestParam("date") String date) {
 
 		// 현재 날짜를 임의로 설정해서 테스트 (예: 이메일 발송 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userDeletionScheduler.testSendDeletionWarningEmails(simulatedNow);
+		userSchedulerService.testSendDeletionWarningEmails(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.EMAIL_SENT);
 	}
@@ -75,12 +76,12 @@ public class TestSchedulerController {
 	 */
 	@PostMapping("/delete-expired-users")
 	public ResponseEntity<CommonResponse<Object>> testAutoHardDelete(
-		@RequestParam String date) {
+		@RequestParam("date") String date) {
 
 		// 현재 날짜를 임의로 설정해서 테스트 (예: Hard delete 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userDeletionScheduler.testHardDeleteExpiredUsers(simulatedNow);
+		userSchedulerService.testHardDeleteExpiredUsers(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
@@ -94,7 +95,7 @@ public class TestSchedulerController {
 	 */
 	@PostMapping("/restore-suspended-users")
 	public ResponseEntity<CommonResponse<Object>> testAutoRestore(
-		@RequestParam String date) {
+		@RequestParam("date") String date) {
 
 		// 현재 날짜를 임의로 설정해서 테스트 (예: 복구 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
@@ -111,9 +112,9 @@ public class TestSchedulerController {
 	 * @param date 계정 휴면 상태로 전환 예정 날짜
 	 * @return 휴면 처리 성공 메시지
 	 */
-	@PostMapping("deactivate-inactive-users")
+	@PostMapping("/deactivate-inactive-users")
 	public ResponseEntity<CommonResponse<Object>> testAutoDeactivate(
-		@RequestParam String date) {
+		@RequestParam("date") String date) {
 
 		// 현재 날짜를 임의로 설정해서 테스트 (예: 휴면 계정으로 전환 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);

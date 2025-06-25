@@ -31,7 +31,7 @@ public class PlaceLikeService {
 			findPlace.decreaseLikeCount();
 			isLiked = false;
 		} else {
-			PlaceLike placeLike = new PlaceLike(findPlace, userService.getUserById(userId));
+			PlaceLike placeLike = new PlaceLike(findPlace, userService.findUserById(userId));
 			findPlace.increaseLikeCount();
 			placeLikeRepository.save(placeLike);
 			isLiked = true;

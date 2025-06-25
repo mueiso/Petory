@@ -35,6 +35,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
+	private static final String HEADER_AUTHORIZATION = "Authorization";
+	private static final String TOKEN_PREFIX = "Bearer ";
+
 	private final JwtProvider jwtProvider;
 	private final RedisTemplate<String, String> loginRefreshToken;
 	private final SecurityWhitelist securityWhitelist;
@@ -99,7 +102,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		if ("GET".equalsIgnoreCase(method)
 			&& (url.equals("/albums/all")
 			|| url.matches("^/albums/all/users/\\d+$")
-			|| (url.matches("^/albums/\\d+$") && request.getHeader("Authorization") == null))) {
+			|| (url.matches("^/albums/\\d+$") && request.getHeader(HEADER_AUTHORIZATION) == null))) {
 
 			debugLog("GET /albums 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
@@ -133,16 +136,16 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		// 1. Authorization 헤더 확인
-		String bearerJwt = request.getHeader("Authorization");
+		String bearerJwt = request.getHeader(HEADER_AUTHORIZATION);
 
 		// 2. 쿼리 파라미터 accessToken 도 허용 (테스트 등)
 		if (bearerJwt == null) {
 			String queryToken = request.getParameter("accessToken");
 			if (queryToken != null) { // <-- NPE 방지! (수정포인트)
-				if (queryToken.startsWith("Bearer ")) {
+				if (queryToken.startsWith(TOKEN_PREFIX)) {
 					bearerJwt = queryToken;
 				} else {
-					bearerJwt = "Bearer " + queryToken;
+					bearerJwt = TOKEN_PREFIX + queryToken;
 				}
 				debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
 			}
@@ -156,7 +159,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		// 4. Bearer 형식 확인
-		if (!bearerJwt.startsWith("Bearer ")) {
+		if (!bearerJwt.startsWith(TOKEN_PREFIX)) {
 			writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "유효한 Bearer 토큰이 없습니다.");
 			return;
 		}

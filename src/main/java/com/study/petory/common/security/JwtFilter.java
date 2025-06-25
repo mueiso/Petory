@@ -172,22 +172,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// 7. 토큰 파싱 및 인증정보 등록
 		try {
-			Claims claims = jwtProvider.parseRawToken(rawToken);
-			Long userId = Long.valueOf(claims.getSubject());
-			String email = claims.get("email", String.class);
-			String nickname = claims.get("nickname", String.class);
-
-			List<String> roleList = jwtProvider.getRolesFromToken(rawToken);
-			List<SimpleGrantedAuthority> authorities = roleList.stream()
-				.map(SimpleGrantedAuthority::new)
-				.toList();
-
-			debugLog("JWT Claims 파싱 성공 - userId: " + userId);
-
-			CustomPrincipal principal = new CustomPrincipal(userId, email, nickname, authorities);
+			CustomPrincipal principal = extractPrincipalFromToken(rawToken);
+			debugLog("JWT Claims 파싱 성공 - userId: " + principal.getId());
 
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(principal,
-				null, authorities);
+				null, principal.getAuthorities());
+
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			debugLog("SecurityContext 등록 완료 - principal: " + principal.getEmail());
 
@@ -209,6 +199,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		→ Postman 등에서 Authorization 헤더를 생략(비회원) 하고 테스트하는 경우를 위해
 	 */
 	private String getBearerJwt(HttpServletRequest request, String bearerJwt) {
+
 		if (bearerJwt == null) {
 			String queryToken = request.getParameter("accessToken");
 			if (queryToken != null) {  // NPE 방지
@@ -223,9 +214,35 @@ public class JwtFilter extends OncePerRequestFilter {
 		return bearerJwt;
 	}
 
+	/*
+	 * JWT 에서 Claims 정보를 추출하고, 인증된 사용자 정보(CustomPrincipal)를 객체로 변환하는 메서드
+	 * rawToken(Bearer 접두사 제거된 상태) 에서 사용자 인증 정보 추출
+	 * 사용자 인증 정보가 담긴 CustomPrincipal 객체로 변환해서 반환
+	 */
+	private CustomPrincipal extractPrincipalFromToken(String rawToken) {
+
+		// 1. JWT 의 Claim 부분 파싱
+		Claims claims = jwtProvider.parseRawToken(rawToken);
+
+		// 2. 사용자 식별자(subject), 이메일, 닉네임 등 정보 추출
+		Long userId = Long.valueOf(claims.getSubject());
+		String email = claims.get("email", String.class);
+		String nickname = claims.get("nickname", String.class);
+
+		// 3. 권한(Role) 목록 추출 및 Spring 권한 객체로 변환
+		List<String> roleList = jwtProvider.getRolesFromToken(rawToken);
+		List<SimpleGrantedAuthority> authorities = roleList.stream()
+			.map(SimpleGrantedAuthority::new)
+			.toList();
+
+		// 4. 사용자 정보를 담은 CustomPrincipal 반환
+		return new CustomPrincipal(userId, email, nickname, authorities);
+	}
+
 	// 오류 응답 반환 (JSON)
 	private void writeErrorResponse(HttpServletResponse response, HttpStatusCode status, String message)
 		throws IOException {
+
 		response.setStatus(status.value());
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().write(String.format("{\"status\":%d,\"message\":\"%s\"}", status.value(), message));
@@ -233,11 +250,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	// 디버그 로그
 	private void debugLog(String message) {
+
 		log.debug("[JwtFilter] {}", message);
 	}
 
 	//웹소켓 경로 검증
 	private boolean isWebSocketRequest(String url) {
+
 		return pathMatcher.match("/ws-chat/**", url);
 	}
 }

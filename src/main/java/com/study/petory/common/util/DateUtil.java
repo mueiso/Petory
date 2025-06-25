@@ -2,6 +2,7 @@ package com.study.petory.common.util;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
@@ -16,5 +17,12 @@ public class DateUtil {
 		LocalDateTime now = LocalDateTime.now();
 		LocalDateTime lastTime = now.toLocalDate().plusDays(1).atStartOfDay().minusNanos(1);
 		return Duration.between(now, lastTime);
+	}
+
+	public static LocalDateTime localDateTimeToString(String date) {
+		String input = date.replace(" ", "+");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssxxx");
+		ZonedDateTime zonedDateTime = ZonedDateTime.parse(input, formatter);
+		return zonedDateTime.toLocalDateTime();
 	}
 }

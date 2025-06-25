@@ -27,32 +27,28 @@ public class UserSchedulerService {
 	@Transactional
 	public void deactivateInactiveUsers() {
 
-		LocalDateTime now = LocalDateTime.now();
-		testDeactivateInactiveUsers(now);
+		testDeactivateInactiveUsers(getNow());
 	}
 
 	// 삭제 예정 유저에게 알림 이메일 발송 - 매일 새벽 2시
 	@Transactional
 	public void sendDeletionWarningEmails() {
 
-		LocalDateTime now = LocalDateTime.now();
-		testSendDeletionWarningEmails(now);
+		testSendDeletionWarningEmails(getNow());
 	}
 
 	// 삭제 대상 유저 hard delete - 매일 새벽 3시
 	@Transactional
 	public void hardDeleteExpiredUsers() {
 
-		LocalDateTime now = LocalDateTime.now();
-		testHardDeleteExpiredUsers(now);
+		testHardDeleteExpiredUsers(getNow());
 	}
 
 	// 계정 정지 유저 복구 - 매일 새벽 4시
 	@Transactional
 	public void restoreSuspendedUsers() {
 
-		LocalDateTime now = LocalDateTime.now();
-		testRestoreSuspendedUsers(now);
+		testRestoreSuspendedUsers(getNow());
 	}
 
 	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
@@ -113,7 +109,7 @@ public class UserSchedulerService {
 			UserStatus.SUSPENDED,
 			reactivationTime);
 
-		for(User user : suspendedUsers) {
+		for (User user : suspendedUsers) {
 			user.restoreEntity();
 			user.updateStatus(UserStatus.ACTIVE);
 
@@ -139,5 +135,10 @@ public class UserSchedulerService {
 
 			log.info("[테스트 알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
+	}
+
+	private LocalDateTime getNow() {
+
+		return LocalDateTime.now();
 	}
 }

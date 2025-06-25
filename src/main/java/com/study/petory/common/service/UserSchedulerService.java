@@ -37,6 +37,13 @@ public class UserSchedulerService {
 		testHardDeleteExpiredUsers(now);
 	}
 
+	@Transactional
+	public void restoreSuspendedUsers() {
+
+		LocalDateTime now = LocalDateTime.now();
+		testRestoreSuspendedUsers(now);
+	}
+
 	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testSendDeletionWarningEmails(LocalDateTime simulatedNow) {
@@ -80,6 +87,26 @@ public class UserSchedulerService {
 			// soft delete 이후 90일 초과 유저 hardDelete
 			userRepository.delete(user);
 			log.info("[테스트 알림] 휴면 계정 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
+		}
+	}
+
+	// TEST 관리자에 의해 정지된 계정 30일 후 자동 복구되는지 바로 확인하기 위한 테스트용 메서드
+	@Transactional
+	public void testRestoreSuspendedUsers(LocalDateTime simulatedNow) {
+
+		// 30일 전 날짜를 기준으로 복구 시점 설정
+		LocalDateTime reactivationTime = simulatedNow.minusDays(30);
+
+		// SUSPENDED 상태이면서 deletedAt 이 30일 이상 된 유저
+		List<User> suspendedUsers = userRepository.findByUserStatusAndDeletedAtBefore(
+			UserStatus.SUSPENDED,
+			reactivationTime);
+
+		for(User user : suspendedUsers) {
+			user.restoreEntity();
+			user.updateStatus(UserStatus.ACTIVE);
+
+			log.info("[테스트 알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 }

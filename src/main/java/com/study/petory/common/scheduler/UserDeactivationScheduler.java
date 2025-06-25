@@ -23,6 +23,7 @@ public class UserDeactivationScheduler {
 	// 	LocalDateTime now =
 	// }
 
+	// 유저 자동 휴면 전환 스케줄러 (userStatus = ACTIVE, updatedAt = 현 시각 기준 90일 이상 지난 유저)
 	@Scheduled(cron = "0 0 1 * * *", zone = "Asia/Seoul")  // 매일 새벽 1시: 미접속 유저의 계정 휴면처리 실행
 	@Transactional
 	public void deactivateInactiveUsers() {

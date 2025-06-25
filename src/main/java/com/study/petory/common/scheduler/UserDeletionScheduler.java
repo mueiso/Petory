@@ -15,7 +15,7 @@ public class UserDeletionScheduler {
 
 	private final UserSchedulerService userSchedulerService;
 
-	// 이메일 자동 발송 스케줄러 메서드 (soft delete 된 지 85일 경과 & 89일 미만 유저에게 메일 발송)
+	// 이메일 자동 발송 스케줄러 메서드 (userStatus = DEACTIVATED, deletedAt = 현 시각 기준 85~89일 지난 유저)
 	@Scheduled(cron = "0 0 2 * * *", zone = "Asia/Seoul")  // 매일 새벽 2시: 삭제 예정 알림 (한국 시간대 기준)
 	public void sendDeletionWarningEmails() {
 
@@ -23,7 +23,7 @@ public class UserDeletionScheduler {
 		// log.info("[알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
 	}
 
-	// 유저 자동 삭제 메서드 (휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete)
+	// 유저 자동 hardDelete 스케줄러 (userStatus = DEACTIVATE or DELETED, deletedAt = 현 시각 기준 90일 이상 지난 유저)
 	@Scheduled(cron = "0 0 3 * * *", zone = "Asia/Seoul")  // 매일 새벽 3시: hard delete 실행 (한국 시간대 기준)
 	public void hardDeleteExpiredUsers() {
 

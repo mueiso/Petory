@@ -23,6 +23,15 @@ public class UserSchedulerService {
 	private final EmailService emailService;
 	private final UserRepository userRepository;
 
+	// 미접속 유저의 계정 휴면처리 - 매일 새벽 1시
+	@Transactional
+	public void deactivateInactiveUsers() {
+
+		LocalDateTime now = LocalDateTime.now();
+		testDeactivateInactiveUsers(now);
+	}
+
+	// 삭제 예정 유저에게 알림 이메일 발송 - 매일 새벽 2시
 	@Transactional
 	public void sendDeletionWarningEmails() {
 
@@ -30,6 +39,7 @@ public class UserSchedulerService {
 		testSendDeletionWarningEmails(now);
 	}
 
+	// 삭제 대상 유저 hard delete - 매일 새벽 3시
 	@Transactional
 	public void hardDeleteExpiredUsers() {
 
@@ -37,18 +47,12 @@ public class UserSchedulerService {
 		testHardDeleteExpiredUsers(now);
 	}
 
+	// 계정 정지 유저 복구 - 매일 새벽 4시
 	@Transactional
 	public void restoreSuspendedUsers() {
 
 		LocalDateTime now = LocalDateTime.now();
 		testRestoreSuspendedUsers(now);
-	}
-
-	@Transactional
-	public void deactivateInactiveUsers() {
-
-		LocalDateTime now = LocalDateTime.now();
-		testDeactivateInactiveUsers(now);
 	}
 
 	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드

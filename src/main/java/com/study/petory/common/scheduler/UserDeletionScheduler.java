@@ -20,6 +20,7 @@ public class UserDeletionScheduler {
 	public void sendDeletionWarningEmails() {
 
 		userSchedulerService.sendDeletionWarningEmails();
+		// log.info("[알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
 	}
 
 	// 유저 자동 삭제 메서드 (휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete)
@@ -27,5 +28,6 @@ public class UserDeletionScheduler {
 	public void hardDeleteExpiredUsers() {
 
 		userSchedulerService.hardDeleteExpiredUsers();
+		// log.info("[알림] 휴면 계정 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 	}
 }

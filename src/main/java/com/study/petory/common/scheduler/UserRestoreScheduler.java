@@ -27,5 +27,6 @@ public class UserRestoreScheduler {
 	public void restoreSuspendedUsers() {
 
 		userSchedulerService.restoreSuspendedUsers();
+		// log.info("[알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
 	}
 }

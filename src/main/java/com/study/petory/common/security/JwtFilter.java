@@ -139,17 +139,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		String bearerJwt = request.getHeader(HEADER_AUTHORIZATION);
 
 		// 2. 쿼리 파라미터 accessToken 도 허용 (테스트 등)
-		if (bearerJwt == null) {
-			String queryToken = request.getParameter("accessToken");
-			if (queryToken != null) { // <-- NPE 방지! (수정포인트)
-				if (queryToken.startsWith(TOKEN_PREFIX)) {
-					bearerJwt = queryToken;
-				} else {
-					bearerJwt = TOKEN_PREFIX + queryToken;
-				}
-				debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
-			}
-		}
+		bearerJwt = getBearerJwt(request, bearerJwt);
 
 		// 3. 최종적으로 bearerJwt 가 null 이면 인증 실패
 		if (bearerJwt == null) {
@@ -211,6 +201,26 @@ public class JwtFilter extends OncePerRequestFilter {
 			debugLog("검증 실패 - 이유: " + e.getMessage());
 			writeErrorResponse(response, ErrorCode.FAILED_AUTHORIZATION.getStatus(), e.getMessage());
 		}
+	}
+
+	/*
+	 * 클라이언트가 요청한 JWT(Access Token)를 올바르게 추출하는 메서드
+	 * 헤더(Authorization)가 비어 있을 경우, 쿼리 파라미터(accessToken)에서 토큰을 대체로 가져올 수 있도록 보완함
+		→ Postman 등에서 Authorization 헤더를 생략(비회원) 하고 테스트하는 경우를 위해
+	 */
+	private String getBearerJwt(HttpServletRequest request, String bearerJwt) {
+		if (bearerJwt == null) {
+			String queryToken = request.getParameter("accessToken");
+			if (queryToken != null) {  // NPE 방지
+				if (queryToken.startsWith(TOKEN_PREFIX)) {
+					bearerJwt = queryToken;
+				} else {
+					bearerJwt = TOKEN_PREFIX + queryToken;
+				}
+				debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
+			}
+		}
+		return bearerJwt;
 	}
 
 	// 오류 응답 반환 (JSON)

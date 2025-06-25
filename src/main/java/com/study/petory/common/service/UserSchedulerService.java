@@ -44,6 +44,13 @@ public class UserSchedulerService {
 		testRestoreSuspendedUsers(now);
 	}
 
+	@Transactional
+	public void deactivateInactiveUsers() {
+
+		LocalDateTime now = LocalDateTime.now();
+		testDeactivateInactiveUsers(now);
+	}
+
 	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
 	@Transactional
 	public void testSendDeletionWarningEmails(LocalDateTime simulatedNow) {
@@ -107,6 +114,26 @@ public class UserSchedulerService {
 			user.updateStatus(UserStatus.ACTIVE);
 
 			log.info("[테스트 알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
+		}
+	}
+
+	// TEST 90알간 미접속 시 자동 휴면 계정으로 전환되는지 바로 확인하기 위한 테스트용 메서드
+	@Transactional
+	public void testDeactivateInactiveUsers(LocalDateTime simulatedNow) {
+
+		// 90일전 날짜를 기준으로 비활성화 시점 설정 (= 90일간 미접속 시)
+		LocalDateTime inactivationTime = simulatedNow.minusDays(90);
+
+		// ACTIVE 상태이면서 90일 이상 updatedAt 의 변화가 없는 유저
+		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
+			UserStatus.ACTIVE,
+			inactivationTime);
+
+		for (User user : deactivationCandidates) {
+			user.deactivateEntity();
+			user.updateStatus(UserStatus.DEACTIVATED);
+
+			log.info("[테스트 알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 }

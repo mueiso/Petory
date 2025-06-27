@@ -15,7 +15,7 @@ public class UserDeletionScheduler {
 
 	private final UserSchedulerService userSchedulerService;
 
-	// 이메일 자동 발송 스케줄러 메서드 (userStatus = DEACTIVATED, deletedAt = 현 시각 기준 85~89일 지난 유저)
+	// 유저 삭제 안내 이메일 자동 발송 스케줄러 메서드 (userStatus = DEACTIVATED, deletedAt = 현 시각 기준 85~89일 지난 유저)
 	@Scheduled(cron = "0 0 2 * * *", zone = "Asia/Seoul")  // 매일 새벽 2시: 삭제 예정 알림 (한국 시간대 기준)
 	public void sendDeletionWarningEmails() {
 

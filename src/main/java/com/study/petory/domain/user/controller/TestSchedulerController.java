@@ -44,6 +44,25 @@ public class TestSchedulerController {
 
 	/**
 	 * [TEST]
+	 * 스케줄러에 맞춰 계정이 미접속 상태로 90일 경과 시 해당 유저 자동으로 휴면 계정 처리되는지 확인할 수 있는 테스트용 API
+	 *
+	 * @param date 계정 휴면 상태로 전환 예정 날짜
+	 * @return 휴면 처리 성공 메시지
+	 */
+	@PostMapping("/deactivate-inactive-users")
+	public ResponseEntity<CommonResponse<Object>> testAutoDeactivate(
+		@RequestParam("date") String date) {
+
+		// 현재 날짜를 임의로 설정해서 테스트 (예: 휴면 계정으로 전환 예정 날짜인 "2025-06-18T00:00")
+		LocalDateTime simulatedNow = LocalDateTime.parse(date);
+
+		userSchedulerService.testDeactivateInactiveUsers(simulatedNow);
+
+		return CommonResponse.of(SuccessCode.USER_DEACTIVATED);
+	}
+
+	/**
+	 * [TEST]
 	 * 스테줄러에 맞춰 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
 	 *
 	 * @param date 이메일 발송 예정 날짜
@@ -98,24 +117,5 @@ public class TestSchedulerController {
 		userSchedulerService.testRestoreSuspendedUsers(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
-	}
-
-	/**
-	 * [TEST]
-	 * 스케줄러에 맞춰 계정이 미접속 상태로 90일 경과 시 해당 유저 자동으로 휴면 계정 처리되는지 확인할 수 있는 테스트용 API
-	 *
-	 * @param date 계정 휴면 상태로 전환 예정 날짜
-	 * @return 휴면 처리 성공 메시지
-	 */
-	@PostMapping("/deactivate-inactive-users")
-	public ResponseEntity<CommonResponse<Object>> testAutoDeactivate(
-		@RequestParam("date") String date) {
-
-		// 현재 날짜를 임의로 설정해서 테스트 (예: 휴면 계정으로 전환 예정 날짜인 "2025-06-18T00:00")
-		LocalDateTime simulatedNow = LocalDateTime.parse(date);
-
-		userSchedulerService.testDeactivateInactiveUsers(simulatedNow);
-
-		return CommonResponse.of(SuccessCode.USER_DEACTIVATED);
 	}
 }

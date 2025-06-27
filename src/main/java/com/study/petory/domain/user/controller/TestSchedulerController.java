@@ -44,6 +44,24 @@ public class TestSchedulerController {
 
 	/**
 	 * [TEST]
+	 * 스테줄러에 맞춰 휴면 전환 안내 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
+	 *
+	 * @param date 이메일 발송 예정 날짜
+	 * @return 이메일 발송 성공 메시지
+	 */
+	@PostMapping("/send-deactivation-warning")
+	public ResponseEntity<CommonResponse<Object>> testAutoDeactivationWarning(
+		@RequestParam("date") String date) {
+
+		LocalDateTime simulatedNow = LocalDateTime.parse(date);
+
+		userSchedulerService.testSendDeactivationWarningEmails(simulatedNow);
+
+		return CommonResponse.of(SuccessCode.EMAIL_SENT);
+	}
+
+	/**
+	 * [TEST]
 	 * 스케줄러에 맞춰 계정이 미접속 상태로 90일 경과 시 해당 유저 자동으로 휴면 계정 처리되는지 확인할 수 있는 테스트용 API
 	 *
 	 * @param date 계정 휴면 상태로 전환 예정 날짜
@@ -63,7 +81,7 @@ public class TestSchedulerController {
 
 	/**
 	 * [TEST]
-	 * 스테줄러에 맞춰 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
+	 * 스테줄러에 맞춰 삭제 안내 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
 	 *
 	 * @param date 이메일 발송 예정 날짜
 	 * @return 이메일 발송 성공 메시지
@@ -72,7 +90,6 @@ public class TestSchedulerController {
 	public ResponseEntity<CommonResponse<Object>> testAutoDeletionWarning(
 		@RequestParam("date") String date) {
 
-		// 현재 날짜를 임의로 설정해서 테스트 (예: 이메일 발송 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
 		userSchedulerService.testSendDeletionWarningEmails(simulatedNow);
@@ -92,7 +109,6 @@ public class TestSchedulerController {
 	public ResponseEntity<CommonResponse<Object>> testAutoHardDelete(
 		@RequestParam("date") String date) {
 
-		// 현재 날짜를 임의로 설정해서 테스트 (예: Hard delete 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
 		userSchedulerService.testHardDeleteExpiredUsers(simulatedNow);
@@ -111,7 +127,6 @@ public class TestSchedulerController {
 	public ResponseEntity<CommonResponse<Object>> testAutoRestore(
 		@RequestParam("date") String date) {
 
-		// 현재 날짜를 임의로 설정해서 테스트 (예: 복구 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
 		userSchedulerService.testRestoreSuspendedUsers(simulatedNow);

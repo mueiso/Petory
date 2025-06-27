@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserSchedulerService {
 
-	private static final int ACCOUNT_DELETION_DELAY_DAYS = 90;  // 삭제까지 유예 기간
+	private static final int ACCOUNT_DELAY_DAYS = 90;  // 삭제까지 유예 기간
 
 	private final EmailService emailService;
 	private final UserRepository userRepository;
@@ -39,6 +39,7 @@ public class UserSchedulerService {
 	public void sendDeletionWarningEmails() {
 
 		testSendDeletionWarningEmails(getNow());
+		log.info("[알림] 휴면 예정 유저에게 이메일 전송 - email: {}", email);
 	}
 
 	// 삭제 대상 유저 hard delete - 매일 새벽 3시
@@ -54,23 +55,43 @@ public class UserSchedulerService {
 	}
 
 	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
+	public void testSendDeactivationWarningEmails(LocalDateTime simulatedNow) {
+
+		// 85일 전 날짜를 기준으로 휴면 안내 메일 발송 시점 설정
+		LocalDateTime sendDeactivationEmailDate = simulatedNow.minusDays(85);
+
+		// ACTIVE 상태이면서 85일 이상 updatedAt 의 변화가 없는 유저
+		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
+			UserStatus.ACTIVE,
+			sendDeactivationEmailDate);
+
+		for (User user : deactivationCandidates) {
+			String email = user.getEmail();
+			String name = user.getUserPrivateInfo().getName();
+		}
+
+		// 이메일 발송 + 휴면 전환 예정일 함께 전달
+		emailService.sendDeactivationWarning(email, name, user.getUpdatedAt());
+		log.info("[알림] 휴면 예정 유저에게 이메일 전송 - email: {}", email);
+
+	}
 
 	// TEST 90알간 미접속 시 자동 휴면 계정으로 전환되는지 바로 확인하기 위한 테스트용 메서드
 	public void testDeactivateInactiveUsers(LocalDateTime simulatedNow) {
 
 		// 90일전 날짜를 기준으로 비활성화 시점 설정 (= 90일간 미접속 시)
-		LocalDateTime inactivationTime = simulatedNow.minusDays(ACCOUNT_DELETION_DELAY_DAYS);
+		LocalDateTime inactivationDate = simulatedNow.minusDays(ACCOUNT_DELAY_DAYS);
 
 		// ACTIVE 상태이면서 90일 이상 updatedAt 의 변화가 없는 유저
 		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
 			UserStatus.ACTIVE,
-			inactivationTime);
+			inactivationDate);
 
 		for (User user : deactivationCandidates) {
 			user.deactivateEntity();
 			user.updateStatus(UserStatus.DEACTIVATED);
 
-			log.info("[테스트 알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 
@@ -82,7 +103,7 @@ public class UserSchedulerService {
 		 * 2. 89일 전 시점 계산: soft delete '85일 ~ 89일' 사이의 기간을 만들기 위한 계산 (-90+1로 계산하는 이유)
 		 * 3. 85일 전 시점 계산
 		 */
-		LocalDateTime from = simulatedNow.minusDays(ACCOUNT_DELETION_DELAY_DAYS).plusDays(1);
+		LocalDateTime from = simulatedNow.minusDays(ACCOUNT_DELAY_DAYS).plusDays(1);
 		LocalDateTime to = simulatedNow.minusDays(85);
 
 		// 위 시간 범위 안에서 soft delete 처리된 유저 목록 조회
@@ -95,7 +116,7 @@ public class UserSchedulerService {
 
 			// 이메일 발송 + 삭제 예정일 함께 전달
 			emailService.sendDeletionWarning(email, name, user.getDeletedAt());
-			log.info("[테스트 알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
+			log.info("[알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
 		}
 	}
 
@@ -103,7 +124,7 @@ public class UserSchedulerService {
 	public void testHardDeleteExpiredUsers(LocalDateTime simulatedNow) {
 
 		// 90일 전 날짜를 기준으로 삭제 시점 설정
-		LocalDateTime deletionLimitDate = simulatedNow.minusDays(ACCOUNT_DELETION_DELAY_DAYS);
+		LocalDateTime deletionLimitDate = simulatedNow.minusDays(ACCOUNT_DELAY_DAYS);
 
 		// DEACTIVATED 또는 DELETED 상태 중 deletedAt 기준으로 90일 이상 지난 유저만 조회
 		List<User> expiredUsers = userRepository.findByUserStatusInAndDeletedAtBefore(
@@ -114,7 +135,7 @@ public class UserSchedulerService {
 
 			// soft delete 이후 90일 초과 유저 hardDelete
 			userRepository.delete(user);
-			log.info("[테스트 알림] 휴면 계정 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[알림] deletedAt 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 
@@ -122,18 +143,18 @@ public class UserSchedulerService {
 	public void testRestoreSuspendedUsers(LocalDateTime simulatedNow) {
 
 		// 30일 전 날짜를 기준으로 복구 시점 설정
-		LocalDateTime reactivationTime = simulatedNow.minusDays(30);
+		LocalDateTime reactivationDate = simulatedNow.minusDays(30);
 
 		// SUSPENDED 상태이면서 deletedAt 이 30일 이상 된 유저
 		List<User> suspendedUsers = userRepository.findByUserStatusAndDeletedAtBefore(
 			UserStatus.SUSPENDED,
-			reactivationTime);
+			reactivationDate);
 
 		for (User user : suspendedUsers) {
 			user.restoreEntity();
 			user.updateStatus(UserStatus.ACTIVE);
 
-			log.info("[테스트 알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
+			log.info("[알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 

@@ -17,17 +17,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmailService {
 
-	private final JavaMailSender mailSender;  // 이메일 전송할 때 사용하는 JavaMailSender 객체
-	private final TemplateEngine templateEngine;  // HTML 템플릿을 렌더링하기 위한 Thymeleaf 템플릿 엔진
+	private static final int ACCOUNT_DELAY_DAYS = 90;
 
 	// TODO - 배포 전 메일 발신 주소 수정 필요할지 확인
 	private final String FROM_EMAIL = "noreply@petory.com";
+
+	private final JavaMailSender mailSender;  // 이메일 전송할 때 사용하는 JavaMailSender 객체
+	private final TemplateEngine templateEngine;  // HTML 템플릿을 렌더링하기 위한 Thymeleaf 템플릿 엔진
+
 
 	// soft delete 되어있는 계정에게 삭제 경고 이메일을 발송하는 메서드
 	public void sendDeletionWarning(String to, String name, LocalDateTime deletedAt) {
 
 		// 최종 삭제될 날짜 (soft delete 된 후 90일 경과)
-		LocalDate deletionDate = deletedAt.plusDays(90).toLocalDate();
+		LocalDate deletionDate = deletedAt.plusDays(ACCOUNT_DELAY_DAYS).toLocalDate();
 		// soft delete 된 날짜
 		LocalDate deactivatedDate = deletedAt.toLocalDate();
 
@@ -67,6 +70,35 @@ public class EmailService {
 			// TODO - 이메일 전송 중 예외 발생 시, 복구(재전송) 루틴 필요
 		} catch (MessagingException e) {
 			throw new RuntimeException("삭제 안내 이메일 전송 실패", e);
+		}
+	}
+
+	// 휴면 계정으로 전환될 예정인 유저에게 안내 이메일 발송하는 메서드
+	public void sendDeactivationWarning(String to, String name, LocalDateTime updatedAt) {
+
+		// 최종 휴면 계정으로 전환되는 날짜 (updatedAt 90일 경과)
+		LocalDate deactivationDate = updatedAt.plusDays(ACCOUNT_DELAY_DAYS).toLocalDate();
+
+		Context context = new Context();
+		context.setVariable("name", name);
+		context.setVariable("deactivationDate", deactivationDate);
+
+		// "email/deactivation-warning.html" 템플릿 파일 내 ${...} 표현식에 해당 변수를 삽입하여 완성된 HTML 을 생성
+		String htmlContent = templateEngine.process("email/deactivation-warning", context);
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+			helper.setTo(to);
+			helper.setFrom(FROM_EMAIL);
+			helper.setSubject("[Petory] 장기 미접속 안내 - 곧 휴면 계정으로 전환됩니다");
+			helper.setText(htmlContent, true);
+
+			mailSender.send(message);
+
+		} catch (MessagingException e) {
+			throw new RuntimeException("휴면 안내 이메일 전송 실패", e);
 		}
 	}
 }

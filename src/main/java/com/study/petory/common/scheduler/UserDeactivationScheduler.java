@@ -27,3 +27,4 @@ public class UserDeactivationScheduler {
 		userSchedulerService.deactivateInactiveUsers();
 	}
 }
+

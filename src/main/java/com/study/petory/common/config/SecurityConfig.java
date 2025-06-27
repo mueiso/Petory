@@ -2,6 +2,7 @@ package com.study.petory.common.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -41,6 +42,12 @@ public class SecurityConfig {
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final CustomAccessDeniedHandler customAccessDeniedHandler;
 	private final SecurityWhitelist securityWhitelist;
+
+	@Value("${app.cors.allowed-origins}")
+	private String allowedOriginsString;
+
+	@Value("${app.cors.allow-credentials}")
+	private boolean allowCredentials;
 
 	/*
 	 * 1. .csrf : CSRF 설정 → JWT 기반이기 때문에 csrf 보호 비활성화
@@ -113,9 +120,15 @@ public class SecurityConfig {
 		// CORS 설정 객체 생성
 		CorsConfiguration config = new CorsConfiguration();
 
-		// TODO - 배포 전 주소 변경 필요 ("https://www.petory.com")
-		// 허용할 프론트 주소 (클라이언트 도메인 지정)
-		config.setAllowedOrigins(List.of("http://localhost:3000"));  // React 등 프론트엔드 개발 서버
+		List<String> allowedOrigins = List.of(allowedOriginsString.split(","));
+
+		/*
+		 * 허용할 프론트 주소 (클라이언트 도메인 지정)
+		 * 어떤 프론트엔드 클라이언트가 백엔드 API 에 접근할 수 있는지를 명시하는 설정
+		 * http://localhost:3000 : 개발 중 로컬에서 프론트엔드를 실행할 때 API 요청을 허용하려고 사용
+		 * https://www.petory.click : 운영 환경의 실제 배포된 프론트엔드 도메인, 사용자들이 웹사이트를 통해 백엔드 API 에 접근할 때 사용
+		 */
+		config.setAllowedOrigins(allowedOrigins);  // React 등 프론트엔드 개발 서버
 
 		// 허용할 HTTP 메서드 지정
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
@@ -123,9 +136,11 @@ public class SecurityConfig {
 		// 허용할 요청 헤더 지정
 		config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
-		// TODO - 프론트 구현하여 연동 시 true 로 설정 변경 필요
-		// 자격 증명 포함 허용 (예: 쿠키, Authorization 헤더 등)
-		config.setAllowCredentials(false);
+		/*
+		 * 프론트 구현하여 연동 시 true 로 설정 변경 필요
+		 * 자격 증명 포함 허용 (예: 쿠키, Authorization 헤더 등)
+		 */
+		config.setAllowCredentials(allowCredentials);
 
 		// CORS 설정을 특정 경로 패턴에 매핑
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

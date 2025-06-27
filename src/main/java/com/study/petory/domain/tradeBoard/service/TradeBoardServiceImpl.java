@@ -21,7 +21,6 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardQueryRepository;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
@@ -48,7 +47,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
 	}
 
-	public List<String> imageToUrlList(TradeBoard tradeBoard){
+	public List<String> imageToUrlList(TradeBoard tradeBoard) {
 		if (!tradeBoard.getImages().isEmpty()) {
 			return tradeBoard.getImages().stream()
 				.map(TradeBoardImage::getUrl)
@@ -58,7 +57,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	}
 
 	public void validateOwner(TradeBoard tradeBoard, User user) {
-		if (!tradeBoard.isOwner(user.getId()) || user.hasRole(Role.ADMIN)) {
+		if (!tradeBoard.isOwner(user.getId()) && !user.hasRole(Role.ADMIN)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 	}
@@ -66,7 +65,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 생성
 	@Override
 	@Transactional
-	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto, List<MultipartFile> images) {
+	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto,
+		List<MultipartFile> images) {
 
 		//나중에 토큰으로 값을 받아올 예정
 		User user = findUser(userId);
@@ -76,11 +76,12 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.title(requestDto.getTitle())
 			.content(requestDto.getContent())
 			.price(requestDto.getPrice())
-			.user(user)
 			.build();
 
-		tradeBoardRepository.save(tradeBoard);
+		// 연관관계 설정 (주인 + 반대편 모두)
+		user.addTradeBoard(tradeBoard);
 
+		tradeBoardRepository.save(tradeBoard);
 
 		List<String> urls = new ArrayList<>();
 		if (images != null && !images.isEmpty()) {
@@ -124,7 +125,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 수정
 	@Override
 	@Transactional
-	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
+	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId,
+		TradeBoardUpdateRequestDto requestDto) {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 

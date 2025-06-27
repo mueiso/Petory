@@ -1,9 +1,12 @@
 package com.study.petory.domain.user.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
+import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -60,6 +63,10 @@ public class User extends TimeFeatureBasedEntity {
 	@Column
 	private LocalDateTime lastLoginAt;
 
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<TradeBoard> tradeBoards = new ArrayList<>();
+
 	@Builder
 	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
 		this.email = email;
@@ -93,5 +100,11 @@ public class User extends TimeFeatureBasedEntity {
 
 	public boolean hasRole(Role role) {
 		return userRole.stream().anyMatch(userRole -> userRole.getRole().equals(role));
+	}
+
+	// 연관관계 편의 메서드
+	public void addTradeBoard(TradeBoard tradeBoard) {
+		tradeBoards.add(tradeBoard);
+		tradeBoard.setUser(this);  // 주인 객체 설정
 	}
 }

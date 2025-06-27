@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserSchedulerService {
 
-	private static final int ACCOUNT_DELAY_DAYS = 90;  // 삭제까지 유예 기간
+	private static final int ACCOUNT_DELAY_DAYS = 90;  // 유예 기간
 
 	private final EmailService emailService;
 	private final UserRepository userRepository;

@@ -26,23 +26,6 @@ public class NotificationScheduler {
 	private final JobLauncher jobLauncher;
 	private final Job sendDailyQuestionJob;
 
-	// @Scheduled(cron = "0 0 0 * * *")
-	// @Transactional
-	// public void sendDailyQuestionNotification() {
-	//
-	// 	List<User> users = userRepository.findAll();
-	//
-	// 	for (User user : users) {
-	//
-	// 		Notification notification = Notification.builder()
-	// 			.user(user)
-	// 			.content("오늘의 질문이 도착했습니다 !")
-	// 			.build();
-	//
-	// 		notificationRepository.save(notification);
-	// 	}
-	// }
-
 	@Scheduled(cron = "0 0 0 * * *")
 	public void sendDailyQuestionNotification() throws Exception{
 		JobParameters jobParameters = new JobParametersBuilder()

@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -29,4 +31,8 @@ public interface PlaceService {
 	Place findPlaceByPlaceId(Long placeId);
 
 	Place findPlaceWithPlaceReviewByPlaceId(Long placeId);
+
+	List<PlaceGetAllResponseDto> findPlaceRank();
+
+	void findPlaceRankSchedule();
 }

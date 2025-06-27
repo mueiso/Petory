@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -293,5 +295,10 @@ public class PlaceController {
 		@PathVariable Long placeId
 	) {
 		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
+	}
+
+	@GetMapping("/rank")
+	public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank() {
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank());
 	}
 }

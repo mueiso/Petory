@@ -1,5 +1,6 @@
 package com.study.petory.domain.place.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceStatus;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.entity.QPlace;
 import com.study.petory.domain.place.entity.QPlaceReview;
@@ -70,5 +72,36 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 			.leftJoin(qPlaceReview.user, qUser).fetchJoin()
 			.where(qPlace.id.eq(id))
 			.fetchOne());
+	}
+
+	@Override
+	public List<PlaceGetAllResponseDto> findPlaceRankOrderByLikeCountDesc() {
+
+		List<Place> placeList = new ArrayList<>();
+
+		for (PlaceType placeType : PlaceType.values()) {
+			Place placeRank = jpaQueryFactory
+				.selectFrom(qPlace)
+				.where(
+					qPlace.placeType.eq(placeType),
+					qPlace.placeStatus.eq(PlaceStatus.ACTIVE),
+					qPlace.likeCount.isNotNull()
+				)
+				.orderBy(
+					qPlace.likeCount.desc(),
+					qPlace.ratio.desc().nullsLast(),
+					qPlace.id.asc()
+				)
+				.limit(1)
+				.fetchOne();
+
+			if (placeRank != null) {
+				placeList.add(placeRank);
+			}
+		}
+
+		return placeList.stream()
+			.map(PlaceGetAllResponseDto::from)
+			.toList();
 	}
 }

@@ -1,11 +1,16 @@
 package com.study.petory.domain.place.service;
 
+import static com.study.petory.common.util.DateUtil.*;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +38,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 	private final PlaceRepository placeRepository;
 	private final UserService userService;
+	private final RedisTemplate<String, Object> redisTemplate;
 
 	// 장소 등록
 	@Override
@@ -152,4 +158,16 @@ public class PlaceServiceImpl implements PlaceService {
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 
+	@Cacheable(value = "placeRankRedisCache", key = "'rank'")
+	@Override
+	public List<PlaceGetAllResponseDto> findPlaceRank() {
+		return placeRepository.findPlaceRankOrderByLikeCountDesc();
+	}
+
+	@Scheduled(cron = "0 0 0 * * *")
+	@Override
+	public void findPlaceRankSchedule() {
+		List<PlaceGetAllResponseDto> placeRankDtoList = placeRepository.findPlaceRankOrderByLikeCountDesc();
+		redisTemplate.opsForValue().set("placeRankRedisCache::rank", placeRankDtoList, remainderTime());
+	}
 }

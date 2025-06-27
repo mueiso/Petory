@@ -41,7 +41,7 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	@Transactional
 	public void saveAlbum(Long userId, AlbumCreateRequestDto requestDto, List<MultipartFile> images) {
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		if (albumRepository.existTodayAlbum(userId)) {
 			throw new CustomException(ErrorCode.ALREADY_SAVED_ALBUM_TODAY);
@@ -131,7 +131,7 @@ public class AlbumServiceImpl implements AlbumService {
 		Album album = findAlbumByAlbumId(false, albumId);
 
 		validateAuthor(userId, album);
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		validImageSize(user.getUserRole(), images);
 

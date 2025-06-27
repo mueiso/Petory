@@ -2,9 +2,7 @@ package com.study.petory.domain.user.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +14,6 @@ import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.entity.UserStatus;
-import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,10 +21,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-	private final UserRepository userRepository;
 	private final UserService userService;
 	private final JwtProvider jwtProvider;
-	private final RedisTemplate<String, String> loginRefreshToken;
 
 	/*
 	 * [토큰 발급]
@@ -38,8 +33,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public TokenResponseDto issueToken(User user) {
 
-		User savedUser = userRepository.findByEmail(user.getEmail())
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User savedUser = userService.findUserByEmail(user.getEmail());
 
 		// 로그인 불가 상태는 예외 처리: 계정 정지 상태 (SUSPENDED)
 		if (savedUser.getUserStatus() == UserStatus.SUSPENDED) {
@@ -88,30 +82,6 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	/*
-	 * [로그아웃 처리]
-	 * AccessToken 을 블랙리스트 등록 - 만료시간되면 자동 삭제
-	 * Redis 에 저장된 RefreshToken 제거
-	 */
-	@Override
-	@Transactional
-	public void logout(String accessToken) {
-
-		String pureToken = jwtProvider.subStringToken(accessToken);
-		Long userId = Long.valueOf(jwtProvider.getClaims(accessToken).getSubject());
-
-		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
-
-		/*
-		 * AccessToken 을 블랙리스트에 등록하는 로직
-		 * expiration 시간은 AccessToken 의 남은 유효기간만큼 설정되어, 만료 시 자동으로 삭제
-		 */
-		loginRefreshToken.opsForValue()
-			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
-
-		jwtProvider.deleteRefreshToken(userId);
-	}
-
-	/*
 	 * [토큰 재발급]
 	 * AccessToken 이 만료된 경우에만, 전달된 refreshToken 기반으로 AccessToken 재발급
 	 */
@@ -141,7 +111,7 @@ public class AuthServiceImpl implements AuthService {
 		}
 
 		// 5. 사용자 조회
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		// 6. 역할 목록 추출
 		List<String> roles = user.getUserRole().stream()
@@ -170,7 +140,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public List<Role> addRoleToUser(Long userId, Role newRole) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		boolean alreadyHasSameRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(newRole));
@@ -194,7 +164,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public List<Role> removeRoleFromUser(Long userId, Role roleToRemove) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		boolean hasRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(roleToRemove));
@@ -219,7 +189,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public void suspendUser(Long targetUserId) {
 
-		User user = userService.getUserById(targetUserId);
+		User user = userService.findUserById(targetUserId);
 
 		if (user.getUserStatus() == UserStatus.SUSPENDED) {
 			throw new CustomException(ErrorCode.ALREADY_SUSPENDED);
@@ -237,7 +207,7 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public void restoreUser(Long targetUserId) {
 
-		User user = userService.getUserById(targetUserId);
+		User user = userService.findUserById(targetUserId);
 
 		if (user.isDeletedAtNull()) {
 			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);

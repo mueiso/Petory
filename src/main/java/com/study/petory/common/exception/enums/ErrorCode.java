@@ -25,7 +25,6 @@ public enum ErrorCode implements BaseCode {
 	WRONG_SIGNATURE(HttpStatus.UNAUTHORIZED, "잘못된 서명입니다."),
 	INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
 	NO_TOKEN(HttpStatus.BAD_REQUEST, "토큰이 없습니다."),
-	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 틀렸습니다."),
 	USER_ID_NOT_GENERATED(HttpStatus.INTERNAL_SERVER_ERROR, "사용자 정보를 저장했지만 ID가 생성되지 않았습니다."),
 	OAUTH2_EMAIL_NOT_FOUND(HttpStatus.BAD_REQUEST, "OAuth2 인증에 이메일 정보가 없습니다."),
 	ALREADY_HAS_SAME_ROLE(HttpStatus.BAD_REQUEST, "중복되는 권한입니다."),
@@ -33,6 +32,7 @@ public enum ErrorCode implements BaseCode {
 	LOGIN_UNAVAILABLE(HttpStatus.FORBIDDEN, "로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다."),
 	ALREADY_SUSPENDED(HttpStatus.BAD_REQUEST, "이미 정지된 계정입니다."),
 	USER_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 유저가 아닙니다."),
+	USER_ALREADY_DELETED(HttpStatus.BAD_REQUEST, "이미 탈퇴한 계정입니다."),
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),

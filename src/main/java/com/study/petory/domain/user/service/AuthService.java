@@ -10,8 +10,6 @@ public interface AuthService {
 
 	TokenResponseDto issueToken(User user);
 
-	void logout(String accessToken);
-
 	TokenResponseDto reissue(String accessToken, String refreshTokenRaw);
 
 	List<Role> addRoleToUser(Long userId, Role newRole);

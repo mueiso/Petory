@@ -51,7 +51,6 @@ public class EmailService {
 			// 메시지를 쉽게 설정하기 위한 도우미 클래스 (다국어 인코딩 설정 포함)
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-
 			/*
 			 * 수신자 이메일 주소 설정
 			 * 발신자 이메일 주소 설정

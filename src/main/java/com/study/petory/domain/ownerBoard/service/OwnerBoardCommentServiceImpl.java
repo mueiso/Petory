@@ -51,7 +51,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 	public OwnerBoardCommentCreateResponseDto saveOwnerBoardComment(Long userId, Long boardId,
 		OwnerBoardCommentCreateRequestDto dto) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		OwnerBoard ownerBoard = ownerBoardService.findOwnerBoardById(boardId);
 
@@ -103,7 +103,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 		OwnerBoardComment comment = findOwnerBoardCommentById(commentId);
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		if (!user.hasRole(Role.ADMIN)) {
 			validBoardOwnerShip(comment, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);

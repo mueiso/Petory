@@ -33,7 +33,7 @@ public class PlaceReportService {
 			throw new CustomException(ErrorCode.ALREADY_INACTIVE_PLACE);
 		}
 
-		User findUser = userService.getUserById(userId);
+		User findUser = userService.findUserById(userId);
 
 		if (placeReportRepository.existsByUserIdAndPlaceId(findUser.getId(), findPlace.getId())) {
 			throw new CustomException(ErrorCode.ALREADY_REPORT_PLACE);

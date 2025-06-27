@@ -44,7 +44,7 @@ public class EmailService {
 		context.setVariable("deactivatedDate", deactivatedDate);
 		context.setVariable("deletionDate", deletionDate);
 
-		sendEmail(to, "[Petory] 계정 삭제 예정 안내", "email/deletion0warning", context);
+		sendEmail(to, "[Petory] 계정 삭제 예정 안내", "email/deletion-warning", context);
 	}
 
 	// 휴면 계정으로 전환될 예정인 유저에게 안내 이메일 발송하는 메서드

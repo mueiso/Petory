@@ -58,19 +58,19 @@ public class UserSchedulerService {
 	public void testSendDeactivationWarningEmails(LocalDateTime simulatedNow) {
 
 		// 85일 전 날짜를 기준으로 휴면 안내 메일 발송 시점 설정
-		LocalDateTime sendDeactivationEmailDate = simulatedNow.minusDays(85);
+		LocalDateTime deactivationEmailDate = simulatedNow.minusDays(85);
 
 		// ACTIVE 상태이면서 85일 이상 updatedAt 의 변화가 없는 유저
 		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
 			UserStatus.ACTIVE,
-			sendDeactivationEmailDate);
+			deactivationEmailDate);
 
 		for (User user : deactivationCandidates) {
 			String email = user.getEmail();
 			String name = user.getUserPrivateInfo().getName();
 
 			// 이메일 발송 + 휴면 전환 예정일 함께 전달
-			emailService.sendDeactivationWarning(email, name, user.getUpdatedAt());
+			emailService.sendDeactivationWarning(email, name, deactivationEmailDate);
 			log.info("[알림] 휴면 예정 유저에게 이메일 전송 - email: {}", email);
 		}
 	}

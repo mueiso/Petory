@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NotificationScheduler {
 
-	private final UserRepository userRepository;
 	private final NotificationRepository notificationRepository;
 	private final JobLauncher jobLauncher;
 	private final Job sendDailyQuestionJob;

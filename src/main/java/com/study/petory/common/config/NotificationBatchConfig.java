@@ -1,14 +1,19 @@
 package com.study.petory.common.config;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import javax.sql.DataSource;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.database.JpaItemWriter;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.JpaPagingItemReader;
-import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
+import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,15 +29,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NotificationBatchConfig {
 
+	private final DataSource dataSource;
 	private final EntityManagerFactory entityManagerFactory;
 
-	private final int CHUNK_SIZE = 100;
+	private final int CHUNK_SIZE = 500;
 
 	@Bean
-	public JpaPagingItemReader<User> userReader(
-		JobRepository jobRepository,
-		PlatformTransactionManager transactionManager
-	) {
+	public JpaPagingItemReader<User> userReader() {
 		return new JpaPagingItemReaderBuilder<User>()
 			.name("userReader")
 			.entityManagerFactory(entityManagerFactory)
@@ -51,9 +54,15 @@ public class NotificationBatchConfig {
 	}
 
 	@Bean
-	public JpaItemWriter<Notification> dailyQuestionWriter() {
-		return new JpaItemWriterBuilder<Notification>()
-			.entityManagerFactory(entityManagerFactory)
+	public JdbcBatchItemWriter<Notification> dailyQuestionWriter() {
+		return new JdbcBatchItemWriterBuilder<Notification>()
+			.dataSource(dataSource)
+			.sql("INSERT INTO tb_notification (user_id, content, created_at) VALUES (?, ?, ?)")
+			.itemPreparedStatementSetter((notification, ps) -> {
+				ps.setLong(1, notification.getUserId());
+				ps.setString(2, notification.getContent());
+				ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+			})
 			.build();
 	}
 
@@ -73,7 +82,7 @@ public class NotificationBatchConfig {
 		PlatformTransactionManager transactionManager,
 		JpaPagingItemReader<User> userReader,
 		ItemProcessor<User, Notification> itemProcessor,
-		JpaItemWriter<Notification> itemWriter
+		JdbcBatchItemWriter<Notification> itemWriter
 	) {
 		return new StepBuilder("sendDailyQuestionStep", jobRepository)
 			.<User, Notification>chunk(CHUNK_SIZE, transactionManager)

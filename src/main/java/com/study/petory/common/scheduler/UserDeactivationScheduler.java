@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import com.study.petory.common.service.UserSchedulerService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class UserDeactivationScheduler {
@@ -27,6 +25,5 @@ public class UserDeactivationScheduler {
 	public void deactivateInactiveUsers() {
 
 		userSchedulerService.deactivateInactiveUsers();
-		// log.info("[알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
 	}
 }

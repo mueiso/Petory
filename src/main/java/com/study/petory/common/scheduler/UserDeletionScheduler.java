@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import com.study.petory.common.service.UserSchedulerService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class UserDeletionScheduler {
@@ -20,7 +18,6 @@ public class UserDeletionScheduler {
 	public void sendDeletionWarningEmails() {
 
 		userSchedulerService.sendDeletionWarningEmails();
-		// log.info("[알림] 삭제 예정 유저에게 이메일 전송 - email: {}", email);
 	}
 
 	// 유저 자동 hardDelete 스케줄러 (userStatus = DEACTIVATE or DELETED, deletedAt = 현 시각 기준 90일 이상 지난 유저)
@@ -28,6 +25,5 @@ public class UserDeletionScheduler {
 	public void hardDeleteExpiredUsers() {
 
 		userSchedulerService.hardDeleteExpiredUsers();
-		// log.info("[알림] 휴면 계정 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 	}
 }

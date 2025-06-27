@@ -26,6 +26,7 @@ public class UserSchedulerService {
 
 	// 미접속 유저에게 알림 이메일 발송 - 매일 자정
 	public void sendDeactivationWarningEmails() {
+
 		testSendDeactivationWarningEmails(getNow());
 	}
 
@@ -39,7 +40,6 @@ public class UserSchedulerService {
 	public void sendDeletionWarningEmails() {
 
 		testSendDeletionWarningEmails(getNow());
-		log.info("[알림] 휴면 예정 유저에게 이메일 전송 - email: {}", email);
 	}
 
 	// 삭제 대상 유저 hard delete - 매일 새벽 3시
@@ -68,12 +68,11 @@ public class UserSchedulerService {
 		for (User user : deactivationCandidates) {
 			String email = user.getEmail();
 			String name = user.getUserPrivateInfo().getName();
+
+			// 이메일 발송 + 휴면 전환 예정일 함께 전달
+			emailService.sendDeactivationWarning(email, name, user.getUpdatedAt());
+			log.info("[알림] 휴면 예정 유저에게 이메일 전송 - email: {}", email);
 		}
-
-		// 이메일 발송 + 휴면 전환 예정일 함께 전달
-		emailService.sendDeactivationWarning(email, name, user.getUpdatedAt());
-		log.info("[알림] 휴면 예정 유저에게 이메일 전송 - email: {}", email);
-
 	}
 
 	// TEST 90알간 미접속 시 자동 휴면 계정으로 전환되는지 바로 확인하기 위한 테스트용 메서드

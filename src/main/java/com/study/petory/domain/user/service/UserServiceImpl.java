@@ -140,8 +140,14 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	public User findUserById(Long userId) {
 
-		return userRepository.findUserById(userId)
+		User user = userRepository.findUserById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.USER_NOT_EXISTING);
+		}
+
+		return user;
 	}
 
 	@Override

@@ -17,12 +17,14 @@ import lombok.Getter;
 public abstract class TimeFeatureBasedEntity {
 
 	@CreatedDate
-	@Column(updatable = false)
+	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 
 	@LastModifiedDate
+	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
+	@Column(name = "deleted_at")
 	private LocalDateTime deletedAt;
 
 	// soft delete 시 사용

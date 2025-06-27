@@ -31,6 +31,8 @@ public class PlaceGetResponseDto {
 
 	private final List<PlaceReviewGetResponseDto> placeReviewList;
 
+	private final Long likeCount;
+
 	private PlaceGetResponseDto(Place place, List<PlaceReviewGetResponseDto> placeReviewGetResponseDto) {
 		this.id = place.getId();
 		this.placeName = place.getPlaceName();
@@ -41,6 +43,7 @@ public class PlaceGetResponseDto {
 		this.latitude = place.getLatitude();
 		this.longitude = place.getLongitude();
 		this.placeReviewList = placeReviewGetResponseDto;
+		this.likeCount = place.getLikeCount();
 	}
 
 	public static PlaceGetResponseDto from(Place place, List<PlaceReviewGetResponseDto> placeReviewGetResponseDto) {

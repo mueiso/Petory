@@ -1,7 +1,6 @@
 package com.study.petory.domain.place.entity;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +77,9 @@ public class Place extends TimeFeatureBasedEntity {
 	@Column
 	private LocalDateTime reportResetAt;
 
+	@Column(nullable = false)
+	private Long likeCount = 0L;
+
 	@Builder
 	public Place(User user, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio, String address,
 		BigDecimal latitude, BigDecimal longitude) {
@@ -124,5 +126,13 @@ public class Place extends TimeFeatureBasedEntity {
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
+	}
+
+	public void increaseLikeCount() {
+		this.likeCount++;
+	}
+
+	public void decreaseLikeCount() {
+		this.likeCount--;
 	}
 }

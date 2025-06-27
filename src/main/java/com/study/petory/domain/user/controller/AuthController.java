@@ -47,24 +47,6 @@ public class AuthController {
 	}
 
 	/**
-	 * [로그아웃 처리]
-	 * AccessToken 을 블랙리스트에 등록하고,
-	 * Redis 에 저장된 RefreshToken 삭제
-	 *
-	 * @param bearerToken : "Bearer {accessToken}" 형식의 헤더
-	 * @return 로그아웃 성공 메시지
-	 */
-	@DeleteMapping("/logout")
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	public ResponseEntity<CommonResponse<Object>> logout(
-		@RequestHeader("Authorization") String bearerToken) {
-
-		authServiceImpl.logout(bearerToken);
-
-		return CommonResponse.of(SuccessCode.USER_LOGOUT);
-	}
-
-	/**
 	 * [관리자 전용 - 권한 추가]
 	 * ADMIN 권한이 있는 사용자만 다른 사용자에게 권한을 부여할 수 있습니다.
 	 *
@@ -107,15 +89,15 @@ public class AuthController {
 	 * 지정한 사용자의 계정을 soft delete 처리
 	 * 이미 비활성화된 계정일 경우 예외 처리
 	 *
-	 * @param userId 계정 정지 대상 사용자의 ID
+	 * @param targetUserId 계정 정지 대상 사용자의 ID
 	 * @return 계정 정지 성공 메시지
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/suspend")
 	public ResponseEntity<CommonResponse<Object>> suspendUser(
-		@RequestParam Long userId) {
+		@RequestParam Long targetUserId) {
 
-		authServiceImpl.suspendUser(userId);
+		authServiceImpl.suspendUser(targetUserId);
 
 		return CommonResponse.of(SuccessCode.USER_SUSPENDED);
 	}
@@ -126,15 +108,15 @@ public class AuthController {
 	 * deletedAt 필드를 null 로 되돌려 계정을 활성화 상태로 변경
 	 * 이미 활성화된 계정일 경우 예외 처리
 	 *
-	 * @param userId 복구할 대상 사용자의 ID
+	 * @param targetUserId 복구할 대상 사용자의 ID
 	 * @return 복구 성공 메시지
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/restore")
 	public ResponseEntity<CommonResponse<Object>> restoreUser(
-		@RequestParam Long userId) {
+		@RequestParam Long targetUserId) {
 
-		authServiceImpl.restoreUser(userId);
+		authServiceImpl.restoreUser(targetUserId);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}

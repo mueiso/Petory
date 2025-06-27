@@ -209,17 +209,23 @@ public class JwtFilter extends OncePerRequestFilter {
 	 */
 	private String getBearerJwt(HttpServletRequest request, String bearerJwt) {
 
-		if (bearerJwt == null) {
-			String queryToken = request.getParameter("accessToken");
-			if (queryToken != null) {  // NPE 방지
-				if (queryToken.startsWith(TOKEN_PREFIX)) {
-					bearerJwt = queryToken;
-				} else {
-					bearerJwt = TOKEN_PREFIX + queryToken;
-				}
-				debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
-			}
+		// 클라이언트가 이미 Authorization 헤더에 JWT 담아 보낸 경우 그대로 반환
+		if (bearerJwt != null) {
+			return bearerJwt;
 		}
+
+		// Authorization 헤더가 없을 경우, 쿼리 파라미터의 accessToken 을 꺼냄
+		String queryToken = request.getParameter("accessToken");
+		// 쿼리 파라미너테도 없으면 JWT 못 얻기 때문에 null 반환 (인증 실패 처리)
+		if (queryToken == null) {
+			return null;
+		}
+
+		// 쿼리 파라미터에서 가져온 token 이 "Bearer "가 안 붙어있으면 붙여줌
+		bearerJwt = formatAsBearer(queryToken);
+		debugLog("accessToken 쿼리 파라미터 사용: " + bearerJwt);
+
+		// 형식이 잘 갖춰지도록 보정된 JWT 반환
 		return bearerJwt;
 	}
 
@@ -267,5 +273,15 @@ public class JwtFilter extends OncePerRequestFilter {
 	private boolean isWebSocketRequest(String url) {
 
 		return pathMatcher.match("/ws-chat/**", url);
+	}
+
+	private String formatAsBearer(String token) {
+
+		/*
+		 * 표준 Authorization 형식으로 보정하기 위한 헬퍼 메서드
+		 * token 이 이미 "Bearer "로 시작하면 그대로 반환
+		 * 아닐 경우 "Bearer " 접두사 붙여서 반환
+		 */
+		return token.startsWith(TOKEN_PREFIX) ? token : TOKEN_PREFIX + token;
 	}
 }

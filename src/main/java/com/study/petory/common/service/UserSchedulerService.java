@@ -24,7 +24,7 @@ public class UserSchedulerService {
 	private final EmailService emailService;
 	private final UserRepository userRepository;
 
-	// 미접속 유저에게 알림 이메일 발송 - 매일 자정
+	// 미접속 유저에게 휴면 알림 이메일 발송 - 매일 자정
 	public void sendDeactivationWarningEmails() {
 
 		testSendDeactivationWarningEmails(getNow());
@@ -36,7 +36,7 @@ public class UserSchedulerService {
 		testDeactivateInactiveUsers(getNow());
 	}
 
-	// 삭제 예정 유저에게 알림 이메일 발송 - 매일 새벽 2시
+	// 삭제 예정 유저에게 삭제 알림 이메일 발송 - 매일 새벽 2시
 	public void sendDeletionWarningEmails() {
 
 		testSendDeletionWarningEmails(getNow());

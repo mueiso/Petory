@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class UserSchedulerService {
 
@@ -23,36 +24,57 @@ public class UserSchedulerService {
 	private final EmailService emailService;
 	private final UserRepository userRepository;
 
+	// 미접속 유저에게 알림 이메일 발송 - 매일 자정
+	public void sendDeactivationWarningEmails() {
+		testSendDeactivationWarningEmails(getNow());
+	}
+
 	// 미접속 유저의 계정 휴면처리 - 매일 새벽 1시
-	@Transactional
 	public void deactivateInactiveUsers() {
 
 		testDeactivateInactiveUsers(getNow());
 	}
 
 	// 삭제 예정 유저에게 알림 이메일 발송 - 매일 새벽 2시
-	@Transactional
 	public void sendDeletionWarningEmails() {
 
 		testSendDeletionWarningEmails(getNow());
 	}
 
 	// 삭제 대상 유저 hard delete - 매일 새벽 3시
-	@Transactional
 	public void hardDeleteExpiredUsers() {
 
 		testHardDeleteExpiredUsers(getNow());
 	}
 
 	// 계정 정지 유저 복구 - 매일 새벽 4시
-	@Transactional
 	public void restoreSuspendedUsers() {
 
 		testRestoreSuspendedUsers(getNow());
 	}
 
 	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
-	@Transactional
+
+	// TEST 90알간 미접속 시 자동 휴면 계정으로 전환되는지 바로 확인하기 위한 테스트용 메서드
+	public void testDeactivateInactiveUsers(LocalDateTime simulatedNow) {
+
+		// 90일전 날짜를 기준으로 비활성화 시점 설정 (= 90일간 미접속 시)
+		LocalDateTime inactivationTime = simulatedNow.minusDays(ACCOUNT_DELETION_DELAY_DAYS);
+
+		// ACTIVE 상태이면서 90일 이상 updatedAt 의 변화가 없는 유저
+		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
+			UserStatus.ACTIVE,
+			inactivationTime);
+
+		for (User user : deactivationCandidates) {
+			user.deactivateEntity();
+			user.updateStatus(UserStatus.DEACTIVATED);
+
+			log.info("[테스트 알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
+		}
+	}
+
+	// TEST 스테줄러에 맞춰 이메일 자동 발송 되는지 바로 확인하기 위한 테스트용 메서드
 	public void testSendDeletionWarningEmails(LocalDateTime simulatedNow) {
 
 		/*
@@ -78,7 +100,6 @@ public class UserSchedulerService {
 	}
 
 	// TEST 스케줄러에 맞춰 휴면 계쩡 or 탈퇴 계정이 된 지 90일 초과된 유저 자동 hardDelete 되는지 바로 확인하기 위한 테스트용 메서드
-	@Transactional
 	public void testHardDeleteExpiredUsers(LocalDateTime simulatedNow) {
 
 		// 90일 전 날짜를 기준으로 삭제 시점 설정
@@ -98,7 +119,6 @@ public class UserSchedulerService {
 	}
 
 	// TEST 관리자에 의해 정지된 계정 30일 후 자동 복구되는지 바로 확인하기 위한 테스트용 메서드
-	@Transactional
 	public void testRestoreSuspendedUsers(LocalDateTime simulatedNow) {
 
 		// 30일 전 날짜를 기준으로 복구 시점 설정
@@ -114,26 +134,6 @@ public class UserSchedulerService {
 			user.updateStatus(UserStatus.ACTIVE);
 
 			log.info("[테스트 알림] 30일 정지됐던 계정 복구 - userId: {}, email: {}", user.getId(), user.getEmail());
-		}
-	}
-
-	// TEST 90알간 미접속 시 자동 휴면 계정으로 전환되는지 바로 확인하기 위한 테스트용 메서드
-	@Transactional
-	public void testDeactivateInactiveUsers(LocalDateTime simulatedNow) {
-
-		// 90일전 날짜를 기준으로 비활성화 시점 설정 (= 90일간 미접속 시)
-		LocalDateTime inactivationTime = simulatedNow.minusDays(ACCOUNT_DELETION_DELAY_DAYS);
-
-		// ACTIVE 상태이면서 90일 이상 updatedAt 의 변화가 없는 유저
-		List<User> deactivationCandidates = userRepository.findByUserStatusAndUpdatedAtBefore(
-			UserStatus.ACTIVE,
-			inactivationTime);
-
-		for (User user : deactivationCandidates) {
-			user.deactivateEntity();
-			user.updateStatus(UserStatus.DEACTIVATED);
-
-			log.info("[테스트 알림] 90일 미접속 유저 휴면처리 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}
 

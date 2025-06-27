@@ -142,6 +142,9 @@ public class SecurityConfig {
 		 */
 		config.setAllowCredentials(allowCredentials);
 
+		// 프론트 연동 시 필요
+		// config.setExposedHeaders(List.of("Authorization"));
+
 		// CORS 설정을 특정 경로 패턴에 매핑
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 

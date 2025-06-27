@@ -81,7 +81,7 @@ public class TestSchedulerController {
 
 	/**
 	 * [TEST]
-	 * 스테줄러에 맞춰 삭제 안내 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
+	 * 스케줄러에 맞춰 삭제 안내 메일 자동 발송되는지 바로 확인하기 위한 테스트용 API
 	 *
 	 * @param date 이메일 발송 예정 날짜
 	 * @return 이메일 발송 성공 메시지

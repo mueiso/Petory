@@ -3,6 +3,7 @@ package com.study.petory.common.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmailService {
 
-	private static final int ACCOUNT_DELAY_DAYS = 90;
-
-	// TODO - 배포 전 메일 발신 주소 수정 필요할지 확인
-	private final String FROM_EMAIL = "noreply@petory.com";
-
 	private final JavaMailSender mailSender;  // 이메일 전송할 때 사용하는 JavaMailSender 객체
 	private final TemplateEngine templateEngine;  // HTML 템플릿을 렌더링하기 위한 Thymeleaf 템플릿 엔진
+
+	// TODO - 배포 전 메일 발신 주소 수정 필요할지 확인
+	@Value("${mail.from}")
+	private String FROM_EMAIL;
+
+	private static final int ACCOUNT_DELAY_DAYS = 90;
 
 	// soft delete 되어있는 계정에게 삭제 경고 이메일을 발송하는 메서드
 	public void sendDeletionWarning(String to, String name, LocalDateTime deletedAt) {

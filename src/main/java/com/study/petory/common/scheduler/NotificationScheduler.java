@@ -3,6 +3,10 @@ package com.study.petory.common.scheduler;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,22 +24,33 @@ public class NotificationScheduler {
 
 	private final UserRepository userRepository;
 	private final NotificationRepository notificationRepository;
+	private final JobLauncher jobLauncher;
+	private final Job sendDailyQuestionJob;
+
+	// @Scheduled(cron = "0 0 0 * * *")
+	// @Transactional
+	// public void sendDailyQuestionNotification() {
+	//
+	// 	List<User> users = userRepository.findAll();
+	//
+	// 	for (User user : users) {
+	//
+	// 		Notification notification = Notification.builder()
+	// 			.user(user)
+	// 			.content("오늘의 질문이 도착했습니다 !")
+	// 			.build();
+	//
+	// 		notificationRepository.save(notification);
+	// 	}
+	// }
 
 	@Scheduled(cron = "0 0 0 * * *")
-	@Transactional
-	public void sendDailyQuestionNotification() {
+	public void sendDailyQuestionNotification() throws Exception{
+		JobParameters jobParameters = new JobParametersBuilder()
+			.addLong("time", System.currentTimeMillis())
+			.toJobParameters();
 
-		List<User> users = userRepository.findAll();
-
-		for (User user : users) {
-
-			Notification notification = Notification.builder()
-				.user(user)
-				.content("오늘의 질문이 도착했습니다 !")
-				.build();
-
-			notificationRepository.save(notification);
-		}
+		jobLauncher.run(sendDailyQuestionJob, jobParameters);
 	}
 
 	@Scheduled(cron = "0 0 21 * * *")

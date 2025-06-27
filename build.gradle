@@ -80,6 +80,9 @@ dependencies {
 
     // SMTP
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // Spring Batch
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
 }
 
 tasks.named('test') {

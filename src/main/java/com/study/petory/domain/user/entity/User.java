@@ -122,4 +122,9 @@ public class User extends TimeFeatureBasedEntity {
 		this.dailyQnas.add(dailyQna);
 		dailyQna.setUser(this);
 	}
+
+	public void addAlbum(Album album) {
+		this.albums.add(album);
+		album.setUser(this);
+	}
 }

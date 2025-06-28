@@ -22,6 +22,8 @@ public class OwnerBoardGetResponseDto {
 
 	private final List<OwnerBoardImage> images;
 
+	private final Long userId;
+
 	// 게시글 단건 조회시 첫 댓글 10개만 가져오기, 11번째부터는 페이징 처리
 	private List<OwnerBoardCommentGetResponseDto> commentsList;
 
@@ -38,6 +40,7 @@ public class OwnerBoardGetResponseDto {
 			ownerBoard.getTitle(),
 			ownerBoard.getContent(),
 			ownerBoard.getImages(),
+			ownerBoard.getUser() != null ? ownerBoard.getUser().getId() : null,  // User 가 null 일 경우 null 로 노출되도록
 			commentsList,
 			ownerBoard.getCreatedAt(),
 			ownerBoard.getUpdatedAt()

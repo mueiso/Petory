@@ -43,7 +43,7 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 
 	@OneToMany(mappedBy = "ownerBoard", cascade = CascadeType.ALL)
@@ -78,6 +78,11 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
+	}
+
+	// 연관관계 참조 끊기 위한 메서드
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
 

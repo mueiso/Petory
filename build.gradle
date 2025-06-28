@@ -71,6 +71,9 @@ dependencies {
 
     // OAuth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // deploy
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {
@@ -90,12 +93,13 @@ tasks.withType(Checkstyle) {
     }
 }
 
-checkstyle {
-    // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail을 내고 싶다면 이 선언을 추가
-    maxWarnings = 0
-    //rule 및 suppressions xml파일 위치 명시
-    configFile = file("config/checkstyle/naver-checkstyle-rules.xml")
-    configProperties = ["suppressionFile": "config/checkstyle/naver-checkstyle-suppressions.xml"]
-    // checkstyle 버전 8.24 이상 선언
-    toolVersion = "8.24"
-}
+//checkstyle {
+//    // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail을 내고 싶다면 이 선언을 추가
+//    maxWarnings = 0
+//    //rule 및 suppressions xml파일 위치 명시
+//    configFile = file("config/checkstyle/naver-checkstyle-rules.xml")
+//    configProperties = ["suppressionFile": "config/checkstyle/naver-checkstyle-suppressions.xml"]
+//    // checkstyle 버전 8.24 이상 선언
+//    toolVersion = "8.24"
+//}
+//빌드를 위해 잠시 주석

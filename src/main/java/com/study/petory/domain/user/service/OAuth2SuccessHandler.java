@@ -57,7 +57,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 		 * 클라이언트 리다이렉트 (프론트에서 토큰 받을 수 있도록 쿼리 파라미터 전달)
 		 */
 		String targetUrl = UriComponentsBuilder
-			.fromUriString("http://localhost:8080/login-success.html")
+			// .fromUriString("http://localhost:8080/login-success.html")
+			.fromUriString("https://petory.click/login-success.html")
 			.queryParam("accessToken", tokens.getAccessToken())
 			.queryParam("refreshToken", tokens.getRefreshToken())
 			.build()

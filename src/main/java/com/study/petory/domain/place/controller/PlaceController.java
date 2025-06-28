@@ -1,7 +1,5 @@
 package com.study.petory.domain.place.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -85,9 +83,10 @@ public class PlaceController {
 	public ResponseEntity<CommonResponse<Page<PlaceGetAllResponseDto>>> getAllPlace(
 		@RequestParam(required = false) String placeName,
 		@RequestParam(required = false) PlaceType placeType,
-		@PageableDefault(size = 10) Pageable pageable
+		@RequestParam(required = false) String address,
+		@PageableDefault Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, placeType, pageable));
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, placeType, address, pageable));
 	}
 
 	/**
@@ -297,8 +296,8 @@ public class PlaceController {
 		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
 	}
 
-	@GetMapping("/rank")
-	public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank() {
-		return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank());
-	}
+	// @GetMapping("/rank")
+	// public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank() {
+	// 	return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank());
+	// }
 }

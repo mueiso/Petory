@@ -2,6 +2,7 @@ package com.study.petory;
 
 import java.util.Collections;
 
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -13,6 +14,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 @EnableJpaAuditing
 @EnableMongoAuditing
 @EnableScheduling
+@EnableBatchProcessing
 @SpringBootApplication
 public class PetoryApplication {
 

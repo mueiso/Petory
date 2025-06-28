@@ -32,7 +32,7 @@ public class NotificationBatchConfig {
 	private final DataSource dataSource;
 	private final EntityManagerFactory entityManagerFactory;
 
-	private final int CHUNK_SIZE = 500;
+	private static final int CHUNK_SIZE = 500;
 
 	@Bean
 	public JpaPagingItemReader<User> userReader() {

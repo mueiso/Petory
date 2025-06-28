@@ -17,6 +17,7 @@ import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilde
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.study.petory.domain.notification.entity.Notification;
@@ -82,13 +83,15 @@ public class NotificationBatchConfig {
 		PlatformTransactionManager transactionManager,
 		JpaPagingItemReader<User> userReader,
 		ItemProcessor<User, Notification> itemProcessor,
-		JdbcBatchItemWriter<Notification> itemWriter
+		JdbcBatchItemWriter<Notification> itemWriter,
+		TaskExecutor notificationTaskExecutor
 	) {
 		return new StepBuilder("sendDailyQuestionStep", jobRepository)
 			.<User, Notification>chunk(CHUNK_SIZE, transactionManager)
 			.reader(userReader)
 			.processor(itemProcessor)
 			.writer(itemWriter)
+			.taskExecutor(notificationTaskExecutor)
 			.build();
 	}
 }

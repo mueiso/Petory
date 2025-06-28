@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
+import com.study.petory.domain.album.entity.Album;
+import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 
 import jakarta.persistence.CascadeType;
@@ -67,6 +69,14 @@ public class User extends TimeFeatureBasedEntity {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<TradeBoard> tradeBoards = new ArrayList<>();
 
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<DailyQna> dailyQnas = new ArrayList<>();
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<Album> albums = new ArrayList<>();
+
 	@Builder
 	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
 		this.email = email;
@@ -106,5 +116,10 @@ public class User extends TimeFeatureBasedEntity {
 	public void addTradeBoard(TradeBoard tradeBoard) {
 		tradeBoards.add(tradeBoard);
 		tradeBoard.setUser(this);  // 주인 객체 설정
+	}
+
+	public void addDailyQna(DailyQna dailyQna) {
+		this.dailyQnas.add(dailyQna);
+		dailyQna.setUser(this);
 	}
 }

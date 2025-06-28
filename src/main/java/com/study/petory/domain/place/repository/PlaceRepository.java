@@ -9,4 +9,6 @@ import com.study.petory.domain.place.entity.Place;
 
 public interface PlaceRepository extends JpaRepository<Place, Long>, PlaceCustomRepository {
 	Optional<Place> findByPlaceNameAndAddress(String placeName, String address);
+
+	List<Place> findAllByOrderByLikeCountDesc();
 }

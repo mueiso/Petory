@@ -17,8 +17,8 @@ RUN chmod +x gradlew
 # Gradle 빌드 실행 (테스트 및 체크 제외)
 RUN ./gradlew build -x test -x check
 
-# JAR 파일 복사 (Spring Boot 빌드 결과물)
-COPY build/libs/*.jar app.jar
+# JAR 파일 복사 (여러 JAR 파일 처리)
+RUN find build/libs -name "*.jar" -not -name "*plain*" -exec cp {} app.jar \;
 
 # 포트 노출
 EXPOSE 8080

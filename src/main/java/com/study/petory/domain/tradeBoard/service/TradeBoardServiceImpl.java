@@ -57,8 +57,10 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	}
 
 	public void validateOwner(TradeBoard tradeBoard, User user) {
-		if (!tradeBoard.isOwner(user.getId()) && !user.hasRole(Role.ADMIN)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
+		if (tradeBoard.getUser() == null || !tradeBoard.isOwner(user.getId())) {
+			if (!user.hasRole(Role.ADMIN)) {
+				throw new CustomException(ErrorCode.FORBIDDEN);
+			}
 		}
 	}
 

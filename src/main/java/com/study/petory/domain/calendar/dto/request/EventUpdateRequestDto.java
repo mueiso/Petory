@@ -1,6 +1,5 @@
 package com.study.petory.domain.calendar.dto.request;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
@@ -15,9 +14,9 @@ public class EventUpdateRequestDto {
 	private String title;
 
 	@NotBlank(message = "startDate일은 필수 항목입니다.")
-	private LocalDateTime startDate;
+	private String startDate;
 
-	private LocalDateTime endDate;
+	private String endDate;
 
 	@NotBlank(message = "timeZone은 필수 항목입니다.")
 	private String timeZone;

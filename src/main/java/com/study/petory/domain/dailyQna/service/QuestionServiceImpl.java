@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.common.util.DateUtil;
+import com.study.petory.common.util.CustomDateUtil;
 import com.study.petory.domain.dailyQna.dto.request.QuestionCreateRequestDto;
 import com.study.petory.domain.dailyQna.dto.request.QuestionUpdateRequestDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetAllResponseDto;
@@ -67,7 +67,7 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	@Cacheable(value = "todayQuestion")
 	public QuestionGetTodayResponseDto findTodayQuestion() {
-		String today = DateUtil.getFormatDate();
+		String today = CustomDateUtil.getFormatDate();
 		Question question = questionRepository.findTodayQuestion(today)
 			.orElseThrow(() -> new CustomException(ErrorCode.TODAY_QUESTION_IS_DEACTIVATED));
 		return QuestionGetTodayResponseDto.from(question);

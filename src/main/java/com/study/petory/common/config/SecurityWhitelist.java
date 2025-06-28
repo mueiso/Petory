@@ -25,11 +25,9 @@ public class SecurityWhitelist {
 			"/map.html",
 			"/chat.html",
 			"/ws-chat",
-			"/ws-chat/**",
-			"/calendar/index.html",
-			"/index.global.min.js",
-			"/daygrid.global.min.js",
-			"/main.js"
+			"/ws-chat/**"
+			// 캘린더 접근 권한 요청 프론트 필요
+			// 캘린더 프론트
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

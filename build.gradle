@@ -70,6 +70,9 @@ dependencies {
 
     // OAuth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // ical4j
+    implementation 'org.mnode.ical4j:ical4j:3.2.14'
 }
 
 tasks.named('test') {

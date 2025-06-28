@@ -1,26 +1,22 @@
 package com.study.petory.domain.calendar.dto.response;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-import com.study.petory.domain.user.entity.User;
+import com.study.petory.common.util.CustomDateUtil;
+import com.study.petory.domain.calendar.entity.Event;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public class EventCreateResponseDto {
 
 	private final Long id;
 
 	private final String title;
 
-	private final LocalDateTime startDate;
+	private final String startDate;
 
-	private final LocalDateTime endDate;
-
-	private final String timeZone;
+	private final String endDate;
 
 	private final Boolean isAllDay;
 
@@ -29,4 +25,29 @@ public class EventCreateResponseDto {
 	private final String description;
 
 	private final String color;
+
+	private EventCreateResponseDto(Long id, String title, String startDate, String endDate,
+		Boolean isAllDay, List<String> recurrence, String description, String color) {
+		this.id = id;
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.isAllDay = isAllDay;
+		this.recurrence = recurrence;
+		this.description = description;
+		this.color = color;
+	}
+
+	public static EventCreateResponseDto from(Event event) {
+		return new EventCreateResponseDto(
+			event.getId(),
+			event.toString(),
+			CustomDateUtil.toISOString(event.getStartDate(), event.getTimeZone()),
+			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
+			event.getIsAllDay(),
+			event.getRecurrence(),
+			event.getDescription(),
+			event.getColor()
+		);
+	}
 }

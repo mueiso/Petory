@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petory Calendar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .current-month {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #dee2e6;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: #495057;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .day-cell {
+            background: white;
+            min-height: 120px;
+            padding: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .day-cell:hover {
+            background: #f8f9fa;
+        }
+
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+
+        .other-month {
+            color: #adb5bd;
+            background: #f8f9fa;
+        }
+
+        .today {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .event {
+            background: #007bff; /* 기본 색상 */
+            color: white;
+            padding: 2px 6px;
+            margin: 2px 0;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .event:hover {
+            opacity: 0.8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .color-option.selected {
+            border-color: #495057;
+            transform: scale(1.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .auth-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .auth-section h3 {
+            margin-bottom: 15px;
+            color: #495057;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .calendar-grid {
+                margin: 10px;
+            }
+
+            .day-cell {
+                min-height: 80px;
+                padding: 5px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐾 Petory Calendar</h1>
+            <p>반려동물과 함께하는 소중한 시간을 기록하세요</p>
+        </div>
+
+        <!-- 인증 토큰 설정 섹션 -->
+        <div class="auth-section">
+            <h3>🔐 인증 토큰 설정</h3>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="authToken" class="form-control" placeholder="Bearer 토큰을 입력하세요" style="flex: 1;">
+                <button onclick="saveToken()" class="btn btn-primary">저장</button>
+            </div>
+            <div id="tokenStatus" style="margin-top: 10px; font-size: 14px;"></div>
+        </div>
+
+        <div class="controls">
+            <div class="nav-buttons">
+                <button onclick="previousMonth()" class="btn btn-secondary">◀ 이전</button>
+                <button onclick="nextMonth()" class="btn btn-secondary">다음 ▶</button>
+                <button onclick="goToToday()" class="btn btn-primary">오늘</button>
+            </div>
+            <div class="current-month" id="currentMonth"></div>
+            <button onclick="openCreateModal()" class="btn btn-primary">+ 일정 추가</button>
+        </div>
+
+        <div id="calendarContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>캘린더를 불러오는 중...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 일정 생성/수정 모달 -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modalTitle">새 일정 추가</h2>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">제목 *</label>
+                        <input type="text" id="eventTitle" class="form-control" required>
+                        <div id="titleError" class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventStartDate">시작일시 *</label>
+                        <input type="datetime-local" id="eventStartDate" class="form-control" required>
+                        <div id="startDateError" class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventEndDate">종료일시</label>
+                        <input type="datetime-local" id="eventEndDate" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="isAllDay">
+                            <label for="isAllDay">하루 종일</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventDescription">메모</label>
+                        <textarea id="eventDescription" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>색상</label>
+                        <div class="color-picker" id="colorPicker"></div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 30px;">
+                        <button type="button" onclick="closeModal()" class="btn btn-secondary">취소</button>
+                        <button type="submit" class="btn btn-primary" id="saveButton">저장</button>
+                        <button type="button" onclick="deleteEvent()" class="btn" id="deleteButton" style="background: #dc3545; color: white; display: none;">삭제</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        let currentDate = new Date();
+        let events = [];
+        let editingEventId = null;
+        let authToken = '';
+        
+        // API 기본 URL (실제 서버 URL로 변경해주세요)
+        const API_BASE_URL = 'http://localhost:8080';
+
+        // 색상 옵션 (Google Calendar API 호환을 위해 문자열 ID 사용)
+        // Google Calendar는 colorId를 문자열로 사용하므로 문자열이 더 적합합니다
+        const colorOptions = [
+            { id: '1', name: 'LAVENDER', hex: '#a4bdfc' },
+            { id: '2', name: 'SAGE', hex: '#7ae7bf' },
+            { id: '3', name: 'GRAPE', hex: '#dbadff' },
+            { id: '4', name: 'FLAMINGO', hex: '#ff887c' },
+            { id: '5', name: 'BANANA', hex: '#fbd75b' },
+            { id: '6', name: 'TANGERINE', hex: '#ffb878' },
+            { id: '7', name: 'PEACOCK', hex: '#46d6db' },
+            { id: '8', name: 'GRAPHITE', hex: '#e1e1e1' },
+            { id: '9', name: 'BLUEBERRY', hex: '#5484ed' },
+            { id: '10', name: 'BASIL', hex: '#51b749' },
+            { id: '11', name: 'TOMATO', hex: '#dc2127' }
+        ];
+
+        // 토큰 관리
+        function saveToken() {
+            const token = document.getElementById('authToken').value.trim();
+            if (token) {
+                authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+                localStorage.setItem('petoryAuthToken', authToken);
+                document.getElementById('tokenStatus').innerHTML = '✅ 토큰이 저장되었습니다.';
+                document.getElementById('tokenStatus').style.color = '#28a745';
+                loadCalendar();
+            } else {
+                document.getElementById('tokenStatus').innerHTML = '❌ 토큰을 입력해주세요.';
+                document.getElementById('tokenStatus').style.color = '#dc3545';
+            }
+        }
+
+        // 저장된 토큰 로드
+        function loadSavedToken() {
+            const savedToken = localStorage.getItem('petoryAuthToken');
+            if (savedToken) {
+                authToken = savedToken;
+                document.getElementById('authToken').value = savedToken.replace('Bearer ', '');
+                document.getElementById('tokenStatus').innerHTML = '✅ 저장된 토큰을 사용합니다.';
+                document.getElementById('tokenStatus').style.color = '#28a745';
+            }
+        }
+
+        // API 요청 헬퍼 (401 에러 상세 처리)
+        async function apiRequest(url, options = {}) {
+            if (!authToken) {
+                throw new Error('인증 토큰이 설정되지 않았습니다.');
+            }
+
+            const defaultOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': authToken
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}${url}`, {
+                    ...defaultOptions,
+                    ...options,
+                    headers: {
+                        ...defaultOptions.headers,
+                        ...options.headers
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        // 401 에러 시 토큰 상태 업데이트
+                        document.getElementById('tokenStatus').innerHTML = '❌ 인증이 만료되었습니다. 토큰을 다시 입력해주세요.';
+                        document.getElementById('tokenStatus').style.color = '#dc3545';
+                        throw new Error('인증이 만료되었습니다. 토큰을 다시 확인해주세요.');
+                    }
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                return response.json();
+            } catch (error) {
+                console.error('API 요청 실패:', error);
+                throw error;
+            }
+        }
+
+        // 캘린더 초기화
+        function initCalendar() {
+            loadSavedToken();
+            createColorPicker();
+            updateMonthDisplay();
+            loadCalendar();
+        }
+
+        // 색상 선택기 생성
+        function createColorPicker() {
+            const colorPicker = document.getElementById('colorPicker');
+            colorOptions.forEach(color => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'color-option';
+                colorDiv.style.backgroundColor = color.hex;
+                colorDiv.dataset.colorId = color.id;
+                colorDiv.onclick = () => selectColor(color.id);
+                colorPicker.appendChild(colorDiv);
+            });
+        }
+
+        // 색상 선택
+        function selectColor(colorId) {
+            document.querySelectorAll('.color-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector(`[data-color-id="${colorId}"]`).classList.add('selected');
+        }
+
+        // 월 표시 업데이트
+        function updateMonthDisplay() {
+            const monthNames = [
+                '1월', '2월', '3월', '4월', '5월', '6월',
+                '7월', '8월', '9월', '10월', '11월', '12월'
+            ];
+            const monthDisplay = `${currentDate.getFullYear()}년 ${monthNames[currentDate.getMonth()]}`;
+            document.getElementById('currentMonth').textContent = monthDisplay;
+        }
+
+        // 캘린더 로드
+        async function loadCalendar() {
+            if (!authToken) {
+                document.getElementById('calendarContainer').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #dc3545;">
+                        <h3>⚠️ 인증 토큰을 설정해주세요</h3>
+                        <p>API를 사용하기 위해 위에서 토큰을 입력하고 저장 버튼을 클릭하세요.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const startDate = getMonthStart(currentDate);
+                const endDate = getMonthEnd(currentDate);
+                
+                const start = formatDateForAPI(startDate);
+                const end = formatDateForAPI(endDate);
+
+                console.log('API 요청 범위:', start, '~', end); // 디버그 로그
+
+                const response = await apiRequest(`/calendars?start=${start}&end=${end}`);
+                events = response.data || [];
+                
+                console.log('받아온 이벤트 데이터:', events); // 디버그 로그
+                
+                // 각 이벤트의 날짜 정보 확인
+                events.forEach(event => {
+                    console.log(`이벤트 "${event.title}":`, {
+                        startDate: event.startDate,
+                        endDate: event.endDate,
+                        isAllDay: event.isAllDay
+                    });
+                });
+                
+                renderCalendar();
+            } catch (error) {
+                console.error('캘린더 로드 실패:', error);
+                let errorMessage = error.message;
+                
+                if (error.message.includes('401')) {
+                    errorMessage = '인증이 만료되었습니다. 토큰을 다시 확인해주세요.';
+                    document.getElementById('tokenStatus').innerHTML = '❌ 토큰이 만료되었습니다. 다시 입력해주세요.';
+                    document.getElementById('tokenStatus').style.color = '#dc3545';
+                }
+                
+                document.getElementById('calendarContainer').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #dc3545;">
+                        <h3>❌ 캘린더 로드 실패</h3>
+                        <p>${errorMessage}</p>
+                        <button onclick="loadCalendar()" class="btn btn-primary" style="margin-top: 15px;">다시 시도</button>
+                    </div>
+                `;
+            }
+        }
+
+        // 캘린더 렌더링
+        function renderCalendar() {
+            const calendar = document.createElement('div');
+            calendar.className = 'calendar-grid';
+
+            // 요일 헤더
+            const dayHeaders = ['일', '월', '화', '수', '목', '금', '토'];
+            dayHeaders.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'day-header';
+                header.textContent = day;
+                calendar.appendChild(header);
+            });
+
+            // 달력 날짜들
+            const startDate = getMonthStart(currentDate);
+            const endDate = getMonthEnd(currentDate);
+            
+            // 첫째 주 시작일 (일요일부터)
+            const firstDay = new Date(startDate);
+            firstDay.setDate(firstDay.getDate() - firstDay.getDay());
+
+            // 마지막 주 끝일 (토요일까지)
+            const lastDay = new Date(endDate);
+            lastDay.setDate(lastDay.getDate() + (6 - lastDay.getDay()));
+
+            for (let d = new Date(firstDay); d <= lastDay; d.setDate(d.getDate() + 1)) {
+                const dayCell = createDayCell(new Date(d));
+                calendar.appendChild(dayCell);
+            }
+
+            document.getElementById('calendarContainer').innerHTML = '';
+            document.getElementById('calendarContainer').appendChild(calendar);
+        }
+
+        // 날짜 셀 생성
+        function createDayCell(date) {
+            const cell = document.createElement('div');
+            cell.className = 'day-cell';
+            
+            const isCurrentMonth = date.getMonth() === currentDate.getMonth();
+            const isToday = isDateToday(date);
+            
+            if (!isCurrentMonth) {
+                cell.classList.add('other-month');
+            }
+            if (isToday) {
+                cell.classList.add('today');
+            }
+
+            // 날짜 번호
+            const dayNumber = document.createElement('div');
+            dayNumber.className = 'day-number';
+            dayNumber.textContent = date.getDate();
+            cell.appendChild(dayNumber);
+
+            // 해당 날짜의 이벤트들
+            const dayEvents = getEventsForDate(date);
+            dayEvents.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event';
+                
+                // 여러 날에 걸친 이벤트 표시 개선
+                const eventStartDate = new Date(event.startDate);
+                const eventEndDate = event.endDate ? new Date(event.endDate) : new Date(event.startDate);
+                const isMultiDay = eventStartDate.toDateString() !== eventEndDate.toDateString();
+                
+                if (isMultiDay) {
+                    const isFirstDay = date.toDateString() === eventStartDate.toDateString();
+                    const isLastDay = date.toDateString() === eventEndDate.toDateString();
+                    
+                    if (isFirstDay) {
+                        eventDiv.textContent = event.title;
+                    } else if (isLastDay) {
+                        eventDiv.textContent = `${event.title} (종료)`;
+                        eventDiv.style.opacity = '0.8';
+                    } else {
+                        eventDiv.textContent = `${event.title} (계속)`;
+                        eventDiv.style.opacity = '0.6';
+                    }
+                } else {
+                    eventDiv.textContent = event.title;
+                }
+                
+                // 색상 적용 - CSS 변수 대신 직접 스타일 적용
+                const color = getColorByIdOrHex(event.color);
+                if (color) {
+                    eventDiv.style.backgroundColor = color;
+                }
+                
+                eventDiv.onclick = (e) => {
+                    e.stopPropagation();
+                    editEvent(event.id);
+                };
+                cell.appendChild(eventDiv);
+            });
+
+            // 날짜 셀 클릭 시 새 이벤트 생성
+            cell.onclick = () => {
+                openCreateModal(date);
+            };
+
+            return cell;
+        }
+
+        // 특정 날짜의 이벤트 가져오기
+        function getEventsForDate(date) {
+            return events.filter(event => {
+                const eventDate = new Date(event.startDate);
+                return eventDate.toDateString() === date.toDateString();
+            });
+        }
+
+        // 색상 ID 또는 HEX 값으로 색상 반환
+        function getColorByIdOrHex(colorValue) {
+            if (!colorValue) return null;
+            
+            // HEX 값인 경우
+            if (colorValue.startsWith('#')) {
+                return colorValue;
+            }
+            
+            // 색상 ID인 경우
+            const colorOption = colorOptions.find(c => c.id === colorValue);
+            return colorOption ? colorOption.hex : null;
+        }
+
+        // 오늘 날짜인지 확인
+        function isDateToday(date) {
+            const today = new Date();
+            return date.toDateString() === today.toDateString();
+        }
+
+        // 월의 첫째 날
+        function getMonthStart(date) {
+            return new Date(date.getFullYear(), date.getMonth(), 1);
+        }
+
+        // 월의 마지막 날
+        function getMonthEnd(date) {
+            return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        }
+
+        // API용 날짜 포맷
+        function formatDateForAPI(date) {
+            return date.toISOString();
+        }
+
+        // datetime-local input용 날짜 포맷
+        function formatDateForInput(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+
+        // 네비게이션 함수들
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateMonthDisplay();
+            loadCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateMonthDisplay();
+            loadCalendar();
+        }
+
+        function goToToday() {
+            currentDate = new Date();
+            updateMonthDisplay();
+            loadCalendar();
+        }
+
+        // 모달 관리
+        function openCreateModal(selectedDate = null) {
+            editingEventId = null;
+            document.getElementById('modalTitle').textContent = '새 일정 추가';
+            document.getElementById('deleteButton').style.display = 'none';
+            
+            // 폼 초기화
+            document.getElementById('eventForm').reset();
+            clearErrors();
+            
+            // 선택된 날짜가 있으면 설정
+            if (selectedDate) {
+                const startDate = new Date(selectedDate);
+                startDate.setHours(9, 0, 0, 0); // 기본 시간 09:00
+                document.getElementById('eventStartDate').value = formatDateForInput(startDate);
+                
+                const endDate = new Date(selectedDate);
+                endDate.setHours(10, 0, 0, 0); // 기본 종료 시간 10:00
+                document.getElementById('eventEndDate').value = formatDateForInput(endDate);
+            }
+            
+            // 기본 색상 선택
+            selectColor('1');
+            
+            document.getElementById('eventModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+            editingEventId = null;
+            clearErrors();
+        }
+
+        // 이벤트 편집 (401 에러 특별 처리)
+        async function editEvent(eventId) {
+            if (!authToken) {
+                alert('인증 토큰이 설정되지 않았습니다.');
+                return;
+            }
+
+            try {
+                console.log('일정 조회 중:', eventId); // 디버그 로그
+                const response = await apiRequest(`/calendars/${eventId}`);
+                const event = response.data;
+                
+                console.log('조회된 일정:', event); // 디버그 로그
+                
+                editingEventId = eventId;
+                document.getElementById('modalTitle').textContent = '일정 수정';
+                document.getElementById('deleteButton').style.display = 'block';
+                
+                // 폼에 데이터 채우기
+                document.getElementById('eventTitle').value = event.title || '';
+                
+                if (event.startDate) {
+                    document.getElementById('eventStartDate').value = formatDateForInput(new Date(event.startDate));
+                }
+                
+                if (event.endDate) {
+                    document.getElementById('eventEndDate').value = formatDateForInput(new Date(event.endDate));
+                }
+                
+                document.getElementById('isAllDay').checked = event.isAllDay || false;
+                document.getElementById('eventDescription').value = event.description || '';
+                
+                // 색상 선택 (문자열로 처리)
+                if (event.color) {
+                    selectColor(String(event.color));
+                } else {
+                    selectColor('1');
+                }
+                
+                document.getElementById('eventModal').style.display = 'block';
+            } catch (error) {
+                console.error('일정 로드 에러:', error);
+                alert('일정을 불러오는데 실패했습니다: ' + error.message);
+            }
+        }
+
+        // 에러 메시지 클리어
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.textContent = '';
+            });
+        }
+
+        // 폼 검증
+        function validateForm() {
+            clearErrors();
+            let isValid = true;
+
+            const title = document.getElementById('eventTitle').value.trim();
+            if (!title) {
+                document.getElementById('titleError').textContent = 'title은 필수 항목입니다.';
+                isValid = false;
+            }
+
+            const startDate = document.getElementById('eventStartDate').value;
+            if (!startDate) {
+                document.getElementById('startDateError').textContent = 'startDate는 필수 항목입니다.';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // 이벤트 저장
+        async function saveEvent(eventData) {
+            try {
+                if (editingEventId) {
+                    // 수정
+                    await apiRequest(`/calendars/${editingEventId}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(eventData)
+                    });
+                } else {
+                    // 생성
+                    await apiRequest('/calendars', {
+                        method: 'POST',
+                        body: JSON.stringify(eventData)
+                    });
+                }
+                
+                closeModal();
+                loadCalendar();
+            } catch (error) {
+                alert('일정 저장에 실패했습니다: ' + error.message);
+            }
+        }
+
+        // 이벤트 삭제
+        async function deleteEvent() {
+            if (!editingEventId) return;
+            
+            if (confirm('정말로 이 일정을 삭제하시겠습니까?')) {
+                try {
+                    await apiRequest(`/calendars/${editingEventId}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    closeModal();
+                    loadCalendar();
+                } catch (error) {
+                    alert('일정 삭제에 실패했습니다: ' + error.message);
+                }
+            }
+        }
+
+        // 폼 제출 처리
+        document.getElementById('eventForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) return;
+            
+            const selectedColor = document.querySelector('.color-option.selected');
+            const colorId = selectedColor ? selectedColor.dataset.colorId : '1';
+            
+            const eventData = {
+                title: document.getElementById('eventTitle').value.trim(),
+                startDate: new Date(document.getElementById('eventStartDate').value).toISOString(),
+                endDate: document.getElementById('eventEndDate').value ? 
+                    new Date(document.getElementById('eventEndDate').value).toISOString() : null,
+                timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                isAllDay: document.getElementById('isAllDay').checked,
+                description: document.getElementById('eventDescription').value.trim() || null,
+                color: colorId,
+                recurrence: null // 반복 일정은 이후 구현
+            };
+            
+            await saveEvent(eventData);
+        });
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // 하루 종일 체크박스 변경 시 시간 필드 처리
+        document.getElementById('isAllDay').addEventListener('change', function() {
+            const startDateInput = document.getElementById('eventStartDate');
+            const endDateInput = document.getElementById('eventEndDate');
+            
+            if (this.checked) {
+                // 하루 종일인 경우 시간을 00:00으로 설정
+                if (startDateInput.value) {
+                    const startDate = new Date(startDateInput.value);
+                    startDate.setHours(0, 0, 0, 0);
+                    startDateInput.value = formatDateForInput(startDate);
+                }
+                
+                if (endDateInput.value) {
+                    const endDate = new Date(endDateInput.value);
+                    endDate.setHours(23, 59, 59, 999);
+                    endDateInput.value = formatDateForInput(endDate);
+                }
+            }
+        });
+
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            // ESC 키로 모달 닫기
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            
+            // Ctrl + N으로 새 일정 생성
+            if (e.ctrlKey && e.key === 'n') {
+                e.preventDefault();
+                openCreateModal();
+            }
+            
+            // 좌우 화살표로 월 이동
+            if (e.key === 'ArrowLeft' && e.ctrlKey) {
+                e.preventDefault();
+                previousMonth();
+            }
+            
+            if (e.key === 'ArrowRight' && e.ctrlKey) {
+                e.preventDefault();
+                nextMonth();
+            }
+        });
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initCalendar();
+        });
+
+        // 반응형 디자인을 위한 윈도우 리사이즈 처리
+        window.addEventListener('resize', function() {
+            // 모바일에서 캘린더 레이아웃 조정
+            const calendarGrid = document.querySelector('.calendar-grid');
+            if (calendarGrid && window.innerWidth < 768) {
+                calendarGrid.style.fontSize = '12px';
+            } else if (calendarGrid) {
+                calendarGrid.style.fontSize = '14px';
+            }
+        });
+
+        // 터치 이벤트 지원 (모바일)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // 왼쪽으로 스와이프 - 다음 달
+                    nextMonth();
+                } else {
+                    // 오른쪽으로 스와이프 - 이전 달
+                    previousMonth();
+                }
+            }
+        }
+
+        // 디버그 도구 (개발 환경에서만 사용)
+        function debugInfo() {
+            console.log('Current Date:', currentDate);
+            console.log('Events:', events);
+            console.log('Auth Token:', authToken ? '설정됨' : '설정되지 않음');
+            console.log('API Base URL:', API_BASE_URL);
+        }
+
+        // 전역 함수로 노출 (개발 시 디버깅용)
+        window.debugInfo = debugInfo;
+        window.loadCalendar = loadCalendar;
+    </script>
+</body>
+</html>

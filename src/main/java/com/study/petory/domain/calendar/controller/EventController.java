@@ -20,7 +20,7 @@ import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.calendar.dto.request.EventCreateRequestDto;
 import com.study.petory.domain.calendar.dto.request.EventUpdateRequestDto;
 import com.study.petory.domain.calendar.dto.response.EventCreateResponseDto;
-import com.study.petory.domain.calendar.dto.response.EventGetListResponseDto;
+import com.study.petory.domain.calendar.dto.response.EventInstanceGetResponseDto;
 import com.study.petory.domain.calendar.dto.response.EventGetOneResponseDto;
 import com.study.petory.domain.calendar.dto.response.EventUpdateResponseDto;
 import com.study.petory.domain.calendar.service.EventService;
@@ -34,45 +34,77 @@ public class EventController {
 
 	private final EventService eventService;
 
-	// @PostMapping()
-	// public ResponseEntity<CommonResponse<EventCreateResponseDto>> saveEvent(
-	// 	@AuthenticationPrincipal CustomPrincipal currenUser,
-	// 	@RequestBody EventCreateRequestDto request
-	// ) {
-	// 	return CommonResponse.of(SuccessCode.CREATED, eventService.saveEvent(currenUser.getId(), request));
-	// }
-	//
-	// @GetMapping()
-	// public ResponseEntity<CommonResponse<List<EventGetListResponseDto>>> getEvents(
-	// 	@AuthenticationPrincipal CustomPrincipal currenUser,
-	// 	@RequestParam String start,
-	// 	@RequestParam String end
-	// ) {
-	// 	return CommonResponse.of(SuccessCode.FOUND, eventService.findEvents(currenUser.getId(), start, end));
-	// }
-	//
-	// @GetMapping("/{eventId}")
-	// public ResponseEntity<CommonResponse<EventGetOneResponseDto>> getEvent(
-	// 	@PathVariable Long eventId
-	// ) {
-	// 	return CommonResponse.of(SuccessCode.FOUND, eventService.findOneEvent(eventId));
-	// }
-	//
-	// @PutMapping("/{eventId}")
-	// public ResponseEntity<CommonResponse<EventUpdateResponseDto>> updateEvent(
-	// 	@AuthenticationPrincipal CustomPrincipal currenUser,
-	// 	@PathVariable Long eventId,
-	// 	@RequestBody EventUpdateRequestDto request
-	// ) {
-	// 	return CommonResponse.of(SuccessCode.UPDATED, eventService.updateEvent(currenUser.getId(), eventId, request));
-	// }
-	//
-	// @DeleteMapping("/{eventId}")
-	// public ResponseEntity<CommonResponse<Void>> deleteEvent(
-	// 	@AuthenticationPrincipal CustomPrincipal currenUser,
-	// 	@PathVariable Long eventId
-	// ) {
-	// 	eventService.deleteEvent(currenUser.getId(), eventId);
-	// 	return CommonResponse.of(SuccessCode.DELETED);
-	// }
+	/**
+	 * 일정 저장
+	 * @param currenUser		일정을 생성한 유저
+	 * @param request			일정에 대한 데이터
+	 * @return	CommonResponse 성공 메세지, data: id, 제목, 시작일, 종료일, 하루 종일 여부, 반복 조건, 메모, 일정 색상
+	 */
+	@PostMapping()
+	public ResponseEntity<CommonResponse<EventCreateResponseDto>> saveEvent(
+		@AuthenticationPrincipal CustomPrincipal currenUser,
+		@RequestBody EventCreateRequestDto request
+	) {
+		return CommonResponse.of(SuccessCode.CREATED, eventService.saveEvent(currenUser.getId(), request));
+	}
+
+	/**
+	 * 일정 단일 조회
+	 * @param eventId			일정을 조회한 유저
+	 * @return	CommonResponse 성공 메세지, data: id, 제목, 시작일, 종료일, 하루 종일 여부, 반복 조건, 메모, 일정 색상
+	 */
+	@GetMapping("/{eventId}")
+	public ResponseEntity<CommonResponse<EventGetOneResponseDto>> getEvent(
+		@PathVariable Long eventId
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, eventService.findOneEvent(eventId));
+	}
+
+	/**
+	 * 일정 범위 조회
+	 * @param currenUser		일정을 조회한 유저
+	 * @param start				조회 범위 시작일
+	 * @param end				조회 범위 종료일
+	 * @return	CommonResponse 성공 메세지, data: List [일정 인스턴스, 일정 인스턴스, ...]
+	 * 일정 인스턴스: id, 제목, 시작일, 종료일, 하루 종일 여부, 일정 색상
+	 */
+	@GetMapping()
+	public ResponseEntity<CommonResponse<List<EventInstanceGetResponseDto>>> getEvents(
+		@AuthenticationPrincipal CustomPrincipal currenUser,
+		@RequestParam String start,
+		@RequestParam String end
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, eventService.findEvents(currenUser.getId(), start, end));
+	}
+
+	/**
+	 * 일정 단일 수정
+	 * @param currenUser		일정을 수정한 유저
+	 * @param eventId			수정할 일정 id
+	 * @param request			일정을 수정할 데이터
+	 * @return	CommonResponse 성공 메세지, data: id, 제목, 시작일, 종료일, 하루 종일 여부, 반복 조건, 메모, 일정 색상
+	 */
+	@PutMapping("/{eventId}")
+	public ResponseEntity<CommonResponse<EventUpdateResponseDto>> updateEvent(
+		@AuthenticationPrincipal CustomPrincipal currenUser,
+		@PathVariable Long eventId,
+		@RequestBody EventUpdateRequestDto request
+	) {
+		return CommonResponse.of(SuccessCode.UPDATED, eventService.updateEvent(currenUser.getId(), eventId, request));
+	}
+
+	/**
+	 * 일정 단일 삭제
+	 * @param currenUser		일정을 삭제한 유저
+	 * @param eventId			삭제할 일정 id
+	 * @return	CommonResponse 성공 메세지, data: null
+	 */
+	@DeleteMapping("/{eventId}")
+	public ResponseEntity<CommonResponse<Void>> deleteEvent(
+		@AuthenticationPrincipal CustomPrincipal currenUser,
+		@PathVariable Long eventId
+	) {
+		eventService.deleteEvent(currenUser.getId(), eventId);
+		return CommonResponse.of(SuccessCode.DELETED);
+	}
 }

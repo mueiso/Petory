@@ -1,6 +1,6 @@
 package com.study.petory.common.config;
 
-import static com.study.petory.common.util.DateUtil.*;
+import static com.study.petory.common.util.CustomDateUtil.*;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

@@ -1,6 +1,8 @@
 package com.study.petory.domain.calendar.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -53,7 +55,7 @@ public class Event extends UpdateBasedEntity {
 	@Column
 	private LocalDateTime endDate;
 
-	@Column
+	@Column(nullable = false)
 	private String timeZone;
 
 	// 기본 true
@@ -64,7 +66,7 @@ public class Event extends UpdateBasedEntity {
 	private String rrule;
 
 	@Column
-	private String recurrenceEnd;
+	private LocalDateTime recurrenceEnd;
 
 	@Column
 	private String rDate;
@@ -95,7 +97,7 @@ public class Event extends UpdateBasedEntity {
 	// private String Alarm;
 
 	@Builder
-	public Event(User user, String title, LocalDateTime startDate, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, String recurrenceEnd,
+	public Event(User user, String title, LocalDateTime startDate, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
 		String rDate, String exDate, String description, String color) {
 		this.user = user;
 		this.title = title;
@@ -111,7 +113,7 @@ public class Event extends UpdateBasedEntity {
 		this.color = color;
 	}
 
-	public void updateEvent(String title, LocalDateTime start, LocalDateTime end, String timeZone, boolean isAllDay, String rrule, String recurrenceEnd,
+	public void updateEvent(String title, LocalDateTime start, LocalDateTime end, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
 		String rDate, String exDate, String description, String color) {
 		this.title = title;
 		this.startDate = start;
@@ -128,5 +130,31 @@ public class Event extends UpdateBasedEntity {
 
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
+	}
+
+	public boolean isRruleBlank() {
+		return this.rrule == null || this.rrule.isEmpty();
+	}
+
+	public boolean isRDateBlank() {
+		return this.rDate == null || this.rDate.isEmpty();
+	}
+
+	public boolean isExDateBlank() {
+		return this.exDate == null || this.exDate.isEmpty();
+	}
+
+	public List<String> getRecurrence() {
+		List<String> responseList = new ArrayList<>();
+		if (!isRruleBlank()) {
+			responseList.add("RRULE:" + this.rrule);
+		}
+		if (!isRDateBlank()) {
+			responseList.add("RDATE:" + this.rDate);
+		}
+		if (!isExDateBlank()) {
+			responseList.add("EXDATE:" + this.exDate);
+		}
+		return responseList;
 	}
 }

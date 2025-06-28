@@ -77,6 +77,9 @@ public class OwnerBoard extends TimeFeatureBasedEntity {
 
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
+		if (this.user == null) {
+			return false;
+		}
 		return this.user.isEqualId(userId);
 	}
 

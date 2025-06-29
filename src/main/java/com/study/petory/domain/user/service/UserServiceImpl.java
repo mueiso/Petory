@@ -1,7 +1,9 @@
 package com.study.petory.domain.user.service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import com.study.petory.domain.user.dto.UpdateUserRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
+import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 	private final JwtProvider jwtProvider;
+	private final RedisTemplate<String, String> loginRefreshToken;
 
 	/*
 	 * [테스트 전용 - 로그인]
@@ -32,11 +36,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public TokenResponseDto testLogin(Long userId) {
-		User user = userRepository.findById(userId)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		if (user.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.DEACTIVATED_USER);
+		User user = findUserById(userId);
+
+		if (user.getUserStatus() != UserStatus.ACTIVE
+			&& user.getUserStatus() != UserStatus.DEACTIVATED) {
+			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
 		}
 
 		List<String> roles = user.getUserRole().stream()
@@ -56,11 +61,10 @@ public class UserServiceImpl implements UserService {
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
 
-
 	// 현재 사용자 정보 조회
 	@Override
 	@Transactional(readOnly = true)
-	public UserProfileResponseDto getMyProfile(String email) {
+	public UserProfileResponseDto findMyProfile(String email) {
 
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
@@ -70,8 +74,8 @@ public class UserServiceImpl implements UserService {
 
 		return new UserProfileResponseDto(
 			user.getEmail(),
-			user.getNickname(),
 			userPrivateInfo.getName(),
+			user.getNickname(),
 			userPrivateInfo.getMobileNum()
 		);
 	}
@@ -88,10 +92,35 @@ public class UserServiceImpl implements UserService {
 		user.updateNickname(dto.getNickname());
 
 		// UserPrivateInfo 수정
-		user.getUserPrivateInfo().update(dto.getNickname(), dto.getMobileNum());
+		user.getUserPrivateInfo().update(dto.getMobileNum());
 	}
 
-	// 사용자 탈퇴
+	/*
+	 * [로그아웃 처리]
+	 * AccessToken 을 블랙리스트 등록 - 만료시간되면 자동 삭제
+	 * Redis 에 저장된 RefreshToken 제거
+	 */
+	@Override
+	@Transactional
+	public void logout(String accessToken) {
+
+		String pureToken = jwtProvider.subStringToken(accessToken);
+
+		Long userId = Long.valueOf(jwtProvider.getClaims(pureToken).getSubject());
+
+		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
+
+		/*
+		 * AccessToken 을 블랙리스트에 등록하는 로직
+		 * expiration 시간은 AccessToken 의 남은 유효기간만큼 설정되어, 만료 시 자동으로 삭제
+		 */
+		loginRefreshToken.opsForValue()
+			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
+
+		jwtProvider.deleteRefreshToken(userId);
+	}
+
+	// 사용자 탈퇴 (soft delete 처리)
 	@Override
 	@Transactional
 	public void deleteAccount(String email) {
@@ -99,14 +128,27 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-		userRepository.delete(user);
+		if (user.getUserStatus() == UserStatus.DELETED) {
+			throw new CustomException(ErrorCode.USER_ALREADY_DELETED);
+		}
+
+		user.deactivateEntity();
+		user.updateStatus(UserStatus.DELETED);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public User getUserById(Long userId) {
+	public User findUserById(Long userId) {
 
 		return userRepository.findUserById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+	}
+
+	@Override
+	@Transactional
+	public User findUserByEmail(String email) {
+
+		return userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 }

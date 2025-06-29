@@ -46,7 +46,7 @@ public class PlaceServiceImpl implements PlaceService {
 			throw new CustomException(ErrorCode.DUPLICATE_PLACE);
 		}
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		Place place = Place.builder()
 			.user(user)

@@ -1,5 +1,7 @@
 package com.study.petory.domain.chat.dto.request;
 
+import com.study.petory.domain.chat.entity.MessageType;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,5 +11,7 @@ public class MessageSendRequestDto {
 
 	private final String chatRoomId;
 
-	private final String message;
+	private final MessageType messageType;
+
+	private final String content;
 }

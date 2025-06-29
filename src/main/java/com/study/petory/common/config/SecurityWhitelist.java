@@ -13,6 +13,7 @@ public class SecurityWhitelist {
 	private final List<String> urlWhitelist;
 	private final List<String> permitGetPrefixList;
 
+	// TODO - 배포 전 확인 필요
 	public SecurityWhitelist() {
 
 		// Security 전용 WHITELIST
@@ -20,12 +21,15 @@ public class SecurityWhitelist {
 			"/auth/reissue",
 			"/users/test-login",
 			"/login.html",
-			"/login-success.html",
 			"/favicon.ico",
 			"/map.html",
 			"/chat.html",
 			"/ws-chat",
 			"/ws-chat/**",
+			"/test/**",
+			"/image-petory.png",
+			"/petory.ico",
+			"/actuator/prometheus",
 			"/actuator/health"
 		);
 

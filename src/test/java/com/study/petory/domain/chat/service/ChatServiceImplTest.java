@@ -154,7 +154,7 @@ class ChatServiceImplTest {
 		// 채팅방에 메시지를 추가
 		ChatMessage message = ChatMessage.builder()
 			.senderId(2L)
-			.message("안녕")
+			.content("안녕")
 			.build();
 
 		ChatRoom chatRoom = ChatRoom.builder()

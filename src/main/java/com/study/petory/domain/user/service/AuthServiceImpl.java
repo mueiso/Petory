@@ -1,9 +1,8 @@
 package com.study.petory.domain.user.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,18 +13,16 @@ import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserRole;
-import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.entity.UserStatus;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
-	private final UserRepository userRepository;
-	private final JwtProvider jwtProvider;
-	private final RedisTemplate<String, String> loginRefreshToken;
 	private final UserService userService;
+	private final JwtProvider jwtProvider;
 
 	/*
 	 * [토큰 발급]
@@ -36,12 +33,31 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public TokenResponseDto issueToken(User user) {
 
-		User savedUser = userRepository.findByEmail(user.getEmail())
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User savedUser = userService.findUserByEmail(user.getEmail());
 
-		if (savedUser.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.DEACTIVATED_USER);
+		// 로그인 불가 상태는 예외 처리: 계정 정지 상태 (SUSPENDED)
+		if (savedUser.getUserStatus() == UserStatus.SUSPENDED) {
+			throw new CustomException(ErrorCode.LOGIN_UNAVAILABLE);
 		}
+
+		// userStatus 가 휴면 (DEACTIVATED) 상태로 90일이 지나기 전에 로그인 한 경우 휴면 상태 해제
+		if (savedUser.getUserStatus() == UserStatus.DEACTIVATED) {
+			LocalDateTime deletedAt = savedUser.getDeletedAt();
+
+			if (deletedAt != null && deletedAt.plusDays(90).isAfter(LocalDateTime.now())) {
+
+				// 기간 안에 로그인 했기 때문에 복구 처리
+				savedUser.activateUser();
+			}
+		}
+
+		// 재로그인/재회원가입 했을 경우 복구 처리
+		if (savedUser.getUserStatus() == UserStatus.DELETED) {
+			savedUser.activateUser();
+		}
+
+		// 로그인 시간 기록
+		savedUser.updateLastLoginAt(LocalDateTime.now());
 
 		if (savedUser.getId() == null) {
 			throw new CustomException(ErrorCode.USER_ID_NOT_GENERATED);
@@ -63,30 +79,6 @@ public class AuthServiceImpl implements AuthService{
 		jwtProvider.storeRefreshToken(savedUser.getId(), refreshToken);
 
 		return new TokenResponseDto(accessToken, refreshToken);
-	}
-
-	/*
-	 * [로그아웃 처리]
-	 * AccessToken 을 블랙리스트 등록 - 만료시간되면 자동 삭제
-	 * Redis 에 저장된 RefreshToken 제거
-	 */
-	@Override
-	@Transactional
-	public void logout(String accessToken) {
-
-		String pureToken = jwtProvider.subStringToken(accessToken);
-		Long userId = Long.valueOf(jwtProvider.getClaims(accessToken).getSubject());
-
-		long expiration = jwtProvider.getClaims(accessToken).getExpiration().getTime() - System.currentTimeMillis();
-
-		/*
-		 * AccessToken 을 블랙리스트에 등록하는 로직
-		 * expiration 시간은 AccessToken 의 남은 유효기간만큼 설정되어, 만료 시 자동으로 삭제
-		 */
-		loginRefreshToken.opsForValue()
-			.set("BLACKLIST_" + pureToken, "logout", expiration, TimeUnit.MILLISECONDS);
-
-		jwtProvider.deleteRefreshToken(userId);
 	}
 
 	/*
@@ -119,7 +111,7 @@ public class AuthServiceImpl implements AuthService{
 		}
 
 		// 5. 사용자 조회
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		// 6. 역할 목록 추출
 		List<String> roles = user.getUserRole().stream()
@@ -148,7 +140,7 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public List<Role> addRoleToUser(Long userId, Role newRole) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		boolean alreadyHasSameRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(newRole));
@@ -164,7 +156,7 @@ public class AuthServiceImpl implements AuthService{
 			.toList();
 	}
 
-	/**
+	/*
 	 * [관리자 전용 - 권한 제거]
 	 * 지정한 사용자에게서 Role 을 제거하고, 전체 권한 목록 반환
 	 */
@@ -172,7 +164,7 @@ public class AuthServiceImpl implements AuthService{
 	@Transactional
 	public List<Role> removeRoleFromUser(Long userId, Role roleToRemove) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		boolean hasRole = user.getUserRole().stream()
 			.anyMatch(userRole -> userRole.isEqualRole(roleToRemove));
@@ -191,35 +183,36 @@ public class AuthServiceImpl implements AuthService{
 
 	/*
 	 * [관리자 전용 - 유저 비활성화]
-	 * 지정한 사용자를 softDelete 처리
+	 * 지정한 사용자를 계정 정지 처리
 	 */
 	@Override
 	@Transactional
-	public void deactivateUser(Long targetUserId) {
+	public void suspendUser(Long targetUserId) {
 
-		User user = userService.getUserById(targetUserId);
+		User user = userService.findUserById(targetUserId);
 
-		if (user.getDeletedAt() != null) {
-			throw new CustomException(ErrorCode.ALREADY_DEACTIVATED);
+		if (user.getUserStatus() == UserStatus.SUSPENDED) {
+			throw new CustomException(ErrorCode.ALREADY_SUSPENDED);
 		}
 
 		user.deactivateEntity();
+		user.updateStatus(UserStatus.SUSPENDED);
 	}
 
-	/**
+	/*
 	 * [관리자 전용 - 유저 복구]
-	 * Soft Delete 처리된 유저를 복구
+	 * 계정 정지 처리된 유저를 복구
 	 */
 	@Override
 	@Transactional
 	public void restoreUser(Long targetUserId) {
 
-		User user = userService.getUserById(targetUserId);
+		User user = userService.findUserById(targetUserId);
 
-		if (user.getDeletedAt() == null) {
+		if (user.isDeletedAtNull()) {
 			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);
 		}
 
-		user.restoreEntity();
+		user.activateUser();
 	}
 }

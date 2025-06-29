@@ -20,6 +20,7 @@
             position: relative;
             width: 100%;
             height: 500px;
+            overflow: visible;
         }
 
         #menu_wrap {
@@ -188,10 +189,9 @@
         }
     </style>
 </head>
-<body>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
 <div class="map_wrap">
-    <div id="map" style="width:1500px;height:800px;position:relative;overflow:hidden;"></div>
-
+    <div id="map" style="width:1500px;height:800px;position:relative;"></div>
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
@@ -205,6 +205,33 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
+</div>
+<div id="rankList" style="
+    width: 95%;
+    margin: 20px auto 10px auto;
+    padding: 10px 0;
+    background: #fffbea;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    align-items: stretch;
+">
+</div>
+<div id="placeDetail" style="
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #999;
+    z-index: 100;
+">
+    <!-- 상세 정보 영역 -->
 </div>
 <script type="text/javascript"
         src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=64228b435124560ed7067b335db86c9f&libraries=services"></script>
@@ -225,7 +252,11 @@
     // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
     var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
-    window.onload = initMap;
+    window.onload = function () {
+        console.log('onload 실행됨');
+        initMap();
+        fetchAndDisplayRankList(); // ALL 인기 장소 기본 표시
+    };
 
     function initMap() {
         fetch('/places?size=3000')
@@ -269,6 +300,7 @@
                 console.error("검색 실패:", err);
                 alert("검색 중 오류가 발생했습니다.");
             });
+        fetchAndDisplayRankList(keyword);
     }
 
     // 검색 결과 목록과 마커를 표출하는 함수입니다
@@ -286,7 +318,8 @@
 
         var bounds = new kakao.maps.LatLngBounds();
 
-        for (var i = 0; i < places.length; i++) {
+        var MAX_MARKER_COUNT = 20;
+        for (var i = 0; i < Math.min(places.length, MAX_MARKER_COUNT); i++) {
 
             // 마커를 생성하고 지도에 표시합니다
             var placePosition = new kakao.maps.LatLng(places[i].latitude, places[i].longitude),
@@ -452,20 +485,75 @@
         e.preventDefault(); // 기본 제출(새로고침) 막기
         searchPlaces();     // 검색 실행 (page=0 으로 시작)
     });
+
+    // 인기 장소 랭킹
+    function fetchAndDisplayRankList(placeType) {
+
+        console.log("함수 실행됨", placeType);
+
+        // placeType이 없으면 'ALL'
+        const type = placeType ? encodeURIComponent(placeType) : 'ALL';
+
+        fetch(`/places/rank?placeType=${type}`) // 인기 랭킹 api
+            .then(res => res.json())
+            .then(result => {
+                console.log('랭킹 API 응답:', result);
+                console.log('typeof result.data:', typeof result.data);
+                console.log('Array.isArray(result.data):', Array.isArray(result.data));
+                console.log('result.data.length:', result.data && result.data.length);
+                displayRankList(result.data ?? []);
+            })
+            .catch(err => {
+                console.error('인기 랭킹 조회 실패', err);
+            });
+    }
+
+    // 인기 랭킹 리스트 UI
+    function displayRankList(rankList) {
+        const rankDiv = document.getElementById('rankList');
+        rankDiv.innerHTML = ""; // 초기화
+
+        console.log("실제 전달받은 rankList", rankList);
+        console.log("typeof rankList:", typeof rankList);
+        console.log("Array.isArray(rankList):", Array.isArray(rankList));
+        console.log("rankList.constructor:", rankList.constructor);
+
+        if (!Array.isArray(rankList) || rankList.length === 0) {
+            rankDiv.innerHTML = '<div style="margin:auto; color:#888;"> 인기 장소 랭킹이 없습니다 </div>';
+            return;
+        }
+
+        for (let i = 0; i < rankList.length; i++) {
+            const place = rankList[i];
+            console.log("for문 place", place);
+
+            const item = document.createElement('div');
+            item.style.minWidth = "180px";
+            item.style.padding = "12px";
+            item.style.background = "#fff";
+            item.style.border = "1px solid #e5e5e5";
+            item.style.borderRadius = "10px";
+            item.style.textAlign = "center";
+            item.style.cursor = "pointer";
+            item.style.flex = "0 0 auto";
+            item.innerHTML = `
+                <div style="font-weight:bold; font-size:1.2em;">${i + 1}위</div>
+                <div style="margin:8px 0; font-weight:600;">${place.placeName}</div>
+                <div style="color:gray; font-size:0.95em;">${place.address ?? ''}</div>
+                <div style="margin-top:6px;">♥️ ${place.likeCount ?? 0} &nbsp; ⭐ ${place.ratio ?? '-'}</div>
+            `;
+
+            // 상세보기 연결
+            item.onclick = function () {
+                fetch(`/places/${place.placeId || place.id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        showPlaceDetail(data);
+                    });
+            };
+            rankDiv.appendChild(item);
+        }
+    }
 </script>
-<div id="placeDetail" style="
-    position: fixed;
-    top: 100px;
-    right: 30px;
-    width: 300px;
-    max-height: 500px;
-    overflow-y: auto;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #999;
-    z-index: 100;
-">
-    <!-- 상세 정보 영역 -->
-</div>
 </body>
 </html>

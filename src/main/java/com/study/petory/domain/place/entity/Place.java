@@ -48,14 +48,14 @@ public class Place extends TimeFeatureBasedEntity {
 	@OneToMany(mappedBy = "place")
 	private List<PlaceReview> placeReviewList = new ArrayList<>();
 
-	// @Column(nullable = false)
+	@Column(length = 300)
 	private String placeInfo;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 30)
-	private PlaceType placeType; // type -> placeType으로 수정
+	private PlaceType placeType;
 
-	@Column(precision = 2, scale = 1)        // 추후에 NOTNULL로 수정 예정, precision : 전체 자리 수, scale : 그 중 소수점 자리 수
+	@Column(precision = 2, scale = 1)        // precision : 전체 자리 수, scale : 그 중 소수점 자리 수
 	private BigDecimal ratio;
 
 	// 전체 주소

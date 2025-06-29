@@ -66,6 +66,12 @@ public class JwtFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 			return;
 		}
+		
+		if ("GET".equalsIgnoreCase(method) && pathMatcher.match("/places/rank", url)) {
+			debugLog("GET /places/rank 비회원 전용 경로입니다. 필터 우회: " + url);
+			filterChain.doFilter(request, response);
+			return;
+		}
 
 		// GET /places 하위 경로 모두 비회원 허용
 		if ("GET".equalsIgnoreCase(method)

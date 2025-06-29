@@ -30,7 +30,10 @@ public class SecurityWhitelist {
 			"/test/**",
 			"/image-petory.png",
 			"/petory.ico",
-			"/actuator/prometheus"
+			"/actuator/prometheus",
+			"/places/rank",
+			"/places/rank/**",
+			"/place-search-pet.png"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)
@@ -43,7 +46,10 @@ public class SecurityWhitelist {
 			"/albums/all",
 			"/albums/all/users/{userId}",
 			"/albums/{albumId}",
-			"/questions/today"
+			"/questions/today",
+			"/places/rank",
+			"/places/**",
+			"/places/rank/**"
 		);
 	}
 }

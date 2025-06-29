@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -80,6 +81,9 @@ public class Place extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private Long likeCount = 0L;
 
+	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<PlaceImage> images = new ArrayList<>();
+
 	@Builder
 	public Place(User user, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio, String address,
 		BigDecimal latitude, BigDecimal longitude) {
@@ -134,5 +138,11 @@ public class Place extends TimeFeatureBasedEntity {
 
 	public void decreaseLikeCount() {
 		this.likeCount--;
+	}
+
+	// 양방향 연관관계 편의 메서드
+	public void addImage(PlaceImage image) {
+		this.images.add(image);
+		image.setPlace(this);
 	}
 }

@@ -2,12 +2,12 @@ package com.study.petory.domain.place.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -156,82 +156,52 @@ public class PlaceServiceImpl implements PlaceService {
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 
-	// @Cacheable(value = "placeRankRedisCache", key = "'rank'")
-	// @Override
-	// public List<PlaceGetAllResponseDto> findPlaceRank() {
-	// 	return placeRepository.findPlaceRankOrderByLikeCountDesc();
-	// }
-	//
-	// // 리스트 말고 객체 하나로 가져와라
-	// // 레디스 역직렬화 검색하면 나올거임
-	// @Scheduled(cron = "*/10 * * * * *")
-	// @Transactional(readOnly = true)
-	// @Override
-	// public void findPlaceRankSchedule() {
-	// 	System.out.println("✅✅✅✅  인기 랭킹 메서드 실행V1  ✅✅✅✅");
-	// 	List<PlaceGetAllResponseDto> placeRankDtoList = placeRepository.findPlaceRankOrderByLikeCountDesc();
-	// 	redisTemplate.opsForValue().set("placeRankRedisCache::rank", placeRankDtoList, remainderTime());
-	//
-	// 	// Object cacheObj = redisTemplate.opsForValue().get("placeRankRedisCache::rank");
-	// 	// if (cacheObj instanceof List<?>) {
-	// 	// 	List<?> list = (List<?>)cacheObj;
-	// 	// 	List<PlaceGetAllResponseDto> dtoList = list.stream()
-	// 	// 		.map(o -> {
-	// 	// 			if (o instanceof PlaceGetAllResponseDto dto) {
-	// 	// 				return dto;
-	// 	// 			}
-	// 	// 			// LinkedHashMap 인 경우 수동으로 매핑
-	// 	// 			else if (o instanceof LinkedHashMap<?, ?> map) {
-	// 	// 				ObjectMapper objectMapper = new ObjectMapper();
-	// 	// 				return objectMapper.convertValue(map, PlaceGetAllResponseDto.class);
-	// 	// 			}
-	// 	// 			return null;
-	// 	// 		})
-	// 	// 		.filter(Objects::nonNull)
-	// 	// 		.collect(Collectors.toList());
-	// 	// 	for (PlaceGetAllResponseDto dto : dtoList) {
-	// 	// 		System.out.println("placeId : " + dto.getId());
-	// 	// 		System.out.println("placeType : " + dto.getPlaceType());
-	// 	// 		System.out.println("likeCount : " + dto.getLikeCount());
-	// 	// 	}
-	// 	// }
-	// }
-
-	@Scheduled(cron = "0 * * * * *")
-	@Transactional(readOnly = true)
 	@Override
-	public void findPlaceRankByZSet() {
-		System.out.println("💥💥💥💥  인기 랭킹 메서드 실행V2  💥💥💥💥");
-		List<PlaceGetAllResponseDto> placeRankDtoList = placeRepository.findPlaceRankOrderByLikeCountDescV2();
-		for (PlaceGetAllResponseDto dto : placeRankDtoList) {
-			PlaceType placeType = dto.getPlaceType();
-			String redisKey = "placeRank::" + placeType.getDisplayName();
-			Long placeId = dto.getId();
-			Long likeCount = dto.getLikeCount();
+	public List<PlaceGetAllResponseDto> findPlaceRank(PlaceType placeType) {
+		String key = makeKey(placeType);
 
-			// 인기 장소 랭킹 -> 사용자가 map.html 접속 -> 자동으로 인기 장소(좋아요 수 기반)가 출력되게
-			// 여기서 나오는 인기장소가 placeType 별로 상위 1개씩 출력되게 하려고 했던것...
-			// 검색을 했을 때 검색어 자체가 redis에 저장이 된다
-			// 레디스에 검색어가 없으면 새로 저장이 되고 있으면 숫자가 오른다
-			// 장소 -> '서울' address contains '서울' List GetMapping
-			// redis에 서울이 저장됨
-			// 서울 -> score가 올라간다
-			// 장소 -> 서울 서울장소
-			// 서울 -> 스타벅스 서울역점 좋아요 100개
-			// 서울 -> 스타벅스 명동점 좋아요 0개
-			// ZSet에 placeId와 likeCount를 score로 저장
-			redisTemplate.opsForZSet().add(redisKey, placeId, likeCount);
-			System.out.println("redisKey : " + redisKey);
-			System.out.println("placeId : " + placeId);
-			System.out.println("likeCount : " + likeCount);
+		// Top 10 조회
+		Set<Object> placeIdSet = redisTemplate.opsForZSet().reverseRange(key, 0, 9);
+
+		// Ranking 데이터에 이상이 있는 게 아니라 그저 아직 랭킹이 형성되지 않았기 때문에 예외 대신 빈 List를 반환
+		if (placeIdSet == null || placeIdSet.isEmpty()) {
+			return List.of();
 		}
+
+		List<Long> placeIdList = placeIdSet.stream()
+			.map(object -> Long.parseLong(object.toString()))
+			.toList();
+
+		List<Place> placeList = placeRepository.findAllById(placeIdList);
+
+		return placeList.stream()
+			.map(PlaceGetAllResponseDto::from)
+			.toList();
 	}
 
-	// 지역에 대한 검색을 넣어놓고
-	// 	강남에 대한 랭킹이 redis에 들어간다?
-	// ZSet increment 하는 방법 찾아보기. 해당 키에서 평균 range를 스코어링?
-	// ZSet increase score
-	// DB 들릴 필요가없다.................................................................................................
+	// Redis key 생성 로직. (예시 - "place:rank:{PlaceType}"
+	@Override
+	public String makeKey(PlaceType placeType) {
+		StringBuilder stringBuilder = new StringBuilder("place:rank");
 
-	// lettuce랑 redis 공부해보기
+		if (placeType != null) {
+			stringBuilder.append(":").append(placeType);
+		} else {
+			stringBuilder.append(":ALL");
+		}
+
+		return stringBuilder.toString();
+	}
+
+	@Override
+	public PlaceType parsePlaceType(String placeType) {
+		if (placeType == null || "ALL".equalsIgnoreCase(placeType)) {
+			return null;
+		}
+		try {
+			return PlaceType.valueOf(placeType.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			throw new CustomException(ErrorCode.INVALID_PARAMETER);
+		}
+	}
 }

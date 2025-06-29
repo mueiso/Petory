@@ -18,7 +18,7 @@ import com.study.petory.domain.place.entity.PlaceType;
 public interface PlaceService {
 	PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto);
 
-	Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable);
+	Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address, Pageable pageable);
 
 	PlaceGetResponseDto findByPlaceId(Long placeId);
 
@@ -32,7 +32,9 @@ public interface PlaceService {
 
 	Place findPlaceWithPlaceReviewByPlaceId(Long placeId);
 
-	List<PlaceGetAllResponseDto> findPlaceRank();
+	List<PlaceGetAllResponseDto> findPlaceRank(PlaceType placeType);
 
-	void findPlaceRankSchedule();
+	String makeKey(PlaceType placeType);
+
+	PlaceType parsePlaceType(String placeType);
 }

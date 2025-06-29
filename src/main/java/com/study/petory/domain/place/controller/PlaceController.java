@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -82,11 +84,12 @@ public class PlaceController {
 	@GetMapping
 	public ResponseEntity<CommonResponse<Page<PlaceGetAllResponseDto>>> getAllPlace(
 		@RequestParam(required = false) String placeName,
-		@RequestParam(required = false) PlaceType placeType,
+		@RequestParam(required = false) String placeType,
 		@RequestParam(required = false) String address,
 		@PageableDefault Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, placeType, address, pageable));
+		PlaceType type = placeService.parsePlaceType(placeType);
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, type, address, pageable));
 	}
 
 	/**
@@ -296,8 +299,11 @@ public class PlaceController {
 		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
 	}
 
-	// @GetMapping("/rank")
-	// public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank() {
-	// 	return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank());
-	// }
+	@GetMapping("/rank")
+	public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank(
+		@RequestParam(required = false) String placeType
+	) {
+		PlaceType type = placeService.parsePlaceType(placeType);
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank(type));
+	}
 }

@@ -12,9 +12,11 @@ import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceLike;
 import com.study.petory.domain.place.entity.PlaceReport;
+import com.study.petory.domain.place.entity.PlaceReview;
 import com.study.petory.domain.place.repository.PlaceLikeRepository;
 import com.study.petory.domain.place.repository.PlaceReportRepository;
 import com.study.petory.domain.place.repository.PlaceRepository;
+import com.study.petory.domain.place.repository.PlaceReviewRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
 
@@ -32,6 +34,7 @@ public class UserDeletionService {
 	private final PlaceRepository placeRepository;
 	private final PlaceLikeRepository placeLikeRepository;
 	private final PlaceReportRepository placeReportRepository;
+	private final PlaceReviewRepository placeReviewRepository;
 
 	@Transactional
 	public void deleteUser(User user) {
@@ -56,14 +59,20 @@ public class UserDeletionService {
 
 		// 4. PlaceLike 의 User 참조 끊기
 		List<PlaceLike> placeLikes = placeLikeRepository.findByUser(user);
-		for(PlaceLike placeLike : placeLikes) {
+		for (PlaceLike placeLike : placeLikes) {
 			placeLike.setUser(null);
 		}
 
 		// 5. PlaceReport 의 User 참조 끊기
 		List<PlaceReport> placeReports = placeReportRepository.findByUser(user);
-		for (PlaceReport report : placeReports) {
-			report.setUser(null);
+		for (PlaceReport placeReport : placeReports) {
+			placeReport.setUser(null);
+		}
+
+		// 6. PlaceReview 의 User 참조 끊기
+		List<PlaceReview> placeReviews = placeReviewRepository.findByUser(user);
+		for (PlaceReview placeReview : placeReviews) {
+			placeReview.setUser(null);
 		}
 
 		// 7. User 실제 삭제

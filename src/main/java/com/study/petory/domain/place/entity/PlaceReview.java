@@ -36,7 +36,7 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 	private Place place;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 
 	@Column(nullable = false)
@@ -72,5 +72,10 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
+	}
+
+	// 연관관계 참조 끊기 위한 메서드
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

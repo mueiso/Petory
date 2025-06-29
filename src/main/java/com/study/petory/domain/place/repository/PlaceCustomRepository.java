@@ -1,6 +1,5 @@
 package com.study.petory.domain.place.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -15,8 +14,4 @@ public interface PlaceCustomRepository {
 
 	// 특정 조회 - 리뷰 리스트까지 함께 조회하기 위한 메서드
 	Optional<Place> findWithReviewListById(Long id);
-
-	List<PlaceGetAllResponseDto> findPlaceRankOrderByLikeCountDesc();
-
-	List<PlaceGetAllResponseDto> findPlaceRankOrderByLikeCountDescV2();
 }

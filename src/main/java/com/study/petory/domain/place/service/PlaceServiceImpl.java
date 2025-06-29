@@ -46,7 +46,7 @@ public class PlaceServiceImpl implements PlaceService {
 			throw new CustomException(ErrorCode.DUPLICATE_PLACE);
 		}
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		Place place = Place.builder()
 			.user(user)
@@ -133,6 +133,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		findPlace.restoreEntity();
 		findPlace.updateStatus(requestDto.getPlaceStatus());
+		findPlace.updateReportResetAt();
 	}
 
 	// 다른 서비스에서 사용가능하게 설정한 메서드

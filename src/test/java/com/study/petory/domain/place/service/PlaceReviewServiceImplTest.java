@@ -57,7 +57,7 @@ class PlaceReviewServiceImplTest {
 		PlaceReviewCreateRequestDto dto = new PlaceReviewCreateRequestDto("testContent", BigDecimal.ZERO);
 
 		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
-		when(userService.getUserById(1L)).thenReturn(user);
+		when(userService.findUserById(1L)).thenReturn(user);
 		when(placeReviewRepository.findByUserAndPlace(user, place)).thenReturn(Optional.empty());
 
 		when(placeReviewRepository.save(any(PlaceReview.class)))
@@ -93,7 +93,7 @@ class PlaceReviewServiceImplTest {
 		PlaceReview placeReview = PlaceReview.builder().build();
 
 		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
-		when(userService.getUserById(1L)).thenReturn(user);
+		when(userService.findUserById(1L)).thenReturn(user);
 		when(placeReviewRepository.findByUserAndPlace(user, place)).thenReturn(Optional.of(placeReview));
 
 		// 예외 발생을 기대하는 테스트 코드

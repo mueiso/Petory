@@ -9,11 +9,15 @@ public interface UserService {
 
 	TokenResponseDto testLogin(Long userId);
 
-	UserProfileResponseDto getMyProfile(String email);
+	UserProfileResponseDto findMyProfile(String email);
 
 	void updateProfile(String email, UpdateUserRequestDto dto);
 
+	void logout(String accessToken);
+
 	void deleteAccount(String email);
 
-	User getUserById(Long userId);
+	User findUserById(Long userId);
+
+	User findUserByEmail(String email);
 }

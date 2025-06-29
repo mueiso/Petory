@@ -8,7 +8,7 @@ import lombok.Getter;
 public class UserProfileResponseDto {
 
 	private String email;
-	private String nickname;
 	private String name;        // UserPrivateInfo
+	private String nickname;
 	private String mobileNum;   // UserPrivateInfo
 }

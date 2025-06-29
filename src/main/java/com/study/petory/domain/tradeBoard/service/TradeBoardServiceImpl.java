@@ -36,7 +36,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
 	private final TradeBoardImageService tradeBoardImageService;
-	private final TradeBoardQueryRepository tradeBoardQueryRepository;
 
 	public User findUser(Long userId) {
 		return userRepository.findById(userId)
@@ -59,7 +58,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	}
 
 	public void validateOwner(TradeBoard tradeBoard, User user) {
-		if (!tradeBoard.isOwner(user.getId()) || user.hasRole(Role.ADMIN)) {
+		if (!tradeBoard.isOwner(user.getId()) && !user.hasRole(Role.ADMIN)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 	}
@@ -96,7 +95,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional(readOnly = true)
 	public Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, Pageable pageable) {
 
-		Page<TradeBoard> tradeBoards = tradeBoardQueryRepository.findAll(category, pageable);
+		Page<TradeBoard> tradeBoards = tradeBoardRepository.findAll(category, pageable);
 
 		return tradeBoards.map(TradeBoardGetAllResponseDto::new);
 	}
@@ -117,7 +116,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional(readOnly = true)
 	public Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable) {
 
-		Page<TradeBoard> tradeBoards = tradeBoardQueryRepository.findByUserId(userId, pageable);
+		Page<TradeBoard> tradeBoards = tradeBoardRepository.findByUserId(userId, pageable);
 
 		return tradeBoards.map(TradeBoardGetAllResponseDto::new);
 	}

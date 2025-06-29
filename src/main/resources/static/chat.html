@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico">
     <title>채팅 테스트</title>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
@@ -75,20 +74,18 @@
             gap: 10px;
         }
 
-        .input-area input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
         .input-row {
             display: flex;
             gap: 10px;
         }
 
-        .input-row input[type="text"] {
+        .input-row input[type="text"],
+        .input-row input[type="file"] {
             flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
         }
 
         .input-area button {
@@ -112,54 +109,139 @@
     <ul id="messages"></ul>
 
     <div class="input-area">
-        <input type="text" id="senderIdInput" placeholder="아이디를 입력하세요" />
+        <input type="text" id="tokenInput" placeholder="JWT 토큰을 입력하세요" />
+        <button onclick="connectStomp()">연결</button>
+
         <div class="input-row">
             <input type="text" id="messageInput" placeholder="메시지를 입력하세요" />
-            <button onclick="sendMessage()">보내기</button>
+            <button onclick="sendTextMessage()">텍스트 보내기</button>
+        </div>
+
+        <div class="input-row">
+            <input type="file" id="imageInput" accept="image/*" />
+            <button onclick="sendImageMessage()">이미지 보내기</button>
         </div>
     </div>
 </div>
 
 <script>
-    const chatRoomId = "6850c9ac975d6bdf41d1da7f";
+    let stompClient = null;
+    let token = null;
+    let myUserId = null;
+    const chatRoomId = "6850c96a74235b2beafb7112";
 
-    const socket = new SockJS("http://localhost:8080/ws-chat");
-    const stompClient = Stomp.over(socket);
-
-    stompClient.connect({}, (frame) => {
-        console.log("STOMP 연결됨:", frame);
-
-        stompClient.subscribe(`/sub/room/${chatRoomId}`, (message) => {
-            const data = JSON.parse(message.body);
-            const mySenderId = parseInt(document.getElementById("senderIdInput").value, 10);
-
-            if (data.senderId === mySenderId) return;
-
-            addMessage("상대방", data.message, "server");
-        });
-    });
-
-    function sendMessage() {
-        const input = document.getElementById("messageInput");
-        const senderInput = document.getElementById("senderIdInput");
-
-        const message = input.value.trim();
-        const senderId = parseInt(senderInput.value, 10);
-
-        if (!message || !senderId) {
-            alert("메시지와 senderId를 모두 입력하세요!");
+    function connectStomp() {
+        token = document.getElementById("tokenInput").value.trim();
+        if (!token) {
+            alert("토큰을 입력하세요!");
             return;
         }
 
-        const payload = {
-            chatRoomId: chatRoomId,
-            senderId: senderId,
-            message: message
-        };
+        try {
+            const parsedToken = JSON.parse(atob(token.split('.')[1]));
+            myUserId = parseInt(parsedToken.sub, 10);
+        } catch (e) {
+            alert("유효하지 않은 토큰입니다.");
+            return;
+        }
 
-        stompClient.send("/pub/message", {}, JSON.stringify(payload));
-        addMessage("나", message, "me");
-        input.value = "";
+        const socket = new SockJS("http://localhost:8080/ws-chat");
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect(
+            {
+                Authorization: `Bearer ${token}`
+            },
+            (frame) => {
+                console.log("🟢 STOMP 연결됨:", frame);
+
+                stompClient.subscribe(`/sub/room/${chatRoomId}`, (message) => {
+                    const data = JSON.parse(message.body);
+                    const isMine = data.senderId === myUserId;
+                    const className = isMine ? "me" : "server";
+                    const sender = isMine ? "나" : data.senderNickname || "상대방";
+
+                    if (data.messageType === "IMAGE") {
+                        addImage(sender, data.content, className);
+                    } else {
+                        addMessage(sender, data.content, className);
+                    }
+                });
+            },
+            (error) => {
+                console.error("🔴 STOMP 연결 실패:", error);
+            }
+        );
+    }
+
+    function sendTextMessage() {
+        const text = document.getElementById("messageInput").value.trim();
+        if (!text) {
+            alert("메시지를 입력하세요!");
+            return;
+        }
+
+        stompClient.send("/pub/message", {
+            Authorization: `Bearer ${token}`
+        }, JSON.stringify({
+            chatRoomId,
+            messageType: "TEXT",
+            content: text
+        }));
+
+        document.getElementById("messageInput").value = "";
+    }
+
+    async function sendImageMessage() {
+        const imageFile = document.getElementById("imageInput").files[0];
+        if (!imageFile) {
+            alert("이미지를 선택하세요!");
+            return;
+        }
+
+        const presignRes = await fetch("/chat/image", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                chatRoomId,
+                filename: imageFile.name,
+                contentType: imageFile.type
+            })
+        });
+
+        if (!presignRes.ok) {
+            alert("Presigned URL 발급 실패");
+            return;
+        }
+
+        const resJson = await presignRes.json();
+        const { uploadUrl, fileUrl } = resJson.data;
+
+        const uploadRes = await fetch(uploadUrl, {
+            method: "PUT",
+            headers: {
+                "Content-Type": imageFile.type
+            },
+            body: imageFile
+        });
+
+        if (!uploadRes.ok) {
+            alert("S3 업로드 실패");
+            return;
+        }
+
+        stompClient.send("/pub/message", {
+            Authorization: `Bearer ${token}`
+        }, JSON.stringify({
+            chatRoomId,
+            messageType: "IMAGE",
+            content: fileUrl
+        }));
+
+        document.getElementById("imageInput").value = "";
     }
 
     function addMessage(sender, text, className) {
@@ -167,6 +249,15 @@
         const item = document.createElement("li");
         item.className = className;
         item.textContent = `${sender}: ${text}`;
+        list.appendChild(item);
+        list.scrollTop = list.scrollHeight;
+    }
+
+    function addImage(sender, imageUrl, className) {
+        const list = document.getElementById("messages");
+        const item = document.createElement("li");
+        item.className = className;
+        item.innerHTML = `${sender}: <br/><img src="${imageUrl}" style="max-width: 200px; border-radius: 8px;" />`;
         list.appendChild(item);
         list.scrollTop = list.scrollHeight;
     }

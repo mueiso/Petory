@@ -10,15 +10,13 @@ public interface AuthService {
 
 	TokenResponseDto issueToken(User user);
 
-	void logout(String accessToken);
-
 	TokenResponseDto reissue(String accessToken, String refreshTokenRaw);
 
 	List<Role> addRoleToUser(Long userId, Role newRole);
 
 	List<Role> removeRoleFromUser(Long userId, Role roleToRemove);
 
-	void deactivateUser(Long targetUserId);
+	void suspendUser(Long targetUserId);
 
 	void restoreUser(Long targetUserId);
 }

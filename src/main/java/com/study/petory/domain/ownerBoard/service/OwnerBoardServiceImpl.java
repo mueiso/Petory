@@ -60,7 +60,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	public OwnerBoardCreateResponseDto saveOwnerBoard(Long userId, OwnerBoardCreateRequestDto dto,
 		List<MultipartFile> images) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
 			.title(dto.getTitle())
@@ -130,7 +130,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoard ownerBoard = findOwnerBoardById(boardId);
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		if (!user.hasRole(Role.ADMIN)) {
 			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);

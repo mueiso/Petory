@@ -16,6 +16,7 @@ public enum ErrorCode implements BaseCode {
 	ONLY_AUTHOR_CAN_DELETE(HttpStatus.FORBIDDEN, "작성자만 삭제가 가능합니다."),
 	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
 	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
+	TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "요청이 너무 많습니다."),
 	DATE_TIME_PARSE_FAIL(HttpStatus.BAD_REQUEST, "날짜 형식이 올바르지 않습니다."),
 	DATE_TIME_IS_NULL(HttpStatus.BAD_REQUEST, "잘못된 파라미터 요청입니다."),
 
@@ -26,14 +27,14 @@ public enum ErrorCode implements BaseCode {
 	WRONG_SIGNATURE(HttpStatus.UNAUTHORIZED, "잘못된 서명입니다."),
 	INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
 	NO_TOKEN(HttpStatus.BAD_REQUEST, "토큰이 없습니다."),
-	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 틀렸습니다."),
 	USER_ID_NOT_GENERATED(HttpStatus.INTERNAL_SERVER_ERROR, "사용자 정보를 저장했지만 ID가 생성되지 않았습니다."),
 	OAUTH2_EMAIL_NOT_FOUND(HttpStatus.BAD_REQUEST, "OAuth2 인증에 이메일 정보가 없습니다."),
 	ALREADY_HAS_SAME_ROLE(HttpStatus.BAD_REQUEST, "중복되는 권한입니다."),
 	ROLE_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자에게 해당 권한이 존재하지 않습니다."),
-	DEACTIVATED_USER(HttpStatus.FORBIDDEN, "로그인 불가합니다. 비활성화된 사용자입니다."),
-	ALREADY_DEACTIVATED(HttpStatus.BAD_REQUEST, "이미 비활성화된 유저입니다."),
+	LOGIN_UNAVAILABLE(HttpStatus.FORBIDDEN, "로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다."),
+	ALREADY_SUSPENDED(HttpStatus.BAD_REQUEST, "이미 정지된 계정입니다."),
 	USER_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 유저가 아닙니다."),
+	USER_ALREADY_DELETED(HttpStatus.BAD_REQUEST, "이미 탈퇴한 계정입니다."),
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),
@@ -70,13 +71,20 @@ public enum ErrorCode implements BaseCode {
 	JSON_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON 처리 중 에러가 발생했습니다."),
 	PLACE_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 장소입니다."),
 	ALREADY_DELETED_PLACE(HttpStatus.BAD_REQUEST, "이미 삭제된 장소입니다."),
+	ALREADY_INACTIVE_PLACE(HttpStatus.BAD_REQUEST, "이미 비활성화 된 장소입니다."),
+	ALREADY_REPORT_PLACE(HttpStatus.BAD_REQUEST, "이미 신고한 장소입니다."),
 	DUPLICATE_PLACE(HttpStatus.BAD_REQUEST, "이미 등록된 장소입니다."),
+	INCONSISTENT_PLACE(HttpStatus.BAD_REQUEST, "요청사항과 장소가 일치하지 않습니다."),
 
 	// PlaceReview
 	PLACE_REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "리뷰가 존재하지 않습니다."),
 	DUPLICATE_REVIEW(HttpStatus.BAD_REQUEST, "이미 리뷰를 작성한 장소입니다."),
 	REVIEW_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 리뷰입니다."),
 	ALREADY_DELETED_REVIEW(HttpStatus.BAD_REQUEST, "이미 삭제된 리뷰입니다."),
+
+	// PlaceReport
+	PLACE_REPORT_NOT_FOUND(HttpStatus.NOT_FOUND, "신고가 존재하지 않습니다."),
+	ALREADY_INVALID_REPORT(HttpStatus.BAD_REQUEST, "이미 유효하지 않는 신고입니다."),
 
 	// TradeBoard
 	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "거래 글이 존재하지 않습니다."),
@@ -104,8 +112,10 @@ public enum ErrorCode implements BaseCode {
 	// S3
 	FILE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),
 	FILE_NOT_FOUND(HttpStatus.BAD_REQUEST, "존재하지 않는 파일입니다."),
-	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다.");
+	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다."),
 
+	//notification
+	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다");
 
 	private final HttpStatus httpStatus;
 	private final String message;

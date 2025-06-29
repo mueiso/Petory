@@ -13,6 +13,7 @@ public class SecurityWhitelist {
 	private final List<String> urlWhitelist;
 	private final List<String> permitGetPrefixList;
 
+	// TODO - 배포 전 확인 필요
 	public SecurityWhitelist() {
 
 		// Security 전용 WHITELIST
@@ -20,14 +21,12 @@ public class SecurityWhitelist {
 			"/auth/reissue",
 			"/users/test-login",
 			"/login.html",
-			"/login-success.html",
 			"/favicon.ico",
 			"/map.html",
 			"/chat.html",
 			"/ws-chat",
-			"/ws-chat/**"
-			// 캘린더 접근 권한 요청 프론트 필요
-			// 캘린더 프론트
+			"/ws-chat/**",
+			"/test/**"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)
@@ -35,7 +34,8 @@ public class SecurityWhitelist {
 			"/owner-boards/**",
 			"/places",
 			"/places/{placeId}",
-			"/trade-boards/**",
+			"/trade-boards",
+			"/trade-boards/{tradeBoardId}",
 			"/albums/all",
 			"/albums/all/users/{userId}",
 			"/albums/{albumId}",

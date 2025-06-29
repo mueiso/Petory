@@ -38,7 +38,7 @@ public class PlaceLikeService {
 			redisTemplate.opsForZSet().incrementScore("place:rank:ALL", placeId, -1);
 
 		} else {
-			PlaceLike placeLike = new PlaceLike(findPlace, userService.getUserById(userId));
+			PlaceLike placeLike = new PlaceLike(findPlace, userService.findUserById(userId));
 			findPlace.increaseLikeCount();
 			placeLikeRepository.save(placeLike);
 			isLiked = true;

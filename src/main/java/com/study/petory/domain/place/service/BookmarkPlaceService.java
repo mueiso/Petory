@@ -29,7 +29,7 @@ public class BookmarkPlaceService {
 
 	public void writeJsonData(Long userId, String filePath) {
 
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		// filePath에 해당하는 폴더에서 fixed.json으로 끝나는 파일만 가져오는 과정
 		File folder = new File(filePath);

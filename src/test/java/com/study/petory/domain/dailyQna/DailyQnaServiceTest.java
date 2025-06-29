@@ -123,7 +123,7 @@ public class DailyQnaServiceTest {
 
 		DailyQnaCreateRequestDto requestDto = new DailyQnaCreateRequestDto("답변");
 
-		given(userService.getUserById(userId))
+		given(userService.findUserById(userId))
 			.willReturn(testUser);
 		given(questionService.findQuestionByIdAndStatus(List.of(QuestionStatus.ACTIVE), questionId))
 			.willReturn(testQuestion);

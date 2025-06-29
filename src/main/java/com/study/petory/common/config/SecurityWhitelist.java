@@ -21,7 +21,6 @@ public class SecurityWhitelist {
 			"/auth/reissue",
 			"/users/test-login",
 			"/login.html",
-			"/login-success.html",
 			"/favicon.ico",
 			"/map.html",
 			"/chat.html",

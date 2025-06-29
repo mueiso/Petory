@@ -57,7 +57,7 @@ class PlaceServiceImplTest {
 		PlaceCreateRequestDto dto = new PlaceCreateRequestDto("testName", null,
 			PlaceType.ACCOMMODATION, "testAddress", BigDecimal.ONE, BigDecimal.ONE);
 
-		when(userService.getUserById(1L)).thenReturn(user);
+		when(userService.findUserById(1L)).thenReturn(user);
 
 		// 서비스 로직에서 placeRepository에서 save했을 때의 변수를 return에 사용하지 않는다
 		// 근데 서비스 로직에서는 실제로 insert 쿼리가 발생하기 때문에 상관없지만

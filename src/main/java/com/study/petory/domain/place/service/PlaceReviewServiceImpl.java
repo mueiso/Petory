@@ -35,7 +35,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 		PlaceReviewCreateRequestDto requestDto) {
 
 		Place findPlace = placeService.findPlaceWithPlaceReviewByPlaceId(placeId);
-		User findUser = userService.getUserById(userId);
+		User findUser = userService.findUserById(userId);
 
 		// 한 유저가 같은 장소에 한 개의 리뷰만 등록할 수 있도록 검증하는 로직
 		if (placeReviewRepository.existsByUserAndPlace(findUser, findPlace)) {

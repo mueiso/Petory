@@ -1,8 +1,11 @@
 package com.study.petory.domain.place.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
@@ -62,12 +67,13 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Valid @RequestBody PlaceCreateRequestDto requestDto
+		@Valid @RequestBody PlaceCreateRequestDto requestDto,
+		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(currentUser.getId(), requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(currentUser.getId(), requestDto, images));
 	}
 
 	/**
@@ -293,5 +299,43 @@ public class PlaceController {
 		@PathVariable Long placeId
 	) {
 		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
+	}
+
+	/**
+	 * 장소 사진 추가
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @param images 이미지
+	 * @return CommonResponse 방식의 생성 성공 메세지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping(value = "/{placeId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<CommonResponse<Void>> addImages(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@RequestPart List<MultipartFile> images
+	) {
+		placeService.addImages(currentUser.getId(), placeId, images);
+
+		return CommonResponse.of(SuccessCode.CREATED);
+	}
+
+	/**
+	 * 장소 사진 삭제
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @param imageId 이미지
+	 * @return CommonResponse 방식의 삭제 성공 메세지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/{placeId}/images/{imageId}")
+	public ResponseEntity<CommonResponse<Void>> deleteImage(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@PathVariable Long imageId
+	) {
+		placeService.deleteImage(currentUser.getId(), placeId, imageId);
+
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 }

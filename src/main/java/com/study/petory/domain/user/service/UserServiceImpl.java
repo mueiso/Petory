@@ -69,6 +69,10 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.USER_NOT_EXISTING);
+		}
+
 		// UserPrivateInfo 조회
 		UserPrivateInfo userPrivateInfo = user.getUserPrivateInfo();
 
@@ -87,6 +91,10 @@ public class UserServiceImpl implements UserService {
 
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.USER_NOT_EXISTING);
+		}
 
 		// 닉네임 수정
 		user.updateNickname(dto.getNickname());
@@ -154,7 +162,13 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User findUserByEmail(String email) {
 
-		return userRepository.findByEmail(email)
+		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.USER_NOT_EXISTING);
+		}
+
+		return user;
 	}
 }

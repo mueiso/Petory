@@ -62,8 +62,9 @@ public class PlaceController {
 
 	/**
 	 * 장소 등록
-	 * 사진, 평균 평점 추가 예정
+	 * @param currentUser login user 정보
 	 * @param requestDto 장소 등록에 필요한 정보
+	 * @param images image
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
@@ -79,7 +80,6 @@ public class PlaceController {
 	/**
 	 * 전체 장소 조회
 	 * 페이징 관련 스크롤 방식이 옳을 지에 대한 고민
-	 * 필터 검색 로직 QueryDSL 사용으로 바꾸는게 옳을 지에 대한 고민
 	 * @param placeName 장소 이름 일부 입력 시에도 조회 가능
 	 * @param placeType 장소 타입 입력 시 타입 조건 기준 조회 가능
 	 * @param pageable 기본 페이징 설정. 한 페이지에 10개의 게시글(장소) 조회

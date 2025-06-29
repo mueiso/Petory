@@ -78,4 +78,9 @@ public class PlaceReview extends TimeFeatureBasedEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	// NPE 방지 위한 헬퍼 메서드
+	public String getReviewerNickname() {
+		return user != null ? user.getNickname() : "탈퇴한 유저";
+	}
 }

@@ -10,6 +10,8 @@ import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceLike;
+import com.study.petory.domain.place.repository.PlaceLikeRepository;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -26,6 +28,7 @@ public class UserDeletionService {
 	private final OwnerBoardRepository ownerBoardRepository;
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final PlaceRepository placeRepository;
+	private final PlaceLikeRepository placeLikeRepository;
 
 	@Transactional
 	public void deleteUser(User user) {
@@ -48,7 +51,13 @@ public class UserDeletionService {
 			place.setUser(null);
 		}
 
-		// 4. User 실제 삭제
+		// 4. PlaceLike 의 User 참조 끊기
+		List<PlaceLike> placeLikes = placeLikeRepository.findByUser(user);
+		for(PlaceLike placeLike : placeLikes) {
+			placeLike.setUser(null);
+		}
+
+		// 5. User 실제 삭제
 		userRepository.delete(user);
 		log.info("[삭제] 유저 및 연관 데이터 정리 완료 - userId: {}, email: {}", user.getId(), user.getEmail());
 	}

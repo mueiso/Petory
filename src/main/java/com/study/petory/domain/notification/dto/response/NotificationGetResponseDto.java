@@ -9,11 +9,14 @@ import lombok.Getter;
 @Getter
 public class NotificationGetResponseDto {
 
+	private final Long notificationId;
+
 	private final String content;
 
 	private final LocalDateTime createdAt;
 
 	public NotificationGetResponseDto(Notification notification) {
+		this.notificationId = notification.getId();
 		this.content = notification.getContent();
 		this.createdAt = notification.getCreatedAt();
 	}

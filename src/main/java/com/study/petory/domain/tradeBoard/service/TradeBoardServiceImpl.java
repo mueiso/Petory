@@ -67,8 +67,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 생성
 	@Override
 	@Transactional
-	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto,
-		List<MultipartFile> images) {
+	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto, List<MultipartFile> images) {
 
 		//나중에 토큰으로 값을 받아올 예정
 		User user = findUser(userId);
@@ -127,8 +126,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 수정
 	@Override
 	@Transactional
-	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId,
-		TradeBoardUpdateRequestDto requestDto) {
+	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 

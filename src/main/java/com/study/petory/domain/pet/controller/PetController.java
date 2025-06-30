@@ -48,7 +48,7 @@ public class PetController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<PetResponseDto>> createPet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Valid @RequestPart PetCreateRequestDto requestDto,
+		@Valid @RequestPart("requestDto") PetCreateRequestDto requestDto,
 		@RequestPart(required = false) List<MultipartFile> images) {
 
 		petService.savePet(currentUser.getId(), requestDto, images);

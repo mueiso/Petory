@@ -19,20 +19,6 @@ public class EventQueryRepositoryImpl implements EventQueryRepository {
 
 	private final QUser qUser = QUser.user;
 
-	// @Override
-	public List<Event> findEventList(Long userId, LocalDateTime start, LocalDateTime end) {
-		return jpaQueryFactory
-			.selectFrom(qEvent)
-			.join(qUser).on(qUser.id.eq(qEvent.user.id)).fetchJoin()
-			.where(
-				qEvent.user.id.eq(userId),
-				qEvent.startDate.between(start, end)
-				// todo 반복 일정 조회 필요
-			)
-			.orderBy(qEvent.startDate.asc())
-			.stream().toList();
-	}
-
 	// start: 조회 범위 시작일, end: 조회 범위 종료일
 	public List<Event> findEventListStart(Long userId, LocalDateTime start, LocalDateTime end) {
 		return jpaQueryFactory

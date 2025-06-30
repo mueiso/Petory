@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	@Transactional
 	public EventCreateResponseDto saveEvent(Long userId, EventCreateRequestDto request) {
-		User user = userService.getUserById(userId);
+		User user = userService.findUserById(userId);
 
 		Event event = Event.builder()
 			.user(user)

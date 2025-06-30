@@ -29,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(
 	name = "tb_event",
 	indexes = {
+		// 이대로 사용해도 괜찮은 것인가?
 		@Index(name = "index_user_id_start", columnList = "user_id, start_date")
 	}
 )
@@ -42,9 +43,6 @@ public class Event extends UpdateBasedEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-
-	@Column
-	private String googleEventId;
 
 	@Column(length = 100)
 	private String title;
@@ -80,21 +78,6 @@ public class Event extends UpdateBasedEntity {
 	// 프론트에서 null 이라면 기본 색상
 	@Column
 	private String color;
-
-	/*
-	장소 재호님 도움이 필요할 수도 있음
-	구글 캘린더에 저장되는 장소는 구글 맵
-	해당 주소를 카카오 맵에서 사용하기에는 주소가 같은 형식이 아님
-	구글맵에는 있어도 카카오 맵에는 없을 수도 있음
-	구글맵에서 가져온 위도 경도로 카카오 맵 검색이 가능한 것인가? (1. 위경도로 검색 2. 추가 정보로 추가 검색)
-	@Column
-	private String Location; 도로명 주소
-	private Long placeId; null이 아니라면 place id로 검색
-	*/
-
-	// 알람 채원님 도움을 받아야 함
-	// @Column
-	// private String Alarm;
 
 	@Builder
 	public Event(User user, String title, LocalDateTime startDate, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,

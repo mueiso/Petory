@@ -21,7 +21,6 @@ import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
 import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
 import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardQueryRepository;
 import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
@@ -48,7 +47,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
 	}
 
-	public List<String> imageToUrlList(TradeBoard tradeBoard){
+	public List<String> imageToUrlList(TradeBoard tradeBoard) {
 		if (!tradeBoard.getImages().isEmpty()) {
 			return tradeBoard.getImages().stream()
 				.map(TradeBoardImage::getUrl)
@@ -58,8 +57,10 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	}
 
 	public void validateOwner(TradeBoard tradeBoard, User user) {
-		if (!tradeBoard.isOwner(user.getId()) && !user.hasRole(Role.ADMIN)) {
-			throw new CustomException(ErrorCode.FORBIDDEN);
+		if (tradeBoard.getUser() == null || !tradeBoard.isOwner(user.getId())) {
+			if (!user.hasRole(Role.ADMIN)) {
+				throw new CustomException(ErrorCode.FORBIDDEN);
+			}
 		}
 	}
 
@@ -76,11 +77,12 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.title(requestDto.getTitle())
 			.content(requestDto.getContent())
 			.price(requestDto.getPrice())
-			.user(user)
 			.build();
 
-		tradeBoardRepository.save(tradeBoard);
+		// 연관관계 설정 (주인 + 반대편 모두)
+		user.addTradeBoard(tradeBoard);
 
+		tradeBoardRepository.save(tradeBoard);
 
 		List<String> urls = new ArrayList<>();
 		if (images != null && !images.isEmpty()) {

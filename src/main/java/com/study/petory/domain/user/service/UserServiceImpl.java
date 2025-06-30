@@ -69,6 +69,8 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+		validateUserIsNotDeleted(user);
+
 		// UserPrivateInfo 조회
 		UserPrivateInfo userPrivateInfo = user.getUserPrivateInfo();
 
@@ -87,6 +89,8 @@ public class UserServiceImpl implements UserService {
 
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		validateUserIsNotDeleted(user);
 
 		// 닉네임 수정
 		user.updateNickname(dto.getNickname());
@@ -140,15 +144,31 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	public User findUserById(Long userId) {
 
-		return userRepository.findUserById(userId)
+		User user = userRepository.findUserById(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		validateUserIsNotDeleted(user);
+
+		return user;
 	}
 
 	@Override
 	@Transactional
 	public User findUserByEmail(String email) {
 
-		return userRepository.findByEmail(email)
+		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		validateUserIsNotDeleted(user);
+
+		return user;
+	}
+
+	// 중복되는 예외처리 줄이기 위한 메서드
+	private void validateUserIsNotDeleted(User user) {
+
+		if (user.getDeletedAt() != null) {
+			throw new CustomException(ErrorCode.USER_NOT_EXISTING);
+		}
 	}
 }

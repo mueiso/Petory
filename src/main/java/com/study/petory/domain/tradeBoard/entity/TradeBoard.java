@@ -86,7 +86,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 
 	// user 검증 메서드
 	public boolean isOwner(Long userId) {
-		return this.user != null && this.getUser().getId().equals(userId);
+		return this.user != null && this.user.isEqualId(userId);
 	}
 
 	public void addImage(TradeBoardImage image) {

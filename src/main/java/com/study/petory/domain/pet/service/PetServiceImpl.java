@@ -118,6 +118,26 @@ public class PetServiceImpl implements PetService {
 		return PetUpdateResponseDto.of(pet, imageUrls);
 	}
 
+	// 반려동물 프로필 사진 삭제
+	@Override
+	@Transactional
+	public void deletePetImage(Long userId, Long petImageId) {
+
+		PetImage image = petImageService.findImageById(petImageId);
+
+		Pet pet = image.getPet();
+
+		if (!pet.isPetOwner(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
+		// 이미지 삭제 (S3 삭제 + DB 삭제)
+		petImageService.deleteImage(image);
+
+		// 연관관계 제거 (양방향 매핑 유지 위해)
+		pet.getImages().remove(image);
+	}
+
 	// 반려동물 삭제
 	@Override
 	@Transactional

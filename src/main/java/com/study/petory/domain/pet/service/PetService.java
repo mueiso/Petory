@@ -23,6 +23,8 @@ public interface PetService {
 
 	PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images);
 
+	void deletePetImage(Long userId, Long petImageId);
+
 	void deletePet(Long userId, Long petId);
 
 	void restorePet(Long userId, Long petId);

@@ -117,6 +117,24 @@ public class PetController {
 	}
 
 	/**
+	 * [반려동물 프로필 사진 삭제]
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param petImageId 삭제 대상 이미지
+	 * @return 삭제 성공 메시지
+	 */
+	@DeleteMapping("/images/{petImageId}")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	public ResponseEntity<CommonResponse<Void>> deletePetImage(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long petImageId) {
+
+		petService.deletePetImage(currentUser.getId(), petImageId);
+
+		return CommonResponse.of(SuccessCode.DELETED);
+	}
+
+	/**
 	 * [반려동물 삭제]
 	 * 펫 정보를 soft delete 합니다.
 	 *

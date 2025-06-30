@@ -59,12 +59,13 @@ public class Pet extends TimeFeatureBasedEntity {
 	private User user;
 
 	@Builder
-	public Pet(String name, PetSize size, String species, String gender, String birthday) {
+	public Pet(String name, PetSize size, String species, String gender, String birthday, User user) {
 		this.name = name;
 		this.size = size;
 		this.species = species;
 		this.gender = gender;
 		this.birthday = birthday;
+		this.user = user;
 	}
 
 	public void updatePetInfo(String name, String gender, String birthday) {

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -15,7 +17,7 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
-import com.study.petory.domain.pet.dto.PetCreateResponseDto;
+import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.service.PetService;
 
 import jakarta.validation.Valid;
@@ -37,9 +39,9 @@ public class PetController {
 	 * @param images 사진 파일
 	 * @return id, 이름, 크기, 종, 성별, 생일, 생성일
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping
-	public ResponseEntity<CommonResponse<PetCreateResponseDto>> createPet(
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	public ResponseEntity<CommonResponse<PetResponseDto>> createPet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@Valid @RequestPart PetCreateRequestDto requestDto,
 		@RequestPart(required = false) List<MultipartFile> images) {
@@ -49,5 +51,19 @@ public class PetController {
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
+	/**
+	 * [펫 단건 조회]
+	 *
+	 * @param petId 등록된 펫 id
+	 * @return id, 이름, 크기, 종, 성별, 생일, 사진, 생성일
+	 */
+	@GetMapping("/{petId}")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	public ResponseEntity<CommonResponse<PetResponseDto>> getPet(
+		@PathVariable Long petId) {
 
+		petService.findPet(petId);
+
+		return CommonResponse.of(SuccessCode.FOUND);
+	}
 }

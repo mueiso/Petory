@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
-import com.study.petory.domain.pet.dto.PetCreateResponseDto;
+import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.entity.Pet;
+import com.study.petory.domain.pet.entity.PetImage;
 import com.study.petory.domain.pet.repository.PetRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserService;
@@ -27,7 +30,7 @@ public class PetServiceImpl implements PetService {
 	// Pet 생성
 	@Override
 	@Transactional
-	public PetCreateResponseDto savePet(Long userId, PetCreateRequestDto requestDto, List<MultipartFile> images) {
+	public PetResponseDto savePet(Long userId, PetCreateRequestDto requestDto, List<MultipartFile> images) {
 
 		User user = userService.findUserById(userId);
 
@@ -37,6 +40,7 @@ public class PetServiceImpl implements PetService {
 			.species(requestDto.getSpecies())
 			.gender(requestDto.getGender())
 			.birthday(requestDto.getBirthday())
+			.user(user)
 			.build();
 
 		petRepository.save(pet);
@@ -47,6 +51,20 @@ public class PetServiceImpl implements PetService {
 			urls = petImageService.uploadAndSaveAll(images, pet);
 		}
 
-		return PetCreateResponseDto.of(pet, urls);
+		return PetResponseDto.of(pet, urls);
+	}
+
+	// 펫 단건 조회
+	@Override
+	public PetResponseDto findPet(Long petId) {
+
+		Pet pet = petRepository.findById(petId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+
+		List<String> urls = pet.getImages().stream()
+			.map(PetImage::getUrl)
+			.toList();
+
+		return PetResponseDto.of(pet, urls);
 	}
 }

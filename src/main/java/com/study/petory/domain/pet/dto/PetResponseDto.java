@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PetCreateResponseDto {
+public class PetResponseDto {
 
 	private final Long id;
 
@@ -29,8 +29,8 @@ public class PetCreateResponseDto {
 
 	private final LocalDateTime createdAt;
 
-	public static PetCreateResponseDto of(Pet pet, List<String> imageUrls) {
-		return new PetCreateResponseDto(
+	public static PetResponseDto of(Pet pet, List<String> imageUrls) {
+		return new PetResponseDto(
 			pet.getId(),
 			pet.getName(),
 			pet.getSize(),

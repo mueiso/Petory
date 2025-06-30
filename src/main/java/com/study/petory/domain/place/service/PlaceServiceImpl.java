@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -93,11 +92,13 @@ public class PlaceServiceImpl implements PlaceService {
 		List<PlaceReviewGetResponseDto> placeReviewList = findPlace.getPlaceReviewList().stream()
 			.filter(placeReview -> placeReview.getDeletedAt() == null)
 			.map(PlaceReviewGetResponseDto::from)
-			.collect(Collectors.toList());
+			.toList();
+
+		List<PlaceImage> images = placeImageService.findImagesByPlaceId(placeId);
 
 		return PlaceGetResponseDto.of(
 			findPlace,
-			findPlace.getImages().stream()
+			images.stream()
 				.map(PlaceImage::getUrl)
 				.toList(),
 			placeReviewList);
@@ -196,7 +197,7 @@ public class PlaceServiceImpl implements PlaceService {
 	// throws CustomException
 	@Override
 	public Place findPlaceWithPlaceReviewByPlaceId(Long placeId) {
-		return placeRepository.findWithReviewListById(placeId)
+		return placeRepository.findWithReviewListByPlaceId(placeId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 
@@ -219,6 +220,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 		List<Place> placeList = placeRepository.findAllById(placeIdList);
 
+		// 여기서 문제가 발생했던것!!!!!
 		return placeList.stream()
 			.map(place -> {
 				List<String> imageUrls = place.getImages().stream()

@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,5 +62,9 @@ public class PlaceImageService extends AbstractImageService<PlaceImage> {
 	@Override
 	protected String getImageUrl(PlaceImage image) {
 		return image.getUrl();
+	}
+
+	protected List<PlaceImage> findImagesByPlaceId(Long placeId) {
+		return placeImageRepository.findAllByPlace_Id(placeId);
 	}
 }

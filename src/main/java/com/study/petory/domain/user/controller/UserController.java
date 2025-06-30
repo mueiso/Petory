@@ -18,10 +18,9 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.user.dto.TokenResponseDto;
-import com.study.petory.domain.user.dto.UpdateUserRequestDto;
+import com.study.petory.domain.user.dto.UserUpdateRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.service.UserService;
-import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -79,7 +78,7 @@ public class UserController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Validated @RequestBody UpdateUserRequestDto updateDto) {
+		@Validated @RequestBody UserUpdateRequestDto updateDto) {
 
 		userService.updateProfile(currentUser.getEmail(), updateDto);
 

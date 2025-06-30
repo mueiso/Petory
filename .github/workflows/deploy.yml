@@ -4,7 +4,7 @@ name: 🚀 Auto Deploy to AWS
 # main 브랜치에 push하면 자동 배포
 on:
   push:
-    branches: [ dev, deploy/test-prod ]  # 현재 테스트용 + 나중에 main만
+    branches: [ deploy/test-prod ]  # 현재 테스트용 + 나중에 main만
 
 jobs:
   deploy:

@@ -1,5 +1,5 @@
 # 베이스 이미지
-FROM openjdk:17-jdk-slim
+FROM amazoncorretto:17-jdk-slim AS builder
 
 # 작업 디렉토리 설정
 WORKDIR /app

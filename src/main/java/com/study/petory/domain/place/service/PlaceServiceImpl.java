@@ -3,10 +3,12 @@ package com.study.petory.domain.place.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +39,7 @@ public class PlaceServiceImpl implements PlaceService {
 	private final PlaceRepository placeRepository;
 	private final UserService userService;
 	private final PlaceImageService placeImageService;
+	private final RedisTemplate<String, Object> redisTemplate;
 
 	// 장소 등록
 	@Override
@@ -76,8 +79,9 @@ public class PlaceServiceImpl implements PlaceService {
 	// 전체 장소 조회
 	@Override
 	@Transactional(readOnly = true)
-	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
-		return placeRepository.findAllPlace(placeName, placeType, pageable);
+	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address,
+		Pageable pageable) {
+		return placeRepository.findAllPlace(placeName, placeType, address, pageable);
 	}
 
 	// 특정 장소 조회
@@ -189,5 +193,54 @@ public class PlaceServiceImpl implements PlaceService {
 	public Place findPlaceWithPlaceReviewByPlaceId(Long placeId) {
 		return placeRepository.findWithReviewListById(placeId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
+	}
+
+	@Override
+	public List<PlaceGetAllResponseDto> findPlaceRank(PlaceType placeType) {
+		String key = makeKey(placeType);
+
+		// Top 10 조회
+		Set<Object> placeIdSet = redisTemplate.opsForZSet().reverseRange(key, 0, 9);
+
+		// Ranking 데이터에 이상이 있는 게 아니라 그저 아직 랭킹이 형성되지 않았기 때문에 예외 대신 빈 List를 반환
+		if (placeIdSet == null || placeIdSet.isEmpty()) {
+			return List.of();
+		}
+
+		List<Long> placeIdList = placeIdSet.stream()
+			.map(object -> Long.parseLong(object.toString()))
+			.toList();
+
+		List<Place> placeList = placeRepository.findAllById(placeIdList);
+
+		return placeList.stream()
+			.map(PlaceGetAllResponseDto::from)
+			.toList();
+	}
+
+	// Redis key 생성 로직. (예시 - "place:rank:{PlaceType}"
+	@Override
+	public String makeKey(PlaceType placeType) {
+		StringBuilder stringBuilder = new StringBuilder("place:rank");
+
+		if (placeType != null) {
+			stringBuilder.append(":").append(placeType);
+		} else {
+			stringBuilder.append(":ALL");
+		}
+
+		return stringBuilder.toString();
+	}
+
+	@Override
+	public PlaceType parsePlaceType(String placeType) {
+		if (placeType == null || "ALL".equalsIgnoreCase(placeType)) {
+			return null;
+		}
+		try {
+			return PlaceType.valueOf(placeType.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			throw new CustomException(ErrorCode.INVALID_PARAMETER);
+		}
 	}
 }

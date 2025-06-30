@@ -2,12 +2,18 @@ package com.study.petory.domain.place.dto.response;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 
 import lombok.Getter;
 
 @Getter
+@JsonTypeInfo(
+	use = JsonTypeInfo.Id.CLASS,
+	include = JsonTypeInfo.As.PROPERTY,
+	property = "@class"
+)
 public class PlaceGetAllResponseDto {
 
 	private final Long id;

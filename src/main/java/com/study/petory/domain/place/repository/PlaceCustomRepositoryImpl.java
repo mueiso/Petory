@@ -30,12 +30,17 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 	private final QUser qUser = QUser.user;
 
 	@Override
-	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable) {
+	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address,
+		Pageable pageable) {
 
 		BooleanBuilder booleanBuilder = new BooleanBuilder();
 
 		if (placeName != null && !placeName.isBlank()) {
-			booleanBuilder.and(qPlace.placeName.containsIgnoreCase(placeName));
+			booleanBuilder.or(qPlace.placeName.containsIgnoreCase(placeName));
+		}
+
+		if (address != null && !address.isBlank()) {
+			booleanBuilder.or(qPlace.address.containsIgnoreCase(address));
 		}
 
 		if (placeType != null) {

@@ -28,11 +28,16 @@ public class PlaceLike {
 	private Place place;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 
 	public PlaceLike(Place place, User user) {
 		this.place = place;
+		this.user = user;
+	}
+
+	// 연관관계 참조 끊기 위한 메서드
+	public void setUser(User user) {
 		this.user = user;
 	}
 }

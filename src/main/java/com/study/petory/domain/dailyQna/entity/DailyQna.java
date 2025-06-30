@@ -2,6 +2,7 @@ package com.study.petory.domain.dailyQna.entity;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
@@ -35,8 +36,9 @@ public class DailyQna extends TimeFeatureBasedEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JoinColumn(name = "user_id", nullable = false)
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 	@JoinColumn(name = "question_id", nullable = false)
@@ -75,5 +77,9 @@ public class DailyQna extends TimeFeatureBasedEntity {
 	}
 	public void updateStatusDelete() {
 		this.dailyQnaStatus = DailyQnaStatus.DELETED;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

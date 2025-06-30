@@ -23,7 +23,7 @@ public class OwnerBoardCommentGetResponseDto {
 			comment.getId(),
 			comment.getContent(),
 			comment.getCreatedAt(),
-			comment.getUser().getId()
+			comment.getUser() != null ? comment.getUser().getId() : null  // User 가 null 일 경우 null 로 노출되도록
 		);
 	}
 }

@@ -88,10 +88,12 @@ public class PlaceController {
 	@GetMapping
 	public ResponseEntity<CommonResponse<Page<PlaceGetAllResponseDto>>> getAllPlace(
 		@RequestParam(required = false) String placeName,
-		@RequestParam(required = false) PlaceType placeType,
-		@PageableDefault(size = 10) Pageable pageable
+		@RequestParam(required = false) String placeType,
+		@RequestParam(required = false) String address,
+		@PageableDefault Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, placeType, pageable));
+		PlaceType type = placeService.parsePlaceType(placeType);
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findAllPlace(placeName, type, address, pageable));
 	}
 
 	/**
@@ -299,6 +301,19 @@ public class PlaceController {
 		@PathVariable Long placeId
 	) {
 		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
+	}
+
+	/**
+	 * 장소 인기 랭킹
+	 * @param placeType 장소 타입 입력 시 타입 조건 기준 조회 가능
+	 * @return CommonResponse 방식의 인기 랭킹 목록 출력
+	 */
+	@GetMapping("/rank")
+	public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank(
+		@RequestParam(required = false) String placeType
+	) {
+		PlaceType type = placeService.parsePlaceType(placeType);
+		return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank(type));
 	}
 
 	/**

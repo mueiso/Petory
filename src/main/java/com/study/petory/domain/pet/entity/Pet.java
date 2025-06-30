@@ -1,17 +1,24 @@
 package com.study.petory.domain.pet.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +40,7 @@ public class Pet extends TimeFeatureBasedEntity {
 	@Column
 	private String size;
 
+	@Enumerated(EnumType.STRING)
 	@Column
 	private String species;
 
@@ -42,7 +50,8 @@ public class Pet extends TimeFeatureBasedEntity {
 	@Column
 	private String birthday;
 
-	private String photo;
+	@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<PetImage> images = new ArrayList<>();
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -50,19 +59,24 @@ public class Pet extends TimeFeatureBasedEntity {
 	private User user;
 
 	@Builder
-	public Pet(String name, String size, String species, String gender, String birthday, User user) {
+	public Pet(String name, String size, String species, String gender, String birthday) {
 		this.name = name;
 		this.size =size;
 		this.species = species;
 		this.gender = gender;
 		this.birthday = birthday;
-		this.user = user;
 	}
 
 	public void updatePetInfo(String name, String size, String gender) {
 		this.name = name;
 		this.size = size;
 		this.gender = gender;
+	}
+
+	// 양방향 연관관계 편의 메서드
+	public void addImage(PetImage image) {
+		images.add(image);
+		image.setPet(this);
 	}
 
 	public void setUser(User user) {

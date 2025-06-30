@@ -166,7 +166,7 @@ public class AlbumServiceImpl implements AlbumService {
 	// 한 번에 등록할 수 있는 이미지 수량 검증
 	@Override
 	public void validImageSize(List<UserRole> userRoles, List<MultipartFile> images) {
-		if (imageUploadPolicy.canUpload(userRoles, images.size())) {
+		if (!imageUploadPolicy.canUpload(userRoles, images.size())) {
 			throw new CustomException(ErrorCode.ALBUM_IMAGE_SIZE_OVER);
 		}
 	}

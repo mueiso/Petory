@@ -66,11 +66,21 @@ public class PetController {
 	@GetMapping("/{petId}")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<PetResponseDto>> getPet(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId) {
 
-		return CommonResponse.of(SuccessCode.FOUND, petService.findPet(petId));
+		return CommonResponse.of(SuccessCode.FOUND, petService.findPet(currentUser.getId(), petId));
 	}
 
+	/**
+	 * [펫 정보 수정]
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param petId
+	 * @param requestDto
+	 * @param images
+	 * @return
+	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping(value = "/{petId}", consumes = {"multipart/form-data"})
 	public ResponseEntity<CommonResponse<PetUpdateResponseDto>> updatePet(
@@ -83,5 +93,7 @@ public class PetController {
 
 		return CommonResponse.of(SuccessCode.UPDATED, response);
 	}
+
+
 
 }

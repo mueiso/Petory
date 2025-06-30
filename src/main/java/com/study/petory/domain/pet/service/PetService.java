@@ -13,7 +13,7 @@ public interface PetService {
 
 	void savePet(Long userId, PetCreateRequestDto requestDto, List<MultipartFile> images);
 
-	PetResponseDto findPet(Long petId);
+	PetResponseDto findPet(Long userId, Long petId);
 
 	PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images);
 }

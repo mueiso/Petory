@@ -56,10 +56,15 @@ public class PetServiceImpl implements PetService {
 
 	// 펫 단건 조회
 	@Override
-	public PetResponseDto findPet(Long petId) {
+	public PetResponseDto findPet(Long userId, Long petId) {
 
 		Pet pet = petRepository.findById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+
+		// 본인 소유 아닐 경우 예외 처리
+		if (!pet.isPetOwner(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
 
 		List<String> urls = pet.getImages().stream()
 			.map(PetImage::getUrl)
@@ -76,8 +81,7 @@ public class PetServiceImpl implements PetService {
 		Pet pet = petRepository.findById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 
-		// 본인 소유 아닐 경우 예외 처리
-		if (!pet.getUser().getId().equals(userId)) {
+		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
 		}
 

@@ -24,7 +24,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.security.CustomPrincipal;
-import com.study.petory.common.util.AbstractImageService;
 import com.study.petory.domain.album.dto.request.AlbumCreateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumUpdateRequestDto;
 import com.study.petory.domain.album.dto.request.AlbumVisibilityUpdateRequestDto;
@@ -33,7 +32,7 @@ import com.study.petory.domain.album.dto.response.AlbumGetOneResponseDto;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.entity.AlbumImage;
 import com.study.petory.domain.album.entity.AlbumVisibility;
-import com.study.petory.domain.album.repository.AlbumImageRepository;
+import com.study.petory.domain.album.entity.ImageUploadPolicy;
 import com.study.petory.domain.album.repository.AlbumRepository;
 import com.study.petory.domain.album.service.AlbumImageServiceImpl;
 import com.study.petory.domain.album.service.AlbumServiceImpl;
@@ -56,13 +55,10 @@ public class AlbumServiceTest {
 	private AlbumImageServiceImpl albumImageService;
 
 	@Mock
-	private AlbumImageRepository albumImageRepository;
+	private ImageUploadPolicy imageUploadPolicy;
 
 	@Mock
 	private UserService userService;
-
-	@Mock
-	private AbstractImageService abstractImageService;
 
 	private final UserPrivateInfo testUserInfo = UserPrivateInfo.builder()
 		.authId("1")
@@ -141,7 +137,7 @@ public class AlbumServiceTest {
 
 		setImageSize(imageSize);
 
-		given(albumImageService.findImageSize(testUser.getUserRole())).willReturn(imageSize);
+		given(imageUploadPolicy.canUpload(testUser.getUserRole(), testImages.size())).willReturn(true);
 
 		given(userService.findUserById(userId)).willReturn(testUser);
 
@@ -323,7 +319,7 @@ public class AlbumServiceTest {
 
 		setImageSize(imageSize);
 
-		given(albumImageService.findImageSize(testUser.getUserRole())).willReturn(imageSize);
+		given(imageUploadPolicy.canUpload(testUser.getUserRole(), testImages.size())).willReturn(true);
 
 		given(albumRepository.findOneAlbumByUser(false, albumId)).willReturn(Optional.of(testAlbum));
 		given(userService.findUserById(userId)).willReturn(testUser);

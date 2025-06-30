@@ -142,7 +142,7 @@ class PlaceServiceImplTest {
 
 		ReflectionTestUtils.setField(place, "placeReviewList", List.of(placeReview1, placeReview2));
 
-		when(placeRepository.findWithReviewListById(1L)).thenReturn(Optional.of(place));
+		when(placeRepository.findWithReviewListByPlaceId(1L)).thenReturn(Optional.of(place));
 
 		PlaceGetResponseDto dto = placeServiceImpl.findByPlaceId(1L);
 

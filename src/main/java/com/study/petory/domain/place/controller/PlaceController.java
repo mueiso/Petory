@@ -299,6 +299,11 @@ public class PlaceController {
 		return CommonResponse.of(SuccessCode.CREATED, placeLikeService.likePlace(currentUser.getId(), placeId));
 	}
 
+	/**
+	 * 장소 인기 랭킹
+	 * @param placeType 장소 타입 입력 시 타입 조건 기준 조회 가능
+	 * @return CommonResponse 방식의 인기 랭킹 목록 출력
+	 */
 	@GetMapping("/rank")
 	public ResponseEntity<CommonResponse<List<PlaceGetAllResponseDto>>> getPlaceRank(
 		@RequestParam(required = false) String placeType

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
+import com.study.petory.domain.user.service.UserDeletionService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ public class UserSchedulerService {
 
 	private final EmailService emailService;
 	private final UserRepository userRepository;
+	private final UserDeletionService userDeletionService;
 
 	// 미접속 유저에게 휴면 알림 이메일 발송 - 매일 자정
 	public void sendDeactivationWarningEmails() {
@@ -132,8 +134,8 @@ public class UserSchedulerService {
 
 		for (User user : expiredUsers) {
 
-			// soft delete 이후 90일 초과 유저 hardDelete
-			userRepository.delete(user);
+			// 참조 관계 끊고 유저 hard delete
+			userDeletionService.deleteUser(user);
 			log.info("[알림] deletedAt 90일 초과된 유저 삭제 - userId: {}, email: {}", user.getId(), user.getEmail());
 		}
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.UpdateBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
@@ -36,6 +37,7 @@ public class Album extends UpdateBasedEntity {
 	private Long id;
 
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
@@ -70,5 +72,9 @@ public class Album extends UpdateBasedEntity {
 
 	public String getFirstUrl() {
 		return this.albumImageList.get(0).getUrl();
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

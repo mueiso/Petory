@@ -2,6 +2,7 @@ package com.study.petory.domain.place.dto.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
@@ -21,7 +22,7 @@ public class PlaceCreateResponseDto {
 
 	private final BigDecimal ratio;
 
-	// private final String photoList;  // 게시글에 댓글 리스트 조회하듯이 가져와야할듯? dto로 만들어서 넣는것도 방법!
+	private final List<String> imageUrls;
 
 	private final BigDecimal latitude;
 
@@ -29,18 +30,19 @@ public class PlaceCreateResponseDto {
 
 	private final LocalDateTime createdAt;
 
-	private PlaceCreateResponseDto(Place place) {
+	private PlaceCreateResponseDto(Place place, List<String> imageUrls) {
 		this.id = place.getId();
 		this.placeName = place.getPlaceName();
 		this.placeInfo = place.getPlaceInfo();
 		this.placeType = place.getPlaceType();
 		this.ratio = place.getRatio();
+		this.imageUrls = imageUrls;
 		this.latitude = place.getLatitude();
 		this.longitude = place.getLongitude();
 		this.createdAt = place.getCreatedAt();
 	}
 
-	public static PlaceCreateResponseDto from(Place place) {
-		return new PlaceCreateResponseDto(place);
+	public static PlaceCreateResponseDto of(Place place, List<String> imageUrls) {
+		return new PlaceCreateResponseDto(place, imageUrls);
 	}
 }

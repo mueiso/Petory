@@ -1,6 +1,7 @@
 package com.study.petory.domain.place.dto.response;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.study.petory.domain.place.entity.Place;
@@ -28,7 +29,7 @@ public class PlaceGetAllResponseDto {
 
 	private final BigDecimal ratio;
 
-	// private final String photoList; // 이부분도 CreateResponseDto랑 비슷하게 하면 될듯
+	private final List<String> imageUrls;
 
 	private final BigDecimal latitude;
 
@@ -37,19 +38,20 @@ public class PlaceGetAllResponseDto {
 	private final Long likeCount;
 
 	public PlaceGetAllResponseDto(Long id, String placeName, String placeInfo, PlaceType placeType, String address,
-		BigDecimal ratio, BigDecimal latitude, BigDecimal longitude, Long likeCount) {
+		BigDecimal ratio, List<String> imageUrls, BigDecimal latitude, BigDecimal longitude, Long likeCount) {
 		this.id = id;
 		this.placeName = placeName;
 		this.placeInfo = placeInfo;
 		this.placeType = placeType;
 		this.address = address;
 		this.ratio = ratio;
+		this.imageUrls = imageUrls;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.likeCount = likeCount;
 	}
 
-	public static PlaceGetAllResponseDto from(Place place) {
+	public static PlaceGetAllResponseDto of(Place place, List<String> imageUrls) {
 		return new PlaceGetAllResponseDto(
 			place.getId(),
 			place.getPlaceName(),
@@ -57,6 +59,7 @@ public class PlaceGetAllResponseDto {
 			place.getPlaceType(),
 			place.getAddress(),
 			place.getRatio(),
+			imageUrls,
 			place.getLatitude(),
 			place.getLongitude(),
 			place.getLikeCount()

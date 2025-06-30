@@ -30,8 +30,6 @@ public class SecurityWhitelist {
 			"/image-petory.png",
 			"/petory.ico",
 			"/actuator/prometheus",
-			"/places/rank",
-			"/places/rank/**",
 			"/place-search-pet.png"
 		);
 
@@ -46,9 +44,7 @@ public class SecurityWhitelist {
 			"/albums/all/users/{userId}",
 			"/albums/{albumId}",
 			"/questions/today",
-			"/places/rank",
-			"/places/**",
-			"/places/rank/**"
+			"/places/rank"
 		);
 	}
 }

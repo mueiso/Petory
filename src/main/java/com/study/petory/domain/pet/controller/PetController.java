@@ -44,7 +44,7 @@ public class PetController {
 	 * @param images 사진 파일
 	 * @return 생성 성공 메시지
 	 */
-	@PostMapping
+	@PostMapping(consumes = {"multipart/form-data"})
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<PetResponseDto>> createPet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -80,8 +80,8 @@ public class PetController {
 	 * @param images 동물 프로필 사진 (선택)
 	 * @return 수정된 내용
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping(value = "/{petId}", consumes = {"multipart/form-data"})
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<PetUpdateResponseDto>> updatePet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId,
@@ -101,8 +101,8 @@ public class PetController {
 	 * @param petId 정보 삭제 대상 반려동물
 	 * @return 삭제 성공 메시지
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{petId}")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> deletePet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId) {
@@ -119,8 +119,8 @@ public class PetController {
 	 * @param petId 복구 대상 반려동물
 	 * @return 복구 성공 메시지
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PatchMapping("/{petId}/restore")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> restorePet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId) {

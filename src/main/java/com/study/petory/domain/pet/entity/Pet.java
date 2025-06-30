@@ -3,6 +3,8 @@ package com.study.petory.domain.pet.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
@@ -28,6 +30,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "tb_pet")
 @NoArgsConstructor
+@DynamicUpdate
 public class Pet extends TimeFeatureBasedEntity {
 
 	@Id

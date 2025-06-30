@@ -8,6 +8,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
+import com.study.petory.domain.ownerBoard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
 import com.study.petory.domain.pet.dto.PetResponseDto;
+import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
+import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
+import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.pet.service.PetService;
 
 import jakarta.validation.Valid;
@@ -62,8 +68,20 @@ public class PetController {
 	public ResponseEntity<CommonResponse<PetResponseDto>> getPet(
 		@PathVariable Long petId) {
 
-		petService.findPet(petId);
-
-		return CommonResponse.of(SuccessCode.FOUND);
+		return CommonResponse.of(SuccessCode.FOUND, petService.findPet(petId));
 	}
+
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PutMapping(value = "/{petId}", consumes = {"multipart/form-data"})
+	public ResponseEntity<CommonResponse<PetUpdateResponseDto>> updatePet(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long petId,
+		@Valid @RequestPart PetUpdateRequestDto requestDto,
+		@RequestPart(required = false) List<MultipartFile> images) {
+
+		PetUpdateResponseDto response = petService.updatePet(currentUser.getId(), petId, requestDto, images);
+
+		return CommonResponse.of(SuccessCode.UPDATED, response);
+	}
+
 }

@@ -45,8 +45,9 @@ public class PetServiceImpl implements PetService {
 			.species(requestDto.getSpecies())
 			.gender(requestDto.getGender())
 			.birthday(requestDto.getBirthday())
-			.user(user)
 			.build();
+
+		user.addPet(pet);
 
 		petRepository.save(pet);
 

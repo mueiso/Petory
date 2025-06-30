@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum PetSize {
 
-	LARGE_SIZED_ANIMAL("대동물"),
-	MEDIUM_SIZED_ANIMAL("중간 크기 동물"),
-	SMALL_SIZED_ANIMAL("소동물");
+	LARGE("대동물"),
+	MEDIUM("중간 크기 동물"),
+	SMALL("소동물");
 
 	private final String description;
 }

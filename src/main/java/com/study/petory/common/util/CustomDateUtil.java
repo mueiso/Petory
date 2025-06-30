@@ -75,11 +75,6 @@ public class CustomDateUtil {
 		return LocalDateTime.ofInstant(dateTime.toInstant(), ZoneId.systemDefault());
 	}
 
-	public static LocalDateTime toISODateTime(String date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-		return LocalDateTime.parse(date, formatter);
-	}
-
 	public static LocalDateTime stringToUTC(String datetime) {
 		if (datetime == null) {
 			return null;

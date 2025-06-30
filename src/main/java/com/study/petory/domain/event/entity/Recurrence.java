@@ -47,7 +47,12 @@ public class Recurrence {
 	// VEvent 생성
 	private VEvent createVEvent(Event event) {
 		DateTime startDate = new DateTime(CustomDateUtil.toDateTime(event.getStartDate()));
-		DateTime endDate = new DateTime(CustomDateUtil.toDateTime(event.getEndDate()));
+		LocalDateTime end = event.getStartDate();
+		if (event.getEndDate() != null) {
+			end = event.getEndDate();
+		}
+		DateTime endDate = new DateTime(CustomDateUtil.toDateTime(end));
+
 
 		VEvent vEvent = new VEvent(startDate, endDate, event.getTitle());
 
@@ -122,7 +127,7 @@ public class Recurrence {
 
 		for (String rDate : dateTypeList) {
 			try {
-				LocalDateTime localDateTime = CustomDateUtil.toISODateTime(rDate);
+				LocalDateTime localDateTime = CustomDateUtil.stringToUTC(rDate);
 				DateTime dateTime = new DateTime(CustomDateUtil.toDateTime(localDateTime));
 				dateList.add(dateTime);
 			} catch (RuntimeException e) {

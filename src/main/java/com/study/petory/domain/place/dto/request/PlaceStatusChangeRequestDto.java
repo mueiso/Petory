@@ -10,6 +10,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PlaceStatusChangeRequestDto {
 
-	@ValidEnum(enumClass = PlaceStatus.class, message = "지원하지 않는 상태값입니다.")
-	private final PlaceStatus placeStatus;
+	@ValidEnum(enumClass = PlaceStatus.class, ignoreCase = true, message = "지원하지 않는 상태값입니다.")
+	private final String placeStatus;
 }

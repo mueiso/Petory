@@ -22,8 +22,8 @@ public class PlaceCreateRequestDto {
 	@Size(max = 255, message = "장소 정보는 255자까지만 입력 가능합니다.")
 	private final String placeInfo;
 
-	@ValidEnum(enumClass = PlaceType.class, message = "지원하지 않는 장소 타입입니다.")
-	private final PlaceType placeType;
+	@ValidEnum(enumClass = PlaceType.class, ignoreCase = true, message = "지원하지 않는 장소 타입입니다.")
+	private final String placeType;
 
 	@NotBlank
 	@Size(max = 100, message = "주소는 100자까지만 입력 가능합니다.")

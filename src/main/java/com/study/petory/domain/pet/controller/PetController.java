@@ -76,10 +76,10 @@ public class PetController {
 	 * [펫 정보 수정]
 	 *
 	 * @param currentUser 로그인 유저
-	 * @param petId
-	 * @param requestDto
-	 * @param images
-	 * @return
+	 * @param petId 정보 수정 할 반려동물
+	 * @param requestDto 이름, 성별, 생일
+	 * @param images 동물 프로필 사진 (선택)
+	 * @return 수정된 내용
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping(value = "/{petId}", consumes = {"multipart/form-data"})

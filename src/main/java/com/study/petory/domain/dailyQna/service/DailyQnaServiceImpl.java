@@ -20,6 +20,7 @@ import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
+import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,15 +41,19 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 			throw new CustomException(ErrorCode.ALREADY_WRITTEN_TODAY);
 		}
 
-		Question todayQuestion = questionService.findQuestionByIdAndStatus(List.of(QuestionStatus.ACTIVE), questionId);
+		User user = userService.findUserById(userId);
+		Question todayQuestion = questionService.findQuestionByIdAndStatus(
+			List.of(QuestionStatus.ACTIVE), questionId);
 
-		dailyQnaRepository.save(DailyQna.builder()
-			.user(userService.findUserById(userId))
+		DailyQna dailyQna = DailyQna.builder()
 			.question(todayQuestion)
 			.answer(requestDto.getAnswer())
 			.dailyQnaStatus(DailyQnaStatus.ACTIVE)
-			.build()
-		);
+			.build();
+
+		user.addDailyQna(dailyQna);
+
+		dailyQnaRepository.save(dailyQna);
 	}
 
 	// 질문에 사용자가 남긴 모든 답변 조회

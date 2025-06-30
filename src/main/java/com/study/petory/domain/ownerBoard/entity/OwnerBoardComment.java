@@ -33,7 +33,7 @@ public class OwnerBoardComment extends TimeFeatureBasedEntity {
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -58,11 +58,19 @@ public class OwnerBoardComment extends TimeFeatureBasedEntity {
 
 	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
+		if (this.user == null) {
+			return false;
+		}
 		return this.user.isEqualId(userId);
 	}
 
 	// ownerBoard 검증 메서드
 	public boolean isEqualOwnerBoard(Long ownerBoardId) {
 		return this.ownerBoard.isEqualId(ownerBoardId);
+	}
+
+	// 연관관계 참조 끊기 위한 메서드
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

@@ -60,11 +60,11 @@ public class AlbumServiceImpl implements AlbumService {
 		}
 
 		Album album = Album.builder()
-			.user(user)
 			.content(requestDto.getContent())
 			.albumVisibility(albumVisibility)
 			.build();
 
+		user.addAlbum(album);
 		albumRepository.save(album);
 		albumImageService.uploadAndSaveAll(images, album);
 	}

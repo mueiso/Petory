@@ -308,6 +308,39 @@
             padding-left: 0;
         }
 
+        .image-scroll-box {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+            scrollbar-width: thin; /* Firefox */
+            /* 아래는 크롬/엣지용 */
+        }
+
+        .image-scroll-box::-webkit-scrollbar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+        }
+
+        .image-scroll-box::-webkit-scrollbar-thumb {
+            background: #dac39f;
+            border-radius: 4px;
+        }
+
+        .image-scroll-box img {
+            flex: 0 0 auto; /* 이미지가 줄지 않고 스크롤됨 */
+            max-height: 130px;
+            cursor: pointer;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.13s;
+        }
+
+        .image-scroll-box img:hover {
+            transform: scale(1.04);
+        }
+
         @media (max-width: 1000px) {
             .featured-area {
                 width: 98vw;
@@ -341,7 +374,7 @@
                 d="M21 21l-3-3"/></svg>
         <input type="text" placeholder="Search"/>
       </span>
-        <button class="login">login</button>
+        <a href="/login.html" class="login" style="text-decoration: none;">login</a>
     </div>
 </div>
 <main>
@@ -623,6 +656,8 @@
         const detailDiv = document.getElementById("placeDetail");
         const place = data.data;
 
+        console.log('이미지 URL 배열:', place.placeImages);
+
         detailDiv.style.display = "block";
 
         detailDiv.innerHTML = `
@@ -630,9 +665,15 @@
             style="float:right;border:none;background:none;font-size:18px;color:#aaa;cursor:pointer;">×</button>
         <div style="text-align: center; margin-top: 8px;">
             <h3 style="margin-bottom: 10px;">${place.placeName ?? '이름 없음'}</h3>
-            <img src="${place.placePhoto ?? 'https://via.placeholder.com/250x150?text=No+Image'}"
-                alt="장소 사진"
-                style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px;" />
+                <div class="image-scroll-box">
+      ${
+            place.imageUrls && place.imageUrls.length > 0
+                ? place.imageUrls.map(
+                    img => `<img src="${img}" alt="장소 사진" />`
+                ).join('')
+                : `<img src="https://via.placeholder.com/250x150?text=No+Image" alt="No Image" />`
+        }
+    </div>
         </div>
         <div style="margin-top: 10px;">
             <p><strong>주소:</strong> ${place.address ?? '주소 없음'}</p>

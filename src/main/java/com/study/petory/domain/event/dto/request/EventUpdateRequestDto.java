@@ -1,6 +1,8 @@
-package com.study.petory.domain.calendar.dto.request;
+package com.study.petory.domain.event.dto.request;
 
 import java.util.List;
+
+import com.study.petory.domain.event.entity.EventColor;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class EventCreateRequestDto {
+public class EventUpdateRequestDto {
 
 	@NotBlank(message = "title은 필수 항목입니다.")
 	private String title;
@@ -27,5 +29,5 @@ public class EventCreateRequestDto {
 
 	private String description;
 
-	private String color;
+	private EventColor color;
 }

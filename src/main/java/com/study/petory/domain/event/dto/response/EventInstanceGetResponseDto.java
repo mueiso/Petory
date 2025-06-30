@@ -1,9 +1,10 @@
-package com.study.petory.domain.calendar.dto.response;
+package com.study.petory.domain.event.dto.response;
 
 import java.time.LocalDateTime;
 
 import com.study.petory.common.util.CustomDateUtil;
-import com.study.petory.domain.calendar.entity.Event;
+import com.study.petory.domain.event.entity.Event;
+import com.study.petory.domain.event.entity.EventColor;
 
 import lombok.Getter;
 
@@ -20,10 +21,10 @@ public class EventInstanceGetResponseDto {
 
 	private final boolean isAllDay;
 
-	private final String color;
+	private final EventColor color;
 
 	private EventInstanceGetResponseDto(Long id, String title, String startDate, String endDate,
-		boolean isAllDay, String color) {
+		boolean isAllDay, EventColor color) {
 		this.id = id;
 		this.title = title;
 		this.startDate = startDate;

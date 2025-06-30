@@ -1,4 +1,4 @@
-package com.study.petory.domain.calendar.controller;
+package com.study.petory.domain.event.controller;
 
 import java.util.List;
 
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
-import com.study.petory.domain.calendar.dto.request.EventCreateRequestDto;
-import com.study.petory.domain.calendar.dto.request.EventUpdateRequestDto;
-import com.study.petory.domain.calendar.dto.response.EventCreateResponseDto;
-import com.study.petory.domain.calendar.dto.response.EventInstanceGetResponseDto;
-import com.study.petory.domain.calendar.dto.response.EventGetOneResponseDto;
-import com.study.petory.domain.calendar.dto.response.EventUpdateResponseDto;
-import com.study.petory.domain.calendar.service.EventService;
+import com.study.petory.domain.event.dto.request.EventCreateRequestDto;
+import com.study.petory.domain.event.dto.request.EventUpdateRequestDto;
+import com.study.petory.domain.event.dto.response.EventCreateResponseDto;
+import com.study.petory.domain.event.dto.response.EventInstanceGetResponseDto;
+import com.study.petory.domain.event.dto.response.EventGetOneResponseDto;
+import com.study.petory.domain.event.dto.response.EventUpdateResponseDto;
+import com.study.petory.domain.event.service.EventService;
 
 import lombok.RequiredArgsConstructor;
 

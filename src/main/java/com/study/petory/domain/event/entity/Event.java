@@ -1,4 +1,4 @@
-package com.study.petory.domain.calendar.entity;
+package com.study.petory.domain.event.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -77,11 +77,11 @@ public class Event extends UpdateBasedEntity {
 
 	// 프론트에서 null 이라면 기본 색상
 	@Column
-	private String color;
+	private EventColor color;
 
 	@Builder
 	public Event(User user, String title, LocalDateTime startDate, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
-		String rDate, String exDate, String description, String color) {
+		String rDate, String exDate, String description, EventColor color) {
 		this.user = user;
 		this.title = title;
 		this.startDate = startDate;
@@ -97,7 +97,7 @@ public class Event extends UpdateBasedEntity {
 	}
 
 	public void updateEvent(String title, LocalDateTime start, LocalDateTime end, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
-		String rDate, String exDate, String description, String color) {
+		String rDate, String exDate, String description, EventColor color) {
 		this.title = title;
 		this.startDate = start;
 		this.endDate = end;

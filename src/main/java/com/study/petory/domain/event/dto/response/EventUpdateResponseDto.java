@@ -1,9 +1,10 @@
-package com.study.petory.domain.calendar.dto.response;
+package com.study.petory.domain.event.dto.response;
 
 import java.util.List;
 
 import com.study.petory.common.util.CustomDateUtil;
-import com.study.petory.domain.calendar.entity.Event;
+import com.study.petory.domain.event.entity.Event;
+import com.study.petory.domain.event.entity.EventColor;
 
 import lombok.Getter;
 
@@ -24,10 +25,10 @@ public class EventUpdateResponseDto {
 
 	private final String description;
 
-	private final String color;
+	private final EventColor color;
 
 	private EventUpdateResponseDto(Long id, String title, String startDate, String endDate,
-		Boolean isAllDay, List<String> recurrence, String description, String color) {
+		Boolean isAllDay, List<String> recurrence, String description, EventColor color) {
 		this.id = id;
 		this.title = title;
 		this.startDate = startDate;

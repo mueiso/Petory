@@ -1,14 +1,16 @@
-package com.study.petory.domain.calendar.dto.response;
+package com.study.petory.domain.event.dto.response;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.study.petory.common.util.CustomDateUtil;
-import com.study.petory.domain.calendar.entity.Event;
+import com.study.petory.domain.event.entity.Event;
+import com.study.petory.domain.event.entity.EventColor;
 
 import lombok.Getter;
 
 @Getter
-public class EventCreateResponseDto {
+public class EventGetOneResponseDto {
 
 	private final Long id;
 
@@ -18,16 +20,16 @@ public class EventCreateResponseDto {
 
 	private final String endDate;
 
-	private final Boolean isAllDay;
+	private final boolean isAllDay;
 
 	private final List<String> recurrence;
 
 	private final String description;
 
-	private final String color;
+	private final EventColor color;
 
-	private EventCreateResponseDto(Long id, String title, String startDate, String endDate,
-		Boolean isAllDay, List<String> recurrence, String description, String color) {
+	private EventGetOneResponseDto(Long id, String title, String startDate, String endDate, boolean isAllDay,
+		List<String> recurrence, String description, EventColor color) {
 		this.id = id;
 		this.title = title;
 		this.startDate = startDate;
@@ -38,16 +40,16 @@ public class EventCreateResponseDto {
 		this.color = color;
 	}
 
-	public static EventCreateResponseDto from(Event event) {
-		return new EventCreateResponseDto(
+	public static EventGetOneResponseDto from(Event event) {
+		return new EventGetOneResponseDto(
 			event.getId(),
-			event.toString(),
+			event.getTitle(),
 			CustomDateUtil.toISOString(event.getStartDate(), event.getTimeZone()),
 			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
 			event.getIsAllDay(),
 			event.getRecurrence(),
-			event.getDescription(),
-			event.getColor()
+			Optional.ofNullable(event.getDescription()).orElseThrow(null),
+			Optional.ofNullable(event.getColor()).orElseThrow(null)
 		);
 	}
 }

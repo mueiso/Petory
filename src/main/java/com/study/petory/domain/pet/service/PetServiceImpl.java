@@ -47,10 +47,8 @@ public class PetServiceImpl implements PetService {
 
 		petRepository.save(pet);
 
-		List<String> urls = new ArrayList<>();
-
 		if (images != null && !images.isEmpty()) {
-			urls = petImageService.uploadAndSaveAll(images, pet);
+			petImageService.uploadAndSaveAll(images, pet);
 		}
 	}
 

@@ -36,7 +36,7 @@ public class PetController {
 	private final PetService petService;
 
 	/**
-	 * [펫 생성]
+	 * [반려동물 생성]
 	 * 반려동물을 등록합니다.
 	 *
 	 * @param currentUser 로그인 유저
@@ -57,7 +57,7 @@ public class PetController {
 	}
 
 	/**
-	 * [펫 단건 조회]
+	 * [반려동물 단건 조회]
 	 *
 	 * @param petId 등록된 펫 id
 	 * @return id, 이름, 크기, 종, 성별, 생일, 사진, 생성일
@@ -72,7 +72,7 @@ public class PetController {
 	}
 
 	/**
-	 * [펫 정보 수정]
+	 * [반려동물 정보 수정]
 	 *
 	 * @param currentUser 로그인 유저
 	 * @param petId 정보 수정 대상 반려동물
@@ -94,7 +94,7 @@ public class PetController {
 	}
 
 	/**
-	 * [펫 삭제]
+	 * [반려동물 삭제]
 	 * 펫 정보를 soft delete 합니다.
 	 *
 	 * @param currentUser 로그인 유저
@@ -113,7 +113,7 @@ public class PetController {
 	}
 
 	/**
-	 * [펫 복구]
+	 * [반려동물 복구]
 	 *
 	 * @param currentUser 로그인 유저
 	 * @param petId 복구 대상 반려동물

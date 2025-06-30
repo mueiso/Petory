@@ -29,7 +29,7 @@ public class PetServiceImpl implements PetService {
 	private final PetRepository petRepository;
 	private final PetImageService petImageService;
 
-	// 펫 등록
+	// 반려동물 등록
 	@Override
 	@Transactional
 	public void savePet(Long userId, PetCreateRequestDto requestDto, List<MultipartFile> images) {
@@ -52,7 +52,7 @@ public class PetServiceImpl implements PetService {
 		}
 	}
 
-	// 펫 단건 조회
+	// 반려동물 단건 조회
 	@Override
 	@Transactional(readOnly = true)
 	public PetResponseDto findPet(Long userId, Long petId) {
@@ -72,7 +72,7 @@ public class PetServiceImpl implements PetService {
 		return PetResponseDto.of(pet, urls);
 	}
 
-	// 펫 정보 수정
+	// 반려동물 정보 수정
 	@Override
 	@Transactional
 	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images) {
@@ -103,7 +103,7 @@ public class PetServiceImpl implements PetService {
 		return PetUpdateResponseDto.of(pet, imageUrls);
 	}
 
-	// 펫 삭제
+	// 반려동물 삭제
 	@Override
 	@Transactional
 	public void deletePet(Long userId, Long petId) {
@@ -127,7 +127,7 @@ public class PetServiceImpl implements PetService {
 		pet.deactivateEntity();
 	}
 
-	// 펫 복구
+	// 반려동물 복구
 	@Override
 	@Transactional
 	public void restorePet(Long userId, Long petId) {

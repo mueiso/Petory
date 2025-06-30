@@ -32,7 +32,8 @@ public class SecurityWhitelist {
 			"/actuator/prometheus",
 			"/places/rank",
 			"/places/rank/**",
-			"/place-search-pet.png"
+			"/place-search-pet.png",
+			"/calendar.html"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

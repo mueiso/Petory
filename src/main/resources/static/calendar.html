@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지 - 캘린더</title>
+    
+    <!-- FullCalendar CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        /* 헤더 스타일 */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ff6b35;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #333;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 8px 35px 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            width: 200px;
+        }
+        
+        .search-box::after {
+            content: '🔍';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .login-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        /* 메인 컨테이너 */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        /* 탭 네비게이션 */
+        .tab-nav {
+            display: flex;
+            gap: 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tab-nav button {
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-nav button.active {
+            color: #ff6b35;
+            border-bottom-color: #ff6b35;
+        }
+        
+        .tab-nav button:hover {
+            color: #333;
+        }
+        
+        /* 캘린더 섹션 */
+        .calendar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            margin-bottom: 30px;
+        }
+        
+        .calendar-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .calendar-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* FullCalendar 커스텀 스타일 */
+        #calendar {
+            font-family: inherit;
+        }
+        
+        .fc-toolbar-title {
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            color: #333 !important;
+        }
+        
+        .fc-button-primary {
+            background: #ff6b35 !important;
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 6px 12px !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .fc-button-primary:hover {
+            background: #e55a2b !important;
+            transform: translateY(-1px) !important;
+        }
+        
+        .fc-button-primary:disabled {
+            background: #ccc !important;
+            transform: none !important;
+        }
+        
+        .fc-event {
+            border-radius: 4px !important;
+            border: none !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            padding: 2px 6px !important;
+            transition: all 0.2s ease !important;
+        }
+        
+        .fc-event:hover {
+            transform: scale(1.02) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        .fc-daygrid-day-number {
+            color: #333 !important;
+            font-weight: 500 !important;
+        }
+        
+        .fc-col-header-cell {
+            background: #f8f9fa !important;
+            border-color: #e9ecef !important;
+        }
+        
+        .fc-daygrid-day {
+            border-color: #e9ecef !important;
+        }
+        
+        .fc-today {
+            background: rgba(255, 107, 53, 0.1) !important;
+        }
+        
+        /* 모달 스타일 */
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .modal-header {
+            background: #ff6b35;
+            color: white;
+            border-radius: 12px 12px 0 0;
+            border: none;
+            padding: 20px 25px;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        
+        .color-picker {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .color-option {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.15);
+        }
+        
+        .color-option.selected {
+            border-color: #333;
+            transform: scale(1.15);
+        }
+        
+        .btn-primary {
+            background: #ff6b35;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        
+        /* 알림 스타일 */
+        .alert {
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        /* 푸터 */
+        .footer {
+            background: white;
+            border-top: 1px solid #e9ecef;
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #ff6b35;
+            color: white;
+        }
+        
+        .copyright {
+            color: #999;
+            font-size: 13px;
+        }
+
+        /* 토큰 설정 영역 */
+        .token-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .token-section strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">petory</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" class="active">Daily Photo Record</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Pet Places</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search">
+                </div>
+                <button class="login-btn">👤 login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <div class="main-container">
+        <h1 class="page-title">마이 페이지</h1>
+        
+        <!-- 탭 네비게이션 -->
+        <div class="tab-nav">
+            <button>사진 기록</button>
+            <button>좋은 기록</button>
+            <button class="active">캘린더</button>
+            <button>급여 계산</button>
+        </div>
+
+        <!-- 토큰 설정 안내 -->
+        <div class="token-section">
+            <strong>개발자 안내:</strong> JavaScript 코드에서 ACCESS_TOKEN 변수에 인증 토큰을 설정해주세요.
+        </div>
+        
+        <!-- 알림 컨테이너 -->
+        <div id="alertContainer"></div>
+        
+        <!-- 캘린더 섹션 -->
+        <div class="calendar-section">
+            <div class="calendar-header">
+                <h2 class="calendar-title">캘린더</h2>
+            </div>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <!-- 일정 추가/수정 모달 -->
+    <div class="modal fade" id="eventModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">일정 추가</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="mb-3">
+                            <label class="form-label">제목 *</label>
+                            <input type="text" class="form-control" id="eventTitle" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">시작일 *</label>
+                                <input type="datetime-local" class="form-control" id="eventStart" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">종료일</label>
+                                <input type="datetime-local" class="form-control" id="eventEnd">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="eventAllDay">
+                                <label class="form-check-label" for="eventAllDay">
+                                    하루 종일
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">설명</label>
+                            <textarea class="form-control" id="eventDescription" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">색상</label>
+                            <div class="color-picker">
+                                <div class="color-option" data-color="1" style="background-color: #a4bdfc;"></div>
+                                <div class="color-option" data-color="2" style="background-color: #7ae7bf;"></div>
+                                <div class="color-option" data-color="3" style="background-color: #dbadff;"></div>
+                                <div class="color-option" data-color="4" style="background-color: #ff887c;"></div>
+                                <div class="color-option" data-color="5" style="background-color: #fbd75b;"></div>
+                                <div class="color-option" data-color="6" style="background-color: #ffb878;"></div>
+                                <div class="color-option" data-color="7" style="background-color: #46d6db;"></div>
+                                <div class="color-option" data-color="8" style="background-color: #e1e1e1;"></div>
+                                <div class="color-option" data-color="9" style="background-color: #5484ed;"></div>
+                                <div class="color-option" data-color="10" style="background-color: #51b749;"></div>
+                                <div class="color-option" data-color="11" style="background-color: #dc2127;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">반복 설정</label>
+                            <select class="form-control" id="eventRecurrence">
+                                <option value="">반복 없음</option>
+                                <option value="FREQ=DAILY">매일</option>
+                                <option value="FREQ=WEEKLY">매주</option>
+                                <option value="FREQ=MONTHLY">매월</option>
+                                <option value="FREQ=YEARLY">매년</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-danger" id="deleteEventBtn" style="display: none;">삭제</button>
+                    <button type="button" class="btn btn-primary" id="saveEventBtn">저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="social-links">
+                <a href="#">💌</a>
+                <a href="#">📷</a>
+                <a href="#">🔗</a>
+            </div>
+            <div class="copyright">
+                ©2024 Petory. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let calendar;
+        let currentEventId = null;
+        let selectedColor = '1';
+        const API_BASE_URL = 'http://localhost:8080/calendars';
+        const DEFAULT_TIMEZONE = 'Asia/Seoul';
+        
+        // 🔑 여기에 Access Token을 입력하세요
+        const ACCESS_TOKEN = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJhQGVtYWlsLmNvbSIsIm5pY2tuYW1lIjoi7Jyg7KCAIiwicm9sZXMiOltdLCJleHAiOjE3NTEyNzYyNzAsImlhdCI6MTc1MTI3MjY3MH0.316cjcRO4pgg1BQYLz0t1jiVvGNu1mMHo9lhWJPNoEk';
+        
+        // EventColor enum 매핑
+        const EVENT_COLORS = {
+            'LAVENDER': '#a4bdfc',   // LAVENDER
+            'SAGE': '#7ae7bf',   // SAGE
+            'GRAPE': '#dbadff',   // GRAPE
+            'FLAMINGO': '#ff887c',   // FLAMINGO
+            'BANANA': '#fbd75b',   // BANANA
+            'TANGERINE': '#ffb878',   // TANGERINE
+            'PEACOCK': '#46d6db',   // PEACOCK
+            'GRAPHITE': '#e1e1e1',   // GRAPHITE
+            'BLUEBERRY': '#5484ed',   // BLUEBERRY
+            'BASIL': '#51b749',  // BASIL
+            'TOMATO': '#dc2127'   // TOMATO
+        };
+
+        // 알림 표시 함수
+        function showAlert(message, type = 'success') {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // API 요청 헤더 생성
+        function getAuthHeaders() {
+            if (!ACCESS_TOKEN || ACCESS_TOKEN === 'your-access-token-here') {
+                throw new Error('ACCESS_TOKEN을 설정해주세요.');
+            }
+            return {
+                'Content-Type': 'application/json',
+                'Authorization': ACCESS_TOKEN
+            };
+        }
+
+        // 날짜 포맷 변환 함수
+        function formatDateForAPI(date) {
+            if (!date) return null;
+            return new Date(date).toISOString().slice(0, 19);
+        }
+
+        // 모달 폼 초기화
+        function resetModal() {
+            document.getElementById('eventForm').reset();
+            document.getElementById('eventRecurrence').value = '';
+            document.getElementById('eventStart').type = 'datetime-local';
+            document.getElementById('eventEnd').type = 'datetime-local';
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector('.color-option').classList.add('selected');
+            selectedColor = '1';
+        }
+
+        // 일정 모달 열기
+        function openEventModal(event = null, start = null, end = null) {
+            if (event) {
+                // 수정 모드 - 기존 일정 정보를 서버에서 가져오기
+                currentEventId = event.id;
+                loadEventDetails(event.id);
+            } else {
+                // 추가 모드
+                currentEventId = null;
+                resetModal();
+                
+                document.getElementById('modalTitle').textContent = '일정 추가';
+                document.getElementById('eventAllDay').checked = false;
+                document.getElementById('eventStart').value = start ? new Date(start).toISOString().slice(0, 16) : '';
+                document.getElementById('eventEnd').value = end ? new Date(end).toISOString().slice(0, 16) : '';
+                document.getElementById('deleteEventBtn').style.display = 'none';
+                
+                const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+                modal.show();
+            }
+        }
+
+        // 일정 상세 정보 로드 (수정 모드용)
+        async function loadEventDetails(eventId) {
+            try {
+                const headers = getAuthHeaders();
+                const response = await fetch(`${API_BASE_URL}/${eventId}`, {
+                    headers: headers
+                });
+                
+                if (!response.ok) {
+                    throw new Error('일정 정보를 불러오는데 실패했습니다.');
+                }
+                
+                const result = await response.json();
+                const eventData = result.data;
+                
+                console.log('Loaded event data:', eventData);
+                
+                // 폼 초기화
+                resetModal();
+                
+                // 수정 모드 UI 설정
+                document.getElementById('modalTitle').textContent = '일정 수정';
+                document.getElementById('eventTitle').value = eventData.title || '';
+                document.getElementById('eventAllDay').checked = eventData.isAllDay || false;
+                document.getElementById('eventDescription').value = eventData.description || '';
+                
+                // 하루종일 여부에 따라 입력 필드 타입 설정
+                if (eventData.isAllDay) {
+                    document.getElementById('eventStart').type = 'date';
+                    document.getElementById('eventEnd').type = 'date';
+                    document.getElementById('eventStart').value = eventData.startDate ? eventData.startDate.split('T')[0] : '';
+                    document.getElementById('eventEnd').value = eventData.endDate ? eventData.endDate.split('T')[0] : '';
+                } else {
+                    document.getElementById('eventStart').type = 'datetime-local';
+                    document.getElementById('eventEnd').type = 'datetime-local';
+                    document.getElementById('eventStart').value = eventData.startDate ? eventData.startDate.slice(0, 16) : '';
+                    document.getElementById('eventEnd').value = eventData.endDate ? eventData.endDate.slice(0, 16) : '';
+                }
+                
+                // 반복 설정 로드
+                if (eventData.recurrence && eventData.recurrence.length > 0) {
+                    const rrule = eventData.recurrence.find(r => r.startsWith('RRULE:'));
+                    if (rrule) {
+                        const ruleValue = rrule.replace('RRULE:', '');
+                        document.getElementById('eventRecurrence').value = ruleValue;
+                    }
+                }
+                
+                document.getElementById('deleteEventBtn').style.display = 'inline-block';
+                
+                // 색상 설정
+                selectedColor = eventData.color || '1';
+                
+                // 색상 선택 표시
+                document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                const colorOption = document.querySelector(`[data-color="${selectedColor}"]`);
+                if (colorOption) {
+                    colorOption.classList.add('selected');
+                }
+                
+                // 모달 표시
+                const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+                modal.show();
+                
+            } catch (error) {
+                console.error('Error loading event details:', error);
+                showAlert(error.message, 'danger');
+            }
+        }
+
+        // FullCalendar 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'ko',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                buttonText: {
+                    today: '오늘',
+                    month: '월',
+                    week: '주',
+                    day: '일'
+                },
+                height: 'auto',
+                editable: true,
+                selectable: true,
+                selectMirror: true,
+                dayMaxEvents: true,
+                eventDisplay: 'block',
+                
+                // 날짜 선택 시 일정 추가
+                select: function(info) {
+                    openEventModal(null, info.start, info.end);
+                },
+                
+                // 일정 클릭 시 수정
+                eventClick: function(info) {
+                    openEventModal(info.event);
+                },
+                
+                // 일정 드래그 앤 드롭
+                eventDrop: function(info) {
+                    updateEventDates(info.event);
+                },
+                
+                // 일정 리사이즈
+                eventResize: function(info) {
+                    updateEventDates(info.event);
+                },
+                
+                // 날짜 범위 변경 시 일정 로드
+                datesSet: function(info) {
+                    loadEvents(info.start, info.end);
+                }
+            });
+            
+            calendar.render();
+            
+            // 색상 선택 이벤트
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedColor = this.dataset.color;
+                });
+            });
+            
+            // 하루종일 체크박스 이벤트
+            document.getElementById('eventAllDay').addEventListener('change', function() {
+                const isAllDay = this.checked;
+                const startInput = document.getElementById('eventStart');
+                const endInput = document.getElementById('eventEnd');
+                
+                if (isAllDay) {
+                    startInput.type = 'date';
+                    endInput.type = 'date';
+                    
+                    if (startInput.value) {
+                        startInput.value = startInput.value.split('T')[0];
+                    }
+                    if (endInput.value) {
+                        endInput.value = endInput.value.split('T')[0];
+                    }
+                } else {
+                    startInput.type = 'datetime-local';
+                    endInput.type = 'datetime-local';
+                    
+                    if (startInput.value && !startInput.value.includes('T')) {
+                        startInput.value = startInput.value + 'T09:00';
+                    }
+                    if (endInput.value && !endInput.value.includes('T')) {
+                        endInput.value = endInput.value + 'T18:00';
+                    }
+                }
+            });
+        });
+
+        // 일정 로드
+        async function loadEvents(start, end) {
+            try {
+                const headers = getAuthHeaders();
+                const startStr = start.toISOString().slice(0, 19);
+                const endStr = end.toISOString().slice(0, 19);
+                
+                const response = await fetch(`${API_BASE_URL}?start=${startStr}&end=${endStr}`, {
+                    headers: headers
+                });
+                
+                if (!response.ok) {
+                    throw new Error('일정을 불러오는데 실패했습니다.');
+                }
+                
+                const result = await response.json();
+                const events = result.data.map(event => ({
+                    id: event.id,
+                    title: event.title,
+                    start: event.startDate,
+                    end: event.endDate,
+                    allDay: event.isAllDay,
+                    backgroundColor: EVENT_COLORS[event.color] || EVENT_COLORS['1'],
+                    borderColor: EVENT_COLORS[event.color] || EVENT_COLORS['1']
+                }));
+                
+                calendar.removeAllEvents();
+                calendar.addEventSource(events);
+                
+            } catch (error) {
+                if (error.message !== 'ACCESS_TOKEN을 설정해주세요.') {
+                    showAlert(error.message, 'danger');
+                }
+            }
+        }
+
+        // 일정 저장
+        document.getElementById('saveEventBtn').addEventListener('click', async function() {
+            try {
+                const headers = getAuthHeaders();
+                const isAllDay = document.getElementById('eventAllDay').checked;
+                
+                const formData = {
+                    title: document.getElementById('eventTitle').value,
+                    startDate: formatDateForAPI(document.getElementById('eventStart').value),
+                    endDate: formatDateForAPI(document.getElementById('eventEnd').value),
+                    timeZone: DEFAULT_TIMEZONE,
+                    isAllDay: isAllDay,
+                    description: document.getElementById('eventDescription').value,
+                    color: selectedColor,
+                    recurrence: document.getElementById('eventRecurrence').value ? 
+                        [`RRULE:${document.getElementById('eventRecurrence').value}`] : null
+                };
+                
+                let response;
+                if (currentEventId) {
+                    response = await fetch(`${API_BASE_URL}/${currentEventId}`, {
+                        method: 'PUT',
+                        headers: headers,
+                        body: JSON.stringify(formData)
+                    });
+                } else {
+                    response = await fetch(API_BASE_URL, {
+                        method: 'POST',
+                        headers: headers,
+                        body: JSON.stringify(formData)
+                    });
+                }
+                
+                if (!response.ok) {
+                    throw new Error('일정 저장에 실패했습니다.');
+                }
+                
+                showAlert(currentEventId ? '일정이 수정되었습니다.' : '일정이 추가되었습니다.');
+                bootstrap.Modal.getInstance(document.getElementById('eventModal')).hide();
+                calendar.refetchEvents();
+                
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        });
+
+        // 일정 삭제
+        document.getElementById('deleteEventBtn').addEventListener('click', async function() {
+            if (!confirm('정말로 이 일정을 삭제하시겠습니까?')) return;
+            
+            try {
+                const headers = getAuthHeaders();
+                const response = await fetch(`${API_BASE_URL}/${currentEventId}`, {
+                    method: 'DELETE',
+                    headers: headers
+                });
+                
+                if (!response.ok) {
+                    throw new Error('일정 삭제에 실패했습니다.');
+                }
+                
+                showAlert('일정이 삭제되었습니다.');
+                bootstrap.Modal.getInstance(document.getElementById('eventModal')).hide();
+                calendar.refetchEvents();
+                
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        });
+
+        // 일정 드래그 앤 드롭 후 업데이트
+        async function updateEventDates(event) {
+            try {
+                const headers = getAuthHeaders();
+                
+                const getResponse = await fetch(`${API_BASE_URL}/${event.id}`, {
+                    headers: headers
+                });
+                
+                if (!getResponse.ok) {
+                    throw new Error('일정 정보를 가져오는데 실패했습니다.');
+                }
+                
+                const eventData = await getResponse.json();
+                const originalEvent = eventData.data;
+                
+                const updateData = {
+                    title: originalEvent.title,
+                    startDate: formatDateForAPI(event.start),
+                    endDate: formatDateForAPI(event.end),
+                    timeZone: DEFAULT_TIMEZONE,
+                    isAllDay: event.allDay,
+                    description: originalEvent.description,
+                    color: originalEvent.color,
+                    recurrence: originalEvent.recurrence
+                };
+                
+                const response = await fetch(`${API_BASE_URL}/${event.id}`, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify(updateData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('일정 업데이트에 실패했습니다.');
+                }
+                
+                showAlert('일정이 업데이트되었습니다.');
+                
+            } catch (error) {
+                showAlert(error.message, 'danger');
+                calendar.refetchEvents();
+            }
+        }
+    </script>
+</body>
+</html>

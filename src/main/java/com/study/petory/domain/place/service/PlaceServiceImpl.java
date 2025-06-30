@@ -73,7 +73,7 @@ public class PlaceServiceImpl implements PlaceService {
 			urls = placeImageService.uploadAndSaveAll(images, place);
 		}
 
-		return PlaceCreateResponseDto.from(place);
+		return PlaceCreateResponseDto.of(place, urls);
 	}
 
 	// 전체 장소 조회
@@ -95,7 +95,12 @@ public class PlaceServiceImpl implements PlaceService {
 			.map(PlaceReviewGetResponseDto::from)
 			.collect(Collectors.toList());
 
-		return PlaceGetResponseDto.from(findPlace, placeReviewList);
+		return PlaceGetResponseDto.of(
+			findPlace,
+			findPlace.getImages().stream()
+				.map(PlaceImage::getUrl)
+				.toList(),
+			placeReviewList);
 	}
 
 	// 장소 수정
@@ -195,6 +200,7 @@ public class PlaceServiceImpl implements PlaceService {
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 
+	// 인기 랭킹 조회
 	@Override
 	public List<PlaceGetAllResponseDto> findPlaceRank(PlaceType placeType) {
 		String key = makeKey(placeType);
@@ -214,7 +220,12 @@ public class PlaceServiceImpl implements PlaceService {
 		List<Place> placeList = placeRepository.findAllById(placeIdList);
 
 		return placeList.stream()
-			.map(PlaceGetAllResponseDto::from)
+			.map(place -> {
+				List<String> imageUrls = place.getImages().stream()
+					.map(PlaceImage::getUrl)
+					.toList();
+				return PlaceGetAllResponseDto.of(place, imageUrls);
+			})
 			.toList();
 	}
 
@@ -232,6 +243,7 @@ public class PlaceServiceImpl implements PlaceService {
 		return stringBuilder.toString();
 	}
 
+	// String -> PlaceType 변환 로직
 	@Override
 	public PlaceType parsePlaceType(String placeType) {
 		if (placeType == null || "ALL".equalsIgnoreCase(placeType)) {

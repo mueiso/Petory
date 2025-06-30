@@ -11,6 +11,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceImage;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.entity.QPlace;
 import com.study.petory.domain.place.entity.QPlaceReview;
@@ -61,7 +62,12 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 			.fetchOne();
 
 		List<PlaceGetAllResponseDto> dtoList = placeList.stream()
-			.map(PlaceGetAllResponseDto::from)
+			.map(place -> {
+				List<String> imageUrls = place.getImages().stream()
+					.map(PlaceImage::getUrl)
+					.toList();
+				return PlaceGetAllResponseDto.of(place, imageUrls);
+			})
 			.toList();
 
 		return new PageImpl<>(dtoList, pageable, total == null ? 0 : total);

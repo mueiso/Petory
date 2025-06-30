@@ -28,6 +28,15 @@ public class PetController {
 
 	private final PetService petService;
 
+	/**
+	 * [펫 생성]
+	 * 반려동물을 등록합니다.
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param requestDto 이름, 크기, 종, 성별, 생일
+	 * @param images 사진 파일
+	 * @return id, 이름, 크기, 종, 성별, 생일, 생성일
+	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping
 	public ResponseEntity<CommonResponse<PetCreateResponseDto>> createPet(
@@ -39,4 +48,6 @@ public class PetController {
 
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
+
+
 }

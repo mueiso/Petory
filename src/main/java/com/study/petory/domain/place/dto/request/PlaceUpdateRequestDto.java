@@ -21,7 +21,7 @@ public class PlaceUpdateRequestDto {
 	private final String placeInfo;
 
 	@ValidEnum(enumClass = PlaceType.class, ignoreCase = true, message = "지원하지 않는 장소 타입입니다.")
-	private final String placeType;
+	private final PlaceType placeType;
 
 	@Digits(integer = 9, fraction = 6)
 	private final BigDecimal latitude;

@@ -8,9 +8,8 @@ import org.springframework.data.domain.Pageable;
 import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
 
 public interface OwnerBoardQueryRepository {
-	Page<OwnerBoard> findByTitleContaining(String title, Pageable pageable);
 
-	Page<OwnerBoard> findAllWithImages(Pageable pageable);
+	Page<OwnerBoard> findAllByTitleOptional(String title, Pageable pageable);
 
 	Optional<OwnerBoard> findByIdWithImages(Long boardId);
 

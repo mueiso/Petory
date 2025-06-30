@@ -34,55 +34,25 @@ public class OwnerBoardQueryRepositoryImpl implements OwnerBoardQueryRepository 
 	}
 
 	@Override
-	public Page<OwnerBoard> findByTitleContaining(String title, Pageable pageable) {
-		// ID 먼저 조회
+	public Page<OwnerBoard> findAllByTitleOptional(String title, Pageable pageable) {
+
+		BooleanExpression condition = (title != null && !title.isBlank())
+			? ownerBoard.title.contains(title).and(notDeleted()) : notDeleted();
+
+		// 1. ID 먼저 조회
 		List<Long> boardIds = queryFactory
 			.select(ownerBoard.id)
 			.from(ownerBoard)
-			.where(
-				ownerBoard.title.contains(title),
-				notDeleted()
-			)
+			.where(condition)
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
-			.orderBy(
-				ownerBoard.createdAt.desc(), ownerBoard.id.desc())
 			.fetch();
 
 		if (boardIds.isEmpty()) {
 			return new PageImpl<>(Collections.emptyList(), pageable, 0L);
 		}
 
-		// 데이터 조회
-		List<OwnerBoard> content = queryFactory
-			.selectFrom(ownerBoard)
-			.leftJoin(ownerBoard.images).fetchJoin()
-			.where(ownerBoard.id.in(boardIds))
-			.fetch();
-
-		// 총개수 조회
-		Long total = queryFactory
-			.select(ownerBoard.count())
-			.from(ownerBoard)
-			.where(
-				ownerBoard.title.contains(title),
-				notDeleted()
-			)
-			.fetchOne();
-
-		return new PageImpl<>(content, pageable, total != null ? total : 0L);
-	}
-
-	@Override
-	public Page<OwnerBoard> findAllWithImages(Pageable pageable) {
-		List<Long> boardIds = queryFactory
-			.select(ownerBoard.id)
-			.from(ownerBoard)
-			.where(notDeleted())
-			.offset(pageable.getOffset())
-			.limit(pageable.getPageSize())
-			.fetch();
-
+		// 2. 실제 데이터 조회
 		List<OwnerBoard> content = queryFactory
 			.selectFrom(ownerBoard)
 			.leftJoin(ownerBoard.images).fetchJoin()
@@ -90,10 +60,10 @@ public class OwnerBoardQueryRepositoryImpl implements OwnerBoardQueryRepository 
 			.orderBy(ownerBoard.createdAt.desc(), ownerBoard.id.desc())
 			.fetch();
 
+		// 3. 총 개수 조회(구하기)
 		Long total = queryFactory
-			.select(ownerBoard.countDistinct())
+			.select(ownerBoard.count())
 			.from(ownerBoard)
-			.where(notDeleted())
 			.fetchOne();
 
 		return new PageImpl<>(content, pageable, total != null ? total : 0L);

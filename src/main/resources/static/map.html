@@ -688,7 +688,61 @@
             ? place.placeReviewList.map(r => `<p>⭐ ${r.ratio ?? '-'} - ${r.content ?? ''}</p>`).join('')
             : '<p>리뷰 정보 없음</p>'}
         </div>
+         <button id="openReviewModal" style="margin: 14px auto 0 auto; display: block; padding: 8px 18px; background: #e3c187; border: none; border-radius: 8px; color: #fff; font-weight: bold; cursor: pointer;">리뷰 작성</button>
+
+        <div id="reviewModal" style="display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.15); z-index:999;">
+            <div style="background:#fff; width:320px; padding:24px 18px 18px 18px; border-radius:14px; margin:120px auto 0 auto; box-shadow:0 4px 22px rgba(180,140,50,0.08); position:relative;">
+                <button onclick="document.getElementById('reviewModal').style.display='none'" style="position:absolute;top:10px;right:14px;font-size:18px;border:none;background:none;color:#aaa;">×</button>
+                <h3 style="margin:0 0 12px 0;">리뷰 작성</h3>
+                <form id="reviewForm">
+                    <div>
+                        <label>평점(1~5): </label>
+                        <input name="ratio" type="number" min="1" max="5" step="1" style="width:60px;" required>
+                    </div>
+                    <div style="margin:10px 0;">
+                        <label>리뷰 내용: </label>
+                        <textarea name="content" rows="3" style="width:94%;" required></textarea>
+                    </div>
+                    <button type="submit" style="width:100%;padding:7px 0;background:#cc8a3e;border:none;color:#fff;font-weight:bold;border-radius:7px;">작성하기</button>
+                </form>
+            </div>
+        </div>
     `;
+
+        // 버튼 클릭시 리뷰 모달 보이기
+        document.getElementById('openReviewModal').onclick = () => {
+            document.getElementById('reviewModal').style.display = 'block';
+        };
+
+        // 리뷰 작성 폼 제출 이벤트
+        document.getElementById('reviewForm').onsubmit = function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const ratio = form.ratio.value;
+            const content = form.content.value;
+
+            authFetch(`/places/${place.id}/reviews`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ratio, content})
+            })
+                .then(res => {
+                    if (res.ok) return res.json();
+                    throw new Error('리뷰 등록 실패');
+                })
+                .then(res => {
+                    alert('리뷰가 등록되었습니다!');
+                    document.getElementById('reviewModal').style.display = 'none';
+                    // 리뷰 목록 새로고침 (상세조회 다시)
+                    fetch(`/places/${place.id}`)
+                        .then(res => res.json())
+                        .then(data => showPlaceDetail(data));
+                })
+                .catch(err => {
+                    alert('리뷰 등록 실패: 로그인 후 다시 시도해주세요.');
+                });
+        };
     }
 
     // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
@@ -833,6 +887,16 @@
             });
             tempMarker.setMap(map);
         }
+    }
+
+    function authFetch(url, options = {}) {
+        const token = localStorage.getItem('accessToken');
+        // headers 합치기 (혹시 다른 headers도 쓸 수 있으니까!)
+        options.headers = {
+            ...(options.headers || {}),
+            'Authorization': `Bearer ${token}`
+        };
+        return fetch(url, options);
     }
 
 

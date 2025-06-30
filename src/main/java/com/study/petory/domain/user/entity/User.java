@@ -127,4 +127,8 @@ public class User extends TimeFeatureBasedEntity {
 		this.albums.add(album);
 		album.setUser(this);
 	}
+
+	public void setId(Long userId) {
+		this.id = userId;
+	}
 }

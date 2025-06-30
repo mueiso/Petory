@@ -116,7 +116,8 @@ public enum ErrorCode implements BaseCode {
 	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다."),
 
 	//notification
-	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다");
+	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다"),
+	QUERY_PROVIDER_DENIED(HttpStatus.BAD_REQUEST, "query provider가 실행되지 않았습니다.");
 
 	private final HttpStatus httpStatus;
 	private final String message;

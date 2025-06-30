@@ -74,10 +74,15 @@ public class SecurityConfig {
 			.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(auth -> auth
 				// Security 전용 WHITELIST
-				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0])).permitAll()
+				.requestMatchers(securityWhitelist.getUrlWhitelist().toArray(new String[0]))
+				.permitAll()
 				// GET 메서드의 특정 경로 한정 허용
-				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0])).permitAll()
-				.anyRequest().authenticated()
+				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0]))
+				.permitAll()
+				.requestMatchers("/**/*.png", "/**/*.ico", "/**/*.html", "/static/**")
+				.permitAll()
+				.anyRequest()
+				.authenticated()
 			)
 
 			.exceptionHandling(ex -> ex

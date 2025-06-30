@@ -1,5 +1,7 @@
 package com.study.petory.domain.place.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,7 +18,7 @@ import com.study.petory.domain.place.entity.PlaceType;
 public interface PlaceService {
 	PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto);
 
-	Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, Pageable pageable);
+	Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address, Pageable pageable);
 
 	PlaceGetResponseDto findByPlaceId(Long placeId);
 
@@ -29,4 +31,10 @@ public interface PlaceService {
 	Place findPlaceByPlaceId(Long placeId);
 
 	Place findPlaceWithPlaceReviewByPlaceId(Long placeId);
+
+	List<PlaceGetAllResponseDto> findPlaceRank(PlaceType placeType);
+
+	String makeKey(PlaceType placeType);
+
+	PlaceType parsePlaceType(String placeType);
 }

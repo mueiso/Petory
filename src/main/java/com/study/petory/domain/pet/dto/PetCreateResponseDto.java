@@ -3,6 +3,7 @@ package com.study.petory.domain.pet.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.pet.entity.PetSize;
 
 import lombok.AllArgsConstructor;
@@ -27,4 +28,17 @@ public class PetCreateResponseDto {
 	private final List<String> imageUrls;
 
 	private final LocalDateTime createdAt;
+
+	public static PetCreateResponseDto of(Pet pet, List<String> imageUrls) {
+		return new PetCreateResponseDto(
+			pet.getId(),
+			pet.getName(),
+			pet.getSize(),
+			pet.getSpecies(),
+			pet.getGender(),
+			pet.getBirthday(),
+			imageUrls,
+			pet.getCreatedAt()
+		);
+	}
 }

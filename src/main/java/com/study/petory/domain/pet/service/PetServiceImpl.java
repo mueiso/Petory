@@ -73,7 +73,7 @@ public class PetServiceImpl implements PetService {
 	@Transactional(readOnly = true)
 	public PetResponseDto findPet(Long userId, Long petId) {
 
-		Pet pet = petRepository.findById(petId)
+		Pet pet = petRepository.findPetById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 
 		// 본인 소유 아닐 경우 예외 처리
@@ -93,7 +93,7 @@ public class PetServiceImpl implements PetService {
 	@Transactional
 	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images) {
 
-		Pet pet = petRepository.findById(petId)
+		Pet pet = petRepository.findPetById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 
 		if (!pet.isPetOwner(userId)) {
@@ -145,8 +145,6 @@ public class PetServiceImpl implements PetService {
 	public void deletePet(Long userId, Long petId) {
 
 		Pet pet = findPetById(petId);
-
-		User user = userService.findUserById(userId);
 
 		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);

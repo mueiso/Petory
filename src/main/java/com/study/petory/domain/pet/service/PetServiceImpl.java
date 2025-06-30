@@ -3,6 +3,8 @@ package com.study.petory.domain.pet.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +13,7 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
 import com.study.petory.domain.pet.dto.PetResponseDto;
+import com.study.petory.domain.pet.dto.PetGetAllResponseDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
 import com.study.petory.domain.pet.entity.Pet;
@@ -50,6 +53,18 @@ public class PetServiceImpl implements PetService {
 		if (images != null && !images.isEmpty()) {
 			petImageService.uploadAndSaveAll(images, pet);
 		}
+	}
+
+	// 반려동물 목록 전체 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PetGetAllResponseDto> findAllMyPets(Long userId, Pageable pageable) {
+
+		User user = userService.findUserById(userId);
+
+		Page<Pet> pets = petRepository.findAllByUser(user, pageable);
+
+		return pets.map(PetGetAllResponseDto::of);
 	}
 
 	// 반려동물 단건 조회

@@ -37,10 +37,10 @@ public class Pet extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private String name;
 
-	@Column
-	private String size;
-
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private PetSize size;
+
 	@Column
 	private String species;
 
@@ -59,18 +59,18 @@ public class Pet extends TimeFeatureBasedEntity {
 	private User user;
 
 	@Builder
-	public Pet(String name, String size, String species, String gender, String birthday) {
+	public Pet(String name, PetSize size, String species, String gender, String birthday) {
 		this.name = name;
-		this.size =size;
+		this.size = size;
 		this.species = species;
 		this.gender = gender;
 		this.birthday = birthday;
 	}
 
-	public void updatePetInfo(String name, String size, String gender) {
+	public void updatePetInfo(String name, String gender, String birthday) {
 		this.name = name;
-		this.size = size;
 		this.gender = gender;
+		this.birthday = birthday;
 	}
 
 	// 양방향 연관관계 편의 메서드

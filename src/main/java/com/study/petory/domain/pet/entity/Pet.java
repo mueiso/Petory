@@ -80,6 +80,10 @@ public class Pet extends TimeFeatureBasedEntity {
 		image.setPet(this);
 	}
 
+	public boolean isPetOwner(Long userId) {
+		return this.user != null && this.user.isEqualId(userId);
+	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}

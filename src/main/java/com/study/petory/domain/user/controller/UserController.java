@@ -31,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private final UserService userService;
-	private final UserServiceImpl userServiceImpl;
 
 	/**
 	 * [TEST - 로그인]
@@ -100,7 +99,7 @@ public class UserController {
 	public ResponseEntity<CommonResponse<Object>> logout(
 		@RequestHeader("Authorization") String accessToken) {
 
-		userServiceImpl.logout(accessToken);
+		userService.logout(accessToken);
 
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);
 	}

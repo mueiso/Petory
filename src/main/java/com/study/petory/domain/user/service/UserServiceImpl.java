@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	public UserProfileResponseDto findMyProfile(String email) {
 
-		User user = userRepository.findByEmail(email)
+		User user = userRepository.findByEmailWithUserRole(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		validateUserIsNotDeleted(user);
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void updateProfile(String email, UserUpdateRequestDto dto) {
 
-		User user = userRepository.findByEmail(email)
+		User user = userRepository.findByEmailWithUserRole(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		validateUserIsNotDeleted(user);
@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void deleteAccount(String email) {
 
-		User user = userRepository.findByEmail(email)
+		User user = userRepository.findByEmailWithUserRole(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		if (user.getUserStatus() == UserStatus.DELETED) {
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	public User findUserById(Long userId) {
 
-		User user = userRepository.findUserById(userId)
+		User user = userRepository.findByIdWithUserRole(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		validateUserIsNotDeleted(user);
@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User findUserByEmail(String email) {
 
-		User user = userRepository.findByEmail(email)
+		User user = userRepository.findByEmailWithUserRole(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		validateUserIsNotDeleted(user);

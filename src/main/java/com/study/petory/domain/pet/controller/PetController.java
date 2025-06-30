@@ -2,6 +2,10 @@ package com.study.petory.domain.pet.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +24,7 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
+import com.study.petory.domain.pet.dto.PetGetAllResponseDto;
 import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
@@ -54,6 +59,24 @@ public class PetController {
 		petService.savePet(currentUser.getId(), requestDto, images);
 
 		return CommonResponse.of(SuccessCode.CREATED);
+	}
+
+	/**
+	 * [내 반려동물 목록 조회]
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param pageable 최신순 목록 조회
+	 * @return 해당 유저가 등록한 반려동물 전체 목록 페이징 처리되어 반환
+	 */
+	@GetMapping
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	public ResponseEntity<CommonResponse<Page<PetGetAllResponseDto>>> getMyPets(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PageableDefault(page = 0, size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+
+		Page<PetGetAllResponseDto> response = petService.findAllMyPets(currentUser.getId(), pageable);
+
+		return CommonResponse.of(SuccessCode.FOUND, response);
 	}
 
 	/**

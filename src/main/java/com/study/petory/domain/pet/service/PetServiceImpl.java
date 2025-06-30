@@ -29,7 +29,7 @@ public class PetServiceImpl implements PetService {
 	private final PetRepository petRepository;
 	private final PetImageService petImageService;
 
-	// Pet 생성
+	// 펫 등록
 	@Override
 	@Transactional
 	public void savePet(Long userId, PetCreateRequestDto requestDto, List<MultipartFile> images) {
@@ -73,7 +73,7 @@ public class PetServiceImpl implements PetService {
 		return PetResponseDto.of(pet, urls);
 	}
 
-	// 반려동물 정보 수정
+	// 펫 정보 수정
 	@Override
 	@Transactional
 	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images) {
@@ -102,5 +102,35 @@ public class PetServiceImpl implements PetService {
 		pet.updatePetInfo(requestDto.getName(), requestDto.getGender(), requestDto.getBirthday());
 
 		return PetUpdateResponseDto.of(pet, imageUrls);
+	}
+
+	// 펫 삭제
+	@Override
+	@Transactional
+	public void deletePet(Long userId, Long petId) {
+
+		Pet pet = findPetById(petId);
+
+		User user = userService.findUserById(userId);
+
+		if (!pet.isPetOwner(userId)) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);
+		}
+
+		// 이미지 모두 hard delete(S3, DB)
+		List<PetImage> images = pet.getImages();
+
+		for (PetImage image : new ArrayList<>(images)) {
+			petImageService.deleteImage(image);  // S3 이미지 삭제
+			pet.getImages().remove(image);  // DB 이미지 삭제
+		}
+
+		pet.deactivateEntity();
+	}
+
+	@Override
+	public Pet findPetById(Long petId) {
+		return petRepository.findPetById(petId)
+			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND)) ;
 	}
 }

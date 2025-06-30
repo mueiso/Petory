@@ -76,6 +76,8 @@ public class BookmarkPlaceService {
 			case "카페" -> PlaceType.CAFE;
 			case "숙박" -> PlaceType.ACCOMMODATION;
 			case "음식점" -> PlaceType.RESTAURANT;
+			case "BAR" -> PlaceType.BAR;
+			case "캠핑, 야영장" -> PlaceType.CAMPING;
 			default -> PlaceType.ETC;
 		};
 	}

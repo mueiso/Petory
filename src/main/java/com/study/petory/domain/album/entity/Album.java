@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.UpdateBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
@@ -13,7 +14,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +36,8 @@ public class Album extends UpdateBasedEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
@@ -71,5 +72,9 @@ public class Album extends UpdateBasedEntity {
 
 	public String getFirstUrl() {
 		return this.albumImageList.get(0).getUrl();
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

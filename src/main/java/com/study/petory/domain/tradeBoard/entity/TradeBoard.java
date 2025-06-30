@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
@@ -56,6 +57,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 	@Column(nullable = false)
 	private TradeBoardStatus status;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -84,7 +86,7 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 
 	// user 검증 메서드
 	public boolean isOwner(Long userId) {
-		return this.getUser().getId().equals(userId);
+		return this.user != null && this.user.isEqualId(userId);
 	}
 
 	public void addImage(TradeBoardImage image) {
@@ -94,5 +96,9 @@ public class TradeBoard extends TimeFeatureBasedEntity {
 
 	public Long getUserId() {
 		return this.getUser().getId();
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

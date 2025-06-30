@@ -19,7 +19,7 @@ public class PlaceReviewGetResponseDto {
 
 	private PlaceReviewGetResponseDto(PlaceReview placeReview) {
 		this.id = placeReview.getId();
-		this.nickName = placeReview.getUser().getNickname();
+		this.nickName = placeReview.getReviewerNickname();
 		this.content = placeReview.getContent();
 		this.ratio = placeReview.getRatio();
 	}

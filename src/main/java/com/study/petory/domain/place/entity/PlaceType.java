@@ -11,6 +11,8 @@ public enum PlaceType {
 	BEAUTY("애견 미용실"),
 	SCHOOL("애견 유치원"),
 	ACCOMMODATION("숙박"),
+	BAR("주점"),
+	CAMPING("캠핑, 야영장"),
 	ETC("기타");
 
 	private final String displayName;

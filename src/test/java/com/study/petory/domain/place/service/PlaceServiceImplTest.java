@@ -89,19 +89,21 @@ class PlaceServiceImplTest {
 
 		String placeName = null;
 		PlaceType placeType = null;
+		String address = null;
 		Pageable pageable = PageRequest.of(0, 10);
 
 		// 이 테스트에서 PlaceGetAllResponseDto는 테스트 대상이 아니므로 mock 객체로 만들어 사용
 		PlaceGetAllResponseDto dto = mock(PlaceGetAllResponseDto.class);
 		Page<PlaceGetAllResponseDto> page = new PageImpl<>(List.of(dto));
 
-		when(placeRepository.findAllPlace(placeName, placeType, pageable)).thenReturn(page);
+		when(placeRepository.findAllPlace(placeName, placeType, address, pageable)).thenReturn(page);
 
-		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, pageable);
+		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, address,
+			pageable);
 
 		assertAll("파람이 모두 있을 경우 조회 로직 검증",
 			() -> assertEquals(1, findAllPlace.getContent().size()),
-			() -> verify(placeRepository).findAllPlace(placeName, placeType, pageable)
+			() -> verify(placeRepository).findAllPlace(placeName, placeType, address, pageable)
 		);
 	}
 

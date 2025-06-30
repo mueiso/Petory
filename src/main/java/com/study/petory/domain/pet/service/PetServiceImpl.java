@@ -54,6 +54,7 @@ public class PetServiceImpl implements PetService {
 
 	// 펫 단건 조회
 	@Override
+	@Transactional(readOnly = true)
 	public PetResponseDto findPet(Long userId, Long petId) {
 
 		Pet pet = petRepository.findById(petId)
@@ -126,9 +127,27 @@ public class PetServiceImpl implements PetService {
 		pet.deactivateEntity();
 	}
 
+	// 펫 복구
+	@Override
+	@Transactional
+	public void restorePet(Long userId, Long petId) {
+
+		Pet pet = findPetById(petId);
+
+		if (pet.isDeletedAtNull()) {
+			throw new CustomException(ErrorCode.PET_NOT_DELETED);
+		}
+
+		if (!pet.isPetOwner(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
+		pet.restoreEntity();
+	}
+
 	@Override
 	public Pet findPetById(Long petId) {
 		return petRepository.findPetById(petId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND)) ;
+			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 	}
 }

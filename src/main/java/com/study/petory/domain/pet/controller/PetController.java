@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,7 +42,7 @@ public class PetController {
 	 * @param currentUser 로그인 유저
 	 * @param requestDto 이름, 크기, 종, 성별, 생일
 	 * @param images 사진 파일
-	 * @return id, 이름, 크기, 종, 성별, 생일, 생성일
+	 * @return 생성 성공 메시지
 	 */
 	@PostMapping
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -74,7 +75,7 @@ public class PetController {
 	 * [펫 정보 수정]
 	 *
 	 * @param currentUser 로그인 유저
-	 * @param petId 정보 수정 할 반려동물
+	 * @param petId 정보 수정 대상 반려동물
 	 * @param requestDto 이름, 성별, 생일
 	 * @param images 동물 프로필 사진 (선택)
 	 * @return 수정된 내용
@@ -92,6 +93,14 @@ public class PetController {
 		return CommonResponse.of(SuccessCode.UPDATED, response);
 	}
 
+	/**
+	 * [펫 삭제]
+	 * 펫 정보를 soft delete 합니다.
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param petId 정보 삭제 대상 반려동물
+	 * @return 삭제 성공 메시지
+	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{petId}")
 	public ResponseEntity<CommonResponse<Void>> deletePet(
@@ -101,5 +110,23 @@ public class PetController {
 		petService.deletePet(currentUser.getId(), petId);
 
 		return CommonResponse.of(SuccessCode.DELETED);
+	}
+
+	/**
+	 * [펫 복구]
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param petId 복구 대상 반려동물
+	 * @return 복구 성공 메시지
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PatchMapping("/{petId}/restore")
+	public ResponseEntity<CommonResponse<Void>> restorePet(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long petId) {
+
+		petService.restorePet(currentUser.getId(), petId);
+
+		return CommonResponse.of(SuccessCode.RESTORED);
 	}
 }

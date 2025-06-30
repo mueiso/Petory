@@ -37,6 +37,7 @@ public enum ErrorCode implements BaseCode {
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),
+	PET_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 반려동물 정보입니다."),
 
 	// Album
 	ALBUM_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),

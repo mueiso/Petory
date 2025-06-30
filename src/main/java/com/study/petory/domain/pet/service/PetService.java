@@ -20,5 +20,7 @@ public interface PetService {
 
 	void deletePet(Long userId, Long petId);
 
+	void restorePet(Long userId, Long petId);
+
 	Pet findPetById(Long petId);
 }

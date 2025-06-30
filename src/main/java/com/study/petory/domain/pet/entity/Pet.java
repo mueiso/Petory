@@ -77,12 +77,6 @@ public class Pet extends TimeFeatureBasedEntity {
 		this.birthday = birthday;
 	}
 
-	// 양방향 연관관계 편의 메서드
-	public void addImage(PetImage image) {
-		images.add(image);
-		image.setPet(this);
-	}
-
 	public boolean isPetOwner(Long userId) {
 		return this.user != null && this.user.isEqualId(userId);
 	}

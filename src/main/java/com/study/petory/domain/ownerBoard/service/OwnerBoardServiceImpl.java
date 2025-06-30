@@ -70,13 +70,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		ownerBoardRepository.save(ownerBoard);
 
-		List<String> urls = new ArrayList<>();
-
-		if (images != null && !images.isEmpty()) {
-			urls = ownerBoardImageService.uploadAndSaveAll(images, ownerBoard);
-		}
-
-		return OwnerBoardCreateResponseDto.of(ownerBoard, urls);
+		return OwnerBoardCreateResponseDto.of(ownerBoard, ownerBoardImageService.uploadAndSaveAll(images, ownerBoard));
 	}
 
 	// 게시글 전체 조회

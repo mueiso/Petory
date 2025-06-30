@@ -27,7 +27,8 @@ public class SecurityWhitelist {
 			"/ws-chat",
 			"/ws-chat/**",
 			"/test/**",
-			"/calendar/fullcalendar_petory.html"
+			"/calendar.html"
+
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

@@ -36,8 +36,11 @@ public class OwnerBoardQueryRepositoryImpl implements OwnerBoardQueryRepository 
 	@Override
 	public Page<OwnerBoard> findAllByTitleOptional(String title, Pageable pageable) {
 
-		BooleanExpression condition = (title != null && !title.isBlank())
-			? ownerBoard.title.contains(title).and(notDeleted()) : notDeleted();
+		BooleanExpression condition = notDeleted();
+
+		if (title != null && !title.isBlank()) {
+			condition = ownerBoard.title.contains(title).and(notDeleted());
+		}
 
 		// 1. ID 먼저 조회
 		List<Long> boardIds = queryFactory

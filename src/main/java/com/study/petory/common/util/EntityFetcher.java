@@ -6,8 +6,6 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.repository.AlbumRepository;
-import com.study.petory.domain.calender.entity.Calender;
-import com.study.petory.domain.calender.repository.CalenderRepository;
 import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
 import com.study.petory.domain.dailyQna.repository.QuestionRepository;
 import com.study.petory.domain.faq.entity.Faq;
@@ -33,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class EntityFetcher {
 
 	private final AlbumRepository albumRepository;
-	private final CalenderRepository calenderRepository;
 	private final DailyQnaRepository dailyQnaRepository;
 	private final FaqRepository faqRepository;
 	private final FeedbackRepository feedbackRepository;
@@ -47,11 +44,6 @@ public class EntityFetcher {
 	public Album findAlbumByAlbumId(Long albumId) {
 		return albumRepository.findById(albumId)
 			.orElseThrow(() -> new CustomException(ErrorCode.ALBUM_NOT_FOUND));
-	}
-
-	public Calender findCalenderByCalenderId(Long calenderId) {
-		return calenderRepository.findById(calenderId)
-			.orElseThrow(() -> new CustomException(ErrorCode.CALENDER_NOT_FOUND));
 	}
 
 	public Faq findFaqByFaqId(Long faqId) {

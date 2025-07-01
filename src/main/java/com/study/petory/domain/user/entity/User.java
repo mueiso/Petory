@@ -133,6 +133,10 @@ public class User extends TimeFeatureBasedEntity {
 		album.setUser(this);
 	}
 
+	public User(Long id) {
+		this.id = id;
+	}
+
 	public void addPet(Pet pet) {
 		this.pets.add(pet);
 		pet.setUser(this);

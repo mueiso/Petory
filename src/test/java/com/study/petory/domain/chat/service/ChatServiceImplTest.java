@@ -130,7 +130,7 @@ class ChatServiceImplTest {
 		ReflectionTestUtils.setField(chatRoom2, "id", new ObjectId());
 		chatRooms.add(chatRoom2);
 
-		when(chatAggregateRepository.findChatRoomsByUserId(loginUserId, pageable)).thenReturn(chatRooms);
+		when(chatRepository.findChatRoomsByUserId(eq(loginUserId), eq(pageable))).thenReturn(chatRooms);
 
 		// when
 		List<ChatRoomGetAllResponseDto> responseDto = chatService.findAllChatRoom(loginUserId, pageable);
@@ -179,5 +179,25 @@ class ChatServiceImplTest {
 
 		assertThat(responseDto.getMessages()).hasSize(1);
 		assertThat(responseDto.getMessages().get(0).getContent()).isEqualTo("안녕");
+	}
+
+	@Test
+	void 채팅방_나가기에_성공한다() {
+		//given
+		String chatRoomId = new ObjectId().toHexString();
+
+		ChatRoom chatRoom = ChatRoom.builder()
+			.tradeBoardId(1L)
+			.sellerId(1L)
+			.customerId(2L)
+			.build();
+
+		ReflectionTestUtils.setField(chatRoom, "id", new ObjectId(chatRoomId));
+
+		//when
+		chatRoom.leaveChatRoom(1L);
+
+		//then
+		assertThat(chatRoom.isSellerExist()).isEqualTo(false);
 	}
 }

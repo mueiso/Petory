@@ -207,6 +207,8 @@ class AuthServiceImplTest {
 		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 	}
 
+
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

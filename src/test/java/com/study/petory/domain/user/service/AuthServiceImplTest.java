@@ -212,30 +212,50 @@ class AuthServiceImplTest {
 	@Test
 	void reissue_refreshToken_정상_재발급_성공() {
 
-		// given - 테스트용 user 객체 생성
+		/* [given]
+		 * 테스트용 user 객체 생성
+		 * ID 세팅
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
-		ReflectionTestUtils.setField(user, "id", 100L); // ID 세팅
+		ReflectionTestUtils.setField(user, "id", 100L);
 
-		String expiredAccessToken = "expired-access-token";      // 만료된 AccessToken
-		String refreshTokenWithBearer = "Bearer valid-refresh-token"; // Bearer 포함된 refreshToken
-		String pureRefreshToken = "valid-refresh-token";          // Bearer 제거된 토큰
+		/*
+		 * 만료된 AccessToken
+		 * Bearer 포함된 refreshToken
+		 * Bearer 제거된 토큰
+		 */
+		String expiredAccessToken = "expired-access-token";
+		String refreshTokenWithBearer = "Bearer valid-refresh-token";
+		String pureRefreshToken = "valid-refresh-token";
 		Long userId = 100L;
 
-		// mock 설정
-		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true); // AccessToken 만료 상태
-		given(jwtProvider.subStringToken(refreshTokenWithBearer)).willReturn(pureRefreshToken); // Bearer 제거
+		/*
+		 * mock 설정 - AccessToken 만료 상태
+		 * mock 설정 - Bearer 제거
+		 * mock 설정 - Claims 에서 userId 추출
+		 * mock 설정 - refreshToken 유효성 확인
+		 * mock 설정 - 유저 조회
+		 * mock 설정 - 새 AccessToken 생성
+		 * mock 설정 - 새 RefreshToken 생성
+		 */
+		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true);
+		given(jwtProvider.subStringToken(refreshTokenWithBearer)).willReturn(pureRefreshToken);
 		given(jwtProvider.getClaims(pureRefreshToken)).willReturn(
-			Jwts.claims().setSubject(String.valueOf(userId))); // Claims에서 userId 추출
-		given(jwtProvider.isValidRefreshToken(userId, pureRefreshToken)).willReturn(true); // refreshToken 유효성 확인
-		given(userService.findUserById(userId)).willReturn(user); // 유저 조회
+			Jwts.claims().setSubject(String.valueOf(userId)));
+		given(jwtProvider.isValidRefreshToken(userId, pureRefreshToken)).willReturn(true);
+		given(userService.findUserById(userId)).willReturn(user);
 		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn(
-			"new-access-token"); // 새 AccessToken 생성
-		given(jwtProvider.createRefreshToken(userId)).willReturn("new-refresh-token"); // 새 RefreshToken 생성
+			"new-access-token");
+		given(jwtProvider.createRefreshToken(userId)).willReturn("new-refresh-token");
 
-		// when - 재발급 요청
+		/* [when]
+		 * 재발급 요청
+		 */
 		TokenResponseDto result = authService.reissue(expiredAccessToken, refreshTokenWithBearer);
 
-		// then - 토큰 재발급 결과 검증
+		/* [then]
+		 * 토큰 재발급 결과 검증
+		 */
 		assertThat(result).isNotNull();
 		assertThat(result.getAccessToken()).isEqualTo("new-access-token");
 		assertThat(result.getRefreshToken()).isEqualTo("new-refresh-token");

@@ -8,6 +8,5 @@ public interface UserCustomRepository {
 
 	Optional<User> findByEmailWithUserRole(String email);
 
-	// userRole, userPrivateInfo 모두 필요 없는 경우
 	Optional<User> findByIdWithUserRole(Long id);
 }

@@ -261,6 +261,34 @@ class AuthServiceImplTest {
 		assertThat(result.getRefreshToken()).isEqualTo("new-refresh-token");
 	}
 
+	@Test
+	void reissue_refreshToken_유효하지_않으면_예외발생() {
+
+		// given - 테스트용 user 생성
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 200L);
+
+		String expiredAccessToken = "expired-access-token";
+		String refreshTokenWithBearer = "Bearer invalid-refresh-token";
+		String pureRefreshToken = "invalid-refresh-token";
+		Long userId = 200L;
+
+		// mock 설정
+		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true); // accessToken 만료 상태
+		given(jwtProvider.subStringToken(refreshTokenWithBearer)).willReturn(pureRefreshToken); // Bearer 제거
+		given(jwtProvider.getClaims(pureRefreshToken)).willReturn(Jwts.claims().setSubject(String.valueOf(userId))); // userId 추출
+		given(jwtProvider.isValidRefreshToken(userId, pureRefreshToken)).willReturn(false); // 유효하지 않은 토큰
+
+		// when - 토큰 재발급 시도
+		CustomException exception = catchThrowableOfType(() ->
+				authService.reissue(expiredAccessToken, refreshTokenWithBearer),
+			CustomException.class
+		);
+
+		// then - INVALID_TOKEN 예외 발생 확인
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.INVALID_TOKEN);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

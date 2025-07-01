@@ -44,8 +44,8 @@ class OAuth2SuccessHandlerTest {
 	@Test
 	void onAuthenticationSuccess_소셜로그인_성공시_토큰_JSON_응답처리() throws Exception {
 
-		/*
-		 * [given]
+		/* [given]
+		 *
 		 * OAuth2 인증 사용자 속성 미리 구성 (이메일, 닉네임)
 		 */
 		Map<String, Object> attributes = new HashMap<>();
@@ -81,23 +81,38 @@ class OAuth2SuccessHandlerTest {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 
+		// response.getWriter()가 호출되면 내가 만든 printWriter 를 반환하도록 설정
 		when(response.getWriter()).thenReturn(printWriter);
 
-		// when
+		/* [when]
+		 * 실제 테스트 대상인 OAuth2SuccessHandler 의 onAuthenticationSuccess 메서드 실행
+		 */
 		oAuth2SuccessHandler.onAuthenticationSuccess(request, response, authentication);
 
-		// then
+		/* [then]
+		 * issueToken 메서드가 1회 호출되었는지 검증 (사용자 정보로 토큰 발급 수행)
+		 * 응답 상태가 200 OK 로 설정되었는지 확인
+		 * Content-Type 이 JSON 이고 UTF-8 인코딩인지 확인
+		 */
 		verify(authServiceImpl).issueToken(any(User.class));
 		verify(response).setStatus(HttpServletResponse.SC_OK);
 		verify(response).setContentType("application/json;charset=UTF-8");
 
+		// printWriter 에 실제 응답 데이터 쓰기 위해 flush 수행
 		printWriter.flush();
 
-		// 응답 문자열 JSON 으로 검증
-		ObjectMapper mapper = new ObjectMapper();
+		/*
+		 * 응답 결과로 출력된 문자열(JSON)을 읽어오고
+		 * JSON 문자열을 다시 TokenResponseDto 객체로 역직렬화 (검증을 위해)
+		 */
 		String responseJson = stringWriter.toString();
+		ObjectMapper mapper = new ObjectMapper();
 		TokenResponseDto result = mapper.readValue(responseJson, TokenResponseDto.class);
 
+		/*
+		 * AccessToken 값이 예상한 값과 일치하는지 검증
+		 * RefreshToken 값이 예상한 값과 일치하는지 검증
+		 */
 		assertEquals("accessTokenValue", result.getAccessToken());
 		assertEquals("refreshTokenValue", result.getRefreshToken());
 	}

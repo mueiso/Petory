@@ -57,15 +57,4 @@ public class AlbumImageServiceImpl extends AbstractImageService<AlbumImage> {
 	protected String getImageUrl(AlbumImage image) {
 		return image.getUrl();
 	}
-
-	public int findImageSize(List<UserRole> userRole) {
-		int imageSize = 1;
-		if (userRole.contains(Role.USER)) {
-			imageSize = 1;
-		}
-		if (userRole.contains(Role.ADMIN)) {
-			imageSize = 5;
-		}
-		return imageSize;
-	}
 }

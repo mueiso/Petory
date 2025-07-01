@@ -10,14 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserStatus;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-
-	@EntityGraph(attributePaths = {"userRole"})
-	Optional<User> findByEmail(String email);
-
-	// userRole, userPrivateInfo 모두 필요 없는 경우
-	@EntityGraph(attributePaths = {"userRole"})
-	Optional<User> findUserById(Long id);
+public interface UserRepository extends JpaRepository<User, Long>, UserCustomRepository {
 
 	// UserStatus 가 DEACTIVATED + deletedAt 85일~90일 사이인 사용자 (hard delete 예정자 조회용)
 	List<User> findByUserStatusAndDeletedAtBetween(UserStatus userStatus, LocalDateTime from, LocalDateTime to);

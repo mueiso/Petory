@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,7 +113,7 @@ public class AuthController {
 	 * @return 복구 성공 메시지
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/restore")
+	@PatchMapping("/restore")
 	public ResponseEntity<CommonResponse<Object>> restoreUser(
 		@RequestParam Long targetUserId) {
 

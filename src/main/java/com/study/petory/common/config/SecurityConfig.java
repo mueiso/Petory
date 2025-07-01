@@ -65,7 +65,6 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http, RateLimitFilter rateLimitFilter) throws Exception {
 		http
-			// TODO - 배포 전 확인 필요
 			// CORS 설정 적용
 			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.csrf(AbstractHttpConfigurer::disable)
@@ -78,8 +77,6 @@ public class SecurityConfig {
 				.permitAll()
 				// GET 메서드의 특정 경로 한정 허용
 				.requestMatchers(HttpMethod.GET, securityWhitelist.getPermitGetPrefixList().toArray(new String[0]))
-				.permitAll()
-				.requestMatchers("/**/*.png", "/**/*.ico", "/**/*.html", "/static/**")
 				.permitAll()
 				.anyRequest()
 				.authenticated()

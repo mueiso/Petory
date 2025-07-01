@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
+import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.tradeBoard.entity.TradeBoard;
 
 import jakarta.persistence.CascadeType;
@@ -77,6 +78,10 @@ public class User extends TimeFeatureBasedEntity {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Album> albums = new ArrayList<>();
 
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<Pet> pets = new ArrayList<>();
+
 	@Builder
 	public User(String nickname, String email, UserPrivateInfo userPrivateInfo, List<UserRole> userRole) {
 		this.email = email;
@@ -126,5 +131,10 @@ public class User extends TimeFeatureBasedEntity {
 	public void addAlbum(Album album) {
 		this.albums.add(album);
 		album.setUser(this);
+	}
+
+	public void addPet(Pet pet) {
+		this.pets.add(pet);
+		pet.setUser(this);
 	}
 }

@@ -1,6 +1,6 @@
 package com.study.petory.common.config;
 
-import static com.study.petory.common.util.DateUtil.*;
+import static com.study.petory.common.util.CustomDateUtil.*;
 
 import java.time.Duration;
 

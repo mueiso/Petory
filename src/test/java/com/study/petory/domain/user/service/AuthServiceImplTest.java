@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -374,6 +375,24 @@ class AuthServiceImplTest {
 		assertThat(result.getRefreshToken()).isEqualTo("new-refresh-token");
 	}
 
+	@Test
+	void addRoleToUser_새로운_권한_추가_성공() {
+
+		// given - USER 권한을 가진 유저 생성
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 10L); // id 설정
+
+		// mock: userId로 사용자 조회 시 해당 user 반환
+		given(userService.findUserById(user.getId())).willReturn(user);
+
+		// when - 아직 없는 ADMIN 권한 추가
+		List<Role> roles = authService.addRoleToUser(user.getId(), Role.ADMIN);
+
+		// then - 권한 목록에 ADMIN이 포함되어 있는지 확인
+		assertThat(roles).contains(Role.ADMIN);
+		assertThat(roles).hasSize(2); // 기존 USER + 새로 추가된 ADMIN
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 
@@ -387,7 +406,7 @@ class AuthServiceImplTest {
 			.nickname("닉네임")
 			.email("test@email.com")
 			.userPrivateInfo(privateInfo)
-			.userRole(List.of(UserRole.builder().role(Role.USER).build()))
+			.userRole(new ArrayList<>(List.of(UserRole.builder().role(Role.USER).build())))
 			.build();
 
 		// 전달받은 상태로 userStatus 설정

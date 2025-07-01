@@ -147,20 +147,26 @@ class AuthServiceImplTest {
 	@Test
 	void issueToken_아이디_null이면_예외발생() {
 
-		// given - ID가 null인 유저 객체를 ACTIVE 상태로 생성
-		User user = createUserWithStatus(UserStatus.ACTIVE); // 정상 상태의 유저
-		// ID는 설정하지 않아서 기본적으로 null 상태
+		/* [given]
+		 * ID가 null 인 유저 객체를 ACTIVE 상태로 생성 (ID는 설정하지 않아서 기본적으로 null 상태)
+		 */
+		User user = createUserWithStatus(UserStatus.ACTIVE);
 
 		// mock 설정 - 이메일로 유저 조회 시 위 유저 반환
 		given(userService.findUserByEmail(anyString())).willReturn(user);
 
-		// when - 토큰 발급 시도 → ID가 없으므로 예외 발생 예상
+		/* [when]
+		 * 토큰 발급 시도
+		 * ID 가 없으므로 예외 발생
+		 */
 		CustomException exception = catchThrowableOfType(
-			() -> authService.issueToken(user), // 토큰 발급 시도
-			CustomException.class // CustomException 타입 예외 포착
+			() -> authService.issueToken(user),
+			CustomException.class
 		);
 
-		// then - USER_ID_NOT_GENERATED 예외 코드 검증
+		/* [then]
+		 * USER_ID_NOT_GENERATED 예외 코드 검증
+		 */
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_ID_NOT_GENERATED);
 	}
 

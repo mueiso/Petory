@@ -11,8 +11,10 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceImage;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.entity.QPlace;
+import com.study.petory.domain.place.entity.QPlaceImage;
 import com.study.petory.domain.place.entity.QPlaceReview;
 import com.study.petory.domain.user.entity.QUser;
 
@@ -28,6 +30,8 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 	private final QPlaceReview qPlaceReview = QPlaceReview.placeReview;
 
 	private final QUser qUser = QUser.user;
+
+	private final QPlaceImage qPlaceImage = QPlaceImage.placeImage;
 
 	@Override
 	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address,
@@ -49,6 +53,7 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 
 		List<Place> placeList = jpaQueryFactory
 			.selectFrom(qPlace)
+			.leftJoin(qPlace.images, qPlaceImage).fetchJoin()
 			.where(booleanBuilder)
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize())
@@ -61,19 +66,33 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 			.fetchOne();
 
 		List<PlaceGetAllResponseDto> dtoList = placeList.stream()
-			.map(PlaceGetAllResponseDto::from)
+			.map(place -> {
+				List<String> imageUrls = place.getImages().stream()
+					.map(PlaceImage::getUrl)
+					.toList();
+				return PlaceGetAllResponseDto.of(place, imageUrls);
+			})
 			.toList();
 
 		return new PageImpl<>(dtoList, pageable, total == null ? 0 : total);
 	}
 
 	@Override
-	public Optional<Place> findWithReviewListById(Long id) {
+	public Optional<Place> findWithReviewListByPlaceId(Long placeId) {
 		return Optional.ofNullable(jpaQueryFactory
 			.selectFrom(qPlace)
 			.leftJoin(qPlace.placeReviewList, qPlaceReview).fetchJoin()
 			.leftJoin(qPlaceReview.user, qUser).fetchJoin()
-			.where(qPlace.id.eq(id))
+			.where(qPlace.id.eq(placeId))
 			.fetchOne());
+	}
+
+	@Override
+	public List<Place> findAllById(List<Long> placeIdList) {
+		return jpaQueryFactory
+			.selectFrom(qPlace)
+			.leftJoin(qPlace.images, qPlaceImage).fetchJoin()
+			.where(qPlace.id.in(placeIdList))
+			.fetch();
 	}
 }

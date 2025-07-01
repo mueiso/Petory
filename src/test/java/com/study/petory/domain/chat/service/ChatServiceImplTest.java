@@ -178,6 +178,6 @@ class ChatServiceImplTest {
 		assertThat(responseDto.getSellerId()).isEqualTo(chatRoom.getSellerId());
 
 		assertThat(responseDto.getMessages()).hasSize(1);
-		assertThat(responseDto.getMessages().get(0).getMessage()).isEqualTo("안녕");
+		assertThat(responseDto.getMessages().get(0).getContent()).isEqualTo("안녕");
 	}
 }

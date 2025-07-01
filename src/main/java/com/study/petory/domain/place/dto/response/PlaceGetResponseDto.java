@@ -23,7 +23,7 @@ public class PlaceGetResponseDto {
 
 	private final BigDecimal ratio;
 
-	// private final String photoList; // 이부분도 CreateResponseDto랑 비슷하게 하면 될듯
+	private final List<String> imageUrls;
 
 	private final BigDecimal latitude;
 
@@ -33,20 +33,23 @@ public class PlaceGetResponseDto {
 
 	private final Long likeCount;
 
-	private PlaceGetResponseDto(Place place, List<PlaceReviewGetResponseDto> placeReviewGetResponseDto) {
+	private PlaceGetResponseDto(Place place, List<String> imageUrls,
+		List<PlaceReviewGetResponseDto> placeReviewGetResponseDto) {
 		this.id = place.getId();
 		this.placeName = place.getPlaceName();
 		this.placeInfo = place.getPlaceInfo();
 		this.placeType = place.getPlaceType();
 		this.address = place.getAddress();
 		this.ratio = place.getRatio();
+		this.imageUrls = imageUrls;
 		this.latitude = place.getLatitude();
 		this.longitude = place.getLongitude();
 		this.placeReviewList = placeReviewGetResponseDto;
 		this.likeCount = place.getLikeCount();
 	}
 
-	public static PlaceGetResponseDto from(Place place, List<PlaceReviewGetResponseDto> placeReviewGetResponseDto) {
-		return new PlaceGetResponseDto(place, placeReviewGetResponseDto);
+	public static PlaceGetResponseDto of(Place place, List<String> imageUrls,
+		List<PlaceReviewGetResponseDto> placeReviewGetResponseDto) {
+		return new PlaceGetResponseDto(place, imageUrls, placeReviewGetResponseDto);
 	}
 }

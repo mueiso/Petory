@@ -22,6 +22,7 @@ import com.study.petory.domain.dailyQna.dto.response.QuestionGetDeletedResponseD
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetInactiveResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetOneResponseDto;
 import com.study.petory.domain.dailyQna.dto.response.QuestionGetTodayResponseDto;
+import com.study.petory.domain.dailyQna.entity.DailyQnaStatus;
 import com.study.petory.domain.dailyQna.entity.Question;
 import com.study.petory.domain.dailyQna.entity.QuestionStatus;
 import com.study.petory.domain.dailyQna.repository.QuestionRepository;
@@ -59,7 +60,9 @@ public class QuestionServiceImpl implements QuestionService {
 	// 질문 단건 조회 admin
 	@Override
 	public QuestionGetOneResponseDto findOneQuestion(Long questionId) {
-		Question question = findQuestionByIdAndStatus(activeAndInactiveStatus(), questionId);
+		List<QuestionStatus> activeAndInactiveStatus = List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE);
+
+		Question question = findQuestionByIdAndStatus(activeAndInactiveStatus, questionId);
 		return QuestionGetOneResponseDto.from(question);
 	}
 
@@ -78,7 +81,9 @@ public class QuestionServiceImpl implements QuestionService {
 	@Transactional
 	@CacheEvict(value = "todayQuestion", allEntries = true)
 	public void updateQuestion(Long questionId, QuestionUpdateRequestDto request) {
-		Question question = findQuestionByIdAndStatus(activeAndInactiveStatus(), questionId);
+		List<QuestionStatus> activeAndInactiveStatus = List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE);
+
+		Question question = findQuestionByIdAndStatus(activeAndInactiveStatus, questionId);
 
 		if (questionRepository.existsByDate(request.getDate()) && !question.getDate().equals(request.getDate())) {
 			throw new CustomException(ErrorCode.DATE_IS_EXIST);
@@ -95,14 +100,18 @@ public class QuestionServiceImpl implements QuestionService {
 		if (findQuestionStatusById(questionId).equals(QuestionStatus.INACTIVE)) {
 			throw new CustomException(ErrorCode.QUESTION_IS_DEACTIVATED);
 		}
-		Question question = findQuestionByIdAndStatus(activeStatus(), questionId);
+		List<QuestionStatus> activeStatus = List.of(QuestionStatus.ACTIVE);
+
+		Question question = findQuestionByIdAndStatus(activeStatus, questionId);
 		question.updateStatusInactive();
 	}
 
 	// 비활성화 된 질문 조회 admin
 	@Override
 	public Page<QuestionGetInactiveResponseDto> findInactiveQuestion(Pageable pageable) {
-		Page<Question> questionPage = questionRepository.findQuestionPageByStatus(inactiveStatus(), pageable);
+		List<QuestionStatus> inactiveStatus = List.of(QuestionStatus.INACTIVE);
+
+		Page<Question> questionPage = questionRepository.findQuestionPageByStatus(inactiveStatus, pageable);
 		return questionPage
 			.map(QuestionGetInactiveResponseDto::from);
 	}
@@ -114,7 +123,9 @@ public class QuestionServiceImpl implements QuestionService {
 		if (findQuestionStatusById(questionId).equals(QuestionStatus.ACTIVE)) {
 			throw new CustomException(ErrorCode.QUESTION_IS_NOT_DEACTIVATED);
 		}
-		Question question = findQuestionByIdAndStatus(inactiveStatus(), questionId);
+		List<QuestionStatus> inactiveStatus = List.of(QuestionStatus.INACTIVE);
+
+		Question question = findQuestionByIdAndStatus(inactiveStatus, questionId);
 		question.updateStatusActive();
 	}
 
@@ -125,7 +136,9 @@ public class QuestionServiceImpl implements QuestionService {
 		if (findQuestionStatusById(questionId).equals(QuestionStatus.DELETED)) {
 			throw new CustomException(ErrorCode.QUESTION_IS_DELETED);
 		}
-		Question question = findQuestionByIdAndStatus(activeAndInactiveStatus(), questionId);
+		List<QuestionStatus> activeAndInactiveStatus = List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE);
+
+		Question question = findQuestionByIdAndStatus(activeAndInactiveStatus, questionId);
 
 		question.deactivateEntity();
 		question.updateStatusDelete();
@@ -138,8 +151,9 @@ public class QuestionServiceImpl implements QuestionService {
 		if (!findQuestionStatusById(questionId).equals(QuestionStatus.DELETED)) {
 			throw new CustomException(ErrorCode.QUESTION_IS_NOT_DELETED);
 		}
+		List<QuestionStatus> deleteStatus = List.of(QuestionStatus.DELETED);
 
-		Question question = findQuestionByIdAndStatus(deleteStatus(), questionId);
+		Question question = findQuestionByIdAndStatus(deleteStatus, questionId);
 
 		question.restoreEntity();
 		question.updateStatusActive();
@@ -148,7 +162,9 @@ public class QuestionServiceImpl implements QuestionService {
 	// 관리자가 삭제된 질문 조회 admin
 	@Override
 	public Page<QuestionGetDeletedResponseDto> findQuestionByDeleted(Pageable pageable) {
-		Page<Question> questionList = questionRepository.findQuestionPageByStatus(deleteStatus(), pageable);
+		List<QuestionStatus> deleteStatus = List.of(QuestionStatus.DELETED);
+
+		Page<Question> questionList = questionRepository.findQuestionPageByStatus(deleteStatus, pageable);
 		return questionList.map(QuestionGetDeletedResponseDto::from);
 	}
 
@@ -189,21 +205,5 @@ public class QuestionServiceImpl implements QuestionService {
 	public QuestionStatus findQuestionStatusById(Long questionId) {
 		return questionRepository.findQuestionStatusById(questionId)
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
-	}
-
-	public List<QuestionStatus> activeStatus() {
-		return List.of(QuestionStatus.ACTIVE);
-	}
-
-	public List<QuestionStatus> inactiveStatus() {
-		return List.of(QuestionStatus.INACTIVE);
-	}
-
-	public List<QuestionStatus> deleteStatus() {
-		return List.of(QuestionStatus.DELETED);
-	}
-
-	public List<QuestionStatus> activeAndInactiveStatus() {
-		return List.of(QuestionStatus.ACTIVE, QuestionStatus.INACTIVE);
 	}
 }

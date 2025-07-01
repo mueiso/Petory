@@ -71,7 +71,9 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	@Override
 	@Transactional
 	public void updateDailyQna(Long userId, Long dailyQnaId, DailyQnaUpdateRequestDto requestDto) {
-		DailyQna dailyQna = findDailyQnaByStatusAndId(activeStatus(), dailyQnaId);
+		List<DailyQnaStatus> activeStatus = List.of(DailyQnaStatus.ACTIVE);
+
+		DailyQna dailyQna = findDailyQnaByStatusAndId(activeStatus, dailyQnaId);
 		validateAuthor(userId, dailyQna);
 		dailyQna.updateDailyQna(requestDto.getAnswer());
 	}
@@ -83,7 +85,9 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		if (findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.HIDDEN)) {
 			throw new CustomException(ErrorCode.DAILY_QNA_IS_HIDDEN);
 		}
-		DailyQna dailyQna = findDailyQnaByStatusAndId(activeStatus(), dailyQnaId);
+		List<DailyQnaStatus> activeStatus = List.of(DailyQnaStatus.ACTIVE);
+
+		DailyQna dailyQna = findDailyQnaByStatusAndId(activeStatus, dailyQnaId);
 		validateAuthor(userId, dailyQna);
 		dailyQna.updateStatusHidden();
 	}
@@ -104,7 +108,10 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		if (!findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.HIDDEN)) {
 			throw new CustomException(ErrorCode.DAILY_QNA_IS_NOT_HIDDEN);
 		}
-		DailyQna dailyQna = findDailyQnaByStatusAndId(hiddenStatus(), dailyQnaId);
+
+		List<DailyQnaStatus> hiddenStatus = List.of(DailyQnaStatus.HIDDEN);
+
+		DailyQna dailyQna = findDailyQnaByStatusAndId(hiddenStatus, dailyQnaId);
 		validateAuthor(userId, dailyQna);
 		dailyQna.updateStatusActive();
 	}
@@ -116,7 +123,10 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		if (findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.DELETED)) {
 			throw new CustomException(ErrorCode.DAILY_QNA_IS_DELETED);
 		}
-		DailyQna dailyQna = findDailyQnaByStatusAndId(activeAndHiddenStatus(), dailyQnaId);
+
+		List<DailyQnaStatus> activeAndHiddenStatus = List.of(DailyQnaStatus.ACTIVE, DailyQnaStatus.HIDDEN);
+
+		DailyQna dailyQna = findDailyQnaByStatusAndId(activeAndHiddenStatus, dailyQnaId);
 		dailyQna.deactivateEntity();
 		dailyQna.updateStatusDelete();
 	}
@@ -137,7 +147,10 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 		if (!findDailyQnaStatusById(dailyQnaId).equals(DailyQnaStatus.DELETED)) {
 			throw new CustomException(ErrorCode.DAILY_QNA_IS_NOT_DELETED);
 		}
-		DailyQna dailyQna = findDailyQnaByStatusAndId(deleteStatus(), dailyQnaId);
+
+		List<DailyQnaStatus> deleteStatus = List.of(DailyQnaStatus.DELETED);
+
+		DailyQna dailyQna = findDailyQnaByStatusAndId(deleteStatus, dailyQnaId);
 		dailyQna.updateStatusActive();
 		dailyQna.restoreEntity();
 	}
@@ -162,21 +175,5 @@ public class DailyQnaServiceImpl implements DailyQnaService{
 	public DailyQnaStatus findDailyQnaStatusById(Long dailyQnaId) {
 		return dailyQnaRepository.findDailyQnaStatusById(dailyQnaId)
 			.orElseThrow(() -> new CustomException(ErrorCode.QUESTION_NOT_FOUND));
-	}
-
-	public List<DailyQnaStatus> activeStatus() {
-		return List.of(DailyQnaStatus.ACTIVE);
-	}
-
-	public List<DailyQnaStatus> hiddenStatus() {
-		return List.of(DailyQnaStatus.HIDDEN);
-	}
-
-	public List<DailyQnaStatus> deleteStatus() {
-		return List.of(DailyQnaStatus.DELETED);
-	}
-
-	public List<DailyQnaStatus> activeAndHiddenStatus() {
-		return List.of(DailyQnaStatus.ACTIVE, DailyQnaStatus.HIDDEN);
 	}
 }

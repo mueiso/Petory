@@ -17,8 +17,10 @@ public enum ErrorCode implements BaseCode {
 	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
 	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
 	TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "요청이 너무 많습니다."),
+	LAZY_LOADING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Lazy 로딩 문제가 발생했습니다."),
 	DATE_TIME_PARSE_FAIL(HttpStatus.BAD_REQUEST, "날짜 형식이 올바르지 않습니다."),
 	DATE_TIME_IS_NULL(HttpStatus.BAD_REQUEST, "잘못된 파라미터 요청입니다."),
+
 
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
@@ -39,6 +41,7 @@ public enum ErrorCode implements BaseCode {
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),
+	PET_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 반려동물 정보입니다."),
 
 	// Album
 	ALBUM_NOT_FOUND(HttpStatus.NOT_FOUND, "앨범에 사진이 존재하지 않습니다."),
@@ -116,7 +119,8 @@ public enum ErrorCode implements BaseCode {
 	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다."),
 
 	//notification
-	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다");
+	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다"),
+	QUERY_PROVIDER_DENIED(HttpStatus.BAD_REQUEST, "query provider가 실행되지 않았습니다.");
 
 	private final HttpStatus httpStatus;
 	private final String message;

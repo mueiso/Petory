@@ -11,7 +11,7 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
-import com.study.petory.domain.user.dto.UpdateUserRequestDto;
+import com.study.petory.domain.user.dto.UserUpdateRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
@@ -66,8 +66,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	public UserProfileResponseDto findMyProfile(String email) {
 
-		User user = userRepository.findByEmail(email)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = findUserByEmail(email);
 
 		validateUserIsNotDeleted(user);
 
@@ -85,10 +84,9 @@ public class UserServiceImpl implements UserService {
 	// 사용자 정보 업데이트
 	@Override
 	@Transactional
-	public void updateProfile(String email, UpdateUserRequestDto dto) {
+	public void updateProfile(String email, UserUpdateRequestDto dto) {
 
-		User user = userRepository.findByEmail(email)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = findUserByEmail(email);
 
 		validateUserIsNotDeleted(user);
 
@@ -129,8 +127,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void deleteAccount(String email) {
 
-		User user = userRepository.findByEmail(email)
-			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+		User user = findUserByEmail(email);
 
 		if (user.getUserStatus() == UserStatus.DELETED) {
 			throw new CustomException(ErrorCode.USER_ALREADY_DELETED);
@@ -144,7 +141,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	public User findUserById(Long userId) {
 
-		User user = userRepository.findUserById(userId)
+		User user = userRepository.findByIdWithUserRole(userId)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		validateUserIsNotDeleted(user);
@@ -156,7 +153,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User findUserByEmail(String email) {
 
-		User user = userRepository.findByEmail(email)
+		User user = userRepository.findByEmailWithUserRole(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		validateUserIsNotDeleted(user);

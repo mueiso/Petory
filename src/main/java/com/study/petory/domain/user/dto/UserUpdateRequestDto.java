@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UpdateUserRequestDto {
+public class UserUpdateRequestDto {
 
 	@Size(max = 30, message = "최대 입력 가능한 글자수는 30자 입니다.")
 	private String nickname;

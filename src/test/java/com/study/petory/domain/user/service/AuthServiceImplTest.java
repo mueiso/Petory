@@ -76,6 +76,29 @@ class AuthServiceImplTest {
 		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 	}
 
+	@Test
+	void issueToken_DELETED_복구_성공() {
+
+		// given
+		User user = createUserWithStatus(UserStatus.DELETED); // DELETED 상태 유저 생성
+		user.updateStatus(UserStatus.DELETED);
+		user.deactivateEntity(); // deletedAt 설정
+		ReflectionTestUtils.setField(user, "id", 2L); // ID 설정
+
+		given(userService.findUserByEmail(anyString())).willReturn(user); // 이메일 기반 유저 조회 시 위 유저 리턴
+		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn("access-token"); // accessToken mock
+		given(jwtProvider.createRefreshToken(any())).willReturn("refresh-token"); // refreshToken mock
+
+		// when
+		TokenResponseDto result = authService.issueToken(user); // 테스트 대상 호출
+
+		// then
+		assertThat(result).isNotNull(); // 반환값 존재 여부 확인
+		assertThat(result.getAccessToken()).isEqualTo("access-token"); // accessToken 값 확인
+		assertThat(result.getRefreshToken()).isEqualTo("refresh-token"); // refreshToken 값 확인
+		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE); // 상태가 ACTIVE로 복구되었는지 확인
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

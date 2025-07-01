@@ -64,7 +64,6 @@ class JwtFilterTest {
 	@Test
 	void 정상_토큰_인증_성공() throws Exception {
 
-
 		/* [given]
 		 * 1. 정상 토큰
 		 * 2. Bearer 제거한 토큰

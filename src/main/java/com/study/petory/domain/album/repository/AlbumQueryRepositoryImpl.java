@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class AlbumCustomRepositoryImpl implements AlbumCustomRepository {
+public class AlbumQueryRepositoryImpl implements AlbumQueryRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
 

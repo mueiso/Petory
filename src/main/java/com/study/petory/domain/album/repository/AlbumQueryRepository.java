@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.study.petory.domain.album.entity.Album;
 
-public interface AlbumCustomRepository {
+public interface AlbumQueryRepository {
 
 	Page<Album> findAllAlbum(boolean showOnlyPublic, Long userId, Pageable pageable);
 

@@ -10,6 +10,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -47,14 +48,14 @@ public class Place extends TimeFeatureBasedEntity {
 	@OneToMany(mappedBy = "place")
 	private List<PlaceReview> placeReviewList = new ArrayList<>();
 
-	// @Column(nullable = false)
+	@Column(length = 300)
 	private String placeInfo;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 30)
-	private PlaceType placeType; // type -> placeType으로 수정
+	private PlaceType placeType;
 
-	@Column(precision = 2, scale = 1)        // 추후에 NOTNULL로 수정 예정, precision : 전체 자리 수, scale : 그 중 소수점 자리 수
+	@Column(precision = 2, scale = 1)        // precision : 전체 자리 수, scale : 그 중 소수점 자리 수
 	private BigDecimal ratio;
 
 	// 전체 주소
@@ -79,6 +80,9 @@ public class Place extends TimeFeatureBasedEntity {
 
 	@Column(nullable = false)
 	private Long likeCount = 0L;
+
+	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<PlaceImage> images = new ArrayList<>();
 
 	@Builder
 	public Place(User user, String placeName, String placeInfo, PlaceType placeType, BigDecimal ratio, String address,
@@ -139,5 +143,11 @@ public class Place extends TimeFeatureBasedEntity {
 	// 연관관계 참조 끊기 위한 메서드
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	// 양방향 연관관계 편의 메서드
+	public void addImage(PlaceImage image) {
+		this.images.add(image);
+		image.setPlace(this);
 	}
 }

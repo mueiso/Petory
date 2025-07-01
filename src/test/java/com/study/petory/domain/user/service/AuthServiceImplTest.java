@@ -378,19 +378,27 @@ class AuthServiceImplTest {
 	@Test
 	void addRoleToUser_새로운_권한_추가_성공() {
 
-		// given - USER 권한을 가진 유저 생성
+		/* [given]
+		 * USER 권한을 가진 유저 생성
+		 * id 설정
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
-		ReflectionTestUtils.setField(user, "id", 10L); // id 설정
+		ReflectionTestUtils.setField(user, "id", 10L);
 
 		// mock: userId로 사용자 조회 시 해당 user 반환
 		given(userService.findUserById(user.getId())).willReturn(user);
 
-		// when - 아직 없는 ADMIN 권한 추가
+		/* [when]
+		 * 아직 없는 ADMIN 권한 추가
+		 */
 		List<Role> roles = authService.addRoleToUser(user.getId(), Role.ADMIN);
 
-		// then - 권한 목록에 ADMIN이 포함되어 있는지 확인
+		/* [then]
+		 * 권한 목록에 ADMIN 이 포함되어 있는지 확인
+		 * 기존 USER + 새로 추가된 ADMIN
+		 */
 		assertThat(roles).contains(Role.ADMIN);
-		assertThat(roles).hasSize(2); // 기존 USER + 새로 추가된 ADMIN
+		assertThat(roles).hasSize(2);
 	}
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드

@@ -9,9 +9,9 @@ import com.study.petory.domain.user.entity.User;
 
 public interface PlaceLikeRepository extends JpaRepository<PlaceLike, Long> {
 
-	boolean existsByPlace_IdAndUser_Id(Long placeId, Long userId);
-
-	void deleteByPlace_IdAndUser_Id(Long placeId, Long userId);
-
 	List<PlaceLike> findByUser(User user);
+
+	boolean existsByPlaceIdAndUserId(Long placeId, Long userId);
+
+	void deleteByPlaceIdAndUserId(Long placeId, Long userId);
 }

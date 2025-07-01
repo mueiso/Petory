@@ -133,7 +133,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 
 	@Override
 	public List<PlaceReview> findPlaceReviewListByPlaceId(Long placeId) {
-		return placeReviewRepository.findAllByPlace_Id(placeId);
+		return placeReviewRepository.findAllByPlaceId(placeId);
 	}
 
 	private void verifyAuthorEdit(PlaceReview placeReview, Long userId) {

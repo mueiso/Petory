@@ -65,6 +65,6 @@ public class PlaceImageService extends AbstractImageService<PlaceImage> {
 	}
 
 	protected List<PlaceImage> findImagesByPlaceId(Long placeId) {
-		return placeImageRepository.findAllByPlace_Id(placeId);
+		return placeImageRepository.findAllByPlaceId(placeId);
 	}
 }

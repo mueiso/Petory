@@ -17,5 +17,5 @@ public interface PlaceReviewRepository extends JpaRepository<PlaceReview, Long>,
 
 	List<PlaceReview> findByUser(User user);
 
-	List<PlaceReview> findAllByPlace_Id(Long placeId);
+	List<PlaceReview> findAllByPlaceId(Long placeId);
 }

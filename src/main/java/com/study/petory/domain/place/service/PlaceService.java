@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
@@ -16,7 +17,7 @@ import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceType;
 
 public interface PlaceService {
-	PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto);
+	PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto, List<MultipartFile> images);
 
 	Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address, Pageable pageable);
 
@@ -37,4 +38,8 @@ public interface PlaceService {
 	String makeKey(PlaceType placeType);
 
 	PlaceType parsePlaceType(String placeType);
+
+	void addImages(Long userId, Long placeId, List<MultipartFile> images);
+
+	void deleteImage(Long userId, Long placeId, Long imageId);
 }

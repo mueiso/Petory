@@ -37,10 +37,10 @@ public class PlaceLikeService {
 		Place findPlace = placeService.findPlaceByPlaceId(placeId);
 		String key = placeService.makeKey(findPlace.getPlaceType());
 
-		boolean isLiked = placeLikeRepository.existsByPlace_IdAndUser_Id(placeId, userId);
+		boolean isLiked = placeLikeRepository.existsByPlaceIdAndUserId(placeId, userId);
 
 		if (isLiked) {
-			placeLikeRepository.deleteByPlace_IdAndUser_Id(placeId, userId);
+			placeLikeRepository.deleteByPlaceIdAndUserId(placeId, userId);
 			findPlace.decreaseLikeCount();
 			isLiked = false;
 

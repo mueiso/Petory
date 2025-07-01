@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
@@ -52,6 +53,8 @@ class PlaceServiceImplTest {
 	void savePlace() {
 		User user = new User();
 
+		List<MultipartFile> images = null;
+
 		ReflectionTestUtils.setField(user, "id", 1L);
 
 		PlaceCreateRequestDto dto = new PlaceCreateRequestDto("testName", null,
@@ -72,7 +75,7 @@ class PlaceServiceImplTest {
 			return savedPlace;
 		});
 
-		PlaceCreateResponseDto responseDto = placeServiceImpl.savePlace(1L, dto);
+		PlaceCreateResponseDto responseDto = placeServiceImpl.savePlace(1L, dto, images);
 
 		assertAll("저장 로직 검증",
 			() -> assertEquals(1L, responseDto.getId()),
@@ -139,7 +142,7 @@ class PlaceServiceImplTest {
 
 		ReflectionTestUtils.setField(place, "placeReviewList", List.of(placeReview1, placeReview2));
 
-		when(placeRepository.findWithReviewListById(1L)).thenReturn(Optional.of(place));
+		when(placeRepository.findWithReviewListByPlaceId(1L)).thenReturn(Optional.of(place));
 
 		PlaceGetResponseDto dto = placeServiceImpl.findByPlaceId(1L);
 

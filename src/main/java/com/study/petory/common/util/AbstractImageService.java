@@ -77,6 +77,16 @@ public abstract class AbstractImageService<T> {
 		s3Uploader.deleteFile(key);
 	}
 
+	// S3에서 삭제만 수행하며, DB 에서의 삭제는 cascade 또는 연관 엔티티에서 .clear()로 처리 가능
+	@Transactional
+	public void deleteAll(List<T> images) {
+		if (images == null || images.isEmpty()) return;
+
+		for (T image : images) {
+			deleteImageInternal(image);  // S3에서 삭제
+		}
+	}
+
 	// 공통 유틸
 	protected String extractKeyFromUrl(String url) {
 		String baseUrl = "https://" + bucket + ".s3." + region + ".amazonaws.com/";
@@ -96,5 +106,4 @@ public abstract class AbstractImageService<T> {
 	protected abstract T findImageById(Long imageId); // Image 조회로직
 
 	protected abstract String getImageUrl(T image); // Image에서 Url 가져오기
-
 }

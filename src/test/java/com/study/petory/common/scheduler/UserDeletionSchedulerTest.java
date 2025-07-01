@@ -22,20 +22,29 @@ class UserDeletionSchedulerTest {
 	@Test
 	void sendDeletionWarningEmails_호출시_서비스메서드_실행() {
 
-		// when: 스케줄러 메서드 직접 호출
+		/* [when]
+		 * 테스트 대상인 sendDeletionWarningEmails() 메서드 직접 호출
+		 * 스케줄링 없이 수동으로 실행
+		 */
 		userDeletionScheduler.sendDeletionWarningEmails();
 
-		// then: userSchedulerService.sendDeletionWarningEmails()가 호출되었는지 검증
+		/* [then]
+		 * 내부적으로 userSchedulerService.sendDeletionWarningEmails()가 호출되었는지 검증
+		 */
 		verify(userSchedulerService).sendDeletionWarningEmails();
 	}
 
 	@Test
 	void hardDeleteExpiredUsers_호출시_서비스메서드_실행() {
 
-		// when: 스케줄러 메서드 직접 호출
+		/* [when]
+		 * 테스트 대상인 hardDeleteExpiredUsers() 메서드 직접 호출
+		 */
 		userDeletionScheduler.hardDeleteExpiredUsers();
 
-		// then: userSchedulerService.hardDeleteExpiredUsers()가 호출되었는지 검증
+		/* [then]
+		 * 내부적으로 userSchedulerService.hardDeleteExpiredUsers()가 호출되었는지 검증
+		 */
 		verify(userSchedulerService).hardDeleteExpiredUsers();
 	}
 }

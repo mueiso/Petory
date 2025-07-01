@@ -1,6 +1,5 @@
 package com.study.petory.domain.place.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -66,13 +65,9 @@ public class PlaceServiceImpl implements PlaceService {
 
 		placeRepository.save(place);
 
-		List<String> urls = new ArrayList<>();
-
-		if (images != null && !images.isEmpty()) {
-			urls = placeImageService.uploadAndSaveAll(images, place);
-		}
-
-		return PlaceCreateResponseDto.of(place, urls);
+		return PlaceCreateResponseDto.of(
+			place,
+			placeImageService.uploadAndSaveAll(images, place));
 	}
 
 	// 전체 장소 조회

@@ -170,6 +170,43 @@ class AuthServiceImplTest {
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_ID_NOT_GENERATED);
 	}
 
+	@Test
+	void issueToken_ACTIVE_상태_유저_토큰_정상_발급() {
+
+		/* [given]
+		 * userStatus ACTIVE 상태의 유저 생성
+		 * 유저 ID 설정
+		 */
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		user.updateStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 10L);
+
+		/*
+		 * mock 설정 - 유저 조회 시 위 유저 반환
+		 * mock 설정 - accessToken 생성 요청 시 "accessToken" 리턴
+		 * mock 설정 - refreshToken 생성 요청 시 "refreshToken" 리턴
+		 */
+		given(userService.findUserByEmail(anyString())).willReturn(user);
+		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn("access-token");
+		given(jwtProvider.createRefreshToken(any())).willReturn("refresh-token");
+
+		/* [when]
+		 * 토큰 발급 실행
+		 */
+		TokenResponseDto result = authService.issueToken(user);
+
+		/* [then]
+		 * 반환값이 null 이 아닌지 존재 여부 확인
+		 * accessToken 값이 예상대로인지 확인
+		 * refreshToken 값이 예상대로인지 확인
+		 * userStatus 여전히 ACTIVE 인지 검증
+		 */
+		assertThat(result).isNotNull();
+		assertThat(result.getAccessToken()).isEqualTo("access-token");
+		assertThat(result.getRefreshToken()).isEqualTo("refresh-token");
+		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

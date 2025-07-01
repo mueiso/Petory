@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
@@ -143,6 +144,25 @@ class AuthServiceImplTest {
 			.hasMessageContaining("로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다.");
 	}
 
+	@Test
+	void issueToken_아이디_null이면_예외발생() {
+
+		// given - ID가 null인 유저 객체를 ACTIVE 상태로 생성
+		User user = createUserWithStatus(UserStatus.ACTIVE); // 정상 상태의 유저
+		// ID는 설정하지 않아서 기본적으로 null 상태
+
+		// mock 설정 - 이메일로 유저 조회 시 위 유저 반환
+		given(userService.findUserByEmail(anyString())).willReturn(user);
+
+		// when - 토큰 발급 시도 → ID가 없으므로 예외 발생 예상
+		CustomException exception = catchThrowableOfType(
+			() -> authService.issueToken(user), // 토큰 발급 시도
+			CustomException.class // CustomException 타입 예외 포착
+		);
+
+		// then - USER_ID_NOT_GENERATED 예외 코드 검증
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_ID_NOT_GENERATED);
+	}
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {

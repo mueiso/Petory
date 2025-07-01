@@ -2,6 +2,7 @@ package com.study.petory.domain.event.dto.request;
 
 import java.util.List;
 
+import com.study.petory.common.util.ValidEnum;
 import com.study.petory.domain.event.entity.EventColor;
 
 import jakarta.validation.constraints.NotBlank;
@@ -29,5 +30,6 @@ public class EventCreateRequestDto {
 
 	private String description;
 
+	@ValidEnum(enumClass = EventColor.class, ignoreCase = true, message = "지원하지 않는 색상입니다.")
 	private EventColor color;
 }

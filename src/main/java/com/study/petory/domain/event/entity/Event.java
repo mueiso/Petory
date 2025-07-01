@@ -15,7 +15,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -26,13 +25,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @DynamicUpdate
-@Table(
-	name = "tb_event",
-	indexes = {
-		// 이대로 사용해도 괜찮은 것인가?
-		@Index(name = "index_user_id_start", columnList = "user_id, start_date")
-	}
-)
+@Table(name = "tb_event")
 @NoArgsConstructor
 public class Event extends UpdateBasedEntity {
 

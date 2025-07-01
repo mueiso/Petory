@@ -2,6 +2,10 @@ package com.study.petory.domain.pet.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +24,7 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
+import com.study.petory.domain.pet.dto.PetGetAllResponseDto;
 import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
@@ -44,7 +49,7 @@ public class PetController {
 	 * @param images 사진 파일
 	 * @return 생성 성공 메시지
 	 */
-	@PostMapping
+	@PostMapping(consumes = {"multipart/form-data"})
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<PetResponseDto>> createPet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -54,6 +59,24 @@ public class PetController {
 		petService.savePet(currentUser.getId(), requestDto, images);
 
 		return CommonResponse.of(SuccessCode.CREATED);
+	}
+
+	/**
+	 * [내 반려동물 목록 조회]
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param pageable 최신순 목록 조회
+	 * @return 해당 유저가 등록한 반려동물 전체 목록 페이징 처리되어 반환
+	 */
+	@GetMapping
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	public ResponseEntity<CommonResponse<Page<PetGetAllResponseDto>>> getMyPets(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PageableDefault(page = 0, size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+
+		Page<PetGetAllResponseDto> response = petService.findAllMyPets(currentUser.getId(), pageable);
+
+		return CommonResponse.of(SuccessCode.FOUND, response);
 	}
 
 	/**
@@ -80,8 +103,8 @@ public class PetController {
 	 * @param images 동물 프로필 사진 (선택)
 	 * @return 수정된 내용
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping(value = "/{petId}", consumes = {"multipart/form-data"})
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<PetUpdateResponseDto>> updatePet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId,
@@ -94,6 +117,24 @@ public class PetController {
 	}
 
 	/**
+	 * [반려동물 프로필 사진 삭제]
+	 *
+	 * @param currentUser 로그인 유저
+	 * @param petImageId 삭제 대상 이미지
+	 * @return 삭제 성공 메시지
+	 */
+	@DeleteMapping("/images/{petImageId}")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	public ResponseEntity<CommonResponse<Void>> deletePetImage(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long petImageId) {
+
+		petService.deletePetImage(currentUser.getId(), petImageId);
+
+		return CommonResponse.of(SuccessCode.DELETED);
+	}
+
+	/**
 	 * [반려동물 삭제]
 	 * 펫 정보를 soft delete 합니다.
 	 *
@@ -101,8 +142,8 @@ public class PetController {
 	 * @param petId 정보 삭제 대상 반려동물
 	 * @return 삭제 성공 메시지
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{petId}")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> deletePet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId) {
@@ -119,8 +160,8 @@ public class PetController {
 	 * @param petId 복구 대상 반려동물
 	 * @return 복구 성공 메시지
 	 */
-	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PatchMapping("/{petId}/restore")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Void>> restorePet(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long petId) {

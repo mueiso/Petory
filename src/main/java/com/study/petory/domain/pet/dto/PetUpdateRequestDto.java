@@ -13,9 +13,7 @@ public class PetUpdateRequestDto {
 	@Size(max = 30, message = "최대 30자까지 입력할 수 있습니다.")
 	private String name;
 
-	@NotBlank
 	String gender;
 
-	@NotBlank
 	String birthday;
 }

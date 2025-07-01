@@ -23,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long>, UserCustomRep
 
 	// UserStatus 가 ACTIVE 상태이고, updatedAt 이 특정 시간 이전인 사용자 조회 (마지막 활동 시점이 오래된 사용자 조회용)
 	List<User> findByUserStatusAndUpdatedAtBefore(UserStatus userStatus, LocalDateTime updatedAtBefore);
+
+	@EntityGraph(attributePaths = "userPrivateInfo")
+	List<User> findAll();
 }

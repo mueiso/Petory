@@ -3,6 +3,8 @@ package com.study.petory.domain.pet.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +13,7 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
 import com.study.petory.domain.pet.dto.PetResponseDto;
+import com.study.petory.domain.pet.dto.PetGetAllResponseDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
 import com.study.petory.domain.pet.entity.Pet;
@@ -42,8 +45,9 @@ public class PetServiceImpl implements PetService {
 			.species(requestDto.getSpecies())
 			.gender(requestDto.getGender())
 			.birthday(requestDto.getBirthday())
-			.user(user)
 			.build();
+
+		user.addPet(pet);
 
 		petRepository.save(pet);
 
@@ -52,12 +56,24 @@ public class PetServiceImpl implements PetService {
 		}
 	}
 
+	// 반려동물 목록 전체 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<PetGetAllResponseDto> findAllMyPets(Long userId, Pageable pageable) {
+
+		User user = userService.findUserById(userId);
+
+		Page<Pet> pets = petRepository.findAllByUser(user, pageable);
+
+		return pets.map(PetGetAllResponseDto::of);
+	}
+
 	// 반려동물 단건 조회
 	@Override
 	@Transactional(readOnly = true)
 	public PetResponseDto findPet(Long userId, Long petId) {
 
-		Pet pet = petRepository.findById(petId)
+		Pet pet = petRepository.findPetById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 
 		// 본인 소유 아닐 경우 예외 처리
@@ -77,7 +93,7 @@ public class PetServiceImpl implements PetService {
 	@Transactional
 	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images) {
 
-		Pet pet = petRepository.findById(petId)
+		Pet pet = petRepository.findPetById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
 
 		if (!pet.isPetOwner(userId)) {
@@ -103,14 +119,32 @@ public class PetServiceImpl implements PetService {
 		return PetUpdateResponseDto.of(pet, imageUrls);
 	}
 
+	// 반려동물 프로필 사진 삭제
+	@Override
+	@Transactional
+	public void deletePetImage(Long userId, Long petImageId) {
+
+		PetImage image = petImageService.findImageById(petImageId);
+
+		Pet pet = image.getPet();
+
+		if (!pet.isPetOwner(userId)) {
+			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
+		// 이미지 삭제 (S3 삭제 + DB 삭제)
+		petImageService.deleteImage(image);
+
+		// 연관관계 제거 (양방향 매핑 유지 위해)
+		pet.getImages().remove(image);
+	}
+
 	// 반려동물 삭제
 	@Override
 	@Transactional
 	public void deletePet(Long userId, Long petId) {
 
 		Pet pet = findPetById(petId);
-
-		User user = userService.findUserById(userId);
 
 		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_DELETE);

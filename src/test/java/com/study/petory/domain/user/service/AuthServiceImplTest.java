@@ -120,18 +120,27 @@ class AuthServiceImplTest {
 	@Test
 	void issueToken_SUSPENDED_상태_로그인_불가_예외발생() {
 
-		// given - 정지 상태(SUSPENDED)의 유저 생성
+		/* [given]
+		 * userStatus SUSPENDED 상태의 유저 객체 생성
+		 * 한번 더 명시적으로 상태 설정
+		 * ID 가 null 인 경우 방지 위해 리플렉션 통해 ID 강제 주입
+		 */
 		User user = createUserWithStatus(UserStatus.SUSPENDED);
-		user.updateStatus(UserStatus.SUSPENDED); // 명시적으로 정지 상태 설정
-		ReflectionTestUtils.setField(user, "id", 3L); // ID 주입
+		user.updateStatus(UserStatus.SUSPENDED);
+		ReflectionTestUtils.setField(user, "id", 3L);
 
-		// userService.findUserByEmail() 호출 시 위 유저 반환하도록 설정
+		// mock 설정 - 이메일로 유저 조회 시 위에서 만든 suspended 유저를 반환
 		given(userService.findUserByEmail(anyString())).willReturn(user);
 
-		// when & then - 로그인 시도 시 예외 발생 검증
-		assertThatThrownBy(() -> authService.issueToken(user)) // 로그인 시도
-			.isInstanceOf(CustomException.class) // 예외 타입 확인
-			.hasMessageContaining("로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다."); // 에러 메시지 확인 (ErrorCode 이름 기반)
+		//  - 로그인 시도 시 예외 발생 검증
+		/* [when & then]
+		 * AuthService 의 issueToken 호출 시 (로그인 시도 시) 예외 발생 여부 확인
+		 * 예외 타입 확인
+		 * 에러 메시지 일치하는지 검증
+		 */
+		assertThatThrownBy(() -> authService.issueToken(user))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining("로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다.");
 	}
 
 

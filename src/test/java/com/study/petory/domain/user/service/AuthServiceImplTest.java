@@ -301,6 +301,26 @@ class AuthServiceImplTest {
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.INVALID_TOKEN);
 	}
 
+	@Test
+	void reissue_accessToken_만료되지_않았으면_예외발생() {
+
+		// given
+		String validAccessToken = "valid-access-token";
+		String anyRefreshToken = "Bearer dummy-refresh-token";
+
+		// mock 설정: accessToken 이 아직 만료되지 않음
+		given(jwtProvider.isAccessTokenExpired(validAccessToken)).willReturn(false);
+
+		// when
+		CustomException exception = catchThrowableOfType(() ->
+				authService.reissue(validAccessToken, anyRefreshToken),
+			CustomException.class
+		);
+
+		// then
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.TOKEN_NOT_EXPIRED);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

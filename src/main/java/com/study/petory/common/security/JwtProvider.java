@@ -49,9 +49,11 @@ public class JwtProvider {
 	 * 15분 * 60초 * 1000밀리초 = 900,000밀리초 = 15분
 	 * 7일 * 24시간 * 60분 * 60초 * 1000밀리초 = 604,800,000밀리초 = 7일
 	 */
-	private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
-	// private static final long accessTokenLife = 15 * 60 * 1000L;  // 15분
-	private static final long refreshTokenLife = 7 * 24 * 60 * 60 * 1000L;  // 7일
+	@Value("${jwt.access-token-valid-time}")
+	private long accessTokenLife;
+
+	@Value("${jwt.refresh-token-valid-time}")
+	private long refreshTokenLife;
 
 	/*
 	 * @Value : 외부 설정값 주입받기 위해 사용

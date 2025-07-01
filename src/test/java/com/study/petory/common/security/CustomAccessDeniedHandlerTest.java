@@ -20,36 +20,48 @@ import org.springframework.security.access.AccessDeniedException;
 class CustomAccessDeniedHandlerTest {
 
 	@Mock
-	private HttpServletRequest request; // 가짜 요청
+	private HttpServletRequest request;
 
 	@Mock
-	private HttpServletResponse response; // 가짜 응답
+	private HttpServletResponse response;
 
 	@Mock
-	private AccessDeniedException accessDeniedException; // 가짜 예외
+	private AccessDeniedException accessDeniedException;
 
 	@InjectMocks
-	private CustomAccessDeniedHandler accessDeniedHandler; // 테스트 대상 클래스
+	private CustomAccessDeniedHandler accessDeniedHandler;
 
 	@Test
 	void handle_인가실패시_403상태코드와_JSON응답을_리턴() throws Exception {
 
-		// given
-		StringWriter stringWriter = new StringWriter(); // 응답 본문을 메모리에 쓰기 위한 객체
+		/* [given]
+		 * 테스트 중 응답 내용을 확인하기 위한 StringWriter 와 PrinterWriter 준비
+		 */
+		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
-		when(response.getWriter()).thenReturn(printWriter); // response.getWriter() 모킹
 
-		// when
-		accessDeniedHandler.handle(request, response, accessDeniedException); // 테스트 대상 메서드 실행
+		// response.getWriter()가 호출되면 내가 만든 printWriter 를 반환하도록 설정
+		when(response.getWriter()).thenReturn(printWriter);
 
-		// then
-		verify(response).setStatus(HttpServletResponse.SC_FORBIDDEN); // 403 응답 설정 검증
-		verify(response).setContentType("application/json;charset=UTF-8"); // Content-Type 설정 검증
+		/* [when]
+		 * 테스트 대상 메서드 호출 (인가 실패 상황 시뮬레이션)
+		 */
+		accessDeniedHandler.handle(request, response, accessDeniedException);
 
-		printWriter.flush(); // 출력 버퍼를 stringWriter로 밀어넣음
-		String result = stringWriter.toString(); // 응답 본문 가져오기
+		/* [then]
+		 * 응답 상태 코드가 401 UNAUTHORIZED 로 설정되었는지 확인
+		 * 응답 Content-Type 이 application/json;charset=UTF-8로 설정되었는지 확인
+		 */
+		verify(response).setStatus(HttpServletResponse.SC_FORBIDDEN);
+		verify(response).setContentType("application/json;charset=UTF-8");
 
-		// 응답 본문 검증
+		// 응답 본문 출력을 버퍼에 반영 (flush 해야 StringWriter 에 데이터가 쓰임)
+		printWriter.flush();
+
+		// 버퍼에 출력된 내용을 문자열로 추출
+		String result = stringWriter.toString();
+
+		// 응답 JSON 문자열이 기대한 응답값과 일치하는지 검증
 		assertEquals("{\"status\":403,\"message\":\"권한이 필요합니다.\"}", result);
 	}
 }

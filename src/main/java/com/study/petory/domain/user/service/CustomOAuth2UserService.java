@@ -45,7 +45,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		}
 
 		// 5. 사용자 정보가 DB에 존재하지 않으면 새로 생성
-		User user = userRepository.findByEmail(email).orElseGet(() -> {
+		User user = userRepository.findByEmailWithUserRole(email).orElseGet(() -> {
 
 			// 5-1. 개인 정보 객체 생성
 			UserPrivateInfo privateInfo = UserPrivateInfo.builder()

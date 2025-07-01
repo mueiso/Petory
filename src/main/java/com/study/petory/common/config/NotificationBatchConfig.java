@@ -38,9 +38,7 @@ public class NotificationBatchConfig {
 		JdbcCursorItemReader<User> reader = new JdbcCursorItemReader<>();
 		reader.setDataSource(dataSource);
 		reader.setSql("SELECT id FROM tb_user ORDER BY id");
-		reader.setRowMapper((rs, rowNum) -> {
-			return new User(rs.getLong("id"));
-		});
+		reader.setRowMapper((rs, rowNum) -> new User(rs.getLong("id")));
 		reader.setVerifyCursorPosition(false);
 		return reader;
 	}

@@ -39,9 +39,7 @@ public class NotificationBatchConfig {
 		reader.setDataSource(dataSource);
 		reader.setSql("SELECT id FROM tb_user ORDER BY id");
 		reader.setRowMapper((rs, rowNum) -> {
-			User user = new User();
-			user.setId(rs.getLong("id"));
-			return user;
+			return new User(rs.getLong("id"));
 		});
 		reader.setVerifyCursorPosition(false);
 		return reader;

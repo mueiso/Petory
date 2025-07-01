@@ -3,13 +3,13 @@ package com.study.petory.domain.place.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
@@ -22,6 +22,7 @@ import com.study.petory.domain.place.dto.response.PlaceGetResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewGetResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceImage;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.place.repository.PlaceRepository;
 import com.study.petory.domain.user.entity.User;
@@ -35,12 +36,13 @@ public class PlaceServiceImpl implements PlaceService {
 
 	private final PlaceRepository placeRepository;
 	private final UserService userService;
+	private final PlaceImageService placeImageService;
 	private final RedisTemplate<String, Object> redisTemplate;
 
 	// 장소 등록
 	@Override
 	@Transactional
-	public PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto) {
+	public PlaceCreateResponseDto savePlace(Long userId, PlaceCreateRequestDto requestDto, List<MultipartFile> images) {
 
 		Optional<Place> findPlace = placeRepository.findByPlaceNameAndAddress(requestDto.getPlaceName(),
 			requestDto.getAddress());
@@ -63,7 +65,9 @@ public class PlaceServiceImpl implements PlaceService {
 
 		placeRepository.save(place);
 
-		return PlaceCreateResponseDto.from(place);
+		return PlaceCreateResponseDto.of(
+			place,
+			placeImageService.uploadAndSaveAll(images, place));
 	}
 
 	// 전체 장소 조회
@@ -83,9 +87,16 @@ public class PlaceServiceImpl implements PlaceService {
 		List<PlaceReviewGetResponseDto> placeReviewList = findPlace.getPlaceReviewList().stream()
 			.filter(placeReview -> placeReview.getDeletedAt() == null)
 			.map(PlaceReviewGetResponseDto::from)
-			.collect(Collectors.toList());
+			.toList();
 
-		return PlaceGetResponseDto.from(findPlace, placeReviewList);
+		List<PlaceImage> images = placeImageService.findImagesByPlaceId(placeId);
+
+		return PlaceGetResponseDto.of(
+			findPlace,
+			images.stream()
+				.map(PlaceImage::getUrl)
+				.toList(),
+			placeReviewList);
 	}
 
 	// 장소 수정
@@ -140,6 +151,35 @@ public class PlaceServiceImpl implements PlaceService {
 		findPlace.updateReportResetAt();
 	}
 
+	// 장소 사진 추가
+	@Override
+	@Transactional
+	public void addImages(Long userId, Long placeId, List<MultipartFile> images) {
+
+		Place findPlace = findPlaceByPlaceId(placeId);
+
+		List<PlaceImage> placeImages = placeImageService.uploadAndReturnEntities(images, findPlace);
+		for (PlaceImage image : placeImages) {
+			findPlace.addImage(image);
+		}
+	}
+
+	// 장소 사진 삭제
+	@Override
+	@Transactional
+	public void deleteImage(Long userId, Long placeId, Long imageId) {
+		Place findPlace = findPlaceByPlaceId(placeId);
+
+		PlaceImage image = placeImageService.findImageById(imageId);
+
+		if (!findPlace.isEqualId(image.getPlace().getId())) {
+			throw new CustomException(ErrorCode.INVALID_INPUT);
+		}
+
+		placeImageService.deleteImageInternal(image);
+		findPlace.getImages().remove(image);
+	}
+
 	// 다른 서비스에서 사용가능하게 설정한 메서드
 	// throws CustomException
 	@Override
@@ -152,10 +192,11 @@ public class PlaceServiceImpl implements PlaceService {
 	// throws CustomException
 	@Override
 	public Place findPlaceWithPlaceReviewByPlaceId(Long placeId) {
-		return placeRepository.findWithReviewListById(placeId)
+		return placeRepository.findWithReviewListByPlaceId(placeId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_NOT_FOUND));
 	}
 
+	// 인기 랭킹 조회
 	@Override
 	public List<PlaceGetAllResponseDto> findPlaceRank(PlaceType placeType) {
 		String key = makeKey(placeType);
@@ -174,8 +215,14 @@ public class PlaceServiceImpl implements PlaceService {
 
 		List<Place> placeList = placeRepository.findAllById(placeIdList);
 
+		// 여기서 문제가 발생했던것!!!!!
 		return placeList.stream()
-			.map(PlaceGetAllResponseDto::from)
+			.map(place -> {
+				List<String> imageUrls = place.getImages().stream()
+					.map(PlaceImage::getUrl)
+					.toList();
+				return PlaceGetAllResponseDto.of(place, imageUrls);
+			})
 			.toList();
 	}
 
@@ -193,6 +240,7 @@ public class PlaceServiceImpl implements PlaceService {
 		return stringBuilder.toString();
 	}
 
+	// String -> PlaceType 변환 로직
 	@Override
 	public PlaceType parsePlaceType(String placeType) {
 		if (placeType == null || "ALL".equalsIgnoreCase(placeType)) {

@@ -1,6 +1,5 @@
 package com.study.petory.domain.pet.dto;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.study.petory.domain.pet.entity.Pet;
@@ -11,34 +10,25 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PetResponseDto {
+public class PetUpdateResponseDto {
 
-	private final Long id;
-
+	private Long id;
 	private String name;
-
 	private PetSize size;
-
 	private String species;
-
 	private String gender;
-
 	private String birthday;
+	private List<String> imageUrls;
 
-	private final List<String> imageUrls;
-
-	private final LocalDateTime createdAt;
-
-	public static PetResponseDto of(Pet pet, List<String> imageUrls) {
-		return new PetResponseDto(
+	public static PetUpdateResponseDto of(Pet pet, List<String> imageUrls) {
+		return new PetUpdateResponseDto(
 			pet.getId(),
 			pet.getName(),
 			pet.getSize(),
 			pet.getSpecies(),
 			pet.getGender(),
 			pet.getBirthday(),
-			imageUrls,
-			pet.getCreatedAt()
+			imageUrls
 		);
 	}
 }

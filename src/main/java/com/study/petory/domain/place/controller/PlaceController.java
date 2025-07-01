@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
@@ -59,23 +62,24 @@ public class PlaceController {
 
 	/**
 	 * 장소 등록
-	 * 사진, 평균 평점 추가 예정
+	 * @param currentUser login user 정보
 	 * @param requestDto 장소 등록에 필요한 정보
+	 * @param images image
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Valid @RequestBody PlaceCreateRequestDto requestDto
+		@Valid @RequestPart PlaceCreateRequestDto requestDto,
+		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(currentUser.getId(), requestDto));
+		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(currentUser.getId(), requestDto, images));
 	}
 
 	/**
 	 * 전체 장소 조회
 	 * 페이징 관련 스크롤 방식이 옳을 지에 대한 고민
-	 * 필터 검색 로직 QueryDSL 사용으로 바꾸는게 옳을 지에 대한 고민
 	 * @param placeName 장소 이름 일부 입력 시에도 조회 가능
 	 * @param placeType 장소 타입 입력 시 타입 조건 기준 조회 가능
 	 * @param pageable 기본 페이징 설정. 한 페이지에 10개의 게시글(장소) 조회
@@ -310,5 +314,43 @@ public class PlaceController {
 	) {
 		PlaceType type = placeService.parsePlaceType(placeType);
 		return CommonResponse.of(SuccessCode.FOUND, placeService.findPlaceRank(type));
+	}
+
+	/**
+	 * 장소 사진 추가
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @param images 이미지
+	 * @return CommonResponse 방식의 생성 성공 메세지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping(value = "/{placeId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<CommonResponse<Void>> addImages(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@RequestPart List<MultipartFile> images
+	) {
+		placeService.addImages(currentUser.getId(), placeId, images);
+
+		return CommonResponse.of(SuccessCode.CREATED);
+	}
+
+	/**
+	 * 장소 사진 삭제
+	 * @param currentUser login user 정보
+	 * @param placeId 장소 식별자
+	 * @param imageId 이미지
+	 * @return CommonResponse 방식의 삭제 성공 메세지
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/{placeId}/images/{imageId}")
+	public ResponseEntity<CommonResponse<Void>> deleteImage(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long placeId,
+		@PathVariable Long imageId
+	) {
+		placeService.deleteImage(currentUser.getId(), placeId, imageId);
+
+		return CommonResponse.of(SuccessCode.DELETED);
 	}
 }

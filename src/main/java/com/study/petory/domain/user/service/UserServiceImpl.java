@@ -11,7 +11,7 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
-import com.study.petory.domain.user.dto.UpdateUserRequestDto;
+import com.study.petory.domain.user.dto.UserUpdateRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 	// 사용자 정보 업데이트
 	@Override
 	@Transactional
-	public void updateProfile(String email, UpdateUserRequestDto dto) {
+	public void updateProfile(String email, UserUpdateRequestDto dto) {
 
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));

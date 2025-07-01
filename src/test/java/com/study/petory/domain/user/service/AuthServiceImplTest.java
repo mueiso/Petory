@@ -23,6 +23,8 @@ import com.study.petory.domain.user.entity.UserPrivateInfo;
 import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.entity.UserStatus;
 
+import io.jsonwebtoken.Jwts;
+
 @ExtendWith(MockitoExtension.class)
 class AuthServiceImplTest {
 
@@ -207,7 +209,37 @@ class AuthServiceImplTest {
 		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 	}
 
+	@Test
+	void reissue_refreshToken_정상_재발급_성공() {
 
+		// given - 테스트용 user 객체 생성
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 100L); // ID 세팅
+
+		String expiredAccessToken = "expired-access-token";      // 만료된 AccessToken
+		String refreshTokenWithBearer = "Bearer valid-refresh-token"; // Bearer 포함된 refreshToken
+		String pureRefreshToken = "valid-refresh-token";          // Bearer 제거된 토큰
+		Long userId = 100L;
+
+		// mock 설정
+		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true); // AccessToken 만료 상태
+		given(jwtProvider.subStringToken(refreshTokenWithBearer)).willReturn(pureRefreshToken); // Bearer 제거
+		given(jwtProvider.getClaims(pureRefreshToken)).willReturn(
+			Jwts.claims().setSubject(String.valueOf(userId))); // Claims에서 userId 추출
+		given(jwtProvider.isValidRefreshToken(userId, pureRefreshToken)).willReturn(true); // refreshToken 유효성 확인
+		given(userService.findUserById(userId)).willReturn(user); // 유저 조회
+		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn(
+			"new-access-token"); // 새 AccessToken 생성
+		given(jwtProvider.createRefreshToken(userId)).willReturn("new-refresh-token"); // 새 RefreshToken 생성
+
+		// when - 재발급 요청
+		TokenResponseDto result = authService.reissue(expiredAccessToken, refreshTokenWithBearer);
+
+		// then - 토큰 재발급 결과 검증
+		assertThat(result).isNotNull();
+		assertThat(result.getAccessToken()).isEqualTo("new-access-token");
+		assertThat(result.getRefreshToken()).isEqualTo("new-refresh-token");
+	}
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {

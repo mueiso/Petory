@@ -48,6 +48,7 @@ public class NotificationBatchConfig {
 	}
 
 	@Bean
+	@StepScope
 	public ItemProcessor<User, Notification> dailyQuestionProcessor() {
 		return user -> Notification.builder()
 			.user(user)
@@ -56,6 +57,7 @@ public class NotificationBatchConfig {
 	}
 
 	@Bean
+	@StepScope
 	public JdbcBatchItemWriter<Notification> dailyQuestionWriter() {
 		return new JdbcBatchItemWriterBuilder<Notification>()
 			.dataSource(dataSource)

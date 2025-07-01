@@ -36,30 +36,47 @@ class AuthServiceImplTest {
 	@Test
 	void issueToken_DEACTIVATED_90일_이내_로그인_성공_복구() {
 
-		// given
+		/* [given]
+		 * userStatus 가 DEACTIVATED 인 테스트 유저 생성
+		 * 명시적으로 DEACTIVATED 설정
+		 * deletedAt 값을 현재 시각으로 설정
+		 * 테스트를 위해 user 의 id 필드 강제 설정
+		 */
 		User user = createUserWithStatus(UserStatus.DEACTIVATED);
 		user.updateStatus(UserStatus.DEACTIVATED);
-		user.deactivateEntity(); // deletedAt 등록됨
+		user.deactivateEntity();
 		ReflectionTestUtils.setField(user, "id", 1L);
 
-		// deletedAt 을 현재 기준 89일 전으로 설정
+		// deletedAt을 현재 시각 기준 89일 전으로 설정 → 복구 조건 만족 (90일 이내 로그인)
 		ReflectionTestUtils.setField(user, "deletedAt", LocalDateTime.now().minusDays(89));
 
+		/*
+		 * userService.findUserByEmail() 호출 시 위에서 만든 user 리턴하도록 설정
+		 * jwtProvider.createAccessToken() 호출 시 accessToken 리턴
+		 * jwtProvider.createRefreshToken() 호출 시 refreshToken 리턴
+		 */
 		given(userService.findUserByEmail(anyString())).willReturn(user);
 		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn("access-token");
 		given(jwtProvider.createRefreshToken(any())).willReturn("refresh-token");
 
-		// when
+		/* [when]
+		 * 실제 테스트 대상 메서드 호출
+		 */
 		TokenResponseDto result = authService.issueToken(user);
 
-		// then
+		/* [then]
+		 * 반환된 TokenResponseDto 가 null 이 아님을 검증
+		 * accessToken 값 검증
+		 * refreshToken 값 검증
+		 * userStatus 가 ACTIVE 로 복구되었는지 검증
+		 */
 		assertThat(result).isNotNull();
 		assertThat(result.getAccessToken()).isEqualTo("access-token");
 		assertThat(result.getRefreshToken()).isEqualTo("refresh-token");
-		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE); // 상태 복구되었는지 확인
+		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 	}
 
-	// 테스트용 유저 객체 생성 유틸 메서드
+	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 
 		UserPrivateInfo privateInfo = UserPrivateInfo.builder()
@@ -75,7 +92,9 @@ class AuthServiceImplTest {
 			.userRole(List.of(UserRole.builder().role(Role.USER).build()))
 			.build();
 
+		// 전달받은 상태로 userStatus 설정
 		user.updateStatus(status);
+
 		return user;
 	}
 }

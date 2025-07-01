@@ -68,10 +68,10 @@ public class PlaceController {
 	 * @return CommonResponse 방식의 등록된 장소 정보
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<CommonResponse<PlaceCreateResponseDto>> createPlace(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Valid @RequestBody PlaceCreateRequestDto requestDto,
+		@Valid @RequestPart PlaceCreateRequestDto requestDto,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
 		return CommonResponse.of(SuccessCode.CREATED, placeService.savePlace(currentUser.getId(), requestDto, images));

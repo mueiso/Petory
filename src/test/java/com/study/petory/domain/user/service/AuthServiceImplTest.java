@@ -199,8 +199,8 @@ class AuthServiceImplTest {
 
 		/* [then]
 		 * 반환값이 null 이 아닌지 존재 여부 확인
-		 * accessToken 값이 예상대로인지 확인
-		 * refreshToken 값이 예상대로인지 확인
+		 * accessToken 값이 예상값과 동일한지 검증
+		 * refreshToken 값이 예상값과 동일한지 검증
 		 * userStatus 여전히 ACTIVE 인지 검증
 		 */
 		assertThat(result).isNotNull();
@@ -324,30 +324,51 @@ class AuthServiceImplTest {
 	@Test
 	void reissue_accessToken_만료_정상_재발급_성공() {
 
-		// given
+		/* [given]
+		 * 만료된 accessToken 시나리오
+		 * Bearer 잡두사가 붙은 refreshToken
+		 * Bearer 제거된 실제 refreshToken
+		 */
 		String expiredAccessToken = "expired-access-token";
 		String refreshTokenRaw = "Bearer valid-refresh-token";
-		String refreshToken = "valid-refresh-token";  // Bearer 제거된 실제 토큰
+		String refreshToken = "valid-refresh-token";
 
-		// 유저 객체 생성
+		/*
+		 * 테스트용 유저 객체 생성 (userStatus ACTIVE)
+		 * userId 강제 주입
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 		ReflectionTestUtils.setField(user, "id", 1L);
 
-		// mock 설정
-		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true);  // accessToken 만료됨
-		given(jwtProvider.subStringToken(refreshTokenRaw)).willReturn(refreshToken);   // "Bearer " 제거
+		/*
+		 * mock 설정 - accessToken 이 만료된 것으로 설정
+		 * mock 설정 - "Bearer " 접두사 제거
+		 * mock 설정 - refreshToken 으로부터 userId 추출 (Claims 객체로)
+		 * mock 설정 - Redis 에 저장된 refreshToken 과 일치하는지 확인 (유효함)
+		 * mock 설정 - userId 로 사용자 조회
+		 * mock 설정 - 새로운 accessToken 발급 요청에 대한 응답
+		 * mock 설정 -새로운 refreshToken 발급 요청에 대한 응답
+		 */
+		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true);
+		given(jwtProvider.subStringToken(refreshTokenRaw)).willReturn(refreshToken);
 		given(jwtProvider.getClaims(refreshToken)).willReturn(
-			Jwts.claims().setSubject(String.valueOf(user.getId())));                    // userId 추출용 Claims
+			Jwts.claims().setSubject(String.valueOf(user.getId())));
 
-		given(jwtProvider.isValidRefreshToken(user.getId(), refreshToken)).willReturn(true);  // refreshToken 유효
-		given(userService.findUserById(user.getId())).willReturn(user);                       // 유저 조회
+		given(jwtProvider.isValidRefreshToken(user.getId(), refreshToken)).willReturn(true);
+		given(userService.findUserById(user.getId())).willReturn(user);
 		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn("new-access-token");
 		given(jwtProvider.createRefreshToken(any())).willReturn("new-refresh-token");
 
-		// when
+		/* [when]
+		 * 실제 토큰 재발급 메서드 실행
+		 */
 		TokenResponseDto result = authService.reissue(expiredAccessToken, refreshTokenRaw);
 
-		// then
+		/* [then]
+		 * 반환 객체가 null 이 아닌지 검증
+		 * accessToken 값이 예상값과 동일한지 검증
+		 * refreshToken 값이 예상값과 동일한지 검증
+		 */
 		assertThat(result).isNotNull();
 		assertThat(result.getAccessToken()).isEqualTo("new-access-token");
 		assertThat(result.getRefreshToken()).isEqualTo("new-refresh-token");

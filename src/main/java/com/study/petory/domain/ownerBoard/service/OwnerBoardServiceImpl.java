@@ -175,7 +175,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
 
-		if (!ownerBoard.isEqualId(image.getOwnerBoard().getId())) {
+		if (!ownerBoard.isEqualId(image.getOwnerBoardId())) {
 			throw new CustomException(ErrorCode.INVALID_INPUT);
 		}
 

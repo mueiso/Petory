@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img width="561" alt="image" src="https://github.com/user-attachments/assets/9ae07f0a-77e5-47e3-a2d6-9f05147c1fe3" />
+<img width="561" alt="image" src="https://github.com/user-attachments/assets/c8000817-918b-4c14-9585-af755c1d0ead" />
 
 [![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=java)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=spring)](https://spring.io/projects/spring-boot)

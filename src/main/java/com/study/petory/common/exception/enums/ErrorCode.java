@@ -17,6 +17,7 @@ public enum ErrorCode implements BaseCode {
 	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
 	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
 	TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "요청이 너무 많습니다."),
+	LAZY_LOADING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Lazy 로딩 문제가 발생했습니다."),
 
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),

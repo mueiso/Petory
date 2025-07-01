@@ -163,6 +163,11 @@ class PlaceServiceImplTest {
 
 		ReflectionTestUtils.setField(place, "id", 1L);
 
+		User user = new User();
+
+		ReflectionTestUtils.setField(user, "id", 1L);
+		ReflectionTestUtils.setField(place, "user", user);
+
 		PlaceUpdateRequestDto dto = new PlaceUpdateRequestDto(
 			"updateTestName",
 			null,
@@ -212,7 +217,10 @@ class PlaceServiceImplTest {
 			.placeName("testName")
 			.build();
 
+		place.deactivateEntity();
+
 		ReflectionTestUtils.setField(place, "id", 1L);
+		ReflectionTestUtils.setField(place, "placeStatus", PlaceStatus.DELETED);
 
 		PlaceStatusChangeRequestDto dto = new PlaceStatusChangeRequestDto(PlaceStatus.ACTIVE);
 
@@ -224,5 +232,13 @@ class PlaceServiceImplTest {
 			() -> assertEquals(PlaceStatus.ACTIVE, place.getPlaceStatus()),
 			() -> assertNull(place.getDeletedAt())
 		);
+	}
+
+	@Test
+	@DisplayName("인기 랭킹")
+	void findPlaceRank() {
+
+		String key = placeServiceImpl.makeKey(PlaceType.ACCOMMODATION);
+
 	}
 }

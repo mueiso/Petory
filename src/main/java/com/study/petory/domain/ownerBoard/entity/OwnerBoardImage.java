@@ -38,4 +38,8 @@ public class OwnerBoardImage extends CreationBasedEntity {
 		this.ownerBoard = ownerBoard;
 	}
 
+	public Long getOwnerBoardId() {
+		return this.ownerBoard != null ? this.getOwnerBoard().getId() : null;
+	}
+
 }

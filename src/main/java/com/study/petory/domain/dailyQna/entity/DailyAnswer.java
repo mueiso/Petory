@@ -1,7 +1,5 @@
 package com.study.petory.domain.dailyQna.entity;
 
-import org.hibernate.annotations.Where;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;
@@ -25,13 +23,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Table(
-	name = "tb_daily_qna",
+	name = "tb_daily_answer",
 	indexes = {
-		@Index(name = "index_user_question",columnList = "user_id, question_id"),
+		@Index(name = "index_user_question",columnList = "user_id, daily_question_id"),
 	}
 	)
 @NoArgsConstructor
-public class DailyQna extends TimeFeatureBasedEntity {
+public class DailyAnswer extends TimeFeatureBasedEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -41,23 +39,23 @@ public class DailyQna extends TimeFeatureBasedEntity {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@JoinColumn(name = "question_id", nullable = false)
+	@JoinColumn(name = "daily_question_id", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Question question;
+	private DailyQuestion dailyQuestion;
 
 	@Column(nullable = false)
 	private String answer;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private DailyQnaStatus dailyQnaStatus;
+	private DailyAnswerStatus dailyAnswerStatus;
 
 	@Builder
-	public DailyQna(User user, Question question, String answer, DailyQnaStatus dailyQnaStatus) {
+	public DailyAnswer(User user, DailyQuestion dailyQuestion, String answer, DailyAnswerStatus dailyAnswerStatus) {
 		this.user = user;
-		this.question = question;
+		this.dailyQuestion = dailyQuestion;
 		this.answer = answer;
-		this.dailyQnaStatus = dailyQnaStatus;
+		this.dailyAnswerStatus = dailyAnswerStatus;
 	}
 
 	public void updateDailyQna(String answer) {
@@ -70,13 +68,13 @@ public class DailyQna extends TimeFeatureBasedEntity {
 	}
 
 	public void updateStatusActive() {
-		this.dailyQnaStatus = DailyQnaStatus.ACTIVE;
+		this.dailyAnswerStatus = DailyAnswerStatus.ACTIVE;
 	}
 	public void updateStatusHidden() {
-		this.dailyQnaStatus = DailyQnaStatus.HIDDEN;
+		this.dailyAnswerStatus = DailyAnswerStatus.HIDDEN;
 	}
 	public void updateStatusDelete() {
-		this.dailyQnaStatus = DailyQnaStatus.DELETED;
+		this.dailyAnswerStatus = DailyAnswerStatus.DELETED;
 	}
 
 	public void setUser(User user) {

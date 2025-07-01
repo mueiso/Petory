@@ -6,8 +6,8 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.repository.AlbumRepository;
-import com.study.petory.domain.dailyQna.repository.DailyQnaRepository;
-import com.study.petory.domain.dailyQna.repository.QuestionRepository;
+import com.study.petory.domain.dailyQna.repository.DailyAnswerRepository;
+import com.study.petory.domain.dailyQna.repository.DailyQuestionRepository;
 import com.study.petory.domain.faq.entity.Faq;
 import com.study.petory.domain.faq.repository.FaqRepository;
 import com.study.petory.domain.feedback.entity.Feedback;
@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class EntityFetcher {
 
 	private final AlbumRepository albumRepository;
-	private final DailyQnaRepository dailyQnaRepository;
+	private final DailyAnswerRepository dailyAnswerRepository;
 	private final FaqRepository faqRepository;
 	private final FeedbackRepository feedbackRepository;
 	private final OwnerBoardRepository ownerBoardRepository;
@@ -39,7 +39,7 @@ public class EntityFetcher {
 	private final PlaceRepository placeRepository;
 	private final TradeBoardRepository tradeBoardRepository;
 	private final UserRepository userRepository;
-	private final QuestionRepository questionRepository;
+	private final DailyQuestionRepository questionRepository;
 
 	public Album findAlbumByAlbumId(Long albumId) {
 		return albumRepository.findById(albumId)

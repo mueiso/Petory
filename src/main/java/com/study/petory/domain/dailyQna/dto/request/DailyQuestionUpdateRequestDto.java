@@ -8,11 +8,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class QuestionUpdateRequestDto {
+public class DailyQuestionUpdateRequestDto {
 
 	@NotBlank
 	@Size(max = 85, message = "85글자 이하로 입력해주세요.")
-	private String content;
+	private String question;
 
 	@NotBlank
 	@Size(max = 10, message = "10글자 이하로 입력해주세요.")

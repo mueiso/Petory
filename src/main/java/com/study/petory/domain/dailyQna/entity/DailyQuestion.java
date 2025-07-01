@@ -16,33 +16,33 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "tb_question")
+@Table(name = "tb_daily_question")
 @NoArgsConstructor
-public class Question extends TimeFeatureBasedEntity {
+public class DailyQuestion extends TimeFeatureBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false)
-	private String content;
+	private String question;
 
 	@Column(nullable = false, unique = true, length = 10)
 	private String date;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private QuestionStatus questionStatus;
+	private DailyQuestionStatus dailyQuestionStatus;
 
 	@Builder
-	public Question(String content, String date, QuestionStatus questionStatus) {
-		this.content = content;
+	public DailyQuestion(String question, String date, DailyQuestionStatus dailyQuestionStatus) {
+		this.question = question;
 		this.date = date;
-		this.questionStatus = questionStatus;
+		this.dailyQuestionStatus = dailyQuestionStatus;
 	}
 
 	public void update(String question, String date) {
-		this.content = question;
+		this.question = question;
 		this.date = date;
 	}
 
@@ -51,14 +51,14 @@ public class Question extends TimeFeatureBasedEntity {
 	}
 
 	public void updateStatusActive() {
-		this.questionStatus = QuestionStatus.ACTIVE;
+		this.dailyQuestionStatus = DailyQuestionStatus.ACTIVE;
 	}
 
 	public void updateStatusInactive() {
-		this.questionStatus = QuestionStatus.INACTIVE;
+		this.dailyQuestionStatus = DailyQuestionStatus.INACTIVE;
 	}
 
 	public void updateStatusDelete() {
-		this.questionStatus = QuestionStatus.DELETED;
+		this.dailyQuestionStatus = DailyQuestionStatus.DELETED;
 	}
 }

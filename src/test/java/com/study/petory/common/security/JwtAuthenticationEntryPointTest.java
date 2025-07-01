@@ -61,7 +61,7 @@ class JwtAuthenticationEntryPointTest {
 		// 버퍼에 출력된 내용을 문자열로 추출
 		String result = stringWriter.toString();
 
-		// 출력된 JSON 문자열이 기대한 응답값과 일치하는지 검증
+		// 응답 JSON 문자열이 기대한 응답값과 일치하는지 검증
 		assertEquals("{\"status\":401,\"message\":\"인증이 필요합니다.\"}", result);
 	}
 }

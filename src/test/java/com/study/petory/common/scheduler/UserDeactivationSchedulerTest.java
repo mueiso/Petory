@@ -14,28 +14,38 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class UserDeactivationSchedulerTest {
 
 	@Mock
-	private UserSchedulerService userSchedulerService; // 내부 서비스 모킹
+	private UserSchedulerService userSchedulerService;
 
 	@InjectMocks
-	private UserDeactivationScheduler userDeactivationScheduler; // 테스트 대상 클래스
+	private UserDeactivationScheduler userDeactivationScheduler;
 
 	@Test
 	void sendDeactivationWarningEmails_호출시_서비스메서드_실행() {
 
-		// when
+		/* [when]
+		 * 테스트 대상 메서드 호출
+		 * 내부적으로 userSchedulerService.sendDeactivationWarningEmails() 호출
+		 */
 		userDeactivationScheduler.sendDeactivationWarningEmails();
 
-		// then
-		verify(userSchedulerService).sendDeactivationWarningEmails(); // 호출 여부 검증
+		/* [then]
+		 * userSchedulerService 의 해당 메서드가 정확히 호출됐는지 검증
+		 */
+		verify(userSchedulerService).sendDeactivationWarningEmails();
 	}
 
 	@Test
 	void deactivateInactiveUsers_호출시_서비스메서드_실행() {
 
-		// when
+		/* [when]
+		 * 테스트 대상 메서드 호출
+		 * 내부적으로 userSchedulerService.deactivateInactiveUsers() 실행
+		 */
 		userDeactivationScheduler.deactivateInactiveUsers();
 
-		// then
-		verify(userSchedulerService).deactivateInactiveUsers(); // 호출 여부 검증
+		/* [then]
+		 * userSchedulerService 의 해당 메서드가 정확히 호출됐는지 검증
+		 */
+		verify(userSchedulerService).deactivateInactiveUsers();
 	}
 }

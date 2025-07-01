@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
@@ -111,10 +112,28 @@ class AuthServiceImplTest {
 		 * userStatus ACTIVE 로 복구되었는지 검증
 		 */
 		assertThat(result).isNotNull();
-		assertThat(result.getAccessToken()).isEqualTo("access-token"); // accessToken 값 확인
-		assertThat(result.getRefreshToken()).isEqualTo("refresh-token"); // refreshToken 값 확인
-		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE); // 상태가 ACTIVE로 복구되었는지 확인
+		assertThat(result.getAccessToken()).isEqualTo("access-token");
+		assertThat(result.getRefreshToken()).isEqualTo("refresh-token");
+		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 	}
+
+	@Test
+	void issueToken_SUSPENDED_상태_로그인_불가_예외발생() {
+
+		// given - 정지 상태(SUSPENDED)의 유저 생성
+		User user = createUserWithStatus(UserStatus.SUSPENDED);
+		user.updateStatus(UserStatus.SUSPENDED); // 명시적으로 정지 상태 설정
+		ReflectionTestUtils.setField(user, "id", 3L); // ID 주입
+
+		// userService.findUserByEmail() 호출 시 위 유저 반환하도록 설정
+		given(userService.findUserByEmail(anyString())).willReturn(user);
+
+		// when & then - 로그인 시도 시 예외 발생 검증
+		assertThatThrownBy(() -> authService.issueToken(user)) // 로그인 시도
+			.isInstanceOf(CustomException.class) // 예외 타입 확인
+			.hasMessageContaining("로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다."); // 에러 메시지 확인 (ErrorCode 이름 기반)
+	}
+
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {

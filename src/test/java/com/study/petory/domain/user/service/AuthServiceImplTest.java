@@ -321,6 +321,38 @@ class AuthServiceImplTest {
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.TOKEN_NOT_EXPIRED);
 	}
 
+	@Test
+	void reissue_accessToken_만료_정상_재발급_성공() {
+
+		// given
+		String expiredAccessToken = "expired-access-token";
+		String refreshTokenRaw = "Bearer valid-refresh-token";
+		String refreshToken = "valid-refresh-token";  // Bearer 제거된 실제 토큰
+
+		// 유저 객체 생성
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 1L);
+
+		// mock 설정
+		given(jwtProvider.isAccessTokenExpired(expiredAccessToken)).willReturn(true);  // accessToken 만료됨
+		given(jwtProvider.subStringToken(refreshTokenRaw)).willReturn(refreshToken);   // "Bearer " 제거
+		given(jwtProvider.getClaims(refreshToken)).willReturn(
+			Jwts.claims().setSubject(String.valueOf(user.getId())));                    // userId 추출용 Claims
+
+		given(jwtProvider.isValidRefreshToken(user.getId(), refreshToken)).willReturn(true);  // refreshToken 유효
+		given(userService.findUserById(user.getId())).willReturn(user);                       // 유저 조회
+		given(jwtProvider.createAccessToken(any(), any(), any(), any())).willReturn("new-access-token");
+		given(jwtProvider.createRefreshToken(any())).willReturn("new-refresh-token");
+
+		// when
+		TokenResponseDto result = authService.reissue(expiredAccessToken, refreshTokenRaw);
+
+		// then
+		assertThat(result).isNotNull();
+		assertThat(result.getAccessToken()).isEqualTo("new-access-token");
+		assertThat(result.getRefreshToken()).isEqualTo("new-refresh-token");
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

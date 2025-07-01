@@ -21,6 +21,7 @@ public enum ErrorCode implements BaseCode {
 	DATE_TIME_PARSE_FAIL(HttpStatus.BAD_REQUEST, "날짜 형식이 올바르지 않습니다."),
 	DATE_TIME_IS_NULL(HttpStatus.BAD_REQUEST, "잘못된 파라미터 요청입니다."),
 
+
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
 	EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),

@@ -116,4 +116,8 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 		comment.deactivateEntity();
 	}
 
+	public void test() {
+		System.out.println("빌드 시간아 줄어라!");
+	}
+
 }

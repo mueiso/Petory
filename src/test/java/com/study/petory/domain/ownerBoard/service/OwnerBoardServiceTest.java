@@ -2,6 +2,7 @@ package com.study.petory.domain.ownerBoard.service;
 
 import static com.study.petory.domain.user.entity.UserStatus.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import java.util.ArrayList;
@@ -49,33 +50,26 @@ public class OwnerBoardServiceTest {
 	@InjectMocks
 	private OwnerBoardServiceImpl ownerBoardService;
 
-	private User mockUser;
-
-	// @BeforeEach
-	// void SetUser() {
-	// 	List<UserRole> userRole = new ArrayList<>();
-	// 	userRole.add(new UserRole(Role.USER));
-	// 	UserPrivateInfo info = new UserPrivateInfo(1, "name", "010-0000-0000");
-	// 	this.mockUser = new User("nickname", "test@mail.com", info, userRole);
-	// 	ReflectionTestUtils.setField(mockUser, "id", 1L);
-	// }
-
 	@Test
 	void 게시글_저장에_성공한다_이미지_포함() {
 		// given
-		User mockUser = createActiveUser();
+		User user = createActiveUser(1L);
 		OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
 
 		List<MultipartFile> images = List.of(
 			new MockMultipartFile("image", "test.jpg", "image/jpeg", "image data".getBytes())
 		);
 
-		OwnerBoard mockBoard = createOwnerBoard("제목", "내용");
+		OwnerBoard ownerBoard = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(user)
+			.build();
 
 		List<String> mockUrls = List.of("https://s3.url/test1.jpg", "https://s3.url/test2.jpg");
 
-		given(userService.findUserById(1L)).willReturn(mockUser);
-		given(ownerBoardRepository.save(any(OwnerBoard.class))).willReturn(mockBoard);
+		given(userService.findUserById(1L)).willReturn(user);
+		given(ownerBoardRepository.save(any(OwnerBoard.class))).willReturn(ownerBoard);
 		given(ownerBoardImageService.uploadAndSaveAll(any(), any())).willReturn(mockUrls);
 
 		// when
@@ -87,31 +81,32 @@ public class OwnerBoardServiceTest {
 		assertThat(result.getImageUrls()).containsExactlyElementsOf(mockUrls);
 	}
 
-	// @Test
-	// void 게시글_저장에_성공한다_이미지_미포함() {
-	// 	// given
-	// 	OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
-	// 	List<MultipartFile> images = null;
-	//
-	// 	OwnerBoard mockBoard = OwnerBoard.builder()
-	// 		.title("제목")
-	// 		.content("내용")
-	// 		.user(mockUser)
-	// 		.build();
-	//
-	// 	given(userRepository.findById(1L)).willReturn(Optional.of(mockUser));
-	// 	given(ownerBoardRepository.save(any(OwnerBoard.class))).willReturn(mockBoard);
-	//
-	// 	// when
-	// 	OwnerBoardCreateResponseDto result = ownerBoardService.saveOwnerBoard(requestDto, images);
-	//
-	// 	// then
-	// 	assertThat(result.getTitle()).isEqualTo("제목");
-	// 	assertThat(result.getContent()).isEqualTo("내용");
-	// 	assertTrue(result.getImageUrls().isEmpty());
-	// 	verify(ownerBoardImageService, never()).uploadAndSaveAll(any(), any());
-	// }
-	//
+	@Test
+	void 게시글_저장에_성공한다_이미지_미포함() {
+		// given
+		OwnerBoardCreateRequestDto requestDto = new OwnerBoardCreateRequestDto("제목", "내용");
+		List<MultipartFile> images = null;
+
+		User user = createActiveUser(1L);
+
+		OwnerBoard ownerBoard = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(user)
+			.build();
+
+		given(userService.findUserById(1L)).willReturn(user);
+		given(ownerBoardRepository.save(any(OwnerBoard.class))).willReturn(ownerBoard);
+
+		// when
+		OwnerBoardCreateResponseDto result = ownerBoardService.saveOwnerBoard(1L, requestDto, images);
+
+		// then
+		assertThat(result.getTitle()).isEqualTo("제목");
+		assertThat(result.getContent()).isEqualTo("내용");
+		assertTrue(result.getImageUrls().isEmpty());
+	}
+
 	// @Test
 	// void 제목이_포함된_게시글_조회에_성공한다() {
 	// 	// given
@@ -301,8 +296,13 @@ public class OwnerBoardServiceTest {
 	// }
 
 	// 기본 활성 유저 생성
-	private User createActiveUser() {
-		return createUserWithStatus(ACTIVE);
+	private User createActiveUser(Long id) {
+		User user = createUserWithStatus(ACTIVE);
+
+		// user Id 주입
+		ReflectionTestUtils.setField(user, "id", id);
+
+		return user;
 	}
 
 
@@ -322,9 +322,6 @@ public class OwnerBoardServiceTest {
 			.userRole(new ArrayList<>(List.of(UserRole.builder().role(Role.USER).build())))
 			.build();
 
-		// user Id 주입
-		ReflectionTestUtils.setField(user, "id", 1L);
-
 		// 전달받은 상태로 userStatus 설정
 		user.updateStatus(status);
 
@@ -332,13 +329,13 @@ public class OwnerBoardServiceTest {
 	}
 
 	// 게시글 등록 유틸 메서드
-	private OwnerBoard createOwnerBoard(String title, String content) {
+	private OwnerBoard createOwnerBoard() {
 
-		User user = createActiveUser();
+		User user = createActiveUser(1L);
 
 		OwnerBoard ownerBoard = OwnerBoard.builder()
-			.title(title)
-			.content(content)
+			.title("제목")
+			.content("내용")
 			.user(user)
 			.build();
 

@@ -135,6 +135,9 @@ public class SecurityConfig {
 		// 허용할 요청 헤더 지정
 		config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
+		// expose 설정 추가 (프론트가 응답 헤더 읽을 수 있도록)
+		config.setExposedHeaders(List.of("Authorization", "X-Refresh-Token"));
+
 		/*
 		 * 프론트 구현하여 연동 시 true 로 설정 변경 필요
 		 * 자격 증명 포함 허용 (예: 쿠키, Authorization 헤더 등)

@@ -49,11 +49,18 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 		// 토큰 발급 및 저장 처리
 		TokenResponseDto tokens = authServiceImpl.issueToken(user);
 
-		// JSON 응답 설정
-		response.setStatus(HttpServletResponse.SC_OK);
-		response.setContentType("application/json;charset=UTF-8");
+		// 헤더로 토큰 전달
+		response.setHeader("Authorization", tokens.getAccessToken());
+		response.setHeader("X-Refresh-Token", tokens.getRefreshToken());
 
-		// accessToken + refreshToken 을 JSON 응답으로 전달
-		objectMapper.writeValue(response.getWriter(), tokens);
+		// 헤더를 JS 에서 읽을 수 있도록 CORS expose 설정 필요
+		response.setHeader("Access-Control-Expose-Headers", "Authorization, X-Refresh-Token");
+
+		// // JSON 응답 설정
+		// response.setStatus(HttpServletResponse.SC_OK);
+		// response.setContentType("application/json;charset=UTF-8");
+		//
+		// // accessToken + refreshToken 을 JSON 응답으로 전달
+		// objectMapper.writeValue(response.getWriter(), tokens);
 	}
 }

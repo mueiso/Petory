@@ -55,12 +55,5 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 		// 헤더를 JS 에서 읽을 수 있도록 CORS expose 설정 필요
 		response.setHeader("Access-Control-Expose-Headers", "Authorization, X-Refresh-Token");
-
-		// // JSON 응답 설정
-		// response.setStatus(HttpServletResponse.SC_OK);
-		// response.setContentType("application/json;charset=UTF-8");
-		//
-		// // accessToken + refreshToken 을 JSON 응답으로 전달
-		// objectMapper.writeValue(response.getWriter(), tokens);
 	}
 }

@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 	private final AuthServiceImpl authServiceImpl;
-	private final ObjectMapper objectMapper = new ObjectMapper();  // JSON 변환용
 
 	@Override
 	public void onAuthenticationSuccess(

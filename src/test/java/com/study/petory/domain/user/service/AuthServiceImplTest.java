@@ -423,7 +423,7 @@ class AuthServiceImplTest {
 		);
 
 		/* [then]
-		 * ALREADY_HAS_SAME_ROLE 예외 발생 확인
+		 * ALREADY_HAS_SAME_ROLE 예외 코드 확인
 		 */
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ALREADY_HAS_SAME_ROLE);
 	}
@@ -436,7 +436,7 @@ class AuthServiceImplTest {
 		 */
 		Long notExistUserId = 999L;
 
-		// mock 설정: 해당 ID로 사용자 조회 시 예외 발생
+		// mock 설정 - 해당 ID로 사용자 조회 시 예외 발생
 		given(userService.findUserById(notExistUserId))
 			.willThrow(new CustomException(ErrorCode.USER_NOT_FOUND));
 
@@ -452,6 +452,31 @@ class AuthServiceImplTest {
 		 * USER_NOT_FOUND 예외 코드 확인
 		 */
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_NOT_FOUND);
+	}
+
+	@Test
+	void removeRoleFromUser_정상적인_권한_제거_성공() {
+
+		/* [given]
+		 * USER, ADMIN 권한을 가진 유저 생성
+		 */
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		user.getUserRole().add(UserRole.builder().role(Role.ADMIN).build());
+		ReflectionTestUtils.setField(user, "id", 300L);
+
+		// mock 설정 - 유저 ID로 조회 시 해당 유저 리턴
+		given(userService.findUserById(300L)).willReturn(user);
+
+		/* [when]
+		 * ADMIN 권한 제거 시도
+		 */
+		List<Role> rolesAfterRemoval = authService.removeRoleFromUser(300L, Role.ADMIN);
+
+		/* [then]
+		 * USER 권한만 남아있는지 확인
+		 */
+		assertThat(rolesAfterRemoval).containsOnly(Role.USER);
+		assertThat(rolesAfterRemoval).doesNotContain(Role.ADMIN);
 	}
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드

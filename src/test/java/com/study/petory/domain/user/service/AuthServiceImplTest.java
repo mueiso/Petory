@@ -556,6 +556,33 @@ class AuthServiceImplTest {
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ALREADY_SUSPENDED);
 	}
 
+	@Test
+	void restoreUser_정지된_계정_복구_성공() {
+
+		/* [given]
+		 * 유저 상태: SUSPENDED
+		 * deletedAt: 최근 날짜로 설정
+		 */
+		User user = createUserWithStatus(UserStatus.SUSPENDED);
+		user.deactivateEntity();
+		ReflectionTestUtils.setField(user, "id", 700L);
+
+		// mock 설정 - ID로 조회 시 해당 유저 반환
+		given(userService.findUserById(user.getId())).willReturn(user);
+
+		/* [when]
+		 * 정지된 계정 복구 요청
+		 */
+		authService.restoreUser(user.getId());
+
+		/* [then]
+		 * 유저 상태가 ACTIVE 로 복구되었는지 확인
+		 * deletedAt 이 null 로 초기화되었는지 확인
+		 */
+		assertThat(user.getUserStatus()).isEqualTo(UserStatus.ACTIVE);
+		assertThat(user.getDeletedAt()).isNull();
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

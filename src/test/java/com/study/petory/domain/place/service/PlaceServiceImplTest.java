@@ -45,6 +45,9 @@ class PlaceServiceImplTest {
 	@Mock
 	private UserService userService;
 
+	@Mock
+	private PlaceImageService placeImageService;
+
 	@InjectMocks
 	private PlaceServiceImpl placeServiceImpl;
 
@@ -87,7 +90,7 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("전체 장소 조회 - 파람이 모두 입력되지 않는 경우")
+	@DisplayName("전체 장소 조회")
 	void findAllPlace() {
 
 		String placeName = null;
@@ -104,7 +107,7 @@ class PlaceServiceImplTest {
 		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, address,
 			pageable);
 
-		assertAll("파람이 모두 있을 경우 조회 로직 검증",
+		assertAll("장소 조회 로직 검증",
 			() -> assertEquals(1, findAllPlace.getContent().size()),
 			() -> verify(placeRepository).findAllPlace(placeName, placeType, address, pageable)
 		);

@@ -70,27 +70,16 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		ownerBoardRepository.save(ownerBoard);
 
-		List<String> urls = new ArrayList<>();
-
-		if (images != null && !images.isEmpty()) {
-			urls = ownerBoardImageService.uploadAndSaveAll(images, ownerBoard);
-		}
-
-		return OwnerBoardCreateResponseDto.of(ownerBoard, urls);
+		return OwnerBoardCreateResponseDto.of(ownerBoard, ownerBoardImageService.uploadAndSaveAll(images, ownerBoard));
 	}
 
 	// 게시글 전체 조회
 	@Override
 	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
+		Page<OwnerBoardGetAllResponseDto> response = ownerBoardRepository.findAllWithFirstImageAndTitleOptional(title,
+			pageable);
 
-		Page<OwnerBoard> boards;
-		if (title != null) {
-			boards = ownerBoardRepository.findByTitleContaining(title, pageable);
-		} else {
-			boards = ownerBoardRepository.findAllWithImages(pageable);
-		}
-
-		return boards.map(OwnerBoardGetAllResponseDto::from);
+		return ownerBoardRepository.findAllWithFirstImageAndTitleOptional(title, pageable);
 	}
 
 	// 게시글 단건 조회
@@ -187,7 +176,7 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 
 		OwnerBoardImage image = ownerBoardImageService.findImageById(imageId);
 
-		if (!ownerBoard.isEqualId(image.getOwnerBoard().getId())) {
+		if (!ownerBoard.isEqualId(image.getOwnerBoardId())) {
 			throw new CustomException(ErrorCode.INVALID_INPUT);
 		}
 

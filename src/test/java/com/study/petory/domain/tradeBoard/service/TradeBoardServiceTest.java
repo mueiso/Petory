@@ -125,7 +125,7 @@ class TradeBoardServiceTest {
 		List<TradeBoard> tradeBoards = List.of(tradeBoard1, tradeBoard2);
 		Page<TradeBoard> page = new PageImpl<>(tradeBoards, pageable, tradeBoards.size());
 
-		when(tradeBoardQueryRepository.findAll(null, pageable)).thenReturn(page);
+		when(tradeBoardRepository.findAll(nullable(TradeCategory.class), eq(pageable))).thenReturn(page);
 
 		// when
 		Page<TradeBoardGetAllResponseDto> responseDto = tradeBoardService.findAllTradeBoard(null, pageable);
@@ -143,7 +143,7 @@ class TradeBoardServiceTest {
 		List<TradeBoard> tradeBoards = List.of(tradeBoard1);
 		Page<TradeBoard> page = new PageImpl<>(tradeBoards, pageable, tradeBoards.size());
 
-		when(tradeBoardQueryRepository.findAll(TradeCategory.TOYS, pageable)).thenReturn(page);
+		when(tradeBoardRepository.findAll(TradeCategory.TOYS, pageable)).thenReturn(page);
 
 		// when
 		Page<TradeBoardGetAllResponseDto> responseDto = tradeBoardService.findAllTradeBoard(TradeCategory.TOYS, pageable);
@@ -177,7 +177,7 @@ class TradeBoardServiceTest {
 		List<TradeBoard> tradeBoards = List.of(tradeBoard1, tradeBoard2);
 		Page<TradeBoard> page = new PageImpl<>(tradeBoards, pageable, tradeBoards.size());
 
-		when(tradeBoardQueryRepository.findByUserId(user.getId(), pageable)).thenReturn(page);
+		when(tradeBoardRepository.findByUserId(user.getId(), pageable)).thenReturn(page);
 
 		// when
 		Page<TradeBoardGetAllResponseDto> responseDto = tradeBoardService.findByUser(user.getId(), pageable);

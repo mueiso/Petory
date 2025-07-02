@@ -59,7 +59,7 @@ public class OwnerBoardController {
 	 * @return id, 제목, 내용, 생성일
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping(consumes = {"multipart/form-data"})
 	public ResponseEntity<CommonResponse<OwnerBoardCreateResponseDto>> createOwnerBoard(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@RequestPart @Valid OwnerBoardCreateRequestDto dto,

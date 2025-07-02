@@ -583,6 +583,32 @@ class AuthServiceImplTest {
 		assertThat(user.getDeletedAt()).isNull();
 	}
 
+	@Test
+	void restoreUser_비활성화_상태가_아닌_경우_예외발생() {
+
+		/* [given]
+		 * userStatus 가 ACTIVE 이며, deletedAt 이 null 인 유저 생성
+		 */
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 800L);
+
+		// mock 설정 - 유저 ID로 조회 시 해당 유저 반환
+		given(userService.findUserById(user.getId())).willReturn(user);
+
+		/* [when]
+		 * 복구 시도 → 예외 발생 예상
+		 */
+		CustomException exception = catchThrowableOfType(() ->
+				authService.restoreUser(user.getId()),
+			CustomException.class
+		);
+
+		/* [then]
+		 * USER_NOT_DEACTIVATED 예외 코드 검증
+		 */
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_NOT_DEACTIVATED);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

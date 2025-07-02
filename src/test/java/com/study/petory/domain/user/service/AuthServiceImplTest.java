@@ -530,6 +530,32 @@ class AuthServiceImplTest {
 		assertThat(user.getDeletedAt()).isNotNull();
 	}
 
+	@Test
+	void suspendUser_이미_정지된_계정_정지_시_예외발생() {
+
+		/* [given]
+		 * 이미 SUSPENDED 상태인 유저 생성
+		 */
+		User user = createUserWithStatus(UserStatus.SUSPENDED);
+		ReflectionTestUtils.setField(user, "id", 600L);
+
+		// mock 설정 - ID로 조회 시 해당 유저 반환
+		given(userService.findUserById(user.getId())).willReturn(user);
+
+		/* [when]
+		 * 이미 정지된 계정을 다시 정지하려 하면 → 예외 발생 예상
+		 */
+		CustomException exception = catchThrowableOfType(
+			() -> authService.suspendUser(user.getId()),
+			CustomException.class
+		);
+
+		/* [then]
+		 * ALREADY_SUSPENDED 예외 코드 확인
+		 */
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ALREADY_SUSPENDED);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

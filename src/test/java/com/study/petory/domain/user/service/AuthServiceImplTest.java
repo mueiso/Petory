@@ -505,6 +505,31 @@ class AuthServiceImplTest {
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ROLE_NOT_FOUND);
 	}
 
+	@Test
+	void suspendUser_정상_계정_정지_성공() {
+
+		/* [given]
+		 * ACTIVE 상태의 유저 생성
+		 */
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 500L);
+
+		// mock 설정 - ID로 조회 시 해당 유저 반환
+		given(userService.findUserById(user.getId())).willReturn(user);
+
+		/* [when]
+		 * 유저 정지 처리 실행
+		 */
+		authService.suspendUser(user.getId());
+
+		/* [then]
+		 * 유저 상태가 SUSPENDED 로 변경되었는지 검증
+		 * deletedAt 값이 null 이 아님 → 정지 처리되면서 deactivateEntity() 호출되었는지 확인
+		 */
+		assertThat(user.getUserStatus()).isEqualTo(UserStatus.SUSPENDED);
+		assertThat(user.getDeletedAt()).isNotNull();
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

@@ -428,6 +428,32 @@ class AuthServiceImplTest {
 		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ALREADY_HAS_SAME_ROLE);
 	}
 
+	@Test
+	void addRoleToUser_유저_존재하지_않으면_예외() {
+
+		/* [given]
+		 * 존재하지 않는 사용자 ID
+		 */
+		Long notExistUserId = 999L;
+
+		// mock 설정: 해당 ID로 사용자 조회 시 예외 발생
+		given(userService.findUserById(notExistUserId))
+			.willThrow(new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		/* [when]
+		 * 존재하지 않는 사용자에게 권한 추가 시도 → 예외 발생
+		 */
+		CustomException exception = catchThrowableOfType(() ->
+				authService.addRoleToUser(notExistUserId, Role.ADMIN),
+			CustomException.class
+		);
+
+		/* [then]
+		 * USER_NOT_FOUND 예외 코드 확인
+		 */
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_NOT_FOUND);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

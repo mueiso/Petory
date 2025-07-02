@@ -24,11 +24,4 @@ public class DailyAnswerGetResponseDto {
 			dailyAnswer.getCreatedAt()
 		);
 	}
-
-	public static DailyAnswerGetResponseDto from(String answer, LocalDateTime createdAt) {
-		return new DailyAnswerGetResponseDto(
-			answer,
-			createdAt
-		);
-	}
 }

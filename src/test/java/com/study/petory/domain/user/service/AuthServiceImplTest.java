@@ -441,7 +441,7 @@ class AuthServiceImplTest {
 			.willThrow(new CustomException(ErrorCode.USER_NOT_FOUND));
 
 		/* [when]
-		 * 존재하지 않는 사용자에게 권한 추가 시도 → 예외 발생
+		 * 존재하지 않는 사용자에게 권한 추가 시도 → 예외 발생 예상
 		 */
 		CustomException exception = catchThrowableOfType(() ->
 				authService.addRoleToUser(notExistUserId, Role.ADMIN),
@@ -477,6 +477,32 @@ class AuthServiceImplTest {
 		 */
 		assertThat(rolesAfterRemoval).containsOnly(Role.USER);
 		assertThat(rolesAfterRemoval).doesNotContain(Role.ADMIN);
+	}
+
+	@Test
+	void removeRoleFromUser_존재하지_않는_권한_제거_시_예외발생() {
+
+		/* [given]
+		 * USER 권한만 가진 유저 생성
+		 */
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		ReflectionTestUtils.setField(user, "id", 400L);
+
+		// mock 설정 - 유저 ID로 조회 시 해당 유저 리턴
+		given(userService.findUserById(400L)).willReturn(user);
+
+		/* [when]
+		 * 존재하지 않는 ADMIN 권한 제거 시도 → 예외 발생 예상
+		 */
+		CustomException exception = catchThrowableOfType(() ->
+				authService.removeRoleFromUser(400L, Role.ADMIN),
+			CustomException.class
+		);
+
+		/* [then]
+		 * ROLE_NOT_FOUND 예외 코드 확인
+		 */
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ROLE_NOT_FOUND);
 	}
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드

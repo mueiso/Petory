@@ -401,6 +401,35 @@ class AuthServiceImplTest {
 		assertThat(roles).hasSize(2);
 	}
 
+	@Test
+	void addRoleToUser_이미_존재하는_권한_추가_시_예외() {
+
+		// given - USER 역할이 이미 포함된 유저 생성
+		User user = User.builder()
+			.nickname("기존유저")
+			.email("exist@user.com")
+			.userPrivateInfo(UserPrivateInfo.builder()
+				.authId("auth456")
+				.name("홍길동")
+				.mobileNum("01098765432")
+				.build())
+			.userRole(new ArrayList<>(List.of(UserRole.builder().role(Role.USER).build())))
+			.build();
+		ReflectionTestUtils.setField(user, "id", 100L);
+
+		// mock 설정 - 유저 ID로 조회하면 해당 유저 리턴
+		given(userService.findUserById(100L)).willReturn(user);
+
+		// when - 이미 존재하는 USER 권한 추가 시도
+		CustomException exception = catchThrowableOfType(() ->
+				authService.addRoleToUser(100L, Role.USER),
+			CustomException.class
+		);
+
+		// then - ALREADY_HAS_SAME_ROLE 예외 발생 확인
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ALREADY_HAS_SAME_ROLE);
+	}
+
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

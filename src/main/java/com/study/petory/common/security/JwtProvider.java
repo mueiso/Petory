@@ -195,6 +195,11 @@ public class JwtProvider {
 		}
 	}
 
+	// Redis 키 네이밍: "RT:{userId}"
+	private String getRefreshTokenKey(Long userId) {
+		return "RT:" + userId;
+	}
+
 	/*
 	 * Redis 에 userId를 키로 하여 Refresh Token 을 저장
 	 * Redis TTL(Time-To-Live)은 7일 → 자동 만료
@@ -219,7 +224,7 @@ public class JwtProvider {
 	// 로그아웃 시 Redis 에서 해당 사용자의 Refresh Token 삭제
 	public void deleteRefreshToken(Long userId) {
 
-		loginRefreshToken.delete(String.valueOf(userId));
+		loginRefreshToken.delete(getRefreshTokenKey(userId));
 	}
 
 	/*
@@ -228,7 +233,7 @@ public class JwtProvider {
 	 */
 	public boolean isValidRefreshToken(Long userId, String refreshToken) {
 
-		String saved = loginRefreshToken.opsForValue().get(String.valueOf(userId));
+		String saved = loginRefreshToken.opsForValue().get(getRefreshTokenKey(userId));
 		return saved != null && saved.equals(refreshToken);
 	}
 
@@ -236,7 +241,7 @@ public class JwtProvider {
 	public boolean isAccessTokenExpired(String token) {
 		try {
 			getClaims(token);
-			return false; // 예외 없이 Claims 얻었으면 유효
+			return false;  // 예외 없이 Claims 얻었으면 유효
 		} catch (CustomException ex) {
 			if (ex.getErrorCode() == ErrorCode.EXPIRED_TOKEN) {
 				return true;

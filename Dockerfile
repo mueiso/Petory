@@ -4,18 +4,20 @@ FROM amazoncorretto:17 AS builder
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# Gradle과 소스 코드 복사
+# 의존성 파일만 먼저 복사 (Layer 캐싱 최적화)
 COPY gradlew gradlew
 COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
-COPY src src
 
-# gradlew 실행 권한 부여
 RUN chmod +x gradlew
 
-# Gradle 빌드 실행 (테스트 및 체크 제외)
-RUN ./gradlew build -x test -x check
+# 의존성만 먼저 다운로드 (캐시 활용 가능)
+RUN ./gradlew dependencies --no-daemon
+
+# 소스 코드는 나중에 복사 (코드 변경 시에만 이 Layer부터 재빌드)
+COPY src src
+RUN ./gradlew build -x test -x check --no-daemon
 
 # JAR 파일 복사 (여러 JAR 파일 처리)
 RUN find build/libs -name "*.jar" -not -name "*plain*" -exec cp {} app.jar \;

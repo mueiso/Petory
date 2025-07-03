@@ -1,15 +1,15 @@
-package com.study.petory.domain.tradeBoard.service;
+package com.study.petory.domain.tradeboard.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.common.util.AbstractImageService;
-import com.study.petory.common.util.S3Uploader;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardImageRepository;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.util.AbstractImageService;
+import com.study.petory.common.util.S3Uploader;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoardImage;
+import com.study.petory.domain.tradeboard.repository.TradeBoardImageRepository;
 
 @Service
 public class TradeBoardImageService extends AbstractImageService<TradeBoardImage> {

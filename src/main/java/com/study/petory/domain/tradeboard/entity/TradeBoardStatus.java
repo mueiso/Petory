@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.entity;
+package com.study.petory.domain.tradeboard.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

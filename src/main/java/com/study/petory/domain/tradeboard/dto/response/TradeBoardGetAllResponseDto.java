@@ -1,9 +1,9 @@
-package com.study.petory.domain.tradeBoard.dto.response;
+package com.study.petory.domain.tradeboard.dto.response;
 
 import java.util.List;
 
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoardImage;
 
 import lombok.Getter;
 

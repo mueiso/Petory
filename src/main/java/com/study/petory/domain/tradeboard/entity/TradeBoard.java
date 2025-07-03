@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.entity;
+package com.study.petory.domain.tradeboard.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardUpdateRequestDto;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.CascadeType;

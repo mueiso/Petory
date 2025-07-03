@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.service;
+package com.study.petory.domain.tradeboard.service;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -20,17 +20,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardQueryRepository;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardCreateRequestDto;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardUpdateRequestDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetAllResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardUpdateResponseDto;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoardStatus;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.repository.TradeBoardQueryRepository;
+import com.study.petory.domain.tradeboard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
@@ -54,7 +54,6 @@ class TradeBoardServiceTest {
 
 	@Mock
 	private TradeBoardImageService tradeBoardImageService;
-
 
 	private User user;
 	private TradeBoard tradeBoard1;
@@ -146,7 +145,8 @@ class TradeBoardServiceTest {
 		when(tradeBoardRepository.findAll(TradeCategory.TOYS, pageable)).thenReturn(page);
 
 		// when
-		Page<TradeBoardGetAllResponseDto> responseDto = tradeBoardService.findAllTradeBoard(TradeCategory.TOYS, pageable);
+		Page<TradeBoardGetAllResponseDto> responseDto = tradeBoardService.findAllTradeBoard(TradeCategory.TOYS,
+			pageable);
 
 		// then
 		assertThat(responseDto).isNotEmpty();

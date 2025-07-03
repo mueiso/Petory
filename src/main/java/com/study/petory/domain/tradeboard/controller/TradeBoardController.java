@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.controller;
+package com.study.petory.domain.tradeboard.controller;
 
 import java.util.List;
 
@@ -26,15 +26,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.service.TradeBoardService;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardCreateRequestDto;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardUpdateRequestDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetAllResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardUpdateResponseDto;
+import com.study.petory.domain.tradeboard.entity.TradeBoardStatus;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.service.TradeBoardService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +58,8 @@ public class TradeBoardController {
 		@Valid @RequestPart TradeBoardCreateRequestDto requestDto,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		return CommonResponse.of(SuccessCode.CREATED, tradeBoardService.saveTradeBoard(currentUser.getId(), requestDto, images));
+		return CommonResponse.of(SuccessCode.CREATED,
+			tradeBoardService.saveTradeBoard(currentUser.getId(), requestDto, images));
 	}
 
 	/**
@@ -114,7 +115,8 @@ public class TradeBoardController {
 		@PathVariable Long tradeBoardId,
 		@Valid @RequestBody TradeBoardUpdateRequestDto requestDto
 	) {
-		return CommonResponse.of(SuccessCode.UPDATED, tradeBoardService.updateTradeBoard(currentUser.getId(), tradeBoardId, requestDto));
+		return CommonResponse.of(SuccessCode.UPDATED,
+			tradeBoardService.updateTradeBoard(currentUser.getId(), tradeBoardId, requestDto));
 	}
 
 	/**

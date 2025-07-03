@@ -1,22 +1,19 @@
-package com.study.petory.domain.tradeBoard.repository;
+package com.study.petory.domain.tradeboard.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
-import com.study.petory.domain.tradeBoard.entity.QTradeBoard;
-import com.study.petory.domain.tradeBoard.entity.QTradeBoardImage;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.entity.QTradeBoard;
+import com.study.petory.domain.tradeboard.entity.QTradeBoardImage;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoardStatus;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
 import com.study.petory.domain.user.entity.QUser;
 
 import lombok.RequiredArgsConstructor;

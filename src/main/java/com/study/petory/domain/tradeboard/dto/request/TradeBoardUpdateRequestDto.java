@@ -1,6 +1,7 @@
-package com.study.petory.domain.tradeBoard.dto.request;
+package com.study.petory.domain.tradeboard.dto.request;
 
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.entity.TradeBoardStatus;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class TradeBoardCreateRequestDto {
+public class TradeBoardUpdateRequestDto {
 
 	@NotNull(message = "카테고리를 입력해주세요.")
 	private final TradeCategory category;
@@ -25,4 +26,7 @@ public class TradeBoardCreateRequestDto {
 
 	@NotNull(message = "금액을 입력해주세요.")
 	private final Integer price;
+
+	@NotNull(message = "판매하시는 물품의 상태를 입력해주세요.")
+	private final TradeBoardStatus status;
 }

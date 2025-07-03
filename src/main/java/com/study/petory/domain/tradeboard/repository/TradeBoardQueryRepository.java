@@ -1,11 +1,10 @@
-package com.study.petory.domain.tradeBoard.repository;
-
-import org.springframework.data.domain.Pageable;
+package com.study.petory.domain.tradeboard.repository;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
 
 public interface TradeBoardQueryRepository {
 

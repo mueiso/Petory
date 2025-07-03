@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.entity;
+package com.study.petory.domain.tradeboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.CreationBasedEntity;

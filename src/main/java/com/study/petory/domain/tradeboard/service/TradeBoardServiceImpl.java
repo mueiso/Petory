@@ -1,4 +1,4 @@
-package com.study.petory.domain.tradeBoard.service;
+package com.study.petory.domain.tradeboard.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +11,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardCreateRequestDto;
-import com.study.petory.domain.tradeBoard.dto.request.TradeBoardUpdateRequestDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardCreateResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetAllResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardGetResponseDto;
-import com.study.petory.domain.tradeBoard.dto.response.TradeBoardUpdateResponseDto;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardImage;
-import com.study.petory.domain.tradeBoard.entity.TradeBoardStatus;
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardCreateRequestDto;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardUpdateRequestDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetAllResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardUpdateResponseDto;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoardImage;
+import com.study.petory.domain.tradeboard.entity.TradeBoardStatus;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
@@ -41,7 +41,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 	}
 
-	//tradeBoardId로 tradeBoard 조회
+	//tradeBoardId로 tradeboard 조회
 	public TradeBoard findTradeBoard(Long tradeBoardId) {
 		return tradeBoardRepository.findById(tradeBoardId)
 			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
@@ -67,7 +67,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 생성
 	@Override
 	@Transactional
-	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto, List<MultipartFile> images) {
+	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto,
+		List<MultipartFile> images) {
 
 		//나중에 토큰으로 값을 받아올 예정
 		User user = findUser(userId);
@@ -126,7 +127,8 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	//게시글 수정
 	@Override
 	@Transactional
-	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId, TradeBoardUpdateRequestDto requestDto) {
+	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId,
+		TradeBoardUpdateRequestDto requestDto) {
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
 

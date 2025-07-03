@@ -1,10 +1,8 @@
-package com.study.petory.domain.place.entity;
+package com.study.petory.domain.tradeboard.entity;
 
-import net.minidev.json.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.CreationBasedEntity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,24 +18,23 @@ import lombok.Setter;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "tb_place_image")
-public class PlaceImage extends CreationBasedEntity {
+@Table(name = "tb_trade_board_image")
+public class TradeBoardImage extends CreationBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
 	private String url;
 
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "place_id")
+	@JoinColumn(name = "trade_board_id")
 	@JsonIgnore
-	private Place place;
+	private TradeBoard tradeBoard;
 
-	public PlaceImage(String url, Place place) {
+	public TradeBoardImage(String url, TradeBoard tradeBoard) {
 		this.url = url;
-		this.place = place;
+		this.tradeBoard = tradeBoard;
 	}
 }

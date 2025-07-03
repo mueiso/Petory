@@ -1,10 +1,8 @@
-package com.study.petory.domain.place.entity;
+package com.study.petory.domain.ownerboard.entity;
 
-import net.minidev.json.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.petory.common.entity.CreationBasedEntity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,24 +18,28 @@ import lombok.Setter;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "tb_place_image")
-public class PlaceImage extends CreationBasedEntity {
+@Table(name = "tb_owner_board_image")
+public class OwnerBoardImage extends CreationBasedEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
 	private String url;
 
-	@Setter
+	@Setter // 양방향 연관관계 설정을 위한 setter
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "place_id")
+	@JoinColumn(name = "owner_board_id")
 	@JsonIgnore
-	private Place place;
+	private OwnerBoard ownerBoard;
 
-	public PlaceImage(String url, Place place) {
+	public OwnerBoardImage(String url, OwnerBoard ownerBoard) {
 		this.url = url;
-		this.place = place;
+		this.ownerBoard = ownerBoard;
 	}
+
+	public Long getOwnerBoardId() {
+		return this.ownerBoard != null ? this.getOwnerBoard().getId() : null;
+	}
+
 }

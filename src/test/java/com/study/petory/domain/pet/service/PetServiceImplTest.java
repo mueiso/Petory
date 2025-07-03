@@ -105,4 +105,19 @@ class PetServiceImplTest {
 		// then
 		verify(mockPet).deactivateEntity(); // soft delete 메서드 호출 확인
 	}
+
+	@Test
+	void restorePet_복구_실패_notDeleted() {
+		// given
+		Long userId = 1L;
+		Long petId = 1L;
+		Pet mockPet = mock(Pet.class);
+		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
+		given(mockPet.isDeletedAtNull()).willReturn(true); // 삭제된 상태가 아님
+
+		// when & then
+		assertThatThrownBy(() -> petService.restorePet(userId, petId))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.PET_NOT_DELETED.getMessage());
+	}
 }

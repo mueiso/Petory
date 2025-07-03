@@ -77,26 +77,41 @@ class PetServiceImplTest {
 	@Test
 	void findAllMyPets_조회_성공() {
 
-		// [given]
+		/* [given]
+		 * 테스트 사용자 ID
+		 * 사용자 mock 객체 생성
+		 * Pageable 객체는 실제 값이 중요하지 않으므로 mock 처리
+		 */
 		Long userId = 1L;
 		User mockUser = mock(User.class);
 		Pageable pageable = mock(Pageable.class);
 
+		// 테스트용 Pet 객체 2개 생성 (이름, 사이즈, 유저 정보 포함)
 		Pet pet1 = Pet.builder().name("쿠키").size(PetSize.SMALL).user(mockUser).build();
 		Pet pet2 = Pet.builder().name("초코").size(PetSize.LARGE).user(mockUser).build();
-		List<Pet> petList = List.of(pet1, pet2);
 
+		// Pet 객체들을 리스트로 묶어서 페이징된 Page 객체로 감쌈
+		List<Pet> petList = List.of(pet1, pet2);
+		// 페이징 처리된 결과 흉내내기
 		Page<Pet> petPage = new org.springframework.data.domain.PageImpl<>(petList);
 
-		// user 조회
+		/*
+		 * userService.findUserById() 호출 시 mockUser 반환되도록 설정 (user 조회)
+		 * petRepository.findAllByUser() 호출 시 petPage 반환되도록 설정 (pet 목록 조회)
+		 */
 		given(userService.findUserById(userId)).willReturn(mockUser);
-		// pet 목록 조회
 		given(petRepository.findAllByUser(mockUser, pageable)).willReturn(petPage);
 
-		// [when]
+		/* [when]
+		 * 실제 서비스 메서드 호출
+		 */
 		var result = petService.findAllMyPets(userId, pageable);
 
-		// [then]
+		/* [then]
+		 * 총 개수가 2개인지 검증
+		 * 첫 번째 항목 이름이 "쿠키"인지 검증
+		 * 두 번째 항목 이름이 "초코"인지 검증
+		 */
 		assertThat(result.getTotalElements()).isEqualTo(2);
 		assertThat(result.getContent().get(0).getName()).isEqualTo("쿠키");
 		assertThat(result.getContent().get(1).getName()).isEqualTo("초코");

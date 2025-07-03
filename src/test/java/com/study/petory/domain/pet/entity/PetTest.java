@@ -20,90 +20,79 @@ class PetTest {
 	void 펫_생성_성공() {
 
 		// given
-		String name = "쿠키";
-		PetSize size = PetSize.SMALL;
-		String species = "푸들";
-		String gender = "남";
-		String birthday = "2022-01-01";
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 
 		// when
-		Pet pet = Pet.builder()
-			.name(name)
-			.size(size)
-			.species(species)
-			.gender(gender)
-			.birthday(birthday)
-			.user(user)
-			.build();
+		Pet pet = createDefaultPetBuilder(user).build();
 
 		// then
-		assertThat(pet.getName()).isEqualTo(name);
-		assertThat(pet.getSize()).isEqualTo(size);
-		assertThat(pet.getSpecies()).isEqualTo(species);
-		assertThat(pet.getGender()).isEqualTo(gender);
-		assertThat(pet.getBirthday()).isEqualTo(birthday);
+		assertThat(pet.getName()).isEqualTo("쿠키");
+		assertThat(pet.getSize()).isEqualTo(PetSize.SMALL);
+		assertThat(pet.getSpecies()).isEqualTo("푸들");
+		assertThat(pet.getGender()).isEqualTo("남");
+		assertThat(pet.getBirthday()).isEqualTo("2022-01-01");
 		assertThat(pet.getUser()).isEqualTo(user);
 	}
 
 	@Test
 	void 펫_정보_수정_성공() {
 
-		// given: 초기 Pet 객체 구성
+		// given
 		User user = createUserWithStatus(UserStatus.ACTIVE);
-		Pet pet = Pet.builder()
-			.name("쿠키")
-			.size(PetSize.MEDIUM)
-			.gender("남")
-			.birthday("2020-01-01")
-			.user(user)
-			.build();
+		Pet pet = createDefaultPetBuilder(user).build();
 
-		// when: updatePetInfo 메서드로 정보 수정
-		pet.updatePetInfo("초코", "남자였던 것", "2021-05-05");
+		// when
+		pet.updatePetInfo("뽀삐", "여", "2021-05-05");
 
-		// then: 수정된 값들이 정상적으로 반영되었는지 확인
-		assertThat(pet.getName()).isEqualTo("초코");
-		assertThat(pet.getGender()).isEqualTo("남자였던 것");
+		// then
+		assertThat(pet.getName()).isEqualTo("뽀삐");
+		assertThat(pet.getGender()).isEqualTo("여");
 		assertThat(pet.getBirthday()).isEqualTo("2021-05-05");
 	}
 
 	@Test
 	void 펫_소유자_확인_성공() {
 
-		// given: 사용자와 펫 객체 생성
+		// given
 		User user = createUserWithStatus(UserStatus.ACTIVE);
-		Pet pet = Pet.builder()
-			.name("쿠키")
-			.size(PetSize.SMALL)
-			.user(user)
-			.build();
+		Pet pet = createDefaultPetBuilder(user).build();
 
-		// when: user 의 ID와 펫의 owner 일치 여부 확인
-		boolean isOwner = pet.isPetOwner(1L); // createUserWithStatus 에서 ID를 1L로 세팅함
+		// when
+		boolean isOwner = pet.isPetOwner(1L); // 테스트에서 강제로 user ID를 1L로 설정함
 
-		// then: isPetOwner 결과가 true 여야 함
+		// then
 		assertThat(isOwner).isTrue();
 	}
 
 	@Test
 	void 펫_소유자_설정_성공() {
 
-		// given: 유저와 소유자 미지정된 Pet 객체 생성
+		// given
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 		Pet pet = Pet.builder()
 			.name("쿠키")
 			.size(PetSize.SMALL)
 			.build();
 
-		// when: setUser()로 사용자 설정
+		// when
 		pet.setUser(user);
 
-		// then: 연관된 유저가 정상적으로 설정되었는지 확인
+		// then
 		assertThat(pet.getUser()).isEqualTo(user);
 	}
 
-	// 중복 코드 줄이기 위한 테스트용 유저 객체 생성 유틸 메서드
+	// 중복 코드 제거용 테스트용 기본 Pet 빌더 생성 메서드
+	private Pet.PetBuilder createDefaultPetBuilder(User user) {
+		return Pet.builder()
+			.name("쿠키")
+			.size(PetSize.SMALL)
+			.species("푸들")
+			.gender("남")
+			.birthday("2022-01-01")
+			.user(user);
+	}
+
+	// 중복 코드 제거용 테스트용 유저 생성 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 
 		UserPrivateInfo privateInfo = UserPrivateInfo.builder()
@@ -123,7 +112,7 @@ class PetTest {
 
 		user.updateStatus(status);
 
-		// 테스트 ID 강제 주입
+		// ID는 테스트 환경에서 명시적으로 설정
 		ReflectionTestUtils.setField(user, "id", 1L);
 
 		return user;

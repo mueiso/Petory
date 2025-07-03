@@ -43,16 +43,23 @@ class PetTest {
 	@Test
 	void 펫_정보_수정_성공() {
 
-		// given
+		/* [given]
+		 * userStatus ACTIVE 인 테스트용 유저 생성
+		 * Pet 객체 생성
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 		Pet pet = createDefaultPetBuilder(user).build();
 
-		// when
-		pet.updatePetInfo("뽀삐", "여", "2021-05-05");
+		/* [when]
+		 * updateInfo() 메서드를 통해 필드 값 변경
+		 */
+		pet.updatePetInfo("쿠키", "남자였던 것", "2021-05-05");
 
-		// then
-		assertThat(pet.getName()).isEqualTo("뽀삐");
-		assertThat(pet.getGender()).isEqualTo("여");
+		/* [then]
+		 * 변경된 값들이 정상적으로 반영되었는지 검증
+		 */
+		assertThat(pet.getName()).isEqualTo("쿠키");
+		assertThat(pet.getGender()).isEqualTo("남자였던 것");
 		assertThat(pet.getBirthday()).isEqualTo("2021-05-05");
 	}
 

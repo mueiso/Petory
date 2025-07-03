@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
+import com.study.petory.domain.ownerboard.entity.OwnerBoard;
+import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceLike;
 import com.study.petory.domain.place.entity.PlaceReport;

@@ -1,8 +1,10 @@
 package com.study.petory.common.util;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +53,13 @@ public class CustomDateUtil {
 				// 표준 형식인 경우
 				return ZonedDateTime.parse(input).toLocalDateTime();
 			}
+
+			// 시간이 안 들어오는 경우
+			if (trimDate.length() == 10) {
+				LocalDate localDate = LocalDate.parse(trimDate);
+				return localDate.atStartOfDay();
+			}
+
 			// 19자 미만은 잘못된 형식
 			throw new CustomException(ErrorCode.DATE_TIME_PARSE_FAIL);
 
@@ -88,4 +97,11 @@ public class CustomDateUtil {
 		}
 	}
 
+	public static Long getDaysDifference(LocalDateTime start, LocalDateTime end) {
+		if (end == null) {
+			return null;
+		}
+		Period period = Period.between(start.toLocalDate(), end.toLocalDate());
+		return (long)period.getDays();
+	}
 }

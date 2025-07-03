@@ -3,6 +3,7 @@ package com.study.petory.domain.event.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ import com.study.petory.domain.event.service.EventService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/calendars")
+@RequestMapping("/users/events")
 @RequiredArgsConstructor
 public class EventController {
 
@@ -41,6 +42,7 @@ public class EventController {
 	 * @return	CommonResponse 성공 메세지, data: id, 제목, 시작일, 종료일, 하루 종일 여부, 반복 조건, 메모, 일정 색상
 	 */
 	@PostMapping()
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<EventCreateResponseDto>> saveEvent(
 		@AuthenticationPrincipal CustomPrincipal currenUser,
 		@RequestBody EventCreateRequestDto request
@@ -54,6 +56,7 @@ public class EventController {
 	 * @return	CommonResponse 성공 메세지, data: id, 제목, 시작일, 종료일, 하루 종일 여부, 반복 조건, 메모, 일정 색상
 	 */
 	@GetMapping("/{eventId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<EventGetOneResponseDto>> getEvent(
 		@PathVariable Long eventId
 	) {
@@ -69,6 +72,7 @@ public class EventController {
 	 * 일정 인스턴스: id, 제목, 시작일, 종료일, 하루 종일 여부, 일정 색상
 	 */
 	@GetMapping()
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<List<EventInstanceGetResponseDto>>> getEvents(
 		@AuthenticationPrincipal CustomPrincipal currenUser,
 		@RequestParam String start,
@@ -78,13 +82,14 @@ public class EventController {
 	}
 
 	/**
-	 * 일정 단일 수정
+	 * 일정 수정
 	 * @param currenUser		일정을 수정한 유저
 	 * @param eventId			수정할 일정 id
 	 * @param request			일정을 수정할 데이터
 	 * @return	CommonResponse 성공 메세지, data: id, 제목, 시작일, 종료일, 하루 종일 여부, 반복 조건, 메모, 일정 색상
 	 */
 	@PutMapping("/{eventId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<EventUpdateResponseDto>> updateEvent(
 		@AuthenticationPrincipal CustomPrincipal currenUser,
 		@PathVariable Long eventId,
@@ -94,12 +99,13 @@ public class EventController {
 	}
 
 	/**
-	 * 일정 단일 삭제
+	 * 일정 삭제
 	 * @param currenUser		일정을 삭제한 유저
 	 * @param eventId			삭제할 일정 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
 	@DeleteMapping("/{eventId}")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteEvent(
 		@AuthenticationPrincipal CustomPrincipal currenUser,
 		@PathVariable Long eventId

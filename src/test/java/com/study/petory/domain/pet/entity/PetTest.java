@@ -19,13 +19,19 @@ class PetTest {
 	@Test
 	void 펫_생성_성공() {
 
-		// given
+		/* [given]
+		 * userStatus ACTIVE 인 테스트용 유저 생성
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 
-		// when
+		/* [when]
+		 * Pet 객체 생성
+		 */
 		Pet pet = createDefaultPetBuilder(user).build();
 
-		// then
+		/* [then]
+		 * 모든 필드가 기대한 값으로 정확히 세팅됐는지 검증
+		 */
 		assertThat(pet.getName()).isEqualTo("쿠키");
 		assertThat(pet.getSize()).isEqualTo(PetSize.SMALL);
 		assertThat(pet.getSpecies()).isEqualTo("푸들");

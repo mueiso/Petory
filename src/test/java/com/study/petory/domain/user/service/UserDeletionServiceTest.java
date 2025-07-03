@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 
+import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
 import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
@@ -49,6 +50,9 @@ class UserDeletionServiceTest {
 	@Mock
 	private PlaceReviewRepository placeReviewRepository;
 
+	@Mock
+	private JwtProvider jwtProvider;
+
 	@InjectMocks
 	private UserDeletionService userDeletionService;
 
@@ -57,8 +61,11 @@ class UserDeletionServiceTest {
 
 		/* [given]
 		 * 삭제 대상 User 를 Mock 객체로 생성
+		 * jwtProvider.deleteRefreshToken(user.getId()) 위해 필요
 		 */
 		User user = mock(User.class);
+		when(user.getId()).thenReturn(1L);
+		when(user.getEmail()).thenReturn("test@email.com");
 
 		// OwnerBoard 레포지토리에서 해당 유저의 게시글 목록을 반환하도록 설정
 		OwnerBoard board = mock(OwnerBoard.class);
@@ -101,5 +108,8 @@ class UserDeletionServiceTest {
 
 		// 유저 삭제 되었는지 검증
 		verify(userRepository).delete(user);
+
+		// RefreshToken 제거 호출 여부도 검증
+		verify(jwtProvider).deleteRefreshToken(1L);
 	}
 }

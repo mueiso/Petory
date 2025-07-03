@@ -95,6 +95,42 @@ class CustomOAuth2UserServiceTest {
 		assertThat(result.getAuthorities()).anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
 	}
 
+	@Test
+	void loadUser_신규_유저_저장_성공() {
+
+		OAuth2User oAuth2User = new DefaultOAuth2User(
+			List.of(() -> "ROLE_USER"),
+			Map.of("email", NEW_EMAIL, "name", NEW_NAME),
+			"email"
+		);
+
+		/*
+		 * OAuth2 클라이언트 등록 정보(Mock)
+		 * "google" 프로바이더 지정
+		 */
+		ClientRegistration clientRegistration = mock(ClientRegistration.class);
+		given(clientRegistration.getRegistrationId()).willReturn("google");
+
+		/*
+		 * OAuth2UserRequest 객체가 위 클라이언트 정보를 반환하도록 성정
+		 * 해당 이메일로 DB 조회 시 기존 유저가 없다고 가정 (신규 유저의 조건)
+		 * 유저 저장 요청 시 정달된 객체를 그대로 반환하도록 설정 (실제 DB save 동작 흉내)
+		 */
+		given(userRequest.getClientRegistration()).willReturn(clientRegistration);
+		given(userRepository.findByEmailWithUserRole(NEW_EMAIL)).willReturn(Optional.empty());
+		given(userRepository.save(any(User.class))).willAnswer(inv -> inv.getArgument(0));
+
+		// 테스트 대상 서비스에 대해 spy 생성하여 내부 loadUser Override
+		CustomOAuth2UserService spyService = spy(customOAuth2UserService);
+		// 실제로는 외부 API 에 요청 보내지 않고, 내가 만든 oauth2User 를 반환하도록 함
+		doReturn(oAuth2User).when((DefaultOAuth2UserService)spyService).loadUser(userRequest);
+
+		OAuth2User result = spyService.loadUser(userRequest);
+
+		assertThat(result.getName()).isEqualTo(NEW_EMAIL);
+		assertThat(result.getAuthorities()).anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
+	}
+
 	// 테스트용 유저 객체 생성 유틸 메서드
 	private User createUserWithStatus(UserStatus status, String email, String name) {
 

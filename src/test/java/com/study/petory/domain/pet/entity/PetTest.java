@@ -88,17 +88,23 @@ class PetTest {
 	@Test
 	void 펫_소유자_설정_성공() {
 
-		// given
+		/* [given]
+		 * user 가 없는 Pet 객체 생성 (user 설정 없이 생성)
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 		Pet pet = Pet.builder()
 			.name("쿠키")
 			.size(PetSize.SMALL)
 			.build();
 
-		// when
+		/* [when]
+		 * setUser()를 통해 연관된 유저 설정
+		 */
 		pet.setUser(user);
 
-		// then
+		/* [then]
+		 * 해당 user 가 정상적으로 설정됐는지 확인
+		 */
 		assertThat(pet.getUser()).isEqualTo(user);
 	}
 

@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import com.study.petory.common.exception.CustomException;
@@ -157,6 +158,33 @@ class PetServiceImplTest {
 		assertThatThrownBy(() -> petService.findAllMyPets(userId, pageable))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.USER_NOT_FOUND.getMessage());
+	}
+
+	@Test
+	void findAllMyPets_조회_결과없음() {
+
+		// [given]
+		Long userId = 1L;
+		User mockUser = mock(User.class);
+		Pageable pageable = mock(Pageable.class);
+
+		// 빈 리스트를 담은 페이징 객체
+		Page<Pet> emptyPage = new PageImpl<>(List.of());
+
+		// 유저 조회는 성공
+		given(userService.findUserById(userId)).willReturn(mockUser);
+		// 조회 결과는 빈 페이지
+		given(petRepository.findAllByUser(mockUser, pageable)).willReturn(emptyPage);
+
+		// [when]
+		var result = petService.findAllMyPets(userId, pageable);
+
+		/* [then]
+		 * 총 요소 0개 확인
+		 * 실제 목록 비어 있는 것 확인
+		 */
+		assertThat(result.getTotalElements()).isZero();
+		assertThat(result.getContent()).isEmpty();
 	}
 
 	@Test

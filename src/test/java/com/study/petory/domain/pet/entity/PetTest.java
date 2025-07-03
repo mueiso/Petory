@@ -46,6 +46,28 @@ class PetTest {
 		assertThat(pet.getUser()).isEqualTo(user);
 	}
 
+	@Test
+	void 펫_정보_수정_성공() {
+
+		// given: 초기 Pet 객체 구성
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		Pet pet = Pet.builder()
+			.name("초코")
+			.size(PetSize.MEDIUM)
+			.gender("남")
+			.birthday("2020-01-01")
+			.user(user)
+			.build();
+
+		// when: updatePetInfo 메서드로 정보 수정
+		pet.updatePetInfo("뽀삐", "여", "2021-05-05");
+
+		// then: 수정된 값들이 정상적으로 반영되었는지 확인
+		assertThat(pet.getName()).isEqualTo("뽀삐");
+		assertThat(pet.getGender()).isEqualTo("여");
+		assertThat(pet.getBirthday()).isEqualTo("2021-05-05");
+	}
+
 	// 중복 코드 줄이기 위한 테스트용 유저 객체 생성 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

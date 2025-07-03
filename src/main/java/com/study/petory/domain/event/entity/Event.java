@@ -11,6 +11,8 @@ import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -68,7 +70,7 @@ public class Event extends UpdateBasedEntity {
 	@Column(length = 300)
 	private String description;
 
-	// 프론트에서 null 이라면 기본 색상
+	@Enumerated(EnumType.STRING)
 	@Column
 	private EventColor color;
 

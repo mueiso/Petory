@@ -138,6 +138,23 @@ class PetServiceImplTest {
 	}
 
 	@Test
+	void findAllMyPets_조회_실패_유저없음() {
+
+		// [given]
+		Long userId = 999L; // 존재하지 않는 유저 ID
+		Pageable pageable = mock(Pageable.class); // 페이징은 목 처리
+
+		// userService 가 해당 ID를 조회했을 때 예외 발생하도록 설정
+		given(userService.findUserById(userId))
+			.willThrow(new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		// [when & then]
+		assertThatThrownBy(() -> petService.findAllMyPets(userId, pageable))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_NOT_FOUND.getMessage());
+	}
+
+	@Test
 	void updatePet_수정_실패_소유자아님() {
 
 		// [given]

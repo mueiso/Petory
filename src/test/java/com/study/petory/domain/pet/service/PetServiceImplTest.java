@@ -147,14 +147,23 @@ class PetServiceImplTest {
 	@Test
 	void restorePet_복구_실패_notDeleted() {
 
-		// given
+		/* [given]
+		 * userId 설정
+		 * petId 설정
+		 * 복구할 반려동물 mock
+		 * DB 에서 찾았다고 가정
+		 * 삭제된 상태가 아님
+		 */
 		Long userId = 1L;
 		Long petId = 1L;
 		Pet mockPet = mock(Pet.class);
 		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
-		given(mockPet.isDeletedAtNull()).willReturn(true); // 삭제된 상태가 아님
+		given(mockPet.isDeletedAtNull()).willReturn(true);
 
-		// when & then
+		/* [when & then]
+		 * 복구 시도
+		 * 이미 삭제되지 않은 상태에서 예외 발생 확인
+		 */
 		assertThatThrownBy(() -> petService.restorePet(userId, petId))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.PET_NOT_DELETED.getMessage());

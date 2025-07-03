@@ -92,6 +92,7 @@ public class EventServiceImpl implements EventService {
 
 	// 일정 단일 조회
 	@Override
+	@Transactional
 	public EventGetOneResponseDto findOneEvent(Long eventId) {
 		Event event = findEventById(eventId);
 		return EventGetOneResponseDto.from(event);

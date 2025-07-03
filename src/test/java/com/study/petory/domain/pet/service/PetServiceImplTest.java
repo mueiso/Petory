@@ -95,16 +95,23 @@ class PetServiceImplTest {
 	@Test
 	void updatePet_수정_실패_소유자아님() {
 
-		// given
+		// [given]
 		Long userId = 1L;
 		Long petId = 1L;
 		PetUpdateRequestDto requestDto = new PetUpdateRequestDto("수정이름", "여", "2020-01-01");
 
+		/*
+		 * 수정 대상 반려동물 mock 객체
+		 * 해당 ID 로 조회 시 mockPet 반환
+		 * 유저가 소유자 아님으로 설정
+		 */
 		Pet mockPet = mock(Pet.class);
 		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
 		given(mockPet.isPetOwner(userId)).willReturn(false);
 
-		// when & then
+		/* [when & then]
+		 * 접근 권한 없음 예외 확인
+		 */
 		assertThatThrownBy(() -> petService.updatePet(userId, petId, requestDto, null))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.FORBIDDEN.getMessage());

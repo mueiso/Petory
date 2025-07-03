@@ -9,7 +9,7 @@ import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.dailyQna.entity.DailyAnswer;
 import com.study.petory.domain.pet.entity.Pet;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

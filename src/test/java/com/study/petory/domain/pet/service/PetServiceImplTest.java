@@ -51,7 +51,10 @@ class PetServiceImplTest {
 		User mockUser = mock(User.class);
 		given(userService.findUserById(userId)).willReturn(mockUser);
 
-		// 저장될 Pet 객체를 캡처하기 위한 도구
+		/*
+		 * 저장될 Pet 객체를 캡처하기 위한 도구
+		 * ArgumentCaptor<Pet>의 역할: PetRepository.save() 메서드가 호출될 때 실제로 전달된 Pet 객체가 뭔지 가로채서 저장해줌
+		 */
 		ArgumentCaptor<Pet> petCaptor = ArgumentCaptor.forClass(Pet.class);
 
 		/* [when]
@@ -76,9 +79,14 @@ class PetServiceImplTest {
 		Long userId = 1L;
 		Long petId = 100L;
 
+		// 없는 ID 로 조회 시 빈 Optional 반환
 		given(petRepository.findPetById(petId)).willReturn(Optional.empty());
 
-		// when & then
+		/* [when & then]
+		 * 예외 발생 예상
+		 * CustomException 인지 확인
+		 * 에러 메시지 일치 여부 확인
+		 */
 		assertThatThrownBy(() -> petService.findPet(userId, petId))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.PET_NOT_FOUND.getMessage());
@@ -94,7 +102,7 @@ class PetServiceImplTest {
 
 		Pet mockPet = mock(Pet.class);
 		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
-		given(mockPet.isPetOwner(userId)).willReturn(false); // 소유자 아님
+		given(mockPet.isPetOwner(userId)).willReturn(false);
 
 		// when & then
 		assertThatThrownBy(() -> petService.updatePet(userId, petId, requestDto, null))

@@ -12,6 +12,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
@@ -70,6 +72,34 @@ class PetServiceImplTest {
 		verify(petRepository).save(petCaptor.capture());
 		verify(mockUser).addPet(any(Pet.class));
 		assertThat(petCaptor.getValue().getName()).isEqualTo("쿠키");
+	}
+
+	@Test
+	void findAllMyPets_조회_성공() {
+
+		// [given]
+		Long userId = 1L;
+		User mockUser = mock(User.class);
+		Pageable pageable = mock(Pageable.class);
+
+		Pet pet1 = Pet.builder().name("쿠키").size(PetSize.SMALL).user(mockUser).build();
+		Pet pet2 = Pet.builder().name("초코").size(PetSize.LARGE).user(mockUser).build();
+		List<Pet> petList = List.of(pet1, pet2);
+
+		Page<Pet> petPage = new org.springframework.data.domain.PageImpl<>(petList);
+
+		// user 조회
+		given(userService.findUserById(userId)).willReturn(mockUser);
+		// pet 목록 조회
+		given(petRepository.findAllByUser(mockUser, pageable)).willReturn(petPage);
+
+		// [when]
+		var result = petService.findAllMyPets(userId, pageable);
+
+		// [then]
+		assertThat(result.getTotalElements()).isEqualTo(2);
+		assertThat(result.getContent().get(0).getName()).isEqualTo("쿠키");
+		assertThat(result.getContent().get(1).getName()).isEqualTo("초코");
 	}
 
 	@Test

@@ -88,4 +88,21 @@ class PetServiceImplTest {
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.FORBIDDEN.getMessage());
 	}
+
+	@Test
+	void deletePet_삭제_성공() {
+		// given
+		Long userId = 1L;
+		Long petId = 1L;
+		Pet mockPet = mock(Pet.class);
+		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
+		given(mockPet.isPetOwner(userId)).willReturn(true);
+		given(mockPet.getImages()).willReturn(List.of());
+
+		// when
+		petService.deletePet(userId, petId);
+
+		// then
+		verify(mockPet).deactivateEntity(); // soft delete 메서드 호출 확인
+	}
 }

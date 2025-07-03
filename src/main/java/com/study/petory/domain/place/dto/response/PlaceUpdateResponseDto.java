@@ -21,8 +21,6 @@ public class PlaceUpdateResponseDto {
 
 	private final BigDecimal ratio;
 
-	// private final String photoList; // CreateResponseDto와 같은 방법!
-
 	private final BigDecimal latitude;
 
 	private final BigDecimal longitude;

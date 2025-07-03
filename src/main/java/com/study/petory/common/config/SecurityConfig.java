@@ -19,7 +19,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.study.petory.common.filter.RateLimitFilter;
+import com.study.petory.common.ratelimit.RateLimitFilter;
 import com.study.petory.common.security.CustomAccessDeniedHandler;
 import com.study.petory.common.security.JwtAuthenticationEntryPoint;
 import com.study.petory.common.security.JwtFilter;

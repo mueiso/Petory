@@ -1,4 +1,4 @@
-package com.study.petory.common.filter;
+package com.study.petory.common.ratelimit;
 
 import java.io.IOException;
 import java.util.Optional;

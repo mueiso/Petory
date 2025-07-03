@@ -1,4 +1,4 @@
-package com.study.petory.common.filter;
+package com.study.petory.common.ratelimit;
 
 import java.util.Arrays;
 import java.util.Optional;

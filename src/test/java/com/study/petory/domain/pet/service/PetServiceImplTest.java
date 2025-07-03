@@ -55,4 +55,19 @@ class PetServiceImplTest {
 		verify(mockUser).addPet(any(Pet.class)); // 양방향 연관관계 설정 확인
 		assertThat(petCaptor.getValue().getName()).isEqualTo("쿠키");
 	}
+
+	@Test
+	void findPet_조회_실패_petNotFound() {
+
+		// given
+		Long userId = 1L;
+		Long petId = 100L;
+
+		given(petRepository.findPetById(petId)).willReturn(Optional.empty());
+
+		// when & then
+		assertThatThrownBy(() -> petService.findPet(userId, petId))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.PET_NOT_FOUND.getMessage());
+	}
 }

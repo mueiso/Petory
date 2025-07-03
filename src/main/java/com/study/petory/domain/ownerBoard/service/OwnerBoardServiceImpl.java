@@ -1,6 +1,7 @@
 package com.study.petory.domain.ownerBoard.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -126,12 +127,12 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 			validBoardOwnerShip(ownerBoard, userId, ErrorCode.ONLY_AUTHOR_CAN_DELETE);
 		}
 
-		// 이미지 모두 hard delete(S3, DB)
-		List<OwnerBoardImage> images = ownerBoard.getImages();
+		Iterator<OwnerBoardImage> iterator = ownerBoard.getImages().iterator();
 
-		for (OwnerBoardImage image : new ArrayList<>(images)) {
-			ownerBoardImageService.deleteImage(image); // S3 이미지 정보 삭제
-			ownerBoard.getImages().remove(image); // DB 이미지 정보 삭제, 연관관계를 끊어 고아객체로 만들면 delete 쿼리 발생
+		while (iterator.hasNext()) {
+			OwnerBoardImage image = iterator.next();
+			ownerBoardImageService.deleteImage(image); // DB 이미지 정보 삭제, 연관관계를 끊어 고아객체로 만들면 delete 쿼리 발생
+			iterator.remove(); // S3 이미지 정보 삭제
 		}
 
 		// 게시글 soft delete

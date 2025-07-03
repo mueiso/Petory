@@ -1,10 +1,8 @@
 package com.study.petory.domain.event.dto.response;
 
-import java.time.LocalDateTime;
-
 import com.study.petory.common.util.CustomDateUtil;
-import com.study.petory.domain.event.entity.Event;
 import com.study.petory.domain.event.entity.EventColor;
+import com.study.petory.domain.event.entity.EventInstance;
 
 import lombok.Getter;
 
@@ -33,21 +31,12 @@ public class EventInstanceGetResponseDto {
 		this.color = color;
 	}
 
-	public static EventInstanceGetResponseDto from(Event event, LocalDateTime instanceTime) {
-		LocalDateTime eventStartTime = event.getStartDate();
-		LocalDateTime eventEndTime = event.getEndDate();
-		if (instanceTime!=null) {
-			eventStartTime = instanceTime;
-		}
-		if (instanceTime!=null && eventEndTime != null) {
-			long a = CustomDateUtil.getDaysDifference(event.getStartDate(), event.getEndDate());
-			eventEndTime.plusDays(a);
-		}
+	public static EventInstanceGetResponseDto from(EventInstance event) {
 		return new EventInstanceGetResponseDto(
 			event.getId(),
 			event.getTitle(),
-			CustomDateUtil.toISOString(eventStartTime, event.getTimeZone()),
-			CustomDateUtil.toISOString(eventEndTime, event.getTimeZone()),
+			CustomDateUtil.toISOString(event.getStartDate(), event.getTimeZone()),
+			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
 			event.getIsAllDay(),
 			event.getColor()
 		);

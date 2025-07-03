@@ -1,11 +1,10 @@
 package com.study.petory.domain.event.dto.response;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.study.petory.common.util.CustomDateUtil;
-import com.study.petory.domain.event.entity.Event;
 import com.study.petory.domain.event.entity.EventColor;
+import com.study.petory.domain.event.entity.EventInstance;
 
 import lombok.Getter;
 
@@ -40,7 +39,7 @@ public class EventGetOneResponseDto {
 		this.color = color;
 	}
 
-	public static EventGetOneResponseDto from(Event event) {
+	public static EventGetOneResponseDto from(EventInstance event) {
 		return new EventGetOneResponseDto(
 			event.getId(),
 			event.getTitle(),

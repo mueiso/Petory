@@ -13,15 +13,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public class EventUpdateRequestDto {
 
-	@NotBlank(message = "title은 필수 항목입니다.")
+	@NotBlank(message = "제목은 필수 항목입니다.")
 	private String title;
 
-	@NotBlank(message = "startDate일은 필수 항목입니다.")
+	@NotBlank(message = "시작 일은 필수 항목입니다.")
 	private String startDate;
 
+	@NotBlank(message = "종료 일은 필수 항목입니다.")
 	private String endDate;
 
-	@NotBlank(message = "timeZone은 필수 항목입니다.")
+	@NotBlank(message = "타임 존은 필수 항목입니다.")
 	private String timeZone;
 
 	private Boolean isAllDay;

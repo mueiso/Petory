@@ -68,6 +68,24 @@ class PetTest {
 		assertThat(pet.getBirthday()).isEqualTo("2021-05-05");
 	}
 
+	@Test
+	void 펫_소유자_확인_성공() {
+
+		// given: 사용자와 펫 객체 생성
+		User user = createUserWithStatus(UserStatus.ACTIVE);
+		Pet pet = Pet.builder()
+			.name("초코")
+			.size(PetSize.SMALL)
+			.user(user)
+			.build();
+
+		// when: user 의 ID와 펫의 owner 일치 여부 확인
+		boolean isOwner = pet.isPetOwner(1L); // createUserWithStatus 에서 ID를 1L로 세팅함
+
+		// then: isPetOwner 결과가 true 여야 함
+		assertThat(isOwner).isTrue();
+	}
+
 	// 중복 코드 줄이기 위한 테스트용 유저 객체 생성 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
 

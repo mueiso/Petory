@@ -1,7 +1,5 @@
 package com.study.petory.domain.dailyQna.entity;
 
-import org.hibernate.annotations.Where;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.user.entity.User;

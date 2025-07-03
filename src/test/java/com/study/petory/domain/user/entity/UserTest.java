@@ -12,7 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.dailyQna.entity.DailyQna;
 import com.study.petory.domain.pet.entity.Pet;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
 
 class UserTest {
 

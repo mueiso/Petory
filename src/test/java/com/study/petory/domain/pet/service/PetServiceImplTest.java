@@ -119,7 +119,15 @@ class PetServiceImplTest {
 
 	@Test
 	void deletePet_삭제_성공() {
-		// given
+
+		/* [given]
+		 * userId 설정
+		 * petId 설정
+		 * 삭제할 반려동물 mock
+		 * DB 에서 찾았다고 가정
+		 * 사용자 소유 확인
+		 * 이미지 없다고 가정 (단순화)
+		 */
 		Long userId = 1L;
 		Long petId = 1L;
 		Pet mockPet = mock(Pet.class);
@@ -127,15 +135,18 @@ class PetServiceImplTest {
 		given(mockPet.isPetOwner(userId)).willReturn(true);
 		given(mockPet.getImages()).willReturn(List.of());
 
-		// when
+		// [when]
 		petService.deletePet(userId, petId);
 
-		// then
-		verify(mockPet).deactivateEntity(); // soft delete 메서드 호출 확인
+		/* [then]
+		 * soft delete 메서드 호출되었는지 확인
+		 */
+		verify(mockPet).deactivateEntity();
 	}
 
 	@Test
 	void restorePet_복구_실패_notDeleted() {
+
 		// given
 		Long userId = 1L;
 		Long petId = 1L;

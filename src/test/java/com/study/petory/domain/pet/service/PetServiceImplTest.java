@@ -70,4 +70,22 @@ class PetServiceImplTest {
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.PET_NOT_FOUND.getMessage());
 	}
+
+	@Test
+	void updatePet_수정_실패_소유자아님() {
+
+		// given
+		Long userId = 1L;
+		Long petId = 1L;
+		PetUpdateRequestDto requestDto = new PetUpdateRequestDto("수정이름", "여", "2020-01-01");
+
+		Pet mockPet = mock(Pet.class);
+		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
+		given(mockPet.isPetOwner(userId)).willReturn(false); // 소유자 아님
+
+		// when & then
+		assertThatThrownBy(() -> petService.updatePet(userId, petId, requestDto, null))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.FORBIDDEN.getMessage());
+	}
 }

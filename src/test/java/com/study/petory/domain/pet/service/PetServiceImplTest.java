@@ -38,21 +38,34 @@ class PetServiceImplTest {
 	@Test
 	void savePet_등록_성공() {
 
-		// given
+		/* [given]
+		 * 등록 요청 DTO 생성
+		 */
 		Long userId = 1L;
 		PetCreateRequestDto requestDto = new PetCreateRequestDto("쿠키", PetSize.SMALL, "푸들", "남", "2022-01-01");
 
+		/*
+		 * 유저 mock 객체 생성
+		 * 유저 서비스 호출 시 mockUser 반환
+		 */
 		User mockUser = mock(User.class);
 		given(userService.findUserById(userId)).willReturn(mockUser);
 
+		// 저장될 Pet 객체를 캡처하기 위한 도구
 		ArgumentCaptor<Pet> petCaptor = ArgumentCaptor.forClass(Pet.class);
 
-		// when
+		/* [when]
+		 * 이미지 없이 등록 시도
+		 */
 		petService.savePet(userId, requestDto, null);
 
-		// then
+		/* [then]
+		 * petRepository.save 호출 확인 및 캡처
+		 * 양방향 연관관계 설정 메서드 호출 확인
+		 * 저장된 Pet 의 name 필드 검증
+		 */
 		verify(petRepository).save(petCaptor.capture());
-		verify(mockUser).addPet(any(Pet.class)); // 양방향 연관관계 설정 확인
+		verify(mockUser).addPet(any(Pet.class));
 		assertThat(petCaptor.getValue().getName()).isEqualTo("쿠키");
 	}
 

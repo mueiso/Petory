@@ -48,8 +48,8 @@ public class EventGetOneResponseDto {
 			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
 			event.getIsAllDay(),
 			event.getRecurrence(),
-			Optional.ofNullable(event.getDescription()).orElseThrow(null),
-			Optional.ofNullable(event.getColor()).orElseThrow(null)
+			event.getDescription(),
+			event.getColor()
 		);
 	}
 }

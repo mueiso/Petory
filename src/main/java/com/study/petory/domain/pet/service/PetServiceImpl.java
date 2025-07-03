@@ -12,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
-import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.dto.PetGetAllResponseDto;
+import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
 import com.study.petory.domain.pet.entity.Pet;
@@ -91,7 +91,8 @@ public class PetServiceImpl implements PetService {
 	// 반려동물 정보 수정
 	@Override
 	@Transactional
-	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images) {
+	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto,
+		List<MultipartFile> images) {
 
 		Pet pet = petRepository.findPetById(petId)
 			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));

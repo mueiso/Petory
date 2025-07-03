@@ -66,14 +66,22 @@ class PetTest {
 	@Test
 	void 펫_소유자_확인_성공() {
 
-		// given
+		/* [given]
+		 * userStatus ACTIVE 인 테스트용 유저 생성
+		 * Pet 객체 생성
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE);
 		Pet pet = createDefaultPetBuilder(user).build();
 
-		// when
-		boolean isOwner = pet.isPetOwner(1L); // 테스트에서 강제로 user ID를 1L로 설정함
+		/* [when]
+		 * Pet 의 소유자가 주어진 userId와 일치하는지 확인
+		 * 테스트에서 강제로 userId를 1L로 설정
+		 */
+		boolean isOwner = pet.isPetOwner(1L);
 
-		// then
+		/* [then]
+		 * true 여야 테스트 통과
+		 */
 		assertThat(isOwner).isTrue();
 	}
 

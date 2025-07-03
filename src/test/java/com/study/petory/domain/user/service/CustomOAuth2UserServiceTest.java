@@ -50,6 +50,9 @@ class CustomOAuth2UserServiceTest {
 	@Test
 	void loadUser_기존_유저_정상_조회() {
 
+		/* [given]
+		 * 기존 User 객체 생성
+		 */
 		User user = createUserWithStatus(UserStatus.ACTIVE, TEST_EMAIL, TEST_NAME);
 
 		/*
@@ -79,8 +82,15 @@ class CustomOAuth2UserServiceTest {
 		CustomOAuth2UserService spyService = spy(customOAuth2UserService);
 		doReturn(oAuth2User).when((DefaultOAuth2UserService)spyService).loadUser(userRequest);
 
+		/* [when]
+		 * 테스트 대상 메서드 호출
+		 */
 		OAuth2User result = spyService.loadUser(userRequest);
 
+		/* [then]
+		 * 이름(email) 확인
+		 * 권한 포함 여부 확인
+		 */
 		assertThat(result.getName()).isEqualTo(TEST_EMAIL);
 		assertThat(result.getAuthorities()).anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
 	}

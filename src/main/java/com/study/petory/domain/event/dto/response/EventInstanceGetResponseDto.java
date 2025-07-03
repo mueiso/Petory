@@ -35,14 +35,19 @@ public class EventInstanceGetResponseDto {
 
 	public static EventInstanceGetResponseDto from(Event event, LocalDateTime instanceTime) {
 		LocalDateTime eventStartTime = event.getStartDate();
+		LocalDateTime eventEndTime = event.getEndDate();
 		if (instanceTime!=null) {
 			eventStartTime = instanceTime;
+		}
+		if (instanceTime!=null && eventEndTime != null) {
+			long a = CustomDateUtil.getDaysDifference(event.getStartDate(), event.getEndDate());
+			eventEndTime.plusDays(a);
 		}
 		return new EventInstanceGetResponseDto(
 			event.getId(),
 			event.getTitle(),
 			CustomDateUtil.toISOString(eventStartTime, event.getTimeZone()),
-			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
+			CustomDateUtil.toISOString(eventEndTime, event.getTimeZone()),
 			event.getIsAllDay(),
 			event.getColor()
 		);

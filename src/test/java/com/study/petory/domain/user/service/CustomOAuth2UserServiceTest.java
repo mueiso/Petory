@@ -98,6 +98,12 @@ class CustomOAuth2UserServiceTest {
 	@Test
 	void loadUser_신규_유저_저장_성공() {
 
+		/* [given]
+		 * 신규 유저 정보를 포함한 OAuth2User 생성 (email, name 포함)
+		 * 권한 목록에 ROLE_USER 포함
+		 * 사용자 속성 (OAuth2 프로바이더 응답)
+		 * 사용자 식별자 key 지정
+		 */
 		OAuth2User oAuth2User = new DefaultOAuth2User(
 			List.of(() -> "ROLE_USER"),
 			Map.of("email", NEW_EMAIL, "name", NEW_NAME),
@@ -125,8 +131,16 @@ class CustomOAuth2UserServiceTest {
 		// 실제로는 외부 API 에 요청 보내지 않고, 내가 만든 oauth2User 를 반환하도록 함
 		doReturn(oAuth2User).when((DefaultOAuth2UserService)spyService).loadUser(userRequest);
 
+		/* [when]
+		 * 실제 서비스 메서드 실행
+		 */
 		OAuth2User result = spyService.loadUser(userRequest);
 
+		/* [then]
+		 * (반환된 유저 정보 검증)
+		 * 사용자 식별자가 내가 설정한 이메일과 일치하는지 확인
+		 * 사용자 권한에 ROLE_USER 포함되어 있는지 확인
+		 */
 		assertThat(result.getName()).isEqualTo(NEW_EMAIL);
 		assertThat(result.getAuthorities()).anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
 	}

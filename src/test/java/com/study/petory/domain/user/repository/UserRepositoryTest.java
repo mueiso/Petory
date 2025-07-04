@@ -91,12 +91,19 @@ class UserRepositoryTest {
 		// 기준 시점: 90일 전
 		LocalDateTime standard = LocalDateTime.now().withNano(0).minusDays(90);
 
+		/*
+		 * 기준 범위에 포함되는 유저: updatedAt 이 100일전
+		 * 기준 범위에 포함되는 유저: updatedAt 이 85일전
+		 * 기준 범위에 제외되는 유저: userStatus 가 DELETED
+		 */
 		createUser(UserStatus.ACTIVE, null, standard.minusDays(10));
 		createUser(UserStatus.ACTIVE, null, standard.plusDays(5));
 		createUser(UserStatus.DELETED, null, standard.minusDays(10));
 
+		// 테스트 대상 쿼리 실행
 		List<User> result = userRepository.findByUserStatusAndUpdatedAtBefore(UserStatus.ACTIVE, standard);
 
+		// 1명 조회되는지 확인
 		assertThat(result).hasSize(1);
 	}
 

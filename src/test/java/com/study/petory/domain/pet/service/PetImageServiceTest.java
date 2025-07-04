@@ -66,4 +66,16 @@ class PetImageServiceTest {
 		// then
 		assertEquals("https://s3.test/image.jpg", found.getUrl());
 	}
+
+	@Test
+	void findImageById_이미지_없을_경우_예외발생() {
+
+		// given
+		Long id = 999L;
+		when(petImageRepository.findById(id)).thenReturn(Optional.empty());
+
+		// when & then
+		CustomException ex = assertThrows(CustomException.class, () -> petImageService.findImageById(id));
+		assertEquals(ErrorCode.FILE_NOT_FOUND, ex.getErrorCode());
+	}
 }

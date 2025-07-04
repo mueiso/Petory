@@ -59,17 +59,22 @@ class PetImageServiceTest {
 	@Test
 	void findImageById_정상적으로_조회() {
 
-		// given
+		// [given]
 		Long id = 1L;
 		Pet pet = new Pet();
 		PetImage image = new PetImage("https://s3.test/image.jpg", pet);
 
+		// petImageRepository.findById(id) 호출 시 image 를 반환하도록 설정
 		when(petImageRepository.findById(id)).thenReturn(Optional.of(image));
 
-		// when
+		/* [when]
+		 * 테스트 대상 메서드 호출
+		 */
 		PetImage found = petImageService.findImageById(id);
 
-		// then
+		/* [then]
+		 * url 일치하는지 검증
+		 */
 		assertEquals("https://s3.test/image.jpg", found.getUrl());
 	}
 

@@ -98,14 +98,22 @@ class PetImageServiceTest {
 	@Test
 	void createImageEntity_정상생성() {
 
-		// given
+		/* [given]
+		 * Pet 객체 생성
+		 * 업로드된 이미지 url
+		 */
 		Pet pet = new Pet();
 		String url = "https://s3.test/created.jpg";
 
-		// when
+		/* [when]
+		 * 실제 이미지 객체 생성 메서드 호출
+		 */
 		PetImage image = petImageService.createImageEntity(url, pet);
 
-		// then
+		/* [then]
+		 * 생성된 이미지의 url 확인
+		 * 생성된 이미지가 참조하고 있는 Pet 객체 일치 여부 확인
+		 */
 		assertEquals(url, image.getUrl());
 		assertEquals(pet, image.getPet());
 	}
@@ -113,6 +121,7 @@ class PetImageServiceTest {
 	@Test
 	void getFolderName_pet반환() {
 
+		// "pet" 폴더명 반환 확인
 		assertEquals("pet", petImageService.getFolderName());
 	}
 }

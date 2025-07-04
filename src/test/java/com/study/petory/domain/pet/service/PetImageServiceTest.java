@@ -1,0 +1,52 @@
+package com.study.petory.domain.pet.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import java.util.Optional;
+
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.util.S3Uploader;
+import com.study.petory.domain.pet.entity.Pet;
+import com.study.petory.domain.pet.entity.PetImage;
+import com.study.petory.domain.pet.repository.PetImageRepository;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+class PetImageServiceTest {
+
+	@Mock
+	private S3Uploader s3Uploader;
+
+	@Mock
+	private PetImageRepository petImageRepository;
+
+	@InjectMocks
+	private PetImageService petImageService;
+
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
+
+	@Test
+	void deleteImage_정상_삭제_호출() {
+
+		// given
+		Pet pet = new Pet();  // 기본 생성자 또는 목 객체
+		PetImage image = new PetImage("https://s3.test/pet.jpg", pet);
+
+		// doNothing().when(s3Uploader).deleteFile(anyString()); // 내부 호출 확인은 생략
+
+		// when
+		petImageService.deleteImage(image);
+
+		// then
+		verify(s3Uploader).deleteFile(eq("https://s3.test/pet.jpg"));
+	}
+}

@@ -78,4 +78,19 @@ class PetImageServiceTest {
 		CustomException ex = assertThrows(CustomException.class, () -> petImageService.findImageById(id));
 		assertEquals(ErrorCode.FILE_NOT_FOUND, ex.getErrorCode());
 	}
+
+	@Test
+	void createImageEntity_정상생성() {
+
+		// given
+		Pet pet = new Pet();
+		String url = "https://s3.test/created.jpg";
+
+		// when
+		PetImage image = petImageService.createImageEntity(url, pet);
+
+		// then
+		assertEquals(url, image.getUrl());
+		assertEquals(pet, image.getPet());
+	}
 }

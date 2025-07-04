@@ -13,7 +13,7 @@ public class ImageUploadPolicy {
 
 	private final Map<Role, Integer> upload = Map.of(
 		Role.ADMIN, 20,
-		Role.USER, 2
+		Role.USER, 1
 	);
 
 	// 권한을 통해 등록할 수 있는 최대 개수를 조회

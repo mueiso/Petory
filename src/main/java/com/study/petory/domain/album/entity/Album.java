@@ -41,7 +41,7 @@ public class Album extends UpdateBasedEntity {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@Column(columnDefinition = "TEXT")
+	@Column()
 	private String content;
 
 	@Enumerated(EnumType.STRING)

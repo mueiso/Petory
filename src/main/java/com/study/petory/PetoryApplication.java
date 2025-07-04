@@ -11,10 +11,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-@EnableJpaAuditing
-@EnableMongoAuditing
-@EnableScheduling
-@EnableBatchProcessing
+//@EnableJpaAuditing
+//@EnableMongoAuditing
+//@EnableScheduling
+//@EnableBatchProcessing
 @SpringBootApplication
 public class PetoryApplication {
 

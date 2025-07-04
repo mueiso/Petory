@@ -22,12 +22,7 @@ import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.repository.UserRepository;
 
 @Import(QueryDSLConfig.class)
-@DataJpaTest(
-	excludeAutoConfiguration = {
-		org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration.class,
-		org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration.class
-	}
-)
+@DataJpaTest
 @EntityScan(basePackages = "com.study.petory.domain")
 class PetRepositoryTest {
 

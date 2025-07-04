@@ -138,27 +138,28 @@ public class OwnerBoardServiceTest {
 		verify(ownerBoardRepository, times(1)).findAllWithFirstImageAndTitleOptional(keyword, pageable);
 	}
 
-	// @Test
-	// void 제목_검색어_없이_게시글_전체_조회에_성공한다() {
-	// 	// given
-	// 	Pageable pageable = PageRequest.of(0, 5);
-	// 	List<OwnerBoard> mockList = List.of(
-	// 		OwnerBoard.builder().title("제목입니다").content("내용").build(),
-	// 		OwnerBoard.builder().title("두번째 글").content("내용").build()
-	// 	);
-	//
-	// 	Page<OwnerBoard> mockPage = new PageImpl<>(mockList);
-	//
-	// 	given(ownerBoardRepository.findAll(pageable)).willReturn(mockPage);
-	//
-	// 	// when
-	// 	Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(null, pageable);
-	//
-	// 	// then
-	// 	assertEquals(2, result.getTotalElements());
-	// 	verify(ownerBoardRepository, times(1)).findAll(pageable);
-	// }
-	//
+	@Test
+	void 제목_검색어_없이_게시글_전체_조회에_성공한다() {
+		// given
+		String keyword = null;
+		Pageable pageable = PageRequest.of(0, 5);
+		List<OwnerBoardGetAllResponseDto> dtoList = List.of(
+			new OwnerBoardGetAllResponseDto(1L, "강아지 사진", "강아지", "https://s3.url/test1.jpg"),
+			new OwnerBoardGetAllResponseDto(2L, "고양이 사진", "고양이", "https://s3.url/test2.jpg")
+		);
+
+		Page<OwnerBoardGetAllResponseDto> mockPage = new PageImpl<>(dtoList, pageable, dtoList.size());
+
+		given(ownerBoardRepository.findAllWithFirstImageAndTitleOptional(keyword, pageable)).willReturn(mockPage);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(keyword, pageable);
+
+		// then
+		assertThat(result.getContent()).hasSize(2);
+		verify(ownerBoardRepository, times(1)).findAllWithFirstImageAndTitleOptional(keyword, pageable);
+	}
+
 	// @Test
 	// void 게시글_단건_조회에_성공한다() {
 	// 	// given

@@ -21,8 +21,8 @@ import com.study.petory.domain.user.entity.UserPrivateInfo;
 import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.repository.UserRepository;
 
-@Import(QueryDSLConfig.class)
 @DataJpaTest
+@Import(QueryDSLConfig.class)
 @EntityScan(basePackages = "com.study.petory.domain")
 class PetRepositoryTest {
 

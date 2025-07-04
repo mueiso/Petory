@@ -42,6 +42,7 @@ dependencies {
 
     //MongoDB
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.3'
 
     //웹소켓
     implementation 'org.springframework.boot:spring-boot-starter-websocket'

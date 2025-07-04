@@ -64,13 +64,23 @@ class UserRepositoryTest {
 		// 기준 시점: 90일 전
 		LocalDateTime base = LocalDateTime.now().withNano(0).minusDays(90);
 
+		/*
+		 * 기준 범위에 포함되는 유저: deletedAt 이 92일전
+		 * 기준 범위에 포함되는 유저: deletedAt 이 91일전
+		 * 기준 범위에 제외되는 유저: userStatus 가 ACTIVE
+		 */
 		createUser(UserStatus.DEACTIVATED, base.minusDays(2), base.minusDays(10));
 		createUser(UserStatus.DELETED, base.minusDays(1), base.minusDays(5));
 		createUser(UserStatus.ACTIVE, base.minusDays(1), base.minusDays(5));
 
+		/*
+		 * 삭제 대상 리스트 구성
+		 * 테스트 대상 쿼리 실행
+		 */
 		List<UserStatus> statusList = List.of(UserStatus.DEACTIVATED, UserStatus.DELETED);
 		List<User> result = userRepository.findByUserStatusInAndDeletedAtBefore(statusList, base);
 
+		// 2명 조회되는지 확인
 		assertThat(result).hasSize(2);
 	}
 

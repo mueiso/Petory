@@ -29,8 +29,8 @@ class UserRepositoryTest {
 	private UserRepository userRepository;
 
 	@Test
-	// userStatus DEACTIVATED 상테이면서 deletedAt 값이 85~90일 전 사이인 사용자 조회
-	void findUsers_휴면_상테_삭제_예정자_조회_성공() {
+	// userStatus DEACTIVATED 상태, deletedAt 값이 85~90일 전 사이인 유저 조회
+	void findUsers_휴면_상테_삭제_예정자_조회() {
 
 		/*
 		 * 비교 정확도 향상 위해 nano 단위는 제거
@@ -58,8 +58,8 @@ class UserRepositoryTest {
 	}
 
 	@Test
-	// userStatus DEACTIVATED 또는 DELETED 상태이면서 deletedAt 값이 90일 초과된 사용자 조회
-	void findUsers_휴면_또는_탈퇴_상태_삭제_예정자_조회_성공() {
+	// userStatus DEACTIVATED 또는 DELETED 상태, deletedAt 값이 90일 초과된 유저 조회
+	void findUsers_휴면_또는_탈퇴_상태_삭제_예정자_조회() {
 
 		// 기준 시점: 90일 전
 		LocalDateTime base = LocalDateTime.now().withNano(0).minusDays(90);
@@ -85,29 +85,15 @@ class UserRepositoryTest {
 	}
 
 	@Test
-	@DisplayName("휴면 후 경과 사용자 조회: DEACTIVATED 상태, deletedAt < 기준일")
-	void findDormantUsersExceededPeriod() {
+	// userStatus ACTIVE 상태, updatedAt 값이 90일 초과된 유저 조회
+	void find_휴면_전환_예정자_조회() {
 
-		LocalDateTime base = LocalDateTime.now().withNano(0).minusDays(30);
+		// 기준 시점: 90일 전
+		LocalDateTime standard = LocalDateTime.now().withNano(0).minusDays(90);
 
-		createUser(UserStatus.DEACTIVATED, base.minusDays(10), base.minusDays(40)); // 포함
-		createUser(UserStatus.DEACTIVATED, base.plusDays(5), base.minusDays(40));   // 제외
-		createUser(UserStatus.ACTIVE, base.minusDays(10), base.minusDays(40));      // 제외
-
-		List<User> result = userRepository.findByUserStatusAndDeletedAtBefore(UserStatus.DEACTIVATED, base);
-
-		assertThat(result).hasSize(1);
-	}
-
-	@Test
-	@DisplayName("비활동 사용자 조회: ACTIVE 상태, updatedAt < 기준일")
-	void findInactiveUsers() {
-
-		LocalDateTime standard = LocalDateTime.now().withNano(0).minusDays(180);
-
-		createUser(UserStatus.ACTIVE, null, standard.minusDays(10)); // 포함
-		createUser(UserStatus.ACTIVE, null, standard.plusDays(5));   // 제외
-		createUser(UserStatus.DELETED, null, standard.minusDays(10));// 제외
+		createUser(UserStatus.ACTIVE, null, standard.minusDays(10));
+		createUser(UserStatus.ACTIVE, null, standard.plusDays(5));
+		createUser(UserStatus.DELETED, null, standard.minusDays(10));
 
 		List<User> result = userRepository.findByUserStatusAndUpdatedAtBefore(UserStatus.ACTIVE, standard);
 

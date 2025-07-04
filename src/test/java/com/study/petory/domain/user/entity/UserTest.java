@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.domain.album.entity.Album;
-import com.study.petory.domain.dailyQna.entity.DailyQna;
+import com.study.petory.domain.dailyqna.entity.DailyAnswer;
 import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.tradeboard.entity.TradeBoard;
 
@@ -127,11 +127,11 @@ class UserTest {
 	void addDailyQna_정상추가되고_연관관계설정() {
 
 		// DailyQna 객체를 생성하고 추가
-		DailyQna dailyQna = new DailyQna();
+		DailyAnswer dailyQna = new DailyAnswer();
 		user.addDailyQna(dailyQna);
 
 		// 리스트에 포함됐는지 확인
-		assertThat(user.getDailyQnas()).contains(dailyQna);
+		assertThat(user.getDailyAnswers()).contains(dailyQna);
 		// 연관관계 설정 확인
 		assertThat(dailyQna.getUser()).isEqualTo(user);
 	}

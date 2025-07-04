@@ -35,6 +35,14 @@
             border-bottom: 1px solid #eee;
         }
 
+        .room-info {
+            padding: 8px 16px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            color: #666;
+        }
+
         #messages {
             list-style: none;
             padding: 16px;
@@ -101,14 +109,27 @@
         .input-area button:hover {
             background-color: #e97827;
         }
+
+        .error {
+            color: #ff4444;
+            background-color: #ffeeee;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 <div class="chat-box">
     <h1>채팅방</h1>
+    <div class="room-info">
+        채팅방 ID: <span id="roomIdDisplay">로딩 중...</span>
+    </div>
     <ul id="messages"></ul>
 
     <div class="input-area">
+        <div id="errorMessage" class="error" style="display: none;"></div>
+
         <input type="text" id="tokenInput" placeholder="JWT 토큰을 입력하세요" />
         <button onclick="connectStomp()">연결</button>
 
@@ -128,12 +149,61 @@
     let stompClient = null;
     let token = null;
     let myUserId = null;
-    const chatRoomId = "6850c96a74235b2beafb7112";
+    let chatRoomId = null;
+
+    // URL에서 채팅방 ID 가져오기
+    function getChatRoomIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomId = urlParams.get('roomId');
+
+        if (roomId) {
+            return roomId;
+        }
+
+        // URL 경로에서 가져오기 (예: /chat/room/68527de5590ad16d49306e45)
+        const pathParts = window.location.pathname.split('/');
+        const roomIndex = pathParts.indexOf('room');
+        if (roomIndex !== -1 && roomIndex + 1 < pathParts.length) {
+            return pathParts[roomIndex + 1];
+        }
+
+        return null;
+    }
+
+    function showError(message) {
+        const errorDiv = document.getElementById('errorMessage');
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+
+    function hideError() {
+        const errorDiv = document.getElementById('errorMessage');
+        errorDiv.style.display = 'none';
+    }
+
+    // 페이지 로드 시 채팅방 ID 설정
+    window.onload = function() {
+        chatRoomId = getChatRoomIdFromUrl();
+
+        if (!chatRoomId) {
+            showError('채팅방 ID를 찾을 수 없습니다. URL에 ?roomId=채팅방ID 또는 /room/채팅방ID를 포함해주세요.');
+            document.getElementById('roomIdDisplay').textContent = '없음';
+            return;
+        }
+
+        document.getElementById('roomIdDisplay').textContent = chatRoomId;
+        hideError();
+    };
 
     function connectStomp() {
+        if (!chatRoomId) {
+            showError('채팅방 ID가 설정되지 않았습니다.');
+            return;
+        }
+
         token = document.getElementById("tokenInput").value.trim();
         if (!token) {
-            alert("토큰을 입력하세요!");
+            showError("토큰을 입력하세요!");
             return;
         }
 
@@ -141,12 +211,11 @@
             const parsedToken = JSON.parse(atob(token.split('.')[1]));
             myUserId = parseInt(parsedToken.sub, 10);
         } catch (e) {
-            alert("유효하지 않은 토큰입니다.");
+            showError("유효하지 않은 토큰입니다.");
             return;
         }
 
-        // const socket = new SockJS("http://localhost:8080/ws-chat");
-        const socket = new SockJS("https://petory.click/ws-chat");
+        const socket = new SockJS("http://localhost:8080/ws-chat");
         stompClient = Stomp.over(socket);
 
         stompClient.connect(
@@ -155,6 +224,7 @@
             },
             (frame) => {
                 console.log("🟢 STOMP 연결됨:", frame);
+                hideError();
 
                 stompClient.subscribe(`/sub/room/${chatRoomId}`, (message) => {
                     const data = JSON.parse(message.body);
@@ -171,14 +241,20 @@
             },
             (error) => {
                 console.error("🔴 STOMP 연결 실패:", error);
+                showError("STOMP 연결에 실패했습니다.");
             }
         );
     }
 
     function sendTextMessage() {
+        if (!stompClient || !chatRoomId) {
+            showError("먼저 채팅방에 연결하세요!");
+            return;
+        }
+
         const text = document.getElementById("messageInput").value.trim();
         if (!text) {
-            alert("메시지를 입력하세요!");
+            showError("메시지를 입력하세요!");
             return;
         }
 
@@ -191,58 +267,70 @@
         }));
 
         document.getElementById("messageInput").value = "";
+        hideError();
     }
 
     async function sendImageMessage() {
+        if (!stompClient || !chatRoomId) {
+            showError("먼저 채팅방에 연결하세요!");
+            return;
+        }
+
         const imageFile = document.getElementById("imageInput").files[0];
         if (!imageFile) {
-            alert("이미지를 선택하세요!");
+            showError("이미지를 선택하세요!");
             return;
         }
 
-        const presignRes = await fetch("/chat/image", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({
+        try {
+            const presignRes = await fetch("/chat/image", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    chatRoomId,
+                    filename: imageFile.name,
+                    contentType: imageFile.type
+                })
+            });
+
+            if (!presignRes.ok) {
+                showError("Presigned URL 발급 실패");
+                return;
+            }
+
+            const resJson = await presignRes.json();
+            const { uploadUrl, fileUrl } = resJson.data;
+
+            const uploadRes = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": imageFile.type
+                },
+                body: imageFile
+            });
+
+            if (!uploadRes.ok) {
+                showError("S3 업로드 실패");
+                return;
+            }
+
+            stompClient.send("/pub/message", {
+                Authorization: `Bearer ${token}`
+            }, JSON.stringify({
                 chatRoomId,
-                filename: imageFile.name,
-                contentType: imageFile.type
-            })
-        });
+                messageType: "IMAGE",
+                content: fileUrl
+            }));
 
-        if (!presignRes.ok) {
-            alert("Presigned URL 발급 실패");
-            return;
+            document.getElementById("imageInput").value = "";
+            hideError();
+        } catch (error) {
+            showError("이미지 업로드 중 오류가 발생했습니다.");
+            console.error(error);
         }
-
-        const resJson = await presignRes.json();
-        const { uploadUrl, fileUrl } = resJson.data;
-
-        const uploadRes = await fetch(uploadUrl, {
-            method: "PUT",
-            headers: {
-                "Content-Type": imageFile.type
-            },
-            body: imageFile
-        });
-
-        if (!uploadRes.ok) {
-            alert("S3 업로드 실패");
-            return;
-        }
-
-        stompClient.send("/pub/message", {
-            Authorization: `Bearer ${token}`
-        }, JSON.stringify({
-            chatRoomId,
-            messageType: "IMAGE",
-            content: fileUrl
-        }));
-
-        document.getElementById("imageInput").value = "";
     }
 
     function addMessage(sender, text, className) {

@@ -26,9 +26,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerboard.dto.request.OwnerBoardCreateRequestDto;
+import com.study.petory.domain.ownerboard.dto.request.OwnerBoardUpdateRequestDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardCreateResponseDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetResponseDto;
+import com.study.petory.domain.ownerboard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
 import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
@@ -195,30 +197,32 @@ public class OwnerBoardServiceTest {
 		assertEquals(2, result.getImages().size());
 		assertEquals(10, result.getCommentsList().size());
 	}
-	//
-	// @Test
-	// void 게시글_수정에_성공한다() {
-	// 	// given
-	// 	Long boardId = 1L;
-	// 	OwnerBoard originalBoard = OwnerBoard.builder()
-	// 		.title("원래 제목")
-	// 		.content("원래 내용")
-	// 		.user(mockUser)
-	// 		.build();
-	//
-	// 	ReflectionTestUtils.setField(originalBoard, "id", boardId);
-	// 	OwnerBoardUpdateRequestDto requestDto = new OwnerBoardUpdateRequestDto("수정된 제목", "수정된 내용");
-	//
-	// 	given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(originalBoard));
-	//
-	// 	// when
-	// 	OwnerBoardUpdateResponseDto result = ownerBoardService.updateOwnerBoard(boardId, requestDto);
-	//
-	// 	// then
-	// 	assertEquals("수정된 제목", result.getTitle());
-	// 	assertEquals("수정된 내용", result.getContent());
-	// }
-	//
+
+	@Test
+	void 게시글_수정에_성공한다() {
+		// given
+		User user = createActiveUser(1L);
+
+		Long boardId = 1L;
+		OwnerBoard originalBoard = OwnerBoard.builder()
+			.title("원래 제목")
+			.content("원래 내용")
+			.user(user)
+			.build();
+
+		ReflectionTestUtils.setField(originalBoard, "id", boardId);
+		OwnerBoardUpdateRequestDto requestDto = new OwnerBoardUpdateRequestDto("수정된 제목", "수정된 내용");
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(originalBoard));
+
+		// when
+		OwnerBoardUpdateResponseDto result = ownerBoardService.updateOwnerBoard(user.getId(), boardId, requestDto);
+
+		// then
+		assertEquals("수정된 제목", result.getTitle());
+		assertEquals("수정된 내용", result.getContent());
+	}
+
 	// @Test
 	// void 게시글_삭제에_성공한다() {
 	// 	// given

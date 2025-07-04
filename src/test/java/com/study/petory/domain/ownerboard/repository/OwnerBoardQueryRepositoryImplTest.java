@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 
 import com.study.petory.common.config.QueryDSLConfig;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
@@ -34,6 +35,10 @@ public class OwnerBoardQueryRepositoryImplTest {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	private OwnerBoardQueryRepositoryImpl ownerBoardQueryRepositoryImpl;
+	@Autowired
+	private EntityManagerFactoryInfo entityManagerFactoryInfo;
 
 	@Test
 	void 게시글과_이미지를_함께_조회한다() {
@@ -63,6 +68,30 @@ public class OwnerBoardQueryRepositoryImplTest {
 		assertThat(result.get().getImages()).hasSize(2);
 		assertThat(result.get().getImages().get(0).getUrl()).startsWith("https://");
 	}
+
+	@Test
+	void 삭제되지_않은_게시글을_조회한다() {
+		// given
+		User user = createUserWithStatus(ACTIVE);
+
+		OwnerBoard ownerBoard = OwnerBoard.builder()
+			.user(user)
+			.title("제목")
+			.content("내용")
+			.build();
+
+		ownerBoardRepository.save(ownerBoard);
+		assertThat(ownerBoard.getId()).isNotNull();
+
+		// when
+		Optional<OwnerBoard> result = ownerBoardQueryRepositoryImpl.findByIdIncludingDeleted(ownerBoard.getId());
+
+		// then
+		assertThat(result).isPresent();
+		assertThat(result.get().getId()).isEqualTo(ownerBoard.getId());
+		assertThat(result.get().getDeletedAt()).isNull();
+	}
+
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {

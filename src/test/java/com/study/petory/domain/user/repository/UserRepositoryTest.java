@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -29,7 +28,7 @@ class UserRepositoryTest {
 	private UserRepository userRepository;
 
 	@Test
-	// userStatus DEACTIVATED 상태, deletedAt 값이 85~90일 전 사이인 유저 조회
+		// userStatus DEACTIVATED 상태, deletedAt 값이 85~90일 전 사이인 유저 조회
 	void findUsers_휴면_상테_삭제_예정자_조회() {
 
 		/*
@@ -58,7 +57,7 @@ class UserRepositoryTest {
 	}
 
 	@Test
-	// userStatus DEACTIVATED 또는 DELETED 상태, deletedAt 값이 90일 초과된 유저 조회
+		// userStatus DEACTIVATED 또는 DELETED 상태, deletedAt 값이 90일 초과된 유저 조회
 	void findUsers_휴면_또는_탈퇴_상태_삭제_예정자_조회() {
 
 		// 기준 시점: 90일 전
@@ -85,7 +84,7 @@ class UserRepositoryTest {
 	}
 
 	@Test
-	// userStatus ACTIVE 상태, updatedAt 값이 90일 초과된 유저 조회
+		// userStatus ACTIVE 상태, updatedAt 값이 90일 초과된 유저 조회
 	void find_휴면_전환_예정자_조회() {
 
 		// 기준 시점: 90일 전

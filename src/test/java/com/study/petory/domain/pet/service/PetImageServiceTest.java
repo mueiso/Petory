@@ -81,11 +81,16 @@ class PetImageServiceTest {
 	@Test
 	void findImageById_이미지_없을_경우_예외발생() {
 
-		// given
+		/* [given]
+		 * 해당 ID 로 조회 시 Optional.empty() 반환하도록 설정
+		 */
 		Long id = 999L;
 		when(petImageRepository.findById(id)).thenReturn(Optional.empty());
 
-		// when & then
+		/* [when & then]
+		 * 예외 발생 테스트
+		 * 발생한 예외의 ErrorCode 가 FILE_NOT_FOUND 인지 검증
+		 */
 		CustomException ex = assertThrows(CustomException.class, () -> petImageService.findImageById(id));
 		assertEquals(ErrorCode.FILE_NOT_FOUND, ex.getErrorCode());
 	}

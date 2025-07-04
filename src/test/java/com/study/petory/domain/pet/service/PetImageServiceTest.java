@@ -93,4 +93,10 @@ class PetImageServiceTest {
 		assertEquals(url, image.getUrl());
 		assertEquals(pet, image.getPet());
 	}
+
+	@Test
+	void getFolderName_pet반환() {
+
+		assertEquals("pet", petImageService.getFolderName());
+	}
 }

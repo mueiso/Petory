@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.petory.domain.ownerboard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardCreateResponseDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetAllResponseDto;
+import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
+import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
 import com.study.petory.domain.ownerboard.service.OwnerBoardImageService;
@@ -160,40 +163,38 @@ public class OwnerBoardServiceTest {
 		verify(ownerBoardRepository, times(1)).findAllWithFirstImageAndTitleOptional(keyword, pageable);
 	}
 
-	// @Test
-	// void 게시글_단건_조회에_성공한다() {
-	// 	// given
-	// 	Long boardId = 1L;
-	// 	OwnerBoard mockBoard = OwnerBoard.builder()
-	// 		.title("제목")
-	// 		.content("내용")
-	// 		.user(mockUser)
-	// 		.build();
-	//
-	// 	List<OwnerBoardComment> mockComments = IntStream.range(0, 10)
-	// 		.mapToObj(i -> OwnerBoardComment.builder()
-	// 			.content("댓글 " + i)
-	// 			.user(mockUser)
-	// 			.ownerBoard(mockBoard)
-	// 			.build())
-	// 		.toList();
-	//
-	// 	ReflectionTestUtils.setField(mockBoard, "id", boardId);
-	// 	ReflectionTestUtils.setField(mockBoard, "images", List.of("mockImage1", "mockImage2"));
-	// 	ReflectionTestUtils.setField(mockBoard, "comments", mockComments);
-	//
-	// 	given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(mockBoard));
-	// 	given(ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(boardId)).willReturn(mockComments);
-	//
-	// 	// when
-	// 	OwnerBoardGetResponseDto result = ownerBoardService.findOwnerBoard(boardId);
-	//
-	// 	// then
-	// 	assertEquals("제목", result.getTitle());
-	// 	assertEquals("내용", result.getContent());
-	// 	assertEquals(2, result.getImages().size());
-	// 	assertEquals(10, result.getCommentsList().size());
-	// }
+	@Test
+	void 게시글_단건_조회에_성공한다() {
+		// given
+		Long boardId = 1L;
+		OwnerBoard mockBoard = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.build();
+
+		List<OwnerBoardComment> mockComments = IntStream.range(0, 10)
+			.mapToObj(i -> OwnerBoardComment.builder()
+				.content("댓글 " + i)
+				.ownerBoard(mockBoard)
+				.build())
+			.toList();
+
+		ReflectionTestUtils.setField(mockBoard, "id", boardId);
+		ReflectionTestUtils.setField(mockBoard, "images", List.of("mockImage1", "mockImage2"));
+		ReflectionTestUtils.setField(mockBoard, "comments", mockComments);
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(mockBoard));
+		given(ownerBoardCommentRepository.findTop10ByOwnerBoardIdOrderByCreatedAt(boardId)).willReturn(mockComments);
+
+		// when
+		OwnerBoardGetResponseDto result = ownerBoardService.findOwnerBoard(boardId);
+
+		// then
+		assertEquals("제목", result.getTitle());
+		assertEquals("내용", result.getContent());
+		assertEquals(2, result.getImages().size());
+		assertEquals(10, result.getCommentsList().size());
+	}
 	//
 	// @Test
 	// void 게시글_수정에_성공한다() {

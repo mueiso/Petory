@@ -8,6 +8,7 @@ import static org.mockito.BDDMockito.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,12 +16,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.ownerboard.dto.request.OwnerBoardCreateRequestDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardCreateResponseDto;
+import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
@@ -109,34 +115,29 @@ public class OwnerBoardServiceTest {
 		assertTrue(result.getImageUrls().isEmpty());
 	}
 
-	// @Test
-	// void 제목이_포함된_게시글_조회에_성공한다() {
-	// 	// given
-	// 	String keyword = "제목";
-	// 	Pageable pageable = PageRequest.of(0, 5);
-	// 	List<OwnerBoard> mockList = List.of(
-	// 		OwnerBoard.builder().title("제목입니다").content("내용").build(),
-	// 		OwnerBoard.builder().title("포함안된 글").content("내용").build()
-	// 	);
-	//
-	// 	Page<OwnerBoard> filteredPage = new PageImpl<>(
-	// 		mockList.stream()
-	// 			.filter(board -> board.getTitle().contains(keyword))
-	// 			.collect(Collectors.toList())
-	// 	);
-	//
-	// 	given(ownerBoardRepository.findByTitleContaining(keyword, pageable)).willReturn(filteredPage);
-	//
-	// 	// when
-	// 	Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(keyword, pageable);
-	//
-	// 	// then
-	// 	assertEquals(1, result.getTotalElements());
-	// 	assertEquals("제목입니다", result.getContent().get(0).getTitle());
-	// 	verify(ownerBoardRepository, times(1)).findByTitleContaining(keyword, pageable);
-	// 	verify(ownerBoardRepository, never()).findAll();
-	// }
-	//
+	@Test
+	void 제목이_포함된_게시글_조회에_성공한다() {
+		// given
+		String keyword = "사진";
+		Pageable pageable = PageRequest.of(0, 5);
+		List<OwnerBoardGetAllResponseDto> dtoList = List.of(
+			new OwnerBoardGetAllResponseDto(1L, "강아지 사진", "강아지", "https://s3.url/test1.jpg"),
+			new OwnerBoardGetAllResponseDto(2L, "고양이 사진", "고양이", "https://s3.url/test2.jpg")
+		);
+
+		Page<OwnerBoardGetAllResponseDto> mockPage = new PageImpl<>(dtoList, pageable, dtoList.size());
+
+		given(ownerBoardRepository.findAllWithFirstImageAndTitleOptional(keyword, pageable)).willReturn(mockPage);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result = ownerBoardService.findAllOwnerBoards(keyword, pageable);
+
+		// then
+		assertThat(result.getContent()).hasSize(2);
+		assertThat(result.getContent().get(0).getTitle()).contains("사진");
+		verify(ownerBoardRepository, times(1)).findAllWithFirstImageAndTitleOptional(keyword, pageable);
+	}
+
 	// @Test
 	// void 제목_검색어_없이_게시글_전체_조회에_성공한다() {
 	// 	// given

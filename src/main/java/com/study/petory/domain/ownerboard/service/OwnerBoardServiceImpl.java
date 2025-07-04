@@ -78,8 +78,6 @@ public class OwnerBoardServiceImpl implements OwnerBoardService {
 	// 게시글 전체 조회
 	@Override
 	public Page<OwnerBoardGetAllResponseDto> findAllOwnerBoards(String title, Pageable pageable) {
-		Page<OwnerBoardGetAllResponseDto> response = ownerBoardRepository.findAllWithFirstImageAndTitleOptional(title,
-			pageable);
 
 		return ownerBoardRepository.findAllWithFirstImageAndTitleOptional(title, pageable);
 	}

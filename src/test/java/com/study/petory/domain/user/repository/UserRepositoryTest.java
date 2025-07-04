@@ -29,22 +29,35 @@ class UserRepositoryTest {
 	private UserRepository userRepository;
 
 	@Test
-	// 삭제 예정자 조회: DEACTIVATED 상태, deletedAt 85~90일 전
+	// userStatus DEACTIVATED 상테이면서 deletedAt 값이 85~90일 전 사이인 사용자 조회
 	void findUsers_휴면_상테_삭제_예정자_조회_성공() {
 
+		/*
+		 * 비교 정확도 향상 위해 nano 단위는 제거
+		 * 조회 시작 기준일
+		 * 조회 종료 기준일
+		 */
 		LocalDateTime now = LocalDateTime.now().withNano(0);
 		LocalDateTime from = now.minusDays(90);
 		LocalDateTime to = now.minusDays(85);
 
+		/*
+		 * 기준 범위에 포함되는 유저: deletedAt 이 87일전
+		 * 기준 범위에 제외되는 유저들: deletedAt 이 80일 전이라 범위 밖
+		 * 기준 범위에 제외되는 유저들: userStatus 가 ACTIVE
+		 */
 		createUser(UserStatus.DEACTIVATED, now.minusDays(87), now.minusDays(100)); // 포함됨
 		createUser(UserStatus.DEACTIVATED, now.minusDays(80), now.minusDays(100)); // 제외됨
 		createUser(UserStatus.ACTIVE, now.minusDays(87), now.minusDays(100));      // 제외됨
 
+		// 테스트 대상 쿼리 실행
 		List<User> result = userRepository.findByUserStatusAndDeletedAtBetween(UserStatus.DEACTIVATED, from, to);
 
+		// 1명만 조회되는지 확인
 		assertThat(result).hasSize(1);
 	}
 
+	// 테스트에 사용할 User 생성 위한 유틸 메서드
 	private User createUser(UserStatus status, LocalDateTime deletedAt, LocalDateTime updatedAt) {
 
 		UserPrivateInfo privateInfo = UserPrivateInfo.builder()
@@ -73,12 +86,15 @@ class UserRepositoryTest {
 		return userRepository.save(user);
 	}
 
-	// 필드값 설정 위한 유틸 메서드
+	// 리플렉션으로 부모 클래스 필드 값 설정 위한 유틸 메서드 (TimeFeatureBasedEntity 의 private 필드 대응용)
 	private void setField(Object target, String fieldName, Object value) {
 
 		try {
+			// 부모 클래스에서 필드 검색 (deletedAt, updatedAt)
 			Field field = target.getClass().getSuperclass().getDeclaredField(fieldName);
+			// 접근 가능하도록 설정
 			field.setAccessible(true);
+			// 값 설정
 			field.set(target, value);
 		} catch (Exception e) {
 			throw new RuntimeException("리플렉션 필드 설정 실패: " + fieldName, e);

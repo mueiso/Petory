@@ -31,22 +31,28 @@ class PetImageServiceTest {
 
 	@BeforeEach
 	void setUp() {
+		// @Mock, @InjectMocks 애노테이션 초기화
 		MockitoAnnotations.openMocks(this);
 	}
 
 	@Test
 	void deleteImage_정상_삭제_호출() {
 
-		// given
-		Pet pet = new Pet();  // 기본 생성자 또는 목 객체
+		/* [given]
+		 * 단순 Pet 객체 생성 (실제 DB 와 연동하지 않음)
+		 * 삭제할 PetImage 객체를 mock 으로 객체 생성
+		 */
+		Pet pet = new Pet();
 		PetImage image = new PetImage("https://s3.test/pet.jpg", pet);
 
-		// doNothing().when(s3Uploader).deleteFile(anyString()); // 내부 호출 확인은 생략
-
-		// when
+		/* [when]
+		 * 삭제 로직 수행
+		 */
 		petImageService.deleteImage(image);
 
-		// then
+		/* [then]
+		 * S3Uploader 의 deleteFile 이 해당 url 로 호출됐는지 검증
+		 */
 		verify(s3Uploader).deleteFile(eq("https://s3.test/pet.jpg"));
 	}
 

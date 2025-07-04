@@ -1,6 +1,5 @@
 package com.study.petory.domain.chat.repository;
 
-import static com.mysema.commons.lang.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;

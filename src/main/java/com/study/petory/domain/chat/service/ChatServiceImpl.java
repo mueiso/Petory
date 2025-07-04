@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
@@ -116,6 +117,7 @@ public class ChatServiceImpl implements ChatService {
 
 	//채팅방 생성
 	@Override
+	@Transactional
 	public ChatRoomCreateResponseDto saveChatRoom(Long userId, Long tradeBoardId) {
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)

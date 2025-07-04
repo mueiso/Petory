@@ -49,4 +49,21 @@ class PetImageServiceTest {
 		// then
 		verify(s3Uploader).deleteFile(eq("https://s3.test/pet.jpg"));
 	}
+
+	@Test
+	void findImageById_정상적으로_조회() {
+
+		// given
+		Long id = 1L;
+		Pet pet = new Pet();
+		PetImage image = new PetImage("https://s3.test/image.jpg", pet);
+
+		when(petImageRepository.findById(id)).thenReturn(Optional.of(image));
+
+		// when
+		PetImage found = petImageService.findImageById(id);
+
+		// then
+		assertEquals("https://s3.test/image.jpg", found.getUrl());
+	}
 }

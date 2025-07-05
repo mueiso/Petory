@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -231,9 +232,7 @@ public class OwnerBoardServiceTest {
 	void 게시글_삭제에_성공한다() {
 		// given
 		User user = createActiveUser(1L);
-
 		Long boardId = 1L;
-
 		OwnerBoardImage image1 = mock(OwnerBoardImage.class);
 		OwnerBoardImage image2 = mock(OwnerBoardImage.class);
 
@@ -259,28 +258,29 @@ public class OwnerBoardServiceTest {
 		assertNotNull(board.getDeletedAt());
 	}
 
-	// @Test
-	// void 게시글_복구에_성공한다() {
-	// 	// given
-	// 	Long boardId = 1L;
-	//
-	// 	OwnerBoard deletedBoard = OwnerBoard.builder()
-	// 		.title("삭제된 제목")
-	// 		.content("삭제된 내용")
-	// 		.user(mockUser)
-	// 		.build();
-	// 	ReflectionTestUtils.setField(deletedBoard, "id", boardId);
-	// 	ReflectionTestUtils.setField(deletedBoard, "deletedAt", LocalDateTime.now());
-	//
-	// 	given(ownerBoardRepository.findByIdIncludingDeleted(boardId)).willReturn(Optional.of(deletedBoard));
-	//
-	// 	// when
-	// 	ownerBoardService.restoreOwnerBoard(boardId);
-	//
-	// 	// then
-	// 	assertNull(deletedBoard.getDeletedAt());
-	// }
-	//
+	@Test
+	void 게시글_복구에_성공한다() {
+		// given
+		User user = createActiveUser(1L);
+		Long boardId = 1L;
+
+		OwnerBoard deletedBoard = OwnerBoard.builder()
+			.title("삭제된 제목")
+			.content("삭제된 내용")
+			.user(user)
+			.build();
+		ReflectionTestUtils.setField(deletedBoard, "id", boardId);
+		ReflectionTestUtils.setField(deletedBoard, "deletedAt", LocalDateTime.now());
+
+		given(ownerBoardRepository.findByIdIncludingDeleted(boardId)).willReturn(Optional.of(deletedBoard));
+
+		// when
+		ownerBoardService.restoreOwnerBoard(user.getId(), boardId);
+
+		// then
+		assertNull(deletedBoard.getDeletedAt());
+	}
+
 	// @Test
 	// void 게시글의_사진_삭제에_성공한다() {
 	// 	// given

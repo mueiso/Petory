@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -77,6 +76,9 @@ class JwtProviderTest {
 		String nickname = "nickname";
 		List<String> roles = List.of("ROLE_USER");
 
+		// 토큰 유효 시간 설정 (1시간)
+		ReflectionTestUtils.setField(jwtProvider, "accessTokenLife", 1000 * 60 * 60L);
+
 		/* [when]
 		 * 토큰 생성
 		 * 토큰 파싱
@@ -90,6 +92,7 @@ class JwtProviderTest {
 		assertEquals("1", claims.getSubject(), "Subject에 userId가 문자열로 저장되어야 한다");
 		assertEquals(email, claims.get("email", String.class), "Custom Claim 'email' 검증");
 		assertEquals(nickname, claims.get("nickname", String.class), "Custom Claim 'nickname' 검증");
+		assertEquals(roles, claims.get("roles", List.class));
 	}
 
 	@Test
@@ -146,17 +149,23 @@ class JwtProviderTest {
 		 * Redis 에 저장된 토큰과 동일한 토큰 요청
 		 */
 		Long userId = 1L;
-		String refreshToken = "Bearer mockToken";
+		String bearerToken = "Bearer mockToken";
+		String storedToken = "mockToken";
 
 		// RedisTemplate 의 opsForValue() 모킹
-		ValueOperations<String, String> ops = Mockito.mock(ValueOperations.class);
+		ValueOperations<String, String> ops = mock(ValueOperations.class);
 		when(redisTemplate.opsForValue()).thenReturn(ops);
-		when(ops.get(String.valueOf(userId))).thenReturn(refreshToken);
+
+		// Redis 에 저장된 토큰은 "RT:1" 키에 저장됨
+		when(ops.get("RT:" + userId)).thenReturn(storedToken);
+
+		// 순수 토큰 추출
+		String pureToken = jwtProvider.subStringToken(bearerToken);
 
 		/* [when]
 		 * 검증 요청
 		 */
-		boolean result = jwtProvider.isValidRefreshToken(userId, refreshToken);
+		boolean result = jwtProvider.isValidRefreshToken(userId, pureToken);
 
 		/* [then]
 		 * true 반환 확인

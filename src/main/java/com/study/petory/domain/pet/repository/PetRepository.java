@@ -13,5 +13,5 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
 
 	Optional<Pet> findPetById(Long id);
 
-	Page<Pet> findAllByUser(User user, Pageable pageable);
+	Page<Pet> findAllByUserAndDeletedAtIsNull(User user, Pageable pageable);
 }

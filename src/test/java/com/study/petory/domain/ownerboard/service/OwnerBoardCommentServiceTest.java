@@ -99,36 +99,36 @@ public class OwnerBoardCommentServiceTest {
 		// then
 		assertEquals("새 댓글", result.getContent());
 	}
-	//
-	// @Test
-	// void 댓글_전체_조회에_성공한다() {
-	// 	// given
-	// 	Long boardId = 1L;
-	// 	Pageable pageable = PageRequest.of(0, 10);
-	//
-	// 	List<OwnerBoardComment> mockList = IntStream.range(0, 15)
-	// 		.mapToObj(i -> OwnerBoardComment.builder()
-	// 			.content("댓글 " + i)
-	// 			.user(mockUser)
-	// 			.ownerboard(mockBoard)
-	// 			.build())
-	// 		.toList();
-	//
-	// 	Page<OwnerBoardComment> mockPage = new PageImpl<>(
-	// 		mockList.subList(0, 10), pageable, mockList.size());
-	//
-	// 	given(ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageable)).willReturn(mockPage);
-	//
-	// 	// when
-	// 	Page<OwnerBoardCommentGetResponseDto> result = ownerBoardCommentService.findAllOwnerBoardComments(
-	// 		boardId, pageable);
-	//
-	// 	// then
-	// 	assertEquals(15, result.getTotalElements());
-	// 	assertEquals(10, result.getContent().size());
-	// 	assertEquals("댓글 1", result.getContent().get(1).getContent());
-	// }
-	//
+
+	@Test
+	void 댓글_전체_조회에_성공한다() {
+		// given
+		Long boardId = 1L;
+		Pageable pageable = PageRequest.of(0, 10);
+
+		List<OwnerBoardComment> mockList = IntStream.range(0, 15)
+			.mapToObj(i -> OwnerBoardComment.builder()
+				.content("댓글 " + i)
+				.user(mockUser)
+				.ownerBoard(mockBoard)
+				.build())
+			.toList();
+
+		Page<OwnerBoardComment> mockPage = new PageImpl<>(
+			mockList.subList(0, 10), pageable, mockList.size());
+
+		given(ownerBoardCommentRepository.findByOwnerBoardId(boardId, pageable)).willReturn(mockPage);
+
+		// when
+		Page<OwnerBoardCommentGetResponseDto> result = ownerBoardCommentService.findAllOwnerBoardComments(
+			boardId, pageable);
+
+		// then
+		assertEquals(15, result.getTotalElements());
+		assertEquals(10, result.getContent().size());
+		assertEquals("댓글 1", result.getContent().get(1).getContent());
+	}
+
 	// @Test
 	// void 댓글_수정에_성공한다() {
 	// 	// given

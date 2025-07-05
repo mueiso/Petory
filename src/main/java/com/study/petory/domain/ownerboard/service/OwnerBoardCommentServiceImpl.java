@@ -17,6 +17,7 @@ import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.service.UserService;
 import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class OwnerBoardCommentServiceImpl implements OwnerBoardCommentService {
 
 	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
 	private final OwnerBoardService ownerBoardService;
-	private final UserServiceImpl userService;
+	private final UserService userService;
 
 	/**
 	 * 댓글 작성자 검증 메서드

@@ -1,6 +1,5 @@
 package com.study.petory.domain.ownerboard.service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserService;
-import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 

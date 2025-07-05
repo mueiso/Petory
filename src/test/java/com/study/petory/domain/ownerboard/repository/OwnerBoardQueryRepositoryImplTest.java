@@ -87,11 +87,30 @@ public class OwnerBoardQueryRepositoryImplTest {
 
 	@Test
 	void 첫번째_이미지만_조회한다() {
-	}
+		// given
+		User user = createUserWithStatus(ACTIVE);
+		OwnerBoard ownerBoard = createAndSaveOwnerBoard(user, "게시글", "내용");
 
-	@Test
-	void 검색_결과가_없는_경우() {
+		OwnerBoardImage image1 = new OwnerBoardImage("https://image1.jpg", ownerBoard);
+		OwnerBoardImage image2 = new OwnerBoardImage("https://image2.jpg", ownerBoard);
+		OwnerBoardImage image3 = new OwnerBoardImage("https://image3.jpg", ownerBoard);
 
+		ownerBoard.addImage(image1);
+		ownerBoard.addImage(image2);
+		ownerBoard.addImage(image3);
+
+		ownerBoardImageRepository.saveAll(List.of(image1, image2, image3));
+
+		Pageable pageable = PageRequest.of(0, 10);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result = ownerBoardQueryRepositoryImpl.findAllWithFirstImageAndTitleOptional(
+			null, pageable);
+
+		// then
+		assertThat(result.getContent()).hasSize(1);
+		assertThat(result.getContent().get(0).getImageUrl()).isNotNull();
+		assertThat(result.getContent().get(0).getImageUrl()).isEqualTo("https://image1.jpg");
 	}
 
 	@Test

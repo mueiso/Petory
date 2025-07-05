@@ -1,11 +1,8 @@
 package com.study.petory.domain.ownerboard.service;
 
-import static com.study.petory.domain.user.entity.UserStatus.*;
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
-import java.sql.Ref;
 import java.util.List;
 import java.util.Optional;
 

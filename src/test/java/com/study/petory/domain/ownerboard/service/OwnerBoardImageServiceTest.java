@@ -53,4 +53,25 @@ public class OwnerBoardImageServiceTest {
 		verify(ownerBoardImageRepository, times(2)).save(any(OwnerBoardImage.class));
 	}
 
+	@Test
+	void 이미지_업로드_및_URL_반환_성공() {
+		// given
+		List<MultipartFile> files = List.of(mock(MultipartFile.class));
+		OwnerBoard ownerBoard = mock(OwnerBoard.class);
+
+		given(s3Uploader.uploadFile(any(MultipartFile.class), eq("owner-board")))
+			.willReturn("https://image.jpg");
+
+		// when
+		List<String> result = ownerBoardImageService.uploadAndSaveAll(files, ownerBoard);
+
+		// then
+		assertEquals(1, result.size());
+		assertEquals("https://image.jpg", result.get(0));
+		verify(s3Uploader).uploadFile(any(MultipartFile.class), eq("owner-board"));
+		verify(ownerBoardImageRepository).save(any(OwnerBoardImage.class));
+	}
+
+
+
 }

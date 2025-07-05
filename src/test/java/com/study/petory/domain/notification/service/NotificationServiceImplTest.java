@@ -1,8 +1,6 @@
 package com.study.petory.domain.notification.service;
 
-import static com.study.petory.domain.user.entity.QUser.*;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.List;

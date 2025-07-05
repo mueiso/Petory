@@ -42,7 +42,7 @@ public class EventUpdateResponseDto {
 	public static EventUpdateResponseDto from(Event event) {
 		return new EventUpdateResponseDto(
 			event.getId(),
-			event.toString(),
+			event.getTitle(),
 			CustomDateUtil.toISOString(event.getStartDate(), event.getTimeZone()),
 			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
 			event.getIsAllDay(),

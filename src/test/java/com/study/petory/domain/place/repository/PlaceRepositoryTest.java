@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import com.study.petory.common.config.QueryDSLConfig;
 import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
 import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceImage;
 import com.study.petory.domain.place.entity.PlaceReview;
 import com.study.petory.domain.place.entity.PlaceType;
 import com.study.petory.domain.user.entity.User;
@@ -25,7 +26,7 @@ import com.study.petory.domain.user.repository.UserRepository;
 
 @DataJpaTest
 @Import(QueryDSLConfig.class)
-public class PlaceCustomRepositoryTest {
+public class PlaceRepositoryTest {
 
 	@Autowired
 	private PlaceRepository placeRepository;
@@ -162,6 +163,27 @@ public class PlaceCustomRepositoryTest {
 
 		assertAll("리뷰가 포함된 장소 조회 검증",
 			() -> assertTrue(findPlace.isPresent())
+		);
+	}
+
+	@Test
+	@DisplayName("Image를 fetchJoin한 전체 장소 조회")
+	void findAllWithImagesById() {
+		PlaceImage placeImage1 = new PlaceImage("testUrl", place1);
+		PlaceImage placeImage2 = new PlaceImage("Url", place2);
+
+		placeImageRepository.saveAll(List.of(placeImage1, placeImage2));
+		place1.addImage(placeImage1);
+
+		List<Place> placeList = placeRepository.findAllWithImagesById(List.of(place1.getId()));
+
+		System.out.println("placeList.get(0) Id = " + placeList.get(0).getId());
+
+		assertAll("Image를 fetchJoin한 전체 장소 조회",
+			() -> assertEquals(1, placeList.size()),
+			() -> assertEquals(placeList.get(0).getPlaceType(), PlaceType.CAFE),
+			() -> assertEquals(placeList.get(0).getImages().stream().map(PlaceImage::getUrl).toList(),
+				List.of("testUrl"))
 		);
 	}
 }

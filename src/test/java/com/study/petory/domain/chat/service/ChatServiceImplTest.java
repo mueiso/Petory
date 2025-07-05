@@ -1,7 +1,6 @@
 package com.study.petory.domain.chat.service;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
 import com.study.petory.domain.chat.repository.ChatAggregateRepository;
 import com.study.petory.domain.chat.repository.ChatRepository;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.entity.TradeCategory;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
@@ -130,7 +129,7 @@ class ChatServiceImplTest {
 		ReflectionTestUtils.setField(chatRoom2, "id", new ObjectId());
 		chatRooms.add(chatRoom2);
 
-		when(chatAggregateRepository.findChatRoomsByUserId(loginUserId, pageable)).thenReturn(chatRooms);
+		when(chatRepository.findChatRoomsByUserId(eq(loginUserId), eq(pageable))).thenReturn(chatRooms);
 
 		// when
 		List<ChatRoomGetAllResponseDto> responseDto = chatService.findAllChatRoom(loginUserId, pageable);
@@ -179,5 +178,25 @@ class ChatServiceImplTest {
 
 		assertThat(responseDto.getMessages()).hasSize(1);
 		assertThat(responseDto.getMessages().get(0).getContent()).isEqualTo("안녕");
+	}
+
+	@Test
+	void 채팅방_나가기에_성공한다() {
+		//given
+		String chatRoomId = new ObjectId().toHexString();
+
+		ChatRoom chatRoom = ChatRoom.builder()
+			.tradeBoardId(1L)
+			.sellerId(1L)
+			.customerId(2L)
+			.build();
+
+		ReflectionTestUtils.setField(chatRoom, "id", new ObjectId(chatRoomId));
+
+		//when
+		chatRoom.leaveChatRoom(1L);
+
+		//then
+		assertThat(chatRoom.isSellerExist()).isEqualTo(false);
 	}
 }

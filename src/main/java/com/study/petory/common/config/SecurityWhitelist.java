@@ -42,10 +42,10 @@ public class SecurityWhitelist {
 			"/places/{placeId}",
 			"/trade-boards",
 			"/trade-boards/{tradeBoardId}",
-			"/albums/all",
-			"/albums/all/users/{userId}",
-			"/albums/{albumId}",
-			"/questions/today",
+			"/users/albums",
+			"/users/{userId}/albums",
+			"/users/albums/{albumId}",
+			"/daily-questions/today",
 			"/places/rank"
 		);
 	}

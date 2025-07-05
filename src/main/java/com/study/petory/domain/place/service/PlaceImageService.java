@@ -31,7 +31,7 @@ public class PlaceImageService extends AbstractImageService<PlaceImage> {
 		return "place";
 	}
 
-	// 이미지 URL과 게시글 정보(OwnerBoard)를 기반으로 엔티티 생성
+	// 이미지 URL과 장소 정보(place)를 기반으로 엔티티 생성
 	@Override
 	protected PlaceImage createImageEntity(String url, Object context) {
 		Place place = (Place)context;

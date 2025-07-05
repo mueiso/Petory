@@ -35,16 +35,20 @@ class UserQueryRepositoryTest {
 	@BeforeEach
 	void setUp() {
 
+		// QueryDSL 을 사용하기 위해 JPAQueryFactory 를 직접 생성해 레포지토리 구현체에 주입
 		userQueryRepository = new UserQueryRepositoryImpl(new JPAQueryFactory(em));
 
 		/* [given]
-		 * 유저 및 유저 권한 저장
+		 * 테스트 유저 권한 생성 및 저장
+		 * 권한 설정
+		 * .persist(): 권한을 DB 에 저장
 		 */
 		UserRole userRole = UserRole.builder()
 			.role(Role.USER)
 			.build();
 		em.persist(userRole);
 
+		// 테스트용 유저 생성, 권한은 리스트 형태로 포함
 		testUser = User.builder()
 			.email("test@example.com")
 			.nickname("tester")
@@ -52,6 +56,10 @@ class UserQueryRepositoryTest {
 			.build();
 		em.persist(testUser);
 
+		/*
+		 * .flush(): 영속성 컨텍스트에 저장된 내용을 DB에 반영
+		 * .clear(): 1차 캐시 초기화하여 이후의 조회는 쿼리를 통해 수행되도록 함
+		 */
 		em.flush();
 		em.clear();
 	}
@@ -59,10 +67,17 @@ class UserQueryRepositoryTest {
 	@Test
 	void findByEmailWithUserRole_유저_조회_성공() {
 
-		// when
+		/* [when]
+		 * 이메일을 기준으로 유저를 조회 (권한 포함)
+		 */
 		Optional<User> result = userQueryRepository.findByEmailWithUserRole("test@example.com");
 
-		// then
+		/* [then]
+		 * 결과가 존재하는지 확인
+		 * 이메일 확인
+		 * 권한 정보 있는지 확인
+		 * 첫 번째 권한이 USER 인지 확인
+		 */
 		assertThat(result).isPresent();
 		assertThat(result.get().getEmail()).isEqualTo("test@example.com");
 		assertThat(result.get().getUserRole()).isNotNull();

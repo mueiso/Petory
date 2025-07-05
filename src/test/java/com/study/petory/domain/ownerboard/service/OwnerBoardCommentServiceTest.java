@@ -156,28 +156,30 @@ public class OwnerBoardCommentServiceTest {
 		assertEquals("수정된 댓글", result.getContent());
 	}
 
-	// @Test
-	// void 댓글_삭제에_성공한다() {
-	// 	// given
-	// 	Long boardId = 10L;
-	// 	Long commentId = 100L;
-	//
-	// 	OwnerBoardComment comment = OwnerBoardComment.builder()
-	// 		.content("삭제할 댓글")
-	// 		.user(mockUser)
-	// 		.ownerboard(mockBoard)
-	// 		.build();
-	// 	ReflectionTestUtils.setField(comment, "id", commentId);
-	//
-	// 	given(ownerBoardCommentRepository.findById(commentId)).willReturn(Optional.of(comment));
-	//
-	// 	// when
-	// 	ownerBoardCommentService.deleteOwnerBoardComment(boardId, commentId);
-	//
-	// 	// then
-	// 	assertNotNull(comment.getDeletedAt());
-	//
-	// }
+	@Test
+	void 댓글_삭제에_성공한다() {
+		// given
+		Long userId = 1L;
+		User user = createActiveUser(userId);
+		Long boardId = 10L;
+		Long commentId = 100L;
+
+		OwnerBoardComment comment = OwnerBoardComment.builder()
+			.content("삭제할 댓글")
+			.user(user)
+			.ownerBoard(mockBoard)
+			.build();
+		ReflectionTestUtils.setField(comment, "id", commentId);
+
+		given(ownerBoardCommentRepository.findById(commentId)).willReturn(Optional.of(comment));
+		given(userService.findUserById(userId)).willReturn(user);
+
+		// when
+		ownerBoardCommentService.deleteOwnerBoardComment(userId, boardId, commentId);
+
+		// then
+		assertNotNull(comment.getDeletedAt());
+	}
 
 	// 기본 활성 유저 생성
 	private User createActiveUser(Long userId) {

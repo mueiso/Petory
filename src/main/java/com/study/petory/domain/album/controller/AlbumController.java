@@ -36,7 +36,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/albums")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class AlbumController {
 
@@ -45,18 +45,18 @@ public class AlbumController {
 	/**
 	 * 앨범 저장
 	 * @param currentUser			앨범을 생성한 유저
-	 * @param text			앨범에 작성한 내용
+	 * @param dto				앨범에 작성한 내용
 	 * @param images		앨범에 등록하는 이미지
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping(value = "/albums", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> save(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@RequestPart @Valid AlbumCreateRequestDto text,
+		@RequestPart @Valid AlbumCreateRequestDto dto,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		albumService.saveAlbum(currentUser.getId(), text, images);
+		albumService.saveAlbum(currentUser.getId(), dto, images);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
@@ -65,7 +65,7 @@ public class AlbumController {
 	 * @param pageable		정렬 기준 및 방식
 	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 첫 번째 이미지 url, 생성일
 	 */
-	@GetMapping("/all")
+	@GetMapping("/albums")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllAlbum(
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
@@ -78,7 +78,7 @@ public class AlbumController {
 	 * @param pageable		정렬 기준 및 방식
 	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 첫 번째 이미지 url, 생성일
 	 */
-	@GetMapping("/all/users/my")
+	@GetMapping("/my/albums")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -93,7 +93,7 @@ public class AlbumController {
 	 * @param pageable		정렬 기준 및 방식
 	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 첫 번째 이미지 url, 생성일
 	 */
-	@GetMapping("/all/users/{userId}")
+	@GetMapping("/{userId}/albums")
 	public ResponseEntity<CommonResponse<Page<AlbumGetAllResponseDto>>> getAllUserAlbum(
 		@PathVariable Long userId,
 		@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
@@ -106,7 +106,7 @@ public class AlbumController {
 	 * @param albumId		조회하는 앨범 id
 	 * @return	CommonResponse 성공 메세지, data: 앨범 id, 이미지 List url, 생성일
 	 */
-	@GetMapping("/{albumId}")
+	@GetMapping("/albums/{albumId}")
 	public ResponseEntity<CommonResponse<AlbumGetOneResponseDto>> getOneAlbum(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PathVariable Long albumId
@@ -121,7 +121,7 @@ public class AlbumController {
 	 * @param request		수정할 내용
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
-	@PutMapping("/{albumId}")
+	@PutMapping("/albums/{albumId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateAlbum(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -139,7 +139,7 @@ public class AlbumController {
 	 * @param request		변경하는 앨범 공개 여부
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
-	@PatchMapping("/{albumId}/visibility")
+	@PatchMapping("/albums/{albumId}/visibility")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> updateVisibility(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -156,7 +156,7 @@ public class AlbumController {
 	 * @param albumId		삭제할 앨범 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
-	@DeleteMapping("/{albumId}")
+	@DeleteMapping("/albums/{albumId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteAlbum(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -173,7 +173,7 @@ public class AlbumController {
 	 * @param images		추가할 사진
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
-	@PostMapping(value = "/{albumId}/images", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping(value = "/albums/{albumId}/images", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> saveNewAlbumImage(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
@@ -190,7 +190,7 @@ public class AlbumController {
 	 * @param albumImageId	삭제할 앨범 이미지 id
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
-	@DeleteMapping(value = "/images/{albumImageId}")
+	@DeleteMapping(value = "/albums/images/{albumImageId}")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> deleteAlbumImage(
 		@AuthenticationPrincipal CustomPrincipal currentUser,

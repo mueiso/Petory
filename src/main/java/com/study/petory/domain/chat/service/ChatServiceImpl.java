@@ -8,7 +8,10 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.util.S3Uploader;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
 import com.study.petory.domain.chat.dto.request.PresignedUrlRequestDto;
@@ -19,12 +22,10 @@ import com.study.petory.domain.chat.dto.response.PresignedUrlResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.entity.ChatRoom;
 import com.study.petory.domain.chat.repository.ChatRepository;
-import com.study.petory.domain.tradeBoard.entity.TradeBoard;
-import com.study.petory.domain.tradeBoard.repository.TradeBoardRepository;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.repository.TradeBoardRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.repository.UserRepository;
-import com.study.petory.common.exception.CustomException;
-import com.study.petory.common.exception.enums.ErrorCode;
 
 import lombok.RequiredArgsConstructor;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
@@ -33,7 +34,7 @@ import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignReques
 
 @Service
 @RequiredArgsConstructor
-public class ChatServiceImpl implements ChatService{
+public class ChatServiceImpl implements ChatService {
 
 	@Value("${spring.cloud.aws.region.static}")
 	private String region;
@@ -116,6 +117,7 @@ public class ChatServiceImpl implements ChatService{
 
 	//채팅방 생성
 	@Override
+	@Transactional
 	public ChatRoomCreateResponseDto saveChatRoom(Long userId, Long tradeBoardId) {
 
 		TradeBoard tradeBoard = tradeBoardRepository.findById(tradeBoardId)

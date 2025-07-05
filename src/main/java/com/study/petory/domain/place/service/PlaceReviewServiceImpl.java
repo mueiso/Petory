@@ -2,6 +2,7 @@ package com.study.petory.domain.place.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -130,6 +131,11 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 			.orElseThrow(() -> new CustomException(ErrorCode.PLACE_REVIEW_NOT_FOUND));
 	}
 
+	@Override
+	public List<PlaceReview> findPlaceReviewListByPlaceId(Long placeId) {
+		return placeReviewRepository.findAllByPlaceId(placeId);
+	}
+
 	private void verifyAuthorEdit(PlaceReview placeReview, Long userId) {
 		if (!placeReview.isEqualUser(userId)) {
 			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
@@ -145,7 +151,7 @@ public class PlaceReviewServiceImpl implements PlaceReviewService {
 	private BigDecimal calculateAvgRatio(Long placeId) {
 		Double doubleAvg = placeReviewRepository.calculateAvgRatioByPlaceId(placeId);
 
-		if(doubleAvg == null) {
+		if (doubleAvg == null) {
 			doubleAvg = 0.0;
 		}
 

@@ -42,7 +42,7 @@ public class EventCreateResponseDto {
 	public static EventCreateResponseDto from(Event event) {
 		return new EventCreateResponseDto(
 			event.getId(),
-			event.toString(),
+			event.getTitle(),
 			CustomDateUtil.toISOString(event.getStartDate(), event.getTimeZone()),
 			CustomDateUtil.toISOString(event.getEndDate(), event.getTimeZone()),
 			event.getIsAllDay(),

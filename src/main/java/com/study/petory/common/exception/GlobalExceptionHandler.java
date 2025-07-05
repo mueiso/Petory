@@ -3,6 +3,7 @@ package com.study.petory.common.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.LazyInitializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -59,5 +60,11 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public ResponseEntity<CommonResponse<Void>> MaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
 		return CommonResponse.of(ErrorCode.FILE_SIZE_EXCEEDED);
+	}
+
+	@ExceptionHandler(LazyInitializationException.class)
+	public ResponseEntity<CommonResponse<String>> handleLazyInitException(LazyInitializationException e) {
+		log.error("Lazy 로딩 예외 발생: {}", e.getMessage());
+		return CommonResponse.of(ErrorCode.LAZY_LOADING_ERROR, e.getMessage());
 	}
 }

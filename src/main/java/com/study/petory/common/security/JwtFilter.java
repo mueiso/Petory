@@ -79,7 +79,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		
+
 		if ("GET".equalsIgnoreCase(method) && pathMatcher.match("/places/rank", url)) {
 			debugLog("GET /places/rank 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
@@ -96,9 +96,10 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		// GET 매핑의 /trade-boards, /trade-boards/{tradeBoardId} 경로 비회원 허용
+		// GET 매핑의 /trade-boards, /trade-boards/{tradeBoardId} 경로 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
-			&& (pathMatcher.match("/trade-boards", url)
-			|| pathMatcher.match("/trade-boards/*", url))) {
+			&& (url.equals("/trade-boards")
+			|| url.matches("^/trade-boards/\\d+$"))) {
 
 			debugLog("GET /trade-boards 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
@@ -107,7 +108,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// GET 매핑의 /questions/today 경로 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
-			&& pathMatcher.match("/questions/today", url)) {
+			&& pathMatcher.match("/daily-questions/today", url)) {
 
 			debugLog("GET /questions/today 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);
@@ -116,9 +117,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// GET 매핑의 /albums/all, /albums/all/users/{userId}, /albums/{albumId} 경로 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
-			&& (url.equals("/albums/all")
-			|| url.matches("^/albums/all/users/\\d+$")
-			|| (url.matches("^/albums/\\d+$") && request.getHeader(HEADER_AUTHORIZATION) == null))) {
+			&& (url.equals("/users/albums")
+			|| url.matches("^/users/\\d+$/albums")
+			|| (url.matches("^/users/albums/\\d+$") && request.getHeader(HEADER_AUTHORIZATION) == null))) {
 
 			debugLog("GET /albums 비회원 전용 경로입니다. 필터 우회: " + url);
 			filterChain.doFilter(request, response);

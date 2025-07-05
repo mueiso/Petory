@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.domain.ownerBoard.entity.OwnerBoard;
-import com.study.petory.domain.ownerBoard.entity.OwnerBoardComment;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardCommentRepository;
-import com.study.petory.domain.ownerBoard.repository.OwnerBoardRepository;
+import com.study.petory.common.security.JwtProvider;
+import com.study.petory.domain.ownerboard.entity.OwnerBoard;
+import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceLike;
 import com.study.petory.domain.place.entity.PlaceReport;
@@ -35,6 +36,7 @@ public class UserDeletionService {
 	private final PlaceLikeRepository placeLikeRepository;
 	private final PlaceReportRepository placeReportRepository;
 	private final PlaceReviewRepository placeReviewRepository;
+	private final JwtProvider jwtProvider;
 
 	@Transactional
 	public void deleteUser(User user) {
@@ -78,5 +80,9 @@ public class UserDeletionService {
 		// 7. User 실제 삭제
 		userRepository.delete(user);
 		log.info("[삭제] 유저 및 연관 데이터 정리 완료 - userId: {}, email: {}", user.getId(), user.getEmail());
+
+		// 8. Redis 에서 해당 유저의 Refresh Token 제거
+		jwtProvider.deleteRefreshToken(user.getId());
+		log.info("[삭제] Redis에서 유저 RefreshToken 제거 - key: RT:{}", user.getId());
 	}
 }

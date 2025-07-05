@@ -20,6 +20,7 @@ import com.study.petory.domain.event.dto.response.EventGetOneResponseDto;
 import com.study.petory.domain.event.dto.response.EventInstanceGetResponseDto;
 import com.study.petory.domain.event.dto.response.EventUpdateResponseDto;
 import com.study.petory.domain.event.entity.Event;
+import com.study.petory.domain.event.entity.EventInstance;
 import com.study.petory.domain.event.entity.Recurrence;
 import com.study.petory.domain.event.repository.EventRepository;
 import com.study.petory.domain.user.entity.User;
@@ -39,7 +40,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Event findEventById(Long eventId) {
 		return eventRepository.findById(eventId)
-			.orElseThrow(() -> new CustomException(ErrorCode.CALENDER_NOT_FOUND));
+			.orElseThrow(() -> new CustomException(ErrorCode.EVENT_IS_NOT_FOUND));
 	}
 
 	// 이벤트 생성
@@ -47,12 +48,16 @@ public class EventServiceImpl implements EventService {
 	@Transactional
 	public EventCreateResponseDto saveEvent(Long userId, EventCreateRequestDto request) {
 		User user = userService.findUserById(userId);
+		LocalDateTime endDate = CustomDateUtil.stringToLocalDateTime(request.getEndDate());
+		if (request.getIsAllDay()) {
+			endDate.plusDays(1);
+		}
 
 		Event event = Event.builder()
 			.user(user)
 			.title(request.getTitle())
 			.startDate(CustomDateUtil.stringToLocalDateTime(request.getStartDate()))
-			.endDate(CustomDateUtil.stringToLocalDateTime(request.getEndDate()))
+			.endDate(endDate)
 			.timeZone(request.getTimeZone())
 			.isAllDay(Optional.ofNullable(request.getIsAllDay()).orElse(true))
 			.rrule(recurrence.getRecurrence("RRULE", request.getRecurrence()))
@@ -79,11 +84,16 @@ public class EventServiceImpl implements EventService {
 		return eventList.stream()
 			.flatMap(event -> {
 				if (event.getRrule() == null) {
-					return Stream.of(EventInstanceGetResponseDto.from(event, null));
+					EventInstance instanceEvent = EventInstance.createInstanceEvent(event, null);
+					return Stream.of(EventInstanceGetResponseDto.from(instanceEvent));
 				} else {
 					List<LocalDateTime> instanceTimeList = recurrence.getInstanceStartTimeList(event, startDate, endDate);
 					return instanceTimeList.stream()
-						.map(instanceTime -> EventInstanceGetResponseDto.from(event, instanceTime));
+						.map(instanceTime -> {
+								EventInstance instanceEvent = EventInstance.createInstanceEvent(event, instanceTime);
+								return EventInstanceGetResponseDto.from(instanceEvent);
+							}
+						);
 				}
 			})
 			.sorted(Comparator.comparing(EventInstanceGetResponseDto::getStartDate))
@@ -92,9 +102,11 @@ public class EventServiceImpl implements EventService {
 
 	// 일정 단일 조회
 	@Override
+	@Transactional
 	public EventGetOneResponseDto findOneEvent(Long eventId) {
 		Event event = findEventById(eventId);
-		return EventGetOneResponseDto.from(event);
+		EventInstance instanceEvent = EventInstance.createInstanceEvent(event, null);
+		return EventGetOneResponseDto.from(instanceEvent);
 	}
 
 	// 일정 수정

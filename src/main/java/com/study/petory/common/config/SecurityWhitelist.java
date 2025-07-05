@@ -30,8 +30,6 @@ public class SecurityWhitelist {
 			"/image-petory.png",
 			"/petory.ico",
 			"/actuator/prometheus",
-			"/places/rank",
-			"/places/rank/**",
 			"/place-search-pet.png",
 			"/calendar.html"
 		);
@@ -43,13 +41,11 @@ public class SecurityWhitelist {
 			"/places/{placeId}",
 			"/trade-boards",
 			"/trade-boards/{tradeBoardId}",
-			"/albums/all",
-			"/albums/all/users/{userId}",
-			"/albums/{albumId}",
-			"/questions/today",
-			"/places/rank",
-			"/places/**",
-			"/places/rank/**"
+			"/users/albums",
+			"/users/{userId}/albums",
+			"/users/albums/{albumId}",
+			"/daily-questions/today",
+			"/places/rank"
 		);
 	}
 }

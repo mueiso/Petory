@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.domain.place.dto.request.PlaceCreateRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceStatusChangeRequestDto;
@@ -44,6 +48,15 @@ class PlaceServiceImplTest {
 	@Mock
 	private UserService userService;
 
+	@Mock
+	private PlaceImageService placeImageService;
+
+	@Mock
+	private RedisTemplate<String, Object> redisTemplate;
+
+	@Mock
+	private ZSetOperations<String, Object> zSetOperations;
+
 	@InjectMocks
 	private PlaceServiceImpl placeServiceImpl;
 
@@ -51,6 +64,8 @@ class PlaceServiceImplTest {
 	@DisplayName("장소 등록")
 	void savePlace() {
 		User user = new User();
+
+		List<MultipartFile> images = null;
 
 		ReflectionTestUtils.setField(user, "id", 1L);
 
@@ -72,7 +87,7 @@ class PlaceServiceImplTest {
 			return savedPlace;
 		});
 
-		PlaceCreateResponseDto responseDto = placeServiceImpl.savePlace(1L, dto);
+		PlaceCreateResponseDto responseDto = placeServiceImpl.savePlace(1L, dto, images);
 
 		assertAll("저장 로직 검증",
 			() -> assertEquals(1L, responseDto.getId()),
@@ -84,7 +99,7 @@ class PlaceServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("전체 장소 조회 - 파람이 모두 입력되지 않는 경우")
+	@DisplayName("전체 장소 조회")
 	void findAllPlace() {
 
 		String placeName = null;
@@ -101,7 +116,7 @@ class PlaceServiceImplTest {
 		Page<PlaceGetAllResponseDto> findAllPlace = placeServiceImpl.findAllPlace(placeName, placeType, address,
 			pageable);
 
-		assertAll("파람이 모두 있을 경우 조회 로직 검증",
+		assertAll("장소 조회 로직 검증",
 			() -> assertEquals(1, findAllPlace.getContent().size()),
 			() -> verify(placeRepository).findAllPlace(placeName, placeType, address, pageable)
 		);
@@ -139,7 +154,7 @@ class PlaceServiceImplTest {
 
 		ReflectionTestUtils.setField(place, "placeReviewList", List.of(placeReview1, placeReview2));
 
-		when(placeRepository.findWithReviewListById(1L)).thenReturn(Optional.of(place));
+		when(placeRepository.findWithReviewListByPlaceId(1L)).thenReturn(Optional.of(place));
 
 		PlaceGetResponseDto dto = placeServiceImpl.findByPlaceId(1L);
 
@@ -162,6 +177,11 @@ class PlaceServiceImplTest {
 			.build();
 
 		ReflectionTestUtils.setField(place, "id", 1L);
+
+		User user = new User();
+
+		ReflectionTestUtils.setField(user, "id", 1L);
+		ReflectionTestUtils.setField(place, "user", user);
 
 		PlaceUpdateRequestDto dto = new PlaceUpdateRequestDto(
 			"updateTestName",
@@ -212,7 +232,10 @@ class PlaceServiceImplTest {
 			.placeName("testName")
 			.build();
 
+		place.deactivateEntity();
+
 		ReflectionTestUtils.setField(place, "id", 1L);
+		ReflectionTestUtils.setField(place, "placeStatus", PlaceStatus.DELETED);
 
 		PlaceStatusChangeRequestDto dto = new PlaceStatusChangeRequestDto(PlaceStatus.ACTIVE);
 
@@ -223,6 +246,49 @@ class PlaceServiceImplTest {
 		assertAll("장소 삭제 로직 검증",
 			() -> assertEquals(PlaceStatus.ACTIVE, place.getPlaceStatus()),
 			() -> assertNull(place.getDeletedAt())
+		);
+	}
+
+	@Test
+	@DisplayName("인기 랭킹 - 랭킹 형성 전일 경우")
+	void findPlaceRankBeforeRank() {
+
+		String key = placeServiceImpl.makeKey(PlaceType.CAFE);
+
+		when(redisTemplate.opsForZSet()).thenReturn(zSetOperations);
+		when(redisTemplate.opsForZSet().reverseRange(key, 0, 9)).thenReturn(Set.of());
+
+		List<PlaceGetAllResponseDto> placeRank = placeServiceImpl.findPlaceRank(PlaceType.CAFE);
+
+		assertAll("랭킹이 없을 경우 인기 랭킹 로직 검증",
+			() -> assertEquals(placeRank, List.of())
+		);
+	}
+
+	@Test
+	@DisplayName("인기 랭킹 - 랭킹 형성이 되어 있을 경우")
+	void findPlaceRankAfterRank() {
+		String key = placeServiceImpl.makeKey(PlaceType.CAFE);
+
+		Place place1 = new Place();
+		Place place2 = new Place();
+		Place place3 = new Place();
+
+		ReflectionTestUtils.setField(place1, "id", 1L);
+		ReflectionTestUtils.setField(place1, "placeType", PlaceType.CAFE);
+		ReflectionTestUtils.setField(place2, "id", 2L);
+		ReflectionTestUtils.setField(place2, "placeType", PlaceType.CAFE);
+		ReflectionTestUtils.setField(place3, "id", 3L);
+		ReflectionTestUtils.setField(place3, "placeType", PlaceType.ACCOMMODATION);
+
+		when(redisTemplate.opsForZSet()).thenReturn(zSetOperations);
+		when(redisTemplate.opsForZSet().reverseRange(key, 0, 9)).thenReturn(Set.of(1, 2));
+		when(placeRepository.findAllWithImagesById(anyList())).thenReturn(List.of(place1, place2));
+
+		List<PlaceGetAllResponseDto> placeRank = placeServiceImpl.findPlaceRank(PlaceType.CAFE);
+
+		assertAll("랭킹 형성 후 인기 랭킹 조회",
+			() -> assertEquals(placeRank.get(0).getPlaceType(), PlaceType.CAFE)
 		);
 	}
 }

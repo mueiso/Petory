@@ -18,10 +18,9 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.user.dto.TokenResponseDto;
-import com.study.petory.domain.user.dto.UpdateUserRequestDto;
+import com.study.petory.domain.user.dto.UserUpdateRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.service.UserService;
-import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +30,6 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private final UserService userService;
-	private final UserServiceImpl userServiceImpl;
 
 	/**
 	 * [TEST - 로그인]
@@ -80,7 +78,7 @@ public class UserController {
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<CommonResponse<Object>> updateUser(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@Validated @RequestBody UpdateUserRequestDto updateDto) {
+		@Validated @RequestBody UserUpdateRequestDto updateDto) {
 
 		userService.updateProfile(currentUser.getEmail(), updateDto);
 
@@ -100,7 +98,7 @@ public class UserController {
 	public ResponseEntity<CommonResponse<Object>> logout(
 		@RequestHeader("Authorization") String accessToken) {
 
-		userServiceImpl.logout(accessToken);
+		userService.logout(accessToken);
 
 		return CommonResponse.of(SuccessCode.USER_LOGOUT);
 	}

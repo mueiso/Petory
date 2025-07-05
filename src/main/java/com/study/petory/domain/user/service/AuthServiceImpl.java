@@ -207,10 +207,10 @@ public class AuthServiceImpl implements AuthService {
 	@Transactional
 	public void restoreUser(Long targetUserId) {
 
-		User user = userService.findUserById(targetUserId);
+		User user = userService.findUserByIdWithUserStatus(targetUserId, UserStatus.SUSPENDED);
 
 		if (user.isDeletedAtNull()) {
-			throw new CustomException(ErrorCode.USER_NOT_DEACTIVATED);
+			throw new CustomException(ErrorCode.USER_NOT_SUSPENDED);
 		}
 
 		user.activateUser();

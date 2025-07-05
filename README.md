@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img alt="PETORY Logo" src="https://files.slack.com/files-pri/T06B9PCLY1E-F093MFFMKK2/image.png"/>
+<img width="561" alt="image" src="https://github.com/user-attachments/assets/c8000817-918b-4c14-9585-af755c1d0ead" />
 
 [![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=java)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=spring)](https://spring.io/projects/spring-boot)
@@ -21,7 +21,9 @@
 
 > **"하루 한 번, 반려동물과 더 가까워지는 웹"**
 
-반려동물은 이제 단순한 '펫'이 아닌 '가족'입니다. 하지만 반려인들은 여전히 **정보 공유**, **소통**, **기록 관리**, **용품 거래** 등 일상 속 다양한 불편함을 겪고 있습니다.
+요즘 반려 동물은 '가족'에 포함되는 소중한 존재입니다.
+
+하지만 반려인들은 여전히 **정보 공유**, **소통**, **기록 관리**, **용품 거래** 등 일상 속 다양한 불편함을 겪고 있습니다.
 
 PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄생한 **소통/거래/기록 통합 플랫폼**입니다.
 
@@ -32,54 +34,6 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 - 🍽️ **정보 부족**: 반려동물 동반 가능한 장소 정보가 분산되어 있음
 - 📸 **기록 관리**: 반려동물과의 소중한 순간들을 체계적으로 관리하기 어려움
 
-## ✨ 핵심 기능
-
-### 💬 반려인 커뮤니티
-- **일상 공유**: 반려동물과의 소소한 일상을 자유롭게 공유
-- **정보 교환**: 댓글을 통한 실용적인 정보 공유 및 소통
-- **중고 거래**: 반려용품 중고거래와 실시간 채팅 기능
-
-### 🏠️ 반려동물 친화적 장소
-- **장소 탐색**: 반려동물 동반 가능한 식당, 카페, 숙소 정보
-- **리뷰 시스템**: 사용자 리뷰 및 별점으로 신뢰성 있는 정보 제공
-- **인기 장소**: 좋아요 기반 인기 플레이스 추천
-
-### ✉️ 데일리 기록
-- **데일리 앨범**: 하루 한 컷, 반려동물과의 추억 저장
-- **데일리 QnA**: 매일 다른 질문에 답변 작성, 1년 후 같은 질문에 대한 답을 보며 추억 회상
-
-### ⚙️ 추가 기능
-- **권한 분리**: 비회원/회원/관리자 구분된 접근 제어
-- **실시간 알림**: 스케줄러 기반 데일리 질문 알림
-
-## 🏗️ 시스템 아키텍처
-
-<div align="center">
-
-![시스템 아키텍처](https://via.placeholder.com/800x600/F5F5F5/333333?text=시스템+아키텍처+다이어그램)
-
-</div>
-
-### 🔧 인프라 구성
-
-| 서비스 | 사양 | 역할 |
-|--------|------|------|
-| **EC2** | t2.medium | 애플리케이션 서버 |
-| **RDS** | t4g.micro (MySQL) | 관계형 데이터베이스 |
-| **ElastiCache** | t2.micro (Redis OSS) | 캐싱 및 세션 관리 |
-| **ECR** | Private Repository | 컨테이너 이미지 저장 |
-| **S3** | Standard | 사용자 업로드 파일 관리 |
-| **MongoDB Atlas** | - | 채팅 데이터 저장 |
-
-### 🚀 CI/CD 파이프라인
-
-```mermaid
-graph LR
-    A[GitHub] --> B[GitHub Actions]
-    B --> C[Docker Build]
-    C --> D[ECR Push]
-    D --> E[EC2 Deploy]
-```
 
 ## 🛠️ 기술 스택
 
@@ -137,6 +91,54 @@ graph LR
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack)
 ![ERDCloud](https://img.shields.io/badge/ERD%20Cloud-4285F4?style=for-the-badge)
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma)
+
+
+## ✨ 핵심 기능
+
+### 💬 반려인 커뮤니티
+- **일상 공유**: 반려동물과의 소소한 일상을 자유롭게 공유
+- **정보 교환**: 댓글을 통한 실용적인 정보 공유 및 소통
+- **중고 거래**: 반려용품 중고거래 및 판매자와의 실시간 채팅 기능
+
+### 🏠️ 반려동물 친화적 장소
+- **장소 탐색**: 반려동물 동반 가능한 식당, 카페, 숙소 정보
+- **리뷰 시스템**: 사용자 리뷰 및 별점으로 신뢰성 있는 정보 제공
+- **인기 장소**: 좋아요 기반 인기 플레이스 추천
+
+### ✉️ 데일리 기록
+- **데일리 앨범**: 하루 한 컷, 반려동물과의 추억 저장
+- **데일리 QnA**: 매일 다른 질문에 답변 작성, 1년 후 같은 질문에 대한 답을 보며 추억 회상
+
+### ⚙️ 추가 기능
+- **권한 분리**: 비회원/회원/관리자 구분된 접근 제어
+- **실시간 알림**: 스케줄러 기반 데일리 질문 알림
+
+
+
+## 🏗️ 시스템 아키텍처
+![v2](https://github.com/user-attachments/assets/b799786b-d2bf-4994-804e-f7cad4b9e0df)
+
+
+### 🔧 인프라 구성
+
+| 서비스 | 사양 | 역할 |
+|--------|------|------|
+| **EC2** | t2.medium | 애플리케이션 서버 |
+| **RDS** | t4g.micro (MySQL) | 관계형 데이터베이스 |
+| **ElastiCache** | t2.micro (Redis OSS) | 캐싱 및 세션 관리 |
+| **ECR** | Private Repository | 컨테이너 이미지 저장 |
+| **S3** | Standard | 사용자 업로드 파일 관리 |
+| **MongoDB Atlas** | - | 채팅 데이터 저장 |
+
+### 🚀 CI/CD 파이프라인
+
+```mermaid
+graph LR
+    A[GitHub] --> B[GitHub Actions]
+    B --> C[Docker Build]
+    C --> D[ECR Push]
+    D --> E[EC2 Deploy]
+```
 
 ## 📊 성능 개선
 
@@ -205,31 +207,31 @@ public Step sendDailyQuestionStep(
 <details>
 <summary><strong>1. Docker 빌드 캐시 이슈</strong></summary>
 
-**문제**: 코드 수정 후 배포했으나 변경사항이 반영되지 않음<br/>
-**원인**: Docker 레이어 캐시로 인해 소스코드 변경이 감지되지 않음<br/>
-**해결**: `--no-cache` 옵션 사용 및 빌드 단계 최적화
+- **문제**: 코드 수정 후 배포했으나 변경사항이 반영되지 않음<br/>
+- **원인**: Docker 레이어 캐시로 인해 소스코드 변경이 감지되지 않음<br/>
+- **해결**: `--no-cache` 옵션 사용 및 빌드 단계 최적화
 
 </details>
 
 <details>
 <summary><strong>2. JPA Lazy Loading으로 인한 401 에러</strong></summary>
 
-**문제**: Security 설정에 문제없음에도 401 Unauthorized 발생<br/>
-**원인**: LazyInitializationException이 Security Filter에서 401로 변환됨<br/>
-**해결**: QueryDSL fetch join 적용 및 GlobalExceptionHandler 보강<br/>
+- **문제**: Security 설정에 문제없음에도 401 Unauthorized 발생<br/>
+- **원인**: LazyInitializationException이 Security Filter에서 401로 변환됨<br/>
+- **해결**: QueryDSL fetch join 적용 및 GlobalExceptionHandler 보강<br/>
 
 </details>
 
 <details>
 <summary><strong>3. Rate Limiting 버킷 초기화 문제</strong></summary>
 
-**문제**: Bucket4j Rate Limiting이 매 요청마다 초기화됨<br/>
-**원인**: BucketConfiguration이 매번 새로 생성됨<br/>
-**해결**: 필드 레벨에서 고정된 Configuration 사용
+- **문제**: Bucket4j Rate Limiting이 매 요청마다 초기화됨<br/>
+- **원인**: BucketConfiguration이 매번 새로 생성됨<br/>
+- **해결**: 필드 레벨에서 고정된 Configuration 사용
 
 </details>
 
-## 📱 주요 화면
+## 📱 주요 화면 (추가 예정)
 
 | 메인 페이지 | 커뮤니티 | 플레이스 |
 |-------------|----------|----------|
@@ -312,19 +314,16 @@ public Step sendDailyQuestionStep(
 ### 📈 확장성 개선
 - [ ] Auto Scaling Group 적용
 - [ ] Application Load Balancer 도입
-- [ ] Multi-AZ 배포 구성
 
 ### 🚀 성능 최적화
 - [ ] Spring Batch 파티셔닝 적용
-- [ ] Valkey로 캐시 엔진 업그레이드 검토
-- [ ] CDN 도입으로 정적 파일 응답 속도 개선
 
 ---
 
 <div align="center">
 
+
 **🐾 PETORY와 함께 반려동물과의 소중한 순간을 기록하세요! 🐾**
 
 Made with ❤️ by PETORY Team
-
 </div>

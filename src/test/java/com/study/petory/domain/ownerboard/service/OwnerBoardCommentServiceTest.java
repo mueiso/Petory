@@ -1,7 +1,6 @@
 package com.study.petory.domain.ownerboard.service;
 
 import static com.study.petory.domain.user.entity.UserStatus.*;
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
@@ -58,15 +57,6 @@ public class OwnerBoardCommentServiceTest {
 
 	private User mockUser;
 	private OwnerBoard mockBoard;
-
-	// @BeforeEach
-	// void SetUser() {
-	// 	List<UserRole> userRole = new ArrayList<>();
-	// 	userRole.add(new UserRole(Role.USER));
-	// 	UserPrivateInfo info = new UserPrivateInfo("google", "name", "010-0000-0000");
-	// 	this.mockUser = new User("nickname", "test@mail.com", info, userRole);
-	// 	ReflectionTestUtils.setField(mockUser, "id", 1L);
-	// }
 
 	@BeforeEach
 	void SetBoard() {

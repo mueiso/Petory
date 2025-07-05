@@ -4,8 +4,6 @@
 // import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 //
 // import java.nio.charset.StandardCharsets;
-// import java.time.LocalDate;
-// import java.util.List;
 //
 // import org.junit.jupiter.api.Test;
 // import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +35,10 @@
 //
 // 		// given
 // 		PetCreateRequestDto requestDto = new PetCreateRequestDto(
-// 			"멍멍이",
+// 			"쿠키",
 // 			PetSize.SMALL,
 // 			"푸들",
-// 			"MALE",
+// 			"수컷",
 // 			"2020-05-20"
 // 		);
 //
@@ -89,8 +87,8 @@
 // 	void updatePet_성공() throws Exception {
 //
 // 		PetUpdateRequestDto updateDto = new PetUpdateRequestDto(
-// 			"강아지",
-// 			"FEMALE",
+// 			"초코",
+// 			"수컷이었던 것",
 // 			"2021, 1, 1"
 // 		);
 //

@@ -63,7 +63,7 @@ public class PetServiceImpl implements PetService {
 
 		User user = userService.findUserById(userId);
 
-		Page<Pet> pets = petRepository.findAllByUser(user, pageable);
+		Page<Pet> pets = petRepository.findAllByUserAndDeletedAtIsNull(user, pageable);
 
 		return pets.map(PetGetAllResponseDto::of);
 	}
@@ -73,12 +73,15 @@ public class PetServiceImpl implements PetService {
 	@Transactional(readOnly = true)
 	public PetResponseDto findPet(Long userId, Long petId) {
 
-		Pet pet = petRepository.findPetById(petId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+		Pet pet = findPetById(petId);
 
 		// 본인 소유 아닐 경우 예외 처리
 		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
+		if (!pet.isDeletedAtNull()) {
+			throw new CustomException(ErrorCode.PET_NOT_FOUND);
 		}
 
 		List<String> urls = pet.getImages().stream()
@@ -94,8 +97,7 @@ public class PetServiceImpl implements PetService {
 	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto,
 		List<MultipartFile> images) {
 
-		Pet pet = petRepository.findPetById(petId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+		Pet pet = findPetById(petId);
 
 		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);

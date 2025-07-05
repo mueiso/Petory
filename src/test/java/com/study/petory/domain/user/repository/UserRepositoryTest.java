@@ -84,31 +84,31 @@ class UserRepositoryTest {
 		assertThat(result).hasSize(2);
 	}
 
-	// @Test
-	// 	// userStatus ACTIVE 상태, updatedAt 값이 90일 초과된 유저 조회
-	// void find_휴면_전환_예정자_조회() {
-	//
-	// 	// 기준 시점: 90일 전
-	// 	LocalDateTime standard = LocalDateTime.now().withNano(0).minusDays(90);
-	//
-	// 	/*
-	// 	 * 기준 범위에 포함되는 유저: updatedAt 이 100일전
-	// 	 * 기준 범위에 제외되는 유저: updatedAt 이 85일전
-	// 	 * 기준 범위에 제외되는 유저: userStatus 가 DELETED
-	// 	 */
-	// 	User user = createUser(UserStatus.ACTIVE, null, null);;
-	// 	setField(user, "updatedAt", standard.minusDays(10));
-	// 	userRepository.save(user);
-	//
-	// 	createUser(UserStatus.ACTIVE, null, standard.plusDays(5));
-	// 	createUser(UserStatus.DELETED, null, standard.minusDays(10));
-	//
-	// 	// 테스트 대상 쿼리 실행
-	// 	List<User> result = userRepository.findByUserStatusAndUpdatedAtBefore(UserStatus.ACTIVE, standard);
-	//
-	// 	// 1명 조회되는지 확인
-	// 	assertThat(result).hasSize(1);
-	// }
+	@Test
+		// userStatus ACTIVE 상태, updatedAt 값이 90일 초과된 유저 조회
+	void find_휴면_전환_예정자_조회() {
+
+		// 기준 시점: 90일 전
+		LocalDateTime standard = LocalDateTime.now().withNano(0).minusDays(90);
+
+		/*
+		 * 기준 범위에 포함되는 유저: updatedAt 이 100일전
+		 * 기준 범위에 제외되는 유저: updatedAt 이 85일전
+		 * 기준 범위에 제외되는 유저: userStatus 가 DELETED
+		 */
+		User user = createUser(UserStatus.ACTIVE, null, null);;
+		setField(user, "updatedAt", standard.minusDays(10));
+		userRepository.save(user);
+
+		createUser(UserStatus.ACTIVE, null, standard.plusDays(5));
+		createUser(UserStatus.DELETED, null, standard.minusDays(10));
+
+		// 테스트 대상 쿼리 실행
+		List<User> result = userRepository.findByUserStatusAndUpdatedAtBefore(UserStatus.ACTIVE, standard);
+
+		// 1명 조회되는지 확인
+		assertThat(result).hasSize(1);
+	}
 
 	// 테스트에 사용할 User 생성 위한 유틸 메서드
 	private User createUser(UserStatus status, LocalDateTime deletedAt, LocalDateTime updatedAt) {

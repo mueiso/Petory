@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Event findEventById(Long eventId) {
 		return eventRepository.findById(eventId)
-			.orElseThrow(() -> new CustomException(ErrorCode.CALENDER_NOT_FOUND));
+			.orElseThrow(() -> new CustomException(ErrorCode.EVENT_IS_NOT_FOUND));
 	}
 
 	// 이벤트 생성

@@ -1,4 +1,4 @@
-package com.study.petory.domain.album;
+package com.study.petory.domain.album.service;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
@@ -34,8 +34,6 @@ import com.study.petory.domain.album.entity.AlbumImage;
 import com.study.petory.domain.album.entity.AlbumVisibility;
 import com.study.petory.domain.album.entity.ImageUploadPolicy;
 import com.study.petory.domain.album.repository.AlbumRepository;
-import com.study.petory.domain.album.service.AlbumImageServiceImpl;
-import com.study.petory.domain.album.service.AlbumServiceImpl;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;

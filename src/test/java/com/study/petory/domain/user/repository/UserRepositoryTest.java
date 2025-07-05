@@ -92,7 +92,7 @@ class UserRepositoryTest {
 
 		/*
 		 * 기준 범위에 포함되는 유저: updatedAt 이 100일전
-		 * 기준 범위에 포함되는 유저: updatedAt 이 85일전
+		 * 기준 범위에 제외되는 유저: updatedAt 이 85일전
 		 * 기준 범위에 제외되는 유저: userStatus 가 DELETED
 		 */
 		createUser(UserStatus.ACTIVE, null, standard.minusDays(10));

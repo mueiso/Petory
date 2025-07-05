@@ -21,7 +21,7 @@ import com.study.petory.domain.event.dto.response.EventInstanceGetResponseDto;
 import com.study.petory.domain.event.dto.response.EventUpdateResponseDto;
 import com.study.petory.domain.event.entity.Event;
 import com.study.petory.domain.event.entity.EventInstance;
-import com.study.petory.domain.event.entity.Recurrence;
+import com.study.petory.domain.event.entity.RecurrenceInfo;
 import com.study.petory.domain.event.repository.EventRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserService;
@@ -34,7 +34,7 @@ public class EventServiceImpl implements EventService {
 
 	private final EventRepository eventRepository;
 	private final UserService userService;
-	private final Recurrence recurrence;
+	private final RecurrenceService recurrenceService;
 
 	// 일정 조회
 	@Override
@@ -48,10 +48,12 @@ public class EventServiceImpl implements EventService {
 	@Transactional
 	public EventCreateResponseDto saveEvent(Long userId, EventCreateRequestDto request) {
 		User user = userService.findUserById(userId);
+
 		LocalDateTime endDate = CustomDateUtil.stringToLocalDateTime(request.getEndDate());
 		if (request.getIsAllDay()) {
 			endDate.plusDays(1);
 		}
+		RecurrenceInfo info = recurrenceService.getRecurrence(request.getRecurrence());
 
 		Event event = Event.builder()
 			.user(user)
@@ -59,11 +61,11 @@ public class EventServiceImpl implements EventService {
 			.startDate(CustomDateUtil.stringToLocalDateTime(request.getStartDate()))
 			.endDate(endDate)
 			.timeZone(request.getTimeZone())
-			.isAllDay(Optional.ofNullable(request.getIsAllDay()).orElse(true))
-			.rrule(recurrence.getRecurrence("RRULE", request.getRecurrence()))
-			.recurrenceEnd(recurrence.getRecurrenceEnd(request.getRecurrence()))
-			.rDate(recurrence.getRecurrence("RDATE", request.getRecurrence()))
-			.exDate(recurrence.getRecurrence("EXDATE", request.getRecurrence()))
+			.isAllDay(request.getIsAllDay())
+			.rrule(info.getRrule())
+			.recurrenceEnd(info.getRecurrenceEnd())
+			.rDate(info.getRDate())
+			.exDate(info.getExDate())
 			.description(request.getDescription())
 			.color(request.getColor())
 			.build();
@@ -87,7 +89,7 @@ public class EventServiceImpl implements EventService {
 					EventInstance instanceEvent = EventInstance.createInstanceEvent(event, null);
 					return Stream.of(EventInstanceGetResponseDto.from(instanceEvent));
 				} else {
-					List<LocalDateTime> instanceTimeList = recurrence.getInstanceStartTimeList(event, startDate, endDate);
+					List<LocalDateTime> instanceTimeList = recurrenceService.getInstanceStartTimeList(event, startDate, endDate);
 					return instanceTimeList.stream()
 						.map(instanceTime -> {
 								EventInstance instanceEvent = EventInstance.createInstanceEvent(event, instanceTime);
@@ -116,16 +118,18 @@ public class EventServiceImpl implements EventService {
 		Event event = findEventById(eventId);
 		validUser(userId, event);
 
+		RecurrenceInfo info = recurrenceService.getRecurrence(request.getRecurrence());
+
 		event.updateEvent(
 			request.getTitle(),
 			CustomDateUtil.stringToLocalDateTime(request.getStartDate()),
 			CustomDateUtil.stringToLocalDateTime(request.getEndDate()),
 			request.getTimeZone(),
 			request.getIsAllDay(),
-			recurrence.getRecurrence("RRULE", request.getRecurrence()),
-			recurrence.getRecurrenceEnd(request.getRecurrence()),
-			recurrence.getRecurrence("RDATE", request.getRecurrence()),
-			recurrence.getRecurrence("EXDATE", request.getRecurrence()),
+			info.getRrule(),
+			info.getRecurrenceEnd(),
+			info.getRDate(),
+			info.getExDate(),
 			request.getDescription(),
 			request.getColor()
 		);

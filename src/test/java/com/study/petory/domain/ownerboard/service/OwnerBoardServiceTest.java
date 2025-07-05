@@ -33,6 +33,7 @@ import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetResponseDto;
 import com.study.petory.domain.ownerboard.dto.response.OwnerBoardUpdateResponseDto;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
 import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerboard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
 import com.study.petory.domain.ownerboard.service.OwnerBoardImageService;
@@ -47,6 +48,9 @@ import com.study.petory.domain.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class OwnerBoardServiceTest {
+
+	@Mock
+	private UserRepository userRepository;
 
 	@Mock
 	private OwnerBoardRepository ownerBoardRepository;
@@ -223,33 +227,38 @@ public class OwnerBoardServiceTest {
 		assertEquals("수정된 내용", result.getContent());
 	}
 
-	// @Test
-	// void 게시글_삭제에_성공한다() {
-	// 	// given
-	// 	Long boardId = 1L;
-	//
-	// 	OwnerBoardImage image1 = mock(OwnerBoardImage.class);
-	// 	OwnerBoardImage image2 = mock(OwnerBoardImage.class);
-	//
-	// 	OwnerBoard board = OwnerBoard.builder()
-	// 		.title("제목")
-	// 		.content("내용")
-	// 		.user(mockUser)
-	// 		.build();
-	// 	ReflectionTestUtils.setField(board, "id", boardId);
-	// 	ReflectionTestUtils.setField(board, "images", new ArrayList<>(List.of(image1, image2)));
-	//
-	// 	given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
-	//
-	// 	// when
-	// 	ownerBoardService.deleteOwnerBoard(boardId);
-	//
-	// 	// then
-	// 	verify(ownerBoardImageService, times(2)).deleteImage(any());
-	// 	assertTrue(board.getImages().isEmpty());
-	// 	assertNotNull(board.getDeletedAt());
-	// }
-	//
+	@Test
+	void 게시글_삭제에_성공한다() {
+		// given
+		User user = createActiveUser(1L);
+
+		Long boardId = 1L;
+
+		OwnerBoardImage image1 = mock(OwnerBoardImage.class);
+		OwnerBoardImage image2 = mock(OwnerBoardImage.class);
+
+		OwnerBoard board = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(user)
+			.build();
+		ReflectionTestUtils.setField(board, "id", boardId);
+
+		board.addImage(image1);
+		board.addImage(image2);
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
+		given(userService.findUserById(user.getId())).willReturn(user);
+
+		// when
+		ownerBoardService.deleteOwnerBoard(user.getId(), boardId);
+
+		// then
+		verify(ownerBoardImageService, times(2)).deleteImage(any());
+		assertTrue(board.getImages().isEmpty());
+		assertNotNull(board.getDeletedAt());
+	}
+
 	// @Test
 	// void 게시글_복구에_성공한다() {
 	// 	// given
@@ -305,11 +314,11 @@ public class OwnerBoardServiceTest {
 	// }
 
 	// 기본 활성 유저 생성
-	private User createActiveUser(Long id) {
+	private User createActiveUser(Long userId) {
 		User user = createUserWithStatus(ACTIVE);
 
 		// user Id 주입
-		ReflectionTestUtils.setField(user, "id", id);
+		ReflectionTestUtils.setField(user, "id", userId);
 
 		return user;
 	}

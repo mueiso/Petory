@@ -116,7 +116,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 
 
 ## 🏗️ 시스템 아키텍처
-![v2](https://github.com/user-attachments/assets/b799786b-d2bf-4994-804e-f7cad4b9e0df)
+![Blank diagram - Page 2](https://github.com/user-attachments/assets/c10a955c-4744-4d66-b871-9b1996734285)
 
 
 ### 🔧 인프라 구성

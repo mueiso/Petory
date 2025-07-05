@@ -278,6 +278,40 @@ public class OwnerBoardServiceTest {
 	}
 
 	@Test
+	void 게시글_사진_추가에_성공한다() {
+		// given
+		User user = createActiveUser(1L);
+		Long boardId = 10L;
+
+		OwnerBoard board = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(user)
+			.build();
+		ReflectionTestUtils.setField(board, "id", boardId);
+
+		List<MultipartFile> images = List.of(
+			mock(MultipartFile.class),
+			mock(MultipartFile.class)
+		);
+
+		OwnerBoardImage image1 = new OwnerBoardImage("https://image1.jpg", board);
+		OwnerBoardImage image2 = new OwnerBoardImage("https://image2.jpg", board);
+		List<OwnerBoardImage> imageList = List.of(image1, image2);
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
+		given(ownerBoardImageService.uploadAndReturnEntities(images, board)).willReturn(imageList);
+
+		// when
+		ownerBoardService.addImages(user.getId(), boardId, images);
+
+		verify(ownerBoardImageService).uploadAndReturnEntities(images, board);
+		assertEquals(2, board.getImages().size());
+		assertTrue(board.getImages().contains(image1));
+		assertTrue(board.getImages().contains(image2));
+	}
+
+	@Test
 	void 게시글의_사진_삭제에_성공한다() {
 		// given
 		User user = createActiveUser(1L);

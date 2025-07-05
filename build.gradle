@@ -91,6 +91,8 @@ dependencies {
 
     // ical4j
     implementation 'org.mnode.ical4j:ical4j:3.2.14'
+
+    testImplementation 'com.h2database:h2'
 }
 
 tasks.named('test') {

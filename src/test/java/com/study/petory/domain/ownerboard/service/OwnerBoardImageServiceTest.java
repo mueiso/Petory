@@ -48,7 +48,7 @@ public class OwnerBoardImageServiceTest {
 			.willReturn("https://image2.jpg");
 
 		// when
-		List<OwnerBoardImage> result = ownerBoardImageService.uploadAndReturnEntities(files,ownerBoard);
+		List<OwnerBoardImage> result = ownerBoardImageService.uploadAndReturnEntities(files, ownerBoard);
 
 		// then
 		assertEquals(2, result.size());
@@ -107,5 +107,40 @@ public class OwnerBoardImageServiceTest {
 		verify(ownerBoardImageRepository).findById(imageId);
 	}
 
+	@Test
+	void createImageEntity_정상_동작_확인() {
+		// given
+		String url = "https://image.jpg";
+		OwnerBoard ownerBoard = mock(OwnerBoard.class);
 
+		// when
+		OwnerBoardImage result = ownerBoardImageService.createImageEntity(url, ownerBoard);
+
+		// then
+		assertNotNull(result);
+		assertEquals(url, result.getUrl());
+		assertEquals(ownerBoard, result.getOwnerBoard());
+	}
+
+	@Test
+	void getFolderName_반환값_확인() {
+		// when
+		String folderName = ownerBoardImageService.getFolderName();
+
+		// then
+		assertEquals("owner-board", folderName);
+	}
+
+	@Test
+	void getImageUrl_반환값_확인() {
+		// given
+		OwnerBoardImage image = mock(OwnerBoardImage.class);
+		given(image.getUrl()).willReturn("https://image.jpg");
+
+		// when
+		String url = ownerBoardImageService.getImageUrl(image);
+
+		// then
+		assertEquals("https://image.jpg", url);
+	}
 }

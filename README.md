@@ -28,7 +28,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 ### 🎯 해결하고자 하는 문제
 
 - 💬 **소통 부족**: 반려인들끼리 경험을 나눌 수 있는 전용 공간이 부족
-- ♻️ **거래 불편**: 반려용품 중고거래가 번거롭고 신뢰성 부족
+- ♻️ **거래 불편**: 반려용품 전용 중고 거래 커뮤니티 부족
 - 🍽️ **정보 부족**: 반려동물 동반 가능한 장소 정보가 분산되어 있음
 - 📸 **기록 관리**: 반려동물과의 소중한 순간들을 체계적으로 관리하기 어려움
 
@@ -39,20 +39,18 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 - **정보 교환**: 댓글을 통한 실용적인 정보 공유 및 소통
 - **중고 거래**: 반려용품 중고거래와 실시간 채팅 기능
 
-### ☕ 반려 플레이스
+### 🏠️ 반려동물 친화적 장소
 - **장소 탐색**: 반려동물 동반 가능한 식당, 카페, 숙소 정보
 - **리뷰 시스템**: 사용자 리뷰 및 별점으로 신뢰성 있는 정보 제공
 - **인기 장소**: 좋아요 기반 인기 플레이스 추천
 
 ### ✉️ 데일리 기록
 - **데일리 앨범**: 하루 한 컷, 반려동물과의 추억 저장
-- **데일리 QnA**: 매일 다른 질문에 답하며 일기 작성
-- **성장 기록**: 1년 전 기록과 비교하며 반려동물의 성장 확인
+- **데일리 QnA**: 매일 다른 질문에 답변 작성, 1년 후 같은 질문에 대한 답을 보며 추억 회상
 
 ### ⚙️ 추가 기능
 - **권한 분리**: 비회원/회원/관리자 구분된 접근 제어
 - **실시간 알림**: 스케줄러 기반 데일리 질문 알림
-- **캘린더**: 반려동물 관련 일정 관리 및 D-day 알림
 
 ## 🏗️ 시스템 아키텍처
 
@@ -88,32 +86,57 @@ graph LR
 ### Backend
 ![Java](https://img.shields.io/badge/Java-17-007396?style=for-the-badge&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=for-the-badge&logo=spring)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=spring)
 ![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge&logo=spring)
-![QueryDSL](https://img.shields.io/badge/QueryDSL-4285F4?style=for-the-badge)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=spring)
 ![Spring Batch](https://img.shields.io/badge/Spring%20Batch-6DB33F?style=for-the-badge&logo=spring)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens)
+![QueryDSL](https://img.shields.io/badge/QueryDSL-4285F4?style=for-the-badge)
+![WebSocket](https://img.shields.io/badge/WebSocket-4285F4?style=for-the-badge)
+![STOMP](https://img.shields.io/badge/STOMP-FF6600?style=for-the-badge)
+![iCal4j](https://img.shields.io/badge/iCal4j-FF6B35?style=for-the-badge)
+![Bucket4J](https://img.shields.io/badge/Bucket4J-00ADD8?style=for-the-badge)
 
-### Database
+### Database & Storage
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql)
 ![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=for-the-badge&logo=redis)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb)
+![Amazon S3](https://img.shields.io/badge/Amazon%20S3-569A31?style=for-the-badge&logo=amazons3)
+![ElastiCache](https://img.shields.io/badge/ElastiCache-FF4F8B?style=for-the-badge&logo=amazon-aws)
 
 ### DevOps & Infrastructure
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions)
+![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazon-aws)
+![ECR](https://img.shields.io/badge/Amazon%20ECR-FF9900?style=for-the-badge&logo=amazon-aws)
+![Route53](https://img.shields.io/badge/Amazon%20Route53-FF9900?style=for-the-badge&logo=amazon-aws)
+
+### Test & Monitoring
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman)
 ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana)
 ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus)
+![JMeter](https://img.shields.io/badge/JMeter-D22128?style=for-the-badge&logo=apache)
 
 ### Frontend
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript)
 ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3)
+![FullCalendar](https://img.shields.io/badge/FullCalendar-FF6B35?style=for-the-badge)
 
 ### External APIs
 ![Google OAuth](https://img.shields.io/badge/Google%20OAuth-4285F4?style=for-the-badge&logo=google)
+![Google Gmail](https://img.shields.io/badge/Gmail%20API-EA4335?style=for-the-badge&logo=gmail)
 ![Kakao Map](https://img.shields.io/badge/Kakao%20Map-FFCD00?style=for-the-badge&logo=kakao)
+
+### Development Tools
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=for-the-badge&logo=intellijidea)
+
+### Collaboration
+![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github)
+![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack)
+![ERDCloud](https://img.shields.io/badge/ERD%20Cloud-4285F4?style=for-the-badge)
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma)
 
 ## 📊 성능 개선
 
@@ -155,7 +178,9 @@ public Step sendDailyQuestionStep(
 - **결과**: 코드 안정성 향상 및 개발 효율성 증대
 
 ### 2. Redis 활용 전략
-- **JWT 토큰 관리**: 로그아웃 시 블랙리스트 처리로 보안 강화
+- **JWT 토큰 관리**: <br>
+    로그아웃 → AccessToken를 BLACKLIST 처리하며, Redis에 BLACKLIST_ 키를 저장해 차단 & userId의 RefreshToken  삭제<br>
+    토큰 재발급 → Redis에 저장된 RefreshToken 값과 비교 & 새로운 AccessToken/RefreshToken  발급(토큰 재사용 차단)
 - **전역 캐시**: 데일리 질문 API 응답 속도 향상
 - **Rate Limiting**: Bucket4j와 연동하여 API 요청 제한
 
@@ -167,14 +192,13 @@ public Step sendDailyQuestionStep(
 ### 4. 보안 강화
 - **Google OAuth2 + 자체 JWT**: 외부 인증 + 내부 인가 구조
 - **토큰 분리**: AccessToken(짧은 수명) + RefreshToken(Redis 저장)
-- **블랙리스트 처리**: 로그아웃된 토큰의 즉시 무효화
+- **블랙리스트 처리**: 로그아웃된 AccessToken의 즉시 무효화 및 RefresthToken 삭제로 AccessToken 재발급 방지
 
 ## 📈 모니터링
 
 ### Grafana + Prometheus 모니터링 시스템
 - **시스템 메트릭**: CPU, 메모리, 네트워크 사용량 실시간 모니터링
 - **애플리케이션 메트릭**: HTTP 응답 시간, DB 지연 시간 추적
-- **알림 시스템**: 임계치 초과 시 Slack 알림 발송
 
 ## 🚨 주요 트러블슈팅
 
@@ -224,21 +248,23 @@ public Step sendDailyQuestionStep(
 │   │   ├── 📂 config              # 설정 클래스들
 │   │   ├── 📂 entity              # 공용 엔티티
 │   │   ├── 📂 exception           # 예외 처리
-│   │   ├── 📂 filter              # 필터
+│   │   ├── 📂 ratelimit           # 별점 처리
 │   │   ├── 📂 response            # 공통 응답
 │   │   ├── 📂 scheduler           # 스케쥴러
 │   │   ├── 📂 security            # 보안 설정
 │   │   ├── 📂 service             # 공용 서비스
 │   │   └── 📂 util                # 유틸리티 클래스
 │   ├── 📂 domain
-│   │   ├── 📂 user                # 사용자 관리
-│   │   ├── 📂 ownerBoard          # 커뮤니티 게시판
-│   │   ├── 📂 place               # 플레이스 관리
+│   │   ├── 📂 album               # 반려동물 사진 저장
 │   │   ├── 📂 chat                # 채팅 기능
-│   │   ├── 📂 calendar            # 캘린더 기능
-│   │   ├── 📂 daily               # 데일리 기능
-│   │   └── 📂 notification        # 알림 기능
-│   └── 📂 batch                   # 배치 작업
+│   │   ├── 📂 dailyqna            # 데일리 질문
+│   │   ├── 📂 event               # 일정 관리
+│   │   ├── 📂 notification        # 알림 기능
+│   │   ├── 📂 ownerBoard          # 커뮤니티 게시판
+│   │   ├── 📂 pet                 # 반려동물 관리
+│   │   ├── 📂 place               # 장소 관리
+│   │   ├── 📂 tradeboard          # 중고거래 게시판
+│   └── └── 📂 user                # 사용자 관리
 ├── 📂 src/main/resources
 │   ├── 📂 static                  # 정적 리소스
 │   ├── 📂 templates               # Thymeleaf 템플릿
@@ -247,31 +273,6 @@ public Step sendDailyQuestionStep(
 └── 📄 Dockerfile
 ```
 
-## 🚀 로컬 개발 환경 설정
-
-### 1. 필수 요구사항
-- Java 17+
-- Docker & Docker Compose
-- Git
-
-### 2. 클론 및 실행
-```bash
-# 프로젝트 클론
-git clone https://github.com/jhyang22/Petory.git
-cd petory
-
-# Docker Compose로 개발 환경 실행
-docker-compose up -d
-
-# 애플리케이션 빌드 및 실행
-./gradlew bootRun
-```
-
-### 3. 접속 정보
-- **애플리케이션**: http://localhost:8080
-- **Grafana**: http://localhost:3000 (admin/admin)
-- **MySQL**: localhost:3306
-- **Redis**: localhost:6379
 
 ## 📝 API 문서
 
@@ -286,19 +287,23 @@ docker-compose up -d
 | 게시글 작성 | POST | `/owner-boards` | 새 게시글 작성 |
 | 플레이스 검색 | GET | `/places` | 반려동물 동반 장소 검색 |
 | 채팅방 입장 | GET | `/chat/rooms/{roomId}` | 채팅방 입장 |
-| 데일리 질문 | GET | `/daily/questions/today` | 오늘의 질문 조회 |
+| 데일리 질문 | GET | `/daily-questions/today` | 오늘의 질문 조회 |
 
 ## 👥 팀원 소개
 
-| 역할 | 이름  | 담당 기능                                                          | GitHub                              |
-|------|-----|----------------------------------------------------------------|-------------------------------------|
-| **BE 개발자** | 양재호 | 팀장, Place 도메인, KaKaoMap API 연동, Rate Limiting 기능               | [🐹](https://github.com/jhyang22) |
+| 역할 | 이름  | 담당 기능                                                        | GitHub                              |
+|------|-----|--------------------------------------------------------------|-------------------------------------|
+| **BE 개발자** | 양재호 | 팀장, Place 도메인, KaKaoMap API 연동, Rate Limiting 기능             | [🐹](https://github.com/jhyang22) |
 | **BE 개발자** | 김하정 | 부팀장, 인증/보안, 비회원/회원 기준 인가, 회원세부 권한 기준 인가, 유저 정보 관리 자동화, Pet 도메인 | [😺](https://github.com/mueiso)    |
-| **BE 개발자** | 김채원 | TradeBoard 도메인, 채팅 기능, 데일리 질문 알림 기능 구현 및 최적화                   | [🐰](https://github.com/chaewon9999)     |
-| **BE 개발자** | 심재민 | DailyQnQ 도메인, Album 도메인, Google Calendar API 연동                | [🦊](https://github.com/Deabaind)      |
-| **BE 개발자** | 이은지 | OwnerBoard 도메인, AWS 인프라 구축, CI/CD                              | [🦦](https://github.com/222eunji)   |
+| **BE 개발자** | 김채원 | TradeBoard 도메인, 채팅 기능, 데일리 질문 알림 기능 구현 및 최적화                 | [🐰](https://github.com/chaewon9999)     |
+| **BE 개발자** | 심재민 | DailyQnQ 도메인, Album 도메인                | [🦊](https://github.com/Deabaind)      |
+| **BE 개발자** | 이은지 | OwnerBoard 도메인, AWS 인프라 구축, CI/CD                            | [🦦](https://github.com/222eunji)   |
 
 ## 🏆 향후 개선 계획
+
+### 🔦 기능 확장
+- [ ] 캘린더에서 반려동물 D-day 알림 추가
+- [ ] 반려 동물의 성장 일지 기록하기
 
 ### 🔐 보안 강화
 - [ ] Parameter Store를 통한 환경변수 중앙 관리

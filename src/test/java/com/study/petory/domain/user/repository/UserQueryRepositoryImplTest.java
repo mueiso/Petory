@@ -83,4 +83,17 @@ class UserQueryRepositoryTest {
 		assertThat(result.get().getUserRole()).isNotNull();
 		assertThat(result.get().getUserRole().get(0).getRole()).isEqualTo(Role.USER);
 	}
+
+	@Test
+	void findByIdWithUserRole_유저_조회_성공() {
+
+		// when
+		Optional<User> result = userQueryRepository.findByIdWithUserRole(testUser.getId());
+
+		// then
+		assertThat(result).isPresent();
+		assertThat(result.get().getId()).isEqualTo(testUser.getId());
+		assertThat(result.get().getUserRole()).isNotNull();
+		assertThat(result.get().getUserRole().get(0).getRole()).isEqualTo(Role.USER);
+	}
 }

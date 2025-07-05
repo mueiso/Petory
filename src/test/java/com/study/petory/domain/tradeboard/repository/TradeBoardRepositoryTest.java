@@ -1,9 +1,7 @@
 package com.study.petory.domain.tradeboard.repository;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.aspectj.util.Reflection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.study.petory.common.config.QueryDSLConfig;
 import com.study.petory.domain.tradeboard.entity.TradeBoard;
@@ -22,6 +21,7 @@ import com.study.petory.domain.user.repository.UserRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QueryDSLConfig.class)
+@ActiveProfiles("test")
 class TradeBoardRepositoryTest {
 
 	@Autowired

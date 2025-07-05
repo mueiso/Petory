@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -37,8 +35,6 @@ import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
 import com.study.petory.domain.ownerboard.entity.OwnerBoardImage;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
 import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
-import com.study.petory.domain.ownerboard.service.OwnerBoardImageService;
-import com.study.petory.domain.ownerboard.service.OwnerBoardServiceImpl;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserPrivateInfo;
@@ -281,37 +277,39 @@ public class OwnerBoardServiceTest {
 		assertNull(deletedBoard.getDeletedAt());
 	}
 
-	// @Test
-	// void 게시글의_사진_삭제에_성공한다() {
-	// 	// given
-	// 	Long boardId = 1L;
-	// 	Long imageId = 10L;
-	//
-	// 	OwnerBoard board = OwnerBoard.builder()
-	// 		.title("제목")
-	// 		.content("내용")
-	// 		.user(mockUser)
-	// 		.build();
-	//
-	// 	OwnerBoardImage image1 = mock(OwnerBoardImage.class);
-	// 	ReflectionTestUtils.setField(image1, "id", imageId);
-	// 	OwnerBoardImage image2 = mock(OwnerBoardImage.class);
-	//
-	// 	ReflectionTestUtils.setField(board, "id", boardId);
-	// 	ReflectionTestUtils.setField(board, "images", new ArrayList<>(List.of(image1, image2)));
-	//
-	// 	given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
-	// 	given(ownerBoardImageService.findImageById(imageId)).willReturn(image1);
-	//
-	// 	// when
-	// 	ownerBoardService.deleteImage(boardId, imageId);
-	//
-	// 	// then
-	// 	verify(ownerBoardRepository).findByIdWithImages(boardId);
-	// 	verify(ownerBoardImageService).findImageById(imageId);
-	// 	verify(ownerBoardImageService).deleteImageInternal(image1);
-	// 	assertEquals(1, board.getImages().size());
-	// }
+	@Test
+	void 게시글의_사진_삭제에_성공한다() {
+		// given
+		User user = createActiveUser(1L);
+		Long boardId = 10L;
+		Long imageId = 100L;
+
+		OwnerBoard board = OwnerBoard.builder()
+			.title("제목")
+			.content("내용")
+			.user(user)
+			.build();
+		ReflectionTestUtils.setField(board, "id", boardId);
+
+		OwnerBoardImage image1 = new OwnerBoardImage("https://image1.jpg", board);
+		OwnerBoardImage image2 = new OwnerBoardImage("https://image2.jpg", board);
+		ReflectionTestUtils.setField(image1, "id", imageId);
+
+		board.addImage(image1);
+		board.addImage(image2);
+
+		given(ownerBoardRepository.findByIdWithImages(boardId)).willReturn(Optional.of(board));
+		given(ownerBoardImageService.findImageById(imageId)).willReturn(image1);
+
+		// when
+		ownerBoardService.deleteImage(user.getId(), boardId, imageId);
+
+		// then
+		verify(ownerBoardRepository).findByIdWithImages(boardId);
+		verify(ownerBoardImageService).findImageById(imageId);
+		verify(ownerBoardImageService).deleteImageInternal(image1);
+		assertEquals(1, board.getImages().size());
+	}
 
 	// 기본 활성 유저 생성
 	private User createActiveUser(Long userId) {
@@ -322,7 +320,6 @@ public class OwnerBoardServiceTest {
 
 		return user;
 	}
-
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드
 	private User createUserWithStatus(UserStatus status) {
@@ -360,5 +357,4 @@ public class OwnerBoardServiceTest {
 		return ownerBoard;
 	}
 
-
-	}
+}

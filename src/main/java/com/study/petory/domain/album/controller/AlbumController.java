@@ -45,7 +45,7 @@ public class AlbumController {
 	/**
 	 * 앨범 저장
 	 * @param currentUser			앨범을 생성한 유저
-	 * @param text			앨범에 작성한 내용
+	 * @param dto				앨범에 작성한 내용
 	 * @param images		앨범에 등록하는 이미지
 	 * @return	CommonResponse 성공 메세지, data: null
 	 */
@@ -53,10 +53,10 @@ public class AlbumController {
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<CommonResponse<Void>> save(
 		@AuthenticationPrincipal CustomPrincipal currentUser,
-		@RequestPart @Valid AlbumCreateRequestDto text,
+		@RequestPart @Valid AlbumCreateRequestDto dto,
 		@RequestPart(required = false) List<MultipartFile> images
 	) {
-		albumService.saveAlbum(currentUser.getId(), text, images);
+		albumService.saveAlbum(currentUser.getId(), dto, images);
 		return CommonResponse.of(SuccessCode.CREATED);
 	}
 

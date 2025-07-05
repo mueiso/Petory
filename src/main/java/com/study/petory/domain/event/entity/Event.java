@@ -5,17 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.cglib.core.Local;
 
 import com.study.petory.common.entity.UpdateBasedEntity;
+import com.study.petory.common.util.CustomDateUtil;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -26,13 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @DynamicUpdate
-@Table(
-	name = "tb_event",
-	indexes = {
-		// 이대로 사용해도 괜찮은 것인가?
-		@Index(name = "index_user_id_start", columnList = "user_id, start_date")
-	}
-)
+@Table(name = "tb_event")
 @NoArgsConstructor
 public class Event extends UpdateBasedEntity {
 
@@ -50,7 +47,7 @@ public class Event extends UpdateBasedEntity {
 	@Column(nullable = false)
 	private LocalDateTime startDate;
 
-	@Column
+	@Column(nullable = false)
 	private LocalDateTime endDate;
 
 	@Column(nullable = false)
@@ -75,7 +72,7 @@ public class Event extends UpdateBasedEntity {
 	@Column(length = 300)
 	private String description;
 
-	// 프론트에서 null 이라면 기본 색상
+	@Enumerated(EnumType.STRING)
 	@Column
 	private EventColor color;
 
@@ -96,11 +93,11 @@ public class Event extends UpdateBasedEntity {
 		this.color = color;
 	}
 
-	public void updateEvent(String title, LocalDateTime start, LocalDateTime end, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
+	public void updateEvent(String title, LocalDateTime start, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
 		String rDate, String exDate, String description, EventColor color) {
 		this.title = title;
 		this.startDate = start;
-		this.endDate = end;
+		this.endDate = endDate;
 		this.timeZone = timeZone;
 		this.isAllDay = isAllDay;
 		this.rrule = rrule;

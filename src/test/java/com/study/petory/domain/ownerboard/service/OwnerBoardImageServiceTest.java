@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.*;
 
 import java.sql.Ref;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -89,6 +90,21 @@ public class OwnerBoardImageServiceTest {
 
 		// then
 		verify(s3Uploader).deleteFile("owner-board/image.jpg");
+	}
+
+	@Test
+	void 이미지_ID로_조회_성공() {
+		// given
+		Long imageId = 1L;
+		OwnerBoardImage image = mock(OwnerBoardImage.class);
+		given(ownerBoardImageRepository.findById(imageId)).willReturn(Optional.of(image));
+
+		// when
+		OwnerBoardImage result = ownerBoardImageService.findImageById(imageId);
+
+		// then
+		assertEquals(image, result);
+		verify(ownerBoardImageRepository).findById(imageId);
 	}
 
 

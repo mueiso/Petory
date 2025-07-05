@@ -11,8 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.study.petory.common.config.QueryDSLConfig;
+import com.study.petory.domain.ownerboard.dto.response.OwnerBoardGetAllResponseDto;
 import com.study.petory.domain.ownerboard.entity.OwnerBoard;
 import com.study.petory.domain.ownerboard.entity.OwnerBoardImage;
 import com.study.petory.domain.user.entity.Role;
@@ -38,7 +42,48 @@ public class OwnerBoardQueryRepositoryImplTest {
 	private OwnerBoardQueryRepositoryImpl ownerBoardQueryRepositoryImpl;
 
 	@Test
-	void 게시글과_이미지를_함께_조회한다() {
+	void 조건없이_게시글_전체_조회한다() {
+		// given
+		User user = createUserWithStatus(ACTIVE);
+		createAndSaveOwnerBoard(user, "제목1", "내용1");
+		createAndSaveOwnerBoard(user, "제목2", "내용2");
+		createAndSaveOwnerBoard(user, "제목3", "내용3");
+
+		// OwnerBoard ownerBoard1 = new OwnerBoard("제목1", "내용1", user);
+		// OwnerBoard ownerBoard2 = new OwnerBoard("제목2", "내용2", user);
+		// OwnerBoard ownerBoard3 = new OwnerBoard("제목3", "내용3", user);
+		// ownerBoardRepository.saveAndFlush(ownerBoard1);
+		// ownerBoardRepository.saveAndFlush(ownerBoard2);
+		// ownerBoardRepository.saveAndFlush(ownerBoard3);
+
+		Pageable pageable = PageRequest.of(0, 2);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result =
+			ownerBoardQueryRepositoryImpl.findAllWithFirstImageAndTitleOptional(null, pageable);
+
+		// then
+		assertThat(result.getContent()).hasSize(2);
+		assertThat(result.getTotalElements()).isEqualTo(3);
+		assertThat(result.getTotalPages()).isEqualTo(2);
+		assertThat(result.getNumber()).isEqualTo(0);
+	}
+
+	@Test
+	void 제목으로_게시글_검색_조회한다() {
+	}
+
+	@Test
+	void 첫번째_이미지만_조회한다() {
+	}
+
+	@Test
+	void 검색_결과가_없는_경우() {
+
+	}
+
+	@Test
+	void 게시글과_이미지를_함께_단건_조회한다() {
 		// given
 		User user = createUserWithStatus(ACTIVE);
 
@@ -90,7 +135,7 @@ public class OwnerBoardQueryRepositoryImplTest {
 	}
 
 	@Test
-	void 삭제된_게시글을_조회한다() {
+	void 삭제된_게시글을_단건_조회한다() {
 		// given
 		User user = createUserWithStatus(ACTIVE);
 
@@ -115,7 +160,7 @@ public class OwnerBoardQueryRepositoryImplTest {
 		assertThat(result.get().getDeletedAt()).isNotNull();
 	}
 
-	// 테스트용 유저 객체를 생성하는 유틸 메서드
+	// 테스트용 유저 객체를 생성하는 헬퍼 메서드
 	private User createUserWithStatus(UserStatus status) {
 
 		UserPrivateInfo privateInfo = UserPrivateInfo.builder()
@@ -137,6 +182,16 @@ public class OwnerBoardQueryRepositoryImplTest {
 		userRepository.save(user);
 
 		return user;
+	}
+
+	// 게시글을 생성하는 헬퍼 메서드
+	private OwnerBoard createAndSaveOwnerBoard(User user, String title, String content) {
+		OwnerBoard board = OwnerBoard.builder()
+			.user(user)
+			.title(title)
+			.content(content)
+			.build();
+		return ownerBoardRepository.save(board);
 	}
 
 }

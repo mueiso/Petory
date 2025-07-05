@@ -16,6 +16,7 @@ import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.entity.Role;
+import com.study.petory.domain.user.service.AuthService;
 import com.study.petory.domain.user.service.AuthServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final AuthServiceImpl authServiceImpl;
+	private final AuthService authService;
 
 	/**
 	 * [토큰 재발급]
@@ -42,7 +43,7 @@ public class AuthController {
 		@RequestHeader("Authorization") String accessToken,
 		@RequestHeader("Authorization-Refresh") String refreshToken) {
 
-		TokenResponseDto tokenResponseDto = authServiceImpl.reissue(accessToken, refreshToken);
+		TokenResponseDto tokenResponseDto = authService.reissue(accessToken, refreshToken);
 
 		return CommonResponse.of(SuccessCode.TOKEN_REISSUE, tokenResponseDto);
 	}
@@ -61,7 +62,7 @@ public class AuthController {
 		@RequestParam("userId") Long targetUserId,
 		@RequestParam("role") Role role) {
 
-		List<Role> updatedRoles = authServiceImpl.addRoleToUser(targetUserId, role);
+		List<Role> updatedRoles = authService.addRoleToUser(targetUserId, role);
 
 		return CommonResponse.of(SuccessCode.UPDATED, updatedRoles);
 	}
@@ -80,7 +81,7 @@ public class AuthController {
 		@RequestParam("userId") Long targetUserId,
 		@RequestParam("role") Role role) {
 
-		List<Role> updatedRoles = authServiceImpl.removeRoleFromUser(targetUserId, role);
+		List<Role> updatedRoles = authService.removeRoleFromUser(targetUserId, role);
 
 		return CommonResponse.of(SuccessCode.DELETED, updatedRoles);
 	}
@@ -96,9 +97,9 @@ public class AuthController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/suspend")
 	public ResponseEntity<CommonResponse<Object>> suspendUser(
-		@RequestParam Long targetUserId) {
+		@RequestParam("userId") Long targetUserId) {
 
-		authServiceImpl.suspendUser(targetUserId);
+		authService.suspendUser(targetUserId);
 
 		return CommonResponse.of(SuccessCode.USER_SUSPENDED);
 	}
@@ -115,9 +116,9 @@ public class AuthController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PatchMapping("/restore")
 	public ResponseEntity<CommonResponse<Object>> restoreUser(
-		@RequestParam Long targetUserId) {
+		@RequestParam("userId") Long targetUserId) {
 
-		authServiceImpl.restoreUser(targetUserId);
+		authService.restoreUser(targetUserId);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}

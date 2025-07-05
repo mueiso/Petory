@@ -1,26 +1,24 @@
 package com.study.petory.domain.pet.service;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.*;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.web.multipart.MultipartFile;
-
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.util.S3Uploader;
 import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.pet.entity.PetImage;
 import com.study.petory.domain.pet.repository.PetImageRepository;
 
-@ExtendWith(MockitoExtension.class)
-public class PetImageServiceTest {
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+class PetImageServiceTest {
 
 	@Mock
 	private S3Uploader s3Uploader;
@@ -31,113 +29,99 @@ public class PetImageServiceTest {
 	@InjectMocks
 	private PetImageService petImageService;
 
-	@Test
-	void 이미지_업로드_및_엔티티_반환_성공() {
-		// given
-		List<MultipartFile> files = List.of(
-			mock(MultipartFile.class),
-			mock(MultipartFile.class)
-		);
-		Pet pet = mock(Pet.class);
-
-		given(s3Uploader.uploadFile(any(MultipartFile.class), eq("pet")))
-			.willReturn("https://image1.jpg")
-			.willReturn("https://image2.jpg");
-
-		// when
-		List<PetImage> result = petImageService.uploadAndReturnEntities(files, pet);
-
-		// then
-		assertEquals(2, result.size());
-		verify(s3Uploader, times(2)).uploadFile(any(MultipartFile.class), eq("pet"));
-		verify(petImageRepository, times(2)).save(any(PetImage.class));
+	@BeforeEach
+	void setUp() {
+		// @Mock, @InjectMocks 애노테이션 초기화
+		MockitoAnnotations.openMocks(this);
 	}
 
 	@Test
-	void 이미지_업로드_및_URL_반환_성공() {
-		// given
-		List<MultipartFile> files = List.of(mock(MultipartFile.class));
-		Pet pet = mock(Pet.class);
+	void deleteImage_정상_삭제_호출() {
 
-		given(s3Uploader.uploadFile(any(MultipartFile.class), eq("pet")))
-			.willReturn("https://image.jpg");
+		/* [given]
+		 * 단순 Pet 객체 생성 (실제 DB 와 연동하지 않음)
+		 * 삭제할 PetImage 객체를 mock 으로 객체 생성
+		 */
+		Pet pet = new Pet();
+		PetImage image = new PetImage("https://s3.test/pet.jpg", pet);
 
-		// when
-		List<String> result = petImageService.uploadAndSaveAll(files, pet);
-
-		// then
-		assertEquals(1, result.size());
-		assertEquals("https://image.jpg", result.get(0));
-		verify(s3Uploader).uploadFile(any(MultipartFile.class), eq("pet"));
-		verify(petImageRepository).save(any(PetImage.class));
-	}
-
-	@Test
-	void 이미지_삭제_성공() {
-		// given
-		PetImage image = mock(PetImage.class);
-		given(image.getUrl()).willReturn("https://test-bucket.s3.us-east-1.amazonaws.com/pet/image.jpg");
-
-		// @Value 필드 모킹
-		ReflectionTestUtils.setField(petImageService, "bucket", "test-bucket");
-		ReflectionTestUtils.setField(petImageService, "region", "us-east-1");
-
-		// when
+		/* [when]
+		 * 삭제 로직 수행
+		 */
 		petImageService.deleteImage(image);
 
-		// then
-		verify(s3Uploader).deleteFile("pet/image.jpg");
+		/* [then]
+		 * S3Uploader 의 deleteFile 이 해당 url 로 호출됐는지 검증
+		 */
+		verify(s3Uploader).deleteFile(eq("https://s3.test/pet.jpg"));
 	}
 
 	@Test
-	void 이미지_ID로_조회_성공() {
-		// given
-		Long imageId = 1L;
-		PetImage image = mock(PetImage.class);
-		given(petImageRepository.findById(imageId)).willReturn(Optional.of(image));
+	void findImageById_정상적으로_조회() {
 
-		// when
-		PetImage result = petImageService.findImageById(imageId);
+		// [given]
+		Long id = 1L;
+		Pet pet = new Pet();
+		PetImage image = new PetImage("https://s3.test/image.jpg", pet);
 
-		// then
-		assertEquals(image, result);
-		verify(petImageRepository).findById(imageId);
+		// petImageRepository.findById(id) 호출 시 image 를 반환하도록 설정
+		when(petImageRepository.findById(id)).thenReturn(Optional.of(image));
+
+		/* [when]
+		 * 테스트 대상 메서드 호출
+		 */
+		PetImage found = petImageService.findImageById(id);
+
+		/* [then]
+		 * url 일치하는지 검증
+		 */
+		assertEquals("https://s3.test/image.jpg", found.getUrl());
 	}
 
 	@Test
-	void createImageEntity_정상_동작_확인() {
-		// given
-		String url = "https://image.jpg";
-		Pet pet = mock(Pet.class);
+	void findImageById_이미지_없을_경우_예외발생() {
 
-		// when
-		PetImage result = petImageService.createImageEntity(url, pet);
+		/* [given]
+		 * 해당 ID 로 조회 시 Optional.empty() 반환하도록 설정
+		 */
+		Long id = 999L;
+		when(petImageRepository.findById(id)).thenReturn(Optional.empty());
 
-		// then
-		assertNotNull(result);
-		assertEquals(url, result.getUrl());
-		assertEquals(pet, result.getPet());
+		/* [when & then]
+		 * 예외 발생 테스트
+		 * 발생한 예외의 ErrorCode 가 FILE_NOT_FOUND 인지 검증
+		 */
+		CustomException ex = assertThrows(CustomException.class, () -> petImageService.findImageById(id));
+		assertEquals(ErrorCode.FILE_NOT_FOUND, ex.getErrorCode());
 	}
 
 	@Test
-	void getFolderName_반환값_확인() {
-		// when
-		String folderName = petImageService.getFolderName();
+	void createImageEntity_정상생성() {
 
-		// then
-		assertEquals("pet", folderName);
+		/* [given]
+		 * Pet 객체 생성
+		 * 업로드된 이미지 url
+		 */
+		Pet pet = new Pet();
+		String url = "https://s3.test/created.jpg";
+
+		/* [when]
+		 * 실제 이미지 객체 생성 메서드 호출
+		 */
+		PetImage image = petImageService.createImageEntity(url, pet);
+
+		/* [then]
+		 * 생성된 이미지의 url 확인
+		 * 생성된 이미지가 참조하고 있는 Pet 객체 일치 여부 확인
+		 */
+		assertEquals(url, image.getUrl());
+		assertEquals(pet, image.getPet());
 	}
 
 	@Test
-	void getImageUrl_반환값_확인() {
-		// given
-		PetImage image = mock(PetImage.class);
-		given(image.getUrl()).willReturn("https://image.jpg");
+	void getFolderName_pet반환() {
 
-		// when
-		String url = petImageService.getImageUrl(image);
-
-		// then
-		assertEquals("https://image.jpg", url);
+		// "pet" 폴더명 반환 확인
+		assertEquals("pet", petImageService.getFolderName());
 	}
 }

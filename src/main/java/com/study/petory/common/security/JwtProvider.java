@@ -29,13 +29,6 @@ public class JwtProvider {
 
 	private final RedisTemplate<String, String> loginRefreshToken;
 
-	public JwtProvider(
-		@Qualifier("loginRefreshToken")
-		RedisTemplate<String, String> loginRefreshToken) {
-
-		this.loginRefreshToken = loginRefreshToken;
-	}
-
 	/*
 	 * 이 토큰을 가진 자 (=Bearer)가 인증된 사용자라는 의미의 표준 헤더 형식
 	 * JWT 앞에 붙여서 인증 토큰임을 명시
@@ -270,5 +263,12 @@ public class JwtProvider {
 		}
 
 		return List.of();  // roles 클레임이 없거나 비어 있으면 빈 리스트
+	}
+
+	public JwtProvider(
+		@Qualifier("loginRefreshToken")
+		RedisTemplate<String, String> loginRefreshToken) {
+
+		this.loginRefreshToken = loginRefreshToken;
 	}
 }

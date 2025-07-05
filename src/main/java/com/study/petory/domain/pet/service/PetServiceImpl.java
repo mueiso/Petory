@@ -12,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
-import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.dto.PetGetAllResponseDto;
+import com.study.petory.domain.pet.dto.PetResponseDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateResponseDto;
 import com.study.petory.domain.pet.entity.Pet;
@@ -63,7 +63,7 @@ public class PetServiceImpl implements PetService {
 
 		User user = userService.findUserById(userId);
 
-		Page<Pet> pets = petRepository.findAllByUser(user, pageable);
+		Page<Pet> pets = petRepository.findAllByUserAndDeletedAtIsNull(user, pageable);
 
 		return pets.map(PetGetAllResponseDto::of);
 	}
@@ -73,12 +73,15 @@ public class PetServiceImpl implements PetService {
 	@Transactional(readOnly = true)
 	public PetResponseDto findPet(Long userId, Long petId) {
 
-		Pet pet = petRepository.findPetById(petId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+		Pet pet = findPetById(petId);
 
 		// 본인 소유 아닐 경우 예외 처리
 		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);
+		}
+
+		if (!pet.isDeletedAtNull()) {
+			throw new CustomException(ErrorCode.PET_NOT_FOUND);
 		}
 
 		List<String> urls = pet.getImages().stream()
@@ -91,10 +94,10 @@ public class PetServiceImpl implements PetService {
 	// 반려동물 정보 수정
 	@Override
 	@Transactional
-	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto, List<MultipartFile> images) {
+	public PetUpdateResponseDto updatePet(Long userId, Long petId, PetUpdateRequestDto requestDto,
+		List<MultipartFile> images) {
 
-		Pet pet = petRepository.findPetById(petId)
-			.orElseThrow(() -> new CustomException(ErrorCode.PET_NOT_FOUND));
+		Pet pet = findPetById(petId);
 
 		if (!pet.isPetOwner(userId)) {
 			throw new CustomException(ErrorCode.FORBIDDEN);

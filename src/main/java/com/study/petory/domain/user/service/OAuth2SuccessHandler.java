@@ -48,6 +48,10 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 		// 토큰 발급 및 저장 처리
 		TokenResponseDto tokens = authServiceImpl.issueToken(user);
 
+		// 응답 상태와 컨텐츠 타입 설정
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.setContentType("application/json;charset=UTF-8");
+
 		// 헤더로 토큰 전달
 		response.setHeader("Authorization", tokens.getAccessToken());
 		response.setHeader("X-Refresh-Token", tokens.getRefreshToken());

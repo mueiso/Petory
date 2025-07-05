@@ -6,6 +6,12 @@ import static org.mockito.Mockito.*;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
@@ -16,19 +22,14 @@ import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.redis.core.RedisTemplate;
-
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
-	@Mock private UserRepository userRepository;
-	@Mock private JwtProvider jwtProvider;
-	@Mock private RedisTemplate<String, String> loginRefreshToken;
+	@Mock
+	private UserRepository userRepository;
+
+	@Mock
+	private JwtProvider jwtProvider;
 
 	@InjectMocks
 	private UserServiceImpl userService;

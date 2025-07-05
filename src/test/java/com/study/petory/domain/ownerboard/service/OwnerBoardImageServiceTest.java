@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.sql.Ref;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.util.S3Uploader;
@@ -72,6 +74,22 @@ public class OwnerBoardImageServiceTest {
 		verify(ownerBoardImageRepository).save(any(OwnerBoardImage.class));
 	}
 
+	@Test
+	void 이미지_삭제_성공() {
+		// given
+		OwnerBoardImage image = mock(OwnerBoardImage.class);
+		given(image.getUrl()).willReturn("https://test-bucket.s3.us-east-1.amazonaws.com/owner-board/image.jpg");
+
+		// @Value 필드 모킹
+		ReflectionTestUtils.setField(ownerBoardImageService, "bucket", "test-bucket");
+		ReflectionTestUtils.setField(ownerBoardImageService, "region", "us-east-1");
+
+		// when
+		ownerBoardImageService.deleteImage(image);
+
+		// then
+		verify(s3Uploader).deleteFile("owner-board/image.jpg");
+	}
 
 
 }

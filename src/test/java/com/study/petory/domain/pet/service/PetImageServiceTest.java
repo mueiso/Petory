@@ -15,10 +15,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.petory.common.util.S3Uploader;
-import com.study.petory.domain.ownerboard.entity.OwnerBoard;
-import com.study.petory.domain.ownerboard.entity.OwnerBoardImage;
-import com.study.petory.domain.ownerboard.repository.OwnerBoardImageRepository;
-import com.study.petory.domain.ownerboard.service.OwnerBoardImageService;
 import com.study.petory.domain.pet.entity.Pet;
 import com.study.petory.domain.pet.entity.PetImage;
 import com.study.petory.domain.pet.repository.PetImageRepository;

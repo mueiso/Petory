@@ -58,7 +58,7 @@ class PlaceReviewServiceImplTest {
 
 		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
 		when(userService.findUserById(1L)).thenReturn(user);
-		when(placeReviewRepository.findByUserAndPlace(user, place)).thenReturn(Optional.empty());
+		when(placeReviewRepository.existsByUserAndPlace(user, place)).thenReturn(false);
 
 		when(placeReviewRepository.save(any(PlaceReview.class)))
 			.thenAnswer(invocation -> {
@@ -94,7 +94,7 @@ class PlaceReviewServiceImplTest {
 
 		when(placeService.findPlaceWithPlaceReviewByPlaceId(1L)).thenReturn(place);
 		when(userService.findUserById(1L)).thenReturn(user);
-		when(placeReviewRepository.findByUserAndPlace(user, place)).thenReturn(Optional.of(placeReview));
+		when(placeReviewRepository.existsByUserAndPlace(user, place)).thenReturn(true);
 
 		// 예외 발생을 기대하는 테스트 코드
 		// assertThrows는 실제 발생한 예외를 리턴해준다

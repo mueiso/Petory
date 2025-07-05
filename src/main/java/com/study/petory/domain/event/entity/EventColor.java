@@ -24,17 +24,4 @@ public enum EventColor {
 		this.colorId = colorId;
 		this.hexColor = hexColor;
 	}
-
-	private String getColorId() {
-		return colorId;
-	}
-
-	public static EventColor getEventColor(String colorId) {
-		for (EventColor color : EventColor.values()) {
-			if (color.getColorId().equals(colorId)) {
-				return color;
-			}
-		}
-		return BLUEBERRY;
-	}
 }

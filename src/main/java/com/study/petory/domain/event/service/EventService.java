@@ -14,6 +14,8 @@ public interface EventService {
 
 	Event findEventById(Long eventId);
 
+	void validUser(Long userId, Event event);
+
 	EventCreateResponseDto saveEvent(Long userId, EventCreateRequestDto request);
 
 	EventGetOneResponseDto findOneEvent(Long eventId);

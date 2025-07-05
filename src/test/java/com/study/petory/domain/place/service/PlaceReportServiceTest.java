@@ -3,6 +3,8 @@ package com.study.petory.domain.place.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +15,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.domain.place.dto.request.PlaceReportCancelRequestDto;
 import com.study.petory.domain.place.dto.request.PlaceReportRequestDto;
 import com.study.petory.domain.place.entity.Place;
 import com.study.petory.domain.place.entity.PlaceReport;
@@ -170,6 +173,102 @@ public class PlaceReportServiceTest {
 		assertAll("장소 신고가 10개 이상인 경우 장소 신고 로직 검증",
 			() -> assertNotNull(place.getDeletedAt()),
 			() -> assertEquals(place.getPlaceStatus(), PlaceStatus.INACTIVE)
+		);
+	}
+
+	@Test
+	@DisplayName("장소 신고 취소 - 장소 불일치의 경우")
+	void cancelReportPlaceInconsistentPlace() {
+		Place place1 = new Place();
+		Place place2 = new Place();
+
+		ReflectionTestUtils.setField(place1, "id", 1L);
+		ReflectionTestUtils.setField(place2, "id", 2L);
+
+		User user = new User();
+
+		ReflectionTestUtils.setField(user, "id", 1L);
+
+		PlaceReport placeReport = PlaceReport.builder()
+			.user(user)
+			.place(place1)
+			.content("test")
+			.build();
+
+		ReflectionTestUtils.setField(placeReport, "id", 1L);
+
+		when(placeReportRepository.findById(1L)).thenReturn(Optional.of(placeReport));
+
+		CustomException customException = assertThrows(
+			CustomException.class,
+			() -> placeReportService.cancelReportPlace(1L, 2L, 1L, new PlaceReportCancelRequestDto("test"))
+		);
+
+		assertAll("장소가 비활성화 상태일 때 장소 신고 로직 검증",
+			() -> assertEquals(ErrorCode.INCONSISTENT_PLACE, customException.getErrorCode())
+		);
+	}
+
+	@Test
+	@DisplayName("장소 신고 취소 - 이미 취소된 경우")
+	void cancelReportPlaceAlreadyInvalidReport() {
+		Place place1 = new Place();
+
+		ReflectionTestUtils.setField(place1, "id", 1L);
+
+		User user = new User();
+
+		ReflectionTestUtils.setField(user, "id", 1L);
+
+		PlaceReport placeReport = PlaceReport.builder()
+			.user(user)
+			.place(place1)
+			.content("test")
+			.build();
+
+		ReflectionTestUtils.setField(placeReport, "id", 1L);
+		ReflectionTestUtils.setField(placeReport, "isValid", false);
+
+		when(placeReportRepository.findById(1L)).thenReturn(Optional.of(placeReport));
+
+		CustomException customException = assertThrows(
+			CustomException.class,
+			() -> placeReportService.cancelReportPlace(1L, 1L, 1L, new PlaceReportCancelRequestDto("test"))
+		);
+
+		assertAll("장소 신고가 이미 취소된 경우 장소 신고 로직 검증",
+			() -> assertEquals(ErrorCode.ALREADY_INVALID_REPORT, customException.getErrorCode())
+		);
+	}
+
+	@Test
+	@DisplayName("장소 신고 취소")
+	void cancelPlaceReport() {
+		Place place1 = new Place();
+
+		ReflectionTestUtils.setField(place1, "id", 1L);
+
+		User user = new User();
+
+		ReflectionTestUtils.setField(user, "id", 1L);
+
+		PlaceReport placeReport = PlaceReport.builder()
+			.user(user)
+			.place(place1)
+			.content("test")
+			.build();
+
+		ReflectionTestUtils.setField(placeReport, "id", 1L);
+
+		PlaceReportCancelRequestDto requestDto = new PlaceReportCancelRequestDto("test");
+
+		when(placeReportRepository.findById(1L)).thenReturn(Optional.of(placeReport));
+
+		placeReportService.cancelReportPlace(1L, 1L, 1L, requestDto);
+
+		assertAll("장소 신고 취소 로직 검증",
+			() -> assertEquals(placeReport.isValid(), false),
+			() -> assertNotNull(placeReport.getDeletedAt())
 		);
 	}
 }

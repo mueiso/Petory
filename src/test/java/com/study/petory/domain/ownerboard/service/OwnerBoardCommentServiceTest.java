@@ -84,7 +84,7 @@ public class OwnerBoardCommentServiceTest {
 
 		OwnerBoardComment comment = OwnerBoardComment.builder()
 			.content("새 댓글")
-			.user(mockUser)
+			.user(user)
 			.ownerBoard(mockBoard)
 			.build();
 
@@ -129,31 +129,33 @@ public class OwnerBoardCommentServiceTest {
 		assertEquals("댓글 1", result.getContent().get(1).getContent());
 	}
 
-	// @Test
-	// void 댓글_수정에_성공한다() {
-	// 	// given
-	// 	Long boardId = 10L;
-	// 	Long commentId = 100L;
-	//
-	// 	OwnerBoardComment comment = OwnerBoardComment.builder()
-	// 		.content("기존 댓글")
-	// 		.user(mockUser)
-	// 		.ownerboard(mockBoard)
-	// 		.build();
-	// 	ReflectionTestUtils.setField(comment, "id", commentId);
-	//
-	// 	given(ownerBoardCommentRepository.findById(commentId)).willReturn(Optional.of(comment));
-	//
-	// 	OwnerBoardCommentUpdateRequestDto requestDto = new OwnerBoardCommentUpdateRequestDto("수정된 댓글");
-	//
-	// 	// when
-	// 	OwnerBoardCommentUpdateResponseDto result = ownerBoardCommentService.updateOwnerBoardComment(
-	// 		boardId, commentId, requestDto);
-	//
-	// 	// then
-	// 	assertEquals("수정된 댓글", result.getContent());
-	// }
-	//
+	@Test
+	void 댓글_수정에_성공한다() {
+		// given
+		Long userId = 1L;
+		User user = createActiveUser(userId);
+		Long boardId = 10L;
+		Long commentId = 100L;
+
+		OwnerBoardComment comment = OwnerBoardComment.builder()
+			.content("기존 댓글")
+			.user(user)
+			.ownerBoard(mockBoard)
+			.build();
+		ReflectionTestUtils.setField(comment, "id", commentId);
+
+		given(ownerBoardCommentRepository.findById(commentId)).willReturn(Optional.of(comment));
+
+		OwnerBoardCommentUpdateRequestDto requestDto = new OwnerBoardCommentUpdateRequestDto("수정된 댓글");
+
+		// when
+		OwnerBoardCommentUpdateResponseDto result = ownerBoardCommentService.updateOwnerBoardComment(
+			userId, boardId, commentId, requestDto);
+
+		// then
+		assertEquals("수정된 댓글", result.getContent());
+	}
+
 	// @Test
 	// void 댓글_삭제에_성공한다() {
 	// 	// given

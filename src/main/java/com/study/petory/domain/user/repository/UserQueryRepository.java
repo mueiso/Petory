@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.study.petory.domain.user.entity.User;
 
-public interface UserCustomRepository {
+public interface UserQueryRepository {
 
 	Optional<User> findByEmailWithUserRole(String email);
 

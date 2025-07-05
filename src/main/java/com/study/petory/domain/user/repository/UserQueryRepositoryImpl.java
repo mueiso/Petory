@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class UserCustomRepositoryImpl implements UserCustomRepository {
+public class UserQueryRepositoryImpl implements UserQueryRepository {
 
 	private final JPAQueryFactory queryFactory;
 

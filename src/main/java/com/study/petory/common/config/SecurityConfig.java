@@ -57,9 +57,6 @@ public class SecurityConfig {
 			.anyRequest().authenticated() : 그 외의 모든 요청은 인증된 사용자만 접근 가능
 	 * 4. exceptionHandling : 인증 예외 처리 커스터마이징 → 인증 안 된 사용자가 보호된 리소스 접근 시 예외를 JSON 으로 반환
 			.authenticationEntryPoint : 인증 안 된 사용자 접근 시 동작 지정
-			response.setStatue : HTTP 상태 코드 401 UNAUTHORIZED 로 응답
-			response.setContentType : 응답 형식을 JSON 으로 설정
-			response.getWriter().write() : 사용자에게 JSON 메시지를 반환
 	 * 5. addFilterBefore : JWT 필터를 Security 필터 체인에 등록 → JWT 토큰 유효한지 먼저 검증 후 인증 처리 진행
 	 */
 	@Bean
@@ -83,7 +80,7 @@ public class SecurityConfig {
 			)
 
 			.exceptionHandling(ex -> ex
-				.authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 분리된 클래스 사용
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(customAccessDeniedHandler)
 			)
 
@@ -137,6 +134,9 @@ public class SecurityConfig {
 
 		// 허용할 요청 헤더 지정
 		config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+
+		// expose 설정 추가 (프론트가 응답 헤더 읽을 수 있도록)
+		config.setExposedHeaders(List.of("Authorization", "X-Refresh-Token"));
 
 		/*
 		 * 프론트 구현하여 연동 시 true 로 설정 변경 필요

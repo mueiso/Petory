@@ -96,6 +96,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		}
 
 		// GET 매핑의 /trade-boards, /trade-boards/{tradeBoardId} 경로 비회원 허용
+		// GET 매핑의 /trade-boards, /trade-boards/{tradeBoardId} 경로 비회원 허용
 		if ("GET".equalsIgnoreCase(method)
 			&& (url.equals("/trade-boards")
 			|| url.matches("^/trade-boards/\\d+$"))) {

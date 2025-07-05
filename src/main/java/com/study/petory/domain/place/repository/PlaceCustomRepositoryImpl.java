@@ -88,7 +88,7 @@ public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
 	}
 
 	@Override
-	public List<Place> findAllById(List<Long> placeIdList) {
+	public List<Place> findAllWithImagesById(List<Long> placeIdList) {
 		return jpaQueryFactory
 			.selectFrom(qPlace)
 			.leftJoin(qPlace.images, qPlaceImage).fetchJoin()

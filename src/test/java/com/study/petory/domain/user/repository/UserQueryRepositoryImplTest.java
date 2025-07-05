@@ -87,10 +87,17 @@ class UserQueryRepositoryTest {
 	@Test
 	void findByIdWithUserRole_유저_조회_성공() {
 
-		// when
+		/* [when]
+		 * id를 기준으로 유저 조회 (권한 포함)
+		 */
 		Optional<User> result = userQueryRepository.findByIdWithUserRole(testUser.getId());
 
-		// then
+		/* [then]
+		 * 결과 존재하는지 확인
+		 * id 일치하는지 확인
+		 * 권한 정보 있는지 확인
+		 * 첫 번째 권한이 USER 인지 확인
+		 */
 		assertThat(result).isPresent();
 		assertThat(result.get().getId()).isEqualTo(testUser.getId());
 		assertThat(result.get().getUserRole()).isNotNull();

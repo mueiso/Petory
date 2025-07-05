@@ -213,7 +213,7 @@ public class PlaceServiceImpl implements PlaceService {
 			.map(object -> Long.parseLong(object.toString()))
 			.toList();
 
-		List<Place> placeList = placeRepository.findAllById(placeIdList);
+		List<Place> placeList = placeRepository.findAllWithImagesById(placeIdList);
 
 		// 여기서 문제가 발생했던것!!!!!
 		return placeList.stream()

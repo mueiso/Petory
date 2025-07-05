@@ -16,5 +16,5 @@ public interface PlaceCustomRepository {
 	// 특정 조회 - 리뷰 리스트까지 함께 조회하기 위한 메서드
 	Optional<Place> findWithReviewListByPlaceId(Long placeId);
 
-	List<Place> findAllById(List<Long> placeIdList);
+	List<Place> findAllWithImagesById(List<Long> placeIdList);
 }

@@ -159,7 +159,7 @@ public class PlaceRepositoryTest {
 
 		placeReviewRepository.saveAll(List.of(placeReview1, placeReview2));
 
-		Optional<Place> findPlace = placeRepository.findWithReviewListByPlaceId(1L);
+		Optional<Place> findPlace = placeRepository.findWithReviewListByPlaceId(place1.getId());
 
 		assertAll("리뷰가 포함된 장소 조회 검증",
 			() -> assertTrue(findPlace.isPresent())

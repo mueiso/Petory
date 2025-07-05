@@ -70,7 +70,7 @@ class PetRepositoryTest {
 		PageRequest pageRequest = PageRequest.of(0, 10);
 
 		// when
-		Page<Pet> result = petRepository.findAllByUser(user, pageRequest);
+		Page<Pet> result = petRepository.findAllByUserAndDeletedAtIsNull(user, pageRequest);
 
 		// then
 		assertThat(result.getTotalElements()).isEqualTo(2);

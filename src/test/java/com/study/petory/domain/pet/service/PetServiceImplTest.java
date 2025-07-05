@@ -101,7 +101,7 @@ class PetServiceImplTest {
 		 * petRepository.findAllByUser() 호출 시 petPage 반환되도록 설정 (pet 목록 조회)
 		 */
 		given(userService.findUserById(userId)).willReturn(mockUser);
-		given(petRepository.findAllByUser(mockUser, pageable)).willReturn(petPage);
+		given(petRepository.findAllByUserAndDeletedAtIsNull(mockUser, pageable)).willReturn(petPage);
 
 		/* [when]
 		 * 실제 서비스 메서드 호출
@@ -174,7 +174,7 @@ class PetServiceImplTest {
 		// 유저 조회는 성공
 		given(userService.findUserById(userId)).willReturn(mockUser);
 		// 조회 결과는 빈 페이지
-		given(petRepository.findAllByUser(mockUser, pageable)).willReturn(emptyPage);
+		given(petRepository.findAllByUserAndDeletedAtIsNull(mockUser, pageable)).willReturn(emptyPage);
 
 		// [when]
 		var result = petService.findAllMyPets(userId, pageable);

@@ -49,13 +49,6 @@ public class OwnerBoardQueryRepositoryImplTest {
 		createAndSaveOwnerBoard(user, "제목2", "내용2");
 		createAndSaveOwnerBoard(user, "제목3", "내용3");
 
-		// OwnerBoard ownerBoard1 = new OwnerBoard("제목1", "내용1", user);
-		// OwnerBoard ownerBoard2 = new OwnerBoard("제목2", "내용2", user);
-		// OwnerBoard ownerBoard3 = new OwnerBoard("제목3", "내용3", user);
-		// ownerBoardRepository.saveAndFlush(ownerBoard1);
-		// ownerBoardRepository.saveAndFlush(ownerBoard2);
-		// ownerBoardRepository.saveAndFlush(ownerBoard3);
-
 		Pageable pageable = PageRequest.of(0, 2);
 
 		// when
@@ -71,6 +64,25 @@ public class OwnerBoardQueryRepositoryImplTest {
 
 	@Test
 	void 제목으로_게시글_검색_조회한다() {
+		// given
+		User user = createUserWithStatus(ACTIVE);
+		createAndSaveOwnerBoard(user, "강아지 산책", "내용1");
+		createAndSaveOwnerBoard(user, "강아지 낮잠", "내용2");
+		createAndSaveOwnerBoard(user, "고양이 낮잠", "내용3");
+
+		Pageable pageable = PageRequest.of(0, 10);
+
+		// when
+		Page<OwnerBoardGetAllResponseDto> result
+			= ownerBoardQueryRepositoryImpl.findAllWithFirstImageAndTitleOptional(
+			"강아지", pageable);
+
+		// then
+		assertThat(result.getContent()).hasSize(2);
+		assertThat(result.getTotalElements()).isEqualTo(2);
+		assertThat(result.getContent())
+			.extracting(OwnerBoardGetAllResponseDto::getTitle)
+			.containsExactlyInAnyOrder("강아지 산책", "강아지 낮잠");
 	}
 
 	@Test

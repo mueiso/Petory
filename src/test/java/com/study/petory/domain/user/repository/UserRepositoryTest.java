@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -92,10 +93,13 @@ class UserRepositoryTest {
 
 		/*
 		 * 기준 범위에 포함되는 유저: updatedAt 이 100일전
-		 * 기준 범위에 포함되는 유저: updatedAt 이 85일전
+		 * 기준 범위에 제외되는 유저: updatedAt 이 85일전
 		 * 기준 범위에 제외되는 유저: userStatus 가 DELETED
 		 */
-		createUser(UserStatus.ACTIVE, null, standard.minusDays(10));
+		User user = createUser(UserStatus.ACTIVE, null, null);;
+		setField(user, "updatedAt", standard.minusDays(10));
+		userRepository.save(user);
+
 		createUser(UserStatus.ACTIVE, null, standard.plusDays(5));
 		createUser(UserStatus.DELETED, null, standard.minusDays(10));
 
@@ -119,7 +123,7 @@ class UserRepositoryTest {
 			.nickname("닉_" + status.name())
 			.email("test_" + status.name() + "@email.com")
 			.userPrivateInfo(privateInfo)
-			.userRole(List.of(UserRole.builder().role(Role.USER).build()))
+			.userRole(new ArrayList<>(List.of(UserRole.builder().role(Role.USER).build())))
 			.build();
 
 		user.updateStatus(status);

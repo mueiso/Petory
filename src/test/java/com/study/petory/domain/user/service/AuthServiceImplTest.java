@@ -568,7 +568,7 @@ class AuthServiceImplTest {
 		ReflectionTestUtils.setField(user, "id", 700L);
 
 		// mock 설정 - ID로 조회 시 해당 유저 반환
-		given(userService.findUserById(user.getId())).willReturn(user);
+		given(userService.findUserByIdWithUserStatus(user.getId(), UserStatus.SUSPENDED)).willReturn(user);
 
 		/* [when]
 		 * 정지된 계정 복구 요청
@@ -593,7 +593,7 @@ class AuthServiceImplTest {
 		ReflectionTestUtils.setField(user, "id", 800L);
 
 		// mock 설정 - 유저 ID로 조회 시 해당 유저 반환
-		given(userService.findUserById(user.getId())).willReturn(user);
+		given(userService.findUserByIdWithUserStatus(user.getId(), UserStatus.SUSPENDED)).willReturn(user);
 
 		/* [when]
 		 * 복구 시도 → 예외 발생 예상
@@ -606,7 +606,7 @@ class AuthServiceImplTest {
 		/* [then]
 		 * USER_NOT_DEACTIVATED 예외 코드 검증
 		 */
-		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_NOT_DEACTIVATED);
+		assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.USER_NOT_SUSPENDED);
 	}
 
 	// 테스트용 유저 객체를 생성하는 유틸 메서드

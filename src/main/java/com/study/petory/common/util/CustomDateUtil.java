@@ -10,6 +10,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import net.fortuna.ical4j.model.DateTime;
 
@@ -17,7 +18,10 @@ import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 
 public class CustomDateUtil {
-	public static final String FORMAT_DATE = "MM-dd";
+	private static final String FORMAT_DATE = "MM-dd";
+	private static final DateTimeFormatter ISO_LOCAL_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+	private static final DateTimeFormatter DATE_ONLY_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	private static final DateTimeFormatter UTC_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmssX");
 
 	public static String getFormatDate() {
 		return LocalDateTime.now().format(DateTimeFormatter.ofPattern(FORMAT_DATE));
@@ -38,26 +42,28 @@ public class CustomDateUtil {
 		// 불필요한 문자열을 제거하여 형식 맞추기
 		String trimDate = date.trim();
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+		if (trimDate.isEmpty()) {
+			return null;
+		}
+		int length = trimDate.length();
 
 		try {
 			// 타임존이 없는 경우
-			if (trimDate.length() == 19) {
-				return LocalDateTime.parse(trimDate, formatter);
-			}
-
-			// 타임존이 있는 경우
-			if (trimDate.length() > 19) {
-				// 공백인 경우 표준 ISO 형식으로 변환
-				String input = trimDate.replace(" ", "+");
-				// 표준 형식인 경우
-				return ZonedDateTime.parse(input).toLocalDateTime();
+			if (length == 19) {
+				return LocalDateTime.parse(trimDate, ISO_LOCAL_FORMATTER);
 			}
 
 			// 시간이 안 들어오는 경우
 			if (trimDate.length() == 10) {
-				LocalDate localDate = LocalDate.parse(trimDate);
-				return localDate.atStartOfDay();
+				return LocalDate.parse(trimDate, DATE_ONLY_FORMATTER).atStartOfDay();
+			}
+
+			// 타임존이 있는 경우
+			if (length > 19) {
+				if (trimDate.contains(" ")) {
+					trimDate = trimDate.replaceAll(" ", "+");
+				}
+				return ZonedDateTime.parse(trimDate).toLocalDateTime();
 			}
 
 			// 19자 미만은 잘못된 형식
@@ -85,12 +91,11 @@ public class CustomDateUtil {
 	}
 
 	public static LocalDateTime stringToUTC(String datetime) {
-		if (datetime == null) {
+		if (datetime == null && datetime.isEmpty()) {
 			return null;
 		}
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmssX");
-			OffsetDateTime offsetDateTime = OffsetDateTime.parse(datetime, formatter);
+			OffsetDateTime offsetDateTime = OffsetDateTime.parse(datetime, UTC_FORMATTER);
 			return offsetDateTime.toLocalDateTime();
 		} catch (Exception e) {
 			throw new CustomException(ErrorCode.DATE_TIME_PARSE_FAIL);

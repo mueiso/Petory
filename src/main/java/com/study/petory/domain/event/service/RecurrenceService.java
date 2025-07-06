@@ -1,4 +1,4 @@
-package com.study.petory.domain.event.entity;
+package com.study.petory.domain.event.service;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -21,13 +21,17 @@ import net.fortuna.ical4j.model.property.RRule;
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.util.CustomDateUtil;
+import com.study.petory.domain.event.entity.Event;
+import com.study.petory.domain.event.entity.RecurrenceInfo;
 
 @Component
-public class Recurrence {
+public class RecurrenceService {
 
 	private static final String RRULE = "RRULE";
 	private static final String RDATE = "RDATE";
 	private static final String EXDATE = "EXDATE";
+
+
 
 	// 반복 일정의 시작일 List 생성
 	public List<LocalDateTime> getInstanceStartTimeList(Event event, LocalDateTime start, LocalDateTime end) {
@@ -90,27 +94,32 @@ public class Recurrence {
 	}
 
 	// 반복 조건 List에서 타입에 맞는 반복 조건 조회
-	public String getRecurrence(String type, List<String> recurrence) {
+	public RecurrenceInfo getRecurrence(List<String> recurrence) {
 		if (recurrence == null) {
 			return null;
 		}
-		return recurrence.stream()
-			// 원하는 type + : 조회
-			.filter(i -> i.contains(type + ":"))
-			// 해당 type 제거
-			.map(i -> i.substring(type.length() + 1))
-			.findFirst()
-			.orElse(null);
-	}
 
-	// 반복 조건 List에서 반복 종료일 조회
-	public LocalDateTime getRecurrenceEnd(List<String> recurrence) {
-		String rrule = getRecurrence(RRULE, recurrence);
-		if (rrule == null || !rrule.contains("UNTIL")) {
-			return null;
+		RecurrenceInfo info = new RecurrenceInfo();
+
+		for (String rule : recurrence) {
+			if (rule.startsWith("RRULE:")) {
+				String rrule = rule.substring(6);
+				info.setRrule(rrule);
+
+				if (rrule.contains("UNTIL=")) {
+					int until = rrule.indexOf("UNTIL=") + 6;
+					if (rrule.length() - until >= 16) {
+						String untilValue = rrule.substring(until, until + 16);
+						info.setRecurrenceEnd(CustomDateUtil.stringToUTC(untilValue));
+					}
+				}
+			} else if (rule.startsWith("RDATE:")) {
+				info.setRDate(rule.substring(6));
+			} else if (rule.startsWith("EXDATE:")) {
+				info.setExDate(rule.substring(7));
+			}
 		}
-		String recurrenceEnd = rrule.replaceFirst(".*UNTIL=", "");
-		return CustomDateUtil.stringToUTC(recurrenceEnd.substring(0, 16));
+		return info;
 	}
 
 	public DateList getDateList(Event event, String type) {

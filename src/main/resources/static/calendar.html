@@ -1065,7 +1065,7 @@
 <script>
     // API 설정
     const API_BASE_URL = '/users/events'; // 백엔드 API 기본 URL
-    const ACCESS_TOKEN = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoiZHVtbXkzMEB0ZXN0LmNvbSIsIm5pY2tuYW1lIjoi642U66-47Jyg7KCAMzAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNzYwNzkxNjk2LCJpYXQiOjE3NTE3OTE2OTZ9.5uQMJ8K3xuY24x2BjoDX8VTtud1T4JNb0iUNezdF54I'; // 하드코딩된 Access Token
+    const ACCESS_TOKEN = 'Bearer ' + 'token'; // 하드코딩된 Access Token
 
     // API 요청 헬퍼 함수
     async function apiRequest(url, method = 'GET', data = null) {

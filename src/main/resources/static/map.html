@@ -70,6 +70,7 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 이 줄 추가 */
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -381,18 +382,19 @@
     </style>
 </head>
 <body>
+<!-- Header -->
 <header>
     <nav>
         <a href="/" class="logo">PETORY</a>
         <ul class="nav-links">
-            <li><a href="/community.html">커뮤니티</a></li>
-            <li><a href="/tradeboard.html">마켓플레이스</a></li>
-            <li><a href="/place.html" class="active">펫플레이스</a></li>
-            <li><a href="/mypage.html">마이페이지</a></li>
+            <li><a href="/community">커뮤니티</a></li>
+            <li><a href="/market">마켓플레이스</a></li>
+            <li><a href="/petPlace">펫플레이스</a></li>
+            <li><a href="/myCalendar">마이페이지</a></li>
         </ul>
         <div class="auth-buttons">
-            <a href="/login.html" class="btn btn-outline">로그인</a>
-            <a href="/login.html" class="btn btn-primary">회원가입</a>
+            <a href="/login" class="btn btn-outline">로그인</a>
+            <a href="/login" class="btn btn-primary">회원가입</a>
         </div>
     </nav>
 </header>

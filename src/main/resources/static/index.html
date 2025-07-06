@@ -454,24 +454,14 @@
   <nav>
     <a href="/" class="logo">PETORY</a>
     <ul class="nav-links">
-      <li><a href="/community.html">커뮤니티</a></li>
-      <li><a href="/market.html">마켓플레이스</a></li>
-      <li><a href="/map.html">펫플레이스</a></li>
-      <li><a href="/mypage.html">마이페이지</a></li>
+      <li><a href="/community">커뮤니티</a></li>
+      <li><a href="/market">마켓플레이스</a></li>
+      <li><a href="/petPlace">펫플레이스</a></li>
+      <li><a href="/myCalendar">마이페이지</a></li>
     </ul>
-
-    <!-- 로그인 전 버튼들 -->
-    <div class="auth-buttons" id="authButtons">
-      <span class="auth-loading" id="authLoading">로딩 중...</span>
-      <a href="/login.html" class="btn btn-outline" id="loginBtn" style="display: none;">로그인</a>
-      <a href="/login.html" class="btn btn-primary" id="signupBtn" style="display: none;">회원가입</a>
-    </div>
-
-    <!-- 로그인 후 사용자 정보 -->
-    <div class="user-info hidden" id="userInfo">
-      <div class="user-avatar" id="userAvatar">🐶</div>
-      <span class="user-name" id="userName">사용자</span>
-      <button class="logout-btn" onclick="logout()">로그아웃</button>
+    <div class="auth-buttons">
+      <a href="/login" class="btn btn-outline">로그인</a>
+      <a href="/login" class="btn btn-primary">회원가입</a>
     </div>
   </nav>
 </header>
@@ -492,8 +482,8 @@
   </div>
 
   <div class="cta-buttons">
-    <a href="/community.html" class="btn btn-primary btn-large">커뮤니티 둘러보기</a>
-    <a href="/map.html" class="btn btn-outline btn-large">펫플레이스 확인하기</a>
+    <a href="/community" class="btn btn-primary btn-large">커뮤니티 둘러보기</a>
+    <a href="/petPlace" class="btn btn-outline btn-large">펫플레이스 확인하기</a>
   </div>
 </section>
 
@@ -599,24 +589,6 @@
     <p>&copy; 2025 PETORY. All rights reserved. 🐾</p>
   </div>
 </footer>
-
-// 랜덤 펫 아이콘 배열
-const petIcons = ['🐶', '🐱', '🐰', '🐹', '🐦', '🐠', '🐢', '🦔', '🐭', '🐷'];
-
-// 사용자 이름을 기반으로 일관된 랜덤 아이콘 생성
-function getRandomPetIcon(userName) {
-// 사용자 이름을 해시코드로 변환하여 일관된 인덱스 생성
-let hash = 0;
-for (let i = 0; i < userName.length; i++) {
-const char = userName.charCodeAt(i);
-hash = ((hash << 5) - hash) + char;
-hash = hash & hash; // 32bit 정수로 변환
-}
-
-// 항상 양수로 만들고 배열 길이로 나머지 연산
-const index = Math.abs(hash) % petIcons.length;
-return petIcons[index];
-}
 
 <script>
   // 페이지 로드 시 실행

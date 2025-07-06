@@ -11,13 +11,16 @@ public class HomeController {
 	@GetMapping("/login")
 	public String login() { return "forward:/login.html";}
 
-	@GetMapping("/animalPlace")
-	public String animalPlace() { return "forward:/map.html";}
+	@GetMapping("/petPlace")
+	public String petPlace() { return "forward:/map.html";}
 
-	// @GetMapping("community")
-	// public String community() {}
-	//
-	// @GetMapping("market")
-	// public String market() {}
+	@GetMapping("/community")
+	public String community() {return "forward:/community.html";}
+
+	@GetMapping("/market")
+	public String market() {return "forward:/market.html";}
+
+	@GetMapping("/myCalendar")
+	public String myCalendar() {return "forward:/calendar.html";}
 
 }

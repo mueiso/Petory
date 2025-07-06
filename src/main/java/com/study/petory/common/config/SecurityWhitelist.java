@@ -31,7 +31,26 @@ public class SecurityWhitelist {
 			"/petory.ico",
 			"/actuator/prometheus",
 			"/place-search-pet.png",
-			"/calendar.html"
+			"/calendar.html",
+
+			"/",
+			"/login",
+			"/animalPlace",
+			"/index.html",
+			"/community.html",
+			"/community-new.html",
+			"/chat.html",
+			"/market.html",
+			"/market-detail.html",
+			"/mypage.html",
+			"/map.html",
+			"/auth-callback.html",
+
+
+
+			"/images/**",
+			"/static/**",           // 정적 리소스들 (HTML, CSS, JS, 이미지 등 모두 포함)
+			"/error"                // 에러 페이지
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

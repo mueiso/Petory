@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETORY - 마켓플레이스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 50%, #ffe0b2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header - 메인 페이지와 동일 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #5d4037;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "🐾";
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5d4037;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: #ffcc80;
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #5d4037;
+            border: 2px solid #5d4037;
+        }
+
+        .btn-outline:hover {
+            background: #5d4037;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff8a65, #ffab40);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 138, 101, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #5d4037;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header .subtitle {
+            font-size: 1.2rem;
+            color: #8d6e63;
+            margin-bottom: 2rem;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-and-filter {
+            display: flex;
+            gap: 1rem;
+            flex: 1;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid #ffcc80;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: #ff8a65;
+            box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.1);
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid #ffcc80;
+            border-radius: 25px;
+            background: white;
+            color: #5d4037;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            border-color: #ff8a65;
+            box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.1);
+        }
+
+        .write-btn {
+            background: linear-gradient(45deg, #ff8a65, #ffab40);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .write-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 138, 101, 0.3);
+        }
+
+        .write-btn::before {
+            content: "✏️";
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ffcc80, #ffab40);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .status-for-sale {
+            background: #4caf50;
+        }
+
+        .status-sold-out {
+            background: #f44336;
+        }
+
+        .status-hidden {
+            background: #9e9e9e;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #5d4037;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff8a65;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-category {
+            font-size: 0.9rem;
+            color: #8d6e63;
+            background: #fff3e0;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #a1887f;
+        }
+
+        .seller-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .seller-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ffcc80, #ffab40);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.75rem 1rem;
+            border: 2px solid #ffcc80;
+            background: white;
+            color: #5d4037;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-width: 45px;
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: #ffcc80;
+            transform: translateY(-2px);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Write Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #5d4037;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8d6e63;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #f5f5f5;
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #5d4037;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ffcc80;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            border-color: #ff8a65;
+            box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .price-input {
+            position: relative;
+        }
+
+        .price-input::after {
+            content: "원";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8d6e63;
+            font-weight: 500;
+        }
+
+        .image-upload {
+            border: 2px dashed #ffcc80;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .image-upload:hover {
+            border-color: #ff8a65;
+            background: rgba(255, 204, 128, 0.1);
+        }
+
+        .image-upload input {
+            display: none;
+        }
+
+        .upload-text {
+            color: #8d6e63;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ff8a65, #ffab40);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 138, 101, 0.3);
+        }
+
+        /* Chat Button */
+        .chat-btn {
+            background: linear-gradient(45deg, #4caf50, #8bc34a);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .chat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .chat-btn::before {
+            content: "💬";
+            font-size: 0.8rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #8d6e63;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-message {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .loading::after {
+            content: "🐾";
+            font-size: 2rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .action-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-and-filter {
+                flex-direction: column;
+            }
+
+            .search-box {
+                min-width: auto;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <a href="/" class="logo">PETORY</a>
+        <ul class="nav-links">
+            <li><a href="/community">커뮤니티</a></li>
+            <li><a href="/market">마켓플레이스</a></li>
+            <li><a href="/petPlace">펫플레이스</a></li>
+            <li><a href="/myCalendar">마이페이지</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="/login" class="btn btn-outline">로그인</a>
+            <a href="/login" class="btn btn-primary">회원가입</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Main Container -->
+<div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>🛍️ 마켓플레이스</h1>
+        <p class="subtitle">반려동물 용품을 찾고 거래해보세요</p>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+        <div class="search-and-filter">
+            <div class="search-box">
+                <input type="text" placeholder="상품을 검색해보세요..." id="searchInput">
+            </div>
+            <select class="filter-select" id="categoryFilter">
+                <option value="">전체 카테고리</option>
+                <option value="FOOD_AND_TREATS">사료와 간식</option>
+                <option value="TOYS">장난감</option>
+                <option value="HOUSES_AND_CARRIERS">집과 이동장</option>
+                <option value="FEEDERS_AND_TOILETS">급식기와 화장실</option>
+                <option value="GROOMING_AND_CARE_SUPPLIES">미용 용품</option>
+                <option value="CLOTHES_AND_ACCESSORIES">옷과 악세사리</option>
+                <option value="HEALTH">건강 용품</option>
+            </select>
+            <select class="filter-select" id="priceFilter">
+                <option value="">가격대</option>
+                <option value="0-10000">1만원 이하</option>
+                <option value="10000-50000">1만원 ~ 5만원</option>
+                <option value="50000-100000">5만원 ~ 10만원</option>
+                <option value="100000-">10만원 이상</option>
+            </select>
+            <select class="filter-select" id="statusFilter">
+                <option value="">전체 상태</option>
+                <option value="FOR_SALE">판매중</option>
+                <option value="SOLD_OUT">판매완료</option>
+            </select>
+        </div>
+        <button class="write-btn" onclick="openWriteModal()">상품 등록</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="productGrid">
+        <!-- 상품 카드들이 여기에 동적으로 추가됩니다 -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination">
+        <!-- 페이지네이션 버튼들이 여기에 동적으로 추가됩니다 -->
+    </div>
+</div>
+
+<!-- Write Modal -->
+<div class="modal" id="writeModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">상품 등록</h2>
+            <button class="close-btn" onclick="closeWriteModal()">&times;</button>
+        </div>
+        <form id="productForm">
+            <div class="form-group">
+                <label class="form-label">제목</label>
+                <input type="text" class="form-input" id="productTitleInput" placeholder="상품 제목을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">카테고리</label>
+                <select class="form-select" id="productCategoryInput" required>
+                    <option value="">카테고리를 선택하세요</option>
+                    <option value="FOOD_AND_TREATS">사료와 간식</option>
+                    <option value="TOYS">장난감</option>
+                    <option value="HOUSES_AND_CARRIERS">집과 이동장</option>
+                    <option value="FEEDERS_AND_TOILETS">급식기와 화장실</option>
+                    <option value="GROOMING_AND_CARE_SUPPLIES">미용 용품</option>
+                    <option value="CLOTHES_AND_ACCESSORIES">옷과 악세사리</option>
+                    <option value="HEALTH">건강 용품</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">가격</label>
+                <div class="price-input">
+                    <input type="number" class="form-input" id="productPriceInput" placeholder="가격을 입력하세요" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">상품 설명</label>
+                <textarea class="form-textarea" id="productDescriptionInput" placeholder="상품에 대한 설명을 입력하세요" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">상품 이미지</label>
+                <div class="image-upload" onclick="document.getElementById('imageInput').click()">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📷</div>
+                    <div class="upload-text">클릭하여 이미지를 업로드하세요</div>
+                    <input type="file" id="imageInput" accept="image/*" multiple>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">상품 등록하기</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // 하드코딩된 상품 데이터
+    const MOCK_PRODUCTS = [
+        {
+            id: 1,
+            title: "프리미엄 강아지 사료 10kg",
+            price: 45000,
+            category: "FOOD_AND_TREATS",
+            status: "FOR_SALE",
+            sellerNickname: "펫러버123",
+            sellerAvatar: "🐶",
+            emoji: "🐕"
+        },
+        {
+            id: 2,
+            title: "고양이 모래 5kg 천연 응고형",
+            price: 15000,
+            category: "FEEDERS_AND_TOILETS",
+            status: "FOR_SALE",
+            sellerNickname: "냥집사",
+            sellerAvatar: "🐱",
+            emoji: "🐱"
+        },
+        {
+            id: 3,
+            title: "수족관 필터 50-60L용",
+            price: 35000,
+            category: "HOUSES_AND_CARRIERS",
+            status: "FOR_SALE",
+            sellerNickname: "아쿠아리움",
+            sellerAvatar: "🐟",
+            emoji: "🏠"
+        },
+        {
+            id: 4,
+            title: "대형 새장 + accessories",
+            price: 85000,
+            category: "HOUSES_AND_CARRIERS",
+            status: "SOLD_OUT",
+            sellerNickname: "버디맘",
+            sellerAvatar: "🐦",
+            emoji: "🐦"
+        },
+        {
+            id: 5,
+            title: "햄스터 휠 + 놀이용품 세트",
+            price: 12000,
+            category: "TOYS",
+            status: "FOR_SALE",
+            sellerNickname: "햄찌러버",
+            sellerAvatar: "🐹",
+            emoji: "🐹"
+        },
+        {
+            id: 6,
+            title: "토끼 전용 펠렛 사료 3kg",
+            price: 22000,
+            category: "FOOD_AND_TREATS",
+            status: "FOR_SALE",
+            sellerNickname: "토순이맘",
+            sellerAvatar: "🐰",
+            emoji: "🐰"
+        },
+        {
+            id: 7,
+            title: "강아지 장난감 세트 (공, 로프, 인형)",
+            price: 18000,
+            category: "TOYS",
+            status: "FOR_SALE",
+            sellerNickname: "장난감왕",
+            sellerAvatar: "🎾",
+            emoji: "🎾"
+        },
+        {
+            id: 8,
+            title: "고양이 스크래처 + 장난감",
+            price: 25000,
+            category: "TOYS",
+            status: "FOR_SALE",
+            sellerNickname: "펫샵사장",
+            sellerAvatar: "🐾",
+            emoji: "🧸"
+        },
+        {
+            id: 9,
+            title: "햄스터 침구용품 세트",
+            price: 8000,
+            category: "HOUSES_AND_CARRIERS",
+            status: "FOR_SALE",
+            sellerNickname: "햄스터집",
+            sellerAvatar: "🐹",
+            emoji: "🦆"
+        },
+        {
+            id: 10,
+            title: "자동 급식기 + 급수기 세트",
+            price: 95000,
+            category: "FEEDERS_AND_TOILETS",
+            status: "FOR_SALE",
+            sellerNickname: "스마트펫",
+            sellerAvatar: "🤖",
+            emoji: "🍽️"
+        }
+    ];
+
+    // 카테고리 이름 매핑
+    const CATEGORY_NAMES = {
+        'FOOD_AND_TREATS': '사료와 간식',
+        'TOYS': '장난감',
+        'HOUSES_AND_CARRIERS': '집과 이동장',
+        'FEEDERS_AND_TOILETS': '급식기와 화장실',
+        'GROOMING_AND_CARE_SUPPLIES': '미용 용품',
+        'CLOTHES_AND_ACCESSORIES': '옷과 악세사리',
+        'HEALTH': '건강 용품'
+    };
+
+    // 전역 변수
+    let currentProducts = [...MOCK_PRODUCTS];
+    let currentPage = 1;
+    const itemsPerPage = 8;
+
+    // 페이지 로드 시 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+        renderProducts();
+        setupEventListeners();
+    });
+
+    // 이벤트 리스너 설정
+    function setupEventListeners() {
+        // 검색 기능
+        document.getElementById('searchInput').addEventListener('input', handleSearch);
+
+        // 필터 기능
+        document.getElementById('categoryFilter').addEventListener('change', handleFilter);
+        document.getElementById('priceFilter').addEventListener('change', handleFilter);
+        document.getElementById('statusFilter').addEventListener('change', handleFilter);
+
+        // 상품 등록 폼
+        document.getElementById('productForm').addEventListener('submit', handleProductSubmit);
+    }
+
+    // 상품 렌더링
+    function renderProducts() {
+        const productGrid = document.getElementById('productGrid');
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const productsToShow = currentProducts.slice(startIndex, endIndex);
+
+        if (productsToShow.length === 0) {
+            productGrid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🐾</div>
+                    <div class="empty-message">검색 결과가 없습니다</div>
+                </div>
+            `;
+            return;
+        }
+
+        productGrid.innerHTML = productsToShow.map(product => `
+            <div class="product-card" onclick="viewProduct(${product.id})">
+                <div class="product-image">
+                    ${product.emoji}
+                    <div class="status-badge ${product.status === 'FOR_SALE' ? 'status-for-sale' : 'status-sold-out'}">
+                        ${product.status === 'FOR_SALE' ? '판매중' : '판매완료'}
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.title}</h3>
+                    <div class="product-price">${product.price.toLocaleString()}원</div>
+                    <div class="product-category">${CATEGORY_NAMES[product.category]}</div>
+                    <div class="product-meta">
+                        <div class="seller-info">
+                            <div class="seller-avatar">${product.sellerAvatar}</div>
+                            <span>${product.sellerNickname}</span>
+                        </div>
+                        ${product.status === 'FOR_SALE' ?
+            `<button class="chat-btn" onclick="startChat(${product.id}, event)">채팅하기</button>` :
+            `<span style="color: #f44336; font-weight: 600;">판매완료</span>`
+        }
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        renderPagination();
+    }
+
+    // 페이지네이션 렌더링
+    function renderPagination() {
+        const pagination = document.getElementById('pagination');
+        const totalPages = Math.ceil(currentProducts.length / itemsPerPage);
+
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '';
+
+        // 이전 버튼
+        paginationHTML += `
+            <button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                ‹
+            </button>
+        `;
+
+        // 페이지 번호들
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHTML += `
+                <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">
+                    ${i}
+                </button>
+            `;
+        }
+
+        // 다음 버튼
+        paginationHTML += `
+            <button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                ›
+            </button>
+        `;
+
+        pagination.innerHTML = paginationHTML;
+    }
+
+    // 검색 기능
+    function handleSearch() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        currentProducts = MOCK_PRODUCTS.filter(product =>
+            product.title.toLowerCase().includes(searchTerm) ||
+            product.sellerNickname.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;
+        applyFilters();
+    }
+
+    // 필터 기능
+    function handleFilter() {
+        applyFilters();
+    }
+
+    function applyFilters() {
+        const categoryFilter = document.getElementById('categoryFilter').value;
+        const priceFilter = document.getElementById('priceFilter').value;
+        const statusFilter = document.getElementById('statusFilter').value;
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+        let filteredProducts = MOCK_PRODUCTS;
+
+        // 검색 필터
+        if (searchTerm) {
+            filteredProducts = filteredProducts.filter(product =>
+                product.title.toLowerCase().includes(searchTerm) ||
+                product.sellerNickname.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        // 카테고리 필터
+        if (categoryFilter) {
+            filteredProducts = filteredProducts.filter(product => product.category === categoryFilter);
+        }
+
+        // 가격 필터
+        if (priceFilter) {
+            const [minPrice, maxPrice] = priceFilter.split('-').map(p => p === '' ? Infinity : parseInt(p));
+            filteredProducts = filteredProducts.filter(product => {
+                if (maxPrice === Infinity) {
+                    return product.price >= minPrice;
+                } else {
+                    return product.price >= minPrice && product.price <= maxPrice;
+                }
+            });
+        }
+
+        // 상태 필터
+        if (statusFilter) {
+            filteredProducts = filteredProducts.filter(product => product.status === statusFilter);
+        }
+
+        currentProducts = filteredProducts;
+        currentPage = 1;
+        renderProducts();
+    }
+
+    // 페이지 변경
+    function changePage(page) {
+        const totalPages = Math.ceil(currentProducts.length / itemsPerPage);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // 상품 상세 페이지로 이동
+    function viewProduct(productId) {
+        window.location.href = `/market-detail.html?id=${productId}`;
+    }
+
+    // 채팅 시작
+    function startChat(productId, event) {
+        event.stopPropagation(); // 카드 클릭 이벤트 방지
+        window.location.href = `/chat.html?productId=${productId}`;
+    }
+
+    // 상품 등록 모달 열기
+    function openWriteModal() {
+        document.getElementById('writeModal').classList.add('active');
+    }
+
+    // 상품 등록 모달 닫기
+    function closeWriteModal() {
+        document.getElementById('writeModal').classList.remove('active');
+        document.getElementById('productForm').reset();
+    }
+
+    // 상품 등록 처리
+    function handleProductSubmit(event) {
+        event.preventDefault();
+
+        const formData = {
+            title: document.getElementById('productTitleInput').value,
+            category: document.getElementById('productCategoryInput').value,
+            price: parseInt(document.getElementById('productPriceInput').value),
+            description: document.getElementById('productDescriptionInput').value
+        };
+
+        // 여기서 실제로는 API 호출을 해야 합니다
+        console.log('상품 등록 데이터:', formData);
+
+        // 임시로 알림만 표시
+        alert('상품이 등록되었습니다!');
+        closeWriteModal();
+
+        // 실제로는 새로운 상품을 목록에 추가하고 다시 렌더링
+        const newProduct = {
+            id: MOCK_PRODUCTS.length + 1,
+            ...formData,
+            status: 'FOR_SALE',
+            sellerNickname: '나',
+            sellerAvatar: '🙋‍♂️',
+            emoji: '📦'
+        };
+
+        MOCK_PRODUCTS.unshift(newProduct);
+        currentProducts = [...MOCK_PRODUCTS];
+        renderProducts();
+    }
+
+    // 모달 외부 클릭 시 닫기
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('writeModal');
+        if (event.target === modal) {
+            closeWriteModal();
+        }
+    });
+</script>
+</body>
+</html>

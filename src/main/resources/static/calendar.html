@@ -22,91 +22,150 @@
         }
 
         /* Header */
-        .header {
-            background-color: #faf8f5;
-            padding: 15px 20px;
-            border-bottom: 1px solid #e8e5e0;
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            font-size: 18px;
-            font-weight: 600;
-            color: #d4a574;
+            gap: 0.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #5d4037;
+            text-decoration: none;
         }
 
         .logo::before {
             content: "🐾";
-            margin-right: 8px;
-            font-size: 20px;
+            font-size: 1.5rem;
         }
 
-        .nav-menu {
+        .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 2rem;
             list-style: none;
         }
 
-        .nav-menu a {
+        .nav-links a {
             text-decoration: none;
-            color: #666;
-            font-weight: 400;
-            transition: color 0.2s;
+            color: #5d4037;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
-        .nav-menu a:hover {
-            color: #d4a574;
+        .nav-links a:hover {
+            background: #ffcc80;
+            transform: translateY(-2px);
         }
 
-        .header-right {
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #5d4037;
+            border: 2px solid #5d4037;
+        }
+
+        .btn-outline:hover {
+            background: #5d4037;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff8a65, #ffab40);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 138, 101, 0.4);
+        }
+
+        /* 로그인된 사용자 정보 스타일 */
+        .user-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
         }
 
-        .search-box {
-            position: relative;
-        }
-
-        .search-input {
-            padding: 8px 35px 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            width: 200px;
-            background-color: #f5f3f0;
-            font-size: 14px;
-        }
-
-        .search-input::placeholder {
-            color: #999;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-        }
-
-        .profile-btn {
-            width: 35px;
-            height: 35px;
+        .user-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background-color: #d4a574;
-            border: none;
+            background: linear-gradient(45deg, #ffcc80, #ffab40);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
             color: white;
-            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .user-name {
+            color: #5d4037;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+        }
+
+        /* 숨김 처리 */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 로딩 상태 */
+        .auth-loading {
+            color: #8d6e63;
+            font-size: 0.9rem;
         }
 
         /* Main Content */
@@ -854,26 +913,22 @@
     </style>
 </head>
 <body>
+
 <!-- Header -->
-<header class="header">
-    <div class="nav-container">
-        <div class="logo">Petory</div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="#">Daily Photo Record</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Pet Places</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search">
-                <span class="search-icon">🔍</span>
-            </div>
-            <button class="profile-btn">👤</button>
+<header>
+    <nav>
+        <a href="/" class="logo">PETORY</a>
+        <ul class="nav-links">
+            <li><a href="/community">커뮤니티</a></li>
+            <li><a href="/market">마켓플레이스</a></li>
+            <li><a href="/petPlace">펫플레이스</a></li>
+            <li><a href="/myCalendar">마이페이지</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="/login" class="btn btn-outline">로그인</a>
+            <a href="/login" class="btn btn-primary">회원가입</a>
         </div>
-    </div>
+    </nav>
 </header>
 
 <!-- Main Content -->

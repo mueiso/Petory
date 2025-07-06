@@ -150,6 +150,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
+	public User findUserByIdWithUserStatus(Long userId, UserStatus userStatus) {
+
+		User user = userRepository.findByIdWithUserRoleAndUserStatus(userId, userStatus)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		return user;
+	}
+
+	@Override
 	@Transactional
 	public User findUserByEmail(String email) {
 

@@ -2,7 +2,6 @@ package com.study.petory.domain.user.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserStatus;
 
-public interface UserRepository extends JpaRepository<User, Long>, UserCustomRepository {
+public interface UserRepository extends JpaRepository<User, Long>, UserQueryRepository {
 
 	// UserStatus 가 DEACTIVATED + deletedAt 85일~90일 사이인 사용자 (hard delete 예정자 조회용)
 	List<User> findByUserStatusAndDeletedAtBetween(UserStatus userStatus, LocalDateTime from, LocalDateTime to);

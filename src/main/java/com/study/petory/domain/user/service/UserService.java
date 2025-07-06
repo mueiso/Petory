@@ -4,6 +4,7 @@ import com.study.petory.domain.user.dto.TokenResponseDto;
 import com.study.petory.domain.user.dto.UserUpdateRequestDto;
 import com.study.petory.domain.user.dto.UserProfileResponseDto;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.entity.UserStatus;
 
 public interface UserService {
 
@@ -18,6 +19,8 @@ public interface UserService {
 	void deleteAccount(String email);
 
 	User findUserById(Long userId);
+
+	User findUserByIdWithUserStatus(Long userId, UserStatus userStatus);
 
 	User findUserByEmail(String email);
 }

@@ -81,6 +81,7 @@ public class TradeBoardQueryRepositoryImpl implements TradeBoardQueryRepository 
 		Long total = queryFactory
 			.select(tradeBoard.count())
 			.from(tradeBoard)
+			.join(tradeBoard.user, user)
 			.where(user.id.eq(userId))
 			.fetchOne();
 

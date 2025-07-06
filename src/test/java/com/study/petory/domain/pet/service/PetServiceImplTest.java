@@ -1,0 +1,266 @@
+package com.study.petory.domain.pet.service;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.BDDMockito.*;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.domain.pet.dto.PetCreateRequestDto;
+import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
+import com.study.petory.domain.pet.entity.Pet;
+import com.study.petory.domain.pet.entity.PetSize;
+import com.study.petory.domain.pet.repository.PetRepository;
+import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.service.UserService;
+
+@ExtendWith(MockitoExtension.class)
+class PetServiceImplTest {
+
+	@Mock
+	private UserService userService;
+
+	@Mock
+	private PetRepository petRepository;
+
+	@InjectMocks
+	private PetServiceImpl petService;
+
+	@Test
+	void savePet_등록_성공() {
+
+		/* [given]
+		 * 등록 요청 DTO 생성
+		 */
+		Long userId = 1L;
+		PetCreateRequestDto requestDto = new PetCreateRequestDto("쿠키", PetSize.SMALL, "푸들", "남", "2022-01-01");
+
+		/*
+		 * 유저 mock 객체 생성
+		 * 유저 서비스 호출 시 mockUser 반환
+		 */
+		User mockUser = mock(User.class);
+		given(userService.findUserById(userId)).willReturn(mockUser);
+
+		/*
+		 * 저장될 Pet 객체를 캡처하기 위한 도구
+		 * ArgumentCaptor<Pet>의 역할: PetRepository.save() 메서드가 호출될 때 실제로 전달된 Pet 객체가 뭔지 가로채서 저장해줌
+		 */
+		ArgumentCaptor<Pet> petCaptor = ArgumentCaptor.forClass(Pet.class);
+
+		/* [when]
+		 * 이미지 없이 등록 시도
+		 */
+		petService.savePet(userId, requestDto, null);
+
+		/* [then]
+		 * petRepository.save 호출 확인 및 캡처
+		 * 양방향 연관관계 설정 메서드 호출 확인
+		 * 저장된 Pet 의 name 필드 검증
+		 */
+		verify(petRepository).save(petCaptor.capture());
+		verify(mockUser).addPet(any(Pet.class));
+		assertThat(petCaptor.getValue().getName()).isEqualTo("쿠키");
+	}
+
+	@Test
+	void findAllMyPets_조회_성공() {
+
+		/* [given]
+		 * 테스트 사용자 ID
+		 * 사용자 mock 객체 생성
+		 * Pageable 객체는 실제 값이 중요하지 않으므로 mock 처리
+		 */
+		Long userId = 1L;
+		User mockUser = mock(User.class);
+		Pageable pageable = mock(Pageable.class);
+
+		// 테스트용 Pet 객체 2개 생성 (이름, 사이즈, 유저 정보 포함)
+		Pet pet1 = Pet.builder().name("쿠키").size(PetSize.SMALL).user(mockUser).build();
+		Pet pet2 = Pet.builder().name("초코").size(PetSize.LARGE).user(mockUser).build();
+
+		// Pet 객체들을 리스트로 묶어서 페이징된 Page 객체로 감쌈
+		List<Pet> petList = List.of(pet1, pet2);
+		// 페이징 처리된 결과 흉내내기
+		Page<Pet> petPage = new org.springframework.data.domain.PageImpl<>(petList);
+
+		/*
+		 * userService.findUserById() 호출 시 mockUser 반환되도록 설정 (user 조회)
+		 * petRepository.findAllByUser() 호출 시 petPage 반환되도록 설정 (pet 목록 조회)
+		 */
+		given(userService.findUserById(userId)).willReturn(mockUser);
+		given(petRepository.findAllByUserAndDeletedAtIsNull(mockUser, pageable)).willReturn(petPage);
+
+		/* [when]
+		 * 실제 서비스 메서드 호출
+		 */
+		var result = petService.findAllMyPets(userId, pageable);
+
+		/* [then]
+		 * 총 개수가 2개인지 검증
+		 * 첫 번째 항목 이름이 "쿠키"인지 검증
+		 * 두 번째 항목 이름이 "초코"인지 검증
+		 */
+		assertThat(result.getTotalElements()).isEqualTo(2);
+		assertThat(result.getContent().get(0).getName()).isEqualTo("쿠키");
+		assertThat(result.getContent().get(1).getName()).isEqualTo("초코");
+	}
+
+	@Test
+	void findPet_조회_실패_petNotFound() {
+
+		// given
+		Long userId = 1L;
+		Long petId = 100L;
+
+		// 없는 ID 로 조회 시 빈 Optional 반환
+		given(petRepository.findPetById(petId)).willReturn(Optional.empty());
+
+		/* [when & then]
+		 * 예외 발생 예상
+		 * CustomException 인지 확인
+		 * 에러 메시지 일치 여부 확인
+		 */
+		assertThatThrownBy(() -> petService.findPet(userId, petId))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.PET_NOT_FOUND.getMessage());
+	}
+
+	@Test
+	void findAllMyPets_조회_실패_유저없음() {
+
+		/* [given]
+		 * 존재하지 않는 유저 ID
+		 * 페이징은 mock 처리
+		 */
+		Long userId = 999L;
+		Pageable pageable = mock(Pageable.class);
+
+		// userService 가 해당 ID를 조회했을 때 예외 발생하도록 설정
+		given(userService.findUserById(userId))
+			.willThrow(new CustomException(ErrorCode.USER_NOT_FOUND));
+
+		/* [when & then]
+		 * 예외 발생 코드 검증
+		 */
+		assertThatThrownBy(() -> petService.findAllMyPets(userId, pageable))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_NOT_FOUND.getMessage());
+	}
+
+	@Test
+	void findAllMyPets_조회_결과없음() {
+
+		// [given]
+		Long userId = 1L;
+		User mockUser = mock(User.class);
+		Pageable pageable = mock(Pageable.class);
+
+		// 빈 리스트를 담은 페이징 객체
+		Page<Pet> emptyPage = new PageImpl<>(List.of());
+
+		// 유저 조회는 성공
+		given(userService.findUserById(userId)).willReturn(mockUser);
+		// 조회 결과는 빈 페이지
+		given(petRepository.findAllByUserAndDeletedAtIsNull(mockUser, pageable)).willReturn(emptyPage);
+
+		// [when]
+		var result = petService.findAllMyPets(userId, pageable);
+
+		/* [then]
+		 * 총 요소 0개 확인
+		 * 실제 목록 비어 있는 것 확인
+		 */
+		assertThat(result.getTotalElements()).isZero();
+		assertThat(result.getContent()).isEmpty();
+	}
+
+	@Test
+	void updatePet_수정_실패_소유자아님() {
+
+		// [given]
+		Long userId = 1L;
+		Long petId = 1L;
+		PetUpdateRequestDto requestDto = new PetUpdateRequestDto("수정이름", "여", "2020-01-01");
+
+		/*
+		 * 수정 대상 반려동물 mock 객체
+		 * 해당 ID 로 조회 시 mockPet 반환
+		 * 유저가 소유자 아님으로 설정
+		 */
+		Pet mockPet = mock(Pet.class);
+		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
+		given(mockPet.isPetOwner(userId)).willReturn(false);
+
+		/* [when & then]
+		 * 접근 권한 없음 예외 확인
+		 */
+		assertThatThrownBy(() -> petService.updatePet(userId, petId, requestDto, null))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.FORBIDDEN.getMessage());
+	}
+
+	@Test
+	void deletePet_삭제_성공() {
+
+		/* [given]
+		 * userId 설정
+		 * petId 설정
+		 * 삭제할 반려동물 mock
+		 * DB 에서 찾았다고 가정
+		 * 사용자 소유 확인
+		 * 이미지 없다고 가정 (단순화)
+		 */
+		Long userId = 1L;
+		Long petId = 1L;
+		Pet mockPet = mock(Pet.class);
+		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
+		given(mockPet.isPetOwner(userId)).willReturn(true);
+		given(mockPet.getImages()).willReturn(List.of());
+
+		// [when]
+		petService.deletePet(userId, petId);
+
+		/* [then]
+		 * soft delete 메서드 호출되었는지 확인
+		 */
+		verify(mockPet).deactivateEntity();
+	}
+
+	@Test
+	void restorePet_복구_실패_notDeleted() {
+
+		/* [given]
+		 * userId 설정
+		 * petId 설정
+		 * 복구할 반려동물 mock
+		 * DB 에서 찾았다고 가정
+		 * 삭제된 상태가 아님
+		 */
+		Long userId = 1L;
+		Long petId = 1L;
+		Pet mockPet = mock(Pet.class);
+		given(petRepository.findPetById(petId)).willReturn(Optional.of(mockPet));
+		given(mockPet.isDeletedAtNull()).willReturn(true);
+
+		/* [when & then]
+		 * 복구 시도
+		 * 이미 삭제되지 않은 상태에서 예외 발생 확인
+		 */
+		assertThatThrownBy(() -> petService.restorePet(userId, petId))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.PET_NOT_DELETED.getMessage());
+	}
+}

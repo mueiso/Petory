@@ -36,6 +36,7 @@ public enum ErrorCode implements BaseCode {
 	LOGIN_UNAVAILABLE(HttpStatus.FORBIDDEN, "로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다."),
 	ALREADY_SUSPENDED(HttpStatus.BAD_REQUEST, "이미 정지된 계정입니다."),
 	USER_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 유저가 아닙니다."),
+	USER_NOT_SUSPENDED(HttpStatus.BAD_REQUEST, "계정 정지된 유저가 아닙니다."),
 	USER_ALREADY_DELETED(HttpStatus.BAD_REQUEST, "이미 탈퇴한 계정입니다."),
 	USER_NOT_EXISTING(HttpStatus.BAD_REQUEST, "휴면 계정이거나, 탈퇴한 유저입니다."),
 
@@ -49,8 +50,8 @@ public enum ErrorCode implements BaseCode {
 	ALBUM_IMAGE_SIZE_OVER(HttpStatus.BAD_REQUEST, "한 번에 등록하실 수 있는 이미지 수량을 초과했습니다."),
 	ALREADY_SAVED_ALBUM_TODAY(HttpStatus.BAD_REQUEST, "오늘은 이미 데일리 앨범을 등록하였습니다."),
 
-	// Calender
-	CALENDER_NOT_FOUND(HttpStatus.NOT_FOUND, "캘린더가 존재하지 않습니다."),
+	// Event
+	EVENT_IS_NOT_FOUND(HttpStatus.NOT_FOUND, "일정이 존재하지 않습니다."),
 
 	// DailyQna
 	DAILY_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "질의 응답이 존재하지 않습니다."),
@@ -59,12 +60,6 @@ public enum ErrorCode implements BaseCode {
 	DAILY_QNA_IS_NOT_HIDDEN(HttpStatus.BAD_REQUEST, "숨겨진 질문이 아닙니다."),
 	DAILY_QNA_IS_DELETED(HttpStatus.BAD_REQUEST, "이미 삭제된 질문입니다."),
 	DAILY_QNA_IS_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제된 질문이 아닙니다."),
-
-	// Faq
-	FAQ_QNA_NOT_FOUND(HttpStatus.NOT_FOUND, "자주 찾는 질문은 존재하지 않습니다."),
-
-	// Feedback
-	FEEDBACK_NOT_FOUND(HttpStatus.NOT_FOUND, "피드백이 존재하지 않습니다."),
 
 	// OwnerBoard
 	OWNER_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "글이 존재하지 않습니다."),

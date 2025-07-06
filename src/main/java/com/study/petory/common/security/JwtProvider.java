@@ -29,13 +29,6 @@ public class JwtProvider {
 
 	private final RedisTemplate<String, String> loginRefreshToken;
 
-	public JwtProvider(
-		@Qualifier("loginRefreshToken")
-		RedisTemplate<String, String> loginRefreshToken) {
-
-		this.loginRefreshToken = loginRefreshToken;
-	}
-
 	/*
 	 * 이 토큰을 가진 자 (=Bearer)가 인증된 사용자라는 의미의 표준 헤더 형식
 	 * JWT 앞에 붙여서 인증 토큰임을 명시
@@ -49,9 +42,11 @@ public class JwtProvider {
 	 * 15분 * 60초 * 1000밀리초 = 900,000밀리초 = 15분
 	 * 7일 * 24시간 * 60분 * 60초 * 1000밀리초 = 604,800,000밀리초 = 7일
 	 */
-	private static final long accessTokenLife = 60 * 60 * 1000L;  // 1시간
-	// private static final long accessTokenLife = 15 * 60 * 1000L;  // 15분
-	private static final long refreshTokenLife = 7 * 24 * 60 * 60 * 1000L;  // 7일
+	@Value("${jwt.access-token-valid-time}")
+	private long accessTokenLife;
+
+	@Value("${jwt.refresh-token-valid-time}")
+	private long refreshTokenLife;
 
 	/*
 	 * @Value : 외부 설정값 주입받기 위해 사용
@@ -193,6 +188,11 @@ public class JwtProvider {
 		}
 	}
 
+	// Redis 키 네이밍: "RT:{userId}"
+	private String getRefreshTokenKey(Long userId) {
+		return "RT:" + userId;
+	}
+
 	/*
 	 * Redis 에 userId를 키로 하여 Refresh Token 을 저장
 	 * Redis TTL(Time-To-Live)은 7일 → 자동 만료
@@ -217,7 +217,7 @@ public class JwtProvider {
 	// 로그아웃 시 Redis 에서 해당 사용자의 Refresh Token 삭제
 	public void deleteRefreshToken(Long userId) {
 
-		loginRefreshToken.delete(String.valueOf(userId));
+		loginRefreshToken.delete(getRefreshTokenKey(userId));
 	}
 
 	/*
@@ -226,7 +226,7 @@ public class JwtProvider {
 	 */
 	public boolean isValidRefreshToken(Long userId, String refreshToken) {
 
-		String saved = loginRefreshToken.opsForValue().get(String.valueOf(userId));
+		String saved = loginRefreshToken.opsForValue().get(getRefreshTokenKey(userId));
 		return saved != null && saved.equals(refreshToken);
 	}
 
@@ -234,7 +234,7 @@ public class JwtProvider {
 	public boolean isAccessTokenExpired(String token) {
 		try {
 			getClaims(token);
-			return false; // 예외 없이 Claims 얻었으면 유효
+			return false;  // 예외 없이 Claims 얻었으면 유효
 		} catch (CustomException ex) {
 			if (ex.getErrorCode() == ErrorCode.EXPIRED_TOKEN) {
 				return true;
@@ -263,5 +263,12 @@ public class JwtProvider {
 		}
 
 		return List.of();  // roles 클레임이 없거나 비어 있으면 빈 리스트
+	}
+
+	public JwtProvider(
+		@Qualifier("loginRefreshToken")
+		RedisTemplate<String, String> loginRefreshToken) {
+
+		this.loginRefreshToken = loginRefreshToken;
 	}
 }

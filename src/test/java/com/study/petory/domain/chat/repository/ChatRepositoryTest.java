@@ -1,6 +1,5 @@
 package com.study.petory.domain.chat.repository;
 
-import static com.mysema.commons.lang.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -45,6 +44,9 @@ class ChatRepositoryTest {
 		//then
 		assertEquals(1, chatRooms.size());
 		assertEquals(1L, chatRooms.get(0).getTradeBoardId());
+		assertEquals(1L, chatRooms.get(0).getSellerId());
 		assertEquals(2L, chatRooms.get(0).getCustomerId());
+		assertTrue(chatRooms.get(0).isSellerExist());
+		assertTrue(chatRooms.get(0).isCustomerExist());
 	}
 }

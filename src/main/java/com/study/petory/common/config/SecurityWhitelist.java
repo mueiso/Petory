@@ -20,10 +20,7 @@ public class SecurityWhitelist {
 		this.urlWhitelist = List.of(
 			"/auth/reissue",
 			"/users/test-login",
-			"/login.html",
 			"/favicon.ico",
-			"/map.html",
-			"/chat.html",
 			"/ws-chat",
 			"/ws-chat/**",
 			"/test/**",
@@ -31,7 +28,26 @@ public class SecurityWhitelist {
 			"/petory.ico",
 			"/actuator/prometheus",
 			"/place-search-pet.png",
+
+			"/",
+			"/login",
+			"/petPlace",
+			"/community",
+			"/market",
+			"/myCalendar",
+			"/login.html",
+			"/index.html",
+			"/community.html",
+			"/community-new.html",
+			"/chat.html",
+			"/market.html",
+			"/market-detail.html",
+			"/map.html",
 			"/calendar.html",
+
+			"/images/**",
+			"/static/**",          // 정적 리소스들 (HTML, CSS, JS, 이미지 등 모두 포함)
+
 			"/actuator/health"
 		);
 

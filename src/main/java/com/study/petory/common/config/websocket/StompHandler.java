@@ -21,7 +21,6 @@ import com.study.petory.common.security.JwtProvider;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
-//웹소켓은 HTTP 필터를 타지 않기때문에 따로 검증해주는 클래스
 @Configuration
 @RequiredArgsConstructor
 public class StompHandler implements ChannelInterceptor {
@@ -31,12 +30,11 @@ public class StompHandler implements ChannelInterceptor {
 	@Override
 	public Message<?> preSend(Message<?> message, MessageChannel channel) {
 
-		//stompCommand 확인할 수 있도록 랩핑
 		StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
 		StompCommand command = accessor.getCommand();
 
-		//command 값이 CONNECT 라면 인증 정보 설정
+		//command 값이 CONNECT라면 인증 정보 설정
 		if (StompCommand.CONNECT.equals(command)) {
 
 			String token = accessor.getFirstNativeHeader("Authorization");
@@ -57,7 +55,6 @@ public class StompHandler implements ChannelInterceptor {
 
 			CustomPrincipal principal = new CustomPrincipal(userId, email, nickname, authorities);
 
-			//웹소켓 세션에 사용자 정보 저장
 			accessor.getSessionAttributes().put("user", principal);
 			accessor.setUser(principal);
 

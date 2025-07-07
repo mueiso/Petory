@@ -1,7 +1,6 @@
 package com.study.petory.common.scheduler;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -11,10 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.study.petory.domain.notification.entity.Notification;
 import com.study.petory.domain.notification.repository.NotificationRepository;
-import com.study.petory.domain.user.entity.User;
-import com.study.petory.domain.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

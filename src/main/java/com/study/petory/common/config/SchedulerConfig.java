@@ -21,7 +21,6 @@ public class SchedulerConfig implements SchedulingConfigurer {
 		threadPoolTaskScheduler.setThreadNamePrefix("scheduler-");
 		threadPoolTaskScheduler.initialize();
 
-		//설정한 스레드 풀 등록 -> @Scheduler 어노테이션 사용시 해당 스레드 풀을 이용하게 됨
 		taskRegistrar.setTaskScheduler(threadPoolTaskScheduler);
 	}
 }

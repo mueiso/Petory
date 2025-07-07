@@ -70,7 +70,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto,
 		List<MultipartFile> images) {
 
-		//나중에 토큰으로 값을 받아올 예정
 		User user = findUser(userId);
 
 		TradeBoard tradeBoard = TradeBoard.builder()
@@ -80,7 +79,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 			.price(requestDto.getPrice())
 			.build();
 
-		// 연관관계 설정 (주인 + 반대편 모두)
 		user.addTradeBoard(tradeBoard);
 
 		tradeBoardRepository.save(tradeBoard);
@@ -146,7 +144,6 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 	@Transactional
 	public void updateTradeBoardStatus(Long userId, Long tradeBoardId, TradeBoardStatus status) {
 
-		//토큰 값으로 변경 예정
 		User user = findUser(userId);
 
 		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
@@ -173,7 +170,7 @@ public class TradeBoardServiceImpl implements TradeBoardService {
 		}
 	}
 
-	//게시글 내 사진 삭제
+	//게시글 사진 삭제
 	@Override
 	@Transactional
 	public void deleteImage(Long userId, Long tradeBoardId, Long imageId) {

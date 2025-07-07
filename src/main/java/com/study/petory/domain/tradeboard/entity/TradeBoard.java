@@ -3,8 +3,6 @@ package com.study.petory.domain.tradeboard.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.Where;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.study.petory.common.entity.TimeFeatureBasedEntity;
 import com.study.petory.domain.tradeboard.dto.request.TradeBoardUpdateRequestDto;
@@ -31,7 +29,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tb_trade_board")
 @NoArgsConstructor
-@Where(clause = "status != 'DELETED'")
 public class TradeBoard extends TimeFeatureBasedEntity {
 
 	@Id

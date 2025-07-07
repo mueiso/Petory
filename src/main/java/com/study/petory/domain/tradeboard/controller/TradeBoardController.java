@@ -47,9 +47,11 @@ public class TradeBoardController {
 	private final TradeBoardService tradeBoardService;
 
 	/**
-	 * 게시글 등록
-	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
-	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일 반환
+	 * 게시글 생성
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param requestDto 카테고리, 제목, 내용, 가격
+	 * @param images 거래 물품 사진
+	 * @return 게시글Id, 카테고리, 제목, 내용, 가격, 이미지url, 생성일
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -63,10 +65,10 @@ public class TradeBoardController {
 	}
 
 	/**
-	 * 게시글 전체 조회
-	 * @param category 카테고리 (nullable)
-	 * @param pageable 조회하려는 페이지
-	 * @return 조회된 게시글 반환
+	 * 게시글 전체조회
+	 * @param category 조회하려는 카테고리
+	 * @param pageable 페이징 정보
+	 * @return 페이징된 게시글 리스트(게시글Id, 작성자 닉네임, 제목, 내용, 가격, 이미지url)
 	 */
 	@GetMapping
 	public ResponseEntity<CommonResponse<Page<TradeBoardGetAllResponseDto>>> getAllTradeBoard(
@@ -78,8 +80,8 @@ public class TradeBoardController {
 
 	/**
 	 * 게시글 단건 조회
-	 * @param tradeBoardId 조회하려는 게시글 id
-	 * @return 해당 게시글 반환
+	 * @param tradeBoardId 게시글Id
+	 * @return 게시글Id, 판매자Id, 제목, 내용, 가격, 이미지url, 생성일, 수정일
 	 */
 	@GetMapping("/{tradeBoardId}")
 	public ResponseEntity<CommonResponse<TradeBoardGetResponseDto>> getByTradeBoardId(
@@ -90,8 +92,9 @@ public class TradeBoardController {
 
 	/**
 	 * 유저별 게시글 조회
-	 * @param pageable 조회하려는 페이지
-	 * @return 조회된 게시글 반환
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param pageable 페이징 정보
+	 * @return 페이징된 게시글 리스트(게시글Id, 작성자 닉네임, 제목, 내용, 가격, 이미지url)
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/my-board")
@@ -104,9 +107,10 @@ public class TradeBoardController {
 
 	/**
 	 * 게시글 수정
-	 * @param tradeBoardId 수정하려는 게시글 id
-	 * @param requestDto 카테고리, 제목, 내용, 사진, 금액
-	 * @return id, 카테고리, 제목, 내용, 사진, 금액, 생성일, 수정일 반환
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param tradeBoardId 게시글Id
+	 * @param requestDto 수정하려는 정보(카테고리, 제목, 내용, 가격)
+	 * @return 게시글Id, 카테고리, 제목, 내용, 가격, 이미지url, 생성일, 수정일
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/{tradeBoardId}")
@@ -121,9 +125,10 @@ public class TradeBoardController {
 
 	/**
 	 * 게시글 상태 변경
-	 * @param tradeBoardId 변경하려는 게시글
-	 * @param status 변경하려는 상태값
-	 * @return 변환 성공 메시지
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param tradeBoardId 게시글Id
+	 * @param status 게시글 상태
+	 * @return 200 응답
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PatchMapping("/{tradeBoardId}")
@@ -137,11 +142,11 @@ public class TradeBoardController {
 	}
 
 	/**
-	 * 사진 추가
-	 * @param currentUser 로그인한 유저
-	 * @param tradeBoardId 게시글
+	 * 게시글 사진 추가
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param tradeBoardId 게시글Id
 	 * @param images 추가하려는 사진
-	 * @return 수정한 게시글
+	 * @return 200 응답
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping(value = "/{tradeBoardId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -155,10 +160,11 @@ public class TradeBoardController {
 	}
 
 	/**
-	 * 사진 삭제
-	 * @param tradeBoardId 사진 삭제를 진행할 게시글
-	 * @param imageId 삭제하려는 사진 아이디
-	 * @return 삭제 성공 메시지
+	 * 게시글 사진 삭제
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param tradeBoardId 게시글Id
+	 * @param imageId 이미지Id
+	 * @return 200응답
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{tradeBoardId}/images/{imageId}")

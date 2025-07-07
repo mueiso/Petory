@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.petory.common.exception.enums.SuccessCode;
 import com.study.petory.common.response.CommonResponse;
 import com.study.petory.common.security.CustomPrincipal;
 import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
@@ -30,7 +31,6 @@ import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
 import com.study.petory.domain.chat.dto.response.PresignedUrlResponseDto;
 import com.study.petory.domain.chat.entity.ChatMessage;
 import com.study.petory.domain.chat.service.ChatService;
-import com.study.petory.common.exception.enums.SuccessCode;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,15 +43,16 @@ public class ChatController {
 	private final SimpMessagingTemplate messagingTemplate;
 
 	/**
-	 * 메시지 보내기
-	 * @param requestDto 채팅방 아이디, 판매자 아이디, 보내려는 메시지
+	 *
+	 * @param principal 로그인된 사용자 정보
+	 * @param requestDto 채팅방Id, 메시지 타입, 내용
 	 */
 	@MessageMapping("/message")
 	public void sendMessage(
 		Principal principal,
 		@Payload MessageSendRequestDto requestDto
 	) {
-		CustomPrincipal currentUser = (CustomPrincipal) principal;
+		CustomPrincipal currentUser = (CustomPrincipal)principal;
 		ChatMessage message = chatService.createMessage(currentUser.getId(), requestDto);
 
 		messagingTemplate.convertAndSend("/sub/room/" + requestDto.getChatRoomId(), message);
@@ -71,8 +72,9 @@ public class ChatController {
 
 	/**
 	 * 채팅방 생성
-	 * @param tradeBoardId 게시글 아이디
-	 * @return 채팅방 아이디, 게시글 아이디, 구매.판매자 아이디
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param tradeBoardId 거래하려는 게시글Id
+	 * @return 채팅방Id, 게시글Id, 판매자Id, 구매자Id
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping({"/{tradeBoardId}"})
@@ -85,8 +87,9 @@ public class ChatController {
 
 	/**
 	 * 채팅방 전체 조회
-	 * @param pageable
-	 * @return 채팅방 아이디, 상대방 아이디
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param pageable 페이징 정보
+	 * @return 채팅방Id, 상대방Id
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping
@@ -99,8 +102,9 @@ public class ChatController {
 
 	/**
 	 * 채팅방 단건 조회
-	 * @param chatRoomId 조회하려는 채팅방 아이디
-	 * @return 게시판 아이디, 판매.구매자 아이디, 메시지 리스트
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param chatRoomId 조회하려는 채팅방Id
+	 * @return 게시글Id, 판매자Id, 구매자Id, 채팅 목록
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/{chatRoomId}")
@@ -113,8 +117,9 @@ public class ChatController {
 
 	/**
 	 * 채팅방 나가기
-	 * @param chatRoomId 나가려는 방 아이디
-	 * @return 성공 코드
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param chatRoomId 채팅방Id
+	 * @return 200 응답 반환
 	 */
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/{chatRoomId}")

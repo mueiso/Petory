@@ -30,8 +30,6 @@ public class RecurrenceService {
 	private static final String RDATE = "RDATE";
 	private static final String EXDATE = "EXDATE";
 
-
-
 	// 반복 일정의 시작일 List 생성
 	public List<LocalDateTime> getInstanceStartTimeList(Event event, LocalDateTime start, LocalDateTime end) {
 		VEvent vEvent = createVEvent(event);
@@ -55,7 +53,6 @@ public class RecurrenceService {
 			end = event.getEndDate();
 		}
 		DateTime endDate = new DateTime(CustomDateUtil.toDateTime(end));
-
 
 		VEvent vEvent = new VEvent(startDate, endDate, event.getTitle());
 

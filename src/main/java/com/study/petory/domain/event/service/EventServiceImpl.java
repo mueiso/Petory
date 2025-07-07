@@ -1,0 +1,154 @@
+package com.study.petory.domain.event.service;
+
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.common.util.CustomDateUtil;
+import com.study.petory.domain.event.dto.request.EventCreateRequestDto;
+import com.study.petory.domain.event.dto.request.EventUpdateRequestDto;
+import com.study.petory.domain.event.dto.response.EventCreateResponseDto;
+import com.study.petory.domain.event.dto.response.EventGetOneResponseDto;
+import com.study.petory.domain.event.dto.response.EventInstanceGetResponseDto;
+import com.study.petory.domain.event.dto.response.EventUpdateResponseDto;
+import com.study.petory.domain.event.entity.Event;
+import com.study.petory.domain.event.entity.EventInstance;
+import com.study.petory.domain.event.entity.RecurrenceInfo;
+import com.study.petory.domain.event.repository.EventRepository;
+import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class EventServiceImpl implements EventService {
+
+	private final EventRepository eventRepository;
+	private final UserService userService;
+	private final RecurrenceService recurrenceService;
+
+	// 일정 조회
+	@Override
+	public Event findEventById(Long eventId) {
+		return eventRepository.findById(eventId)
+			.orElseThrow(() -> new CustomException(ErrorCode.EVENT_IS_NOT_FOUND));
+	}
+
+	// 이벤트 생성
+	@Override
+	@Transactional
+	public EventCreateResponseDto saveEvent(Long userId, EventCreateRequestDto request) {
+		User user = userService.findUserById(userId);
+
+		LocalDateTime endDate = CustomDateUtil.stringToLocalDateTime(request.getEndDate());
+		if (request.getIsAllDay()) {
+			endDate = endDate.plusDays(1);
+		}
+		RecurrenceInfo info = recurrenceService.getRecurrence(request.getRecurrence());
+
+		Event event = Event.builder()
+			.user(user)
+			.title(request.getTitle())
+			.startDate(CustomDateUtil.stringToLocalDateTime(request.getStartDate()))
+			.endDate(endDate)
+			.timeZone(request.getTimeZone())
+			.isAllDay(request.getIsAllDay())
+			.rrule(info.getRrule())
+			.recurrenceEnd(info.getRecurrenceEnd())
+			.rDate(info.getRDate())
+			.exDate(info.getExDate())
+			.description(request.getDescription())
+			.color(request.getColor())
+			.build();
+
+		Event savedEvent = eventRepository.save(event);
+		return EventCreateResponseDto.from(savedEvent);
+	}
+
+	// 일정 범위 조회
+	@Override
+	@Transactional
+	public List<EventInstanceGetResponseDto> findEvents(Long userId, String start, String end) {
+		LocalDateTime startDate = CustomDateUtil.stringToLocalDateTime(start);
+		LocalDateTime endDate = CustomDateUtil.stringToLocalDateTime(end);
+
+		List<Event> eventList = eventRepository.findEventListStart(userId, startDate, endDate);
+
+		return eventList.stream()
+			.flatMap(event -> {
+				if (event.getRrule() == null) {
+					EventInstance instanceEvent = EventInstance.createInstanceEvent(event, null);
+					return Stream.of(EventInstanceGetResponseDto.from(instanceEvent));
+				} else {
+					List<LocalDateTime> instanceTimeList = recurrenceService.getInstanceStartTimeList(event, startDate, endDate);
+					return instanceTimeList.stream()
+						.map(instanceTime -> {
+								EventInstance instanceEvent = EventInstance.createInstanceEvent(event, instanceTime);
+								return EventInstanceGetResponseDto.from(instanceEvent);
+							}
+						);
+				}
+			})
+			.sorted(Comparator.comparing(EventInstanceGetResponseDto::getStartDate))
+			.collect(Collectors.toList());
+	}
+
+	// 일정 단일 조회
+	@Override
+	@Transactional
+	public EventGetOneResponseDto findOneEvent(Long eventId) {
+		Event event = findEventById(eventId);
+		EventInstance instanceEvent = EventInstance.createInstanceEvent(event, null);
+		return EventGetOneResponseDto.from(instanceEvent);
+	}
+
+	// 일정 수정
+	@Override
+	@Transactional
+	public EventUpdateResponseDto updateEvent(Long userId, Long eventId, EventUpdateRequestDto request) {
+		Event event = findEventById(eventId);
+		validUser(userId, event);
+
+		RecurrenceInfo info = recurrenceService.getRecurrence(request.getRecurrence());
+
+		event.updateEvent(
+			request.getTitle(),
+			CustomDateUtil.stringToLocalDateTime(request.getStartDate()),
+			CustomDateUtil.stringToLocalDateTime(request.getEndDate()),
+			request.getTimeZone(),
+			request.getIsAllDay(),
+			info.getRrule(),
+			info.getRecurrenceEnd(),
+			info.getRDate(),
+			info.getExDate(),
+			request.getDescription(),
+			request.getColor()
+		);
+
+		return EventUpdateResponseDto.from(event);
+	}
+
+	// 일정 삭제
+	@Override
+	@Transactional
+	public void deleteEvent(Long userId, Long eventId) {
+		Event event = findEventById(eventId);
+		validUser(userId, event);
+		eventRepository.deleteById(eventId);
+	}
+
+	// 작성자 검증
+	public void validUser(Long userId, Event event) {
+		if (!event.isEqualUser(userId)) {
+			throw new CustomException(ErrorCode.ONLY_AUTHOR_CAN_EDIT);
+		}
+	}
+}

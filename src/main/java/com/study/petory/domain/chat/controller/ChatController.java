@@ -1,0 +1,135 @@
+package com.study.petory.domain.chat.controller;
+
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.study.petory.common.exception.enums.SuccessCode;
+import com.study.petory.common.response.CommonResponse;
+import com.study.petory.common.security.CustomPrincipal;
+import com.study.petory.domain.chat.dto.request.MessageSendRequestDto;
+import com.study.petory.domain.chat.dto.request.PresignedUrlRequestDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomCreateResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetAllResponseDto;
+import com.study.petory.domain.chat.dto.response.ChatRoomGetResponseDto;
+import com.study.petory.domain.chat.dto.response.PresignedUrlResponseDto;
+import com.study.petory.domain.chat.entity.ChatMessage;
+import com.study.petory.domain.chat.service.ChatService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/chat")
+@RequiredArgsConstructor
+public class ChatController {
+
+	private final ChatService chatService;
+	private final SimpMessagingTemplate messagingTemplate;
+
+	/**
+	 *
+	 * @param principal 로그인된 사용자 정보
+	 * @param requestDto 채팅방Id, 메시지 타입, 내용
+	 */
+	@MessageMapping("/message")
+	public void sendMessage(
+		Principal principal,
+		@Payload MessageSendRequestDto requestDto
+	) {
+		CustomPrincipal currentUser = (CustomPrincipal)principal;
+		ChatMessage message = chatService.createMessage(currentUser.getId(), requestDto);
+
+		messagingTemplate.convertAndSend("/sub/room/" + requestDto.getChatRoomId(), message);
+	}
+
+	/**
+	 * presigned url 생성
+	 * @param requestDto 채팅방 아이디, 파일 이름, 파일 타입
+	 * @return 업로드할 url, 파일 url
+	 */
+	@PostMapping("/image")
+	public ResponseEntity<CommonResponse<PresignedUrlResponseDto>> getPresignedUrl(
+		@RequestBody PresignedUrlRequestDto requestDto
+	) {
+		return CommonResponse.of(SuccessCode.CREATED, chatService.createPresignedUrl(requestDto));
+	}
+
+	/**
+	 * 채팅방 생성
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param tradeBoardId 거래하려는 게시글Id
+	 * @return 채팅방Id, 게시글Id, 판매자Id, 구매자Id
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PostMapping({"/{tradeBoardId}"})
+	public ResponseEntity<CommonResponse<ChatRoomCreateResponseDto>> createChatRoom(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable Long tradeBoardId
+	) {
+		return CommonResponse.of(SuccessCode.CREATED, chatService.saveChatRoom(currentUser.getId(), tradeBoardId));
+	}
+
+	/**
+	 * 채팅방 전체 조회
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param pageable 페이징 정보
+	 * @return 채팅방Id, 상대방Id
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@GetMapping
+	public ResponseEntity<CommonResponse<List<ChatRoomGetAllResponseDto>>> getAllChatRoom(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, chatService.findAllChatRoom(currentUser.getId(), pageable));
+	}
+
+	/**
+	 * 채팅방 단건 조회
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param chatRoomId 조회하려는 채팅방Id
+	 * @return 게시글Id, 판매자Id, 구매자Id, 채팅 목록
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@GetMapping("/{chatRoomId}")
+	public ResponseEntity<CommonResponse<ChatRoomGetResponseDto>> getByChatRoomId(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable String chatRoomId
+	) {
+		return CommonResponse.of(SuccessCode.FOUND, chatService.findChatRoomById(currentUser.getId(), chatRoomId));
+	}
+
+	/**
+	 * 채팅방 나가기
+	 * @param currentUser 로그인된 사용자 정보
+	 * @param chatRoomId 채팅방Id
+	 * @return 200 응답 반환
+	 */
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@DeleteMapping("/{chatRoomId}")
+	public ResponseEntity<CommonResponse<Void>> leaveChatRoom(
+		@AuthenticationPrincipal CustomPrincipal currentUser,
+		@PathVariable String chatRoomId
+	) {
+		chatService.leaveChatRoomById(currentUser.getId(), chatRoomId);
+
+		return CommonResponse.of(SuccessCode.DELETED);
+	}
+
+}

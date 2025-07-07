@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>계정 삭제 예정 안내</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+<h2 style="color: #e74c3c;">⚠️ Petory 계정 삭제 예정 안내</h2>
+
+<p><strong th:text="${name}">사용자</strong> 님, 안녕하세요.</p>
+
+<p>
+  회원님의 계정은 <strong th:text="${deactivatedDate}">2024-01-01</strong>에 비활성화되었으며,<br>
+  <strong th:text="${deletionDate}">2024-04-01</strong>에 자동으로 계정이 삭제될 예정입니다.
+</p>
+
+<p>삭제를 원하지 않으신다면, 그 전에 <strong>로그인</strong>하셔서 계정을 복구해주시기 바랍니다.</p>
+
+<p style="color: #e74c3c;"><strong>❗계정이 삭제되면 저장된 정보는 모두 복구할 수 없습니다.❗</strong></p>
+
+<br>
+<p>감사합니다.<br>Petory 드림</p>
+
+<hr style="margin-top: 40px;">
+<footer style="font-size: 12px; color: #888;">
+  ※ 본 메일은 발신 전용입니다. 문의는 Petory 고객센터를 이용해주세요.
+</footer>
+</body>
+</html>

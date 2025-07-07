@@ -1,0 +1,187 @@
+package com.study.petory.domain.tradeboard.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.study.petory.common.exception.CustomException;
+import com.study.petory.common.exception.enums.ErrorCode;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardCreateRequestDto;
+import com.study.petory.domain.tradeboard.dto.request.TradeBoardUpdateRequestDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardCreateResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetAllResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardGetResponseDto;
+import com.study.petory.domain.tradeboard.dto.response.TradeBoardUpdateResponseDto;
+import com.study.petory.domain.tradeboard.entity.TradeBoard;
+import com.study.petory.domain.tradeboard.entity.TradeBoardImage;
+import com.study.petory.domain.tradeboard.entity.TradeBoardStatus;
+import com.study.petory.domain.tradeboard.entity.TradeCategory;
+import com.study.petory.domain.tradeboard.repository.TradeBoardRepository;
+import com.study.petory.domain.user.entity.Role;
+import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class TradeBoardServiceImpl implements TradeBoardService {
+
+	private final TradeBoardRepository tradeBoardRepository;
+	private final UserRepository userRepository;
+	private final TradeBoardImageService tradeBoardImageService;
+
+	public User findUser(Long userId) {
+		return userRepository.findById(userId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+	}
+
+	//tradeBoardId로 tradeboard 조회
+	public TradeBoard findTradeBoard(Long tradeBoardId) {
+		return tradeBoardRepository.findById(tradeBoardId)
+			.orElseThrow(() -> new CustomException(ErrorCode.TRADE_BOARD_NOT_FOUND));
+	}
+
+	public List<String> imageToUrlList(TradeBoard tradeBoard) {
+		if (!tradeBoard.getImages().isEmpty()) {
+			return tradeBoard.getImages().stream()
+				.map(TradeBoardImage::getUrl)
+				.toList();
+		}
+		return List.of();
+	}
+
+	public void validateOwner(TradeBoard tradeBoard, User user) {
+		if (tradeBoard.getUser() == null || !tradeBoard.isOwner(user.getId())) {
+			if (!user.hasRole(Role.ADMIN)) {
+				throw new CustomException(ErrorCode.FORBIDDEN);
+			}
+		}
+	}
+
+	//게시글 생성
+	@Override
+	@Transactional
+	public TradeBoardCreateResponseDto saveTradeBoard(Long userId, TradeBoardCreateRequestDto requestDto,
+		List<MultipartFile> images) {
+
+		User user = findUser(userId);
+
+		TradeBoard tradeBoard = TradeBoard.builder()
+			.category(requestDto.getCategory())
+			.title(requestDto.getTitle())
+			.content(requestDto.getContent())
+			.price(requestDto.getPrice())
+			.build();
+
+		user.addTradeBoard(tradeBoard);
+
+		tradeBoardRepository.save(tradeBoard);
+
+		List<String> urls = new ArrayList<>();
+		if (images != null && !images.isEmpty()) {
+			urls = tradeBoardImageService.uploadAndSaveAll(images, tradeBoard);
+		}
+
+		return new TradeBoardCreateResponseDto(tradeBoard, urls);
+	}
+
+	//게시글 전체 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<TradeBoardGetAllResponseDto> findAllTradeBoard(TradeCategory category, Pageable pageable) {
+
+		Page<TradeBoard> tradeBoards = tradeBoardRepository.findAll(category, pageable);
+
+		return tradeBoards.map(TradeBoardGetAllResponseDto::new);
+	}
+
+	//게시글 단건 조회
+	@Override
+	@Transactional(readOnly = true)
+	public TradeBoardGetResponseDto findByTradeBoardId(Long tradeBoardId) {
+
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+		List<String> urls = imageToUrlList(tradeBoard);
+
+		return new TradeBoardGetResponseDto(tradeBoard, urls);
+	}
+
+	// 유저별 게시글 조회
+	@Override
+	@Transactional(readOnly = true)
+	public Page<TradeBoardGetAllResponseDto> findByUser(Long userId, Pageable pageable) {
+
+		Page<TradeBoard> tradeBoards = tradeBoardRepository.findByUserId(userId, pageable);
+
+		return tradeBoards.map(TradeBoardGetAllResponseDto::new);
+	}
+
+	//게시글 수정
+	@Override
+	@Transactional
+	public TradeBoardUpdateResponseDto updateTradeBoard(Long userId, Long tradeBoardId,
+		TradeBoardUpdateRequestDto requestDto) {
+
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+
+		User user = findUser(userId);
+
+		validateOwner(tradeBoard, user);
+
+		tradeBoard.updateTradeBoard(requestDto);
+
+		return new TradeBoardUpdateResponseDto(tradeBoard);
+	}
+
+	//게시글 상태 업데이트
+	@Override
+	@Transactional
+	public void updateTradeBoardStatus(Long userId, Long tradeBoardId, TradeBoardStatus status) {
+
+		User user = findUser(userId);
+
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+
+		validateOwner(tradeBoard, user);
+
+		tradeBoard.updateStatus(status);
+	}
+
+	//사진 추가
+	@Override
+	@Transactional
+	public void addImages(Long userId, Long tradeBoardId, List<MultipartFile> images) {
+
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+		User user = findUser(userId);
+
+		validateOwner(tradeBoard, user);
+
+		List<TradeBoardImage> imageEntities = tradeBoardImageService.uploadAndReturnEntities(images, tradeBoard);
+
+		for (TradeBoardImage image : imageEntities) {
+			tradeBoard.addImage(image);
+		}
+	}
+
+	//게시글 사진 삭제
+	@Override
+	@Transactional
+	public void deleteImage(Long userId, Long tradeBoardId, Long imageId) {
+
+		TradeBoard tradeBoard = findTradeBoard(tradeBoardId);
+		User user = findUser(userId);
+
+		validateOwner(tradeBoard, user);
+
+		TradeBoardImage image = tradeBoardImageService.findImageById(imageId);
+
+		tradeBoardImageService.deleteImageInternal(image);
+	}
+}

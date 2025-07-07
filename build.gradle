@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.0'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'checkstyle'
 }
 
 group = 'com.study'
@@ -25,17 +26,108 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+    implementation 'software.amazon.awssdk:s3:2.20.122'
+    testRuntimeOnly 'com.h2database:h2'
+
+    // 테스트용 의존성
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+    // H2 인메모리 DB (테스트용 DB로 꼭 필요)
+    testRuntimeOnly 'com.h2database:h2'
+    // IDE 에서 개별 테스트 실행 시 필요
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'software.amazon.awssdk:s3:2.20.122'
+
+    // .env 등록을 위한 의존성
+    implementation 'io.github.cdimascio:dotenv-java:3.2.0'
+
+    //MongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.3'
+
+    //웹소켓
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.security:spring-security-messaging'
+
+    // json 데이터 파싱을 위한 의존성(YAMLFactory 사용가능)
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+
+    // Query DSL
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.security:spring-security-core'
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // Jackson 기반 serializer
+
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+    // OAuth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // bucket4j
+    implementation 'com.bucket4j:bucket4j-core:8.9.0'
+    implementation 'com.bucket4j:bucket4j-redis:8.9.0'  // bucket4j와 redis를 연동하기 위한 의존성
+
+    // SMTP
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // grafana + prometheus
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
+    // Spring Batch
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    // ical4j
+    implementation 'org.mnode.ical4j:ical4j:3.2.14'
+
+    testImplementation 'com.h2database:h2'
+
+    // deploy
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+
+// 컴파일시 UTF-8로 인코딩해 한글 테스트에서 워닝 발생되지 않도록 설정
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+//mxl 리포트 및 html 리포트를 생성하려면 추가
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+checkstyle {
+    // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail을 내고 싶다면 이 선언을 추가
+    maxWarnings = 0
+    //rule 및 suppressions xml파일 위치 명시
+    configFile = file("config/checkstyle/naver-checkstyle-rules.xml")
+    configProperties = ["suppressionFile": "config/checkstyle/naver-checkstyle-suppressions.xml"]
+    // checkstyle 버전 8.24 이상 선언
+    toolVersion = "8.24"
 }

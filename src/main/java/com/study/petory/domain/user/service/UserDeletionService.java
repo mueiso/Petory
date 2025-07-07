@@ -1,0 +1,88 @@
+package com.study.petory.domain.user.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.study.petory.common.security.JwtProvider;
+import com.study.petory.domain.ownerboard.entity.OwnerBoard;
+import com.study.petory.domain.ownerboard.entity.OwnerBoardComment;
+import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository;
+import com.study.petory.domain.ownerboard.repository.OwnerBoardRepository;
+import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceLike;
+import com.study.petory.domain.place.entity.PlaceReport;
+import com.study.petory.domain.place.entity.PlaceReview;
+import com.study.petory.domain.place.repository.PlaceLikeRepository;
+import com.study.petory.domain.place.repository.PlaceReportRepository;
+import com.study.petory.domain.place.repository.PlaceRepository;
+import com.study.petory.domain.place.repository.PlaceReviewRepository;
+import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class UserDeletionService {
+
+	private final UserRepository userRepository;
+	private final OwnerBoardRepository ownerBoardRepository;
+	private final OwnerBoardCommentRepository ownerBoardCommentRepository;
+	private final PlaceRepository placeRepository;
+	private final PlaceLikeRepository placeLikeRepository;
+	private final PlaceReportRepository placeReportRepository;
+	private final PlaceReviewRepository placeReviewRepository;
+	private final JwtProvider jwtProvider;
+
+	@Transactional
+	public void deleteUser(User user) {
+
+		// 1. OwnerBoard 의 user 참조 끊기
+		List<OwnerBoard> boards = ownerBoardRepository.findByUser(user);
+		for (OwnerBoard board : boards) {
+			board.setUser(null);
+		}
+
+		// 2. OwnerBoardComment 의 user 참조 끊기
+		List<OwnerBoardComment> comments = ownerBoardCommentRepository.findByUser(user);
+		for (OwnerBoardComment comment : comments) {
+			comment.setUser(null);
+		}
+
+		// 3. Place 의 user 참조 끊기
+		List<Place> places = placeRepository.findByUser(user);
+		for (Place place : places) {
+			place.setUser(null);
+		}
+
+		// 4. PlaceLike 의 User 참조 끊기
+		List<PlaceLike> placeLikes = placeLikeRepository.findByUser(user);
+		for (PlaceLike placeLike : placeLikes) {
+			placeLike.setUser(null);
+		}
+
+		// 5. PlaceReport 의 User 참조 끊기
+		List<PlaceReport> placeReports = placeReportRepository.findByUser(user);
+		for (PlaceReport placeReport : placeReports) {
+			placeReport.setUser(null);
+		}
+
+		// 6. PlaceReview 의 User 참조 끊기
+		List<PlaceReview> placeReviews = placeReviewRepository.findByUser(user);
+		for (PlaceReview placeReview : placeReviews) {
+			placeReview.setUser(null);
+		}
+
+		// 7. User 실제 삭제
+		userRepository.delete(user);
+		log.info("[삭제] 유저 및 연관 데이터 정리 완료 - userId: {}, email: {}", user.getId(), user.getEmail());
+
+		// 8. Redis 에서 해당 유저의 Refresh Token 제거
+		jwtProvider.deleteRefreshToken(user.getId());
+		log.info("[삭제] Redis에서 유저 RefreshToken 제거 - key: RT:{}", user.getId());
+	}
+}

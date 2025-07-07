@@ -1,3 +1,19 @@
-/gradlew text eol=lf
+# 쉘 스크립트, gradle wrapper 등은 LF (기본 텍스트라서 따로 안 써도 됨)
+
+# 윈도우용 배치 파일은 CRLF (실행 문제 방지용)
 *.bat text eol=crlf
+
+# 바이너리 파일은 Git이 줄바꿈 건들지 않게
 *.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp4 binary
+*.pdf binary
+*.zip binary
+
+# 그 외 모든 텍스트는 LF로 고정
+* text=auto eol=lf
+*.json text eol=lf
+

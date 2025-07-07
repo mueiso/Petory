@@ -1,0 +1,98 @@
+package com.study.petory.domain.place.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.study.petory.domain.place.dto.response.PlaceGetAllResponseDto;
+import com.study.petory.domain.place.entity.Place;
+import com.study.petory.domain.place.entity.PlaceImage;
+import com.study.petory.domain.place.entity.PlaceType;
+import com.study.petory.domain.place.entity.QPlace;
+import com.study.petory.domain.place.entity.QPlaceImage;
+import com.study.petory.domain.place.entity.QPlaceReview;
+import com.study.petory.domain.user.entity.QUser;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class PlaceCustomRepositoryImpl implements PlaceCustomRepository {
+
+	private final JPAQueryFactory jpaQueryFactory;
+
+	private final QPlace qPlace = QPlace.place;
+
+	private final QPlaceReview qPlaceReview = QPlaceReview.placeReview;
+
+	private final QUser qUser = QUser.user;
+
+	private final QPlaceImage qPlaceImage = QPlaceImage.placeImage;
+
+	@Override
+	public Page<PlaceGetAllResponseDto> findAllPlace(String placeName, PlaceType placeType, String address,
+		Pageable pageable) {
+
+		BooleanBuilder booleanBuilder = new BooleanBuilder();
+
+		if (placeName != null && !placeName.isBlank()) {
+			booleanBuilder.or(qPlace.placeName.containsIgnoreCase(placeName));
+		}
+
+		if (address != null && !address.isBlank()) {
+			booleanBuilder.or(qPlace.address.containsIgnoreCase(address));
+		}
+
+		if (placeType != null) {
+			booleanBuilder.and(qPlace.placeType.eq(placeType));
+		}
+
+		List<Place> placeList = jpaQueryFactory
+			.selectFrom(qPlace)
+			.leftJoin(qPlace.images, qPlaceImage).fetchJoin()
+			.where(booleanBuilder)
+			.offset(pageable.getOffset())
+			.limit(pageable.getPageSize())
+			.fetch();
+
+		Long total = jpaQueryFactory
+			.select(qPlace.count())
+			.from(qPlace)
+			.where(booleanBuilder)
+			.fetchOne();
+
+		List<PlaceGetAllResponseDto> dtoList = placeList.stream()
+			.map(place -> {
+				List<String> imageUrls = place.getImages().stream()
+					.map(PlaceImage::getUrl)
+					.toList();
+				return PlaceGetAllResponseDto.of(place, imageUrls);
+			})
+			.toList();
+
+		return new PageImpl<>(dtoList, pageable, total == null ? 0 : total);
+	}
+
+	@Override
+	public Optional<Place> findWithReviewListByPlaceId(Long placeId) {
+		return Optional.ofNullable(jpaQueryFactory
+			.selectFrom(qPlace)
+			.leftJoin(qPlace.placeReviewList, qPlaceReview).fetchJoin()
+			.leftJoin(qPlaceReview.user, qUser).fetchJoin()
+			.where(qPlace.id.eq(placeId))
+			.fetchOne());
+	}
+
+	@Override
+	public List<Place> findAllWithImagesById(List<Long> placeIdList) {
+		return jpaQueryFactory
+			.selectFrom(qPlace)
+			.leftJoin(qPlace.images, qPlaceImage).fetchJoin()
+			.where(qPlace.id.in(placeIdList))
+			.fetch();
+	}
+}

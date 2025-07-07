@@ -1,0 +1,39 @@
+package com.study.petory.common.exception.enums;
+
+import org.springframework.http.HttpStatus;
+
+public enum SuccessCode implements BaseCode {
+
+	// Common
+	CREATED(HttpStatus.CREATED, "성공적으로 생성되었습니다."),
+	FOUND(HttpStatus.OK, "성공적으로 조회되었습니다."),
+	UPDATED(HttpStatus.OK, "성공적으로 수정되었습니다."),
+	DELETED(HttpStatus.OK, "성공적으로 삭제되었습니다."),
+	RESTORED(HttpStatus.OK, "성공적으로 복구되었습니다."),
+	EMAIL_SENT(HttpStatus.OK, "성공적으로 이메일이 전송되었습니다."),
+
+	// USER
+	USER_LOGIN(HttpStatus.OK, "성공적으로 로그인되었습니다."),
+	USER_LOGOUT(HttpStatus.OK, "성공적으로 로그아웃되었습니다."),
+	TOKEN_REISSUE(HttpStatus.OK, "성공적으로 토큰이 재발급되었습니다."),
+	USER_SUSPENDED(HttpStatus.OK, "성공적으로 계정이 정지되었습니다."),
+	USER_DEACTIVATED(HttpStatus.OK, "성공적으로 휴면 계정으로 전환되었습니다.");
+
+	private final HttpStatus httpStatus;
+	private final String message;
+
+	SuccessCode(HttpStatus httpStatus, String message) {
+		this.httpStatus = httpStatus;
+		this.message = message;
+	}
+
+	@Override
+	public HttpStatus getStatus() {
+		return httpStatus;
+	}
+
+	@Override
+	public String getMessage() {
+		return message;
+	}
+}

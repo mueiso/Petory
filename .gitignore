@@ -4,8 +4,11 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-*.properties
+*application-local.properties
+*application-test.properties
 *.env
+**/src/main/generated/
+**/src/main/test.http
 
 ### STS ###
 .apt_generated
@@ -37,3 +40,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# deploy.script (temp)
+deploy.sh

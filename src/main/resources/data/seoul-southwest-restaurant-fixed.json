@@ -1,0 +1,717 @@
+[ {
+  "bookmarkId" : 1007381272,
+  "name" : "회스토리",
+  "displayName" : "",
+  "px" : 126.9072784,
+  "py" : 37.5055189,
+  "type" : "place",
+  "useTime" : 1683528740000,
+  "lastUpdateTime" : 1683528740000,
+  "creationTime" : 1683528739000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "38724430",
+  "address" : "서울특별시 영등포구 신길3동 322-6",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09560650",
+  "cidPath" : [ "220036", "220037", "220076", "220792", "221629" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "dsrmWQzXfj0jBeKCCHDKwA==",
+      "pan" : "159.81",
+      "tilt" : "10.00",
+      "lng" : "126.9071888",
+      "lat" : "37.5057615",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ ],
+    "category" : "생선회"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715473,
+  "name" : "보드람치킨 독산한신점",
+  "displayName" : "",
+  "px" : 126.887897,
+  "py" : 37.4564043,
+  "type" : "place",
+  "useTime" : 1681844332000,
+  "lastUpdateTime" : 1681844332000,
+  "creationTime" : 1681844332000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1188403408",
+  "address" : "서울특별시 금천구 독산동 1093-4",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220049", "220371" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "+hfGg9I4QA5nfcPMussYZw==",
+      "pan" : "149.93",
+      "tilt" : "10.00",
+      "lng" : "126.8877246",
+      "lat" : "37.4567011",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20200723_154/1595490981088Tz7DI_JPEG/z8-ylVztpcyaFnv6CvQM1sDv.jpg", "https://ldb-phinf.pstatic.net/20250509_204/1746778807418SmOxM_JPEG/%BD%BA%B8%B6%C6%AE%C7%C3%B7%B9%C0%CC%BD%BA_%B4%EB%C7%A5_%C0%CC%B9%CC%C1%F6_01.jpg", "https://ldb-phinf.pstatic.net/20240812_13/17234393979983kQi7_JPEG/%BD%BA%B8%B6%C6%AE%C7%C3%B7%B9%C0%CC%BD%BA_%B4%EB%C7%A5_%C0%CC%B9%CC%C1%F6_02.jpg" ],
+    "category" : "치킨,닭강정"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715452,
+  "name" : "김치찜에 진심 금천점",
+  "displayName" : "",
+  "px" : 126.8997002,
+  "py" : 37.4618131,
+  "type" : "place",
+  "useTime" : 1681844326000,
+  "lastUpdateTime" : 1681844326000,
+  "creationTime" : 1681844326000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1786286335",
+  "address" : "서울특별시 금천구 독산동 1065 . 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "JrzsMGqMqfp4T3o/rknWow==",
+      "pan" : "86.04",
+      "tilt" : "17.50",
+      "lng" : "126.8995684",
+      "lat" : "37.4618045",
+      "fov" : "70"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230130_50/1675044780645X6epl_JPEG/20230130_110257.jpg" ],
+    "category" : "한식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715419,
+  "name" : "상신상회 생각나는 아구찜",
+  "displayName" : "",
+  "px" : 126.9029581,
+  "py" : 37.4525818,
+  "type" : "place",
+  "useTime" : 1681844319000,
+  "lastUpdateTime" : 1681844319000,
+  "creationTime" : 1681844318000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1595964391",
+  "address" : "서울특별시 금천구 시흥동 892 102호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545103",
+  "cidPath" : [ "220036", "220037", "220076", "220793", "221633" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715389,
+  "name" : "댕포차",
+  "displayName" : "",
+  "px" : 126.9025386,
+  "py" : 37.4522401,
+  "type" : "place",
+  "useTime" : 1681844312000,
+  "lastUpdateTime" : 1681844312000,
+  "creationTime" : 1681844311000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1127249161",
+  "address" : "서울특별시 금천구 시흥동 891-1 댕포차",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09545103",
+  "cidPath" : [ "220036", "220051", "220559", "221149" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715348,
+  "name" : "샵개포차",
+  "displayName" : "",
+  "px" : 126.9034147,
+  "py" : 37.4516099,
+  "type" : "place",
+  "useTime" : 1681844304000,
+  "lastUpdateTime" : 1681844304000,
+  "creationTime" : 1681844303000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1709274372",
+  "address" : "서울특별시 금천구 시흥동 892-51 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09545103",
+  "cidPath" : [ "220036", "220051", "220559", "221149" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "KLfKGPohCuKNL6gHKB1/GA==",
+      "pan" : "9.89",
+      "tilt" : "10.00",
+      "lng" : "126.9034039",
+      "lat" : "37.4515479",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230111_19/1673420084843gvqUm_JPEG/6DA05D67-BE9A-47D9-BDE3-54FF685988E1.jpeg" ],
+    "category" : "포장마차"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715312,
+  "name" : "양지식당",
+  "displayName" : "",
+  "px" : 126.9026492,
+  "py" : 37.4512748,
+  "type" : "place",
+  "useTime" : 1681844295000,
+  "lastUpdateTime" : 1681844295000,
+  "creationTime" : 1681844295000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1387250118",
+  "address" : "서울특별시 금천구 시흥동 903-11 1층 양지식당",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545103",
+  "cidPath" : [ "220036", "220037", "220075", "220765", "221458" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "3m6TPe5+dNcoB0n0TTjA6Q==",
+      "pan" : "98.92",
+      "tilt" : "14.63",
+      "lng" : "126.9025561",
+      "lat" : "37.4513354",
+      "fov" : "82"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20180814_23/1534223401498CdaB1_JPEG/peJ_Qe_Gb0TZEq5nQFlkdEiY.jpg", "https://ldb-phinf.pstatic.net/20180814_73/15342234150539RrOm_JPEG/J5ekJygmMR1Rf862CgeecH0l.jpg", "https://ldb-phinf.pstatic.net/20180814_276/1534223421906NKjeU_JPEG/rQahAkp5xBR_1Gro25kFXIew.jpg" ],
+    "category" : "돼지고기구이"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715279,
+  "name" : "빡주",
+  "displayName" : "",
+  "px" : 126.902627,
+  "py" : 37.4512721,
+  "type" : "place",
+  "useTime" : 1681844287000,
+  "lastUpdateTime" : 1681844287000,
+  "creationTime" : 1681844286000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1083396997",
+  "address" : "서울특별시 금천구 시흥동 903-11 1층 빡주",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09545103",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "3m6TPe5+dNcoB0n0TTjA6Q==",
+      "pan" : "96.78",
+      "tilt" : "13.31",
+      "lng" : "126.9025561",
+      "lat" : "37.4513354",
+      "fov" : "47"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250310_278/1741603184379x9eI3_JPEG/1741425893324-6.jpg", "https://ldb-phinf.pstatic.net/20250310_148/1741603184242tGTBn_JPEG/1741425893324-5.jpg", "https://ldb-phinf.pstatic.net/20250310_49/17416031845689GrQE_JPEG/1741425893324-4.jpg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715246,
+  "name" : "써러라 팔천순대",
+  "displayName" : "",
+  "px" : 126.9023256,
+  "py" : 37.4470968,
+  "type" : "place",
+  "useTime" : 1681844277000,
+  "lastUpdateTime" : 1681844277000,
+  "creationTime" : 1681844277000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1612783357",
+  "address" : "서울특별시 금천구 시흥동 985 한 영상가 1층 1호",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545103",
+  "cidPath" : [ "220036", "220037", "220075", "220768", "221546" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "fGXO0slIIYc8F3CUVVpWpQ==",
+      "pan" : "-42.03",
+      "tilt" : "10.00",
+      "lng" : "126.9023764",
+      "lat" : "37.4470404",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20220208_193/1644305433153MPmcB_JPEG/1644305416310.jpg", "https://ldb-phinf.pstatic.net/20220208_172/1644305297149YIS4q_JPEG/1644304803364.jpg", "https://ldb-phinf.pstatic.net/20220208_118/1644295788177tJSFk_JPEG/1643268238927-8.jpg" ],
+    "category" : "순대,순댓국"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715210,
+  "name" : "일품향 양꼬치",
+  "displayName" : "",
+  "px" : 126.8973822,
+  "py" : 37.4758776,
+  "type" : "place",
+  "useTime" : 1681844267000,
+  "lastUpdateTime" : 1681844267000,
+  "creationTime" : 1681844266000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "1283386006",
+  "address" : "서울특별시 금천구 독산동 144-89 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220039", "220091", "220861" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715173,
+  "name" : "명성왕족발",
+  "displayName" : "",
+  "px" : 126.9006721,
+  "py" : 37.4741991,
+  "type" : "place",
+  "useTime" : 1681844257000,
+  "lastUpdateTime" : 1681844257000,
+  "creationTime" : 1681844256000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1291257521",
+  "address" : "서울특별시 금천구 독산동 981-34",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220037", "220075", "220766", "221504" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "qx+b6rhfP/gMQtYCcFMcuQ==",
+      "pan" : "23.23",
+      "tilt" : "10.00",
+      "lng" : "126.9005932",
+      "lat" : "37.4740152",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20210503_21/1619979996801dovlb_JPEG/Ggp-IBr990MLXlS1OwzljTmk.JPG.jpg", "https://ldb-phinf.pstatic.net/20210503_225/16199799572410nRzf_JPEG/c10YmcR_DYDrrYFnVLnpdKjj.JPG.jpg", "https://ldb-phinf.pstatic.net/20210503_69/1619979957260Srqh5_JPEG/PMlTufbpmxd8WWgfnMelkWkg.JPG.jpg" ],
+    "category" : "족발,보쌈"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715131,
+  "name" : "코끼리튀김 분식",
+  "displayName" : "",
+  "px" : 126.900843,
+  "py" : 37.473471,
+  "type" : "place",
+  "useTime" : 1681844248000,
+  "lastUpdateTime" : 1681844248000,
+  "creationTime" : 1681844248000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "20846232",
+  "address" : "서울특별시 금천구 독산동 986",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220048", "220185" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "Wt7FsAE4RAEQLVoh/PuDHA==",
+      "pan" : "-117.04",
+      "tilt" : "10.00",
+      "lng" : "126.9009634",
+      "lat" : "37.4735323",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20181219_294/1545187352515JWgJg_JPEG/50P4HYhao1eDnRRIWPJ87-uw.jpg", "https://ldb-phinf.pstatic.net/20181112_6/1542012198959BKaGD_JPEG/ZMZnnAzdriHDgRipvp7hjo-w.jpg", "https://ldb-phinf.pstatic.net/20181112_135/1542012204978TlSpz_JPEG/bbDKwLLyEbD_Tem2pchkqzDm.jpg" ],
+    "category" : "종합분식"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715099,
+  "name" : "리온즈 펍",
+  "displayName" : "",
+  "px" : 126.8962905,
+  "py" : 37.471147,
+  "type" : "place",
+  "useTime" : 1681844241000,
+  "lastUpdateTime" : 1681844241000,
+  "creationTime" : 1681844240000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1087453900",
+  "address" : "서울특별시 금천구 독산동 296-24 1층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220051", "220553", "221078" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "k7yOLaOkMgu62URWQvx80Q==",
+      "pan" : "93.11",
+      "tilt" : "11.12",
+      "lng" : "126.8962206",
+      "lat" : "37.4711080",
+      "fov" : "80"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20181103_3/1541240065715F1IPU_JPEG/P6yrZcKthtEdgcIGIk24klIx.jpeg.jpg", "https://ldb-phinf.pstatic.net/20240110_236/1704844061719tFsP8_JPEG/1000011184.jpg", "https://ldb-phinf.pstatic.net/20181103_109/1541240103029V7gD0_JPEG/mFTKYl67PQfS6SAy_QjGD4FM.jpeg.jpg" ],
+    "category" : "바(BAR)"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715070,
+  "name" : "홍수계찜닭 홈플러스금천점",
+  "displayName" : "",
+  "px" : 126.8969006,
+  "py" : 37.4686955,
+  "type" : "place",
+  "useTime" : 1681844233000,
+  "lastUpdateTime" : 1681844233000,
+  "creationTime" : 1681844232000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "UNAVAILABLE" ]
+  },
+  "sid" : "37208940",
+  "address" : "서울특별시 금천구 독산동 291-7 홈플러스금천점 3층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220037", "220075", "220776", "232054" ],
+  "available" : false,
+  "folderMappings" : null,
+  "placeInfo" : null,
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981715029,
+  "name" : "회가대표 초밥24 본점",
+  "displayName" : "",
+  "px" : 126.89607,
+  "py" : 37.4608756,
+  "type" : "place",
+  "useTime" : 1681844224000,
+  "lastUpdateTime" : 1681844224000,
+  "creationTime" : 1681844223000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1713552491",
+  "address" : "서울특별시 금천구 독산동 1156 1층 104호 회가대표 초밥24 본점",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220038", "220089", "220850" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "RaW+aq5ABjvttgUWi0Kuqw==",
+      "pan" : "56.42",
+      "tilt" : "13.19",
+      "lng" : "126.8958613",
+      "lat" : "37.4607272",
+      "fov" : "62"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230211_5/167605944950216WLh_JPEG/image.jpg", "https://ldb-phinf.pstatic.net/20230211_121/1676059394960kFamF_JPEG/image.jpg", "https://ldb-phinf.pstatic.net/20230211_97/1676059466794XVpTe_JPEG/image.jpg" ],
+    "category" : "초밥,롤"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981714980,
+  "name" : "카츠레츠",
+  "displayName" : "",
+  "px" : 126.896345,
+  "py" : 37.4601635,
+  "type" : "place",
+  "useTime" : 1681844213000,
+  "lastUpdateTime" : 1681844213000,
+  "creationTime" : 1681844213000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : false,
+    "details" : [ "GEOMETRY" ]
+  },
+  "sid" : "1249268798",
+  "address" : "서울특별시 금천구 독산동 1155 1층 139호 카츠레츠",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545102",
+  "cidPath" : [ "220036", "220038", "220082", "220812" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "TKuUIZpH0WeCekqLJodpNg==",
+      "pan" : "-29.94",
+      "tilt" : "10.00",
+      "lng" : "126.8971403",
+      "lat" : "37.4589513",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20240205_288/17071185921729QrHb_JPEG/%C4%AB%C3%F7%B7%B9%C3%F7%C4%B3%B8%AF%C5%CD.jpg", "https://ldb-phinf.pstatic.net/20240205_5/1707118514162pMHVX_PNG/A3%B8%DE%B4%BA%C6%C7.PNG", "https://ldb-phinf.pstatic.net/20240205_137/1707118608915pdsoB_PNG/%C0%DB%C0%BA%B8%DE%B4%BA%C6%C71.PNG" ],
+    "category" : "돈가스"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981714938,
+  "name" : "평일주점",
+  "displayName" : "",
+  "px" : 126.8850917,
+  "py" : 37.4827137,
+  "type" : "place",
+  "useTime" : 1681844202000,
+  "lastUpdateTime" : 1681844202000,
+  "creationTime" : 1681844201000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1350380935",
+  "address" : "서울특별시 금천구 가산동 83-13",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09545101",
+  "cidPath" : [ "220036", "220051", "220552", "221043" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "CgRBHJHlNWNdMwUwvJgsBg==",
+      "pan" : "-139.51",
+      "tilt" : "10.00",
+      "lng" : "126.8852260",
+      "lat" : "37.4828706",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20230509_21/1683606644510yNju7_JPEG/2933686C-97A5-4157-AB47-8CF8A1759A8D.jpeg", "https://ldb-phinf.pstatic.net/20230509_277/1683606644280kAxfD_JPEG/Resized_20230418_105730_1398341415460320.jpeg" ],
+    "category" : "맥주,호프"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981714889,
+  "name" : "소주인",
+  "displayName" : "",
+  "px" : 126.8901721,
+  "py" : 37.4779253,
+  "type" : "place",
+  "useTime" : 1681844191000,
+  "lastUpdateTime" : 1681844191000,
+  "creationTime" : 1681844191000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1410743520",
+  "address" : "서울특별시 금천구 가산동 143-37 1층()",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545101",
+  "cidPath" : [ "220036", "220037", "220053" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "BD2Cs2lch9a1hwphL4n37w==",
+      "pan" : "-123.40",
+      "tilt" : "10.00",
+      "lng" : "126.8902630",
+      "lat" : "37.4779851",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20231102_16/16988881864045qsnp_JPEG/KakaoTalk_20231101_175921481_03.jpg", "https://ldb-phinf.pstatic.net/20231102_44/169888818638045ocH_JPEG/KakaoTalk_20231101_175921481_04.jpg", "https://ldb-phinf.pstatic.net/20231102_2/1698888186467FsMMw_JPEG/KakaoTalk_20231101_175921481_25.jpg" ],
+    "category" : "이자카야"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981714851,
+  "name" : "텐마루",
+  "displayName" : "",
+  "px" : 126.8898416,
+  "py" : 37.4777423,
+  "type" : "place",
+  "useTime" : 1681844180000,
+  "lastUpdateTime" : 1681844180000,
+  "creationTime" : 1681844179000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "36174409",
+  "address" : "서울특별시 금천구 가산동 143-44 2층",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "BAR",
+  "mcidName" : "BAR",
+  "rcode" : "09545101",
+  "cidPath" : [ "220036", "220051", "220556", "221121" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "+s8gBwCQaIsuKecyXzwS3A==",
+      "pan" : "-177.35",
+      "tilt" : "10.00",
+      "lng" : "126.8898467",
+      "lat" : "37.4778487",
+      "fov" : "120"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20250512_195/1747008775443pX0Eq_JPEG/IMG_0846.jpeg", "https://ldb-phinf.pstatic.net/20250512_146/1747008777619HoLXS_JPEG/IMG_1466.jpeg", "https://ldb-phinf.pstatic.net/20250512_76/1747008777226VAbYn_JPEG/IMG_1499.jpeg" ],
+    "category" : "요리주점"
+  },
+  "isIndoor" : false
+}, {
+  "bookmarkId" : 981714814,
+  "name" : "서울막창",
+  "displayName" : "",
+  "px" : 126.8906665,
+  "py" : 37.4750611,
+  "type" : "place",
+  "useTime" : 1681844172000,
+  "lastUpdateTime" : 1681844172000,
+  "creationTime" : 1681844171000,
+  "order" : 65535,
+  "bookmarkMismatchInfo" : {
+    "isMatched" : true,
+    "details" : [ "AVAILABLE" ]
+  },
+  "sid" : "1795436963",
+  "address" : "서울특별시 금천구 가산동 233-5 1동 G11호 서울막창",
+  "memo" : "",
+  "url" : "",
+  "mcid" : "DINING",
+  "mcidName" : "음식점",
+  "rcode" : "09545101",
+  "cidPath" : [ "220036", "220037", "220075", "220767", "221540" ],
+  "available" : true,
+  "folderMappings" : null,
+  "placeInfo" : {
+    "streetPanorama" : {
+      "id" : "N5euB2cVAa0yAQDiXrrFCg==",
+      "pan" : "78.67",
+      "tilt" : "7.56",
+      "lng" : "126.8905035",
+      "lat" : "37.4749310",
+      "fov" : "90"
+    },
+    "thumbnailUrls" : [ "https://ldb-phinf.pstatic.net/20211207_264/1638874763067nJewe_PNG/KakaoTalk_20211207_195118536.png", "https://ldb-phinf.pstatic.net/20211207_106/16388755801397iRXr_PNG/2.png", "https://ldb-phinf.pstatic.net/20211207_35/1638875579170TFWdg_PNG/3.png" ],
+    "category" : "곱창,막창,양"
+  },
+  "isIndoor" : false
+} ]

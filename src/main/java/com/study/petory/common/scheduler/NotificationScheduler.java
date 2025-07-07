@@ -27,7 +27,7 @@ public class NotificationScheduler {
 	private final Job sendDailyQuestionJob;
 
 	@Scheduled(cron = "0 0 0 * * *")
-	public void sendDailyQuestionNotification() throws Exception{
+	public void sendDailyQuestionNotification() throws Exception {
 		JobParameters jobParameters = new JobParametersBuilder()
 			.addLong("time", System.currentTimeMillis())
 			.toJobParameters();

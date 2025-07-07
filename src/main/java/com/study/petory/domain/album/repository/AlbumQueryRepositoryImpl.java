@@ -69,11 +69,6 @@ public class AlbumQueryRepositoryImpl implements AlbumQueryRepository {
 			.offset(pageable.getOffset())
 			.limit(pageable.getPageSize());
 
-		// new PathBuilder(qAlbum.getType(), qAlbum.getMetadata()); 와 동일
-		/*
-		qAlbum.getType() → Album.class 를 반환
-		qAlbum.getMetadata() → "album" 별칭을 반환하기에 동일
-		 */
 		PathBuilder pathBuilder = new PathBuilder<>(Album.class, "album");
 		for (Sort.Order o : pageable.getSort()) {
 			query.orderBy(new OrderSpecifier(o.isAscending() ? Order.ASC : Order.DESC,

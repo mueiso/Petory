@@ -17,7 +17,6 @@ public enum ErrorCode implements BaseCode {
 	LAZY_LOADING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Lazy 로딩 문제가 발생했습니다."),
 	DATE_TIME_PARSE_FAIL(HttpStatus.BAD_REQUEST, "날짜 형식이 올바르지 않습니다."),
 
-
 	// user
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
 	EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
@@ -58,7 +57,6 @@ public enum ErrorCode implements BaseCode {
 	DAILY_QNA_IS_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제된 질문이 아닙니다."),
 
 	// OwnerBoard
-	OWNER_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "글이 존재하지 않습니다."),
 	OWNER_BOARD_NOT_DELETED(HttpStatus.BAD_REQUEST, "삭제되지 않은 게시물은 복구할 수 없습니다."),
 
 	// Place

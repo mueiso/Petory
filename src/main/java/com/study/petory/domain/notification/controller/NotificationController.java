@@ -42,7 +42,8 @@ public class NotificationController {
 		@AuthenticationPrincipal CustomPrincipal currentUser,
 		@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
 	) {
-		return CommonResponse.of(SuccessCode.FOUND, notificationService.findNotificationByUser(currentUser.getId(), pageable));
+		return CommonResponse.of(SuccessCode.FOUND,
+			notificationService.findNotificationByUser(currentUser.getId(), pageable));
 	}
 
 	/**

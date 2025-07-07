@@ -18,7 +18,6 @@ import com.study.petory.domain.ownerboard.repository.OwnerBoardCommentRepository
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.service.UserService;
-import com.study.petory.domain.user.service.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 

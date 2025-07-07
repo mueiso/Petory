@@ -159,4 +159,28 @@ class UserServiceImplTest {
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.USER_NOT_EXISTING.getMessage());
 	}
+
+	@Test
+	void updateProfile_정상동작() {
+
+		// [given]
+		String email = "test@example.com";
+		UserUpdateRequestDto dto = new UserUpdateRequestDto();
+		dto.setNickname("new-nick");
+		dto.setMobileNum("010-1111-2222");
+
+		User user = mock(User.class);
+		UserPrivateInfo info = mock(UserPrivateInfo.class);
+		when(user.getDeletedAt()).thenReturn(null);
+		when(user.getUserPrivateInfo()).thenReturn(info);
+
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// when
+		userService.updateProfile(email, dto);
+
+		// then
+		verify(user).updateNickname("new-nick");
+		verify(info).update("010-1111-2222");
+	}
 }

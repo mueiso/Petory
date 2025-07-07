@@ -207,7 +207,7 @@ public class JwtProvider {
 
 		long expireMillis = refreshTokenLife;
 		loginRefreshToken.opsForValue().set(
-			String.valueOf(userId),
+			getRefreshTokenKey(userId),
 			refreshToken,
 			expireMillis,
 			TimeUnit.MILLISECONDS

@@ -142,4 +142,21 @@ class UserServiceImplTest {
 		assertThat(result.getName()).isEqualTo("홍길동");
 		assertThat(result.getMobileNum()).isEqualTo("010-1234-5678");
 	}
+
+	@Test
+	void findMyProfile_탈퇴유저_예외발생() {
+
+		// [given]
+		String email = "deleted@example.com";
+
+		User user = mock(User.class);
+		when(user.getDeletedAt()).thenReturn(LocalDateTime.now());
+
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// then
+		assertThatThrownBy(() -> userService.findMyProfile(email))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_NOT_EXISTING.getMessage());
+	}
 }

@@ -17,6 +17,7 @@ import com.study.petory.common.config.QueryDSLConfig;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
 import com.study.petory.domain.user.entity.UserRole;
+import com.study.petory.domain.user.entity.UserStatus;
 
 import jakarta.persistence.EntityManager;
 
@@ -101,6 +102,25 @@ class UserQueryRepositoryTest {
 		assertThat(result).isPresent();
 		assertThat(result.get().getId()).isEqualTo(testUser.getId());
 		assertThat(result.get().getUserRole()).isNotNull();
+		assertThat(result.get().getUserRole().get(0).getRole()).isEqualTo(Role.USER);
+	}
+
+	@Test
+	void findByIdWithUserRoleAndUserStatus_조회_성공() {
+
+		// [given]
+		testUser.updateStatus(UserStatus.ACTIVE); // 상태 설정
+		em.flush();
+		em.clear();
+
+		// [when]
+		Optional<User> result = userQueryRepository.findByIdWithUserRoleAndUserStatus(testUser.getId(),
+			UserStatus.ACTIVE);
+
+		// [then]
+		assertThat(result).isPresent();
+		assertThat(result.get().getId()).isEqualTo(testUser.getId());
+		assertThat(result.get().getUserStatus()).isEqualTo(UserStatus.ACTIVE);
 		assertThat(result.get().getUserRole().get(0).getRole()).isEqualTo(Role.USER);
 	}
 }

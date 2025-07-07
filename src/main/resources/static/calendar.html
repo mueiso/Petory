@@ -1138,13 +1138,13 @@
 
         try {
             console.log(`API 요청: ${method} ${url}`, data ? data : '');
-            
+
             const response = await fetch(url, options);
-            
+
             // 응답 텍스트를 먼저 가져와서 로깅
             const responseText = await response.text();
             console.log('서버 응답:', responseText);
-            
+
             if (!response.ok) {
                 let errorMessage = `HTTP error! status: ${response.status}`;
                 try {
@@ -1240,7 +1240,7 @@
         // RRULE 파라미터 파싱
         const params = {};
         const parts = rruleString.replace('RRULE:', '').split(';');
-        
+
         parts.forEach(part => {
             const [key, value] = part.split('=');
             if (key && value) {
@@ -1291,18 +1291,18 @@
     // 반복 설정을 UI에 복원하는 함수
     function restoreRepeatSettings(rruleArray) {
         const parsed = parseRRule(rruleArray);
-        
+
         // 반복 유형 설정
         document.getElementById('repeatType').value = parsed.type;
-        
+
         if (parsed.type === 'custom') {
             // 사용자 정의 설정 표시
             document.getElementById('customSettings').classList.remove('hidden');
-            
+
             // 간격과 주기 설정
             document.getElementById('customInterval').value = parsed.interval;
             document.getElementById('customFreq').value = parsed.freq;
-            
+
             // 요일 설정 (주간 반복인 경우)
             document.querySelectorAll('.weekday-option').forEach(day => {
                 day.classList.remove('selected');
@@ -1310,16 +1310,16 @@
                     day.classList.add('selected');
                 }
             });
-            
+
             // 종료 조건 설정
             document.querySelector(`input[name="customEndType"][value="${parsed.endType}"]`).checked = true;
-            
+
             if (parsed.endType === 'until' && parsed.untilDate) {
                 document.getElementById('customUntilDate').value = parsed.untilDate;
             } else if (parsed.endType === 'count' && parsed.count) {
                 document.getElementById('customCount').value = parsed.count;
             }
-            
+
             // 요일 섹션 표시/숨김 및 필드 활성화 상태 업데이트
             updateWeekdayVisibility();
             updateEndFields();
@@ -1353,13 +1353,13 @@
             fixedWeekCount: false,
             showNonCurrentDates: true,
 
-            events: async function(info, successCallback, failureCallback) {
+            events: async function (info, successCallback, failureCallback) {
                 try {
                     const start = info.startStr.split('T')[0];
                     const end = info.endStr.split('T')[0];
-                    
+
                     const response = await apiRequest(`${API_BASE_URL}?start=${start}&end=${end}`);
-                    
+
                     const events = response.data.map(event => {
                         return {
                             id: event.id,
@@ -1377,7 +1377,7 @@
                             }
                         };
                     });
-                    
+
                     successCallback(events);
                 } catch (error) {
                     console.error('일정 로드 실패:', error);
@@ -1429,7 +1429,7 @@
             } else {
                 modalTitle.textContent = '일정 수정';
                 document.getElementById('deleteEvent').style.display = 'block';
-                
+
                 try {
                     // 서버에서 상세 정보 가져오기
                     const response = await apiRequest(`${API_BASE_URL}/${event.id}`);
@@ -1503,7 +1503,7 @@
         // 폼 채우기 (수정 모드)
         function fillForm(event, eventDetail) {
             const data = eventDetail || event.extendedProps.originalEvent;
-            
+
             document.getElementById('eventTitle').value = data.title || event.title;
 
             let startDate = data.startDate ? data.startDate.split('T')[0] : event.startStr.split('T')[0];
@@ -1752,18 +1752,18 @@
         // 반복 조건을 API 형태로 변환
         function buildRecurrenceArray() {
             const repeatType = document.getElementById('repeatType').value;
-            
+
             if (repeatType === 'none') {
                 return [];
             }
-            
+
             const recurrence = [];
             const rruleOnly = currentRRule.split('\n').find(line => line.startsWith('RRULE:'));
-            
+
             if (rruleOnly) {
                 recurrence.push(rruleOnly);
             }
-            
+
             return recurrence;
         }
 
@@ -1998,9 +1998,9 @@
                 // 캘린더 새로고침
                 calendar.refetchEvents();
                 closeModal();
-                
+
                 console.log('일정 저장 성공:', response);
-                
+
             } catch (error) {
                 console.error('일정 저장 실패:', error);
             }
@@ -2011,13 +2011,13 @@
             if (currentEvent && confirm('이 일정을 삭제하시겠습니까?')) {
                 try {
                     await apiRequest(`${API_BASE_URL}/${currentEvent.id}`, 'DELETE');
-                    
+
                     // 캘린더 새로고침
                     calendar.refetchEvents();
                     closeModal();
-                    
+
                     console.log('일정 삭제 성공');
-                    
+
                 } catch (error) {
                     console.error('일정 삭제 실패:', error);
                 }

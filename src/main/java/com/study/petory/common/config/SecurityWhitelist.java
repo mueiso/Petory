@@ -45,7 +45,9 @@ public class SecurityWhitelist {
 			"/calendar.html",
 
 			"/images/**",
-			"/static/**"           // 정적 리소스들 (HTML, CSS, JS, 이미지 등 모두 포함)
+			"/static/**",          // 정적 리소스들 (HTML, CSS, JS, 이미지 등 모두 포함)
+
+			"/actuator/health"
 		);
 
 		// GET 매핑만 허용 (예: HttpMethod.GET, /places)

@@ -42,6 +42,7 @@ dependencies {
     testRuntimeOnly 'com.h2database:h2'
     // IDE 에서 개별 테스트 실행 시 필요
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'software.amazon.awssdk:s3:2.20.122'
 
     // .env 등록을 위한 의존성
     implementation 'io.github.cdimascio:dotenv-java:3.2.0'
@@ -99,6 +100,9 @@ dependencies {
     implementation 'org.mnode.ical4j:ical4j:3.2.14'
 
     testImplementation 'com.h2database:h2'
+
+    // deploy
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {

@@ -19,8 +19,8 @@
             color: #333;
         }
 
-        /* Header */
-        .header {
+        /* Header - 메인 페이지와 동일 */
+        header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
@@ -30,12 +30,12 @@
             z-index: 100;
         }
 
-        .header-content {
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
         .logo {
@@ -53,13 +53,13 @@
             font-size: 1.5rem;
         }
 
-        .nav-menu {
+        .nav-links {
             display: flex;
-            list-style: none;
             gap: 2rem;
+            list-style: none;
         }
 
-        .nav-menu a {
+        .nav-links a {
             text-decoration: none;
             color: #5d4037;
             font-weight: 500;
@@ -68,58 +68,47 @@
             transition: all 0.3s ease;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
+        .nav-links a:hover, .nav-links a.active {
             background: #ffcc80;
             transform: translateY(-2px);
         }
 
-        .header-right {
+        .auth-buttons {
             display: flex;
-            align-items: center;
             gap: 1rem;
         }
 
-        .search-box {
-            position: relative;
-        }
-
-        .search-box input {
-            padding: 0.5rem 2.5rem 0.5rem 1rem;
-            border: 2px solid #ffcc80;
-            border-radius: 25px;
-            width: 200px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .search-box input:focus {
-            border-color: #ff8a65;
-            box-shadow: 0 0 0 3px rgba(255, 138, 101, 0.1);
-        }
-
-        .search-box::after {
-            content: "🔍";
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1rem;
-        }
-
-        .login-btn {
-            background: linear-gradient(45deg, #ff8a65, #ffab40);
-            color: white;
+        .btn {
             padding: 0.5rem 1.5rem;
             border: none;
             border-radius: 25px;
-            text-decoration: none;
             font-weight: 500;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
-        .login-btn:hover {
+        .btn-outline {
+            background: transparent;
+            color: #5d4037;
+            border: 2px solid #5d4037;
+        }
+
+        .btn-outline:hover {
+            background: #5d4037;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff8a65, #ffab40);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 138, 101, 0.4);
         }

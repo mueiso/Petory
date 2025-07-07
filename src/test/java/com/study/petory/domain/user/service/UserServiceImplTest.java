@@ -216,4 +216,23 @@ class UserServiceImplTest {
 
 		verify(jwtProvider).deleteRefreshToken(userId);
 	}
+
+	@Test
+	void deleteAccount_정상_softDelete() {
+
+		// [given]
+		String email = "delete@test.com";
+		User user = mock(User.class);
+		when(user.getUserStatus()).thenReturn(UserStatus.ACTIVE);
+		when(user.getDeletedAt()).thenReturn(null);
+
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// when
+		userService.deleteAccount(email);
+
+		// then
+		verify(user).deactivateEntity();
+		verify(user).updateStatus(UserStatus.DELETED);
+	}
 }

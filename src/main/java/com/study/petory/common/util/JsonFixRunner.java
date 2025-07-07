@@ -20,22 +20,22 @@ public class JsonFixRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// 1. resources/data 경로 기준으로 폴더 객체 생성(data 폴더 안을 스캔하기 위한 준비)
-		String dirPath = System.getProperty("user.dir") + "/src/main/resources/data";
-		File folder = new File(dirPath);
-
-		// 2. .txt 파일만 필터링
-		File[] fileArrays = folder.listFiles((dir, name) -> name.endsWith(".txt"));
-
-		for (File file : fileArrays) {
-			String rawPath = file.getPath();
-			String fixedPath = rawPath.replace(".txt", "-fixed.json");
-
-			try {
-				jsonFixerService.fixJsonFile(rawPath, fixedPath);
-			} catch (Exception e) {
-				throw new CustomException(ErrorCode.JSON_PARSE_ERROR);
-			}
-		}
+		// // 1. resources/data 경로 기준으로 폴더 객체 생성(data 폴더 안을 스캔하기 위한 준비)
+		// String dirPath = System.getProperty("user.dir") + "/src/main/resources/data";
+		// File folder = new File(dirPath);
+		//
+		// // 2. .txt 파일만 필터링
+		// File[] fileArrays = folder.listFiles((dir, name) -> name.endsWith(".txt"));
+		//
+		// for (File file : fileArrays) {
+		// 	String rawPath = file.getPath();
+		// 	String fixedPath = rawPath.replace(".txt", "-fixed.json");
+		//
+		// 	try {
+		// 		jsonFixerService.fixJsonFile(rawPath, fixedPath);
+		// 	} catch (Exception e) {
+		// 		throw new CustomException(ErrorCode.JSON_PARSE_ERROR);
+		// 	}
+		// }
 	}
 }

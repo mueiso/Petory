@@ -215,7 +215,7 @@
             return;
         }
 
-        const socket = new SockJS("http://localhost:8080/ws-chat");
+        const socket = new SockJS("https://petory.click/ws-chat");
         stompClient = Stomp.over(socket);
 
         stompClient.connect(

@@ -1,7 +1,5 @@
 package com.study.petory.domain.album.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,8 +10,6 @@ import com.study.petory.common.util.S3Uploader;
 import com.study.petory.domain.album.entity.Album;
 import com.study.petory.domain.album.entity.AlbumImage;
 import com.study.petory.domain.album.repository.AlbumImageRepository;
-import com.study.petory.domain.user.entity.Role;
-import com.study.petory.domain.user.entity.UserRole;
 
 @Service
 public class AlbumImageServiceImpl extends AbstractImageService<AlbumImage> {

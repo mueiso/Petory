@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 public enum SuccessCode implements BaseCode {
 
 	// Common
-	REQUESTED(HttpStatus.OK, "SuccessCode를 수정해주세요"),
 	CREATED(HttpStatus.CREATED, "성공적으로 생성되었습니다."),
 	FOUND(HttpStatus.OK, "성공적으로 조회되었습니다."),
 	UPDATED(HttpStatus.OK, "성공적으로 수정되었습니다."),

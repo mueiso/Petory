@@ -53,7 +53,6 @@ public class Event extends UpdateBasedEntity {
 	@Column(nullable = false)
 	private String timeZone;
 
-	// 기본 true
 	@Column
 	private Boolean isAllDay;
 

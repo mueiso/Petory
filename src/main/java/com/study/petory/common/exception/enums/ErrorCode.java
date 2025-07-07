@@ -7,19 +7,15 @@ public enum ErrorCode implements BaseCode {
 	// common
 	INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "잘못된 파라미터 요청입니다."),
 	INVALID_INPUT(HttpStatus.BAD_REQUEST, "요청한 값에 오류가 있습니다."),
-	UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인이 필요한 요청입니다."),
 	FORBIDDEN(HttpStatus.FORBIDDEN, "권한이 필요한 요청입니다."),
 	NO_RESOURCE(HttpStatus.NOT_FOUND, "존재하지 않는 데이터입니다."),
-	EXIST_RESOURCE(HttpStatus.CONFLICT, "중복된 데이터입니다."),
 	LONG_JSON_TYPE(HttpStatus.BAD_REQUEST, "요청 형식이 잘못되었습니다. JSON 구조를 확인하세요."),
 	ONLY_AUTHOR_CAN_EDIT(HttpStatus.FORBIDDEN, "작성자만 수정이 가능합니다."),
 	ONLY_AUTHOR_CAN_DELETE(HttpStatus.FORBIDDEN, "작성자만 삭제가 가능합니다."),
-	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
 	FILE_SIZE_EXCEEDED(HttpStatus.BAD_REQUEST, "업로드 용량을 초과했습니다."),
 	TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS, "요청이 너무 많습니다."),
 	LAZY_LOADING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Lazy 로딩 문제가 발생했습니다."),
 	DATE_TIME_PARSE_FAIL(HttpStatus.BAD_REQUEST, "날짜 형식이 올바르지 않습니다."),
-	DATE_TIME_IS_NULL(HttpStatus.BAD_REQUEST, "잘못된 파라미터 요청입니다."),
 
 
 	// user
@@ -35,10 +31,10 @@ public enum ErrorCode implements BaseCode {
 	ROLE_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자에게 해당 권한이 존재하지 않습니다."),
 	LOGIN_UNAVAILABLE(HttpStatus.FORBIDDEN, "로그인 불가합니다. 계정이 정지되었거나, 탈퇴한 유저입니다."),
 	ALREADY_SUSPENDED(HttpStatus.BAD_REQUEST, "이미 정지된 계정입니다."),
-	USER_NOT_DEACTIVATED(HttpStatus.BAD_REQUEST, "비활성화된 유저가 아닙니다."),
 	USER_NOT_SUSPENDED(HttpStatus.BAD_REQUEST, "계정 정지된 유저가 아닙니다."),
 	USER_ALREADY_DELETED(HttpStatus.BAD_REQUEST, "이미 탈퇴한 계정입니다."),
 	USER_NOT_EXISTING(HttpStatus.BAD_REQUEST, "휴면 계정이거나, 탈퇴한 유저입니다."),
+	FAILED_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "검증에 실패했습니다."),
 
 	// pet
 	PET_NOT_FOUND(HttpStatus.NOT_FOUND, "펫이 존재하지 않습니다."),
@@ -87,8 +83,6 @@ public enum ErrorCode implements BaseCode {
 
 	// TradeBoard
 	TRADE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "거래 글이 존재하지 않습니다."),
-	TRADE_BOARD_FORBIDDEN(HttpStatus.FORBIDDEN, "작성자만 거래글을 수정하거나 삭제할 수 있습니다."),
-	TRADE_BOARD_IMAGE_OVERFLOW(HttpStatus.BAD_REQUEST, "사진은 5장까지 업로드 가능합니다."),
 
 	// Question
 	QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "질문이 존재하지 않습니다."),
@@ -104,7 +98,6 @@ public enum ErrorCode implements BaseCode {
 	OWNER_BOARD_COMMENT_MISMATCH(HttpStatus.BAD_REQUEST, "해당 게시글에 존재하지 않는 댓글입니다."),
 
 	//Chat
-	CHAT_ROOM_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "이미 존재하는 채팅방입니다."),
 	CHAT_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 채팅방입니다."),
 	CANNOT_SEND_MESSAGE_TO_SELF(HttpStatus.BAD_REQUEST, "자신의 게시물에 메시지를 보낼 수 없습니다."),
 
@@ -114,8 +107,7 @@ public enum ErrorCode implements BaseCode {
 	FILE_INVALID_EXTENSION(HttpStatus.BAD_REQUEST, "이미지만 업로드 할 수 있습니다."),
 
 	//notification
-	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다"),
-	QUERY_PROVIDER_DENIED(HttpStatus.BAD_REQUEST, "query provider가 실행되지 않았습니다.");
+	NOTIFICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 알림입니다");
 
 	private final HttpStatus httpStatus;
 	private final String message;

@@ -55,10 +55,6 @@ public class AlbumQueryRepositoryImpl implements AlbumQueryRepository {
 		JPAQuery<Album> query = jpaQueryFactory
 			.selectFrom(qAlbum)
 			.join(qUser).on(qUser.id.eq(qAlbum.user.id)).fetchJoin()
-			/*
-			leftJoin(A.field, B)
-			B가 A를 조인하고 있으며 A.field 의 필드와 같은 타입
-			 */
 			.leftJoin(qAlbum.albumImageList, qAlbumImage).fetchJoin()
 			.where(
 				builder,

@@ -10,6 +10,6 @@ import lombok.Getter;
 public class DailyAnswerCreateRequestDto {
 
 	@NotBlank
-	@Size(max = 255, message = "85글자 이하로 입력해주세요.")
+	@Size(max = 255, message = "255글자 이하로 입력해주세요.")
 	private String answer;
 }

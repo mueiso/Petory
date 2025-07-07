@@ -62,7 +62,6 @@ public class DailyAnswer extends TimeFeatureBasedEntity {
 		this.answer = answer;
 	}
 
-	// user 검증 메서드
 	public boolean isEqualUser(Long userId) {
 		return this.user.isEqualId(userId);
 	}

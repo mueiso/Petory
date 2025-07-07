@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.hibernate.LazyInitializationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -22,8 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
-	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	// 유효성 예외 처리
 	@ExceptionHandler(MethodArgumentNotValidException.class)

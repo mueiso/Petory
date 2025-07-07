@@ -19,23 +19,16 @@ public class EventQueryRepositoryImpl implements EventQueryRepository {
 
 	private final QUser qUser = QUser.user;
 
-	// start: 조회 범위 시작일, end: 조회 범위 종료일
 	public List<Event> findEventListStart(Long userId, LocalDateTime start, LocalDateTime end) {
 		return jpaQueryFactory
 			.selectFrom(qEvent)
 			.join(qUser).on(qUser.id.eq(qEvent.user.id)).fetchJoin()
 			.where(
 				qEvent.user.id.eq(userId),
-				// startDate: 일정 시작일
 				qEvent.startDate.between(start, end)
-					// 일정 시작일이 조회 범위 전인 일정만 조회
-					// 일정 시작일 > 조회 시작일
 					.or(qEvent.startDate.lt(start)
-						// rrule: 반복 조건
 						.and(qEvent.rrule.isNotNull())
-						// recurrenceEnd: 반복 종료일
 						.and(qEvent.recurrenceEnd.isNull()
-							// 반복 종료일이 시작일 이후에 종료 되는 일정
 							.or(qEvent.recurrenceEnd.gt(start))
 						)
 					)

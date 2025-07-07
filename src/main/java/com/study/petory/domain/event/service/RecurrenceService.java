@@ -27,7 +27,6 @@ import com.study.petory.domain.event.entity.RecurrenceInfo;
 @Component
 public class RecurrenceService {
 
-	private static final String RRULE = "RRULE";
 	private static final String RDATE = "RDATE";
 	private static final String EXDATE = "EXDATE";
 
@@ -145,5 +144,4 @@ public class RecurrenceService {
 		}
 		return dateList;
 	}
-
 }

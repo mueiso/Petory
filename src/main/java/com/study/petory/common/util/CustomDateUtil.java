@@ -10,7 +10,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import net.fortuna.ical4j.model.DateTime;
 
@@ -34,12 +33,10 @@ public class CustomDateUtil {
 	}
 
 	public static LocalDateTime stringToLocalDateTime(String date) {
-		// 데이터가 null이거나 앞 뒤에 불필요한 입력을 제거할 때 비어있다면 null 반환
 		if (date == null || date.trim().isEmpty()) {
 			return null;
 		}
 
-		// 불필요한 문자열을 제거하여 형식 맞추기
 		String trimDate = date.trim();
 
 		if (trimDate.isEmpty()) {
@@ -66,7 +63,6 @@ public class CustomDateUtil {
 				return ZonedDateTime.parse(trimDate).toLocalDateTime();
 			}
 
-			// 19자 미만은 잘못된 형식
 			throw new CustomException(ErrorCode.DATE_TIME_PARSE_FAIL);
 
 		} catch (DateTimeParseException e) {

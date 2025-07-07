@@ -13,10 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-/*
- * AuthenticationFailureHandler: Spring Security 에서 인증 실패 시 실행되는 콜백 핸들러
- * OAuth2 로그인 실패 시 호출되는 핸들러
- */
+// OAuth2 로그인 실패 시 호출되는 핸들러
 public class OAuth2FailureHandler implements AuthenticationFailureHandler {
 
 	// 인증 실패 시 실행되는 콜백 메서드

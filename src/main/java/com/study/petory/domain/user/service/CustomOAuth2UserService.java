@@ -49,9 +49,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 			// 5-1. 개인 정보 객체 생성
 			UserPrivateInfo privateInfo = UserPrivateInfo.builder()
-				.authId(userRequest.getClientRegistration().getRegistrationId())  // 예: "google"
+				.authId(userRequest.getClientRegistration().getRegistrationId())
 				.name(name)
-				.mobileNum("")  // 초기값 설정 (필요시 나중에 업데이트)
+				.mobileNum("")
 				.build();
 
 			// 5-2. 기본 사용자 역할 설정 (예: ROLE_USER)
@@ -61,7 +61,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 			// 5-3. 사용자 객체 생성 및 저장
 			return userRepository.save(User.builder()
-				.nickname(name)  // 초기 닉네임 설정
+				.nickname(name)
 				.email(email)
 				.userPrivateInfo(privateInfo)
 				.userRole(List.of(userRole))

@@ -67,7 +67,7 @@ class UserSchedulerServiceTest {
 		/* [when]
 		 * 테스트 대상 메서드 실행: 미접속 85일 넘은 유저들에게 휴면 안내 메일 발송
 		 */
-		userSchedulerService.testSendDeactivationWarningEmails(now);
+		userSchedulerService.NowSendDeactivationWarningEmails(now);
 
 		/* [then]
 		 * 이메일 발송 메서드가 호풀되었는지 검증 (이메일, 이름, 날짜 확인)

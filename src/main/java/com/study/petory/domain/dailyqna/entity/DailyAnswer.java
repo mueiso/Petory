@@ -25,9 +25,9 @@ import lombok.NoArgsConstructor;
 @Table(
 	name = "tb_daily_answer",
 	indexes = {
-		@Index(name = "index_user_question",columnList = "user_id, daily_question_id"),
+		@Index(name = "index_user_question", columnList = "user_id, daily_question_id"),
 	}
-	)
+)
 @NoArgsConstructor
 public class DailyAnswer extends TimeFeatureBasedEntity {
 	@Id
@@ -69,9 +69,11 @@ public class DailyAnswer extends TimeFeatureBasedEntity {
 	public void updateStatusActive() {
 		this.dailyAnswerStatus = DailyAnswerStatus.ACTIVE;
 	}
+
 	public void updateStatusHidden() {
 		this.dailyAnswerStatus = DailyAnswerStatus.HIDDEN;
 	}
+
 	public void updateStatusDelete() {
 		this.dailyAnswerStatus = DailyAnswerStatus.DELETED;
 	}

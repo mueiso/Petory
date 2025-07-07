@@ -55,7 +55,7 @@ public class TestSchedulerController {
 
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userSchedulerService.testSendDeactivationWarningEmails(simulatedNow);
+		userSchedulerService.NowSendDeactivationWarningEmails(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.EMAIL_SENT);
 	}
@@ -74,7 +74,7 @@ public class TestSchedulerController {
 		// 현재 날짜를 임의로 설정해서 테스트 (예: 휴면 계정으로 전환 예정 날짜인 "2025-06-18T00:00")
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userSchedulerService.testDeactivateInactiveUsers(simulatedNow);
+		userSchedulerService.NowDeactivateInactiveUsers(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.USER_DEACTIVATED);
 	}
@@ -92,7 +92,7 @@ public class TestSchedulerController {
 
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userSchedulerService.testSendDeletionWarningEmails(simulatedNow);
+		userSchedulerService.NowSendDeletionWarningEmails(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.EMAIL_SENT);
 	}
@@ -111,7 +111,7 @@ public class TestSchedulerController {
 
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userSchedulerService.testHardDeleteExpiredUsers(simulatedNow);
+		userSchedulerService.NowHardDeleteExpiredUsers(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.DELETED);
 	}
@@ -129,7 +129,7 @@ public class TestSchedulerController {
 
 		LocalDateTime simulatedNow = LocalDateTime.parse(date);
 
-		userSchedulerService.testRestoreSuspendedUsers(simulatedNow);
+		userSchedulerService.NowRestoreSuspendedUsers(simulatedNow);
 
 		return CommonResponse.of(SuccessCode.RESTORED);
 	}

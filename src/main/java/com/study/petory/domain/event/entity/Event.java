@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.cglib.core.Local;
 
 import com.study.petory.common.entity.UpdateBasedEntity;
-import com.study.petory.common.util.CustomDateUtil;
 import com.study.petory.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -76,7 +74,8 @@ public class Event extends UpdateBasedEntity {
 	private EventColor color;
 
 	@Builder
-	public Event(User user, String title, LocalDateTime startDate, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
+	public Event(User user, String title, LocalDateTime startDate, LocalDateTime endDate, String timeZone,
+		boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
 		String rDate, String exDate, String description, EventColor color) {
 		this.user = user;
 		this.title = title;
@@ -92,7 +91,8 @@ public class Event extends UpdateBasedEntity {
 		this.color = color;
 	}
 
-	public void updateEvent(String title, LocalDateTime start, LocalDateTime endDate, String timeZone, boolean isAllDay, String rrule, LocalDateTime recurrenceEnd,
+	public void updateEvent(String title, LocalDateTime start, LocalDateTime endDate, String timeZone, boolean isAllDay,
+		String rrule, LocalDateTime recurrenceEnd,
 		String rDate, String exDate, String description, EventColor color) {
 		this.title = title;
 		this.startDate = start;

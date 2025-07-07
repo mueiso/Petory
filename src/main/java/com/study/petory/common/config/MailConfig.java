@@ -36,8 +36,8 @@ public class MailConfig {
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		// TODO - 배포 전 false 로 변경 (로그에 인증정보나 내용 일부가 노출될 수 있기 때문)
-		props.put("mail.debug", "true");
+		// 배포 시 false 로 변경 (로그에 인증정보나 내용 일부가 노출될 수 있기 때문)
+		props.put("mail.debug", "false");
 
 		return mailSender;
 	}

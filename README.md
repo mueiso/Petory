@@ -2,7 +2,8 @@
 
 <div align="center">
 
-<img width="561" alt="image" src="https://github.com/user-attachments/assets/c8000817-918b-4c14-9585-af755c1d0ead" />
+<img src="https://github.com/user-attachments/assets/59b15656-0f9a-4e13-a42e-a42bfe842e14" width="70%" />
+
 
 🐕**반려동물과 함께하는 일상을 더욱 풍요롭게 만드는 웹 플랫폼**🐈‍⬛
 

@@ -6,8 +6,8 @@
 
 🐕**반려동물과 함께하는 일상을 더욱 풍요롭게 만드는 웹 플랫폼**🐈‍⬛
 
-[🌐 사이트 바로가기](https://petory.click) | [📖 API 문서](https://documenter.getpostman.com/view/43234443/2sB2xE9ndC) | [🎨 와이어프레임](https://embed.figma.com/design/VyKiRe0wVqK9vkuDqdkojg/Petory-%EC%A0%9C%EC%B6%9C%EC%9A%A9?node-id=0-1)
-
+[🌐 사이트 바로가기](https://petory.click) | [📖 API 문서](https://documenter.getpostman.com/view/43234443/2sB2xE9ndC) | [🎨 와이어프레임](https://github.com/jhyang22/Petory/wiki/%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84-PDF
+)
 </div>
 
 ## 💡 프로젝트 소개

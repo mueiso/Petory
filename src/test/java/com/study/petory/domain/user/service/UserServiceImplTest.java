@@ -302,12 +302,78 @@ class UserServiceImplTest {
 		// 이메일 기준 유저 조회 시 위의 mock 유저 반환되도록 설정
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// [then]
 		/* [when & then]
 		 * 이미 탈퇴한 유저가 다시 탈퇴 시도할 경우 예외 타입 & 예외 메시지 일치하는지 검증
 		 */
 		assertThatThrownBy(() -> userService.deleteAccount(email))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.USER_ALREADY_DELETED.getMessage());
+	}
+
+	@Test
+	void findUserById_탈퇴유저일경우_예외발생() {
+
+		// [given]
+		Long userId = 1L;
+		User user = mock(User.class);
+		when(user.getDeletedAt()).thenReturn(LocalDateTime.now());
+
+		// [when]
+		when(userRepository.findByIdWithUserRole(userId)).thenReturn(Optional.of(user));
+
+		// [then]
+		assertThatThrownBy(() -> userService.findUserById(userId))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_NOT_EXISTING.getMessage());
+	}
+
+	@Test
+	void findUserByIdWithUserStatus_존재하지않는경우_예외발생() {
+
+		// [given]
+		Long userId = 1L;
+
+		// [when]
+		when(userRepository.findByIdWithUserRoleAndUserStatus(userId, UserStatus.ACTIVE))
+			.thenReturn(Optional.empty());
+
+		// [then]
+		assertThatThrownBy(() -> userService.findUserByIdWithUserStatus(userId, UserStatus.ACTIVE))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_NOT_FOUND.getMessage());
+	}
+
+	@Test
+	void findUserByEmail_정상조회() {
+
+		// [given]
+		String email = "test@email.com";
+		User user = mock(User.class);
+		when(user.getDeletedAt()).thenReturn(null);
+
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// [when]
+		User result = userService.findUserByEmail(email);
+
+		// [then]
+		assertThat(result).isEqualTo(user);
+	}
+
+	@Test
+	void findUserByEmail_삭제된유저_예외() {
+
+		// [given]
+		String email = "deleted@email.com";
+		User user = mock(User.class);
+		when(user.getDeletedAt()).thenReturn(LocalDateTime.now());
+
+		// [when]
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// [then]
+		assertThatThrownBy(() -> userService.findUserByEmail(email))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_NOT_EXISTING.getMessage());
 	}
 }

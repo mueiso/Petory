@@ -226,21 +226,30 @@ class UserServiceImplTest {
 		String pureToken = "abc.def.ghi";
 		Long userId = 123L;
 
+		// JWT 의 Claims 를 mock 으로 생성하여 토큰 정보 세팅
 		Claims claims = mock(Claims.class);
 		when(claims.getSubject()).thenReturn(userId.toString());
 		when(claims.getExpiration()).thenReturn(new Date(System.currentTimeMillis() + 10_000));
 
+		// jwtProvider 관련 메서드 모킹 (토큰 파싱 & claims)
 		when(jwtProvider.subStringToken(token)).thenReturn(pureToken);
 		when(jwtProvider.getClaims(pureToken)).thenReturn(claims);
 		when(jwtProvider.getClaims(token)).thenReturn(claims);
 
-		// RedisTemplate 설정 (이 부분이 핵심)
+		// RedisTemplate 설정 (ValueOperations 반환 설정)
 		when(loginRefreshToken.opsForValue()).thenReturn(valueOperations);
 
-		// [when]
+		/* [when]
+		 * 로그아웃 메서드 수행
+		 */
 		userService.logout(token);
 
-		// [then]
+		/* [then]
+		 * (AccessToken 을 블랙리스트에 저장했는지 검증)
+		 * key: "BLACKLIST_{token}"
+		 * value: "logout"
+		 * TTL: 만료 시간까지 남은 밀리초
+		 */
 		verify(valueOperations).set(
 			eq("BLACKLIST_" + pureToken),
 			eq("logout"),
@@ -248,24 +257,34 @@ class UserServiceImplTest {
 			eq(TimeUnit.MILLISECONDS)
 		);
 
+		// 해당 유저의 RefreshToken 삭제 메서드 수행됐는지 검증
 		verify(jwtProvider).deleteRefreshToken(userId);
 	}
 
 	@Test
 	void deleteAccount_정상_softDelete() {
 
-		// [given]
+		/* [given]
+		 * 삭제 요청을 받을 유저 이메일
+		 * 탈퇴 대상 유저를 mock 으로 생성 (userStatus: ACTIVE, deletedAt: null)
+		 */
 		String email = "delete@test.com";
 		User user = mock(User.class);
 		when(user.getUserStatus()).thenReturn(UserStatus.ACTIVE);
 		when(user.getDeletedAt()).thenReturn(null);
 
+		// 이메일 기준 유저 조회 시 위의 mock 반환되도록 설정
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// [when]
+		/* [when]
+		 * soft delete 메서드 수행
+		 */
 		userService.deleteAccount(email);
 
-		// [then]
+		/* [then]
+		 * 탈퇴 처리 메서드 호출됐는지 검증
+		 * userStatus DELETED 로 변경됐는지 검증
+		 */
 		verify(user).deactivateEntity();
 		verify(user).updateStatus(UserStatus.DELETED);
 	}
@@ -273,14 +292,20 @@ class UserServiceImplTest {
 	@Test
 	void deleteAccount_이미삭제된유저_예외() {
 
-		// [given]
+		/* [given]
+		 * 유저 객체 mock 으로 생성 (userStatus: DELETED)
+		 */
 		String email = "already@deleted.com";
 		User user = mock(User.class);
 		when(user.getUserStatus()).thenReturn(UserStatus.DELETED);
 
+		// 이메일 기준 유저 조회 시 위의 mock 유저 반환되도록 설정
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
 		// [then]
+		/* [when & then]
+		 * 이미 탈퇴한 유저가 다시 탈퇴 시도할 경우 예외 타입 & 예외 메시지 일치하는지 검증
+		 */
 		assertThatThrownBy(() -> userService.deleteAccount(email))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.USER_ALREADY_DELETED.getMessage());

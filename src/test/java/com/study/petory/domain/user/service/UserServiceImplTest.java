@@ -235,4 +235,20 @@ class UserServiceImplTest {
 		verify(user).deactivateEntity();
 		verify(user).updateStatus(UserStatus.DELETED);
 	}
+
+	@Test
+	void deleteAccount_이미삭제된유저_예외() {
+
+		// [given]
+		String email = "already@deleted.com";
+		User user = mock(User.class);
+		when(user.getUserStatus()).thenReturn(UserStatus.DELETED);
+
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// then
+		assertThatThrownBy(() -> userService.deleteAccount(email))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.USER_ALREADY_DELETED.getMessage());
+	}
 }

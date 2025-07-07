@@ -124,6 +124,13 @@ class UserServiceImplTest {
 		User user = mock(User.class);
 		UserPrivateInfo info = mock(UserPrivateInfo.class);
 
+		/*
+		 * (정상 유저 필드 설정)
+		 * 유저가 탈퇴하지 않았음을 설정
+		 * 개인 정보 연결
+		 * 유저 기본 정보 설정
+		 * 유저 개인 정보 설정
+		 */
 		when(user.getDeletedAt()).thenReturn(null);
 		when(user.getUserPrivateInfo()).thenReturn(info);
 		when(user.getEmail()).thenReturn(email);
@@ -131,12 +138,17 @@ class UserServiceImplTest {
 		when(info.getName()).thenReturn("홍길동");
 		when(info.getMobileNum()).thenReturn("010-1234-5678");
 
+		// 레포지토리에서 해당 유저 조회했을 때 위의 mock 객체가 반환되도록 설정
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// when
+		/* [when]
+		 * 테스트 대상 메서드 호출 (프로필 정보 조회)
+		 */
 		UserProfileResponseDto result = userService.findMyProfile(email);
 
-		// then
+		/* [then]
+		 * 반환값이 위에서 설정한 mock 객체의 값과 일치하는지 검증
+		 */
 		assertThat(result.getEmail()).isEqualTo(email);
 		assertThat(result.getNickname()).isEqualTo("닉네임");
 		assertThat(result.getName()).isEqualTo("홍길동");
@@ -149,12 +161,21 @@ class UserServiceImplTest {
 		// [given]
 		String email = "deleted@example.com";
 
+		/*
+		 * 탈퇴한 유저를 mock 으로 생성
+		 * 탈퇴 시각을 현재 시각으로 설정해서 탈퇴 상태임을 나타냄
+		 */
 		User user = mock(User.class);
 		when(user.getDeletedAt()).thenReturn(LocalDateTime.now());
 
+		// 해당 유저를 이메일로 조회 시 위의 mock 객체가 반환되도록 설정
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// then
+		/*
+		 * [when & then]
+		 * findMyProfile 호출 시, 탈퇴 유저이므로 예외가 발생해야 함
+		 * 예외 타임 & 예외 메시지 일치하는지 확인
+		 */
 		assertThatThrownBy(() -> userService.findMyProfile(email))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.USER_NOT_EXISTING.getMessage());
@@ -163,23 +184,36 @@ class UserServiceImplTest {
 	@Test
 	void updateProfile_정상동작() {
 
-		// [given]
+		/* [given]
+		 * 사용자 이메일과 프로필 수정 Dto 생성
+		 */
 		String email = "test@example.com";
 		UserUpdateRequestDto dto = new UserUpdateRequestDto();
 		dto.setNickname("new-nick");
 		dto.setMobileNum("010-1111-2222");
 
+		// 유저 & 개인정보 mock 으로 생성
 		User user = mock(User.class);
 		UserPrivateInfo info = mock(UserPrivateInfo.class);
+
+		/*
+		 * 탈퇴되지 않은 유저로 설정
+		 * 개인 정보 연결
+		 */
 		when(user.getDeletedAt()).thenReturn(null);
 		when(user.getUserPrivateInfo()).thenReturn(info);
 
+		// 이메일로 유저 조회 시 위의 mock 유저 반환되도록 설정
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// when
+		/* [when]
+		 * 유저 정보 수정 메서드 호출
+		 */
 		userService.updateProfile(email, dto);
 
-		// then
+		/* [then]
+		 * 닉네임 및 전화번호 값 일치하는지 검증
+		 */
 		verify(user).updateNickname("new-nick");
 		verify(info).update("010-1111-2222");
 	}
@@ -203,10 +237,10 @@ class UserServiceImplTest {
 		// RedisTemplate 설정 (이 부분이 핵심)
 		when(loginRefreshToken.opsForValue()).thenReturn(valueOperations);
 
-		// when
+		// [when]
 		userService.logout(token);
 
-		// then
+		// [then]
 		verify(valueOperations).set(
 			eq("BLACKLIST_" + pureToken),
 			eq("logout"),
@@ -228,10 +262,10 @@ class UserServiceImplTest {
 
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// when
+		// [when]
 		userService.deleteAccount(email);
 
-		// then
+		// [then]
 		verify(user).deactivateEntity();
 		verify(user).updateStatus(UserStatus.DELETED);
 	}
@@ -246,7 +280,7 @@ class UserServiceImplTest {
 
 		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
 
-		// then
+		// [then]
 		assertThatThrownBy(() -> userService.deleteAccount(email))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.USER_ALREADY_DELETED.getMessage());

@@ -96,7 +96,7 @@ class UserRepositoryTest {
 		 * 기준 범위에 제외되는 유저: updatedAt 이 85일전
 		 * 기준 범위에 제외되는 유저: userStatus 가 DELETED
 		 */
-		User user = createUser(UserStatus.ACTIVE, null, null);;
+		User user = createUser(UserStatus.ACTIVE, null, null);
 		setField(user, "updatedAt", standard.minusDays(10));
 		userRepository.save(user);
 

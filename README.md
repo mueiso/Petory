@@ -9,11 +9,12 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat-square&logo=mysql)](https://www.mysql.com/)
 [![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=flat-square&logo=redis)](https://redis.io/)
 [![Docker](https://img.shields.io/badge/Docker-20.10-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
+[![Docker](https://img.shields.io/badge/Docker-28.x-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
 [![AWS](https://img.shields.io/badge/AWS-EC2%2FRDS%2FS3-232F3E?style=flat-square&logo=amazon-aws)](https://aws.amazon.com/)
 
 **반려동물과 함께하는 일상을 더욱 풍요롭게 만드는 웹 플랫폼**
 
-[🌐 사이트 바로가기](https://petory.click/login.html) | [📖 API 문서](https://documenter.getpostman.com/view/43234443/2sB2xE9ndC) | [🎨 와이어프레임](https://embed.figma.com/design/VyKiRe0wVqK9vkuDqdkojg/Petory-%EC%A0%9C%EC%B6%9C%EC%9A%A9?node-id=0-1)
+[🌐 사이트 바로가기](https://petory.click) | [📖 API 문서](https://documenter.getpostman.com/view/43234443/2sB2xE9ndC) | [🎨 와이어프레임](https://embed.figma.com/design/VyKiRe0wVqK9vkuDqdkojg/Petory-%EC%A0%9C%EC%B6%9C%EC%9A%A9?node-id=0-1)
 
 </div>
 
@@ -116,14 +117,14 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 
 
 ## 🏗️ 시스템 아키텍처
-![Blank diagram - Page 2](https://github.com/user-attachments/assets/c10a955c-4744-4d66-b871-9b1996734285)
+![아키텍쳐 vpc az수정](https://github.com/user-attachments/assets/3e01e12d-e90e-4bc2-944a-7b05721683da)
 
 
 ### 🔧 인프라 구성
 
 | 서비스 | 사양 | 역할 |
 |--------|------|------|
-| **EC2** | t2.medium | 애플리케이션 서버 |
+| **EC2** | t3.medium | 애플리케이션 서버 |
 | **RDS** | t4g.micro (MySQL) | 관계형 데이터베이스 |
 | **ElastiCache** | t2.micro (Redis OSS) | 캐싱 및 세션 관리 |
 | **ECR** | Private Repository | 컨테이너 이미지 저장 |
@@ -231,15 +232,19 @@ public Step sendDailyQuestionStep(
 
 </details>
 
-## 📱 주요 화면 (추가 예정)
+## 🛡️ Test Coverage
+![화면 캡처 2025-07-06 163040.png](attachment:e5d3964c-7d1a-4b2f-a4fe-c9cd6ed6a152:화면_캡처_2025-07-06_163040.png)
+
+
+## 📱 주요 화면
 
 | 메인 페이지 | 커뮤니티 | 플레이스 |
 |-------------|----------|----------|
-| ![메인](https://via.placeholder.com/300x200/FFE0B2/5D4037?text=메인페이지) | ![커뮤니티](https://via.placeholder.com/300x200/FFE0B2/5D4037?text=커뮤니티) | ![플레이스](https://via.placeholder.com/300x200/FFE0B2/5D4037?text=플레이스) |
+| <img src="https://github.com/user-attachments/assets/68c9feaf-ff41-4d1f-b0c7-2dc66155e03d" width = "200"/> | <img src="https://github.com/user-attachments/assets/1092473b-765b-4540-a238-5d1bdd79b10a" width = "200"/>| <img src="https://github.com/user-attachments/assets/bef7597f-801c-426d-8a4d-2dcab8bc4cc2" width = "200"/> |
 
-| 데일리 QnA | 채팅 | 캘린더 |
+| 로그인 | 채팅 | 캘린더 |
 |-------------|------|--------|
-| ![데일리](https://via.placeholder.com/300x200/FFE0B2/5D4037?text=데일리QnA) | ![채팅](https://via.placeholder.com/300x200/FFE0B2/5D4037?text=채팅) | ![캘린더](https://via.placeholder.com/300x200/FFE0B2/5D4037?text=캘린더) |
+| <img src="https://github.com/user-attachments/assets/0a551055-ba1e-4b26-896c-18bf08f3a8e5" width = "200"/> | <img src="https://github.com/user-attachments/assets/ec721a74-3bb7-4082-9105-898796bee698" width = "200"/>| <img src="https://github.com/user-attachments/assets/491ae3a5-6cfb-4a7e-aa51-007a0cb4f9a6" width = "200"/> |
 
 ## 🗂️ 프로젝트 구조
 
@@ -285,11 +290,15 @@ public Step sendDailyQuestionStep(
 | 기능 | Method | Endpoint | 설명 |
 |------|--------|----------|------|
 | 로그인 | GET | `/oauth2/authorization/google` | Google OAuth2 로그인 |
-| 게시글 목록 | GET | `/owner-boards` | 커뮤니티 게시글 조회 |
-| 게시글 작성 | POST | `/owner-boards` | 새 게시글 작성 |
-| 플레이스 검색 | GET | `/places` | 반려동물 동반 장소 검색 |
-| 채팅방 입장 | GET | `/chat/rooms/{roomId}` | 채팅방 입장 |
-| 데일리 질문 | GET | `/daily-questions/today` | 오늘의 질문 조회 |
+| 반려동물 등록 | POST | `/pet` | 사용자의 반려동물 등록 |
+| 앨범 조회 | GET | `/users/my/albums` | 사용자가 기록한 사진 전체 조회 |
+| 데일리 질문 | GET | `/daily-questions/today` | 오늘의 질문 조회|
+| 플레이스 검색 | GET | `/places` | 반려동물 동반 장소 조회 |
+| 게시글 목록 | GET | `/owner-boards` | 커뮤니티 게시글 전체 조회|
+| 채팅 시작 | GET | `/chat/{chatId}` | 채팅방 입장 |
+| 알림 전체 조회 | GET | `/notifications` | 오늘의 질문 알림 조회|
+| 일정 생성 | POST | `/users/events` | 일정 생성 |
+
 
 ## 👥 팀원 소개
 

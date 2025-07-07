@@ -4,15 +4,7 @@
 
 <img width="561" alt="image" src="https://github.com/user-attachments/assets/c8000817-918b-4c14-9585-af755c1d0ead" />
 
-[![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=java)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=spring)](https://spring.io/projects/spring-boot)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat-square&logo=mysql)](https://www.mysql.com/)
-[![Redis](https://img.shields.io/badge/Redis-7.0-DC382D?style=flat-square&logo=redis)](https://redis.io/)
-[![Docker](https://img.shields.io/badge/Docker-20.10-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
-[![Docker](https://img.shields.io/badge/Docker-28.x-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
-[![AWS](https://img.shields.io/badge/AWS-EC2%2FRDS%2FS3-232F3E?style=flat-square&logo=amazon-aws)](https://aws.amazon.com/)
-
-**반려동물과 함께하는 일상을 더욱 풍요롭게 만드는 웹 플랫폼**
+🐕**반려동물과 함께하는 일상을 더욱 풍요롭게 만드는 웹 플랫폼**🐈‍⬛
 
 [🌐 사이트 바로가기](https://petory.click) | [📖 API 문서](https://documenter.getpostman.com/view/43234443/2sB2xE9ndC) | [🎨 와이어프레임](https://embed.figma.com/design/VyKiRe0wVqK9vkuDqdkojg/Petory-%EC%A0%9C%EC%B6%9C%EC%9A%A9?node-id=0-1)
 
@@ -59,7 +51,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 ![ElastiCache](https://img.shields.io/badge/ElastiCache-FF4F8B?style=for-the-badge&logo=amazon-aws)
 
 ### DevOps & Infrastructure
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
+[![Docker](https://img.shields.io/badge/Docker-28.x-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions)
 ![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazon-aws)
 ![ECR](https://img.shields.io/badge/Amazon%20ECR-FF9900?style=for-the-badge&logo=amazon-aws)
@@ -120,8 +112,8 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 ![아키텍쳐 vpc az수정](https://github.com/user-attachments/assets/3e01e12d-e90e-4bc2-944a-7b05721683da)
 
 
-### 🔧 인프라 구성
 
+### 🔧 인프라 구성
 | 서비스 | 사양 | 역할 |
 |--------|------|------|
 | **EC2** | t3.medium | 애플리케이션 서버 |
@@ -130,6 +122,8 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 | **ECR** | Private Repository | 컨테이너 이미지 저장 |
 | **S3** | Standard | 사용자 업로드 파일 관리 |
 | **MongoDB Atlas** | - | 채팅 데이터 저장 |
+
+
 
 ### 🚀 CI/CD 파이프라인
 
@@ -141,72 +135,155 @@ graph LR
     D --> E[EC2 Deploy]
 ```
 
-## 📊 성능 개선
 
-### 🚀 Spring Batch 도입으로 91% 성능 개선
+## 💫 주요 기술적 의사결정
 
-**문제상황**: 10만 명 사용자 대상 데일리 질문 알림 발송 시 58초 소요
+<details>
+<summary>☀️ JWT + Redis 기반 보안 강화</summary>
 
-**해결과정**:
-1. **기존 방식** (findAll + for loop): 58초
-2. **Spring Batch + 비동기 처리**: 8초 (86% 개선)
-3. **JdbcCursorItemReader 적용**: 5초 (91% 개선)
+**🔹 배경**  
+- JWT의 무상태 특성으로 로그아웃 후에도 토큰이 유효기간 내라면 인증된 것처럼 동작하는 보안 취약점 발견  
+- 토큰 탈취 시 즉각적인 대응이 어려운 구조적 문제점 인식  
 
-```java
-// 최종 적용된 배치 처리 구조
-@Bean
-public Step sendDailyQuestionStep(
-    JobRepository jobRepository,
-    PlatformTransactionManager transactionManager,
-    JdbcCursorItemReader<User> userReader,
-    ItemProcessor<User, Notification> itemProcessor,
-    JdbcBatchItemWriter<Notification> itemWriter,
-    TaskExecutor notificationTaskExecutor
-) {
-    return new StepBuilder("sendDailyQuestionStep", jobRepository)
-        .<User, Notification>chunk(CHUNK_SIZE, transactionManager)
-        .reader(userReader)
-        .processor(itemProcessor)
-        .writer(itemWriter)
-        .taskExecutor(notificationTaskExecutor)
-        .build();
-}
-```
+**🔹 비교**  
+- Session 방식: 서버 메모리 사용량 증가, 확장성 제약  
+- JWT만 사용: 로그아웃 처리 불가, 토큰 무효화 어려움  
+- JWT + Redis: 무상태성 유지하면서 실시간 토큰 제어 가능  
 
-## 🔐 주요 기술적 의사결정
+**🔹 결론**  
+- Redis 블랙리스트와 TTL을 활용한 JWT 보안 강화 구현  
+- 로그아웃 시 AccessToken 블랙리스트 등록으로 즉시 차단, 자동 만료로 서버 부하 최소화  
+</details>
 
-### 1. QueryDSL 도입
-- **배경**: 복잡한 동적 쿼리와 타입 안정성 확보 필요
-- **장점**: 컴파일 시점 오류 확인, 유지보수성 향상, 동적 쿼리 작성 용이
-- **결과**: 코드 안정성 향상 및 개발 효율성 증대
+<details>
+<summary>☀️ MongoDB Atlas 선택 (vs DocumentDB)</summary>
 
-### 2. Redis 활용 전략
-- **JWT 토큰 관리**: <br>
-    로그아웃 → AccessToken를 BLACKLIST 처리하며, Redis에 BLACKLIST_ 키를 저장해 차단 & userId의 RefreshToken  삭제<br>
-    토큰 재발급 → Redis에 저장된 RefreshToken 값과 비교 & 새로운 AccessToken/RefreshToken  발급(토큰 재사용 차단)
-- **전역 캐시**: 데일리 질문 API 응답 속도 향상
-- **Rate Limiting**: Bucket4j와 연동하여 API 요청 제한
+**🔹 배경**  
+- 채팅 기능 구현을 위한 NoSQL 데이터베이스 필요  
+- AWS DocumentDB와 MongoDB Atlas 중 선택 고민  
 
-### 3. Spring Batch 성능 최적화
-- **청크 기반 처리**: 대용량 데이터를 효율적으로 처리
-- **멀티스레드 활용**: TaskExecutor를 통한 병렬 처리
-- **JDBC vs JPA**: 단순 삽입 작업에서 JDBC 선택으로 성능 향상
+**🔹 비교**  
+- DocumentDB: AWS 네이티브 통합 우수, 하지만 MongoDB 100% 호환성 미보장  
+- MongoDB Atlas: 완전한 MongoDB 호환성, 무료 티어 제공  
+- 호환성 리스크: DocumentDB는 버전 차이로 인한 쿼리 동작 차이 가능성  
 
-### 4. 보안 강화
-- **Google OAuth2 + 자체 JWT**: 외부 인증 + 내부 인가 구조
-- **토큰 분리**: AccessToken(짧은 수명) + RefreshToken(Redis 저장)
-- **블랙리스트 처리**: 로그아웃된 AccessToken의 즉시 무효화 및 RefresthToken 삭제로 AccessToken 재발급 방지
+**🔹 결론**  
+- 기존 코드와의 100% 호환성과 개발 일정을 고려하여 MongoDB Atlas 선택  
+- 안정성과 빠른 배포를 우선시한 현실적 판단  
+</details>
+
+<details>
+<summary>☀️ MongoDB에 바이너리 파일 적재하기</summary>
+
+**🔹 배경**  
+- 사용자가 채팅을 보낼 때 사진 보내기 기능이 필요했습니다.  
+- 현재 MongoDB를 사용해 채팅을 저장 중이며,  
+  `@MessageMapping` 어노테이션과 `messagingTemplate`을 활용해 웹소켓 기반 채팅을 구현했습니다.  
+- 이로 인해 다음과 같은 문제점이 발생했습니다:  
+  - 바이너리 파일 저장 시 base64로 인코딩이 필요함  
+  - 클라이언트가 저장 요청을 보낼 때, 이미지 형식이 맞는지 서버에서 검증해야 함  
+
+**🔹 고려 사항**
+
+| 항목 | 고려 사항 |
+|------|------------|
+| 파일 저장 방식 | S3로 업로드 → MongoDB에는 URL만 저장 |
+| 업로드 성공 여부 | 클라이언트가 파일을 업로드한 후 서버에 알려야 함 |
+| 파일 타입 | 잘못된 파일이 저장되지 않도록 업로드 시 검증 필요 |
+| 저장 항목 | 파일명, MIME 타입, S3 URL, 유저 ID 등 |
+
+**🔹 결론**  
+- 클라이언트가 **Presigned URL**을 통해 S3에 직접 사진을 업로드하도록 구현  
+- 서버는 업로드 URL만 응답하고, 클라이언트가 업로드 완료 후 해당 URL을 DB에 저장 요청  
+- 이렇게 하여 **파일 유효성 검증 부담을 줄이고**, **서버 부하 및 비용도 절감**  
+</details>
+
+
+<details>
+<summary>☀️ Grafana + Prometheus 모니터링</summary>
+
+**🔹 배경**  
+- AWS 기반 운영 환경에서 시스템 상태 실시간 모니터링 필요  
+- 장애 상황 빠른 파악과 대응을 위한 가시화된 모니터링 체계 구축  
+
+**🔹 비교**  
+- 로그만 사용: 문제 파악에 시간 소요, 사후 대응적  
+- CloudWatch: AWS 네이티브하지만 커스터마이징 제약  
+- Grafana + Prometheus: 유연한 대시보드, 다양한 데이터 소스 연동 가능  
+
+**🔹 결론**  
+- Spring Boot Actuator와 Prometheus 연동으로 메트릭 수집  
+- Grafana 대시보드로 CPU, 메모리, HTTP 응답시간 등 실시간 모니터링 구현  
+</details>
+
+
 
 ## 📈 모니터링
 
-### Grafana + Prometheus 모니터링 시스템
+**Grafana + Prometheus 모니터링 시스템**
 - **시스템 메트릭**: CPU, 메모리, 네트워크 사용량 실시간 모니터링
 - **애플리케이션 메트릭**: HTTP 응답 시간, DB 지연 시간 추적
+
+
+
+## 📊 성능 개선
+
+<details>
+<summary>🚀 스프링 배치를 통한 91% 성능 개선</summary>
+
+**🔹 기능 소개**  
+- 매일 자정마다 유저에게 데일리 질문 알림을 발송하는 기능 구현  
+- `Notification` 엔티티를 사용해 유저와 알림 내용을 저장  
+
+**🔹 기술 결정 과정**  
+- 기존 `findAll()` + 반복 저장 방식은 유저 수 증가 시 병목 발생  
+- Spring Batch + `chunk` 기반 처리로 대체  
+- `TaskExecutor`로 멀티스레드 병렬 처리 적용  
+
+**🔹 성능 테스트 결과**  
+- 기존 방식: 10만명 기준 평균 **58초**  
+- Spring Batch + 비동기 처리: **7초**  
+- JdbcCursorItemReader로 리팩토링 후: **5초**  
+- **총 91.3% 성능 개선** 달성  
+
+**🔹 회고**  
+- 단순 반복 저장 방식의 병목 문제를 Spring Batch로 해결  
+- reader/processor/writer 구조와 JDBC vs JPA 차이 학습  
+- 향후 파티셔닝 도입 및 병렬 Step 처리 고려 예정  
+
+</details>
+
+<details>
+<summary>🚀 Redis 캐싱을 통한 인기 랭킹 성능 개선</summary>
+
+**🔹 기능 소개**  
+- 인기 장소 랭킹 데이터를 Redis에 캐싱하여 빠르게 조회  
+
+**🔹 기술 결정 과정**  
+- 기존 방식: QueryDSL로 DB 직접 조회 (좋아요 수 기준 정렬)  
+- 리팩토링 방식: Redis ZSet을 사용해 랭킹 구현  
+  - 좋아요 시 score 증가, 취소 시 감소  
+  - 캐시된 `placeId`로 DB에서 상세 데이터 조회  
+
+**🔹 성능 테스트 결과 (JMeter + Grafana)**  
+- 평균 응답시간: **509ms 개선 (약 3.1%)**  
+- 최소 응답시간: **5ms (SQL 대비 15배 빠름)**  
+- 3000명 동시 접속 시 **0% 오류율**  
+- Redis가 응답 지연과 부하 분산에 효과적임 확인  
+
+**🔹 회고**  
+- Redis 도입으로 캐시 기반 구조의 이점 체감  
+- 과부하 상황에서 서버 자원 한계를 시각화하며 대응 전략 필요성 인지  
+- 추후 TTL 설정, 조회 필드 최적화, 인덱싱 등도 개선 포인트로 도출  
+
+</details>
+
+
 
 ## 🚨 주요 트러블슈팅
 
 <details>
-<summary><strong>1. Docker 빌드 캐시 이슈</strong></summary>
+<summary>⚠️ Docker 빌드 캐시 이슈</summary>
 
 - **문제**: 코드 수정 후 배포했으나 변경사항이 반영되지 않음<br/>
 - **원인**: Docker 레이어 캐시로 인해 소스코드 변경이 감지되지 않음<br/>
@@ -215,7 +292,7 @@ public Step sendDailyQuestionStep(
 </details>
 
 <details>
-<summary><strong>2. JPA Lazy Loading으로 인한 401 에러</strong></summary>
+<summary>⚠️ JPA Lazy Loading으로 인한 401 에러</summary>
 
 - **문제**: Security 설정에 문제없음에도 401 Unauthorized 발생<br/>
 - **원인**: LazyInitializationException이 Security Filter에서 401로 변환됨<br/>
@@ -224,7 +301,7 @@ public Step sendDailyQuestionStep(
 </details>
 
 <details>
-<summary><strong>3. Rate Limiting 버킷 초기화 문제</strong></summary>
+<summary>⚠️ Rate Limiting 버킷 초기화 문제</summary>
 
 - **문제**: Bucket4j Rate Limiting이 매 요청마다 초기화됨<br/>
 - **원인**: BucketConfiguration이 매번 새로 생성됨<br/>
@@ -233,8 +310,7 @@ public Step sendDailyQuestionStep(
 </details>
 
 ## 🛡️ Test Coverage
-![화면 캡처 2025-07-06 163040.png](attachment:e5d3964c-7d1a-4b2f-a4fe-c9cd6ed6a152:화면_캡처_2025-07-06_163040.png)
-
+![화면 캡처 2025-07-06 163040](https://github.com/user-attachments/assets/e0adc662-2ae7-4cf6-85f0-d06a57e17c33)
 
 ## 📱 주요 화면
 

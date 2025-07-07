@@ -3,7 +3,6 @@ package com.study.petory.domain.event.service;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -51,7 +50,7 @@ public class EventServiceImpl implements EventService {
 
 		LocalDateTime endDate = CustomDateUtil.stringToLocalDateTime(request.getEndDate());
 		if (request.getIsAllDay()) {
-			endDate.plusDays(1);
+			endDate = endDate.plusDays(1);
 		}
 		RecurrenceInfo info = recurrenceService.getRecurrence(request.getRecurrence());
 

@@ -183,4 +183,37 @@ class UserServiceImplTest {
 		verify(user).updateNickname("new-nick");
 		verify(info).update("010-1111-2222");
 	}
+
+	@Test
+	void logout_정상동작() {
+
+		// [given]
+		String token = "Bearer abc.def.ghi";
+		String pureToken = "abc.def.ghi";
+		Long userId = 123L;
+
+		Claims claims = mock(Claims.class);
+		when(claims.getSubject()).thenReturn(userId.toString());
+		when(claims.getExpiration()).thenReturn(new Date(System.currentTimeMillis() + 10_000));
+
+		when(jwtProvider.subStringToken(token)).thenReturn(pureToken);
+		when(jwtProvider.getClaims(pureToken)).thenReturn(claims);
+		when(jwtProvider.getClaims(token)).thenReturn(claims);
+
+		// RedisTemplate 설정 (이 부분이 핵심)
+		when(loginRefreshToken.opsForValue()).thenReturn(valueOperations);
+
+		// when
+		userService.logout(token);
+
+		// then
+		verify(valueOperations).set(
+			eq("BLACKLIST_" + pureToken),
+			eq("logout"),
+			anyLong(),
+			eq(TimeUnit.MILLISECONDS)
+		);
+
+		verify(jwtProvider).deleteRefreshToken(userId);
+	}
 }

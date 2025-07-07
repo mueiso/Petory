@@ -3,24 +3,34 @@ package com.study.petory.domain.user.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import com.study.petory.common.exception.CustomException;
 import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.common.security.JwtProvider;
 import com.study.petory.domain.user.dto.TokenResponseDto;
+import com.study.petory.domain.user.dto.UserProfileResponseDto;
+import com.study.petory.domain.user.dto.UserUpdateRequestDto;
 import com.study.petory.domain.user.entity.Role;
 import com.study.petory.domain.user.entity.User;
+import com.study.petory.domain.user.entity.UserPrivateInfo;
 import com.study.petory.domain.user.entity.UserRole;
 import com.study.petory.domain.user.entity.UserStatus;
 import com.study.petory.domain.user.repository.UserRepository;
+
+import io.jsonwebtoken.Claims;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -31,13 +41,19 @@ class UserServiceImplTest {
 	@Mock
 	private JwtProvider jwtProvider;
 
+	@Mock
+	private RedisTemplate<String, String> loginRefreshToken;
+
+	@Mock
+	private ValueOperations<String, String> valueOperations;
+
 	@InjectMocks
 	private UserServiceImpl userService;
 
 	@Test
 	void testLogin_ACTIVE_또는_DEACTIVATED_상태일때_로그인성공() {
 
-		// given
+		// [given]
 		Long userId = 1L;
 
 		// User 객체를 Mock 으로 생성
@@ -76,7 +92,7 @@ class UserServiceImplTest {
 	@Test
 	void testLogin_정지_또는_삭제_상태이면_예외발생() {
 
-		// given
+		// [given]
 		Long userId = 2L;
 
 		/*
@@ -97,5 +113,33 @@ class UserServiceImplTest {
 		assertThatThrownBy(() -> userService.testLogin(userId))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.LOGIN_UNAVAILABLE.getMessage());
+	}
+
+	@Test
+	void findMyProfile_성공() {
+
+		// [given]
+		String email = "test@example.com";
+
+		User user = mock(User.class);
+		UserPrivateInfo info = mock(UserPrivateInfo.class);
+
+		when(user.getDeletedAt()).thenReturn(null);
+		when(user.getUserPrivateInfo()).thenReturn(info);
+		when(user.getEmail()).thenReturn(email);
+		when(user.getNickname()).thenReturn("닉네임");
+		when(info.getName()).thenReturn("홍길동");
+		when(info.getMobileNum()).thenReturn("010-1234-5678");
+
+		when(userRepository.findByEmailWithUserRole(email)).thenReturn(Optional.of(user));
+
+		// when
+		UserProfileResponseDto result = userService.findMyProfile(email);
+
+		// then
+		assertThat(result.getEmail()).isEqualTo(email);
+		assertThat(result.getNickname()).isEqualTo("닉네임");
+		assertThat(result.getName()).isEqualTo("홍길동");
+		assertThat(result.getMobileNum()).isEqualTo("010-1234-5678");
 	}
 }

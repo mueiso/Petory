@@ -3,6 +3,7 @@ package com.study.petory.domain.pet.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import com.study.petory.common.exception.enums.ErrorCode;
 import com.study.petory.domain.pet.dto.PetCreateRequestDto;
 import com.study.petory.domain.pet.dto.PetUpdateRequestDto;
 import com.study.petory.domain.pet.entity.Pet;
+import com.study.petory.domain.pet.entity.PetImage;
 import com.study.petory.domain.pet.entity.PetSize;
 import com.study.petory.domain.pet.repository.PetRepository;
 import com.study.petory.domain.user.entity.User;
@@ -34,6 +36,9 @@ class PetServiceImplTest {
 
 	@Mock
 	private PetRepository petRepository;
+
+	@Mock
+	private PetImageService petImageService;
 
 	@InjectMocks
 	private PetServiceImpl petService;
@@ -262,5 +267,55 @@ class PetServiceImplTest {
 		assertThatThrownBy(() -> petService.restorePet(userId, petId))
 			.isInstanceOf(CustomException.class)
 			.hasMessageContaining(ErrorCode.PET_NOT_DELETED.getMessage());
+	}
+
+	@Test
+	void deletePetImage_성공() {
+
+		// [given]
+		Long userId = 1L;
+		Long petImageId = 100L;
+
+		Pet mockPet = mock(Pet.class);
+		PetImage mockImage = mock(PetImage.class);
+
+		// 관계 설정
+		given(mockImage.getPet()).willReturn(mockPet);
+		given(mockPet.isPetOwner(userId)).willReturn(true);
+
+		// 이미지 목록에서 제거되도록 설정
+		List<PetImage> imageList = new ArrayList<>();
+		imageList.add(mockImage);
+		given(mockPet.getImages()).willReturn(imageList);
+
+		// 이미지 조회
+		given(petImageService.findImageById(petImageId)).willReturn(mockImage);
+
+		// [when]
+		petService.deletePetImage(userId, petImageId);
+
+		// [then]
+		verify(petImageService).deleteImage(mockImage);
+		assertThat(mockPet.getImages()).doesNotContain(mockImage);
+	}
+
+	@Test
+	void deletePetImage_실패_소유자아님() {
+
+		// [given]
+		Long userId = 1L;
+		Long petImageId = 100L;
+
+		Pet mockPet = mock(Pet.class);
+		PetImage mockImage = mock(PetImage.class);
+
+		given(mockImage.getPet()).willReturn(mockPet);
+		given(mockPet.isPetOwner(userId)).willReturn(false);
+		given(petImageService.findImageById(petImageId)).willReturn(mockImage);
+
+		// [when & then]
+		assertThatThrownBy(() -> petService.deletePetImage(userId, petImageId))
+			.isInstanceOf(CustomException.class)
+			.hasMessageContaining(ErrorCode.FORBIDDEN.getMessage());
 	}
 }

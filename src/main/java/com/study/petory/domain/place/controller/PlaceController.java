@@ -40,7 +40,6 @@ import com.study.petory.domain.place.dto.response.PlaceReviewCreateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceReviewUpdateResponseDto;
 import com.study.petory.domain.place.dto.response.PlaceUpdateResponseDto;
 import com.study.petory.domain.place.entity.PlaceType;
-import com.study.petory.domain.place.service.BookmarkPlaceService;
 import com.study.petory.domain.place.service.PlaceLikeService;
 import com.study.petory.domain.place.service.PlaceReportService;
 import com.study.petory.domain.place.service.PlaceReviewService;
@@ -56,7 +55,6 @@ public class PlaceController {
 
 	private final PlaceService placeService;
 	private final PlaceReviewService placeReviewService;
-	private final BookmarkPlaceService bookmarkPlaceService;
 	private final PlaceReportService placeReportService;
 	private final PlaceLikeService placeLikeService;
 
@@ -233,21 +231,6 @@ public class PlaceController {
 	) {
 		placeReviewService.deletePlaceReview(currentUser.getId(), placeId, reviewId);
 		return CommonResponse.of(SuccessCode.DELETED);
-	}
-
-	/**
-	 * Json data 저장하기
-	 * @return CommonResponse 방식의 성공 메시지
-	 */
-	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/write-json")
-	public ResponseEntity<CommonResponse<Void>> writeJsonData(
-		@AuthenticationPrincipal CustomPrincipal currentUser
-	) {
-		// 현재 프로젝트의 루트 경로를 가져와서 src 이하의 경로를 붙이는 과정
-		String filePath = System.getProperty("user.dir") + "/src/main/resources/data";
-		bookmarkPlaceService.writeJsonData(currentUser.getId(), filePath);
-		return CommonResponse.of(SuccessCode.CREATED);
 	}
 
 	/**

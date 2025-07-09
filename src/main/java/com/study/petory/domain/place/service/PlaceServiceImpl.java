@@ -1,8 +1,11 @@
 package com.study.petory.domain.place.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -215,8 +218,11 @@ public class PlaceServiceImpl implements PlaceService {
 
 		List<Place> placeList = placeRepository.findAllWithImagesById(placeIdList);
 
-		// 여기서 문제가 발생했던것!!!!!
-		return placeList.stream()
+		Map<Long, Place> placeMap = placeList.stream()
+			.collect(Collectors.toMap(Place::getId, Function.identity()));
+
+		return placeIdList.stream()
+			.map(placeMap::get)
 			.map(place -> {
 				List<String> imageUrls = place.getImages().stream()
 					.map(PlaceImage::getUrl)

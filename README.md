@@ -395,7 +395,7 @@ graph LR
 **🔹 PR / 이슈 관리**
 - [PR 예시: ]([gh pr checkout 126](https://github.com/jhyang22/Petory/pull/126))
 
-- [이슈 예시: ]([[gh issues checkout 183](https://github.com/jhyang22/Petory/issues/183))
+- [이슈 예시: ]([gh issues checkout 183](https://github.com/jhyang22/Petory/issues/183))
 
 ## 🏆 향후 개선 계획
 

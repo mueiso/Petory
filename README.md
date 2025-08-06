@@ -389,6 +389,14 @@ graph LR
 | **BE 개발자** | 심재민 | DailyQnQ 도메인, Album 도메인                | [🦊](https://github.com/Deabaind)      |
 | **BE 개발자** | 이은지 | OwnerBoard 도메인, AWS 인프라 구축, CI/CD                            | [🦦](https://github.com/222eunji)   |
 
+
+## 📌 Git convention
+
+**🔹 PR / 이슈 관리**
+- [PR 예시: ]([gh pr checkout 126](https://github.com/jhyang22/Petory/pull/126))
+
+- [이슈 예시: ]([[gh issues checkout 183](https://github.com/jhyang22/Petory/issues/183)
+
 ## 🏆 향후 개선 계획
 
 ### 🔦 기능 확장

@@ -393,9 +393,12 @@ graph LR
 ## 📌 Git convention
 
 **🔹 PR / 이슈 관리**
-- [PR 예시: ]([gh pr checkout 126](https://github.com/jhyang22/Petory/pull/126))
+- [PR 예시: ]([gh pr/126](https://github.com/jhyang22/Petory/pull/126))
 
-- [이슈 예시: ]([gh issues checkout 183](https://github.com/jhyang22/Petory/issues/183))
+- [이슈 예시: ]([gh issues/183](https://github.com/jhyang22/Petory/issues/183))
+
+**🔹 commit convention**
+- [커밋 예시: ]<img width="1292" height="953" alt="Image" src="https://github.com/user-attachments/assets/dd8b9f5b-a065-4a98-b60f-3e3c27238d49" />
 
 ## 🏆 향후 개선 계획
 

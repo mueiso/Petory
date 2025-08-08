@@ -359,6 +359,13 @@ graph LR
 └── 📄 Dockerfile
 ```
 
+## 📝 ERD 설계
+- v1
+<img width="2080" height="1204" alt="Image" src="https://github.com/user-attachments/assets/363b8adb-7180-443a-acb6-f643124d3170" />
+
+- v2
+<img width="2970" height="1884" alt="Image" src="https://github.com/user-attachments/assets/fd0411c5-82f0-4269-ba29-764bd18d6780" />
+
 
 ## 📝 API 문서
 

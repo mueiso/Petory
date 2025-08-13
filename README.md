@@ -1,4 +1,5 @@
 # 🐾 PETORY
+<br>
 
 <div align="center">
 
@@ -28,6 +29,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 - 🍽️ **정보 부족**: 반려동물 동반 가능한 장소 정보가 분산되어 있음
 - 📸 **기록 관리**: 반려동물과의 소중한 순간들을 체계적으로 관리하기 어려움
 
+<br/>
 
 ## 🛠️ 기술 스택
 
@@ -86,6 +88,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 ![ERDCloud](https://img.shields.io/badge/ERD%20Cloud-4285F4?style=for-the-badge)
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma)
 
+<br/>
 
 ## ✨ 핵심 기능
 
@@ -108,8 +111,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 - **실시간 알림**: 스케줄러 기반 데일리 질문 알림
 - **유저 정보 관리 자동화**: 스케줄러 기반 휴면/정지/탈퇴 유저의 정보 관리 자동화
 
-
-
+<br/>
 
 ## 🏗️ 시스템 아키텍처
 ![아키텍쳐 vpc az수정](https://github.com/user-attachments/assets/3e01e12d-e90e-4bc2-944a-7b05721683da)
@@ -138,6 +140,7 @@ graph LR
     D --> E[EC2 Deploy]
 ```
 
+<br/>
 
 ## 💫 주요 기술적 의사결정
 
@@ -219,7 +222,7 @@ graph LR
 - Grafana 대시보드로 CPU, 메모리, HTTP 응답시간 등 실시간 모니터링 구현  
 </details>
 
-
+<br/>
 
 ## 📈 모니터링
 
@@ -227,7 +230,7 @@ graph LR
 - **시스템 메트릭**: CPU, 메모리, 네트워크 사용량 실시간 모니터링
 - **애플리케이션 메트릭**: HTTP 응답 시간, DB 지연 시간 추적
 
-
+<br/>
 
 ## 📊 성능 개선
 
@@ -281,7 +284,7 @@ graph LR
 
 </details>
 
-
+<br/>
 
 ## 🚨 주요 트러블슈팅
 
@@ -312,8 +315,12 @@ graph LR
 
 </details>
 
+<br/>
+
 ## 🛡️ Test Coverage
 ![화면 캡처 2025-07-06 163040](https://github.com/user-attachments/assets/e0adc662-2ae7-4cf6-85f0-d06a57e17c33)
+
+<br/>
 
 ## 📱 주요 화면
 
@@ -324,6 +331,8 @@ graph LR
 | 로그인 | 채팅 | 캘린더 |
 |-------------|------|--------|
 | <img src="https://github.com/user-attachments/assets/0a551055-ba1e-4b26-896c-18bf08f3a8e5" width = "200"/> | <img src="https://github.com/user-attachments/assets/ec721a74-3bb7-4082-9105-898796bee698" width = "200"/>| <img src="https://github.com/user-attachments/assets/491ae3a5-6cfb-4a7e-aa51-007a0cb4f9a6" width = "200"/> |
+
+<br/>
 
 ## 🗂️ 프로젝트 구조
 
@@ -359,6 +368,17 @@ graph LR
 └── 📄 Dockerfile
 ```
 
+<br/>
+
+## 📝 ERD 설계
+- v1
+<img width="2080" height="1204" alt="Image" src="https://github.com/user-attachments/assets/363b8adb-7180-443a-acb6-f643124d3170" />
+
+- v2
+<img width="2970" height="1884" alt="Image" src="https://github.com/user-attachments/assets/fd0411c5-82f0-4269-ba29-764bd18d6780" />
+
+<br/>
+<br/>
 
 ## 📝 API 문서
 
@@ -378,16 +398,34 @@ graph LR
 | 알림 전체 조회 | GET | `/notifications` | 오늘의 질문 알림 조회|
 | 일정 생성 | POST | `/users/events` | 일정 생성 |
 
+<br/>
 
 ## 👥 팀원 소개
 
 | 역할 | 이름  | 담당 기능                                                        | GitHub                              |
 |------|-----|--------------------------------------------------------------|-------------------------------------|
 | **BE 개발자** | 양재호 | 팀장, Place 도메인, KaKaoMap API 연동, Rate Limiting 기능             | [🐹](https://github.com/jhyang22) |
-| **BE 개발자** | 김하정 | 부팀장, 인증/보안, 비회원/회원 기준 인가, 회원세부 권한 기준 인가, 유저 정보 관리 자동화, Pet 도메인 | [😺](https://github.com/mueiso)    |
+| **BE 개발자** | 김하정 | 부팀장, 인증/보안, 비회원/회원 기준 인가, 회원세부 권한 기준 인가, 유저 정보 관리 자동화, User/Pet 도메인 | [😺](https://github.com/mueiso)    |
 | **BE 개발자** | 김채원 | TradeBoard 도메인, 채팅 기능, 데일리 질문 알림 기능 구현 및 최적화                 | [🐰](https://github.com/chaewon9999)     |
 | **BE 개발자** | 심재민 | DailyQnQ 도메인, Album 도메인                | [🦊](https://github.com/Deabaind)      |
 | **BE 개발자** | 이은지 | OwnerBoard 도메인, AWS 인프라 구축, CI/CD                            | [🦦](https://github.com/222eunji)   |
+
+<br/>
+
+## 📌 Git convention
+
+### 🔹 PR / 이슈 관리
+- PR 예시: ([gh pr/126](https://github.com/jhyang22/Petory/pull/126))
+
+- 이슈 예시: ([gh issues/183](https://github.com/jhyang22/Petory/issues/183))
+
+### 🔹 commit convention
+- 커밋 히스토리 예시:
+
+|<img width="1292" height="953" alt="Image" src="https://github.com/user-attachments/assets/dd8b9f5b-a065-4a98-b60f-3e3c27238d49" />|
+|---|
+
+<br/>
 
 ## 🏆 향후 개선 계획
 

@@ -406,7 +406,7 @@ graph LR
 | 역할 | 이름  | 담당 기능                                                        | GitHub                              |
 |------|-----|--------------------------------------------------------------|-------------------------------------|
 | **BE 개발자** | 양재호 | 팀장, Place 도메인, KaKaoMap API 연동, Rate Limiting 기능             | [🐹](https://github.com/jhyang22) |
-| **BE 개발자** | 김하정 | 부팀장, 인증/보안, 비회원/회원 기준 인가, 회원세부 권한 기준 인가, 유저 정보 관리 자동화, User/Pet 도메인 | [😺](https://github.com/mueiso)    |
+| **BE 개발자** | 김하정 | 부팀장, 인증/보안, 비회원/회원 기준 인가, 회원세부 권한 기준 인가, 유저 정보 관리 자동화, User 도메인, Pet 도메인 | [😺](https://github.com/mueiso)    |
 | **BE 개발자** | 김채원 | TradeBoard 도메인, 채팅 기능, 데일리 질문 알림 기능 구현 및 최적화                 | [🐰](https://github.com/chaewon9999)     |
 | **BE 개발자** | 심재민 | DailyQnQ 도메인, Album 도메인                | [🦊](https://github.com/Deabaind)      |
 | **BE 개발자** | 이은지 | OwnerBoard 도메인, AWS 인프라 구축, CI/CD                            | [🦦](https://github.com/222eunji)   |

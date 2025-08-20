@@ -145,9 +145,10 @@ graph LR
 ## 💫 주요 기술적 의사결정
 
 <details>
-<summary>☀️ JWT + Redis 기반 보안 강화</summary>
+<summary>☀️ OAuth2 + JWT + Redis 기반 보안 강화</summary>
 
 **🔹 배경**  
+- Google OAuth2 연동으로 보장된 보안성 확보, 하지만 그 후의 토큰 제어 한계점 발견
 - JWT의 무상태 특성으로 로그아웃 후에도 토큰이 유효기간 내라면 인증된 것처럼 동작하는 보안 취약점 발견  
 - 토큰 탈취 시 즉각적인 대응이 어려운 구조적 문제점 인식  
 

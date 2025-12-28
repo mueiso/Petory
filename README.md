@@ -126,7 +126,7 @@ PETORY는 이런 반려인들의 일상을 더 풍요롭게 만들기 위해 탄
 | **ElastiCache** | t2.micro (Redis OSS) | 캐싱 및 세션 관리 |
 | **ECR** | Private Repository | 컨테이너 이미지 저장 |
 | **S3** | Standard | 사용자 업로드 파일 관리 |
-| **MongoDB Atlas** | - | 채팅 데이터 저장 |
+| **MongoDB Atlas** | -- | 채팅 데이터 저장 |
 
 
 
